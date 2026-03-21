@@ -77,40 +77,52 @@ def run_algo3_probe(
 
     child_proposer = build_child_proposer(chat_client)
     tree_expander = build_tree_expander(child_proposer)
-    cached_execution = context.load_json("execution_checkpoint.json")
-    if spec.resume and cached_execution is not None and context.is_stage_complete(
-        "execution_completed"
-    ):
-        execution_result = cached_execution
-    else:
-        execution = execute_method3(
-            source_labels=spec.source_labels,
-            target_labels=spec.target_labels,
-            child_count=spec.child_count,
-            max_depth=spec.max_depth,
-            expand_tree=tree_expander,
-        )
-        execution_result = {
-            "expanded_nodes": _nodes_to_json_compatible(execution.expanded_nodes),
-            "matched_labels": execution.matched_labels,
-        }
-        context.record_checkpoint(
-            "execution_checkpoint.json",
-            execution_result,
-            stage="execution_completed",
-        )
+    try:
+        cached_execution = context.load_json("execution_checkpoint.json")
+        if spec.resume and cached_execution is not None and context.is_stage_complete(
+            "execution_completed"
+        ):
+            execution_result = cached_execution
+        else:
+            execution = execute_method3(
+                source_labels=spec.source_labels,
+                target_labels=spec.target_labels,
+                child_count=spec.child_count,
+                max_depth=spec.max_depth,
+                expand_tree=tree_expander,
+            )
+            execution_result = {
+                "expanded_nodes": _nodes_to_json_compatible(execution.expanded_nodes),
+                "matched_labels": execution.matched_labels,
+            }
+            context.record_checkpoint(
+                "execution_checkpoint.json",
+                execution_result,
+                stage="execution_completed",
+            )
 
-    summary_record = {
-        "run_name": spec.run_name,
-        "model": spec.model,
-        "expanded_nodes": execution_result["expanded_nodes"],
-        "matched_labels": execution_result["matched_labels"],
-    }
-    context.record_checkpoint("summary.json", summary_record, stage="summary_written")
-    context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
-    context.log("probe finished", stage="complete")
-    append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
-    return summary_record
+        summary_record = {
+            "run_name": spec.run_name,
+            "model": spec.model,
+            "expanded_nodes": execution_result["expanded_nodes"],
+            "matched_labels": execution_result["matched_labels"],
+        }
+        context.record_checkpoint("summary.json", summary_record, stage="summary_written")
+        context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
+        context.log("probe finished", stage="complete")
+        append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
+        return summary_record
+    except Exception as error:
+        context.record_failure(error=error)
+        append_jsonl_event(
+            context.events_path,
+            {
+                "event": "probe_failed",
+                "error_type": type(error).__name__,
+                "error_message": str(error),
+            },
+        )
+        raise
 
 
 def _nodes_to_json_compatible(

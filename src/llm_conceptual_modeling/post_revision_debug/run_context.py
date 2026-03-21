@@ -132,3 +132,12 @@ class ProbeRunContext:
         self.write_json(filename, payload)
         self.mark_stage_complete(stage, details={"filename": filename})
         self.log(f"checkpoint written to {filename}", stage=stage)
+
+    def record_failure(self, *, error: Exception) -> None:
+        error_record = {
+            "error_type": type(error).__name__,
+            "error_message": str(error),
+        }
+        self.write_json("error.json", error_record)
+        self.mark_stage_complete("probe_failed", details=error_record)
+        self.log(str(error), level="ERROR", stage="probe_failed")

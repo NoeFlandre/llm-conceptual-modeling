@@ -82,60 +82,72 @@ def run_algo2_probe(
     label_proposer = build_label_proposer(chat_client)
     edge_suggester = build_edge_suggester(chat_client)
     thesaurus = load_algo2_thesaurus()
-    cached_execution = context.load_json("execution_checkpoint.json")
-    if spec.resume and cached_execution is not None and context.is_stage_complete(
-        "execution_completed"
-    ):
-        execution_result = cached_execution
-    else:
-        execution = execute_method2(
-            seed_labels=spec.seed_labels,
-            propose_labels=label_proposer,
-            suggest_edges=edge_suggester,
-            embedding_client=embedding_client,
-            convergence_threshold=spec.convergence_threshold,
-            thesaurus=thesaurus,
+    try:
+        cached_execution = context.load_json("execution_checkpoint.json")
+        if spec.resume and cached_execution is not None and context.is_stage_complete(
+            "execution_completed"
+        ):
+            execution_result = cached_execution
+        else:
+            execution = execute_method2(
+                seed_labels=spec.seed_labels,
+                propose_labels=label_proposer,
+                suggest_edges=edge_suggester,
+                embedding_client=embedding_client,
+                convergence_threshold=spec.convergence_threshold,
+                thesaurus=thesaurus,
+            )
+            execution_result = {
+                "expanded_labels": execution.expanded_labels,
+                "raw_edges": _edges_to_json_compatible(execution.raw_edges),
+                "normalized_edges": _edges_to_json_compatible(execution.normalized_edges),
+                "final_similarity": execution.final_similarity,
+                "iteration_count": execution.iteration_count,
+            }
+            context.record_checkpoint(
+                "execution_checkpoint.json",
+                execution_result,
+                stage="execution_completed",
+            )
+        expanded_label_context = spec.seed_labels + execution_result["expanded_labels"]
+        edge_prompt = build_edge_suggestion_prompt(
+            expanded_label_context,
+            subgraph1=spec.subgraph1,
+            subgraph2=spec.subgraph2,
+            prompt_config=spec.prompt_config,
         )
-        execution_result = {
-            "expanded_labels": execution.expanded_labels,
-            "raw_edges": _edges_to_json_compatible(execution.raw_edges),
-            "normalized_edges": _edges_to_json_compatible(execution.normalized_edges),
-            "final_similarity": execution.final_similarity,
-            "iteration_count": execution.iteration_count,
-        }
-        context.record_checkpoint(
-            "execution_checkpoint.json",
-            execution_result,
-            stage="execution_completed",
-        )
-    expanded_label_context = spec.seed_labels + execution_result["expanded_labels"]
-    edge_prompt = build_edge_suggestion_prompt(
-        expanded_label_context,
-        subgraph1=spec.subgraph1,
-        subgraph2=spec.subgraph2,
-        prompt_config=spec.prompt_config,
-    )
-    if not context.is_stage_complete("edge_prompt_written"):
-        context.record_prompt(
-            "edge_suggestion_prompt.txt",
-            edge_prompt,
-            stage="edge_prompt_written",
-        )
+        if not context.is_stage_complete("edge_prompt_written"):
+            context.record_prompt(
+                "edge_suggestion_prompt.txt",
+                edge_prompt,
+                stage="edge_prompt_written",
+            )
 
-    summary_record = {
-        "run_name": spec.run_name,
-        "model": spec.model,
-        "expanded_labels": execution_result["expanded_labels"],
-        "raw_edges": execution_result["raw_edges"],
-        "normalized_edges": execution_result["normalized_edges"],
-        "final_similarity": execution_result["final_similarity"],
-        "iteration_count": execution_result["iteration_count"],
-    }
-    context.record_checkpoint("summary.json", summary_record, stage="summary_written")
-    context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
-    context.log("probe finished", stage="complete")
-    append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
-    return summary_record
+        summary_record = {
+            "run_name": spec.run_name,
+            "model": spec.model,
+            "expanded_labels": execution_result["expanded_labels"],
+            "raw_edges": execution_result["raw_edges"],
+            "normalized_edges": execution_result["normalized_edges"],
+            "final_similarity": execution_result["final_similarity"],
+            "iteration_count": execution_result["iteration_count"],
+        }
+        context.record_checkpoint("summary.json", summary_record, stage="summary_written")
+        context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
+        context.log("probe finished", stage="complete")
+        append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
+        return summary_record
+    except Exception as error:
+        context.record_failure(error=error)
+        append_jsonl_event(
+            context.events_path,
+            {
+                "event": "probe_failed",
+                "error_type": type(error).__name__,
+                "error_message": str(error),
+            },
+        )
+        raise
 
 
 def _edges_to_json_compatible(edges: list[tuple[str, str]]) -> list[list[str]]:

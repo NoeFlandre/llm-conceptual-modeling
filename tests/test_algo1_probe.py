@@ -145,3 +145,46 @@ def test_run_algo1_probe_can_resume_from_cached_summary(tmp_path) -> None:
     )
 
     assert resumed_summary == initial_summary
+
+
+def test_run_algo1_probe_records_errors(tmp_path) -> None:
+    class FailingChatClient:
+        def complete_json(
+            self,
+            *,
+            prompt: str,
+            schema_name: str,
+            schema: dict[str, object],
+        ) -> dict[str, object]:
+            raise RuntimeError("provider unavailable")
+
+    probe_dir = tmp_path / "algo1_probe"
+    spec = Algo1ProbeSpec(
+        run_name="algo1_single_row_v1",
+        model="mistral-small-2603",
+        subgraph1=[("alpha", "beta")],
+        subgraph2=[("delta", "epsilon")],
+        prompt_config=Method1PromptConfig(
+            use_adjacency_notation=True,
+            use_array_representation=True,
+            include_explanation=True,
+            include_example=False,
+            include_counterexample=False,
+        ),
+        output_dir=probe_dir,
+    )
+
+    try:
+        run_algo1_probe(
+            spec=spec,
+            chat_client=FailingChatClient(),
+        )
+    except RuntimeError as error:
+        assert str(error) == "provider unavailable"
+    else:
+        raise AssertionError("expected RuntimeError")
+
+    error_record = json.loads((probe_dir / "error.json").read_text())
+
+    assert error_record["error_type"] == "RuntimeError"
+    assert error_record["error_message"] == "provider unavailable"
