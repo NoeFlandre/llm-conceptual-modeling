@@ -9,7 +9,9 @@ The new codebase currently covers the first verified slice:
 - shared connection evaluation logic for Algorithms 1 and 2
 - offline Algorithm 1 metrics evaluation
 - offline Algorithm 2 metrics evaluation
-- CLI entrypoints for `lcm eval algo1` and `lcm eval algo2`
+- offline Algorithm 3 recall recomputation
+- ALGO1 factorial analysis from evaluated metrics CSVs
+- CLI entrypoints for `lcm eval algo1`, `lcm eval algo2`, `lcm eval algo3`, and `lcm factorial algo1`
 - regression tests against a committed legacy fixture
 
 Live LLM generation is intentionally out of scope at this stage.
@@ -34,4 +36,14 @@ uv run ty check
 uv run lcm eval algo1 \
   --input tests/fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv \
   --output /tmp/metrics_sg1_sg2.csv
+
+uv run lcm eval algo3 \
+  --input tests/fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv \
+  --output /tmp/method3_results_evaluated_gpt5.csv
+
+uv run lcm factorial algo1 \
+  --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv \
+  --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv \
+  --output /tmp/factorial_analysis_algo1_gpt_5_without_error.csv
 ```
