@@ -96,6 +96,14 @@ uv run lcm generate algo2 \
 This executable Method 2 path uses the confirmed `0.01` convergence threshold and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
 Add `--resume` to any live-backed `generate` or `probe` command to reuse the existing run state and checkpoint files when rerunning a partially completed output directory.
 
+To audit the paper-facing contract in one place, run:
+
+```bash
+UV_CACHE_DIR=/tmp/uv-cache uv run python -c "from llm_conceptual_modeling.cli import main; raise SystemExit(main(['audit', 'paper-alignment', '--json']))"
+```
+
+The resulting JSON report lists the method contracts, the confirmed Method 2 `0.01` convergence threshold, the Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence.
+
 Grouped descriptive summaries:
 
 ```bash

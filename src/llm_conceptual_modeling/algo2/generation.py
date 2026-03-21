@@ -31,7 +31,7 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
     return GenerationManifest(
         algorithm="algo2",
         mode="offline-manifest",
-        implemented=False,
+        implemented=True,
         requires_live_llm=True,
         fixture_only=fixture_only,
         next_step="provide_fixture_dataset" if fixture_only else "implement_provider_adapter",

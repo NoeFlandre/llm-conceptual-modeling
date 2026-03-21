@@ -2,6 +2,7 @@ import argparse
 from collections.abc import Sequence
 
 from llm_conceptual_modeling.commands.analyze import handle_analyze
+from llm_conceptual_modeling.commands.audit import handle_audit
 from llm_conceptual_modeling.commands.baseline import handle_baseline
 from llm_conceptual_modeling.commands.doctor import handle_doctor
 from llm_conceptual_modeling.commands.eval import handle_eval
@@ -17,6 +18,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     analyze_parser = subparsers.add_parser("analyze")
     analyze_subparsers = analyze_parser.add_subparsers(dest="analysis_target", required=True)
+    audit_parser = subparsers.add_parser("audit")
+    audit_subparsers = audit_parser.add_subparsers(dest="audit_target", required=True)
     baseline_parser = subparsers.add_parser("baseline")
     baseline_subparsers = baseline_parser.add_subparsers(dest="algorithm", required=True)
     eval_parser = subparsers.add_parser("eval")
@@ -150,6 +153,9 @@ def build_parser() -> argparse.ArgumentParser:
     baseline_comparison_parser.add_argument("--metric", action="append", required=True)
     baseline_comparison_parser.add_argument("--output", required=True)
 
+    paper_alignment_parser = audit_subparsers.add_parser("paper-alignment")
+    paper_alignment_parser.add_argument("--json", action="store_true")
+
     return parser
 
 
@@ -161,6 +167,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return handle_doctor(args)
     if args.command == "analyze":
         return handle_analyze(args)
+    if args.command == "audit":
+        return handle_audit(args)
     if args.command == "eval":
         return handle_eval(args)
     if args.command == "baseline":

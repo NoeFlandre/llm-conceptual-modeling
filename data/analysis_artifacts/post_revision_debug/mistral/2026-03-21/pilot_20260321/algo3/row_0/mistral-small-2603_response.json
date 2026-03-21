@@ -1,0 +1,25 @@
+{
+  "id": "4119df73491841dd9227b30d1e0331a1",
+  "created": 1774105905,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 3047,
+    "total_tokens": 3412,
+    "completion_tokens": 365,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Blood glucose level\"}, {\"source\": \"Healthy eating\", \"target\": \"Blood mono-unsaturated fatty acid level\"}, {\"source\": \"Healthy eating\", \"target\": \"Blood saturated fatty acid level\"}, {\"source\": \"Supportive food environment\", \"target\": \"Dyslipidemia\"}, {\"source\": \"Supportive food environment\", \"target\": \"Inflammation\"}, {\"source\": \"Cost of healthy foods\", \"target\": \"Dyslipidemia\"}, {\"source\": \"Cost of healthy foods\", \"target\": \"Blood pressure\"}, {\"source\": \"Marketing of healthy foods\", \"target\": \"Dyslipidemia\"}, {\"source\": \"Marketing of unhealthy foods\", \"target\": \"Dyslipidemia\"}, {\"source\": \"Marketing of unhealthy foods\", \"target\": \"Inflammation\"}, {\"source\": \"Availability of healthy foods\", \"target\": \"Dyslipidemia\"}, {\"source\": \"Availability of healthy foods\", \"target\": \"Blood pressure\"}, {\"source\": \"Quality of the sport infrastructure\", \"target\": \"Ability to engage in physical activity\"}, {\"source\": \"Prevalence of walking trails\", \"target\": \"Ability to engage in physical activity\"}, {\"source\": \"Prevalence of bike trails\", \"target\": \"Ability to engage in physical activity\"}, {\"source\": \"Prevalence of green fields\", \"target\": \"Ability to engage in physical activity\"}, {\"source\": \"Aesthetics\", \"target\": \"Ability to engage in physical activity\"}, {\"source\": \"Emotional eating\", \"target\": \"Obesity\"}, {\"source\": \"Appetite\", \"target\": \"Obesity\"}, {\"source\": \"Unhealthy weight control practices\", \"target\": \"Obesity\"}]}"
+      }
+    }
+  ]
+}

@@ -337,6 +337,7 @@ The repository is designed to make wrongness visible rather than implicit.
 - [tests/test_analysis_hypothesis.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_hypothesis.py) checks paired factor-level hypothesis tests and adjusted p-values.
 - [tests/test_analysis_figures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_figures.py) checks tidy figure-export rows and path-derived metadata.
 - [tests/test_baseline.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_baseline.py) checks the deterministic structural baseline heuristics and CLI outputs.
+- `uv run lcm audit paper-alignment --json` emits a compact machine-readable report covering the paper-facing method contracts, the confirmed Method 2 `0.01` convergence threshold, the tracked Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 

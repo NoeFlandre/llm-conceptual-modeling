@@ -58,17 +58,35 @@ This is intended to make every run replayable and auditable.
 
 The `lcm generate ...` and `lcm probe ...` entry points also accept `--resume` for rerunning a partially completed run without reissuing provider calls for completed stages.
 
+For a compact audit of the paper-facing contract, run:
+
+```bash
+UV_CACHE_DIR=/tmp/uv-cache uv run python -c "from llm_conceptual_modeling.cli import main; raise SystemExit(main(['audit', 'paper-alignment', '--json']))"
+```
+
+The audit report includes the Method 2 `0.01` threshold, the Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence in a single JSON payload.
+
 ## Current Findings
 
 The first canonical run is:
 
 - `data/analysis_artifacts/post_revision_debug/mistral/2026-03-21/representative_matrix_v1/`
 
+The smaller live pilot used to validate the provider plumbing is:
+
+- `data/analysis_artifacts/post_revision_debug/mistral/2026-03-21/pilot_20260321/`
+
 From `probe_summary_by_algorithm_and_model.csv`:
 
 - For the representative ALGO1 rows, `mistral-small-2603` and `mistral-medium-2508` increased mean accuracy and precision relative to the imported GPT-5 historical rows, but reduced recall sharply. This suggests that a strict, high-precision prompt can trade recall for precision rather than reproducing the historical GPT-5 balance.
 - For the representative ALGO2 rows, `mistral-small-2603` also improved mean accuracy and precision relative to the imported GPT-5 historical rows, while recall still dropped sharply. The same precision-recall tradeoff appears again.
 - For the representative ALGO3 rows, all three tested Mistral models remained at zero recall under the current structured prompt. This differs from earlier ad hoc ALGO3 probes, which means ALGO3 is highly sensitive to prompt framing and edge-budget choices.
+
+The smaller one-model pilot on `mistral-small-2603` points in the same direction:
+
+- ALGO1 improved accuracy and precision on the sampled rows, but recall dropped sharply.
+- ALGO2 improved accuracy slightly, but precision and recall both dropped on the sampled rows.
+- ALGO3 stayed at zero recall on both sampled rows, while producing more parsed edges than the historical rows.
 
 ## Interpretation
 
