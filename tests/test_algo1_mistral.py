@@ -1,5 +1,7 @@
 import json
-from urllib.error import URLError
+from types import SimpleNamespace
+
+import httpx
 
 from llm_conceptual_modeling.algo1.mistral import (
     Method1PromptConfig,
@@ -9,6 +11,12 @@ from llm_conceptual_modeling.algo1.mistral import (
     build_edge_generator,
     extract_vote_list_from_chat_content,
 )
+
+
+def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
+    return SimpleNamespace(
+        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
+    )
 
 
 def test_build_direct_edge_prompt_mentions_new_nodes_and_output_format() -> None:
@@ -82,27 +90,24 @@ def test_extract_vote_list_from_chat_content_supports_json_schema_payload() -> N
     assert actual == ["Y", "N", "Y"]
 
 
-def test_mistral_chat_client_builds_expected_request_payload() -> None:
+def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:
     captured_request: dict[str, object] = {}
 
-    def fake_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
-        captured_request["url"] = url
-        captured_request["api_key"] = api_key
-        captured_request["payload"] = payload
-        return {
-            "choices": [
-                {
-                    "message": {
-                        "content": json.dumps({"edges": [{"source": "a", "target": "b"}]})
-                    }
-                }
-            ]
-        }
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            captured_request.update(kwargs)
+            return _fake_chat_completion_response(
+                json.dumps({"edges": [{"source": "a", "target": "b"}]})
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
 
     client = MistralChatClient(
         api_key="test-key",
         model="mistral-small-2603",
-        post_json=fake_post_json,
+        sdk_client=FakeSDKClient(),
     )
 
     actual = client.complete_json(
@@ -130,33 +135,58 @@ def test_mistral_chat_client_builds_expected_request_payload() -> None:
     )
 
     assert actual == {"edges": [{"source": "a", "target": "b"}]}
-    assert captured_request["url"] == "https://api.mistral.ai/v1/chat/completions"
-    assert captured_request["api_key"] == "test-key"
-    assert captured_request["payload"]["model"] == "mistral-small-2603"
-    assert captured_request["payload"]["temperature"] == 0.0
+    assert captured_request == {
+        "model": "mistral-small-2603",
+        "messages": [{"role": "user", "content": "generate edges"}],
+        "temperature": 0.0,
+        "response_format": {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "edge_list",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "edges": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "source": {"type": "string"},
+                                    "target": {"type": "string"},
+                                },
+                                "required": ["source", "target"],
+                                "additionalProperties": False,
+                            },
+                        }
+                    },
+                    "required": ["edges"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+    }
 
 
 def test_mistral_chat_client_retries_transient_transport_errors() -> None:
     calls = {"count": 0}
 
-    def flaky_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
-        calls["count"] += 1
-        if calls["count"] < 3:
-            raise URLError("temporary network issue")
-        return {
-            "choices": [
-                {
-                    "message": {
-                        "content": json.dumps({"edges": [{"source": "a", "target": "b"}]})
-                    }
-                }
-            ]
-        }
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            calls["count"] += 1
+            if calls["count"] < 3:
+                raise httpx.ConnectError("temporary network issue")
+            return _fake_chat_completion_response(
+                json.dumps({"edges": [{"source": "a", "target": "b"}]})
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
 
     client = MistralChatClient(
         api_key="test-key",
         model="mistral-small-2603",
-        post_json=flaky_post_json,
+        sdk_client=FakeSDKClient(),
     )
 
     actual = client.complete_json(

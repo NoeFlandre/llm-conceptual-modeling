@@ -58,7 +58,7 @@ This is intended to make every run replayable and auditable.
 
 The `lcm generate ...` and `lcm probe ...` entry points also accept `--resume` for rerunning a partially completed run without reissuing provider calls for completed stages. The live Mistral matrix runner also retries transient HTTP 429 responses and reuses cached per-row response files when `--resume` is set, so a partial matrix can be resumed without restarting completed model calls.
 
-The reusable Mistral chat and embedding clients also retry transient transport failures, including DNS-level `URLError` conditions, with exponential backoff before surfacing a hard failure. When retries are exhausted, the run still writes a structured `error.json` and `run.log` entry so the failure is auditable rather than silent.
+The reusable Mistral chat and embedding clients now use the official `mistralai` SDK and still retry transient transport failures, including DNS-level network errors, with exponential backoff before surfacing a hard failure. When retries are exhausted, the run still writes a structured `error.json` and `run.log` entry so the failure is auditable rather than silent.
 
 For a compact audit of the paper-facing contract, run:
 

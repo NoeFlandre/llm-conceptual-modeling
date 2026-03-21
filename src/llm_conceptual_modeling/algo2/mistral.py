@@ -1,7 +1,8 @@
 import json
 from dataclasses import dataclass
-from typing import Protocol
-from urllib import request
+from typing import Any, Protocol
+
+from mistralai.client import Mistral
 
 from llm_conceptual_modeling.common.retry import call_with_retry
 
@@ -17,27 +18,16 @@ class Method2PromptConfig:
     include_counterexample: bool
 
 
-class PostJsonFunction(Protocol):
-    def __call__(
-        self,
-        *,
-        url: str,
-        api_key: str,
-        payload: dict[str, object],
-    ) -> dict[str, object]: ...
-
-
 class MistralChatClient:
     def __init__(
         self,
         *,
         api_key: str,
         model: str,
-        post_json: PostJsonFunction | None = None,
+        sdk_client: Any | None = None,
     ) -> None:
-        self._api_key = api_key
         self._model = model
-        self._post_json = post_json or _post_json
+        self._sdk_client = sdk_client or Mistral(api_key=api_key)
 
     def complete_json(
         self,
@@ -46,27 +36,24 @@ class MistralChatClient:
         schema_name: str,
         schema: dict[str, object],
     ) -> dict[str, object]:
-        payload = {
-            "model": self._model,
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.0,
-            "response_format": {
-                "type": "json_schema",
-                "json_schema": {
-                    "name": schema_name,
-                    "schema": schema,
-                },
-            },
-        }
         response = call_with_retry(
-            operation=lambda: self._post_json(
-                url="https://api.mistral.ai/v1/chat/completions",
-                api_key=self._api_key,
-                payload=payload,
+            operation=lambda: self._sdk_client.chat.complete(
+                model=self._model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0,
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": schema_name,
+                        "schema": schema,
+                    },
+                },
             ),
             operation_name="mistral chat completion",
         )
-        content = response["choices"][0]["message"]["content"]
+        content = response.choices[0].message.content
+        if content is None:
+            raise ValueError("Mistral returned an empty chat completion content")
         parsed_content = json.loads(content)
         return parsed_content
 
@@ -436,28 +423,3 @@ class LabelProposer(Protocol):
 
 class EdgeSuggester(Protocol):
     def __call__(self, expanded_label_context: list[str]) -> list[Edge]: ...
-
-
-def _post_json(
-    *,
-    url: str,
-    api_key: str,
-    payload: dict[str, object],
-) -> dict[str, object]:
-    body_text = json.dumps(payload)
-    body_bytes = body_text.encode("utf-8")
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-    }
-    http_request = request.Request(
-        url=url,
-        data=body_bytes,
-        headers=headers,
-        method="POST",
-    )
-    with request.urlopen(http_request) as response:
-        response_bytes = response.read()
-    response_text = response_bytes.decode("utf-8")
-    parsed_response = json.loads(response_text)
-    return parsed_response

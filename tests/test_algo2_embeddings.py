@@ -1,10 +1,20 @@
-from urllib.error import URLError
+import httpx
 
 from llm_conceptual_modeling.algo2.embeddings import (
     MistralEmbeddingClient,
     build_embeddings_by_label,
     compute_average_best_match_similarity,
 )
+
+
+class FakeEmbeddingResponse:
+    def __init__(self, data: list[object]) -> None:
+        self.data = data
+
+
+class FakeEmbeddingItem:
+    def __init__(self, embedding: list[float]) -> None:
+        self.embedding = embedding
 
 
 class FakeEmbeddingClient:
@@ -31,24 +41,27 @@ def test_build_embeddings_by_label_preserves_input_order_for_missing_duplicates(
     assert client.calls == [["alpha", "beta"]]
 
 
-def test_mistral_embedding_client_builds_expected_request_payload() -> None:
+def test_mistral_embedding_client_calls_sdk_create_with_expected_payload() -> None:
     captured_request: dict[str, object] = {}
 
-    def fake_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
-        captured_request["url"] = url
-        captured_request["api_key"] = api_key
-        captured_request["payload"] = payload
-        return {
-            "data": [
-                {"embedding": [0.1, 0.2]},
-                {"embedding": [0.3, 0.4]},
-            ]
-        }
+    class FakeEmbeddings:
+        def create(self, **kwargs: object) -> FakeEmbeddingResponse:
+            captured_request.update(kwargs)
+            return FakeEmbeddingResponse(
+                [
+                    FakeEmbeddingItem([0.1, 0.2]),
+                    FakeEmbeddingItem([0.3, 0.4]),
+                ]
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.embeddings = FakeEmbeddings()
 
     client = MistralEmbeddingClient(
         api_key="test-key",
         model="mistral-embed-2312",
-        post_json=fake_post_json,
+        sdk_client=FakeSDKClient(),
     )
 
     actual = client.embed_texts(["alpha", "beta"])
@@ -57,32 +70,35 @@ def test_mistral_embedding_client_builds_expected_request_payload() -> None:
         "alpha": [0.1, 0.2],
         "beta": [0.3, 0.4],
     }
-    assert captured_request["url"] == "https://api.mistral.ai/v1/embeddings"
-    assert captured_request["api_key"] == "test-key"
-    assert captured_request["payload"] == {
+    assert captured_request == {
         "model": "mistral-embed-2312",
-        "input": ["alpha", "beta"],
+        "inputs": ["alpha", "beta"],
     }
 
 
 def test_mistral_embedding_client_retries_transient_transport_errors() -> None:
     calls = {"count": 0}
 
-    def flaky_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
-        calls["count"] += 1
-        if calls["count"] < 3:
-            raise URLError("temporary network issue")
-        return {
-            "data": [
-                {"embedding": [0.1, 0.2]},
-                {"embedding": [0.3, 0.4]},
-            ]
-        }
+    class FakeEmbeddings:
+        def create(self, **kwargs: object) -> FakeEmbeddingResponse:
+            calls["count"] += 1
+            if calls["count"] < 3:
+                raise httpx.ConnectError("temporary network issue")
+            return FakeEmbeddingResponse(
+                [
+                    FakeEmbeddingItem([0.1, 0.2]),
+                    FakeEmbeddingItem([0.3, 0.4]),
+                ]
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.embeddings = FakeEmbeddings()
 
     client = MistralEmbeddingClient(
         api_key="test-key",
         model="mistral-embed-2312",
-        post_json=flaky_post_json,
+        sdk_client=FakeSDKClient(),
     )
 
     actual = client.embed_texts(["alpha", "beta"])

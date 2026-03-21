@@ -1,8 +1,17 @@
+from types import SimpleNamespace
+
 from llm_conceptual_modeling.algo3.mistral import (
     Method3PromptConfig,
+    MistralChatClient,
     build_child_proposer,
     build_tree_expansion_prompt,
 )
+
+
+def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
+    return SimpleNamespace(
+        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
+    )
 
 
 class FakeChatClient:
@@ -89,3 +98,72 @@ def test_build_child_proposer_returns_dictionary_children() -> None:
     }
     assert len(chat_client.calls) == 1
     assert chat_client.calls[0]["schema_name"] == "children_by_label"
+
+
+def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:
+    captured_request: dict[str, object] = {}
+
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            captured_request.update(kwargs)
+            return _fake_chat_completion_response(
+                '{"children_by_label":{"source_a":["bridge_one","bridge_two"]}}'
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-small-2603",
+        sdk_client=FakeSDKClient(),
+    )
+
+    actual = client.complete_json(
+        prompt="expand tree",
+        schema_name="children_by_label",
+        schema={
+            "type": "object",
+            "properties": {
+                "children_by_label": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                    },
+                }
+            },
+            "required": ["children_by_label"],
+            "additionalProperties": False,
+        },
+    )
+
+    assert actual == {
+        "children_by_label": {"source_a": ["bridge_one", "bridge_two"]}
+    }
+    assert captured_request == {
+        "model": "mistral-small-2603",
+        "messages": [{"role": "user", "content": "expand tree"}],
+        "temperature": 0.0,
+        "response_format": {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "children_by_label",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "children_by_label": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            },
+                        }
+                    },
+                    "required": ["children_by_label"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+    }

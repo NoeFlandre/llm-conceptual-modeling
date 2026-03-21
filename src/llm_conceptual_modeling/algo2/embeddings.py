@@ -1,6 +1,6 @@
-import json
-from typing import Protocol
-from urllib import request
+from typing import Any, Protocol
+
+from mistralai.client import Mistral
 
 from llm_conceptual_modeling.algo2.expansion import average_best_match_similarity
 from llm_conceptual_modeling.common.retry import call_with_retry
@@ -16,43 +16,26 @@ class MistralEmbeddingClient:
         *,
         api_key: str,
         model: str,
-        post_json: "PostJsonFunction" | None = None,
+        sdk_client: Any | None = None,
     ) -> None:
-        self._api_key = api_key
         self._model = model
-        self._post_json = post_json or _post_json
+        self._sdk_client = sdk_client or Mistral(api_key=api_key)
 
     def embed_texts(self, texts: list[str]) -> dict[str, list[float]]:
-        payload = {
-            "model": self._model,
-            "input": texts,
-        }
         response = call_with_retry(
-            operation=lambda: self._post_json(
-                url="https://api.mistral.ai/v1/embeddings",
-                api_key=self._api_key,
-                payload=payload,
+            operation=lambda: self._sdk_client.embeddings.create(
+                model=self._model,
+                inputs=texts,
             ),
             operation_name="mistral embeddings",
         )
-        data_items = response["data"]
+        data_items = response.data
         embeddings_by_label: dict[str, list[float]] = {}
 
         for text, item in zip(texts, data_items, strict=True):
-            embedding = item["embedding"]
-            embeddings_by_label[text] = embedding
+            embeddings_by_label[text] = list(item.embedding)
 
         return embeddings_by_label
-
-
-class PostJsonFunction(Protocol):
-    def __call__(
-        self,
-        *,
-        url: str,
-        api_key: str,
-        payload: dict[str, object],
-    ) -> dict[str, object]: ...
 
 
 def build_embeddings_by_label(
@@ -91,28 +74,3 @@ def compute_average_best_match_similarity(
         embeddings_by_label=embeddings_by_label,
     )
     return similarity
-
-
-def _post_json(
-    *,
-    url: str,
-    api_key: str,
-    payload: dict[str, object],
-) -> dict[str, object]:
-    body_text = json.dumps(payload)
-    body_bytes = body_text.encode("utf-8")
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-    }
-    http_request = request.Request(
-        url=url,
-        data=body_bytes,
-        headers=headers,
-        method="POST",
-    )
-    with request.urlopen(http_request) as response:
-        response_bytes = response.read()
-    response_text = response_bytes.decode("utf-8")
-    parsed_response = json.loads(response_text)
-    return parsed_response

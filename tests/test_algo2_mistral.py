@@ -1,4 +1,7 @@
 import json
+from types import SimpleNamespace
+
+import httpx
 
 from llm_conceptual_modeling.algo2.mistral import (
     Method2PromptConfig,
@@ -9,6 +12,12 @@ from llm_conceptual_modeling.algo2.mistral import (
     build_label_proposer,
     extract_label_list_from_chat_content,
 )
+
+
+def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
+    return SimpleNamespace(
+        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
+    )
 
 
 def test_build_label_expansion_prompt_mentions_related_concepts_and_output_format() -> None:
@@ -140,27 +149,24 @@ def test_extract_label_list_from_chat_content_supports_json_schema_payload() -> 
     assert actual == ["bridge_a", "bridge_b"]
 
 
-def test_mistral_chat_client_builds_expected_request_payload() -> None:
+def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:
     captured_request: dict[str, object] = {}
 
-    def fake_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
-        captured_request["url"] = url
-        captured_request["api_key"] = api_key
-        captured_request["payload"] = payload
-        return {
-            "choices": [
-                {
-                    "message": {
-                        "content": json.dumps({"labels": ["bridge_a", "bridge_b"]})
-                    }
-                }
-            ]
-        }
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            captured_request.update(kwargs)
+            return _fake_chat_completion_response(
+                json.dumps({"labels": ["bridge_a", "bridge_b"]})
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
 
     client = MistralChatClient(
         api_key="test-key",
         model="mistral-small-2603",
-        post_json=fake_post_json,
+        sdk_client=FakeSDKClient(),
     )
 
     actual = client.complete_json(
@@ -180,9 +186,7 @@ def test_mistral_chat_client_builds_expected_request_payload() -> None:
     )
 
     assert actual == {"labels": ["bridge_a", "bridge_b"]}
-    assert captured_request["url"] == "https://api.mistral.ai/v1/chat/completions"
-    assert captured_request["api_key"] == "test-key"
-    assert captured_request["payload"] == {
+    assert captured_request == {
         "model": "mistral-small-2603",
         "messages": [{"role": "user", "content": "expand labels"}],
         "temperature": 0.0,
@@ -204,6 +208,48 @@ def test_mistral_chat_client_builds_expected_request_payload() -> None:
             },
         },
     }
+
+
+def test_mistral_chat_client_retries_transient_transport_errors() -> None:
+    calls = {"count": 0}
+
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            calls["count"] += 1
+            if calls["count"] < 3:
+                raise httpx.ConnectError("temporary network issue")
+            return _fake_chat_completion_response(
+                json.dumps({"labels": ["bridge_a", "bridge_b"]})
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-small-2603",
+        sdk_client=FakeSDKClient(),
+    )
+
+    actual = client.complete_json(
+        prompt="expand labels",
+        schema_name="label_list",
+        schema={
+            "type": "object",
+            "properties": {
+                "labels": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                }
+            },
+            "required": ["labels"],
+            "additionalProperties": False,
+        },
+    )
+
+    assert actual == {"labels": ["bridge_a", "bridge_b"]}
+    assert calls["count"] == 3
 
 
 class FakeChatClient:

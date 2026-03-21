@@ -6,6 +6,9 @@ from collections.abc import Callable
 from typing import TypeVar
 from urllib.error import HTTPError, URLError
 
+import httpx
+from mistralai.client.utils.retries import PermanentError
+
 T = TypeVar("T")
 
 logger = logging.getLogger(__name__)
@@ -34,6 +37,16 @@ def call_with_retry(
         except URLError as error:
             retryable = True
             exception = error
+        except httpx.HTTPError as error:
+            retryable = True
+            exception = error
+        except PermanentError as error:
+            if isinstance(error.inner, (URLError, httpx.HTTPError)):
+                retryable = True
+                exception = error.inner
+            else:
+                retryable = False
+                exception = error
 
         if not retryable or attempt >= max_attempts:
             logger.error(

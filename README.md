@@ -301,7 +301,7 @@ uv run lcm generate algo3 \
 ```
 
 Method 2 uses the confirmed cosine-similarity threshold `0.01` in the executable path and the tracked domain thesaurus under `data/inputs/algo2_thesaurus.json`.
-All executable `generate` and `probe` paths accept `--resume` and write `run.log`, `state.json`, and `execution_checkpoint.json` alongside the existing prompt and summary artifacts. The reusable Mistral chat and embedding clients retry transient transport failures with exponential backoff before surfacing a hard error, so the failure path is logged and checkpointed rather than silent.
+All executable `generate` and `probe` paths accept `--resume` and write `run.log`, `state.json`, and `execution_checkpoint.json` alongside the existing prompt and summary artifacts. The reusable Mistral chat and embedding clients are now backed by the official `mistralai` SDK, and they retry transient transport failures with exponential backoff before surfacing a hard error, so the failure path is logged and checkpointed rather than silent.
 
 ## Post-Revision Debugging
 

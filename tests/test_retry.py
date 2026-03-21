@@ -1,5 +1,8 @@
 from urllib.error import HTTPError, URLError
 
+import httpx
+from mistralai.client.utils.retries import PermanentError
+
 from llm_conceptual_modeling.common.retry import call_with_retry
 
 
@@ -54,3 +57,49 @@ def test_call_with_retry_does_not_retry_nonretryable_http_error() -> None:
 
     assert calls["count"] == 1
     assert delays == []
+
+
+def test_call_with_retry_retries_httpx_transport_errors_before_succeeding() -> None:
+    calls = {"count": 0}
+    delays: list[float] = []
+
+    def operation() -> str:
+        calls["count"] += 1
+        if calls["count"] < 3:
+            raise httpx.ConnectError("temporary network issue")
+        return "ok"
+
+    actual = call_with_retry(
+        operation=operation,
+        operation_name="test operation",
+        max_attempts=4,
+        initial_delay_seconds=0.1,
+        sleep_fn=delays.append,
+    )
+
+    assert actual == "ok"
+    assert calls["count"] == 3
+    assert delays == [0.1, 0.2]
+
+
+def test_call_with_retry_retries_sdk_permanent_error_wrapping_transport_failure() -> None:
+    calls = {"count": 0}
+    delays: list[float] = []
+
+    def operation() -> str:
+        calls["count"] += 1
+        if calls["count"] < 3:
+            raise PermanentError(httpx.ConnectError("temporary network issue"))
+        return "ok"
+
+    actual = call_with_retry(
+        operation=operation,
+        operation_name="test operation",
+        max_attempts=4,
+        initial_delay_seconds=0.1,
+        sleep_fn=delays.append,
+    )
+
+    assert actual == "ok"
+    assert calls["count"] == 3
+    assert delays == [0.1, 0.2]
