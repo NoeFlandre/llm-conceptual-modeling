@@ -1,0 +1,25 @@
+{
+  "id": "e66f1de1bc7a4c74bcb98934db3bcbd6",
+  "created": 1774085481,
+  "model": "mistral-medium-2508",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2766,
+    "completion_tokens": 76,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [\n    {\"source\": \"Healthy eating\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Healthy eating\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Stress\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Socio-economic status\", \"target\": \"Healthy eating\"}\n]}"
+      }
+    }
+  ]
+}

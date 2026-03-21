@@ -1,0 +1,14 @@
+[
+  {
+    "model": "mistral-small-2603",
+    "parsed_edge_count": 10,
+    "recall": 0.36363636363636365,
+    "content_preview": "[(\"Healthy eating\", \"Blood glucose level\"), (\"Healthy eating\", \"Blood mono-unsaturated fatty acid level\"), (\"Healthy eating\", \"Blood saturated fatty acid level\"), (\"Obesity\", \"Mental well-being\"), (\"Obesity\", \"Physical well-being\"), (\"Short sleep duration\", \"Healthy eating\"), (\"Inflammation\", \"Insulin resistance\"), (\"Dysfunctional adipose tissue\", \"Inflammation\"), (\"Blood fatty acid level\", \"Adipose storage of fatty acids\"), (\"Cells intake of fatty acids\", \"Adipose storage of fatty acids\")]"
+  },
+  {
+    "model": "mistral-medium-2508",
+    "parsed_edge_count": 535,
+    "recall": 1.0,
+    "content_preview": "```python\n[\n    (\"Healthy eating\", \"Blood fatty acid level\"),\n    (\"Healthy eating\", \"Obesity\"),\n    (\"Healthy eating\", \"Dyslipidemia\"),\n    (\"Healthy eating\", \"Blood pressure\"),\n    (\"Healthy eating\", \"Inflammation\"),\n    (\"Physical activity\", \"Obesity\"),\n    (\"Physical activity\", \"Blood pressure\"),\n    (\"Physical activity\", \"Insulin resistance\"),\n    (\"Physical activity\", \"Dyslipidemia\"),\n    (\"Physical activity\", \"Blood glucose level\"),\n    (\"Physical activity\", \"Heart rate\"),\n    (\"Physical "
+  }
+]

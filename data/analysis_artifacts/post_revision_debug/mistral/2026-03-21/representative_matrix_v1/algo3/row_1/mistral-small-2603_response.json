@@ -1,0 +1,25 @@
+{
+  "id": "52e4745cd0c04a27936a1e0d0f69a69f",
+  "created": 1774085508,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 2684,
+    "total_tokens": 2903,
+    "completion_tokens": 219,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Culture of eating that promotes healthy choices\"}, {\"source\": \"Mental well-being\", \"target\": \"Emotional eating\"}, {\"source\": \"Physical well-being\", \"target\": \"Aesthetics\"}, {\"source\": \"Stress\", \"target\": \"Aesthetics\"}, {\"source\": \"Poor body image\", \"target\": \"Eating disorders\"}, {\"source\": \"Depression\", \"target\": \"Chronic conditions\"}, {\"source\": \"Physical well-being\", \"target\": \"Quality of the sport infrastructure\"}, {\"source\": \"Mental well-being\", \"target\": \"Quality of the sport infrastructure\"}, {\"source\": \"Control\", \"target\": \"Presence of a vibrant community\"}, {\"source\": \"Socio-economic status\", \"target\": \"Availability of healthy foods\"}, {\"source\": \"Weight bias\", \"target\": \"Unhealthy weight control practices\"}, {\"source\": \"Public support and demand for healthy products\", \"target\": \"Culture of eating that promotes healthy choices\"}]}"
+      }
+    }
+  ]
+}

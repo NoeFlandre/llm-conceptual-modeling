@@ -37,6 +37,13 @@ The repository includes the input graph data under [data/inputs](/Users/noefland
 
 Imported multi-model experiment outputs used for revision work are stored under [data/results](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results). Audit artifacts that support tracker findings are stored under [data/analysis_artifacts](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts).
 
+The repository also maintains a hard split between the frozen pre-revision state and later live-debug work:
+
+- pre-revision frozen tag: `pre-revision-freeze-2026-03-21`
+- post-revision debug branch: `post-revision-debug`
+
+Live-provider debugging artifacts are stored under [post_revision_debug](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts/post_revision_debug) so they never overwrite the imported historical corpus.
+
 ## Scope And Boundaries
 
 This repository fully covers the deterministic offline workflows used to process and analyze experiment outputs.
@@ -269,6 +276,23 @@ uv run lcm generate algo1 --json
 uv run lcm generate algo2 --json
 uv run lcm generate algo3 --fixture-only --json
 ```
+
+## Post-Revision Debugging
+
+Post-freeze live-provider probing is documented in [post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md).
+
+The current audited live-debug workflow uses structured Mistral outputs and writes:
+
+- `manifest.json`
+- `run.log`
+- `events.jsonl`
+- per-row prompts
+- raw provider responses
+- scored CSV summaries
+
+The first canonical run is stored under:
+
+- [representative_matrix_v1](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts/post_revision_debug/mistral/2026-03-21/representative_matrix_v1)
 
 ## Reproducibility And Verification
 

@@ -1,0 +1,25 @@
+{
+  "id": "e4f8114c86794b53913d8b770b297a89",
+  "created": 1774085498,
+  "model": "mistral-small-2506",
+  "usage": {
+    "prompt_tokens": 3047,
+    "total_tokens": 3294,
+    "completion_tokens": 247,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\n  \"edges\": [\n    {\n      \"source\": \"Healthy eating\",\n      \"target\": \"Insulin resistance\"\n    },\n    {\n      \"source\": \"Supportive food environment\",\n      \"target\": \"Inflammation\"\n    },\n    {\n      \"source\": \"Obesity\",\n      \"target\": \"Unhealthy foods are cheaper than healthy ones\"\n    },\n    {\n      \"source\": \"Obesity\",\n      \"target\": \"Unhealthy foods are more available than healthy ones\"\n    },\n    {\n      \"source\": \"Public support and demand for healthy products\",\n      \"target\": \"Obesity\"\n    },\n    {\n      \"source\": \"Marketing of unhealthy foods\",\n      \"target\": \"Obesity\"\n    },\n    {\n      \"source\": \"Cost of unhealthy foods\",\n      \"target\": \"Obesity\"\n    },\n    {\n      \"source\": \"Availability of healthy foods\",\n      \"target\": \"Healthy eating\"\n    },\n    {\n      \"source\": \"Quality of the sport infrastructure\",\n      \"target\": \"Exercise\"\n    },\n    {\n      \"source\": \"Exercise\",\n      \"target\": \"Obesity\"\n    }\n  ]\n}"
+      }
+    }
+  ]
+}

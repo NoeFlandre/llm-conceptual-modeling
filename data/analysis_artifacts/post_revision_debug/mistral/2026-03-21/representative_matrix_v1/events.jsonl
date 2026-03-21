@@ -1,0 +1,44 @@
+{"event": "run_started", "run_name": "representative_matrix_v1", "timestamp": "2026-03-21T09:31:18.781823+00:00"}
+{"algorithm": "algo1", "event": "probe_started", "historical_model": "gpt-5", "row_index": 0, "timestamp": "2026-03-21T09:31:18.825260+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2506", "row_index": 0, "timestamp": "2026-03-21T09:31:18.825463+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2506", "parsed_edge_count": 5, "row_index": 0, "timestamp": "2026-03-21T09:31:19.758428+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 0, "timestamp": "2026-03-21T09:31:19.758676+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 0, "timestamp": "2026-03-21T09:31:20.792173+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 0, "timestamp": "2026-03-21T09:31:20.792403+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 4, "row_index": 0, "timestamp": "2026-03-21T09:31:23.214556+00:00"}
+{"algorithm": "algo1", "event": "probe_started", "historical_model": "gpt-5", "row_index": 80, "timestamp": "2026-03-21T09:31:23.242153+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2506", "row_index": 80, "timestamp": "2026-03-21T09:31:23.242347+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2506", "parsed_edge_count": 5, "row_index": 80, "timestamp": "2026-03-21T09:31:24.215429+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 80, "timestamp": "2026-03-21T09:31:24.215672+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 80, "timestamp": "2026-03-21T09:31:25.212775+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 80, "timestamp": "2026-03-21T09:31:25.213375+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 80, "timestamp": "2026-03-21T09:31:29.287686+00:00"}
+{"algorithm": "algo2", "event": "probe_started", "historical_model": "gpt-5", "row_index": 0, "timestamp": "2026-03-21T09:31:29.338542+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2506", "row_index": 0, "timestamp": "2026-03-21T09:31:29.338732+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2506", "parsed_edge_count": 5, "row_index": 0, "timestamp": "2026-03-21T09:31:30.194524+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 0, "timestamp": "2026-03-21T09:31:30.194759+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 0, "timestamp": "2026-03-21T09:31:31.316632+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 0, "timestamp": "2026-03-21T09:31:31.317166+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 4, "row_index": 0, "timestamp": "2026-03-21T09:31:33.440188+00:00"}
+{"algorithm": "algo2", "event": "probe_started", "historical_model": "gpt-5", "row_index": 160, "timestamp": "2026-03-21T09:31:33.487766+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2506", "row_index": 160, "timestamp": "2026-03-21T09:31:33.487948+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2506", "parsed_edge_count": 7, "row_index": 160, "timestamp": "2026-03-21T09:31:35.213106+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 160, "timestamp": "2026-03-21T09:31:35.213314+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 160, "timestamp": "2026-03-21T09:31:36.336926+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 160, "timestamp": "2026-03-21T09:31:36.337126+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 160, "timestamp": "2026-03-21T09:31:38.703240+00:00"}
+{"algorithm": "algo3", "event": "probe_started", "historical_model": "gpt-5", "row_index": 0, "timestamp": "2026-03-21T09:31:38.775028+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2506", "row_index": 0, "timestamp": "2026-03-21T09:31:38.775271+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2506", "parsed_edge_count": 10, "row_index": 0, "timestamp": "2026-03-21T09:31:39.898488+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 0, "timestamp": "2026-03-21T09:31:39.898917+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 28, "row_index": 0, "timestamp": "2026-03-21T09:31:42.699471+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 0, "timestamp": "2026-03-21T09:31:42.700155+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 10, "row_index": 0, "timestamp": "2026-03-21T09:31:44.440660+00:00"}
+{"algorithm": "algo3", "event": "probe_started", "historical_model": "gpt-5", "row_index": 1, "timestamp": "2026-03-21T09:31:44.505717+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2506", "row_index": 1, "timestamp": "2026-03-21T09:31:44.505918+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2506", "parsed_edge_count": 51, "row_index": 1, "timestamp": "2026-03-21T09:31:47.939870+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 1, "timestamp": "2026-03-21T09:31:47.940441+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 12, "row_index": 1, "timestamp": "2026-03-21T09:31:49.474831+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 1, "timestamp": "2026-03-21T09:31:49.475247+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 17, "row_index": 1, "timestamp": "2026-03-21T09:31:57.669014+00:00"}
+{"event": "run_finished", "run_name": "representative_matrix_v1", "timestamp": "2026-03-21T09:31:57.694239+00:00"}

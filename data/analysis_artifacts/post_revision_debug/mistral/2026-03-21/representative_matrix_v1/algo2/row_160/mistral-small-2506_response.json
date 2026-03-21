@@ -1,0 +1,25 @@
+{
+  "id": "731ec937c5f148d893d8658bf30277c0",
+  "created": 1774085493,
+  "model": "mistral-small-2506",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2862,
+    "completion_tokens": 172,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\n  \"edges\": [\n    {\n      \"source\": \"Healthy eating\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Supportive food environment\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Weight bias\",\n      \"target\": \"Healthy eating\"\n    },\n    {\n      \"source\": \"Public support and demand for healthy products\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Stress\",\n      \"target\": \"Healthy eating\"\n    },\n    {\n      \"source\": \"Appetite\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Poor body image\",\n      \"target\": \"Healthy eating\"\n    }\n  ]\n}"
+      }
+    }
+  ]
+}
