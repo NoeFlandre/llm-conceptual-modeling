@@ -1,0 +1,25 @@
+{
+  "id": "28790ce35ed34f76be1cb42da92b5413",
+  "created": 1774106071,
+  "model": "mistral-medium-2508",
+  "usage": {
+    "prompt_tokens": 2684,
+    "total_tokens": 2968,
+    "completion_tokens": 284,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\n  \"edges\": [\n    {\"source\": \"Healthy eating\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Healthy eating\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Stress\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Stress\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Depression\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Depression\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Eating disorders\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Eating disorders\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Supportive food environment\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Supportive food environment\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Appetite\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Aesthetics\", \"target\": \"Mental well-being\"},\n    {\"source\": \"Aesthetics\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Emotional eating\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Control\", \"target\": \"Physical well-being\"},\n    {\"source\": \"Resilience\", \"target\": \"Physical well-being\"}\n  ]\n}"
+      }
+    }
+  ]
+}

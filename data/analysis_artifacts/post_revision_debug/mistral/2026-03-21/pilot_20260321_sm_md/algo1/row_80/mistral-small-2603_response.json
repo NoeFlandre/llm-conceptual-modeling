@@ -1,0 +1,25 @@
+{
+  "id": "b8885b6f01454b729e76550c743d92af",
+  "created": 1774106056,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2791,
+    "completion_tokens": 101,
+    "prompt_tokens_details": {
+      "cached_tokens": 2663
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Physical well-being\"}, {\"source\": \"Healthy eating\", \"target\": \"Mental well-being\"}, {\"source\": \"Obesity\", \"target\": \"Weight bias\"}, {\"source\": \"Weight bias\", \"target\": \"Mental well-being\"}, {\"source\": \"Weight bias\", \"target\": \"Depression\"}, {\"source\": \"Eating disorders\", \"target\": \"Poor body image\"}]}"
+      }
+    }
+  ]
+}

@@ -76,6 +76,10 @@ The smaller live pilot used to validate the provider plumbing is:
 
 - `data/analysis_artifacts/post_revision_debug/mistral/2026-03-21/pilot_20260321/`
 
+The next pilot added a second model for the same representative probe set:
+
+- `data/analysis_artifacts/post_revision_debug/mistral/2026-03-21/pilot_20260321_sm_md/`
+
 From `probe_summary_by_algorithm_and_model.csv`:
 
 - For the representative ALGO1 rows, `mistral-small-2603` and `mistral-medium-2508` increased mean accuracy and precision relative to the imported GPT-5 historical rows, but reduced recall sharply. This suggests that a strict, high-precision prompt can trade recall for precision rather than reproducing the historical GPT-5 balance.
@@ -87,6 +91,12 @@ The smaller one-model pilot on `mistral-small-2603` points in the same direction
 - ALGO1 improved accuracy and precision on the sampled rows, but recall dropped sharply.
 - ALGO2 improved accuracy slightly, but precision and recall both dropped on the sampled rows.
 - ALGO3 stayed at zero recall on both sampled rows, while producing more parsed edges than the historical rows.
+
+The two-model pilot shows the same broad pattern:
+
+- ALGO1 accuracy improves for both models, with `mistral-small-2603` giving slightly higher precision and `mistral-medium-2508` producing fewer edges.
+- ALGO2 accuracy improves for both models, but recall remains much lower than the historical rows; `mistral-medium-2508` improves precision relative to `mistral-small-2603`, but neither model recovers the historical recall level.
+- ALGO3 remains at zero recall for both models on both sampled rows, even though the medium model produces slightly more parsed edges than the small model.
 
 ## Interpretation
 
