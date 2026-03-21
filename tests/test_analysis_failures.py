@@ -68,3 +68,34 @@ def test_cli_analyze_failures_rejects_missing_result_column(tmp_path, capsys) ->
     assert exit_code == 1
     assert "Missing required result columns" in captured.err
     assert not output_path.exists()
+
+
+def test_cli_analyze_failures_combines_multiple_inputs_with_source_labels(tmp_path) -> None:
+    first_input_path = tmp_path / "raw1.csv"
+    second_input_path = tmp_path / "raw2.csv"
+    output_path = tmp_path / "failures.csv"
+    pd.DataFrame({"Result": ["[]"]}).to_csv(first_input_path, index=False)
+    pd.DataFrame({"Result": ["not parseable"]}).to_csv(second_input_path, index=False)
+
+    exit_code = main(
+        [
+            "analyze",
+            "failures",
+            "--input",
+            str(first_input_path),
+            "--input",
+            str(second_input_path),
+            "--result-column",
+            "Result",
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    assert exit_code == 0
+
+    actual = pd.read_csv(output_path)
+
+    assert "source_input" in actual.columns
+    assert set(actual["source_input"]) == {str(first_input_path), str(second_input_path)}
+    assert len(actual) == 2

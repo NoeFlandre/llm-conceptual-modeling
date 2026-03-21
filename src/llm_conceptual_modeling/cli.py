@@ -64,13 +64,13 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser.add_argument("--json", action="store_true")
 
     summary_parser = analyze_subparsers.add_parser("summary")
-    summary_parser.add_argument("--input", required=True)
+    summary_parser.add_argument("--input", action="append", required=True)
     summary_parser.add_argument("--group-by", action="append", required=True)
     summary_parser.add_argument("--metric", action="append", required=True)
     summary_parser.add_argument("--output", required=True)
 
     failures_parser = analyze_subparsers.add_parser("failures")
-    failures_parser.add_argument("--input", required=True)
+    failures_parser.add_argument("--input", action="append", required=True)
     failures_parser.add_argument("--result-column", required=True)
     failures_parser.add_argument("--output", required=True)
 

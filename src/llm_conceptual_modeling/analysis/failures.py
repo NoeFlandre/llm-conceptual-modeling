@@ -6,28 +6,34 @@ from llm_conceptual_modeling.common.types import PathLike
 
 
 def write_failure_analysis(
-    input_csv_path: PathLike,
+    input_csv_paths: list[PathLike] | tuple[PathLike, ...],
     output_csv_path: PathLike,
     *,
     result_column: str,
 ) -> None:
-    dataframe = pd.read_csv(input_csv_path)
-    assert_required_columns(dataframe, [result_column], label="result columns")
+    frames: list[pd.DataFrame] = []
+    for input_csv_path in input_csv_paths:
+        dataframe = pd.read_csv(input_csv_path)
+        assert_required_columns(dataframe, [result_column], label="result columns")
 
-    categories: list[str] = []
-    parsed_edge_counts: list[int] = []
-    is_failures: list[bool] = []
+        categories: list[str] = []
+        parsed_edge_counts: list[int] = []
+        is_failures: list[bool] = []
 
-    for value in dataframe[result_column]:
-        category, parsed_edge_count = _classify_result(value)
-        categories.append(category)
-        parsed_edge_counts.append(parsed_edge_count)
-        is_failures.append(category != "valid_output")
+        for value in dataframe[result_column]:
+            category, parsed_edge_count = _classify_result(value)
+            categories.append(category)
+            parsed_edge_counts.append(parsed_edge_count)
+            is_failures.append(category != "valid_output")
 
-    output = dataframe.copy()
-    output["failure_category"] = categories
-    output["parsed_edge_count"] = parsed_edge_counts
-    output["is_failure"] = is_failures
+        output = dataframe.copy()
+        output["source_input"] = str(input_csv_path)
+        output["failure_category"] = categories
+        output["parsed_edge_count"] = parsed_edge_counts
+        output["is_failure"] = is_failures
+        frames.append(output)
+
+    output = pd.concat(frames, ignore_index=True)
     output.to_csv(output_csv_path, index=False)
 
 

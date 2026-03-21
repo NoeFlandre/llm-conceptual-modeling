@@ -1,0 +1,11 @@
+Feature,Result
+Example,0.1950374394404071
+Counter-Example,0.19503743944040705
+Number of Words,27.726488336977194
+Depth,49.450662576966046
+Example_AND_Counter-Example,3.7495668121349497
+Example_AND_Number of Words,2.770918052462525
+Example_AND_Depth,0.19503743944040705
+Counter-Example_AND_Number of Words,11.772647651562716
+Counter-Example_AND_Depth,0.19503743944040733
+Number of Words_AND_Depth,3.7495668121349497

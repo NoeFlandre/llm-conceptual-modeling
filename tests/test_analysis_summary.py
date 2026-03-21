@@ -37,9 +37,11 @@ def test_cli_analyze_summary_writes_grouped_metric_statistics(tmp_path) -> None:
     expected["ci95_low"] = expected["mean"] - margin
     expected["ci95_high"] = expected["mean"] + margin
     expected["metric"] = "accuracy"
+    expected["source_input"] = input_path
 
     expected = expected[
         [
+            "source_input",
             "Explanation",
             "metric",
             "n",
@@ -80,3 +82,35 @@ def test_cli_analyze_summary_rejects_missing_metric_column(tmp_path, capsys) -> 
     assert exit_code == 1
     assert "Missing required metric columns" in captured.err
     assert not output_path.exists()
+
+
+def test_cli_analyze_summary_combines_multiple_inputs_with_source_labels(tmp_path) -> None:
+    output_path = tmp_path / "summary.csv"
+
+    exit_code = main(
+        [
+            "analyze",
+            "summary",
+            "--input",
+            "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+            "--input",
+            "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
+            "--group-by",
+            "Explanation",
+            "--metric",
+            "accuracy",
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    assert exit_code == 0
+
+    actual = pd.read_csv(output_path)
+
+    assert "source_input" in actual.columns
+    assert set(actual["source_input"]) == {
+        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
+    }
+    assert len(actual) == 4

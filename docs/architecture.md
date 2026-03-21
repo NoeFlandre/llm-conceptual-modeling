@@ -20,6 +20,10 @@ The codebase is organized around three requirements:
   CLI handlers. These modules keep argument wiring separate from the domain logic so workflows remain directly testable.
 - `data/inputs`
   Input graph files referenced by the generation-manifest layer.
+- `data/results`
+  Imported primary experiment outputs organized by algorithm and model.
+- `data/analysis_artifacts`
+  Reproducible audit artifacts derived from `data/results` for revision support.
 - `tests/fixtures/legacy`
   Committed oracle artifacts used for parity verification.
 

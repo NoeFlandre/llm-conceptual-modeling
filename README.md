@@ -34,6 +34,8 @@ Without calling any external LLM provider, a reviewer can:
 
 The repository includes the input graph data under [data/inputs](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/inputs) and regression fixtures under [tests/fixtures/legacy](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/fixtures/legacy).
 
+Imported multi-model experiment outputs used for revision work are stored under [data/results](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results). Audit artifacts that support tracker findings are stored under [data/analysis_artifacts](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts).
+
 ## Scope And Boundaries
 
 This repository fully covers the deterministic offline workflows used to process and analyze experiment outputs.
@@ -212,6 +214,8 @@ A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noef
 - [src/llm_conceptual_modeling/common](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/common): shared evaluation, factorial-analysis, graph, and schema code
 - [src/llm_conceptual_modeling/commands](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/commands): CLI handlers
 - [data/inputs](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/inputs): graph input files used by the generation layer
+- [data/results](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results): imported primary experiment outputs across algorithms and models
+- [data/analysis_artifacts](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts): audit artifacts backing revision-tracker findings
 - [tests/fixtures/legacy](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/fixtures/legacy): committed oracle fixtures for regression checks
 - [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md): implementation-oriented structure and safety notes
 - [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md): short reviewer-oriented reproduction guide
