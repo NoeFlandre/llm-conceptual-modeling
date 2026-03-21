@@ -181,6 +181,22 @@ uv run lcm analyze failures \
   --output /tmp/algo3_failures.csv
 ```
 
+Replication-stability summaries across repeated evaluated runs:
+
+```bash
+uv run lcm analyze stability \
+  --input data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --group-by Explanation \
+  --group-by Example \
+  --group-by Counterexample \
+  --group-by Array/List\\(1/-1\\) \
+  --group-by Tag/Adjacency\\(1/-1\\) \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo1_stability.csv
+```
+
 ### Generation Manifests
 
 The `generate` commands do not call providers. They expose the experimental contract for each algorithm in a machine-readable form:
@@ -202,6 +218,7 @@ The repository is designed to make wrongness visible rather than implicit.
 - [tests/test_snapshots.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_snapshots.py) checks stable JSON command outputs.
 - [tests/test_analysis_summary.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_summary.py) checks grouped descriptive-statistics exports.
 - [tests/test_analysis_failures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_failures.py) checks raw-output failure classification.
+- [tests/test_analysis_stability.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_stability.py) checks grouped replication-stability exports.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 

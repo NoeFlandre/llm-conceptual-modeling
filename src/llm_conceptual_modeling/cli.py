@@ -74,6 +74,12 @@ def build_parser() -> argparse.ArgumentParser:
     failures_parser.add_argument("--result-column", required=True)
     failures_parser.add_argument("--output", required=True)
 
+    stability_parser = analyze_subparsers.add_parser("stability")
+    stability_parser.add_argument("--input", action="append", required=True)
+    stability_parser.add_argument("--group-by", action="append", required=True)
+    stability_parser.add_argument("--metric", action="append", required=True)
+    stability_parser.add_argument("--output", required=True)
+
     return parser
 
 

@@ -26,6 +26,8 @@ The source data for these artifacts comes from the imported primary result files
   Aggregated failure rates by algorithm and model.
 - `parsed_edge_counts_by_model.csv`
   Aggregated parsed edge-count statistics by algorithm and model.
+- `replication_stability/`
+  Stability artifacts derived from evaluated CSVs to quantify how much metrics moved across the recorded repetitions.
 
 ## Audit Use
 

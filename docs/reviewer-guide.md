@@ -100,6 +100,23 @@ uv run lcm analyze failures \
   --output /tmp/algo3_failures.csv
 ```
 
+Replication-stability summary:
+
+```bash
+uv run lcm analyze stability \
+  --input data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --group-by Explanation \
+  --group-by Example \
+  --group-by Counterexample \
+  --group-by Array/List\(1/-1\) \
+  --group-by Tag/Adjacency\(1/-1\) \
+  --group-by Convergence \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo2_stability.csv
+```
+
 ## Files Worth Inspecting
 
 - [README.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/README.md)
