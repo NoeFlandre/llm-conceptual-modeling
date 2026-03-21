@@ -1,5 +1,6 @@
 import json
 
+from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.algo1.probe import (
     Algo1ProbeSpec,
     run_algo1_probe,
@@ -40,8 +41,15 @@ def test_run_algo1_probe_writes_auditable_artifacts(tmp_path) -> None:
     spec = Algo1ProbeSpec(
         run_name="algo1_single_row_v1",
         model="mistral-small-2603",
-        subgraph1=[("alpha", "beta")],
-        subgraph2=[("gamma", "delta")],
+        subgraph1=[("alpha", "beta"), ("beta", "gamma")],
+        subgraph2=[("delta", "epsilon")],
+        prompt_config=Method1PromptConfig(
+            use_adjacency_notation=True,
+            use_array_representation=True,
+            include_explanation=True,
+            include_example=False,
+            include_counterexample=False,
+        ),
         output_dir=probe_dir,
     )
 
@@ -68,13 +76,21 @@ def test_run_algo1_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert manifest == {
         "run_name": "algo1_single_row_v1",
         "model": "mistral-small-2603",
-        "subgraph1": [["alpha", "beta"]],
-        "subgraph2": [["gamma", "delta"]],
+        "subgraph1": [["alpha", "beta"], ["beta", "gamma"]],
+        "subgraph2": [["delta", "epsilon"]],
+        "prompt_config": {
+            "use_adjacency_notation": True,
+            "use_array_representation": True,
+            "include_explanation": True,
+            "include_example": False,
+            "include_counterexample": False,
+        },
     }
     assert summary == actual
     assert len(event_lines) == 2
     assert json.loads(event_lines[0])["event"] == "probe_started"
     assert json.loads(event_lines[1])["event"] == "probe_finished"
     assert "recommend more links between the two maps" in edge_prompt
+    assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in edge_prompt
     assert "causal relationship exists between the source and target concepts" in cove_prompt
     assert len(chat_client.calls) == 2
