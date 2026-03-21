@@ -269,13 +269,38 @@ The tracked revision artifacts for this comparison live under [data/analysis_art
 
 ### Generation Manifests
 
-The `generate` commands do not call providers. They expose the experimental contract for each algorithm in a machine-readable form:
+The `generate` commands expose the experimental contract for each algorithm in a machine-readable form by default. When given explicit runtime arguments, they execute the corresponding live-backed experiment path:
 
 ```bash
 uv run lcm generate algo1 --json
 uv run lcm generate algo2 --json
 uv run lcm generate algo3 --fixture-only --json
 ```
+
+When explicit execution arguments are provided, `generate` also runs a live-backed experiment path for the selected algorithm. This is currently exposed for the paper-aligned Mistral workflows:
+
+```bash
+uv run lcm generate algo1 \
+  --model mistral-small-2603 \
+  --pair sg1_sg2 \
+  --output-root /tmp/algo1_runs \
+  --json
+
+uv run lcm generate algo2 \
+  --model mistral-small-2603 \
+  --embedding-model mistral-embed-2312 \
+  --pair sg1_sg2 \
+  --output-root /tmp/algo2_runs \
+  --json
+
+uv run lcm generate algo3 \
+  --model mistral-small-2603 \
+  --pair subgraph_1_to_subgraph_3 \
+  --output-root /tmp/algo3_runs \
+  --json
+```
+
+Method 2 uses the confirmed cosine-similarity threshold `0.01` in the executable path and the tracked domain thesaurus under `data/inputs/algo2_thesaurus.json`.
 
 ## Post-Revision Debugging
 

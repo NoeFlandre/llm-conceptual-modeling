@@ -82,6 +82,19 @@ Generation-manifest inspection:
 uv run lcm generate algo1 --json
 ```
 
+Paper-aligned live-backed execution for Method 2:
+
+```bash
+uv run lcm generate algo2 \
+  --model mistral-small-2603 \
+  --embedding-model mistral-embed-2312 \
+  --pair sg1_sg2 \
+  --output-root /tmp/algo2_runs \
+  --json
+```
+
+This executable Method 2 path uses the confirmed `0.01` convergence threshold and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
+
 Grouped descriptive summaries:
 
 ```bash

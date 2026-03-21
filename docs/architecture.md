@@ -44,7 +44,7 @@ For the paired hypothesis-test workflow, adjusted p-values use Benjamini-Hochber
 - `lcm verify ...`
   Run repository health checks and deterministic parity checks.
 
-The `lcm generate ...` commands are intentionally narrower. They expose the experiment contract for each algorithm without executing live provider calls.
+The `lcm generate ...` commands expose the experiment contract for each algorithm in their default form. When given explicit model, pair, and output-root arguments, they also execute the corresponding live-backed Mistral experiment path for that algorithm.
 
 The `lcm baseline ...` commands are also intentionally narrow. They expose one deterministic structural heuristic based on the mother graph. This keeps the baseline auditable and testable, but it also means the baseline should be interpreted as a graph heuristic comparator rather than a substitute for provider-backed generation.
 
@@ -62,6 +62,6 @@ This structure is intended to make regressions visible quickly and to keep futur
 
 ## Explicit Boundary
 
-The repository does not currently validate historical live LLM behavior by reissuing provider calls. Instead, the generation layer is preserved as offline manifests describing dataset paths, experimental conditions, replications, subgraph coverage, and prompt previews.
+The repository does not currently validate historical live LLM behavior by reissuing the exact legacy provider calls. Instead, the generation layer now exposes both offline manifests and live-backed Mistral execution paths that reproduce the paper's method structure against the imported data and tracked inputs.
 
 This boundary is deliberate: offline outputs are reproducible and regression-tested, whereas live provider behavior may drift across model versions, serving infrastructure, and time.
