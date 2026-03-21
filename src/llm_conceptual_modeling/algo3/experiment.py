@@ -1,8 +1,8 @@
 from itertools import product
 from pathlib import Path
 
-from llm_conceptual_modeling.algo3.mistral import Method3PromptConfig
-from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec
+from llm_conceptual_modeling.algo3.mistral import ChatCompletionClient, Method3PromptConfig
+from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec, run_algo3_probe
 from llm_conceptual_modeling.common.graph_data import load_default_graph
 
 
@@ -42,6 +42,23 @@ def build_algo3_experiment_specs(
             experiment_specs.append(experiment_spec)
 
     return experiment_specs
+
+
+def run_algo3_experiment(
+    *,
+    specs: list[Algo3ProbeSpec],
+    chat_client: ChatCompletionClient,
+) -> list[dict[str, object]]:
+    summary_records: list[dict[str, object]] = []
+
+    for spec in specs:
+        summary_record = run_algo3_probe(
+            spec=spec,
+            chat_client=chat_client,
+        )
+        summary_records.append(summary_record)
+
+    return summary_records
 
 
 def _load_pair_labels(pair_name: str) -> tuple[list[str], list[str]]:
