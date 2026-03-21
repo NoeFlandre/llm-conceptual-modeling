@@ -1,5 +1,6 @@
 import json
 
+from llm_conceptual_modeling.algo2.mistral import Method2PromptConfig
 from llm_conceptual_modeling.algo2.probe import (
     Algo2ProbeSpec,
     run_algo2_probe,
@@ -51,6 +52,15 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
         run_name="algo2_single_row_v1",
         model="mistral-small-2603",
         seed_labels=["alpha", "beta"],
+        subgraph1=[("alpha", "beta"), ("beta", "gamma")],
+        subgraph2=[("delta", "epsilon")],
+        prompt_config=Method2PromptConfig(
+            use_adjacency_notation=True,
+            use_array_representation=True,
+            include_explanation=True,
+            include_example=False,
+            include_counterexample=False,
+        ),
         convergence_threshold=0.01,
         output_dir=probe_dir,
     )
@@ -78,6 +88,15 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
         "run_name": "algo2_single_row_v1",
         "model": "mistral-small-2603",
         "seed_labels": ["alpha", "beta"],
+        "subgraph1": [["alpha", "beta"], ["beta", "gamma"]],
+        "subgraph2": [["delta", "epsilon"]],
+        "prompt_config": {
+            "use_adjacency_notation": True,
+            "use_array_representation": True,
+            "include_explanation": True,
+            "include_example": False,
+            "include_counterexample": False,
+        },
         "convergence_threshold": 0.01,
     }
     assert summary == actual
@@ -85,5 +104,7 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert json.loads(event_lines[0])["event"] == "probe_started"
     assert json.loads(event_lines[1])["event"] == "probe_finished"
     assert "recommend 5 new related concept names" in label_prompt
+    assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in label_prompt
     assert "suggest edges that directly link concepts" in edge_prompt
+    assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in edge_prompt
     assert len(chat_client.calls) == 3

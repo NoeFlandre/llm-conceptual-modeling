@@ -6,6 +6,7 @@ from llm_conceptual_modeling.algo2.embeddings import EmbeddingClient
 from llm_conceptual_modeling.algo2.method import execute_method2
 from llm_conceptual_modeling.algo2.mistral import (
     ChatCompletionClient,
+    Method2PromptConfig,
     build_edge_suggester,
     build_edge_suggestion_prompt,
     build_label_expansion_prompt,
@@ -20,6 +21,9 @@ class Algo2ProbeSpec:
     run_name: str
     model: str
     seed_labels: list[str]
+    subgraph1: list[tuple[str, str]]
+    subgraph2: list[tuple[str, str]]
+    prompt_config: Method2PromptConfig
     convergence_threshold: float
     output_dir: Path
 
@@ -42,12 +46,26 @@ def run_algo2_probe(
         "run_name": spec.run_name,
         "model": spec.model,
         "seed_labels": spec.seed_labels,
+        "subgraph1": _edges_to_json_compatible(spec.subgraph1),
+        "subgraph2": _edges_to_json_compatible(spec.subgraph2),
+        "prompt_config": {
+            "use_adjacency_notation": spec.prompt_config.use_adjacency_notation,
+            "use_array_representation": spec.prompt_config.use_array_representation,
+            "include_explanation": spec.prompt_config.include_explanation,
+            "include_example": spec.prompt_config.include_example,
+            "include_counterexample": spec.prompt_config.include_counterexample,
+        },
         "convergence_threshold": spec.convergence_threshold,
     }
     manifest_path.write_text(json.dumps(manifest_record, indent=2))
     append_jsonl_event(events_path, {"event": "probe_started", **manifest_record})
 
-    label_prompt = build_label_expansion_prompt(spec.seed_labels)
+    label_prompt = build_label_expansion_prompt(
+        spec.seed_labels,
+        subgraph1=spec.subgraph1,
+        subgraph2=spec.subgraph2,
+        prompt_config=spec.prompt_config,
+    )
     label_prompt_path.write_text(label_prompt)
     label_proposer = build_label_proposer(chat_client)
     edge_suggester = build_edge_suggester(chat_client)
@@ -61,7 +79,12 @@ def run_algo2_probe(
         thesaurus=thesaurus,
     )
     expanded_label_context = spec.seed_labels + execution_result.expanded_labels
-    edge_prompt = build_edge_suggestion_prompt(expanded_label_context)
+    edge_prompt = build_edge_suggestion_prompt(
+        expanded_label_context,
+        subgraph1=spec.subgraph1,
+        subgraph2=spec.subgraph2,
+        prompt_config=spec.prompt_config,
+    )
     edge_prompt_path.write_text(edge_prompt)
     raw_edges = _edges_to_json_compatible(execution_result.raw_edges)
     normalized_edges = _edges_to_json_compatible(execution_result.normalized_edges)
