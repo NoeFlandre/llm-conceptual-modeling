@@ -4,15 +4,17 @@ Offline rewrite of the conceptual modeling research workflows with regression te
 
 ## Current Scope
 
-The new codebase currently covers the first verified slice:
+The new codebase currently covers the deterministic offline workflows for all three algorithms:
 
 - shared connection evaluation logic for Algorithms 1 and 2
 - offline Algorithm 1 metrics evaluation
 - offline Algorithm 2 metrics evaluation
 - offline Algorithm 3 recall recomputation
 - ALGO1 factorial analysis from evaluated metrics CSVs
-- CLI entrypoints for `lcm eval algo1`, `lcm eval algo2`, `lcm eval algo3`, and `lcm factorial algo1`
-- regression tests against a committed legacy fixture
+- ALGO2 factorial analysis from evaluated metrics CSVs
+- ALGO3 factorial analysis from evaluated metrics CSVs
+- CLI entrypoints for `lcm eval algo1`, `lcm eval algo2`, `lcm eval algo3`, `lcm factorial algo1`, `lcm factorial algo2`, and `lcm factorial algo3`
+- regression tests against committed legacy fixtures
 
 Live LLM generation is intentionally out of scope at this stage.
 
@@ -46,4 +48,14 @@ uv run lcm factorial algo1 \
   --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv \
   --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv \
   --output /tmp/factorial_analysis_algo1_gpt_5_without_error.csv
+
+uv run lcm factorial algo2 \
+  --input tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --input tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv \
+  --input tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv \
+  --output /tmp/factorial_analysis_gpt_5_algo2_without_error.csv
+
+uv run lcm factorial algo3 \
+  --input tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv \
+  --output /tmp/factorial_analysis_results_gpt5_without_error.csv
 ```

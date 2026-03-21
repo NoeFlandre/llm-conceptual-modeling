@@ -8,8 +8,14 @@ from llm_conceptual_modeling.algo1.factorial import (
 from llm_conceptual_modeling.algo2.evaluation import (
     evaluate_results_file as evaluate_algo2_results_file,
 )
+from llm_conceptual_modeling.algo2.factorial import (
+    run_factorial_analysis as run_algo2_factorial_analysis,
+)
 from llm_conceptual_modeling.algo3.evaluation import (
     evaluate_results_file as evaluate_algo3_results_file,
+)
+from llm_conceptual_modeling.algo3.factorial import (
+    run_factorial_analysis as run_algo3_factorial_analysis,
 )
 
 
@@ -39,6 +45,14 @@ def build_parser() -> argparse.ArgumentParser:
     factorial_algo1_parser.add_argument("--input", action="append", required=True)
     factorial_algo1_parser.add_argument("--output", required=True)
 
+    factorial_algo2_parser = factorial_subparsers.add_parser("algo2")
+    factorial_algo2_parser.add_argument("--input", action="append", required=True)
+    factorial_algo2_parser.add_argument("--output", required=True)
+
+    factorial_algo3_parser = factorial_subparsers.add_parser("algo3")
+    factorial_algo3_parser.add_argument("--input", required=True)
+    factorial_algo3_parser.add_argument("--output", required=True)
+
     return parser
 
 
@@ -57,6 +71,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     if args.command == "factorial" and args.algorithm == "algo1":
         run_algo1_factorial_analysis(args.input, args.output)
+        return 0
+    if args.command == "factorial" and args.algorithm == "algo2":
+        run_algo2_factorial_analysis(args.input, args.output)
+        return 0
+    if args.command == "factorial" and args.algorithm == "algo3":
+        run_algo3_factorial_analysis(args.input, args.output)
         return 0
 
     parser.error("unsupported command")

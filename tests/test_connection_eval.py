@@ -8,8 +8,14 @@ from llm_conceptual_modeling.algo1.factorial import (
 from llm_conceptual_modeling.algo2.evaluation import (
     evaluate_results_file as evaluate_algo2_results_file,
 )
+from llm_conceptual_modeling.algo2.factorial import (
+    run_factorial_analysis as run_algo2_factorial_analysis,
+)
 from llm_conceptual_modeling.algo3.evaluation import (
     evaluate_results_file as evaluate_algo3_results_file,
+)
+from llm_conceptual_modeling.algo3.factorial import (
+    run_factorial_analysis as run_algo3_factorial_analysis,
 )
 from llm_conceptual_modeling.common.connection_eval import find_valid_connections
 
@@ -92,6 +98,40 @@ def test_algo1_factorial_matches_legacy_fixture(tmp_path) -> None:
     output_path = tmp_path / "factorial_analysis_algo1_gpt_5_without_error.csv"
 
     run_algo1_factorial_analysis(input_paths, output_path)
+
+    actual = pd.read_csv(output_path)
+    expected = pd.read_csv(expected_path)
+
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_algo2_factorial_matches_legacy_fixture(tmp_path) -> None:
+    input_paths = [
+        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv",
+        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv",
+    ]
+    expected_path = (
+        "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv.csv"
+    )
+    output_path = tmp_path / "factorial_analysis_gpt_5_algo2_without_error.csv"
+
+    run_algo2_factorial_analysis(input_paths, output_path)
+
+    actual = pd.read_csv(output_path)
+    expected = pd.read_csv(expected_path)
+
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_algo3_factorial_matches_legacy_fixture(tmp_path) -> None:
+    input_path = "tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
+    expected_path = (
+        "tests/fixtures/legacy/algo3/gpt-5/factorial/factorial_analysis_results_gpt5_without_error.csv"
+    )
+    output_path = tmp_path / "factorial_analysis_results_gpt5_without_error.csv"
+
+    run_algo3_factorial_analysis(input_path, output_path)
 
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)

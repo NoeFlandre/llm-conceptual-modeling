@@ -98,3 +98,55 @@ def test_cli_factorial_algo1_writes_legacy_parity_output(tmp_path) -> None:
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_cli_factorial_algo2_writes_legacy_parity_output(tmp_path) -> None:
+    expected_path = (
+        "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv.csv"
+    )
+    output_path = tmp_path / "factorial.csv"
+
+    exit_code = main(
+        [
+            "factorial",
+            "algo2",
+            "--input",
+            "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+            "--input",
+            "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv",
+            "--input",
+            "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv",
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    assert exit_code == 0
+
+    actual = pd.read_csv(output_path)
+    expected = pd.read_csv(expected_path)
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_cli_factorial_algo3_writes_legacy_parity_output(tmp_path) -> None:
+    expected_path = (
+        "tests/fixtures/legacy/algo3/gpt-5/factorial/factorial_analysis_results_gpt5_without_error.csv"
+    )
+    output_path = tmp_path / "factorial.csv"
+
+    exit_code = main(
+        [
+            "factorial",
+            "algo3",
+            "--input",
+            "tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    assert exit_code == 0
+
+    actual = pd.read_csv(output_path)
+    expected = pd.read_csv(expected_path)
+    pd.testing.assert_frame_equal(actual, expected)
