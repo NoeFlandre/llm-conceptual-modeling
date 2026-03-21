@@ -1,0 +1,62 @@
+{"event": "run_started", "run_name": "pilot_20260321_wide", "timestamp": "2026-03-21T15:16:43.121709+00:00"}
+{"algorithm": "algo1", "event": "probe_started", "historical_model": "gpt-5", "row_index": 0, "timestamp": "2026-03-21T15:16:43.162937+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 0, "timestamp": "2026-03-21T15:16:43.163116+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 5, "row_index": 0, "timestamp": "2026-03-21T15:16:46.282831+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 0, "timestamp": "2026-03-21T15:16:46.283045+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 0, "timestamp": "2026-03-21T15:16:47.616214+00:00"}
+{"algorithm": "algo1", "event": "probe_started", "historical_model": "gpt-5", "row_index": 40, "timestamp": "2026-03-21T15:16:47.640260+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 40, "timestamp": "2026-03-21T15:16:47.640423+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 9, "row_index": 40, "timestamp": "2026-03-21T15:16:49.046203+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 40, "timestamp": "2026-03-21T15:16:49.046428+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 40, "timestamp": "2026-03-21T15:16:51.503957+00:00"}
+{"algorithm": "algo1", "event": "probe_started", "historical_model": "gpt-5", "row_index": 80, "timestamp": "2026-03-21T15:16:51.527065+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 80, "timestamp": "2026-03-21T15:16:51.527225+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 8, "row_index": 80, "timestamp": "2026-03-21T15:16:52.672824+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 80, "timestamp": "2026-03-21T15:16:52.673067+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 80, "timestamp": "2026-03-21T15:16:55.087249+00:00"}
+{"algorithm": "algo1", "event": "probe_started", "historical_model": "gpt-5", "row_index": 120, "timestamp": "2026-03-21T15:16:55.110819+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 120, "timestamp": "2026-03-21T15:16:55.111011+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 5, "row_index": 120, "timestamp": "2026-03-21T15:16:56.215075+00:00"}
+{"algorithm": "algo1", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 120, "timestamp": "2026-03-21T15:16:56.215349+00:00"}
+{"algorithm": "algo1", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 120, "timestamp": "2026-03-21T15:16:58.674154+00:00"}
+{"algorithm": "algo2", "event": "probe_started", "historical_model": "gpt-5", "row_index": 0, "timestamp": "2026-03-21T15:16:58.724365+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 0, "timestamp": "2026-03-21T15:16:58.724545+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 5, "row_index": 0, "timestamp": "2026-03-21T15:16:59.695206+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 0, "timestamp": "2026-03-21T15:16:59.695425+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 0, "timestamp": "2026-03-21T15:17:00.922328+00:00"}
+{"algorithm": "algo2", "event": "probe_started", "historical_model": "gpt-5", "row_index": 80, "timestamp": "2026-03-21T15:17:00.969980+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 80, "timestamp": "2026-03-21T15:17:00.970158+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 80, "timestamp": "2026-03-21T15:17:02.047546+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 80, "timestamp": "2026-03-21T15:17:02.047760+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 80, "timestamp": "2026-03-21T15:17:04.404142+00:00"}
+{"algorithm": "algo2", "event": "probe_started", "historical_model": "gpt-5", "row_index": 160, "timestamp": "2026-03-21T15:17:04.451927+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 160, "timestamp": "2026-03-21T15:17:04.452100+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 160, "timestamp": "2026-03-21T15:17:05.458073+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 160, "timestamp": "2026-03-21T15:17:05.458357+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 4, "row_index": 160, "timestamp": "2026-03-21T15:17:06.707206+00:00"}
+{"algorithm": "algo2", "event": "probe_started", "historical_model": "gpt-5", "row_index": 240, "timestamp": "2026-03-21T15:17:06.755017+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 240, "timestamp": "2026-03-21T15:17:06.755198+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 6, "row_index": 240, "timestamp": "2026-03-21T15:17:07.749440+00:00"}
+{"algorithm": "algo2", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 240, "timestamp": "2026-03-21T15:17:07.749644+00:00"}
+{"algorithm": "algo2", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 5, "row_index": 240, "timestamp": "2026-03-21T15:17:12.216549+00:00"}
+{"algorithm": "algo3", "event": "probe_started", "historical_model": "gpt-5", "row_index": 0, "timestamp": "2026-03-21T15:17:12.279803+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 0, "timestamp": "2026-03-21T15:17:12.280063+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 23, "row_index": 0, "timestamp": "2026-03-21T15:17:14.675017+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 0, "timestamp": "2026-03-21T15:17:14.675545+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 24, "row_index": 0, "timestamp": "2026-03-21T15:17:17.644866+00:00"}
+{"algorithm": "algo3", "event": "probe_started", "historical_model": "gpt-5", "row_index": 60, "timestamp": "2026-03-21T15:17:17.707409+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 60, "timestamp": "2026-03-21T15:17:17.707613+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 17, "row_index": 60, "timestamp": "2026-03-21T15:17:19.738352+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 60, "timestamp": "2026-03-21T15:17:19.739022+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 16, "row_index": 60, "timestamp": "2026-03-21T15:17:25.114891+00:00"}
+{"algorithm": "algo3", "event": "probe_started", "historical_model": "gpt-5", "row_index": 120, "timestamp": "2026-03-21T15:17:25.199850+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 120, "timestamp": "2026-03-21T15:17:25.200142+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 15, "row_index": 120, "timestamp": "2026-03-21T15:17:26.962940+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 120, "timestamp": "2026-03-21T15:17:26.963530+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 21, "row_index": 120, "timestamp": "2026-03-21T15:17:33.867993+00:00"}
+{"algorithm": "algo3", "event": "probe_started", "historical_model": "gpt-5", "row_index": 180, "timestamp": "2026-03-21T15:17:33.941234+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-small-2603", "row_index": 180, "timestamp": "2026-03-21T15:17:33.941489+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-small-2603", "parsed_edge_count": 84, "row_index": 180, "timestamp": "2026-03-21T15:17:41.296023+00:00"}
+{"algorithm": "algo3", "event": "model_call_started", "model": "mistral-medium-2508", "row_index": 180, "timestamp": "2026-03-21T15:17:41.296285+00:00"}
+{"algorithm": "algo3", "event": "model_call_finished", "model": "mistral-medium-2508", "parsed_edge_count": 20, "row_index": 180, "timestamp": "2026-03-21T15:17:48.365314+00:00"}
+{"event": "run_finished", "run_name": "pilot_20260321_wide", "timestamp": "2026-03-21T15:17:48.391439+00:00"}

@@ -98,6 +98,12 @@ The two-model pilot shows the same broad pattern:
 - ALGO2 accuracy improves for both models, but recall remains much lower than the historical rows; `mistral-medium-2508` improves precision relative to `mistral-small-2603`, but neither model recovers the historical recall level.
 - ALGO3 remains at zero recall for both models on both sampled rows, even though the medium model produces slightly more parsed edges than the small model.
 
+The wider four-row pilot keeps the same qualitative picture:
+
+- ALGO1 remains higher-precision than the historical GPT-5 rows on average, while recall is still lower; the medium model is slightly more precise, while the small model returns more edges.
+- ALGO2 remains a precision-recall tradeoff: both models improve accuracy, the medium model improves precision relative to the small model, and neither model recovers the historical recall level.
+- ALGO3 still stays at zero recall across all sampled rows, but the number of parsed edges becomes much larger for the small model than for the medium model, which suggests the prompt is still not controlling output breadth tightly enough.
+
 ## Interpretation
 
 The current post-revision evidence does not support one simple claim such as "Mistral is better" or "Mistral is worse."

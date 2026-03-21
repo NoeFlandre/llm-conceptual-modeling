@@ -1,0 +1,25 @@
+{
+  "id": "463b5f05e82c4de2bb1a895340dd77d9",
+  "created": 1774106261,
+  "model": "mistral-medium-2508",
+  "usage": {
+    "prompt_tokens": 3047,
+    "total_tokens": 3384,
+    "completion_tokens": 337,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\n  \"edges\": [\n    {\"source\": \"Healthy eating\", \"target\": \"Obesity\"},\n    {\"source\": \"Healthy eating\", \"target\": \"Blood pressure\"},\n    {\"source\": \"Healthy eating\", \"target\": \"Insulin resistance\"},\n    {\"source\": \"Healthy eating\", \"target\": \"Dyslipidemia\"},\n    {\"source\": \"Healthy eating\", \"target\": \"Inflammation\"},\n    {\"source\": \"Short sleep duration\", \"target\": \"Obesity\"},\n    {\"source\": \"Short sleep duration\", \"target\": \"Insulin resistance\"},\n    {\"source\": \"Short sleep duration\", \"target\": \"Blood pressure\"},\n    {\"source\": \"Short sleep duration\", \"target\": \"Dyslipidemia\"},\n    {\"source\": \"Short sleep duration\", \"target\": \"Inflammation\"},\n    {\"source\": \"Exercise\", \"target\": \"Obesity\"},\n    {\"source\": \"Exercise\", \"target\": \"Blood pressure\"},\n    {\"source\": \"Exercise\", \"target\": \"Insulin resistance\"},\n    {\"source\": \"Exercise\", \"target\": \"Dyslipidemia\"},\n    {\"source\": \"Exercise\", \"target\": \"Inflammation\"},\n    {\"source\": \"Mental well-being\", \"target\": \"Obesity\"},\n    {\"source\": \"Mental well-being\", \"target\": \"Blood pressure\"},\n    {\"source\": \"Mental well-being\", \"target\": \"Insulin resistance\"},\n    {\"source\": \"Mental well-being\", \"target\": \"Dyslipidemia\"},\n    {\"source\": \"Mental well-being\", \"target\": \"Inflammation\"}\n  ]\n}"
+      }
+    }
+  ]
+}

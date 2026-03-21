@@ -1,0 +1,25 @@
+{
+  "id": "f41f8bfe6a7946b1837afbb4b45b875a",
+  "created": 1774106238,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 3047,
+    "total_tokens": 3354,
+    "completion_tokens": 307,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Blood glucose level\"}, {\"source\": \"Healthy eating\", \"target\": \"Blood mono-unsaturated fatty acid level\"}, {\"source\": \"Healthy eating\", \"target\": \"Blood saturated fatty acid level\"}, {\"source\": \"Supportive food environment\", \"target\": \"Healthy eating\"}, {\"source\": \"Obesity\", \"target\": \"Release of adipokines\"}, {\"source\": \"Obesity\", \"target\": \"Dysfunctional adipose tissue\"}, {\"source\": \"Obesity\", \"target\": \"Short sleep duration\"}, {\"source\": \"Obesity\", \"target\": \"Unhealthy weight control practices\"}, {\"source\": \"Obesity\", \"target\": \"Asthma-like symptoms\"}, {\"source\": \"Inflammation\", \"target\": \"Insulin resistance\"}, {\"source\": \"Inflammation\", \"target\": \"Auto-inflammatory diseases\"}, {\"source\": \"Quality of the sport infrastructure\", \"target\": \"Recreational physical activity\"}, {\"source\": \"Quality of the sport infrastructure\", \"target\": \"Ability to engage in physical activity\"}, {\"source\": \"Cost of healthy foods\", \"target\": \"Healthy eating\"}, {\"source\": \"Cost of unhealthy foods\", \"target\": \"Supportive food environment\"}, {\"source\": \"Marketing of healthy foods\", \"target\": \"Healthy eating\"}, {\"source\": \"Marketing of unhealthy foods\", \"target\": \"Supportive food environment\"}]}"
+      }
+    }
+  ]
+}

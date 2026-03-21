@@ -42,6 +42,27 @@ def main() -> int:
         "--run-name",
         default=None,
     )
+    parser.add_argument(
+        "--algo1-row",
+        action="append",
+        dest="algo1_rows",
+        type=int,
+        default=[],
+    )
+    parser.add_argument(
+        "--algo2-row",
+        action="append",
+        dest="algo2_rows",
+        type=int,
+        default=[],
+    )
+    parser.add_argument(
+        "--algo3-row",
+        action="append",
+        dest="algo3_rows",
+        type=int,
+        default=[],
+    )
     args = parser.parse_args()
 
     models = args.models or [
@@ -63,10 +84,19 @@ def main() -> int:
     grouped_summary_path = run_dir / "probe_summary_by_algorithm_and_model.csv"
     findings_path = run_dir / "findings.md"
 
-    probe_specs = _default_probe_specs()
+    probe_specs = _default_probe_specs(
+        algo1_rows=args.algo1_rows,
+        algo2_rows=args.algo2_rows,
+        algo3_rows=args.algo3_rows,
+    )
     manifest = {
         "run_name": run_name,
         "models": models,
+        "requested_rows": {
+            "algo1": args.algo1_rows,
+            "algo2": args.algo2_rows,
+            "algo3": args.algo3_rows,
+        },
         "probe_specs": [asdict(spec) for spec in probe_specs],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))
@@ -210,50 +240,56 @@ def _build_logger(log_path: Path) -> logging.Logger:
     return logger
 
 
-def _default_probe_specs() -> list[ProbeSpec]:
+def _default_probe_specs(
+    *,
+    algo1_rows: list[int],
+    algo2_rows: list[int],
+    algo3_rows: list[int],
+) -> list[ProbeSpec]:
+    probe_specs: list[ProbeSpec] = []
+    probe_specs.extend(
+        _build_probe_specs_for_algorithm(
+            algorithm="algo1",
+            raw_path="data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+            evaluated_path="data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+            row_indexes=algo1_rows or [0, 80],
+        )
+    )
+    probe_specs.extend(
+        _build_probe_specs_for_algorithm(
+            algorithm="algo2",
+            raw_path="data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+            evaluated_path="data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+            row_indexes=algo2_rows or [0, 160],
+        )
+    )
+    probe_specs.extend(
+        _build_probe_specs_for_algorithm(
+            algorithm="algo3",
+            raw_path="data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+            evaluated_path="data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+            row_indexes=algo3_rows or [0, 1],
+        )
+    )
+    return probe_specs
+
+
+def _build_probe_specs_for_algorithm(
+    *,
+    algorithm: str,
+    raw_path: str,
+    evaluated_path: str,
+    row_indexes: list[int],
+) -> list[ProbeSpec]:
     return [
         ProbeSpec(
-            algorithm="algo1",
-            raw_path="data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
-            evaluated_path="data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
-            row_index=0,
+            algorithm=algorithm,
+            raw_path=raw_path,
+            evaluated_path=evaluated_path,
+            row_index=row_index,
             historical_model="gpt-5",
-        ),
-        ProbeSpec(
-            algorithm="algo1",
-            raw_path="data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
-            evaluated_path="data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
-            row_index=80,
-            historical_model="gpt-5",
-        ),
-        ProbeSpec(
-            algorithm="algo2",
-            raw_path="data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
-            evaluated_path="data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
-            row_index=0,
-            historical_model="gpt-5",
-        ),
-        ProbeSpec(
-            algorithm="algo2",
-            raw_path="data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
-            evaluated_path="data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
-            row_index=160,
-            historical_model="gpt-5",
-        ),
-        ProbeSpec(
-            algorithm="algo3",
-            raw_path="data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
-            evaluated_path="data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
-            row_index=0,
-            historical_model="gpt-5",
-        ),
-        ProbeSpec(
-            algorithm="algo3",
-            raw_path="data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
-            evaluated_path="data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
-            row_index=1,
-            historical_model="gpt-5",
-        ),
+        )
+        for row_index in row_indexes
     ]
 
 

@@ -1,0 +1,25 @@
+{
+  "id": "21582d85570e4b199a9f69c73f8d90bb",
+  "created": 1774106226,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2800,
+    "completion_tokens": 110,
+    "prompt_tokens_details": {
+      "cached_tokens": 2663
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Mental well-being\"}, {\"source\": \"Obesity\", \"target\": \"Weight bias\"}, {\"source\": \"Weight bias\", \"target\": \"Mental well-being\"}, {\"source\": \"Socio-economic status\", \"target\": \"Mental well-being\"}, {\"source\": \"Socio-economic status\", \"target\": \"Physical well-being\"}, {\"source\": \"Culture of eating that promotes healthy choices\", \"target\": \"Mental well-being\"}]}"
+      }
+    }
+  ]
+}

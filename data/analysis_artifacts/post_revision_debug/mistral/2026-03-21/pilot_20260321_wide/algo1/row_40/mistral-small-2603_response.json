@@ -1,0 +1,25 @@
+{
+  "id": "e34bb3c4a4cf4b6285889901f987d279",
+  "created": 1774106207,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2852,
+    "completion_tokens": 162,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Mental well-being\"}, {\"source\": \"Obesity\", \"target\": \"Weight bias\"}, {\"source\": \"Weight bias\", \"target\": \"Depression\"}, {\"source\": \"Weight bias\", \"target\": \"Poor body image\"}, {\"source\": \"Socio-economic status\", \"target\": \"Mental well-being\"}, {\"source\": \"Socio-economic status\", \"target\": \"Physical well-being\"}, {\"source\": \"Public health messaging around thinness\", \"target\": \"Weight bias\"}, {\"source\": \"Culture of eating that promotes healthy choices\", \"target\": \"Mental well-being\"}, {\"source\": \"Culture of eating that promotes healthy choices\", \"target\": \"Healthy eating\"}]}"
+      }
+    }
+  ]
+}
