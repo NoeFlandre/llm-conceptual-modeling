@@ -31,6 +31,8 @@ The repository implements three command families:
   Convert raw algorithm outputs into evaluated CSVs.
 - `lcm factorial ...`
   Compute factorial-analysis summaries from evaluated CSVs.
+- `lcm analyze ...`
+  Produce reviewer-facing post-processing artifacts such as grouped descriptive summaries and raw-output failure classifications.
 - `lcm verify ...`
   Run repository health checks and deterministic parity checks.
 

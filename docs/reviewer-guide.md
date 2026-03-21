@@ -9,6 +9,8 @@ The repository reproduces the deterministic analysis pipeline for the study on L
 - evaluate raw outputs for Algorithms 1 and 2
 - recompute evaluated recall outputs for Algorithm 3
 - run factorial-analysis post-processing for all three algorithms
+- export grouped descriptive statistics and confidence intervals from evaluated CSVs
+- classify malformed, empty, and valid raw outputs for failure inspection
 - verify that these deterministic outputs match committed reference artifacts
 
 ## What It Does Not Reproduce Automatically
@@ -76,6 +78,26 @@ Generation-manifest inspection:
 
 ```bash
 uv run lcm generate algo1 --json
+```
+
+Grouped descriptive summaries:
+
+```bash
+uv run lcm analyze summary \
+  --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --group-by Explanation \
+  --metric accuracy \
+  --metric recall \
+  --output /tmp/algo1_summary.csv
+```
+
+Failure classification:
+
+```bash
+uv run lcm analyze failures \
+  --input tests/fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv \
+  --result-column Results \
+  --output /tmp/algo3_failures.csv
 ```
 
 ## Files Worth Inspecting

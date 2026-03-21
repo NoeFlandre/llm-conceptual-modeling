@@ -1,6 +1,7 @@
 import argparse
 from collections.abc import Sequence
 
+from llm_conceptual_modeling.commands.analyze import handle_analyze
 from llm_conceptual_modeling.commands.doctor import handle_doctor
 from llm_conceptual_modeling.commands.eval import handle_eval
 from llm_conceptual_modeling.commands.factorial import handle_factorial
@@ -12,6 +13,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="lcm")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    analyze_parser = subparsers.add_parser("analyze")
+    analyze_subparsers = analyze_parser.add_subparsers(dest="analysis_target", required=True)
     eval_parser = subparsers.add_parser("eval")
     eval_subparsers = eval_parser.add_subparsers(dest="algorithm", required=True)
 
@@ -60,6 +63,17 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser.add_argument("--fixture-only", action="store_true")
         generate_algorithm_parser.add_argument("--json", action="store_true")
 
+    summary_parser = analyze_subparsers.add_parser("summary")
+    summary_parser.add_argument("--input", required=True)
+    summary_parser.add_argument("--group-by", action="append", required=True)
+    summary_parser.add_argument("--metric", action="append", required=True)
+    summary_parser.add_argument("--output", required=True)
+
+    failures_parser = analyze_subparsers.add_parser("failures")
+    failures_parser.add_argument("--input", required=True)
+    failures_parser.add_argument("--result-column", required=True)
+    failures_parser.add_argument("--output", required=True)
+
     return parser
 
 
@@ -69,6 +83,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "doctor":
         return handle_doctor(args)
+    if args.command == "analyze":
+        return handle_analyze(args)
     if args.command == "eval":
         return handle_eval(args)
     if args.command == "factorial":

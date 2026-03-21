@@ -12,6 +12,8 @@ The current codebase provides a reproducible, testable implementation of the det
 - evaluation of raw outputs for Algorithm 2
 - recall recomputation for Algorithm 3
 - factorial analysis for Algorithms 1, 2, and 3
+- grouped descriptive summaries and confidence-interval exports from evaluated CSVs
+- row-level failure classification for raw outputs
 - repository-level verification commands for parity, smoke checks, and machine-readable reporting
 
 ## Research Context
@@ -75,6 +77,8 @@ The [Makefile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-
 ## Command-Line Interface
 
 The repository exposes a single CLI, `lcm`, for evaluation, factorial analysis, verification, and generation-manifest inspection.
+
+It also exposes `analyze` workflows for reviewer-facing post-processing that do not require any new LLM calls.
 
 ### Evaluate Algorithm Outputs
 
@@ -152,6 +156,29 @@ Combined health and parity gate:
 uv run lcm verify all --json
 ```
 
+### Reviewer-Facing Analysis Commands
+
+Grouped descriptive summaries with confidence-interval exports:
+
+```bash
+uv run lcm analyze summary \
+  --input tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --group-by Explanation \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo1_summary.csv
+```
+
+Raw-output failure classification:
+
+```bash
+uv run lcm analyze failures \
+  --input tests/fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv \
+  --result-column Results \
+  --output /tmp/algo3_failures.csv
+```
+
 ### Generation Manifests
 
 The `generate` commands do not call providers. They expose the experimental contract for each algorithm in a machine-readable form:
@@ -171,6 +198,8 @@ The repository is designed to make wrongness visible rather than implicit.
 - [tests/test_failures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_failures.py) covers malformed inputs and failure modes.
 - [tests/test_graph_data.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_graph_data.py) checks graph-data and manifest invariants.
 - [tests/test_snapshots.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_snapshots.py) checks stable JSON command outputs.
+- [tests/test_analysis_summary.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_summary.py) checks grouped descriptive-statistics exports.
+- [tests/test_analysis_failures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_failures.py) checks raw-output failure classification.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 
