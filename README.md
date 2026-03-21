@@ -301,6 +301,7 @@ uv run lcm generate algo3 \
 ```
 
 Method 2 uses the confirmed cosine-similarity threshold `0.01` in the executable path and the tracked domain thesaurus under `data/inputs/algo2_thesaurus.json`.
+All executable `generate` and `probe` paths accept `--resume` and write `run.log`, `state.json`, and `execution_checkpoint.json` alongside the existing prompt and summary artifacts.
 
 ## Post-Revision Debugging
 
@@ -310,6 +311,8 @@ The current audited live-debug workflow uses structured Mistral outputs and writ
 
 - `manifest.json`
 - `run.log`
+- `state.json`
+- `execution_checkpoint.json`
 - `events.jsonl`
 - per-row prompts
 - raw provider responses

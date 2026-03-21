@@ -74,6 +74,7 @@ def _handle_algo1_execution(args: Namespace) -> int:
         pair_name=args.pair,
         output_root=output_root,
         replications=args.replications,
+        resume=args.resume,
     )
     chat_client = Algo1ChatClient(
         api_key=api_key,
@@ -108,6 +109,7 @@ def _handle_algo2_execution(args: Namespace) -> int:
         pair_name=args.pair,
         output_root=output_root,
         replications=args.replications,
+        resume=args.resume,
     )
     chat_client = Algo2ChatClient(
         api_key=api_key,
@@ -156,6 +158,7 @@ def _handle_algo3_execution(args: Namespace) -> int:
         pair_name=args.pair,
         output_root=output_root,
         replications=args.replications,
+        resume=args.resume,
     )
     chat_client = Algo3ChatClient(
         api_key=api_key,

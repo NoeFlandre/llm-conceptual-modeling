@@ -15,6 +15,7 @@ def build_algo2_experiment_specs(
     pair_name: str,
     output_root: Path,
     replications: int = 5,
+    resume: bool = False,
 ) -> list[Algo2ProbeSpec]:
     seed_labels, subgraph1, subgraph2 = _load_pair_labels(pair_name)
     condition_bits = list(product([0, 1], repeat=5))
@@ -40,6 +41,7 @@ def build_algo2_experiment_specs(
                 prompt_config=prompt_config,
                 convergence_threshold=0.01,
                 output_dir=output_dir,
+                resume=resume,
             )
             experiment_specs.append(experiment_spec)
 

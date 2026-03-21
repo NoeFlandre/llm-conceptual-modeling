@@ -117,10 +117,11 @@ def test_cli_generate_algo1_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["api_key"] = api_key
             captured_call["model"] = model
 
-    def fake_build_specs(*, pair_name, output_root, replications):
+    def fake_build_specs(*, pair_name, output_root, replications, resume):
         captured_call["pair_name"] = pair_name
         captured_call["output_root"] = str(output_root)
         captured_call["replications"] = replications
+        captured_call["resume"] = resume
         return ["spec-a", "spec-b"]
 
     def fake_run_experiment(*, specs, chat_client):
@@ -172,6 +173,7 @@ def test_cli_generate_algo1_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert captured_call["model"] == "mistral-small-2603"
     assert captured_call["pair_name"] == "sg1_sg2"
     assert captured_call["replications"] == 2
+    assert captured_call["resume"] is False
     assert captured_call["specs"] == ["spec-a", "spec-b"]
     assert captured_call["chat_client_type"] == "FakeChatClient"
 
@@ -184,10 +186,11 @@ def test_cli_generate_algo3_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["api_key"] = api_key
             captured_call["model"] = model
 
-    def fake_build_specs(*, pair_name, output_root, replications):
+    def fake_build_specs(*, pair_name, output_root, replications, resume):
         captured_call["pair_name"] = pair_name
         captured_call["output_root"] = str(output_root)
         captured_call["replications"] = replications
+        captured_call["resume"] = resume
         return ["spec-c", "spec-d"]
 
     def fake_run_experiment(*, specs, chat_client):
@@ -239,6 +242,7 @@ def test_cli_generate_algo3_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert captured_call["model"] == "mistral-small-2603"
     assert captured_call["pair_name"] == "subgraph_1_to_subgraph_3"
     assert captured_call["replications"] == 2
+    assert captured_call["resume"] is False
     assert captured_call["specs"] == ["spec-c", "spec-d"]
     assert captured_call["chat_client_type"] == "FakeChatClient"
 
@@ -256,10 +260,11 @@ def test_cli_generate_algo2_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["embedding_api_key"] = api_key
             captured_call["embedding_model"] = model
 
-    def fake_build_specs(*, pair_name, output_root, replications):
+    def fake_build_specs(*, pair_name, output_root, replications, resume):
         captured_call["pair_name"] = pair_name
         captured_call["output_root"] = str(output_root)
         captured_call["replications"] = replications
+        captured_call["resume"] = resume
         return ["spec-e", "spec-f"]
 
     def fake_run_experiment(*, specs, chat_client, embedding_client):
@@ -320,6 +325,7 @@ def test_cli_generate_algo2_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert captured_call["embedding_model"] == "mistral-embed-2312"
     assert captured_call["pair_name"] == "sg1_sg2"
     assert captured_call["replications"] == 2
+    assert captured_call["resume"] is False
     assert captured_call["specs"] == ["spec-e", "spec-f"]
     assert captured_call["chat_client_type"] == "FakeChatClient"
     assert captured_call["embedding_client_type"] == "FakeEmbeddingClient"

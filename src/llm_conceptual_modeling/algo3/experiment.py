@@ -11,6 +11,7 @@ def build_algo3_experiment_specs(
     pair_name: str,
     output_root: Path,
     replications: int = 5,
+    resume: bool = False,
 ) -> list[Algo3ProbeSpec]:
     source_labels, target_labels = _load_pair_labels(pair_name)
     condition_bits = list(product([0, 1], repeat=4))
@@ -38,6 +39,7 @@ def build_algo3_experiment_specs(
                 child_count=child_count,
                 max_depth=max_depth,
                 output_dir=output_dir,
+                resume=resume,
             )
             experiment_specs.append(experiment_spec)
 

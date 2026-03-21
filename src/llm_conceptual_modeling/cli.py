@@ -84,6 +84,7 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser.add_argument("--pair")
         generate_algorithm_parser.add_argument("--output-root")
         generate_algorithm_parser.add_argument("--replications", type=int, default=5)
+        generate_algorithm_parser.add_argument("--resume", action="store_true")
     generate_subparsers.choices["algo2"].add_argument("--embedding-model")
 
     probe_algo1_parser = probe_subparsers.add_parser("algo1")
@@ -92,6 +93,7 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo1_parser.add_argument("--subgraph1-edge", action="append", required=True)
     probe_algo1_parser.add_argument("--subgraph2-edge", action="append", required=True)
     probe_algo1_parser.add_argument("--output-dir", required=True)
+    probe_algo1_parser.add_argument("--resume", action="store_true")
 
     probe_algo2_parser = probe_subparsers.add_parser("algo2")
     probe_algo2_parser.add_argument("--run-name", required=True)
@@ -100,6 +102,7 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo2_parser.add_argument("--seed-label", action="append", required=True)
     probe_algo2_parser.add_argument("--convergence-threshold", type=float, required=True)
     probe_algo2_parser.add_argument("--output-dir", required=True)
+    probe_algo2_parser.add_argument("--resume", action="store_true")
 
     probe_algo3_parser = probe_subparsers.add_parser("algo3")
     probe_algo3_parser.add_argument("--run-name", required=True)
@@ -109,6 +112,7 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo3_parser.add_argument("--child-count", type=int, required=True)
     probe_algo3_parser.add_argument("--max-depth", type=int, required=True)
     probe_algo3_parser.add_argument("--output-dir", required=True)
+    probe_algo3_parser.add_argument("--resume", action="store_true")
 
     summary_parser = analyze_subparsers.add_parser("summary")
     summary_parser.add_argument("--input", action="append", required=True)

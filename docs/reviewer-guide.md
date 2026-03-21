@@ -94,6 +94,7 @@ uv run lcm generate algo2 \
 ```
 
 This executable Method 2 path uses the confirmed `0.01` convergence threshold and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
+Add `--resume` to any live-backed `generate` or `probe` command to reuse the existing run state and checkpoint files when rerunning a partially completed output directory.
 
 Grouped descriptive summaries:
 

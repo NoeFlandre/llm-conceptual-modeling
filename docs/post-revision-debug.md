@@ -41,6 +41,10 @@ Each canonical run writes:
 
 - `run.log`
   Human-readable execution trace.
+- `state.json`
+  Resume state and completed stage list.
+- `execution_checkpoint.json`
+  Serializable checkpoint that can be reused after a partial interruption.
 - `events.jsonl`
   Structured machine-readable event log.
 - `manifest.json`
@@ -51,6 +55,8 @@ Each canonical run writes:
   Raw provider responses.
 
 This is intended to make every run replayable and auditable.
+
+The `lcm generate ...` and `lcm probe ...` entry points also accept `--resume` for rerunning a partially completed run without reissuing provider calls for completed stages.
 
 ## Current Findings
 

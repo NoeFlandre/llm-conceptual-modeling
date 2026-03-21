@@ -4,12 +4,27 @@ import sys
 from argparse import Namespace
 from pathlib import Path
 
-from llm_conceptual_modeling.algo1.mistral import MistralChatClient as Algo1ChatClient
+from llm_conceptual_modeling.algo1.mistral import (
+    Method1PromptConfig,
+)
+from llm_conceptual_modeling.algo1.mistral import (
+    MistralChatClient as Algo1ChatClient,
+)
 from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec, run_algo1_probe
 from llm_conceptual_modeling.algo2.embeddings import MistralEmbeddingClient as Algo2EmbeddingClient
-from llm_conceptual_modeling.algo2.mistral import MistralChatClient as Algo2ChatClient
+from llm_conceptual_modeling.algo2.mistral import (
+    Method2PromptConfig,
+)
+from llm_conceptual_modeling.algo2.mistral import (
+    MistralChatClient as Algo2ChatClient,
+)
 from llm_conceptual_modeling.algo2.probe import Algo2ProbeSpec, run_algo2_probe
-from llm_conceptual_modeling.algo3.mistral import MistralChatClient as Algo3ChatClient
+from llm_conceptual_modeling.algo3.mistral import (
+    Method3PromptConfig,
+)
+from llm_conceptual_modeling.algo3.mistral import (
+    MistralChatClient as Algo3ChatClient,
+)
 from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec, run_algo3_probe
 from llm_conceptual_modeling.generation import emit_json
 
@@ -42,7 +57,15 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
         model=args.model,
         subgraph1=subgraph1,
         subgraph2=subgraph2,
+        prompt_config=Method1PromptConfig(
+            use_adjacency_notation=False,
+            use_array_representation=False,
+            include_explanation=False,
+            include_example=False,
+            include_counterexample=False,
+        ),
         output_dir=output_dir,
+        resume=args.resume,
     )
     chat_client = Algo1ChatClient(
         api_key=api_key,
@@ -62,8 +85,18 @@ def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
         run_name=args.run_name,
         model=args.model,
         seed_labels=args.seed_label,
+        subgraph1=[],
+        subgraph2=[],
+        prompt_config=Method2PromptConfig(
+            use_adjacency_notation=False,
+            use_array_representation=False,
+            include_explanation=False,
+            include_example=False,
+            include_counterexample=False,
+        ),
         convergence_threshold=args.convergence_threshold,
         output_dir=output_dir,
+        resume=args.resume,
     )
     chat_client = Algo2ChatClient(
         api_key=api_key,
@@ -89,9 +122,14 @@ def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
         model=args.model,
         source_labels=args.source_label,
         target_labels=args.target_label,
+        prompt_config=Method3PromptConfig(
+            include_example=False,
+            include_counterexample=False,
+        ),
         child_count=args.child_count,
         max_depth=args.max_depth,
         output_dir=output_dir,
+        resume=args.resume,
     )
     chat_client = Algo3ChatClient(
         api_key=api_key,

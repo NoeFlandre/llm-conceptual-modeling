@@ -1,4 +1,3 @@
-import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -14,6 +13,7 @@ from llm_conceptual_modeling.algo2.mistral import (
 )
 from llm_conceptual_modeling.common.graph_data import load_algo2_thesaurus
 from llm_conceptual_modeling.post_revision_debug.artifacts import append_jsonl_event
+from llm_conceptual_modeling.post_revision_debug.run_context import ProbeRunContext
 
 
 @dataclass(frozen=True)
@@ -26,6 +26,7 @@ class Algo2ProbeSpec:
     prompt_config: Method2PromptConfig
     convergence_threshold: float
     output_dir: Path
+    resume: bool = False
 
 
 def run_algo2_probe(
@@ -35,12 +36,18 @@ def run_algo2_probe(
     embedding_client: EmbeddingClient,
 ) -> dict[str, object]:
     output_dir = spec.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
-    manifest_path = output_dir / "manifest.json"
-    summary_path = output_dir / "summary.json"
-    events_path = output_dir / "events.jsonl"
-    label_prompt_path = output_dir / "label_expansion_prompt.txt"
-    edge_prompt_path = output_dir / "edge_suggestion_prompt.txt"
+    context = ProbeRunContext(
+        output_dir=output_dir,
+        run_name=spec.run_name,
+        algorithm="algo2",
+        resume=spec.resume,
+    )
+
+    if spec.resume:
+        cached_summary = context.load_json("summary.json")
+        if cached_summary is not None and context.is_stage_complete("probe_finished"):
+            context.log("resume requested; returning cached summary", stage="resume")
+            return cached_summary
 
     manifest_record = {
         "run_name": spec.run_name,
@@ -57,8 +64,8 @@ def run_algo2_probe(
         },
         "convergence_threshold": spec.convergence_threshold,
     }
-    manifest_path.write_text(json.dumps(manifest_record, indent=2))
-    append_jsonl_event(events_path, {"event": "probe_started", **manifest_record})
+    context.record_manifest(manifest_record)
+    context.append_event({"event": "probe_started", **manifest_record})
 
     label_prompt = build_label_expansion_prompt(
         spec.seed_labels,
@@ -66,40 +73,68 @@ def run_algo2_probe(
         subgraph2=spec.subgraph2,
         prompt_config=spec.prompt_config,
     )
-    label_prompt_path.write_text(label_prompt)
+    if not context.is_stage_complete("label_prompt_written"):
+        context.record_prompt(
+            "label_expansion_prompt.txt",
+            label_prompt,
+            stage="label_prompt_written",
+        )
     label_proposer = build_label_proposer(chat_client)
     edge_suggester = build_edge_suggester(chat_client)
     thesaurus = load_algo2_thesaurus()
-    execution_result = execute_method2(
-        seed_labels=spec.seed_labels,
-        propose_labels=label_proposer,
-        suggest_edges=edge_suggester,
-        embedding_client=embedding_client,
-        convergence_threshold=spec.convergence_threshold,
-        thesaurus=thesaurus,
-    )
-    expanded_label_context = spec.seed_labels + execution_result.expanded_labels
+    cached_execution = context.load_json("execution_checkpoint.json")
+    if spec.resume and cached_execution is not None and context.is_stage_complete(
+        "execution_completed"
+    ):
+        execution_result = cached_execution
+    else:
+        execution = execute_method2(
+            seed_labels=spec.seed_labels,
+            propose_labels=label_proposer,
+            suggest_edges=edge_suggester,
+            embedding_client=embedding_client,
+            convergence_threshold=spec.convergence_threshold,
+            thesaurus=thesaurus,
+        )
+        execution_result = {
+            "expanded_labels": execution.expanded_labels,
+            "raw_edges": _edges_to_json_compatible(execution.raw_edges),
+            "normalized_edges": _edges_to_json_compatible(execution.normalized_edges),
+            "final_similarity": execution.final_similarity,
+            "iteration_count": execution.iteration_count,
+        }
+        context.record_checkpoint(
+            "execution_checkpoint.json",
+            execution_result,
+            stage="execution_completed",
+        )
+    expanded_label_context = spec.seed_labels + execution_result["expanded_labels"]
     edge_prompt = build_edge_suggestion_prompt(
         expanded_label_context,
         subgraph1=spec.subgraph1,
         subgraph2=spec.subgraph2,
         prompt_config=spec.prompt_config,
     )
-    edge_prompt_path.write_text(edge_prompt)
-    raw_edges = _edges_to_json_compatible(execution_result.raw_edges)
-    normalized_edges = _edges_to_json_compatible(execution_result.normalized_edges)
+    if not context.is_stage_complete("edge_prompt_written"):
+        context.record_prompt(
+            "edge_suggestion_prompt.txt",
+            edge_prompt,
+            stage="edge_prompt_written",
+        )
 
     summary_record = {
         "run_name": spec.run_name,
         "model": spec.model,
-        "expanded_labels": execution_result.expanded_labels,
-        "raw_edges": raw_edges,
-        "normalized_edges": normalized_edges,
-        "final_similarity": execution_result.final_similarity,
-        "iteration_count": execution_result.iteration_count,
+        "expanded_labels": execution_result["expanded_labels"],
+        "raw_edges": execution_result["raw_edges"],
+        "normalized_edges": execution_result["normalized_edges"],
+        "final_similarity": execution_result["final_similarity"],
+        "iteration_count": execution_result["iteration_count"],
     }
-    summary_path.write_text(json.dumps(summary_record, indent=2))
-    append_jsonl_event(events_path, {"event": "probe_finished", **summary_record})
+    context.record_checkpoint("summary.json", summary_record, stage="summary_written")
+    context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
+    context.log("probe finished", stage="complete")
+    append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
     return summary_record
 
 

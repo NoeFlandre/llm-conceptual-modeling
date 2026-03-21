@@ -11,6 +11,7 @@ def build_algo1_experiment_specs(
     pair_name: str,
     output_root: Path,
     replications: int = 5,
+    resume: bool = False,
 ) -> list[Algo1ProbeSpec]:
     pair_subgraphs = _load_pair_subgraphs(pair_name)
     subgraph1, subgraph2 = pair_subgraphs
@@ -35,6 +36,7 @@ def build_algo1_experiment_specs(
                 subgraph2=subgraph2,
                 prompt_config=prompt_config,
                 output_dir=output_dir,
+                resume=resume,
             )
             experiment_specs.append(experiment_spec)
 

@@ -94,3 +94,54 @@ def test_run_algo1_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in edge_prompt
     assert "causal relationship exists between the source and target concepts" in cove_prompt
     assert len(chat_client.calls) == 2
+
+
+def test_run_algo1_probe_can_resume_from_cached_summary(tmp_path) -> None:
+    chat_client = FakeChatClient()
+    probe_dir = tmp_path / "algo1_probe"
+    spec = Algo1ProbeSpec(
+        run_name="algo1_single_row_v1",
+        model="mistral-small-2603",
+        subgraph1=[("alpha", "beta")],
+        subgraph2=[("delta", "epsilon")],
+        prompt_config=Method1PromptConfig(
+            use_adjacency_notation=True,
+            use_array_representation=True,
+            include_explanation=True,
+            include_example=False,
+            include_counterexample=False,
+        ),
+        output_dir=probe_dir,
+    )
+
+    initial_summary = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+
+    class FailingChatClient:
+        def complete_json(self, *, prompt: str, schema_name: str, schema: dict[str, object]):
+            raise AssertionError("resume should not call the provider again")
+
+    resumed_spec = Algo1ProbeSpec(
+        run_name="algo1_single_row_v1",
+        model="mistral-small-2603",
+        subgraph1=[("alpha", "beta")],
+        subgraph2=[("delta", "epsilon")],
+        prompt_config=Method1PromptConfig(
+            use_adjacency_notation=True,
+            use_array_representation=True,
+            include_explanation=True,
+            include_example=False,
+            include_counterexample=False,
+        ),
+        output_dir=probe_dir,
+        resume=True,
+    )
+
+    resumed_summary = run_algo1_probe(
+        spec=resumed_spec,
+        chat_client=FailingChatClient(),
+    )
+
+    assert resumed_summary == initial_summary

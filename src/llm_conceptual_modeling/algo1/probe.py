@@ -1,4 +1,3 @@
-import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -12,6 +11,7 @@ from llm_conceptual_modeling.algo1.mistral import (
     build_edge_generator,
 )
 from llm_conceptual_modeling.post_revision_debug.artifacts import append_jsonl_event
+from llm_conceptual_modeling.post_revision_debug.run_context import ProbeRunContext
 
 Edge = tuple[str, str]
 
@@ -24,6 +24,7 @@ class Algo1ProbeSpec:
     subgraph2: list[Edge]
     prompt_config: Method1PromptConfig
     output_dir: Path
+    resume: bool = False
 
 
 def run_algo1_probe(
@@ -32,13 +33,18 @@ def run_algo1_probe(
     chat_client: ChatCompletionClient,
 ) -> dict[str, object]:
     output_dir = spec.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
+    context = ProbeRunContext(
+        output_dir=output_dir,
+        run_name=spec.run_name,
+        algorithm="algo1",
+        resume=spec.resume,
+    )
 
-    manifest_path = output_dir / "manifest.json"
-    summary_path = output_dir / "summary.json"
-    events_path = output_dir / "events.jsonl"
-    edge_prompt_path = output_dir / "edge_generation_prompt.txt"
-    cove_prompt_path = output_dir / "cove_prompt.txt"
+    if spec.resume:
+        cached_summary = context.load_json("summary.json")
+        if cached_summary is not None and context.is_stage_complete("probe_finished"):
+            context.log("resume requested; returning cached summary", stage="resume")
+            return cached_summary
 
     manifest_record = {
         "run_name": spec.run_name,
@@ -53,36 +59,65 @@ def run_algo1_probe(
             "include_counterexample": spec.prompt_config.include_counterexample,
         },
     }
-    manifest_path.write_text(json.dumps(manifest_record, indent=2))
-    append_jsonl_event(events_path, {"event": "probe_started", **manifest_record})
+    context.record_manifest(manifest_record)
+    context.append_event({"event": "probe_started", **manifest_record})
 
     edge_prompt = build_direct_edge_prompt(
         subgraph1=spec.subgraph1,
         subgraph2=spec.subgraph2,
         prompt_config=spec.prompt_config,
     )
-    edge_prompt_path.write_text(edge_prompt)
+    if not context.is_stage_complete("edge_prompt_written"):
+        context.record_prompt(
+            "edge_generation_prompt.txt",
+            edge_prompt,
+            stage="edge_prompt_written",
+        )
 
     edge_generator = build_edge_generator(chat_client)
     cove_verifier = build_cove_verifier(chat_client)
-    execution_result = execute_method1(
-        subgraph1=spec.subgraph1,
-        subgraph2=spec.subgraph2,
-        generate_edges=edge_generator,
-        verify_edges=cove_verifier,
-    )
+    cached_execution = context.load_json("execution_checkpoint.json")
+    if spec.resume and cached_execution is not None and context.is_stage_complete(
+        "execution_completed"
+    ):
+        execution_result = cached_execution
+    else:
+        execution = execute_method1(
+            subgraph1=spec.subgraph1,
+            subgraph2=spec.subgraph2,
+            generate_edges=edge_generator,
+            verify_edges=cove_verifier,
+        )
+        execution_result = {
+            "candidate_edges": _edges_to_json_compatible(execution.candidate_edges),
+            "verified_edges": _edges_to_json_compatible(execution.verified_edges),
+        }
+        context.record_checkpoint(
+            "execution_checkpoint.json",
+            execution_result,
+            stage="execution_completed",
+        )
 
-    cove_prompt = build_cove_prompt(execution_result.candidate_edges)
-    cove_prompt_path.write_text(cove_prompt)
+    cove_prompt = build_cove_prompt(
+        [tuple(edge) for edge in execution_result["candidate_edges"]],
+    )
+    if not context.is_stage_complete("cove_prompt_written"):
+        context.record_prompt(
+            "cove_prompt.txt",
+            cove_prompt,
+            stage="cove_prompt_written",
+        )
 
     summary_record = {
         "run_name": spec.run_name,
         "model": spec.model,
-        "candidate_edges": _edges_to_json_compatible(execution_result.candidate_edges),
-        "verified_edges": _edges_to_json_compatible(execution_result.verified_edges),
+        "candidate_edges": execution_result["candidate_edges"],
+        "verified_edges": execution_result["verified_edges"],
     }
-    summary_path.write_text(json.dumps(summary_record, indent=2))
-    append_jsonl_event(events_path, {"event": "probe_finished", **summary_record})
+    context.record_checkpoint("summary.json", summary_record, stage="summary_written")
+    context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
+    context.log("probe finished", stage="complete")
+    append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
     return summary_record
 
 

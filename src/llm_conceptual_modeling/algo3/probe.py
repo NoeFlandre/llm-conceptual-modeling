@@ -1,4 +1,3 @@
-import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -14,6 +13,7 @@ from llm_conceptual_modeling.algo3.mistral import (
 )
 from llm_conceptual_modeling.algo3.tree import TreeExpansionNode
 from llm_conceptual_modeling.post_revision_debug.artifacts import append_jsonl_event
+from llm_conceptual_modeling.post_revision_debug.run_context import ProbeRunContext
 
 
 @dataclass(frozen=True)
@@ -26,6 +26,7 @@ class Algo3ProbeSpec:
     child_count: int
     max_depth: int
     output_dir: Path
+    resume: bool = False
 
 
 def run_algo3_probe(
@@ -34,12 +35,18 @@ def run_algo3_probe(
     chat_client: ChatCompletionClient,
 ) -> dict[str, object]:
     output_dir = spec.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
+    context = ProbeRunContext(
+        output_dir=output_dir,
+        run_name=spec.run_name,
+        algorithm="algo3",
+        resume=spec.resume,
+    )
 
-    manifest_path = output_dir / "manifest.json"
-    summary_path = output_dir / "summary.json"
-    events_path = output_dir / "events.jsonl"
-    tree_prompt_path = output_dir / "tree_expansion_prompt.txt"
+    if spec.resume:
+        cached_summary = context.load_json("summary.json")
+        if cached_summary is not None and context.is_stage_complete("probe_finished"):
+            context.log("resume requested; returning cached summary", stage="resume")
+            return cached_summary
 
     manifest_record = {
         "run_name": spec.run_name,
@@ -53,34 +60,56 @@ def run_algo3_probe(
         "child_count": spec.child_count,
         "max_depth": spec.max_depth,
     }
-    manifest_path.write_text(json.dumps(manifest_record, indent=2))
-    append_jsonl_event(events_path, {"event": "probe_started", **manifest_record})
+    context.record_manifest(manifest_record)
+    context.append_event({"event": "probe_started", **manifest_record})
 
     tree_prompt = build_tree_expansion_prompt(
         source_labels=spec.source_labels,
         child_count=spec.child_count,
         prompt_config=spec.prompt_config,
     )
-    tree_prompt_path.write_text(tree_prompt)
+    if not context.is_stage_complete("tree_prompt_written"):
+        context.record_prompt(
+            "tree_expansion_prompt.txt",
+            tree_prompt,
+            stage="tree_prompt_written",
+        )
 
     child_proposer = build_child_proposer(chat_client)
     tree_expander = build_tree_expander(child_proposer)
-    execution_result = execute_method3(
-        source_labels=spec.source_labels,
-        target_labels=spec.target_labels,
-        child_count=spec.child_count,
-        max_depth=spec.max_depth,
-        expand_tree=tree_expander,
-    )
+    cached_execution = context.load_json("execution_checkpoint.json")
+    if spec.resume and cached_execution is not None and context.is_stage_complete(
+        "execution_completed"
+    ):
+        execution_result = cached_execution
+    else:
+        execution = execute_method3(
+            source_labels=spec.source_labels,
+            target_labels=spec.target_labels,
+            child_count=spec.child_count,
+            max_depth=spec.max_depth,
+            expand_tree=tree_expander,
+        )
+        execution_result = {
+            "expanded_nodes": _nodes_to_json_compatible(execution.expanded_nodes),
+            "matched_labels": execution.matched_labels,
+        }
+        context.record_checkpoint(
+            "execution_checkpoint.json",
+            execution_result,
+            stage="execution_completed",
+        )
 
     summary_record = {
         "run_name": spec.run_name,
         "model": spec.model,
-        "expanded_nodes": _nodes_to_json_compatible(execution_result.expanded_nodes),
-        "matched_labels": execution_result.matched_labels,
+        "expanded_nodes": execution_result["expanded_nodes"],
+        "matched_labels": execution_result["matched_labels"],
     }
-    summary_path.write_text(json.dumps(summary_record, indent=2))
-    append_jsonl_event(events_path, {"event": "probe_finished", **summary_record})
+    context.record_checkpoint("summary.json", summary_record, stage="summary_written")
+    context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})
+    context.log("probe finished", stage="complete")
+    append_jsonl_event(context.events_path, {"event": "probe_finished", **summary_record})
     return summary_record
 
 
