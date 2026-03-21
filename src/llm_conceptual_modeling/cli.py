@@ -2,6 +2,7 @@ import argparse
 from collections.abc import Sequence
 
 from llm_conceptual_modeling.commands.analyze import handle_analyze
+from llm_conceptual_modeling.commands.baseline import handle_baseline
 from llm_conceptual_modeling.commands.doctor import handle_doctor
 from llm_conceptual_modeling.commands.eval import handle_eval
 from llm_conceptual_modeling.commands.factorial import handle_factorial
@@ -15,6 +16,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     analyze_parser = subparsers.add_parser("analyze")
     analyze_subparsers = analyze_parser.add_subparsers(dest="analysis_target", required=True)
+    baseline_parser = subparsers.add_parser("baseline")
+    baseline_subparsers = baseline_parser.add_subparsers(dest="algorithm", required=True)
     eval_parser = subparsers.add_parser("eval")
     eval_subparsers = eval_parser.add_subparsers(dest="algorithm", required=True)
 
@@ -37,6 +40,18 @@ def build_parser() -> argparse.ArgumentParser:
     algo3_parser = eval_subparsers.add_parser("algo3")
     algo3_parser.add_argument("--input", required=True)
     algo3_parser.add_argument("--output", required=True)
+
+    baseline_algo1_parser = baseline_subparsers.add_parser("algo1")
+    baseline_algo1_parser.add_argument("--pair", required=True)
+    baseline_algo1_parser.add_argument("--output", required=True)
+
+    baseline_algo2_parser = baseline_subparsers.add_parser("algo2")
+    baseline_algo2_parser.add_argument("--pair", required=True)
+    baseline_algo2_parser.add_argument("--output", required=True)
+
+    baseline_algo3_parser = baseline_subparsers.add_parser("algo3")
+    baseline_algo3_parser.add_argument("--pair", required=True)
+    baseline_algo3_parser.add_argument("--output", required=True)
 
     factorial_algo1_parser = factorial_subparsers.add_parser("algo1")
     factorial_algo1_parser.add_argument("--input", action="append", required=True)
@@ -93,6 +108,12 @@ def build_parser() -> argparse.ArgumentParser:
     figures_parser.add_argument("--metric", action="append", required=True)
     figures_parser.add_argument("--output", required=True)
 
+    baseline_comparison_parser = analyze_subparsers.add_parser("baseline-comparison")
+    baseline_comparison_parser.add_argument("--input", action="append", required=True)
+    baseline_comparison_parser.add_argument("--baseline-input", action="append", required=True)
+    baseline_comparison_parser.add_argument("--metric", action="append", required=True)
+    baseline_comparison_parser.add_argument("--output", required=True)
+
     return parser
 
 
@@ -106,6 +127,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return handle_analyze(args)
     if args.command == "eval":
         return handle_eval(args)
+    if args.command == "baseline":
+        return handle_baseline(args)
     if args.command == "factorial":
         return handle_factorial(args)
     if args.command == "verify":

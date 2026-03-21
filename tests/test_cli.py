@@ -26,6 +26,139 @@ def test_cli_eval_algo1_writes_legacy_parity_metrics(tmp_path) -> None:
     pd.testing.assert_series_equal(actual["accuracy"], expected["accuracy"], check_names=False)
 
 
+def test_cli_baseline_algo1_writes_raw_results_for_requested_pair(tmp_path) -> None:
+    output_path = tmp_path / "algorithm1_baseline_sg1_sg2.csv"
+
+    exit_code = main(
+        [
+            "baseline",
+            "algo1",
+            "--pair",
+            "sg1_sg2",
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    assert exit_code == 0
+
+    actual = pd.read_csv(output_path)
+
+    assert len(actual) == 160
+    assert actual["Repetition"].tolist()[:5] == [0, 0, 0, 0, 0]
+    assert sorted(actual["Explanation"].unique().tolist()) == [-1, 1]
+    assert sorted(actual["Example"].unique().tolist()) == [-1, 1]
+    assert sorted(actual["Counterexample"].unique().tolist()) == [-1, 1]
+    assert sorted(actual["Array/List(1/-1)"].unique().tolist()) == [-1, 1]
+    assert sorted(actual["Tag/Adjacency(1/-1)"].unique().tolist()) == [-1, 1]
+    assert actual["Result"].nunique() == 1
+
+
+def test_cli_baseline_algo1_output_is_evaluable(tmp_path) -> None:
+    raw_output_path = tmp_path / "algorithm1_baseline_sg1_sg2.csv"
+    evaluated_output_path = tmp_path / "metrics.csv"
+
+    baseline_exit_code = main(
+        [
+            "baseline",
+            "algo1",
+            "--pair",
+            "sg1_sg2",
+            "--output",
+            str(raw_output_path),
+        ]
+    )
+    eval_exit_code = main(
+        [
+            "eval",
+            "algo1",
+            "--input",
+            str(raw_output_path),
+            "--output",
+            str(evaluated_output_path),
+        ]
+    )
+
+    assert baseline_exit_code == 0
+    assert eval_exit_code == 0
+
+    actual = pd.read_csv(evaluated_output_path)
+
+    assert len(actual) == 160
+    assert {"accuracy", "recall", "precision"}.issubset(actual.columns)
+
+
+def test_cli_baseline_algo2_output_is_evaluable(tmp_path) -> None:
+    raw_output_path = tmp_path / "algorithm2_baseline_sg1_sg2.csv"
+    evaluated_output_path = tmp_path / "metrics.csv"
+
+    baseline_exit_code = main(
+        [
+            "baseline",
+            "algo2",
+            "--pair",
+            "sg1_sg2",
+            "--output",
+            str(raw_output_path),
+        ]
+    )
+    eval_exit_code = main(
+        [
+            "eval",
+            "algo2",
+            "--input",
+            str(raw_output_path),
+            "--output",
+            str(evaluated_output_path),
+        ]
+    )
+
+    assert baseline_exit_code == 0
+    assert eval_exit_code == 0
+
+    actual = pd.read_csv(evaluated_output_path)
+
+    assert len(actual) == 320
+    assert {"accuracy", "recall", "precision"}.issubset(actual.columns)
+    assert sorted(actual["Convergence"].unique().tolist()) == [-1, 1]
+
+
+def test_cli_baseline_algo3_output_is_evaluable(tmp_path) -> None:
+    raw_output_path = tmp_path / "method3_baseline.csv"
+    evaluated_output_path = tmp_path / "method3_results_evaluated.csv"
+
+    baseline_exit_code = main(
+        [
+            "baseline",
+            "algo3",
+            "--pair",
+            "subgraph_1_to_subgraph_3",
+            "--output",
+            str(raw_output_path),
+        ]
+    )
+    eval_exit_code = main(
+        [
+            "eval",
+            "algo3",
+            "--input",
+            str(raw_output_path),
+            "--output",
+            str(evaluated_output_path),
+        ]
+    )
+
+    assert baseline_exit_code == 0
+    assert eval_exit_code == 0
+
+    actual = pd.read_csv(evaluated_output_path)
+
+    assert len(actual) == 80
+    assert "Recall" in actual.columns
+    assert sorted(actual["Depth"].unique().tolist()) == [1, 2]
+    assert sorted(actual["Number of Words"].unique().tolist()) == [3, 5]
+
+
 def test_cli_eval_algo2_writes_legacy_parity_metrics(tmp_path) -> None:
     raw_path = "tests/fixtures/legacy/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv"
     expected_path = "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv"

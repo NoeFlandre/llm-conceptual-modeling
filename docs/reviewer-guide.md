@@ -9,8 +9,10 @@ The repository reproduces the deterministic analysis pipeline for the study on L
 - evaluate raw outputs for Algorithms 1 and 2
 - recompute evaluated recall outputs for Algorithm 3
 - run factorial-analysis post-processing for all three algorithms
+- generate a deterministic structural baseline for all three algorithms
 - export grouped descriptive statistics and confidence intervals from evaluated CSVs
 - classify malformed, empty, and valid raw outputs for failure inspection
+- compare imported model outputs against the deterministic baseline
 - verify that these deterministic outputs match committed reference artifacts
 
 ## What It Does Not Reproduce Automatically
@@ -153,6 +155,32 @@ uv run lcm analyze figures \
   --metric precision \
   --output /tmp/algo2_metric_rows.csv
 ```
+
+Deterministic structural baseline:
+
+```bash
+uv run lcm baseline algo2 \
+  --pair sg1_sg2 \
+  --output /tmp/algo2_baseline_sg1_sg2.csv
+```
+
+Baseline comparison:
+
+```bash
+uv run lcm analyze baseline-comparison \
+  --baseline-input data/baselines/direct-cross-graph/algo2/evaluated/metrics_sg1_sg2.csv \
+  --baseline-input data/baselines/direct-cross-graph/algo2/evaluated/metrics_sg2_sg3.csv \
+  --baseline-input data/baselines/direct-cross-graph/algo2/evaluated/metrics_sg3_sg1.csv \
+  --input data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --input data/results/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv \
+  --input data/results/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo2_baseline_comparison.csv
+```
+
+The baseline comparison is auditable because it is file-based and deterministic. It should still be interpreted with care: the `direct-cross-graph` baseline uses mother-graph structure directly, so it is a structural heuristic comparator rather than a learned alternative to the LLM workflows.
 
 ## Files Worth Inspecting
 

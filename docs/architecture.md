@@ -35,14 +35,18 @@ The repository implements three command families:
   Convert raw algorithm outputs into evaluated CSVs.
 - `lcm factorial ...`
   Compute factorial-analysis summaries from evaluated CSVs.
+- `lcm baseline ...`
+  Generate deterministic structural baseline raw outputs for each algorithm.
 - `lcm analyze ...`
-  Produce reviewer-facing post-processing artifacts such as grouped descriptive summaries, replication-stability summaries, paired hypothesis tests, tidy figure exports, and raw-output failure classifications.
+  Produce reviewer-facing post-processing artifacts such as grouped descriptive summaries, replication-stability summaries, paired hypothesis tests, tidy figure exports, baseline comparisons, and raw-output failure classifications.
 
 For the paired hypothesis-test workflow, adjusted p-values use Benjamini-Hochberg correction. That choice matches the repository's use case better than a familywise-error correction: the tests are emitted in related families across metrics and files, and the purpose is to control false discoveries while retaining enough sensitivity to inspect potentially real effects in the imported corpus.
 - `lcm verify ...`
   Run repository health checks and deterministic parity checks.
 
 The `lcm generate ...` commands are intentionally narrower. They expose the experiment contract for each algorithm without executing live provider calls.
+
+The `lcm baseline ...` commands are also intentionally narrow. They expose one deterministic structural heuristic based on the mother graph. This keeps the baseline auditable and testable, but it also means the baseline should be interpreted as a graph heuristic comparator rather than a substitute for provider-backed generation.
 
 ## Verification Strategy
 

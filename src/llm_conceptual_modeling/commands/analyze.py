@@ -1,6 +1,7 @@
 import sys
 from argparse import Namespace
 
+from llm_conceptual_modeling.analysis.baseline_comparison import write_baseline_metric_comparison
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
 from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_rows
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
@@ -47,6 +48,14 @@ def handle_analyze(args: Namespace) -> int:
                 args.input,
                 args.output,
                 id_columns=args.id_column,
+                metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "baseline-comparison":
+            write_baseline_metric_comparison(
+                args.input,
+                args.baseline_input,
+                args.output,
                 metrics=args.metric,
             )
             return 0

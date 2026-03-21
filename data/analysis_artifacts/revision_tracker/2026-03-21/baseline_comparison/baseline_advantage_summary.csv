@@ -1,0 +1,8 @@
+algorithm,metric,model_count,models_beating_baseline,best_model,best_model_delta,worst_model,worst_model_delta,average_model_delta
+algo1,accuracy,6,0,gemini-2.5-pro,-0.0210991769858047,gemini-2.0-flash-exp,-0.0693475976542835,-0.03538444557703264
+algo1,precision,6,0,gemini-2.5-pro,-0.5958016231453731,deepseek-v3-chat-0324,-0.739824996050855,-0.6853461086193694
+algo1,recall,6,0,gpt-5,-0.0273824381275875,deepseek-chat-v3.1,-0.1971314674397859,-0.15665880752647585
+algo2,accuracy,6,0,gemini-2.5-pro,-0.0206115347830463,openai-gpt-4o,-0.3212327280277861,-0.08257373884190734
+algo2,precision,6,0,gemini-2.5-pro,-0.6071271593330416,gemini-2.0-flash-exp,-0.7074226965468742,-0.6588992680033728
+algo2,recall,6,0,gpt-5,-0.1021808845982296,openai-gpt-4o,-0.2186653864738443,-0.15793969429290844
+algo3,Recall,6,0,openai-gpt-4o,-0.7013256375,gpt-5,-0.7878786666666666,-0.7481059375

@@ -12,6 +12,7 @@ The current codebase provides a reproducible, testable implementation of the det
 - evaluation of raw outputs for Algorithm 2
 - recall recomputation for Algorithm 3
 - factorial analysis for Algorithms 1, 2, and 3
+- deterministic structural baseline generation for Algorithms 1, 2, and 3
 - grouped descriptive summaries and confidence-interval exports from evaluated CSVs
 - row-level failure classification for raw outputs
 - repository-level verification commands for parity, smoke checks, and machine-readable reporting
@@ -233,6 +234,32 @@ uv run lcm analyze figures \
   --output /tmp/algo3_metric_rows.csv
 ```
 
+Deterministic structural baseline generation:
+
+```bash
+uv run lcm baseline algo1 --pair sg1_sg2 --output /tmp/algo1_baseline_sg1_sg2.csv
+uv run lcm baseline algo2 --pair sg1_sg2 --output /tmp/algo2_baseline_sg1_sg2.csv
+uv run lcm baseline algo3 --pair subgraph_1_to_subgraph_3 --output /tmp/algo3_baseline.csv
+```
+
+Baseline-vs-model comparison from evaluated CSVs:
+
+```bash
+uv run lcm analyze baseline-comparison \
+  --baseline-input data/baselines/direct-cross-graph/algo1/evaluated/metrics_sg1_sg2.csv \
+  --baseline-input data/baselines/direct-cross-graph/algo1/evaluated/metrics_sg2_sg3.csv \
+  --baseline-input data/baselines/direct-cross-graph/algo1/evaluated/metrics_sg3_sg1.csv \
+  --input data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --input data/results/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv \
+  --input data/results/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo1_baseline_comparison.csv
+```
+
+The tracked revision artifacts for this comparison live under [data/analysis_artifacts/revision_tracker/2026-03-21/baseline_comparison](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts/revision_tracker/2026-03-21/baseline_comparison). The current baseline is intentionally simple and deterministic: it uses mother-graph structure directly, so it should be read as a graph heuristic comparator rather than as a substitute for live LLM generation.
+
 ### Generation Manifests
 
 The `generate` commands do not call providers. They expose the experimental contract for each algorithm in a machine-readable form:
@@ -257,6 +284,7 @@ The repository is designed to make wrongness visible rather than implicit.
 - [tests/test_analysis_stability.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_stability.py) checks grouped replication-stability exports.
 - [tests/test_analysis_hypothesis.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_hypothesis.py) checks paired factor-level hypothesis tests and adjusted p-values.
 - [tests/test_analysis_figures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_figures.py) checks tidy figure-export rows and path-derived metadata.
+- [tests/test_baseline.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_baseline.py) checks the deterministic structural baseline heuristics and CLI outputs.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 
