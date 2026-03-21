@@ -14,7 +14,7 @@ The new codebase currently covers the deterministic offline workflows for all th
 - ALGO2 factorial analysis from evaluated metrics CSVs
 - ALGO3 factorial analysis from evaluated metrics CSVs
 - self-verification commands: `lcm doctor` and `lcm verify legacy-parity`
-- offline generation stubs for `algo1`, `algo2`, and `algo3`
+- offline generation manifests for `algo1`, `algo2`, and `algo3`, backed by migrated dataset paths and experiment structure
 - CLI entrypoints for `lcm eval algo1`, `lcm eval algo2`, `lcm eval algo3`, `lcm factorial algo1`, `lcm factorial algo2`, `lcm factorial algo3`, `lcm doctor`, `lcm verify legacy-parity`, and `lcm generate`
 - regression tests against committed legacy fixtures
 
@@ -69,3 +69,6 @@ uv run lcm generate algo1 --json
 
 uv run lcm generate algo3 --fixture-only --json
 ```
+
+The `generate` commands do not call live LLMs. They expose the migrated offline generation contract:
+dataset locations, subgraph-pair coverage, factorial condition counts, replication counts, and prompt previews.
