@@ -45,6 +45,9 @@ class MistralChatClient:
                 },
             ),
             operation_name="mistral chat completion",
+            max_attempts=8,
+            initial_delay_seconds=2.0,
+            max_delay_seconds=30.0,
         )
         content = response.choices[0].message.content
         if content is None:

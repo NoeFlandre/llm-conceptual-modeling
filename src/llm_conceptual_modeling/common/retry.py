@@ -7,6 +7,7 @@ from typing import TypeVar
 from urllib.error import HTTPError, URLError
 
 import httpx
+from mistralai.client.errors.sdkerror import SDKError
 from mistralai.client.utils.retries import PermanentError
 
 T = TypeVar("T")
@@ -47,6 +48,9 @@ def call_with_retry(
             else:
                 retryable = False
                 exception = error
+        except SDKError as error:
+            retryable = getattr(error, "status_code", None) in retry_http_status_codes
+            exception = error
 
         if not retryable or attempt >= max_attempts:
             logger.error(

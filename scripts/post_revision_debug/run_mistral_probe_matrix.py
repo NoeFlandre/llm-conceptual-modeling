@@ -409,10 +409,10 @@ def _call_mistral_with_retry(
     model: str,
     prompt: str,
     logger: logging.Logger | None,
-    max_attempts: int = 3,
+    max_attempts: int = 8,
     base_delay_seconds: float = 1.0,
     backoff_factor: float = 2.0,
-    max_delay_seconds: float = 30.0,
+    max_delay_seconds: float = 60.0,
 ) -> dict[str, Any]:
     payload = {
         "model": model,

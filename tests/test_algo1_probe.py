@@ -4,6 +4,7 @@ from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.algo1.probe import (
     Algo1ProbeSpec,
     run_algo1_probe,
+    _edges_to_json_compatible,
 )
 
 
@@ -188,3 +189,10 @@ def test_run_algo1_probe_records_errors(tmp_path) -> None:
 
     assert error_record["error_type"] == "RuntimeError"
     assert error_record["error_message"] == "provider unavailable"
+
+
+def test_edges_to_json_compatible_tolerates_scalar_entries() -> None:
+    assert _edges_to_json_compatible(["alpha", ("beta", "gamma")]) == [
+        ["alpha"],
+        ["beta", "gamma"],
+    ]

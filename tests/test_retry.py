@@ -1,6 +1,7 @@
 from urllib.error import HTTPError, URLError
 
 import httpx
+from mistralai.client.errors.sdkerror import SDKError
 from mistralai.client.utils.retries import PermanentError
 
 from llm_conceptual_modeling.common.retry import call_with_retry
@@ -90,6 +91,35 @@ def test_call_with_retry_retries_sdk_permanent_error_wrapping_transport_failure(
         calls["count"] += 1
         if calls["count"] < 3:
             raise PermanentError(httpx.ConnectError("temporary network issue"))
+        return "ok"
+
+    actual = call_with_retry(
+        operation=operation,
+        operation_name="test operation",
+        max_attempts=4,
+        initial_delay_seconds=0.1,
+        sleep_fn=delays.append,
+    )
+
+    assert actual == "ok"
+    assert calls["count"] == 3
+    assert delays == [0.1, 0.2]
+
+
+def test_call_with_retry_retries_sdk_error_429_before_succeeding() -> None:
+    calls = {"count": 0}
+    delays: list[float] = []
+    request = httpx.Request("POST", "https://api.mistral.ai/v1/chat/completions")
+    response = httpx.Response(
+        429,
+        request=request,
+        text='{"message":"rate limited"}',
+    )
+
+    def operation() -> str:
+        calls["count"] += 1
+        if calls["count"] < 3:
+            raise SDKError("API error occurred", response, body='{"message":"rate limited"}')
         return "ok"
 
     actual = call_with_retry(

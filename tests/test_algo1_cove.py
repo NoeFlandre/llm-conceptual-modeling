@@ -32,3 +32,16 @@ def test_apply_cove_verification_keeps_only_edges_with_y_vote() -> None:
         ("alpha", "bridge_a"),
         ("bridge_c", "beta"),
     ]
+
+
+def test_apply_cove_verification_treats_missing_votes_as_no() -> None:
+    candidate_edges = [
+        ("alpha", "bridge_a"),
+        ("alpha", "bridge_b"),
+        ("bridge_c", "beta"),
+    ]
+    verification_votes = ["Y"]
+
+    actual = apply_cove_verification(candidate_edges, verification_votes)
+
+    assert actual == [("alpha", "bridge_a")]

@@ -1,3 +1,5 @@
+from itertools import zip_longest
+
 Edge = tuple[str, str]
 
 
@@ -18,11 +20,13 @@ def apply_cove_verification(
 ) -> list[Edge]:
     verified_edges: list[Edge] = []
 
-    for candidate_edge, verification_vote in zip(
+    for candidate_edge, verification_vote in zip_longest(
         candidate_edges,
         verification_votes,
-        strict=True,
+        fillvalue="N",
     ):
+        if candidate_edge is None:
+            break
         vote_is_yes = verification_vote == "Y"
         if not vote_is_yes:
             continue

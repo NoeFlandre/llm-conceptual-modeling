@@ -136,8 +136,13 @@ def run_algo1_probe(
 def _edges_to_json_compatible(edges: list[Edge]) -> list[list[str]]:
     edge_records: list[list[str]] = []
 
-    for source, target in edges:
-        edge_record = [source, target]
+    for edge in edges:
+        if isinstance(edge, (list, tuple)):
+            edge_record = [str(value) for value in edge]
+            edge_records.append(edge_record)
+            continue
+
+        edge_record = [str(edge)]
         edge_records.append(edge_record)
 
     return edge_records

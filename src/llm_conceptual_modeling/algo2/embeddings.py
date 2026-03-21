@@ -28,6 +28,9 @@ class MistralEmbeddingClient:
                 inputs=texts,
             ),
             operation_name="mistral embeddings",
+            max_attempts=8,
+            initial_delay_seconds=2.0,
+            max_delay_seconds=30.0,
         )
         data_items = response.data
         embeddings_by_label: dict[str, list[float]] = {}
