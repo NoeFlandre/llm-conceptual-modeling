@@ -6,10 +6,12 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
     return GenerationManifest(
         algorithm="algo3",
         mode="offline-manifest",
-        implemented=False,
+        implemented=True,
         requires_live_llm=True,
         fixture_only=fixture_only,
-        next_step="provide_fixture_dataset" if fixture_only else "implement_provider_adapter",
+        next_step="provide_fixture_dataset"
+        if fixture_only
+        else "provide_model_pair_and_output_root",
         input_data={
             "categories_csv": str(CATEGORIES_CSV),
             "edges_csv": str(EDGES_CSV),
