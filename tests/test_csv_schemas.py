@@ -24,6 +24,7 @@ def test_algo1_evaluation_output_schema(tmp_path) -> None:
         "accuracy",
         "recall",
         "precision",
+        "f1",
     ]
 
 

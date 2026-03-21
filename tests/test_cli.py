@@ -85,7 +85,7 @@ def test_cli_baseline_algo1_output_is_evaluable(tmp_path) -> None:
     actual = pd.read_csv(evaluated_output_path)
 
     assert len(actual) == 160
-    assert {"accuracy", "recall", "precision"}.issubset(actual.columns)
+    assert {"accuracy", "recall", "precision", "f1"}.issubset(actual.columns)
 
 
 def test_cli_baseline_algo2_output_is_evaluable(tmp_path) -> None:
@@ -119,7 +119,7 @@ def test_cli_baseline_algo2_output_is_evaluable(tmp_path) -> None:
     actual = pd.read_csv(evaluated_output_path)
 
     assert len(actual) == 320
-    assert {"accuracy", "recall", "precision"}.issubset(actual.columns)
+    assert {"accuracy", "recall", "precision", "f1"}.issubset(actual.columns)
     assert sorted(actual["Convergence"].unique().tolist()) == [-1, 1]
 
 

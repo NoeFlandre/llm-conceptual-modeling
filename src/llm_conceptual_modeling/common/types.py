@@ -18,6 +18,7 @@ class GenerationManifest:
     replications: int
     subgraph_pairs: list[str]
     prompt_preview: str
+    method_contract: dict[str, object] | None = None
 
     def to_dict(self) -> dict[str, object]:
         return asdict(self)

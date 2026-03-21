@@ -3,6 +3,16 @@ from llm_conceptual_modeling.common.types import GenerationManifest
 
 
 def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
+    method_contract = {
+        "method_name": "Direct combination",
+        "phases": [
+            "edge_generation",
+            "chain_of_verification",
+        ],
+        "uses_chain_of_verification": True,
+        "verification_output": "Y/N list aligned to candidate pairs",
+        "allows_new_nodes": True,
+    }
     return GenerationManifest(
         algorithm="algo1",
         mode="offline-manifest",
@@ -21,4 +31,5 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
             "You will get two inputs: Knowledge map 1: ... Knowledge map 2: ... "
             "Your task is to recommend more links between the two maps."
         ),
+        method_contract=method_contract,
     ).to_dict()

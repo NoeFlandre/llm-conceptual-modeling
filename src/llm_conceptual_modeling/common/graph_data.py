@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -6,6 +7,13 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_ROOT = REPO_ROOT / "data" / "inputs"
 CATEGORIES_CSV = DATA_ROOT / "Giabbanelli & Macewan (categories).csv"
 EDGES_CSV = DATA_ROOT / "Giabbanelli & Macewan (edges).csv"
+ALGO2_THESAURUS_JSON = DATA_ROOT / "algo2_thesaurus.json"
+
+
+def load_algo2_thesaurus() -> dict[str, dict[str, list[str]]]:
+    raw_text = ALGO2_THESAURUS_JSON.read_text()
+    parsed_thesaurus = json.loads(raw_text)
+    return parsed_thesaurus
 
 def load_default_graph() -> tuple[
     list[tuple[str, str]],

@@ -52,6 +52,11 @@ def test_algo1_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
     pd.testing.assert_series_equal(actual["accuracy"], expected["accuracy"], check_names=False)
     pd.testing.assert_series_equal(actual["recall"], expected["recall"], check_names=False)
     pd.testing.assert_series_equal(actual["precision"], expected["precision"], check_names=False)
+    expected_f1 = (2 * expected["precision"] * expected["recall"]) / (
+        expected["precision"] + expected["recall"]
+    )
+    expected_f1 = expected_f1.fillna(0.0)
+    pd.testing.assert_series_equal(actual["f1"], expected_f1, check_names=False)
 
 
 def test_algo2_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
@@ -71,6 +76,11 @@ def test_algo2_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
     pd.testing.assert_series_equal(actual["accuracy"], expected["accuracy"], check_names=False)
     pd.testing.assert_series_equal(actual["recall"], expected["recall"], check_names=False)
     pd.testing.assert_series_equal(actual["precision"], expected["precision"], check_names=False)
+    expected_f1 = (2 * expected["precision"] * expected["recall"]) / (
+        expected["precision"] + expected["recall"]
+    )
+    expected_f1 = expected_f1.fillna(0.0)
+    pd.testing.assert_series_equal(actual["f1"], expected_f1, check_names=False)
 
 
 def test_algo3_evaluation_matches_legacy_recall_fixture(tmp_path) -> None:

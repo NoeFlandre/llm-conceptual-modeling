@@ -21,6 +21,18 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
             "subgraph_2_to_subgraph_1",
             "subgraph_2_to_subgraph_3",
         ],
+        method_contract={
+            "method_name": "Tree-based approach for indirect matches",
+            "phases": [
+                "source_tree_expansion",
+                "target_match_check",
+                "recursive_expansion",
+            ],
+            "child_count_levels": [3, 5],
+            "depth_levels": [1, 2],
+            "stops_descending_from_matched_words": True,
+            "expansion_scope": "source_labels_only",
+        },
         prompt_preview=(
             "Your task is to recommend related concept names for each concept in the input."
         ),

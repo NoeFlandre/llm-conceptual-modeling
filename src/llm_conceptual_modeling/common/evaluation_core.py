@@ -27,6 +27,15 @@ def _compute_confusion_counts(
     )
 
 
+def _compute_f1_score(*, precision: float, recall: float) -> float:
+    denominator = precision + recall
+    if denominator == 0.0:
+        return 0.0
+
+    f1_score = (2 * precision * recall) / denominator
+    return f1_score
+
+
 def evaluate_connection_results_file(
     input_csv_path: PathLike,
     output_csv_path: PathLike,
@@ -44,6 +53,7 @@ def evaluate_connection_results_file(
     accuracies: list[float] = []
     recalls: list[float] = []
     precisions: list[float] = []
+    f1_scores: list[float] = []
 
     for _, row in dataframe.iterrows():
         edge_list = parse_python_literal(row["Result"])
@@ -81,16 +91,22 @@ def evaluate_connection_results_file(
 
         recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
         precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+        f1_score = _compute_f1_score(
+            precision=precision,
+            recall=recall,
+        )
 
         accuracies.append(accuracy)
         recalls.append(recall)
         precisions.append(precision)
+        f1_scores.append(f1_score)
 
     dataframe["accuracy"] = accuracies
     dataframe["recall"] = recalls
     dataframe["precision"] = precisions
+    dataframe["f1"] = f1_scores
     assert_output_columns(
         dataframe,
-        list(dataframe.columns[:-3]) + ["accuracy", "recall", "precision"],
+        list(dataframe.columns[:-4]) + ["accuracy", "recall", "precision", "f1"],
     )
     dataframe.to_csv(output_csv_path, index=False)

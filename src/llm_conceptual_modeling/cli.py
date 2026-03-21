@@ -7,6 +7,7 @@ from llm_conceptual_modeling.commands.doctor import handle_doctor
 from llm_conceptual_modeling.commands.eval import handle_eval
 from llm_conceptual_modeling.commands.factorial import handle_factorial
 from llm_conceptual_modeling.commands.generate import handle_generate
+from llm_conceptual_modeling.commands.probe import handle_probe
 from llm_conceptual_modeling.commands.verify import handle_verify
 
 
@@ -28,6 +29,8 @@ def build_parser() -> argparse.ArgumentParser:
     verify_subparsers = verify_parser.add_subparsers(dest="verify_target", required=True)
     generate_parser = subparsers.add_parser("generate")
     generate_subparsers = generate_parser.add_subparsers(dest="algorithm", required=True)
+    probe_parser = subparsers.add_parser("probe")
+    probe_subparsers = probe_parser.add_subparsers(dest="algorithm", required=True)
 
     algo1_parser = eval_subparsers.add_parser("algo1")
     algo1_parser.add_argument("--input", required=True)
@@ -77,6 +80,30 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser = generate_subparsers.add_parser(algorithm)
         generate_algorithm_parser.add_argument("--fixture-only", action="store_true")
         generate_algorithm_parser.add_argument("--json", action="store_true")
+
+    probe_algo1_parser = probe_subparsers.add_parser("algo1")
+    probe_algo1_parser.add_argument("--run-name", required=True)
+    probe_algo1_parser.add_argument("--model", required=True)
+    probe_algo1_parser.add_argument("--subgraph1-edge", action="append", required=True)
+    probe_algo1_parser.add_argument("--subgraph2-edge", action="append", required=True)
+    probe_algo1_parser.add_argument("--output-dir", required=True)
+
+    probe_algo2_parser = probe_subparsers.add_parser("algo2")
+    probe_algo2_parser.add_argument("--run-name", required=True)
+    probe_algo2_parser.add_argument("--model", required=True)
+    probe_algo2_parser.add_argument("--embedding-model", required=True)
+    probe_algo2_parser.add_argument("--seed-label", action="append", required=True)
+    probe_algo2_parser.add_argument("--convergence-threshold", type=float, required=True)
+    probe_algo2_parser.add_argument("--output-dir", required=True)
+
+    probe_algo3_parser = probe_subparsers.add_parser("algo3")
+    probe_algo3_parser.add_argument("--run-name", required=True)
+    probe_algo3_parser.add_argument("--model", required=True)
+    probe_algo3_parser.add_argument("--source-label", action="append", required=True)
+    probe_algo3_parser.add_argument("--target-label", action="append", required=True)
+    probe_algo3_parser.add_argument("--child-count", type=int, required=True)
+    probe_algo3_parser.add_argument("--max-depth", type=int, required=True)
+    probe_algo3_parser.add_argument("--output-dir", required=True)
 
     summary_parser = analyze_subparsers.add_parser("summary")
     summary_parser.add_argument("--input", action="append", required=True)
@@ -135,6 +162,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return handle_verify(args)
     if args.command == "generate":
         return handle_generate(args)
+    if args.command == "probe":
+        return handle_probe(args)
 
     parser.error("unsupported command")
     return 2
