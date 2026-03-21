@@ -13,7 +13,9 @@ The new codebase currently covers the deterministic offline workflows for all th
 - ALGO1 factorial analysis from evaluated metrics CSVs
 - ALGO2 factorial analysis from evaluated metrics CSVs
 - ALGO3 factorial analysis from evaluated metrics CSVs
-- CLI entrypoints for `lcm eval algo1`, `lcm eval algo2`, `lcm eval algo3`, `lcm factorial algo1`, `lcm factorial algo2`, and `lcm factorial algo3`
+- self-verification commands: `lcm doctor` and `lcm verify legacy-parity`
+- offline generation stubs for `algo1`, `algo2`, and `algo3`
+- CLI entrypoints for `lcm eval algo1`, `lcm eval algo2`, `lcm eval algo3`, `lcm factorial algo1`, `lcm factorial algo2`, `lcm factorial algo3`, `lcm doctor`, `lcm verify legacy-parity`, and `lcm generate`
 - regression tests against committed legacy fixtures
 
 Live LLM generation is intentionally out of scope at this stage.
@@ -58,4 +60,12 @@ uv run lcm factorial algo2 \
 uv run lcm factorial algo3 \
   --input tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv \
   --output /tmp/factorial_analysis_results_gpt5_without_error.csv
+
+uv run lcm doctor --json
+
+uv run lcm verify legacy-parity --json
+
+uv run lcm generate algo1 --json
+
+uv run lcm generate algo3 --fixture-only --json
 ```
