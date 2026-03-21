@@ -80,6 +80,13 @@ def build_parser() -> argparse.ArgumentParser:
     stability_parser.add_argument("--metric", action="append", required=True)
     stability_parser.add_argument("--output", required=True)
 
+    hypothesis_parser = analyze_subparsers.add_parser("hypothesis")
+    hypothesis_parser.add_argument("--input", action="append", required=True)
+    hypothesis_parser.add_argument("--factor", required=True)
+    hypothesis_parser.add_argument("--pair-by", action="append", required=True)
+    hypothesis_parser.add_argument("--metric", action="append", required=True)
+    hypothesis_parser.add_argument("--output", required=True)
+
     return parser
 
 

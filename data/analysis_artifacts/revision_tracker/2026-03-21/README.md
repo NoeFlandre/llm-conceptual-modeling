@@ -28,6 +28,8 @@ The source data for these artifacts comes from the imported primary result files
   Aggregated parsed edge-count statistics by algorithm and model.
 - `replication_stability/`
   Stability artifacts derived from evaluated CSVs to quantify how much metrics moved across the recorded repetitions.
+- `hypothesis_testing/`
+  Audited paired-test outputs and adjusted p-value summaries for selected factor comparisons on the imported evaluated corpus.
 
 ## Audit Use
 

@@ -2,6 +2,7 @@ import sys
 from argparse import Namespace
 
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
+from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
 
@@ -28,6 +29,15 @@ def handle_analyze(args: Namespace) -> int:
                 args.input,
                 args.output,
                 group_by=args.group_by,
+                metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "hypothesis":
+            write_paired_factor_hypothesis_tests(
+                args.input,
+                args.output,
+                factor=args.factor,
+                pair_by=args.pair_by,
                 metrics=args.metric,
             )
             return 0

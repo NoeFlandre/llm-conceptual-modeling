@@ -197,6 +197,26 @@ uv run lcm analyze stability \
   --output /tmp/algo1_stability.csv
 ```
 
+Paired factor-level hypothesis tests with Benjamini-Hochberg correction:
+
+```bash
+uv run lcm analyze hypothesis \
+  --input data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --factor Convergence \
+  --pair-by Repetition \
+  --pair-by Explanation \
+  --pair-by Example \
+  --pair-by Counterexample \
+  --pair-by Array/List\(1/-1\) \
+  --pair-by Tag/Adjacency\(1/-1\) \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo2_convergence_hypothesis.csv
+```
+
+The hypothesis workflow uses Benjamini-Hochberg correction because this repository runs families of related factor-level tests across multiple files and metrics. The goal is to limit false discoveries without using a correction so conservative that it erases potentially real effects in this exploratory revision-analysis setting.
+
 ### Generation Manifests
 
 The `generate` commands do not call providers. They expose the experimental contract for each algorithm in a machine-readable form:
@@ -219,6 +239,7 @@ The repository is designed to make wrongness visible rather than implicit.
 - [tests/test_analysis_summary.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_summary.py) checks grouped descriptive-statistics exports.
 - [tests/test_analysis_failures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_failures.py) checks raw-output failure classification.
 - [tests/test_analysis_stability.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_stability.py) checks grouped replication-stability exports.
+- [tests/test_analysis_hypothesis.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_hypothesis.py) checks paired factor-level hypothesis tests and adjusted p-values.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 

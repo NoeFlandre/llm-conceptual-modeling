@@ -36,7 +36,9 @@ The repository implements three command families:
 - `lcm factorial ...`
   Compute factorial-analysis summaries from evaluated CSVs.
 - `lcm analyze ...`
-  Produce reviewer-facing post-processing artifacts such as grouped descriptive summaries, replication-stability summaries, and raw-output failure classifications.
+  Produce reviewer-facing post-processing artifacts such as grouped descriptive summaries, replication-stability summaries, paired hypothesis tests, and raw-output failure classifications.
+
+For the paired hypothesis-test workflow, adjusted p-values use Benjamini-Hochberg correction. That choice matches the repository's use case better than a familywise-error correction: the tests are emitted in related families across metrics and files, and the purpose is to control false discoveries while retaining enough sensitivity to inspect potentially real effects in the imported corpus.
 - `lcm verify ...`
   Run repository health checks and deterministic parity checks.
 

@@ -117,6 +117,25 @@ uv run lcm analyze stability \
   --output /tmp/algo2_stability.csv
 ```
 
+Paired hypothesis test:
+
+```bash
+uv run lcm analyze hypothesis \
+  --input data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --factor Explanation \
+  --pair-by Repetition \
+  --pair-by Example \
+  --pair-by Counterexample \
+  --pair-by Array/List\(1/-1\) \
+  --pair-by Tag/Adjacency\(1/-1\) \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo1_explanation_hypothesis.csv
+```
+
+Benjamini-Hochberg correction is used for these outputs because the repository evaluates sets of related factor-level tests rather than one isolated primary test. This keeps the reported signal from being dominated by false positives while remaining less conservative than a familywise-error correction such as Bonferroni.
+
 ## Files Worth Inspecting
 
 - [README.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/README.md)
