@@ -80,6 +80,10 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser = generate_subparsers.add_parser(algorithm)
         generate_algorithm_parser.add_argument("--fixture-only", action="store_true")
         generate_algorithm_parser.add_argument("--json", action="store_true")
+        generate_algorithm_parser.add_argument("--model")
+        generate_algorithm_parser.add_argument("--pair")
+        generate_algorithm_parser.add_argument("--output-root")
+        generate_algorithm_parser.add_argument("--replications", type=int, default=5)
 
     probe_algo1_parser = probe_subparsers.add_parser("algo1")
     probe_algo1_parser.add_argument("--run-name", required=True)
