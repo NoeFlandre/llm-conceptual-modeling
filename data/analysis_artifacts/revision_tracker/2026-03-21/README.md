@@ -30,6 +30,8 @@ The source data for these artifacts comes from the imported primary result files
   Stability artifacts derived from evaluated CSVs to quantify how much metrics moved across the recorded repetitions.
 - `hypothesis_testing/`
   Audited paired-test outputs and adjusted p-value summaries for selected factor comparisons on the imported evaluated corpus.
+- `figure_exports/`
+  Tidy long-format metric exports for external plotting across the imported evaluated corpus.
 
 ## Audit Use
 

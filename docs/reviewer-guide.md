@@ -136,6 +136,24 @@ uv run lcm analyze hypothesis \
 
 Benjamini-Hochberg correction is used for these outputs because the repository evaluates sets of related factor-level tests rather than one isolated primary test. This keeps the reported signal from being dominated by false positives while remaining less conservative than a familywise-error correction such as Bonferroni.
 
+Figure-ready metric export:
+
+```bash
+uv run lcm analyze figures \
+  --input data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv \
+  --id-column Repetition \
+  --id-column Explanation \
+  --id-column Example \
+  --id-column Counterexample \
+  --id-column Array/List\(1/-1\) \
+  --id-column Tag/Adjacency\(1/-1\) \
+  --id-column Convergence \
+  --metric accuracy \
+  --metric recall \
+  --metric precision \
+  --output /tmp/algo2_metric_rows.csv
+```
+
 ## Files Worth Inspecting
 
 - [README.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/README.md)

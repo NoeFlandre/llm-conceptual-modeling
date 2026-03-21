@@ -217,6 +217,22 @@ uv run lcm analyze hypothesis \
 
 The hypothesis workflow uses Benjamini-Hochberg correction because this repository runs families of related factor-level tests across multiple files and metrics. The goal is to limit false discoveries without using a correction so conservative that it erases potentially real effects in this exploratory revision-analysis setting.
 
+Figure-ready long-format metric export:
+
+```bash
+uv run lcm analyze figures \
+  --input data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv \
+  --id-column Repetition \
+  --id-column Example \
+  --id-column Counter-Example \
+  --id-column Number\ of\ Words \
+  --id-column Depth \
+  --id-column Source\ Subgraph\ Name \
+  --id-column Target\ Subgraph\ Name \
+  --metric Recall \
+  --output /tmp/algo3_metric_rows.csv
+```
+
 ### Generation Manifests
 
 The `generate` commands do not call providers. They expose the experimental contract for each algorithm in a machine-readable form:
@@ -240,6 +256,7 @@ The repository is designed to make wrongness visible rather than implicit.
 - [tests/test_analysis_failures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_failures.py) checks raw-output failure classification.
 - [tests/test_analysis_stability.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_stability.py) checks grouped replication-stability exports.
 - [tests/test_analysis_hypothesis.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_hypothesis.py) checks paired factor-level hypothesis tests and adjusted p-values.
+- [tests/test_analysis_figures.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/test_analysis_figures.py) checks tidy figure-export rows and path-derived metadata.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 

@@ -87,6 +87,12 @@ def build_parser() -> argparse.ArgumentParser:
     hypothesis_parser.add_argument("--metric", action="append", required=True)
     hypothesis_parser.add_argument("--output", required=True)
 
+    figures_parser = analyze_subparsers.add_parser("figures")
+    figures_parser.add_argument("--input", action="append", required=True)
+    figures_parser.add_argument("--id-column", action="append", required=True)
+    figures_parser.add_argument("--metric", action="append", required=True)
+    figures_parser.add_argument("--output", required=True)
+
     return parser
 
 

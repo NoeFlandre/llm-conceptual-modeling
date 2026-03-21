@@ -2,6 +2,7 @@ import sys
 from argparse import Namespace
 
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
+from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_rows
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
@@ -38,6 +39,14 @@ def handle_analyze(args: Namespace) -> int:
                 args.output,
                 factor=args.factor,
                 pair_by=args.pair_by,
+                metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "figures":
+            write_figure_ready_metric_rows(
+                args.input,
+                args.output,
+                id_columns=args.id_column,
                 metrics=args.metric,
             )
             return 0
