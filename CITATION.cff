@@ -1,7 +1,16 @@
 cff-version: 1.2.0
-title: llm-conceptual-modeling
-message: "If you use this software, please cite the repository."
+title: "On the variability of generative artificial intelligence methods in conceptual modeling: an experimental evaluation on combining causal maps"
+message: "If you use this software, please cite the repository and the accompanying manuscript."
 authors:
   - family-names: Flandre
-    given-names: Noe
+    given-names: "Noe Y."
+    affiliation: "Old Dominion University (ODU) Virginia Modeling, Analysis, and Simulation Center (VMASC), Suffolk, VA, USA; School of Mines in Ales (IMT Ales), Ales, France"
+  - family-names: Daumas
+    given-names: Cedric
+    affiliation: "Old Dominion University (ODU) Virginia Modeling, Analysis, and Simulation Center (VMASC), Suffolk, VA, USA; School of Mines in Ales (IMT Ales), Ales, France"
+  - family-names: Giabbanelli
+    given-names: "Philippe J."
+    email: pgiabban@odu.edu
+    affiliation: "Old Dominion University (ODU) Virginia Modeling, Analysis, and Simulation Center (VMASC), Suffolk, VA, USA"
+repository-code: "https://github.com/NoeFlandre/llm-conceptual-modeling"
 license: MIT

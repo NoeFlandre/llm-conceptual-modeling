@@ -2,6 +2,10 @@
 
 Offline rewrite of the conceptual modeling research workflows with regression tests against legacy artifacts.
 
+See [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md) for the current internal structure and safety model.
+
+The local `paper/` directory is treated as untracked working material for manuscript context. It is intentionally ignored by git and is not part of the reproducible software surface.
+
 ## Current Scope
 
 The new codebase currently covers the deterministic offline workflows for all three algorithms:
@@ -32,6 +36,7 @@ uv sync --dev
 uv run pytest
 uv run ruff check .
 uv run ty check
+uv run lcm verify all --json
 ```
 
 ## Run
@@ -64,6 +69,8 @@ uv run lcm factorial algo3 \
 uv run lcm doctor --json
 
 uv run lcm verify legacy-parity --json
+
+uv run lcm verify all --json
 
 uv run lcm generate algo1 --json
 

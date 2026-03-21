@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_ROOT = REPO_ROOT / "data" / "inputs"
 CATEGORIES_CSV = DATA_ROOT / "Giabbanelli & Macewan (categories).csv"
 EDGES_CSV = DATA_ROOT / "Giabbanelli & Macewan (edges).csv"

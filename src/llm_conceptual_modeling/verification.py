@@ -10,6 +10,7 @@ from llm_conceptual_modeling.algo2.evaluation import evaluate_results_file as ev
 from llm_conceptual_modeling.algo2.factorial import run_factorial_analysis as factorial_algo2
 from llm_conceptual_modeling.algo3.evaluation import evaluate_results_file as eval_algo3
 from llm_conceptual_modeling.algo3.factorial import run_factorial_analysis as factorial_algo3
+from llm_conceptual_modeling.common.types import VerificationResult
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "legacy"
@@ -28,7 +29,7 @@ def build_doctor_report() -> dict[str, object]:
 
 
 def run_legacy_parity_verification() -> dict[str, object]:
-    results: list[dict[str, str]] = []
+    results: list[VerificationResult] = []
     with TemporaryDirectory() as tmpdir:
         temp_root = Path(tmpdir)
 
@@ -104,8 +105,19 @@ def run_legacy_parity_verification() -> dict[str, object]:
             results,
         )
 
-    status = "ok" if all(result["status"] == "passed" for result in results) else "error"
-    return {"status": status, "results": results}
+    status = "ok" if all(result.status == "passed" for result in results) else "error"
+    return {"status": status, "results": [result.to_dict() for result in results]}
+
+
+def run_full_verification() -> dict[str, object]:
+    doctor = build_doctor_report()
+    legacy_parity = run_legacy_parity_verification()
+    status = "ok" if doctor["status"] == "ok" and legacy_parity["status"] == "ok" else "error"
+    return {
+        "status": status,
+        "doctor": doctor,
+        "legacy_parity": legacy_parity,
+    }
 
 
 def emit_json(payload: dict[str, object]) -> None:
@@ -119,13 +131,13 @@ def _verify_eval(
     output_path: Path,
     evaluator,
     metric_column: str,
-    results: list[dict[str, str]],
+    results: list[VerificationResult],
 ) -> None:
     evaluator(raw_path, output_path)
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)
     status = "passed" if actual[metric_column].equals(expected[metric_column]) else "failed"
-    results.append({"name": name, "status": status})
+    results.append(VerificationResult(name=name, status=status))
 
 
 def _verify_factorial(
@@ -134,10 +146,10 @@ def _verify_factorial(
     expected_path: Path,
     output_path: Path,
     evaluator,
-    results: list[dict[str, str]],
+    results: list[VerificationResult],
 ) -> None:
     evaluator(input_paths, output_path)
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)
     status = "passed" if actual.equals(expected) else "failed"
-    results.append({"name": name, "status": status})
+    results.append(VerificationResult(name=name, status=status))

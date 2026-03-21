@@ -1,35 +1,11 @@
 import argparse
 from collections.abc import Sequence
 
-from llm_conceptual_modeling.algo1.evaluation import evaluate_results_file
-from llm_conceptual_modeling.algo1.factorial import (
-    run_factorial_analysis as run_algo1_factorial_analysis,
-)
-from llm_conceptual_modeling.algo2.evaluation import (
-    evaluate_results_file as evaluate_algo2_results_file,
-)
-from llm_conceptual_modeling.algo2.factorial import (
-    run_factorial_analysis as run_algo2_factorial_analysis,
-)
-from llm_conceptual_modeling.algo3.evaluation import (
-    evaluate_results_file as evaluate_algo3_results_file,
-)
-from llm_conceptual_modeling.algo3.factorial import (
-    run_factorial_analysis as run_algo3_factorial_analysis,
-)
-from llm_conceptual_modeling.generation import (
-    build_generation_stub_payload,
-)
-from llm_conceptual_modeling.generation import (
-    emit_json as emit_generation_json,
-)
-from llm_conceptual_modeling.verification import (
-    build_doctor_report,
-    run_legacy_parity_verification,
-)
-from llm_conceptual_modeling.verification import (
-    emit_json as emit_verification_json,
-)
+from llm_conceptual_modeling.commands.doctor import handle_doctor
+from llm_conceptual_modeling.commands.eval import handle_eval
+from llm_conceptual_modeling.commands.factorial import handle_factorial
+from llm_conceptual_modeling.commands.generate import handle_generate
+from llm_conceptual_modeling.commands.verify import handle_verify
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -73,6 +49,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     doctor_parser.add_argument("--json", action="store_true")
 
+    verify_all_parser = verify_subparsers.add_parser("all")
+    verify_all_parser.add_argument("--json", action="store_true")
+
     legacy_parity_parser = verify_subparsers.add_parser("legacy-parity")
     legacy_parity_parser.add_argument("--json", action="store_true")
 
@@ -88,38 +67,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
 
-    if args.command == "eval" and args.algorithm == "algo1":
-        evaluate_results_file(args.input, args.output)
-        return 0
-    if args.command == "eval" and args.algorithm == "algo2":
-        evaluate_algo2_results_file(args.input, args.output)
-        return 0
-    if args.command == "eval" and args.algorithm == "algo3":
-        evaluate_algo3_results_file(args.input, args.output)
-        return 0
-    if args.command == "factorial" and args.algorithm == "algo1":
-        run_algo1_factorial_analysis(args.input, args.output)
-        return 0
-    if args.command == "factorial" and args.algorithm == "algo2":
-        run_algo2_factorial_analysis(args.input, args.output)
-        return 0
-    if args.command == "factorial" and args.algorithm == "algo3":
-        run_algo3_factorial_analysis(args.input, args.output)
-        return 0
     if args.command == "doctor":
-        emit_verification_json(build_doctor_report())
-        return 0
-    if args.command == "verify" and args.verify_target == "legacy-parity":
-        emit_verification_json(run_legacy_parity_verification())
-        return 0
+        return handle_doctor(args)
+    if args.command == "eval":
+        return handle_eval(args)
+    if args.command == "factorial":
+        return handle_factorial(args)
+    if args.command == "verify":
+        return handle_verify(args)
     if args.command == "generate":
-        emit_generation_json(
-            build_generation_stub_payload(
-                args.algorithm,
-                fixture_only=args.fixture_only,
-            )
-        )
-        return 0
+        return handle_generate(args)
 
     parser.error("unsupported command")
     return 2
