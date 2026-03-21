@@ -1,0 +1,76 @@
+from itertools import product
+from pathlib import Path
+
+from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
+from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec
+from llm_conceptual_modeling.common.graph_data import load_default_graph
+
+
+def build_algo1_experiment_specs(
+    *,
+    pair_name: str,
+    output_root: Path,
+    replications: int = 5,
+) -> list[Algo1ProbeSpec]:
+    pair_subgraphs = _load_pair_subgraphs(pair_name)
+    subgraph1, subgraph2 = pair_subgraphs
+    condition_bits = list(product([0, 1], repeat=5))
+    experiment_specs: list[Algo1ProbeSpec] = []
+
+    for repetition_index in range(replications):
+        for condition_bit_tuple in condition_bits:
+            condition_name = "".join(str(bit) for bit in condition_bit_tuple)
+            run_name = f"algo1_{pair_name}_rep{repetition_index}_cond{condition_name}"
+            prompt_config = _build_prompt_config(condition_bit_tuple)
+            output_dir = (
+                output_root
+                / "algo1"
+                / pair_name
+                / f"rep{repetition_index}_cond{condition_name}"
+            )
+            experiment_spec = Algo1ProbeSpec(
+                run_name=run_name,
+                model="",
+                subgraph1=subgraph1,
+                subgraph2=subgraph2,
+                prompt_config=prompt_config,
+                output_dir=output_dir,
+            )
+            experiment_specs.append(experiment_spec)
+
+    return experiment_specs
+
+
+def _load_pair_subgraphs(pair_name: str) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+    sg1, sg2, sg3, _ = load_default_graph()
+    pair_map = {
+        "sg1_sg2": (sg1, sg2),
+        "sg2_sg3": (sg2, sg3),
+        "sg3_sg1": (sg3, sg1),
+    }
+    if pair_name not in pair_map:
+        msg = f"Unsupported Method 1 pair name: {pair_name}"
+        raise ValueError(msg)
+
+    subgraphs = pair_map[pair_name]
+    return subgraphs
+
+
+def _build_prompt_config(
+    condition_bit_tuple: tuple[int, int, int, int, int],
+) -> Method1PromptConfig:
+    (
+        adjacency_flag,
+        array_flag,
+        explanation_flag,
+        example_flag,
+        counterexample_flag,
+    ) = condition_bit_tuple
+    prompt_config = Method1PromptConfig(
+        use_adjacency_notation=bool(adjacency_flag),
+        use_array_representation=bool(array_flag),
+        include_explanation=bool(explanation_flag),
+        include_example=bool(example_flag),
+        include_counterexample=bool(counterexample_flag),
+    )
+    return prompt_config
