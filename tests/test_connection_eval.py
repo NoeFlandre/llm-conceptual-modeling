@@ -2,6 +2,9 @@ import networkx as nx
 import pandas as pd
 
 from llm_conceptual_modeling.algo1.evaluation import evaluate_results_file
+from llm_conceptual_modeling.algo2.evaluation import (
+    evaluate_results_file as evaluate_algo2_results_file,
+)
 from llm_conceptual_modeling.common.connection_eval import find_valid_connections
 
 
@@ -30,6 +33,25 @@ def test_algo1_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
     output_path = tmp_path / "metrics_sg1_sg2.csv"
 
     evaluate_results_file(raw_path, output_path)
+
+    actual = pd.read_csv(output_path)
+    expected = pd.read_csv(expected_path)
+
+    pd.testing.assert_series_equal(actual["accuracy"], expected["accuracy"], check_names=False)
+    pd.testing.assert_series_equal(actual["recall"], expected["recall"], check_names=False)
+    pd.testing.assert_series_equal(actual["precision"], expected["precision"], check_names=False)
+
+
+def test_algo2_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
+    raw_path = (
+        "tests/fixtures/legacy/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv"
+    )
+    expected_path = (
+        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv"
+    )
+    output_path = tmp_path / "metrics_sg1_sg2.csv"
+
+    evaluate_algo2_results_file(raw_path, output_path)
 
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)

@@ -8,7 +8,8 @@ The new codebase currently covers the first verified slice:
 
 - shared connection evaluation logic for Algorithms 1 and 2
 - offline Algorithm 1 metrics evaluation
-- a CLI entrypoint for `lcm eval algo1`
+- offline Algorithm 2 metrics evaluation
+- CLI entrypoints for `lcm eval algo1` and `lcm eval algo2`
 - regression tests against a committed legacy fixture
 
 Live LLM generation is intentionally out of scope at this stage.
