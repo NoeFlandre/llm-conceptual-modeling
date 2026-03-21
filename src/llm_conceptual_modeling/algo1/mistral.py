@@ -4,6 +4,7 @@ from typing import Protocol
 from urllib import request
 
 from llm_conceptual_modeling.algo1.cove import apply_cove_verification, build_cove_prompt
+from llm_conceptual_modeling.common.retry import call_with_retry
 
 Edge = tuple[str, str]
 
@@ -58,10 +59,13 @@ class MistralChatClient:
                 },
             },
         }
-        response = self._post_json(
-            url="https://api.mistral.ai/v1/chat/completions",
-            api_key=self._api_key,
-            payload=payload,
+        response = call_with_retry(
+            operation=lambda: self._post_json(
+                url="https://api.mistral.ai/v1/chat/completions",
+                api_key=self._api_key,
+                payload=payload,
+            ),
+            operation_name="mistral chat completion",
         )
         content = response["choices"][0]["message"]["content"]
         parsed_content = json.loads(content)

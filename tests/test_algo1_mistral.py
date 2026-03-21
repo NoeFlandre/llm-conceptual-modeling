@@ -1,4 +1,5 @@
 import json
+from urllib.error import URLError
 
 from llm_conceptual_modeling.algo1.mistral import (
     Method1PromptConfig,
@@ -133,6 +134,57 @@ def test_mistral_chat_client_builds_expected_request_payload() -> None:
     assert captured_request["api_key"] == "test-key"
     assert captured_request["payload"]["model"] == "mistral-small-2603"
     assert captured_request["payload"]["temperature"] == 0.0
+
+
+def test_mistral_chat_client_retries_transient_transport_errors() -> None:
+    calls = {"count": 0}
+
+    def flaky_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
+        calls["count"] += 1
+        if calls["count"] < 3:
+            raise URLError("temporary network issue")
+        return {
+            "choices": [
+                {
+                    "message": {
+                        "content": json.dumps({"edges": [{"source": "a", "target": "b"}]})
+                    }
+                }
+            ]
+        }
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-small-2603",
+        post_json=flaky_post_json,
+    )
+
+    actual = client.complete_json(
+        prompt="generate edges",
+        schema_name="edge_list",
+        schema={
+            "type": "object",
+            "properties": {
+                "edges": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "source": {"type": "string"},
+                            "target": {"type": "string"},
+                        },
+                        "required": ["source", "target"],
+                        "additionalProperties": False,
+                    },
+                }
+            },
+            "required": ["edges"],
+            "additionalProperties": False,
+        },
+    )
+
+    assert actual == {"edges": [{"source": "a", "target": "b"}]}
+    assert calls["count"] == 3
 
 
 class FakeChatClient:

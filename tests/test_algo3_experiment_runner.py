@@ -72,3 +72,54 @@ def test_run_algo3_experiment_executes_specs_and_returns_summaries(tmp_path: Pat
 
     assert first_summary["run_name"] == "run_a"
     assert second_summary["run_name"] == "run_b"
+
+
+def test_run_algo3_experiment_skips_failed_specs_and_continues(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    call_order: list[str] = []
+
+    def fake_run_probe(*, spec, chat_client):
+        call_order.append(spec.run_name)
+        if spec.run_name == "run_a":
+            raise RuntimeError("transient failure")
+        return {"run_name": spec.run_name, "matched_labels": ["bridge_hit"]}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.algo3.experiment.run_algo3_probe",
+        fake_run_probe,
+    )
+
+    prompt_config = Method3PromptConfig(
+        include_example=False,
+        include_counterexample=False,
+    )
+    first_spec = Algo3ProbeSpec(
+        run_name="run_a",
+        model="mistral-small-2603",
+        source_labels=["source_a"],
+        target_labels=["bridge_hit", "target_z"],
+        prompt_config=prompt_config,
+        child_count=2,
+        max_depth=2,
+        output_dir=tmp_path / "run_a",
+    )
+    second_spec = Algo3ProbeSpec(
+        run_name="run_b",
+        model="mistral-small-2603",
+        source_labels=["source_a"],
+        target_labels=["bridge_hit", "target_z"],
+        prompt_config=prompt_config,
+        child_count=2,
+        max_depth=2,
+        output_dir=tmp_path / "run_b",
+    )
+
+    actual = run_algo3_experiment(
+        specs=[first_spec, second_spec],
+        chat_client=FakeChatClient(),
+    )
+
+    assert [summary["run_name"] for summary in actual] == ["run_b"]
+    assert call_order == ["run_a", "run_b"]

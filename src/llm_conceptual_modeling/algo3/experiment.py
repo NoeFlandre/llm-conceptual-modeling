@@ -1,9 +1,12 @@
+import logging
 from itertools import product
 from pathlib import Path
 
 from llm_conceptual_modeling.algo3.mistral import ChatCompletionClient, Method3PromptConfig
 from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec, run_algo3_probe
 from llm_conceptual_modeling.common.graph_data import load_default_graph
+
+logger = logging.getLogger(__name__)
 
 
 def build_algo3_experiment_specs(
@@ -54,10 +57,14 @@ def run_algo3_experiment(
     summary_records: list[dict[str, object]] = []
 
     for spec in specs:
-        summary_record = run_algo3_probe(
-            spec=spec,
-            chat_client=chat_client,
-        )
+        try:
+            summary_record = run_algo3_probe(
+                spec=spec,
+                chat_client=chat_client,
+            )
+        except Exception:
+            logger.exception("Method 3 experiment probe failed: run_name=%s", spec.run_name)
+            continue
         summary_records.append(summary_record)
 
     return summary_records

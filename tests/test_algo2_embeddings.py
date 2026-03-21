@@ -1,3 +1,5 @@
+from urllib.error import URLError
+
 from llm_conceptual_modeling.algo2.embeddings import (
     MistralEmbeddingClient,
     build_embeddings_by_label,
@@ -61,6 +63,35 @@ def test_mistral_embedding_client_builds_expected_request_payload() -> None:
         "model": "mistral-embed-2312",
         "input": ["alpha", "beta"],
     }
+
+
+def test_mistral_embedding_client_retries_transient_transport_errors() -> None:
+    calls = {"count": 0}
+
+    def flaky_post_json(*, url: str, api_key: str, payload: dict[str, object]) -> dict[str, object]:
+        calls["count"] += 1
+        if calls["count"] < 3:
+            raise URLError("temporary network issue")
+        return {
+            "data": [
+                {"embedding": [0.1, 0.2]},
+                {"embedding": [0.3, 0.4]},
+            ]
+        }
+
+    client = MistralEmbeddingClient(
+        api_key="test-key",
+        model="mistral-embed-2312",
+        post_json=flaky_post_json,
+    )
+
+    actual = client.embed_texts(["alpha", "beta"])
+
+    assert actual == {
+        "alpha": [0.1, 0.2],
+        "beta": [0.3, 0.4],
+    }
+    assert calls["count"] == 3
 
 
 def test_compute_average_best_match_similarity_uses_embedding_client_once() -> None:

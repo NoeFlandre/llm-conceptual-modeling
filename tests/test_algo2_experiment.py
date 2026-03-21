@@ -73,3 +73,41 @@ def test_run_algo2_experiment_delegates_to_probe(monkeypatch, tmp_path) -> None:
         (specs[0].run_name, "FakeChatClient", "FakeEmbeddingClient"),
         (specs[1].run_name, "FakeChatClient", "FakeEmbeddingClient"),
     ]
+
+
+def test_run_algo2_experiment_skips_failed_specs_and_continues(monkeypatch, tmp_path) -> None:
+    call_order: list[str] = []
+
+    def fake_run_probe(*, spec, chat_client, embedding_client):
+        call_order.append(spec.run_name)
+        if spec.run_name == "algo2_sg1_sg2_rep0_cond00000":
+            raise RuntimeError("transient failure")
+        return {"run_name": spec.run_name, "expanded_labels": ["alpha"]}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.algo2.experiment.run_algo2_probe",
+        fake_run_probe,
+    )
+
+    specs = build_algo2_experiment_specs(
+        pair_name="sg1_sg2",
+        output_root=tmp_path / "runs",
+        replications=1,
+    )
+
+    class FakeChatClient:
+        pass
+
+    class FakeEmbeddingClient:
+        pass
+
+    summary_records = run_algo2_experiment(
+        specs=specs[:2],
+        chat_client=FakeChatClient(),
+        embedding_client=FakeEmbeddingClient(),
+    )
+
+    assert summary_records == [
+        {"run_name": specs[1].run_name, "expanded_labels": ["alpha"]},
+    ]
+    assert call_order == [specs[0].run_name, specs[1].run_name]

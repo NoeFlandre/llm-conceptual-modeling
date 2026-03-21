@@ -94,7 +94,7 @@ uv run lcm generate algo2 \
 ```
 
 This executable Method 2 path uses the confirmed `0.01` convergence threshold and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
-Add `--resume` to any live-backed `generate` or `probe` command to reuse the existing run state and checkpoint files when rerunning a partially completed output directory. The live matrix runner also retries HTTP 429 responses and reloads cached per-row responses when resuming, so interrupted matrix runs can continue without repeating completed provider calls.
+Add `--resume` to any live-backed `generate` or `probe` command to reuse the existing run state and checkpoint files when rerunning a partially completed output directory. The live matrix runner also retries HTTP 429 responses and reloads cached per-row responses when resuming, so interrupted matrix runs can continue without repeating completed provider calls. The reusable Mistral clients also retry transient transport failures, including DNS-level `URLError` conditions, before the command fails with a structured `error.json` and a matching `run.log` entry.
 
 To audit the paper-facing contract in one place, run:
 

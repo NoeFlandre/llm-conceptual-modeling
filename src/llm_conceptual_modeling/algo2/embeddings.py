@@ -3,6 +3,7 @@ from typing import Protocol
 from urllib import request
 
 from llm_conceptual_modeling.algo2.expansion import average_best_match_similarity
+from llm_conceptual_modeling.common.retry import call_with_retry
 
 
 class EmbeddingClient(Protocol):
@@ -26,10 +27,13 @@ class MistralEmbeddingClient:
             "model": self._model,
             "input": texts,
         }
-        response = self._post_json(
-            url="https://api.mistral.ai/v1/embeddings",
-            api_key=self._api_key,
-            payload=payload,
+        response = call_with_retry(
+            operation=lambda: self._post_json(
+                url="https://api.mistral.ai/v1/embeddings",
+                api_key=self._api_key,
+                payload=payload,
+            ),
+            operation_name="mistral embeddings",
         )
         data_items = response["data"]
         embeddings_by_label: dict[str, list[float]] = {}
