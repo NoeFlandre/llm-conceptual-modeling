@@ -173,3 +173,70 @@ def test_cli_generate_algo1_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert captured_call["replications"] == 2
     assert captured_call["specs"] == ["spec-a", "spec-b"]
     assert captured_call["chat_client_type"] == "FakeChatClient"
+
+
+def test_cli_generate_algo3_can_execute_experiment_specs(monkeypatch, capsys, tmp_path) -> None:
+    captured_call: dict[str, object] = {}
+
+    class FakeChatClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["api_key"] = api_key
+            captured_call["model"] = model
+
+    def fake_build_specs(*, pair_name, output_root, replications):
+        captured_call["pair_name"] = pair_name
+        captured_call["output_root"] = str(output_root)
+        captured_call["replications"] = replications
+        return ["spec-c", "spec-d"]
+
+    def fake_run_experiment(*, specs, chat_client):
+        captured_call["specs"] = specs
+        captured_call["chat_client_type"] = type(chat_client).__name__
+        return [
+            {"run_name": "spec-c", "matched_labels": ["alpha"]},
+            {"run_name": "spec-d", "matched_labels": ["beta"]},
+        ]
+
+    monkeypatch.setenv("MISTRAL_API_KEY", "test-key")
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.Algo3ChatClient",
+        FakeChatClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.build_algo3_experiment_specs",
+        fake_build_specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.run_algo3_experiment",
+        fake_run_experiment,
+    )
+
+    exit_code = main(
+        [
+            "generate",
+            "algo3",
+            "--model",
+            "mistral-small-2603",
+            "--pair",
+            "subgraph_1_to_subgraph_3",
+            "--output-root",
+            str(tmp_path / "runs"),
+            "--replications",
+            "2",
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload["algorithm"] == "algo3"
+    assert payload["mode"] == "executed-experiment"
+    assert payload["result_count"] == 2
+    assert captured_call["api_key"] == "test-key"
+    assert captured_call["model"] == "mistral-small-2603"
+    assert captured_call["pair_name"] == "subgraph_1_to_subgraph_3"
+    assert captured_call["replications"] == 2
+    assert captured_call["specs"] == ["spec-c", "spec-d"]
+    assert captured_call["chat_client_type"] == "FakeChatClient"
