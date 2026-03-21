@@ -1,4 +1,5 @@
 from llm_conceptual_modeling.algo3.mistral import (
+    Method3PromptConfig,
     build_child_proposer,
     build_tree_expansion_prompt,
 )
@@ -38,6 +39,39 @@ def test_build_tree_expansion_prompt_reflects_method3_contract() -> None:
     assert "dictionary format" in actual
     assert "source_a" in actual
     assert "source_b" in actual
+
+
+def test_build_tree_expansion_prompt_can_include_example_and_counterexample() -> None:
+    prompt_config = Method3PromptConfig(
+        include_example=True,
+        include_counterexample=True,
+    )
+
+    actual = build_tree_expansion_prompt(
+        source_labels=["source_a", "source_b"],
+        child_count=3,
+        prompt_config=prompt_config,
+    )
+
+    assert "All concept names must have a clear meaning" in actual
+    assert "Here is an example of a desired output for your task." in actual
+    assert "Here is an example of a bad output that we do not want to see." in actual
+
+
+def test_build_tree_expansion_prompt_can_omit_example_and_counterexample() -> None:
+    prompt_config = Method3PromptConfig(
+        include_example=False,
+        include_counterexample=False,
+    )
+
+    actual = build_tree_expansion_prompt(
+        source_labels=["source_a", "source_b"],
+        child_count=5,
+        prompt_config=prompt_config,
+    )
+
+    assert "Here is an example of a desired output for your task." not in actual
+    assert "Here is an example of a bad output that we do not want to see." not in actual
 
 
 def test_build_child_proposer_returns_dictionary_children() -> None:

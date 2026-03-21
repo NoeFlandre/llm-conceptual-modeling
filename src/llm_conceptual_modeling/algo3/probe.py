@@ -8,6 +8,7 @@ from llm_conceptual_modeling.algo3.method import (
 )
 from llm_conceptual_modeling.algo3.mistral import (
     ChatCompletionClient,
+    Method3PromptConfig,
     build_child_proposer,
     build_tree_expansion_prompt,
 )
@@ -21,6 +22,7 @@ class Algo3ProbeSpec:
     model: str
     source_labels: list[str]
     target_labels: list[str]
+    prompt_config: Method3PromptConfig
     child_count: int
     max_depth: int
     output_dir: Path
@@ -44,6 +46,10 @@ def run_algo3_probe(
         "model": spec.model,
         "source_labels": spec.source_labels,
         "target_labels": spec.target_labels,
+        "prompt_config": {
+            "include_example": spec.prompt_config.include_example,
+            "include_counterexample": spec.prompt_config.include_counterexample,
+        },
         "child_count": spec.child_count,
         "max_depth": spec.max_depth,
     }
@@ -53,6 +59,7 @@ def run_algo3_probe(
     tree_prompt = build_tree_expansion_prompt(
         source_labels=spec.source_labels,
         child_count=spec.child_count,
+        prompt_config=spec.prompt_config,
     )
     tree_prompt_path.write_text(tree_prompt)
 

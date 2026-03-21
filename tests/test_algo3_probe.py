@@ -1,5 +1,6 @@
 import json
 
+from llm_conceptual_modeling.algo3.mistral import Method3PromptConfig
 from llm_conceptual_modeling.algo3.probe import (
     Algo3ProbeSpec,
     run_algo3_probe,
@@ -38,6 +39,10 @@ def test_run_algo3_probe_writes_auditable_artifacts(tmp_path) -> None:
         model="mistral-small-2603",
         source_labels=["source_a"],
         target_labels=["bridge_hit", "target_z"],
+        prompt_config=Method3PromptConfig(
+            include_example=True,
+            include_counterexample=False,
+        ),
         child_count=2,
         max_depth=2,
         output_dir=probe_dir,
@@ -93,6 +98,10 @@ def test_run_algo3_probe_writes_auditable_artifacts(tmp_path) -> None:
         "model": "mistral-small-2603",
         "source_labels": ["source_a"],
         "target_labels": ["bridge_hit", "target_z"],
+        "prompt_config": {
+            "include_example": True,
+            "include_counterexample": False,
+        },
         "child_count": 2,
         "max_depth": 2,
     }
@@ -101,4 +110,6 @@ def test_run_algo3_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert json.loads(event_lines[0])["event"] == "probe_started"
     assert json.loads(event_lines[1])["event"] == "probe_finished"
     assert "recommend 2 related concept names" in tree_prompt
+    assert "Here is an example of a desired output for your task." in tree_prompt
+    assert "Here is an example of a bad output that we do not want to see." not in tree_prompt
     assert len(chat_client.calls) == 2

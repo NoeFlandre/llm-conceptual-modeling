@@ -1,6 +1,13 @@
 import json
+from dataclasses import dataclass
 from typing import Protocol
 from urllib import request
+
+
+@dataclass(frozen=True)
+class Method3PromptConfig:
+    include_example: bool
+    include_counterexample: bool
 
 
 class PostJsonFunction(Protocol):
@@ -68,17 +75,50 @@ def build_tree_expansion_prompt(
     *,
     source_labels: list[str],
     child_count: int,
+    prompt_config: Method3PromptConfig | None = None,
 ) -> str:
-    prompt = (
-        "You are a helpful assistant who can creatively suggest relevant ideas. "
+    resolved_prompt_config = prompt_config or Method3PromptConfig(
+        include_example=False,
+        include_counterexample=False,
+    )
+    prompt_sections: list[str] = []
+    prompt_sections.append("You are a helpful assistant who can creatively suggest relevant ideas.")
+    prompt_sections.append(
         "Your input is a set of concept names. "
+        "All concept names must have a clear meaning, such that we can "
+        "interpret having 'more' or 'less' of a concept."
+    )
+    prompt_sections.append(f"Your input is the following list of concept names: {source_labels}")
+    prompt_sections.append(
         f"Your task is to recommend {child_count} related concept names "
         "for each of the names in the input. "
-        "Do not suggest names that are already in the input. "
+        "Do not suggest names that are in the input. "
+        "Your output must include the list of the proposed names for each "
+        "of the input names. Do not include any other text. "
         "Return your proposed names in a dictionary format with source "
-        "labels as keys and arrays of strings as values. "
-        f"Input concepts: {source_labels}"
+        "labels as keys and arrays of strings as values."
     )
+
+    if resolved_prompt_config.include_example:
+        prompt_sections.append(
+            "Here is an example of a desired output for your task. "
+            "We have the list of concepts ['capacity to hire', 'bad employees', "
+            "'good reputation']. In this example, you could recommend these 9 new concepts."
+        )
+
+    if resolved_prompt_config.include_counterexample:
+        prompt_sections.append(
+            "Here is an example of a bad output that we do not want to see. "
+            "A bad output would be unrelated concepts such as 'moon', 'dog', "
+            "and 'thermodynamics'."
+        )
+
+    prompt_sections.append(
+        "Your output must only be the list of proposed concepts. "
+        "Do not repeat any instructions I have given you and do not add "
+        "unnecessary words or phrases."
+    )
+    prompt = " ".join(prompt_sections)
     return prompt
 
 
