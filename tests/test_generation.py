@@ -85,8 +85,7 @@ def test_cli_generate_algo2_exposes_paper_method_contract(capsys) -> None:
     ]
     assert method_contract["embedding_model"] == "mistral-embed-2312"
     assert method_contract["convergence_rule"] == "absolute_cosine_similarity_delta <= threshold"
-    assert method_contract["paper_confirmed_threshold"] == 0.01
-    assert method_contract["paper_unresolved_variant"] == "half_as_early"
+    assert method_contract["convergence_threshold"] == 0.01
     assert method_contract["uses_domain_thesaurus"] is True
     assert method_contract["uses_chain_of_verification"] is True
 
@@ -242,3 +241,85 @@ def test_cli_generate_algo3_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert captured_call["replications"] == 2
     assert captured_call["specs"] == ["spec-c", "spec-d"]
     assert captured_call["chat_client_type"] == "FakeChatClient"
+
+
+def test_cli_generate_algo2_can_execute_experiment_specs(monkeypatch, capsys, tmp_path) -> None:
+    captured_call: dict[str, object] = {}
+
+    class FakeChatClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["api_key"] = api_key
+            captured_call["model"] = model
+
+    class FakeEmbeddingClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["embedding_api_key"] = api_key
+            captured_call["embedding_model"] = model
+
+    def fake_build_specs(*, pair_name, output_root, replications):
+        captured_call["pair_name"] = pair_name
+        captured_call["output_root"] = str(output_root)
+        captured_call["replications"] = replications
+        return ["spec-e", "spec-f"]
+
+    def fake_run_experiment(*, specs, chat_client, embedding_client):
+        captured_call["specs"] = specs
+        captured_call["chat_client_type"] = type(chat_client).__name__
+        captured_call["embedding_client_type"] = type(embedding_client).__name__
+        return [
+            {"run_name": "spec-e", "expanded_labels": ["alpha"]},
+            {"run_name": "spec-f", "expanded_labels": ["beta"]},
+        ]
+
+    monkeypatch.setenv("MISTRAL_API_KEY", "test-key")
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.Algo2ChatClient",
+        FakeChatClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.Algo2EmbeddingClient",
+        FakeEmbeddingClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.build_algo2_experiment_specs",
+        fake_build_specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.run_algo2_experiment",
+        fake_run_experiment,
+    )
+
+    exit_code = main(
+        [
+            "generate",
+            "algo2",
+            "--model",
+            "mistral-small-2603",
+            "--embedding-model",
+            "mistral-embed-2312",
+            "--pair",
+            "sg1_sg2",
+            "--output-root",
+            str(tmp_path / "runs"),
+            "--replications",
+            "2",
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload["algorithm"] == "algo2"
+    assert payload["mode"] == "executed-experiment"
+    assert payload["result_count"] == 2
+    assert captured_call["api_key"] == "test-key"
+    assert captured_call["model"] == "mistral-small-2603"
+    assert captured_call["embedding_api_key"] == "test-key"
+    assert captured_call["embedding_model"] == "mistral-embed-2312"
+    assert captured_call["pair_name"] == "sg1_sg2"
+    assert captured_call["replications"] == 2
+    assert captured_call["specs"] == ["spec-e", "spec-f"]
+    assert captured_call["chat_client_type"] == "FakeChatClient"
+    assert captured_call["embedding_client_type"] == "FakeEmbeddingClient"

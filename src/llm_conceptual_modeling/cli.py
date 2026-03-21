@@ -84,6 +84,7 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser.add_argument("--pair")
         generate_algorithm_parser.add_argument("--output-root")
         generate_algorithm_parser.add_argument("--replications", type=int, default=5)
+    generate_subparsers.choices["algo2"].add_argument("--embedding-model")
 
     probe_algo1_parser = probe_subparsers.add_parser("algo1")
     probe_algo1_parser.add_argument("--run-name", required=True)
