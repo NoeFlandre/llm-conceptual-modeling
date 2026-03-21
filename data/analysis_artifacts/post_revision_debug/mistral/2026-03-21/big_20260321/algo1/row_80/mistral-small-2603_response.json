@@ -1,0 +1,25 @@
+{
+  "id": "3272521033f64ae2ac3a14af5b518b26",
+  "created": 1774106657,
+  "model": "mistral-small-2603",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2841,
+    "completion_tokens": 151,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\"edges\": [{\"source\": \"Healthy eating\", \"target\": \"Physical well-being\"}, {\"source\": \"Healthy eating\", \"target\": \"Mental well-being\"}, {\"source\": \"Obesity\", \"target\": \"Weight bias\"}, {\"source\": \"Weight bias\", \"target\": \"Depression\"}, {\"source\": \"Weight bias\", \"target\": \"Poor body image\"}, {\"source\": \"Weight bias\", \"target\": \"Mental well-being\"}, {\"source\": \"Socio-economic status\", \"target\": \"Mental well-being\"}, {\"source\": \"Socio-economic status\", \"target\": \"Physical well-being\"}, {\"source\": \"Socio-economic status\", \"target\": \"Stress\"}]}"
+      }
+    }
+  ]
+}

@@ -56,7 +56,7 @@ Each canonical run writes:
 
 This is intended to make every run replayable and auditable.
 
-The `lcm generate ...` and `lcm probe ...` entry points also accept `--resume` for rerunning a partially completed run without reissuing provider calls for completed stages.
+The `lcm generate ...` and `lcm probe ...` entry points also accept `--resume` for rerunning a partially completed run without reissuing provider calls for completed stages. The live Mistral matrix runner also retries transient HTTP 429 responses and reuses cached per-row response files when `--resume` is set, so a partial matrix can be resumed without restarting completed model calls.
 
 For a compact audit of the paper-facing contract, run:
 
@@ -103,6 +103,16 @@ The wider four-row pilot keeps the same qualitative picture:
 - ALGO1 remains higher-precision than the historical GPT-5 rows on average, while recall is still lower; the medium model is slightly more precise, while the small model returns more edges.
 - ALGO2 remains a precision-recall tradeoff: both models improve accuracy, the medium model improves precision relative to the small model, and neither model recovers the historical recall level.
 - ALGO3 still stays at zero recall across all sampled rows, but the number of parsed edges becomes much larger for the small model than for the medium model, which suggests the prompt is still not controlling output breadth tightly enough.
+
+The larger resumed matrix attempt `big_20260321` is now also an audited artifact. It did not complete all probe combinations because the live transport layer repeatedly failed with `URLError` on several model calls, but the runner kept the completed outputs and isolated the failures per model instead of aborting the whole run. The completed portion is still informative:
+
+- 75 scored result rows were written before the run stopped.
+- All 24 ALGO1 rows completed for the three models.
+- Only 1 ALGO2 row completed for one model; the remaining ALGO2 cells were recorded as transport failures.
+- No ALGO3 result rows completed in this attempt.
+- 47 model failures were recorded, all with `URLError` and the same DNS-level transport message.
+
+This means the runner is now usable for partial reruns and failure auditing, but the environment still does not support a clean full big run with the current Mistral endpoints and local network conditions.
 
 ## Interpretation
 

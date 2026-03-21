@@ -2,11 +2,13 @@ import argparse
 import json
 import logging
 import os
+import time
 import urllib.request
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError, URLError
 
 import pandas as pd
 
@@ -63,6 +65,10 @@ def main() -> int:
         type=int,
         default=[],
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+    )
     args = parser.parse_args()
 
     models = args.models or [
@@ -92,6 +98,7 @@ def main() -> int:
     manifest = {
         "run_name": run_name,
         "models": models,
+        "resume": args.resume,
         "requested_rows": {
             "algo1": args.algo1_rows,
             "algo2": args.algo2_rows,
@@ -104,6 +111,7 @@ def main() -> int:
     logger.info("Run started: %s", run_name)
 
     result_records: list[dict[str, object]] = []
+    failure_records: list[dict[str, object]] = []
     for probe_spec in probe_specs:
         raw_frame = pd.read_csv(probe_spec.raw_path)
         evaluated_frame = pd.read_csv(probe_spec.evaluated_path)
@@ -132,74 +140,123 @@ def main() -> int:
         )
 
         for model in models:
-            logger.info(
-                "Model call started: algorithm=%s row_index=%s model=%s",
-                probe_spec.algorithm,
-                probe_spec.row_index,
-                model,
-            )
-            append_jsonl_event(
-                events_path,
-                {
-                    "event": "model_call_started",
-                    "algorithm": probe_spec.algorithm,
-                    "row_index": probe_spec.row_index,
-                    "model": model,
-                },
-            )
-            response_data = _call_mistral(
-                api_key=api_key,
-                model=model,
-                prompt=prompt,
-            )
-            response_path = probe_dir / f"{model}_response.json"
-            response_path.write_text(json.dumps(response_data, indent=2))
-            content = response_data["choices"][0]["message"]["content"]
-            edges = extract_edge_list_from_chat_content(content)
+            try:
+                logger.info(
+                    "Model call started: algorithm=%s row_index=%s model=%s",
+                    probe_spec.algorithm,
+                    probe_spec.row_index,
+                    model,
+                )
+                append_jsonl_event(
+                    events_path,
+                    {
+                        "event": "model_call_started",
+                        "algorithm": probe_spec.algorithm,
+                        "row_index": probe_spec.row_index,
+                        "model": model,
+                    },
+                )
+                response_path = probe_dir / f"{model}_response.json"
+                response_data = _load_existing_response(
+                    response_path=response_path,
+                    resume=args.resume,
+                )
+                response_source = "cache" if response_data is not None else "live"
+                if response_data is None:
+                    response_data = _call_mistral_with_retry(
+                        api_key=api_key,
+                        model=model,
+                        prompt=prompt,
+                        logger=logger,
+                    )
+                    response_path.write_text(json.dumps(response_data, indent=2))
+                else:
+                    logger.info(
+                        "Model response loaded from cache: algorithm=%s row_index=%s model=%s",
+                        probe_spec.algorithm,
+                        probe_spec.row_index,
+                        model,
+                    )
+                    append_jsonl_event(
+                        events_path,
+                        {
+                            "event": "model_response_loaded",
+                            "algorithm": probe_spec.algorithm,
+                            "row_index": probe_spec.row_index,
+                            "model": model,
+                            "response_source": response_source,
+                        },
+                    )
+                content = response_data["choices"][0]["message"]["content"]
+                edges = extract_edge_list_from_chat_content(content)
 
-            if probe_spec.algorithm == "algo3":
-                probe_metrics = score_algo3_row(raw_row, content)
-                historical_metrics = {"recall": float(evaluated_row["Recall"])}
-            else:
-                literal_content = repr(edges)
-                probe_metrics = score_connection_row(raw_row, literal_content)
-                historical_metrics = {
-                    "accuracy": float(evaluated_row["accuracy"]),
-                    "recall": float(evaluated_row["recall"]),
-                    "precision": float(evaluated_row["precision"]),
-                }
+                if probe_spec.algorithm == "algo3":
+                    probe_metrics = score_algo3_row(raw_row, content)
+                    historical_metrics = {"recall": float(evaluated_row["Recall"])}
+                else:
+                    literal_content = repr(edges)
+                    probe_metrics = score_connection_row(raw_row, literal_content)
+                    historical_metrics = {
+                        "accuracy": float(evaluated_row["accuracy"]),
+                        "recall": float(evaluated_row["recall"]),
+                        "precision": float(evaluated_row["precision"]),
+                    }
 
-            for metric_name, historical_score in historical_metrics.items():
-                probe_score = float(probe_metrics[metric_name])
-                result_record = build_probe_result_record(
+                for metric_name, historical_score in historical_metrics.items():
+                    probe_score = float(probe_metrics[metric_name])
+                    result_record = build_probe_result_record(
+                        algorithm=probe_spec.algorithm,
+                        row_index=probe_spec.row_index,
+                        model=model,
+                        metric_name=metric_name,
+                        historical_score=historical_score,
+                        probe_score=probe_score,
+                        parsed_edge_count=len(edges),
+                    )
+                    result_record["historical_model"] = probe_spec.historical_model
+                    result_record["response_source"] = response_source
+                    result_records.append(result_record)
+
+                logger.info(
+                    "Model call finished: algorithm=%s row_index=%s model=%s parsed_edge_count=%s",
+                    probe_spec.algorithm,
+                    probe_spec.row_index,
+                    model,
+                    len(edges),
+                )
+                append_jsonl_event(
+                    events_path,
+                    {
+                        "event": "model_call_finished",
+                        "algorithm": probe_spec.algorithm,
+                        "row_index": probe_spec.row_index,
+                        "model": model,
+                        "parsed_edge_count": len(edges),
+                    },
+                )
+            except Exception as error:
+                failure_record = _build_model_failure_record(
                     algorithm=probe_spec.algorithm,
                     row_index=probe_spec.row_index,
                     model=model,
-                    metric_name=metric_name,
-                    historical_score=historical_score,
-                    probe_score=probe_score,
-                    parsed_edge_count=len(edges),
+                    historical_model=probe_spec.historical_model,
+                    error=error,
                 )
-                result_record["historical_model"] = probe_spec.historical_model
-                result_records.append(result_record)
-
-            logger.info(
-                "Model call finished: algorithm=%s row_index=%s model=%s parsed_edge_count=%s",
-                probe_spec.algorithm,
-                probe_spec.row_index,
-                model,
-                len(edges),
-            )
-            append_jsonl_event(
-                events_path,
-                {
-                    "event": "model_call_finished",
-                    "algorithm": probe_spec.algorithm,
-                    "row_index": probe_spec.row_index,
-                    "model": model,
-                    "parsed_edge_count": len(edges),
-                },
-            )
+                failure_records.append(failure_record)
+                logger.exception(
+                    "Model call failed: algorithm=%s row_index=%s model=%s",
+                    probe_spec.algorithm,
+                    probe_spec.row_index,
+                    model,
+                )
+                append_jsonl_event(
+                    events_path,
+                    {
+                        "event": "model_call_failed",
+                        **failure_record,
+                    },
+                )
+                continue
 
     result_frame = pd.DataFrame(result_records)
     result_frame.to_csv(summary_path, index=False)
@@ -216,6 +273,9 @@ def main() -> int:
         .reset_index()
     )
     grouped_frame.to_csv(grouped_summary_path, index=False)
+    if failure_records:
+        failure_frame = pd.DataFrame(failure_records)
+        failure_frame.to_csv(run_dir / "model_failures.csv", index=False)
     findings_text = _build_findings_text(grouped_frame)
     findings_path.write_text(findings_text)
 
@@ -328,7 +388,32 @@ def _build_prompt(algorithm: str, row: pd.Series) -> str:
     return prompt
 
 
-def _call_mistral(*, api_key: str, model: str, prompt: str) -> dict[str, Any]:
+def _load_existing_response(
+    *,
+    response_path: Path,
+    resume: bool,
+) -> dict[str, Any] | None:
+    if not resume:
+        return None
+    if not response_path.exists():
+        return None
+
+    response_text = response_path.read_text()
+    parsed_response: dict[str, Any] = json.loads(response_text)
+    return parsed_response
+
+
+def _call_mistral_with_retry(
+    *,
+    api_key: str,
+    model: str,
+    prompt: str,
+    logger: logging.Logger | None,
+    max_attempts: int = 3,
+    base_delay_seconds: float = 1.0,
+    backoff_factor: float = 2.0,
+    max_delay_seconds: float = 30.0,
+) -> dict[str, Any]:
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
@@ -369,10 +454,55 @@ def _call_mistral(*, api_key: str, model: str, prompt: str) -> dict[str, Any]:
         },
         method="POST",
     )
-    with urllib.request.urlopen(request, timeout=120) as response:
-        response_text = response.read().decode("utf-8")
-    response_data: dict[str, Any] = json.loads(response_text)
-    return response_data
+    attempt = 1
+    delay_seconds = base_delay_seconds
+    while True:
+        try:
+            with urllib.request.urlopen(request, timeout=120) as response:
+                response_text = response.read().decode("utf-8")
+            response_data: dict[str, Any] = json.loads(response_text)
+            return response_data
+        except (HTTPError, URLError) as error:
+            retryable = isinstance(error, URLError) or error.code == 429
+            if not retryable or attempt >= max_attempts:
+                raise
+            if logger is not None:
+                logger.warning(
+                    "Transient Mistral transport error; retrying attempt=%s model=%s error_type=%s",
+                    attempt,
+                    model,
+                    type(error).__name__,
+                )
+            time.sleep(delay_seconds)
+            delay_seconds = min(delay_seconds * backoff_factor, max_delay_seconds)
+            attempt += 1
+
+
+def _call_mistral(*, api_key: str, model: str, prompt: str) -> dict[str, Any]:
+    return _call_mistral_with_retry(
+        api_key=api_key,
+        model=model,
+        prompt=prompt,
+        logger=None,
+    )
+
+
+def _build_model_failure_record(
+    *,
+    algorithm: str,
+    row_index: int,
+    model: str,
+    historical_model: str,
+    error: Exception,
+) -> dict[str, object]:
+    return {
+        "algorithm": algorithm,
+        "row_index": row_index,
+        "model": model,
+        "historical_model": historical_model,
+        "error_type": type(error).__name__,
+        "error_message": str(error),
+    }
 
 
 def _build_findings_text(grouped_frame: pd.DataFrame) -> str:

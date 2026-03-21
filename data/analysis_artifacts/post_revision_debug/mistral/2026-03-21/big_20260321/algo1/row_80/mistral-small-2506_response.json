@@ -1,0 +1,25 @@
+{
+  "id": "5f53c71b53654339bc9374b9d0c87d52",
+  "created": 1774106656,
+  "model": "mistral-small-2506",
+  "usage": {
+    "prompt_tokens": 2690,
+    "total_tokens": 2820,
+    "completion_tokens": 130,
+    "prompt_tokens_details": {
+      "cached_tokens": 2659
+    }
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "{\n  \"edges\": [\n    {\n      \"source\": \"Healthy eating\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Supportive food environment\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Weight bias\",\n      \"target\": \"Healthy eating\"\n    },\n    {\n      \"source\": \"Public support and demand for healthy products\",\n      \"target\": \"Mental well-being\"\n    },\n    {\n      \"source\": \"Cultural norms around thinness\",\n      \"target\": \"Healthy eating\"\n    }\n  ]\n}"
+      }
+    }
+  ]
+}

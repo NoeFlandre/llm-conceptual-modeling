@@ -1,5 +1,6 @@
 from importlib import util
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 
 
 def _load_runner_module():
@@ -46,3 +47,168 @@ def test_custom_probe_rows_override_the_defaults() -> None:
         ("algo2", 11),
         ("algo3", 13),
     ]
+
+
+def test_call_mistral_with_retry_recovers_from_http_429(monkeypatch) -> None:
+    module = _load_runner_module()
+    calls: list[str] = []
+
+    class FakeResponse:
+        def __init__(self, payload: str) -> None:
+            self.payload = payload
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        def read(self):
+            return self.payload.encode("utf-8")
+
+    def fake_urlopen(request, timeout):
+        calls.append(request.full_url)
+        if len(calls) == 1:
+            raise HTTPError(
+                url=request.full_url,
+                code=429,
+                msg="Too Many Requests",
+                hdrs=None,
+                fp=None,
+            )
+        return FakeResponse('{"choices":[{"message":{"content":"{\\"edges\\":[]}"}}]}')
+
+    sleep_calls: list[float] = []
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
+
+    actual = module._call_mistral_with_retry(  # type: ignore[attr-defined]
+        api_key="test-key",
+        model="mistral-small-2603",
+        prompt="prompt text",
+        logger=None,
+    )
+
+    assert len(calls) == 2
+    assert sleep_calls == [1.0]
+    assert actual["choices"][0]["message"]["content"] == '{"edges":[]}'
+
+
+def test_call_mistral_with_retry_recovers_from_urlerror(monkeypatch) -> None:
+    module = _load_runner_module()
+    calls: list[str] = []
+
+    class FakeResponse:
+        def __init__(self, payload: str) -> None:
+            self.payload = payload
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        def read(self):
+            return self.payload.encode("utf-8")
+
+    def fake_urlopen(request, timeout):
+        calls.append(request.full_url)
+        if len(calls) == 1:
+            raise URLError("temporary network issue")
+        return FakeResponse('{"choices":[{"message":{"content":"{\\"edges\\":[]}"}}]}')
+
+    sleep_calls: list[float] = []
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
+
+    actual = module._call_mistral_with_retry(  # type: ignore[attr-defined]
+        api_key="test-key",
+        model="mistral-small-2603",
+        prompt="prompt text",
+        logger=None,
+    )
+
+    assert len(calls) == 2
+    assert sleep_calls == [1.0]
+    assert actual["choices"][0]["message"]["content"] == '{"edges":[]}'
+
+
+def test_call_mistral_with_retry_exponential_backoff_for_urlerror(monkeypatch) -> None:
+    module = _load_runner_module()
+    calls: list[str] = []
+
+    class FakeResponse:
+        def __init__(self, payload: str) -> None:
+            self.payload = payload
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        def read(self):
+            return self.payload.encode("utf-8")
+
+    def fake_urlopen(request, timeout):
+        calls.append(request.full_url)
+        if len(calls) < 3:
+            raise URLError("temporary network issue")
+        return FakeResponse('{"choices":[{"message":{"content":"{\\"edges\\":[]}"}}]}')
+
+    sleep_calls: list[float] = []
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
+
+    actual = module._call_mistral_with_retry(  # type: ignore[attr-defined]
+        api_key="test-key",
+        model="mistral-small-2603",
+        prompt="prompt text",
+        logger=None,
+    )
+
+    assert len(calls) == 3
+    assert sleep_calls == [1.0, 2.0]
+    assert actual["choices"][0]["message"]["content"] == '{"edges":[]}'
+
+
+def test_load_existing_response_respects_resume_flag(tmp_path) -> None:
+    module = _load_runner_module()
+    response_path = tmp_path / "response.json"
+    response_path.write_text('{"choices":[{"message":{"content":"cached"}}]}')
+
+    cached = module._load_existing_response(  # type: ignore[attr-defined]
+        response_path=response_path,
+        resume=True,
+    )
+    missing = module._load_existing_response(  # type: ignore[attr-defined]
+        response_path=response_path,
+        resume=False,
+    )
+
+    assert cached["choices"][0]["message"]["content"] == "cached"
+    assert missing is None
+
+
+def test_build_model_failure_record_preserves_context() -> None:
+    module = _load_runner_module()
+
+    actual = module._build_model_failure_record(  # type: ignore[attr-defined]
+        algorithm="algo2",
+        row_index=7,
+        model="mistral-small-2603",
+        historical_model="gpt-5",
+        error=RuntimeError("temporary failure"),
+    )
+
+    assert actual == {
+        "algorithm": "algo2",
+        "row_index": 7,
+        "model": "mistral-small-2603",
+        "historical_model": "gpt-5",
+        "error_type": "RuntimeError",
+        "error_message": "temporary failure",
+    }

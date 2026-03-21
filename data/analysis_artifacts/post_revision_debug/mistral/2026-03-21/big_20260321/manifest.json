@@ -1,0 +1,211 @@
+{
+  "run_name": "big_20260321",
+  "models": [
+    "mistral-small-2506",
+    "mistral-small-2603",
+    "mistral-medium-2508"
+  ],
+  "resume": true,
+  "requested_rows": {
+    "algo1": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140
+    ],
+    "algo2": [
+      0,
+      40,
+      80,
+      120,
+      160,
+      200,
+      240,
+      280
+    ],
+    "algo3": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210
+    ]
+  },
+  "probe_specs": [
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 0,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 20,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 40,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 60,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 80,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 100,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 120,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo1",
+      "raw_path": "data/results/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 140,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 0,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 40,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 80,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 120,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 160,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 200,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 240,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo2",
+      "raw_path": "data/results/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv",
+      "evaluated_path": "data/results/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+      "row_index": 280,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 0,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 30,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 60,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 90,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 120,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 150,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 180,
+      "historical_model": "gpt-5"
+    },
+    {
+      "algorithm": "algo3",
+      "raw_path": "data/results/algo3/gpt-5/raw/method3_results_gpt5.csv",
+      "evaluated_path": "data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+      "row_index": 210,
+      "historical_model": "gpt-5"
+    }
+  ]
+}
