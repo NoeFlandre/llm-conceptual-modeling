@@ -2,12 +2,12 @@
 from pathlib import Path
 
 VER_FILE = (
-    Path(__file__).resolve().parents[2]
+    Path(__file__).resolve().parents[1]
     / "src" / "llm_conceptual_modeling" / "verification.py"
 )
 
 FIXTURES_ROOT = (
-    Path(__file__).resolve().parents[1] / "fixtures" / "legacy"
+    Path(__file__).resolve().parents[1] / "tests" / "fixtures" / "legacy"
 )
 
 FACTORIAL_FIXTURES = [
