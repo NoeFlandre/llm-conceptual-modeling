@@ -134,7 +134,7 @@ def run_algo1_probe(
         raise
 
 
-def _edges_to_json_compatible(edges: Sequence[Edge]) -> list[list[str]]:
+def _edges_to_json_compatible(edges: Sequence[str | Edge]) -> list[list[str]]:
     edge_records: list[list[str]] = []
 
     for edge in edges:

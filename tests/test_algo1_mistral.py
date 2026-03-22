@@ -22,6 +22,7 @@ def test_build_direct_edge_prompt_mentions_new_nodes_and_output_format() -> None
     actual = build_direct_edge_prompt(
         subgraph1=[("alpha", "beta")],
         subgraph2=[("gamma", "delta")],
+        prompt_config=None,
     )
 
     assert "recommend more links between the two maps" in actual
@@ -232,8 +233,15 @@ class FakeChatClient:
 
 def test_build_edge_generator_calls_chat_client_with_edge_schema() -> None:
     chat_client = FakeChatClient()
+    prompt_config = Method1PromptConfig(
+        use_adjacency_notation=True,
+        use_array_representation=True,
+        include_explanation=False,
+        include_example=False,
+        include_counterexample=False,
+    )
 
-    generator = build_edge_generator(chat_client)
+    generator = build_edge_generator(chat_client, prompt_config)
     actual = generator(
         subgraph1=[("alpha", "beta")],
         subgraph2=[("gamma", "delta")],

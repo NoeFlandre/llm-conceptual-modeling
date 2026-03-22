@@ -97,7 +97,9 @@ def main() -> int:
         resume=args.resume,
     ):
         job_key = _build_job_key(spec)
-        if args.resume and job_key in typing.cast(list[str], state.get("completed_jobs", [])):
+        if args.resume and job_key in typing.cast(
+            list[dict[str, str]], state.get("completed_jobs", [])
+        ):
             append_jsonl_event(
                 run_dir / "events.jsonl",
                 {
@@ -157,7 +159,7 @@ def main() -> int:
                 }
             )
         else:
-            typing.cast(list[str], state["completed_jobs"]).append(job_key)
+            typing.cast(list[dict[str, str]], state["completed_jobs"]).append(job_key)
         state["updated_at"] = datetime.now(UTC).isoformat()
         _write_state(state_path, state)
 
