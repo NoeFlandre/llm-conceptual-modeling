@@ -61,8 +61,8 @@ def test_run_algo2_experiment_delegates_to_probe(monkeypatch, tmp_path) -> None:
 
     summary_records = run_algo2_experiment(
         specs=specs[:2],
-        chat_client=FakeChatClient(),
-        embedding_client=FakeEmbeddingClient(),
+        chat_client=FakeChatClient(),  # type: ignore[arg-type]
+        embedding_client=FakeEmbeddingClient(),  # type: ignore[arg-type]
     )
 
     assert summary_records == [
@@ -103,8 +103,8 @@ def test_run_algo2_experiment_skips_failed_specs_and_continues(monkeypatch, tmp_
 
     summary_records = run_algo2_experiment(
         specs=specs[:2],
-        chat_client=FakeChatClient(),
-        embedding_client=FakeEmbeddingClient(),
+        chat_client=FakeChatClient(),  # type: ignore[arg-type]
+        embedding_client=FakeEmbeddingClient(),  # type: ignore[arg-type]
     )
 
     assert summary_records == [

@@ -99,7 +99,7 @@ def run_algo1_probe(
                 stage="execution_completed",
             )
         candidate_edges: list[list[str]] = execution_result["candidate_edges"]  # type: ignore[index]
-        cove_prompt = build_cove_prompt(
+        cove_prompt = build_cove_prompt(  # type: ignore[arg-type]
             [tuple(edge) for edge in candidate_edges],
         )
         if not context.is_stage_complete("cove_prompt_written"):
@@ -133,7 +133,7 @@ def run_algo1_probe(
         raise
 
 
-def _edges_to_json_compatible(edges: list[str | Edge]) -> list[list[str]]:
+def _edges_to_json_compatible(edges: list[object]) -> list[list[str]]:
     edge_records: list[list[str]] = []
 
     for edge in edges:

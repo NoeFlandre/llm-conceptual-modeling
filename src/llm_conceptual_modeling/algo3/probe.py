@@ -140,6 +140,6 @@ def _nodes_to_json_compatible(
             "depth": expanded_node.depth,
             "matched_target": expanded_node.matched_target,
         }
-        node_records.append(node_record)
+        node_records.append(node_record)  # type: ignore[arg-type]
 
     return node_records

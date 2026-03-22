@@ -22,6 +22,8 @@ class FakeChatClient:
             "prompt": prompt,
             "schema_name": schema_name,
         }
+        # type: ignore[arg-type]
+
         self.calls.append(call_record)
         if schema_name == "label_list":
             return {"labels": ["bridge_a", "bridge_b"]}

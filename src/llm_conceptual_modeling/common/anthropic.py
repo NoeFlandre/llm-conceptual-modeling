@@ -12,7 +12,7 @@ import json
 import logging
 import os
 import time
-from typing import Any, Protocol
+from typing import Any, Protocol, cast
 
 import anthropic
 import httpx
@@ -130,7 +130,7 @@ class AnthropicChatClient:
                 ],
                 temperature=temperature,
                 thinking={"type": "disabled"},
-                output_config={"type": "object"},
+                output_config=cast(Any, {"type": "object"}),
             )
 
         response = _call_with_retry(

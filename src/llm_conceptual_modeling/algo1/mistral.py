@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from typing import Any, Protocol
+from typing import Any, cast as typing_cast, Protocol
 
 from mistralai.client import Mistral
 
@@ -315,7 +315,7 @@ def build_edge_generator(chat_client: ChatCompletionClient) -> "EdgeGenerator":
             schema_name="edge_list",
             schema=schema,
         )
-        raw_edges = response["edges"]
+        raw_edges: list[dict[str, object]] = typing_cast(list[dict[str, object]], response["edges"])
         normalized_edges: list[Edge] = []
 
         for raw_edge in raw_edges:
@@ -348,7 +348,7 @@ def build_cove_verifier(chat_client: ChatCompletionClient) -> "CoveVerifier":
             schema_name="vote_list",
             schema=schema,
         )
-        votes = response["votes"]
+        votes: list[str] = typing_cast(list[str], response["votes"])
         normalized_votes = [str(vote) for vote in votes]
         verified_edges = apply_cove_verification(candidate_edges, normalized_votes)
         return verified_edges

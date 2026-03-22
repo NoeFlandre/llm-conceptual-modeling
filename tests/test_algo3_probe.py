@@ -22,6 +22,8 @@ class FakeChatClient:
             "prompt": prompt,
             "schema_name": schema_name,
         }
+        # type: ignore[arg-type]
+
         self.calls.append(call_record)
         return {
             "children_by_label": {

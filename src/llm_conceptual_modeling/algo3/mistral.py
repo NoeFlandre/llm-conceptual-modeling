@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from typing import Any, Protocol
+from typing import Any, Protocol, cast
 
 from mistralai.client import Mistral
 
@@ -155,7 +155,7 @@ def build_child_proposer(chat_client: ChatCompletionClient) -> ChildProposer:
             schema_name="children_by_label",
             schema=schema,
         )
-        raw_children_by_label = response["children_by_label"]
+        raw_children_by_label = cast(dict[str, list[str]], response["children_by_label"])
         normalized_children_by_label: dict[str, list[str]] = {}
 
         for label, child_labels in raw_children_by_label.items():

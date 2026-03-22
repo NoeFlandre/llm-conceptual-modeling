@@ -1,3 +1,4 @@
+import typing
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -49,7 +50,7 @@ def execute_method2(
     expansion_result = run_label_expansion(
         seed_labels=seed_labels,
         propose_labels=propose_labels,
-        measure_similarity=measure_similarity,
+        measure_similarity=typing.cast(SimilarityFunction, measure_similarity),
         threshold=convergence_threshold,
     )
     expanded_label_context = list(seed_labels) + expansion_result.expanded_labels

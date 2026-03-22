@@ -1,4 +1,5 @@
 import argparse
+import typing
 import json
 import os
 import subprocess
@@ -96,7 +97,7 @@ def main() -> int:
         resume=args.resume,
     ):
         job_key = _build_job_key(spec)
-        if args.resume and job_key in state["completed_jobs"]:
+        if args.resume and job_key in typing.cast(list[str], state.get("completed_jobs", [])):
             append_jsonl_event(
                 run_dir / "events.jsonl",
                 {
@@ -147,7 +148,7 @@ def main() -> int:
                     "returncode": result.returncode,
                 }
             )
-            state["failed_jobs"].append(
+            typing.cast(list[dict[str, object]], state["failed_jobs"]).append(
                 {
                     "model": spec.model,
                     "algorithm": spec.algorithm,
@@ -156,7 +157,7 @@ def main() -> int:
                 }
             )
         else:
-            state["completed_jobs"].append(job_key)
+            typing.cast(list[str], state["completed_jobs"]).append(job_key)
         state["updated_at"] = datetime.now(UTC).isoformat()
         _write_state(state_path, state)
 

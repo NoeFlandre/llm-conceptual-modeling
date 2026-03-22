@@ -22,6 +22,8 @@ class FakeEmbeddingClient:
         self.calls: list[list[str]] = []
 
     def embed_texts(self, texts: list[str]) -> dict[str, list[float]]:
+        # type: ignore[arg-type]
+
         self.calls.append(texts)
         return {text: [float(index), 1.0] for index, text in enumerate(texts, start=1)}
 

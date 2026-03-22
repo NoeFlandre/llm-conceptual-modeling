@@ -1,3 +1,4 @@
+import typing
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -237,7 +238,7 @@ def _build_manifest_checks() -> list[dict[str, object]]:
         ),
         _check(
             "algo2_thesaurus",
-            Path(algo2_method_contract["thesaurus_path"]).exists(),
+            Path(typing.cast(str, algo2_method_contract["thesaurus_path"])).exists(),
             {
                 "path": algo2_method_contract["thesaurus_path"],
                 "synonym_entry_count": algo2_method_contract["synonym_entry_count"],

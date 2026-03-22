@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from typing import Any, Protocol
+from typing import Any, Protocol, cast
 
 from mistralai.client import Mistral
 
@@ -372,7 +372,7 @@ def build_label_proposer(chat_client: ChatCompletionClient) -> "LabelProposer":
             schema_name="label_list",
             schema=schema,
         )
-        labels = response["labels"]
+        labels = cast(list[str], response["labels"])
         normalized_labels = [str(label) for label in labels]
         return normalized_labels
 
@@ -406,7 +406,7 @@ def build_edge_suggester(chat_client: ChatCompletionClient) -> "EdgeSuggester":
             schema_name="edge_list",
             schema=schema,
         )
-        raw_edges = response["edges"]
+        raw_edges = cast(list[dict[str, object]], response["edges"])
         normalized_edges: list[Edge] = []
 
         for raw_edge in raw_edges:
