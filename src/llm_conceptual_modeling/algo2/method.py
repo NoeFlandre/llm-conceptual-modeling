@@ -50,7 +50,7 @@ def execute_method2(
     expansion_result = run_label_expansion(
         seed_labels=seed_labels,
         propose_labels=propose_labels,
-        measure_similarity=typing.cast(SimilarityFunction, measure_similarity),
+        measure_similarity=measure_similarity,  # type: ignore[arg-type]
         threshold=convergence_threshold,
     )
     expanded_label_context = list(seed_labels) + expansion_result.expanded_labels

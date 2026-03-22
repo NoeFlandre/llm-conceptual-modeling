@@ -1,7 +1,6 @@
 import json
 from dataclasses import dataclass
 from typing import Any, cast as typing_cast, Protocol
-
 from mistralai.client import Mistral
 
 from llm_conceptual_modeling.algo1.cove import apply_cove_verification, build_cove_prompt

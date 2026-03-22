@@ -1,4 +1,3 @@
-import typing
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -186,8 +185,7 @@ def _verify_factorial(
 
 
 def _build_manifest_checks() -> list[dict[str, object]]:
-    import typing
-    algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
+        algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
     algo2_manifest: dict[str, object] = build_algo2_manifest(fixture_only=False)
     algo3_manifest: dict[str, object] = build_algo3_manifest(fixture_only=False)
     mc1 = typing.cast(dict[str, object], algo1_manifest.get("method_contract") or {})
