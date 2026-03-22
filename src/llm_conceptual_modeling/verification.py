@@ -189,9 +189,12 @@ def _build_manifest_checks() -> list[dict[str, object]]:
     algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
     algo2_manifest: dict[str, object] = build_algo2_manifest(fixture_only=False)
     algo3_manifest: dict[str, object] = build_algo3_manifest(fixture_only=False)
-    algo1_method_contract: dict[str, object] = typing.cast(dict[str, object], algo1_manifest.get("method_contract") or {})
-    algo2_method_contract: dict[str, object] = typing.cast(dict[str, object], algo2_manifest.get("method_contract") or {})
-    algo3_method_contract: dict[str, object] = typing.cast(dict[str, object], algo3_manifest.get("method_contract") or {})
+    mc1 = typing.cast(dict[str, object], algo1_manifest.get("method_contract") or {})
+    mc2 = typing.cast(dict[str, object], algo2_manifest.get("method_contract") or {})
+    mc3 = typing.cast(dict[str, object], algo3_manifest.get("method_contract") or {})
+    algo1_method_contract: dict[str, object] = mc1
+    algo2_method_contract: dict[str, object] = mc2
+    algo3_method_contract: dict[str, object] = mc3
     return [
         _check(
             "algo1_manifest",
