@@ -395,7 +395,7 @@ A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noef
 
 - [src/llm_conceptual_modeling](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling): package source code
 - [src/llm_conceptual_modeling/algo1](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1), [algo2](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo2), [algo3](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo3): algorithm-specific workflows
-- [src/llm_conceptual_modeling/common](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/common): shared evaluation, factorial-analysis, graph, and schema code
+- [src/llm_conceptual_modeling/common](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/common): shared code including the Mistral chat-client (`common/mistral.py`), evaluation, factorial-analysis, graph, and schema utilities
 - [src/llm_conceptual_modeling/commands](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/commands): CLI handlers
 - [src/llm_conceptual_modeling/cli.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py): CLI entry point (`lcm`)
 - [data/inputs](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/inputs): graph input files used by the generation layer
