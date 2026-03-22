@@ -100,7 +100,7 @@ def run_legacy_parity_verification() -> dict[str, object]:
             / "algo2"
             / "gpt-5"
             / "factorial"
-            / "factorial_analysis_gpt_5_algo2_without_error.csv.csv",
+            / "factorial_analysis_gpt_5_algo2_without_error.csv",
             temp_root / "algo2_factorial.csv",
             factorial_algo2,
             results,
