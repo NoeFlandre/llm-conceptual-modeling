@@ -1,70 +1,44 @@
-import json
+"""algo3 mistral client — Method 3 (tree-structured label expansion).
+
+The shared primitives (``MistralChatClient`` and ``ChatCompletionClient``)
+are imported from :mod:`llm_conceptual_modeling.common.mistral`.
+algo3 does not use knowledge maps.
+"""
+
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Any, Protocol, cast
+from typing import TYPE_CHECKING, cast
 
-from mistralai.client import Mistral
+from llm_conceptual_modeling.common.mistral import ChatCompletionClient, MistralChatClient
 
-from llm_conceptual_modeling.common.retry import call_with_retry
+if TYPE_CHECKING:
+    pass
 
+__all__ = [
+    "ChatCompletionClient",
+    "ChildProposer",
+    "Method3PromptConfig",
+    "MistralChatClient",
+    "build_child_proposer",
+    "build_tree_expansion_prompt",
+]
+
+
+# ---------------------------------------------------------------------------
+# Config
+# ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class Method3PromptConfig:
+    """Prompt-config flags for Method 3 (tree-structured expansion)."""
     include_example: bool
     include_counterexample: bool
 
 
-class MistralChatClient:
-    def __init__(
-        self,
-        *,
-        api_key: str,
-        model: str,
-        sdk_client: Any | None = None,
-    ) -> None:
-        self._model = model
-        self._sdk_client = sdk_client or Mistral(api_key=api_key)
-
-    def complete_json(
-        self,
-        *,
-        prompt: str,
-        schema_name: str,
-        schema: dict[str, object],
-    ) -> dict[str, object]:
-        response = call_with_retry(
-            operation=lambda: self._sdk_client.chat.complete(
-                model=self._model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
-                response_format={
-                    "type": "json_schema",
-                    "json_schema": {
-                        "name": schema_name,
-                        "schema": schema,
-                    },
-                },
-            ),
-            operation_name="mistral chat completion",
-            max_attempts=8,
-            initial_delay_seconds=2.0,
-            max_delay_seconds=30.0,
-        )
-        content = response.choices[0].message.content
-        if content is None:
-            raise ValueError("Mistral returned an empty chat completion content")
-        parsed_content = json.loads(content)
-        return parsed_content
-
-
-class ChatCompletionClient(Protocol):
-    def complete_json(
-        self,
-        *,
-        prompt: str,
-        schema_name: str,
-        schema: dict[str, object],
-    ) -> dict[str, object]: ...
-
+# ---------------------------------------------------------------------------
+# Prompt builder
+# ---------------------------------------------------------------------------
 
 def build_tree_expansion_prompt(
     *,
@@ -72,19 +46,19 @@ def build_tree_expansion_prompt(
     child_count: int,
     prompt_config: Method3PromptConfig | None = None,
 ) -> str:
-    resolved_prompt_config = prompt_config or Method3PromptConfig(
+    resolved = prompt_config or Method3PromptConfig(
         include_example=False,
         include_counterexample=False,
     )
-    prompt_sections: list[str] = []
-    prompt_sections.append("You are a helpful assistant who can creatively suggest relevant ideas.")
-    prompt_sections.append(
+    sections: list[str] = []
+    sections.append("You are a helpful assistant who can creatively suggest relevant ideas.")
+    sections.append(
         "Your input is a set of concept names. "
         "All concept names must have a clear meaning, such that we can "
         "interpret having 'more' or 'less' of a concept."
     )
-    prompt_sections.append(f"Your input is the following list of concept names: {source_labels}")
-    prompt_sections.append(
+    sections.append(f"Your input is the following list of concept names: {source_labels}")
+    sections.append(
         f"Your task is to recommend {child_count} related concept names "
         "for each of the names in the input. "
         "Do not suggest names that are in the input. "
@@ -93,38 +67,37 @@ def build_tree_expansion_prompt(
         "Return your proposed names in a dictionary format with source "
         "labels as keys and arrays of strings as values."
     )
-
-    if resolved_prompt_config.include_example:
-        prompt_sections.append(
+    if resolved.include_example:
+        sections.append(
             "Here is an example of a desired output for your task. "
             "We have the list of concepts ['capacity to hire', 'bad employees', "
             "'good reputation']. In this example, you could recommend these 9 new concepts."
         )
-
-    if resolved_prompt_config.include_counterexample:
-        prompt_sections.append(
+    if resolved.include_counterexample:
+        sections.append(
             "Here is an example of a bad output that we do not want to see. "
             "A bad output would be unrelated concepts such as 'moon', 'dog', "
             "and 'thermodynamics'."
         )
-
-    prompt_sections.append(
+    sections.append(
         "Your output must only be the list of proposed concepts. "
         "Do not repeat any instructions I have given you and do not add "
         "unnecessary words or phrases."
     )
-    prompt = " ".join(prompt_sections)
-    return prompt
+    return " ".join(sections)
 
 
-class ChildProposer(Protocol):
+# ---------------------------------------------------------------------------
+# Child proposer
+# ---------------------------------------------------------------------------
+
+class ChildProposer:
     def __call__(
         self,
         source_labels: list[str],
         *,
         child_count: int,
     ) -> dict[str, list[str]]: ...
-
 
 def build_child_proposer(chat_client: ChatCompletionClient) -> ChildProposer:
     def propose_children(
@@ -155,14 +128,6 @@ def build_child_proposer(chat_client: ChatCompletionClient) -> ChildProposer:
             schema_name="children_by_label",
             schema=schema,  # type: ignore[arg-type]
         )
-        raw_children_by_label = cast(dict[str, list[str]], response["children_by_label"])
-        normalized_children_by_label: dict[str, list[str]] = {}
-
-        for label, child_labels in raw_children_by_label.items():
-            normalized_label = str(label)
-            normalized_child_labels = [str(child_label) for child_label in child_labels]
-            normalized_children_by_label[normalized_label] = normalized_child_labels
-
-        return normalized_children_by_label
-
+        raw = cast(dict[str, list[str]], response["children_by_label"])
+        return {str(k): [str(v) for v in vs] for k, vs in raw.items()}
     return propose_children
