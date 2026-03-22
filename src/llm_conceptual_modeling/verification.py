@@ -185,17 +185,19 @@ def _verify_factorial(
 
 
 def _build_manifest_checks() -> list[dict[str, object]]:
-    algo1_manifest = build_algo1_manifest(fixture_only=False)
-    algo2_manifest = build_algo2_manifest(fixture_only=False)
-    algo3_manifest = build_algo3_manifest(fixture_only=False)
-    algo2_method_contract = algo2_manifest["method_contract"] or {}
-    algo3_method_contract = algo3_manifest["method_contract"] or {}
+    import typing
+    algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
+    algo2_manifest: dict[str, object] = build_algo2_manifest(fixture_only=False)
+    algo3_manifest: dict[str, object] = build_algo3_manifest(fixture_only=False)
+    algo1_method_contract: dict[str, object] = typing.cast(dict[str, object], algo1_manifest.get("method_contract") or {})
+    algo2_method_contract: dict[str, object] = typing.cast(dict[str, object], algo2_manifest.get("method_contract") or {})
+    algo3_method_contract: dict[str, object] = typing.cast(dict[str, object], algo3_manifest.get("method_contract") or {})
     return [
         _check(
             "algo1_manifest",
             algo1_manifest["implemented"] is True
             and algo1_manifest["requires_live_llm"] is True
-            and algo1_manifest["method_contract"]["uses_chain_of_verification"] is True,
+            and algo1_method_contract.get("uses_chain_of_verification") is True,
             {
                 "implemented": algo1_manifest["implemented"],
                 "requires_live_llm": algo1_manifest["requires_live_llm"],

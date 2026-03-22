@@ -98,9 +98,9 @@ def run_algo1_probe(
                 execution_result,
                 stage="execution_completed",
             )
-
+        candidate_edges: list[list[str]] = execution_result["candidate_edges"]  # type: ignore[index]
         cove_prompt = build_cove_prompt(
-            [tuple(edge) for edge in execution_result["candidate_edges"]],
+            [tuple(edge) for edge in candidate_edges],
         )
         if not context.is_stage_complete("cove_prompt_written"):
             context.record_prompt(

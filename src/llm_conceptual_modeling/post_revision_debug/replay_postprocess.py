@@ -97,7 +97,8 @@ def _build_findings(frame: pd.DataFrame) -> str:
 
     lines = ["# Replay Findings", ""]
     grouped = frame.groupby(["algorithm", "model"], dropna=False)
-    for (algorithm, model), group in grouped:
+    for key, group in grouped:
+        algorithm, model = key  # type: ignore[misc]
         lines.append(
             f"- {algorithm} / {model}: {len(group)} summaries, "
             f"mean candidate edges={group['candidate_edge_count'].mean():.2f}, "

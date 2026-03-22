@@ -39,7 +39,7 @@ def execute_method2(
     thesaurus: Thesaurus,
 ) -> Method2ExecutionResult:
     def measure_similarity(candidate_labels: list[str], source_labels: list[str]) -> float:
-        similarity = compute_average_best_match_similarity(
+        similarity: float = compute_average_best_match_similarity(
             candidate_labels=candidate_labels,
             seed_labels=source_labels,
             client=embedding_client,

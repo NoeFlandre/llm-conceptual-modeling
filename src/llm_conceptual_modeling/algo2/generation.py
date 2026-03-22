@@ -11,7 +11,7 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
     thesaurus = load_algo2_thesaurus()
     synonym_map = thesaurus["synonyms"]
     antonym_map = thesaurus["antonyms"]
-    method_contract = {
+    method_contract: dict[str, object] = {
         "method_name": "Grow candidate links through creative thinking and word embeddings",
         "phases": [
             "label_expansion",

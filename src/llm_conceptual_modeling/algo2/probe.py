@@ -109,7 +109,8 @@ def run_algo2_probe(
                 execution_result,
                 stage="execution_completed",
             )
-        expanded_label_context = spec.seed_labels + execution_result["expanded_labels"]
+        expanded_labels: list[str] = execution_result["expanded_labels"]  # type: ignore[index]
+        expanded_label_context = spec.seed_labels + expanded_labels
         edge_prompt = build_edge_suggestion_prompt(
             expanded_label_context,
             subgraph1=spec.subgraph1,

@@ -101,11 +101,13 @@ def run_algo3_probe(
                 stage="execution_completed",
             )
 
-        summary_record = {
+        expanded_nodes: list[dict[str, object]] = execution_result["expanded_nodes"]  # type: ignore[index]
+        matched_labels: list[str] = execution_result["matched_labels"]  # type: ignore[index]
+        summary_record: dict[str, object] = {
             "run_name": spec.run_name,
             "model": spec.model,
-            "expanded_nodes": execution_result["expanded_nodes"],
-            "matched_labels": execution_result["matched_labels"],
+            "expanded_nodes": expanded_nodes,
+            "matched_labels": matched_labels,
         }
         context.record_checkpoint("summary.json", summary_record, stage="summary_written")
         context.mark_stage_complete("probe_finished", details={"summary_path": "summary.json"})

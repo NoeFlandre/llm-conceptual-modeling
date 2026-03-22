@@ -99,7 +99,7 @@ class ProbeRunContext:
         details: dict[str, object] | None = None,
     ) -> dict[str, object]:
         state = self.load_state()
-        completed_stages = list(state.get("completed_stages", []))
+        completed_stages = list(state.get("completed_stages", []))  # type: ignore[arg-type]
         if stage_name not in completed_stages:
             completed_stages.append(stage_name)
         state["completed_stages"] = completed_stages
@@ -134,7 +134,7 @@ class ProbeRunContext:
         self.log(f"checkpoint written to {filename}", stage=stage)
 
     def record_failure(self, *, error: Exception) -> None:
-        error_record = {
+        error_record: dict[str, object] = {
             "error_type": type(error).__name__,
             "error_message": str(error),
         }

@@ -3,7 +3,7 @@ from llm_conceptual_modeling.common.types import GenerationManifest
 
 
 def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
-    method_contract = {
+    method_contract: dict[str, object] = {
         "method_name": "Direct combination",
         "phases": [
             "edge_generation",

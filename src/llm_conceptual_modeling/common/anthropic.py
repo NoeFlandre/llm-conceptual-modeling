@@ -57,7 +57,7 @@ def _call_with_retry(
             exception = exc
         except anthropic.APIError as exc:
             # Anthropic API errors - retry on rate limiting
-            retryable = exc.status_code in (429, 500, 502, 503, 504)
+            retryable = getattr(exc, "status_code", 0) in (429, 500, 502, 503, 504)
             exception = exc
 
         if not retryable or attempt >= max_attempts:
@@ -130,7 +130,7 @@ class AnthropicChatClient:
                 ],
                 temperature=temperature,
                 thinking={"type": "disabled"},
-                output_config={"type": "json_object"},
+                output_config={"type": "object"},
             )
 
         response = _call_with_retry(
