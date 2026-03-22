@@ -25,11 +25,10 @@ class FakeChatClient:
         schema_name: str,
         schema: dict[str, object],
     ) -> dict[str, object]:
-        call_record = {
+        call_record: dict[str, str | object] = {
             "prompt": prompt,
             "schema_name": schema_name,
         }
-        # type: ignore[arg-type]
 
         self.calls.append(call_record)
         return {
