@@ -8,7 +8,7 @@ from llm_conceptual_modeling.algo1.mistral import (
     Method1PromptConfig,
 )
 from llm_conceptual_modeling.algo1.mistral import (
-    MistralChatClient as Algo1ChatClient,
+    MistralChatClient as Algo1MistralChatClient,
 )
 from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec, run_algo1_probe
 from llm_conceptual_modeling.algo2.embeddings import MistralEmbeddingClient as Algo2EmbeddingClient
@@ -16,24 +16,33 @@ from llm_conceptual_modeling.algo2.mistral import (
     Method2PromptConfig,
 )
 from llm_conceptual_modeling.algo2.mistral import (
-    MistralChatClient as Algo2ChatClient,
+    MistralChatClient as Algo2MistralChatClient,
 )
 from llm_conceptual_modeling.algo2.probe import Algo2ProbeSpec, run_algo2_probe
 from llm_conceptual_modeling.algo3.mistral import (
     Method3PromptConfig,
 )
 from llm_conceptual_modeling.algo3.mistral import (
-    MistralChatClient as Algo3ChatClient,
+    MistralChatClient as Algo3MistralChatClient,
 )
 from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec, run_algo3_probe
+from llm_conceptual_modeling.common.anthropic import AnthropicChatClient
 from llm_conceptual_modeling.generation import emit_json
+
+# Backward-compatible aliases for test monkeypatching
+Algo1ChatClient = Algo1MistralChatClient
+Algo2ChatClient = Algo2MistralChatClient
+Algo3ChatClient = Algo3MistralChatClient
 
 Edge = tuple[str, str]
 
 
 def handle_probe(args: Namespace) -> int:
     try:
-        api_key = _require_api_key("MISTRAL_API_KEY")
+        if args.provider == "anthropic":
+            api_key = _require_api_key("ANTHROPIC_API_KEY")
+        else:
+            api_key = _require_api_key("MISTRAL_API_KEY")
 
         if args.algorithm == "algo1":
             return _handle_algo1_probe(args, api_key=api_key)
@@ -67,10 +76,16 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
         output_dir=output_dir,
         resume=args.resume,
     )
-    chat_client = Algo1ChatClient(
-        api_key=api_key,
-        model=args.model,
-    )
+    if args.provider == "anthropic":
+        chat_client = AnthropicChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
+    else:
+        chat_client = Algo1ChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
     summary = run_algo1_probe(
         spec=spec,
         chat_client=chat_client,
@@ -98,10 +113,16 @@ def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
         output_dir=output_dir,
         resume=args.resume,
     )
-    chat_client = Algo2ChatClient(
-        api_key=api_key,
-        model=args.model,
-    )
+    if args.provider == "anthropic":
+        chat_client = AnthropicChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
+    else:
+        chat_client = Algo2ChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
     embedding_client = Algo2EmbeddingClient(
         api_key=api_key,
         model=args.embedding_model,
@@ -131,10 +152,16 @@ def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
         output_dir=output_dir,
         resume=args.resume,
     )
-    chat_client = Algo3ChatClient(
-        api_key=api_key,
-        model=args.model,
-    )
+    if args.provider == "anthropic":
+        chat_client = AnthropicChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
+    else:
+        chat_client = Algo3ChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
     summary = run_algo3_probe(
         spec=spec,
         chat_client=chat_client,

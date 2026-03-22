@@ -7,7 +7,7 @@ from llm_conceptual_modeling.algo1.experiment import (
     build_algo1_experiment_specs,
     run_algo1_experiment,
 )
-from llm_conceptual_modeling.algo1.mistral import MistralChatClient as Algo1ChatClient
+from llm_conceptual_modeling.algo1.mistral import MistralChatClient as Algo1MistralChatClient
 from llm_conceptual_modeling.algo2.embeddings import (
     MistralEmbeddingClient as Algo2EmbeddingClient,
 )
@@ -15,17 +15,22 @@ from llm_conceptual_modeling.algo2.experiment import (
     build_algo2_experiment_specs,
     run_algo2_experiment,
 )
-from llm_conceptual_modeling.algo2.mistral import MistralChatClient as Algo2ChatClient
+from llm_conceptual_modeling.algo2.mistral import MistralChatClient as Algo2MistralChatClient
 from llm_conceptual_modeling.algo3.experiment import (
     build_algo3_experiment_specs,
     run_algo3_experiment,
 )
-from llm_conceptual_modeling.algo3.mistral import MistralChatClient as Algo3ChatClient
+from llm_conceptual_modeling.algo3.mistral import MistralChatClient as Algo3MistralChatClient
+from llm_conceptual_modeling.common.anthropic import AnthropicChatClient
 from llm_conceptual_modeling.generation import (
     build_generation_stub_payload,
     emit_json,
 )
 
+# Backward-compatible aliases for test monkeypatching
+Algo1ChatClient = Algo1MistralChatClient
+Algo2ChatClient = Algo2MistralChatClient
+Algo3ChatClient = Algo3MistralChatClient
 
 def handle_generate(args: Namespace) -> int:
     if _should_execute_algo1_experiment(args):
@@ -64,7 +69,10 @@ def _should_execute_algo2_experiment(args: Namespace) -> bool:
 
 def _handle_algo1_execution(args: Namespace) -> int:
     try:
-        api_key = _require_api_key("MISTRAL_API_KEY")
+        if args.provider == "anthropic":
+            api_key = _require_api_key("ANTHROPIC_API_KEY")
+        else:
+            api_key = _require_api_key("MISTRAL_API_KEY")
     except ValueError as error:
         print(error, file=sys.stderr)
         return 1
@@ -76,10 +84,16 @@ def _handle_algo1_execution(args: Namespace) -> int:
         replications=args.replications,
         resume=args.resume,
     )
-    chat_client = Algo1ChatClient(
-        api_key=api_key,
-        model=args.model,
-    )
+    if args.provider == "anthropic":
+        chat_client = AnthropicChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
+    else:
+        chat_client = Algo1ChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
     summary_records = run_algo1_experiment(
         specs=specs,
         chat_client=chat_client,
@@ -99,7 +113,10 @@ def _handle_algo1_execution(args: Namespace) -> int:
 
 def _handle_algo2_execution(args: Namespace) -> int:
     try:
-        api_key = _require_api_key("MISTRAL_API_KEY")
+        if args.provider == "anthropic":
+            api_key = _require_api_key("ANTHROPIC_API_KEY")
+        else:
+            api_key = _require_api_key("MISTRAL_API_KEY")
     except ValueError as error:
         print(error, file=sys.stderr)
         return 1
@@ -111,10 +128,16 @@ def _handle_algo2_execution(args: Namespace) -> int:
         replications=args.replications,
         resume=args.resume,
     )
-    chat_client = Algo2ChatClient(
-        api_key=api_key,
-        model=args.model,
-    )
+    if args.provider == "anthropic":
+        chat_client = AnthropicChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
+    else:
+        chat_client = Algo2ChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
     embedding_client = Algo2EmbeddingClient(
         api_key=api_key,
         model=args.embedding_model,
@@ -148,7 +171,10 @@ def _should_execute_algo3_experiment(args: Namespace) -> bool:
 
 def _handle_algo3_execution(args: Namespace) -> int:
     try:
-        api_key = _require_api_key("MISTRAL_API_KEY")
+        if args.provider == "anthropic":
+            api_key = _require_api_key("ANTHROPIC_API_KEY")
+        else:
+            api_key = _require_api_key("MISTRAL_API_KEY")
     except ValueError as error:
         print(error, file=sys.stderr)
         return 1
@@ -160,10 +186,16 @@ def _handle_algo3_execution(args: Namespace) -> int:
         replications=args.replications,
         resume=args.resume,
     )
-    chat_client = Algo3ChatClient(
-        api_key=api_key,
-        model=args.model,
-    )
+    if args.provider == "anthropic":
+        chat_client = AnthropicChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
+    else:
+        chat_client = Algo3ChatClient(
+            api_key=api_key,
+            model=args.model,
+        )
     summary_records = run_algo3_experiment(
         specs=specs,
         chat_client=chat_client,

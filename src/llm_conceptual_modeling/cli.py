@@ -86,6 +86,10 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser.add_argument("--model")
         generate_algorithm_parser.add_argument("--pair")
         generate_algorithm_parser.add_argument("--output-root")
+        generate_algorithm_parser.add_argument(
+            "--provider", default="mistral", choices=["mistral", "anthropic"],
+            help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline"
+        )
         generate_algorithm_parser.add_argument("--replications", type=int, default=5)
         generate_algorithm_parser.add_argument("--resume", action="store_true")
     generate_subparsers.choices["algo2"].add_argument("--embedding-model")
@@ -93,6 +97,10 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo1_parser = probe_subparsers.add_parser("algo1")
     probe_algo1_parser.add_argument("--run-name", required=True)
     probe_algo1_parser.add_argument("--model", required=True)
+    probe_algo1_parser.add_argument(
+        "--provider", default="mistral", choices=["mistral", "anthropic"],
+        help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline"
+    )
     probe_algo1_parser.add_argument("--subgraph1-edge", action="append", required=True)
     probe_algo1_parser.add_argument("--subgraph2-edge", action="append", required=True)
     probe_algo1_parser.add_argument("--output-dir", required=True)
@@ -101,6 +109,10 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo2_parser = probe_subparsers.add_parser("algo2")
     probe_algo2_parser.add_argument("--run-name", required=True)
     probe_algo2_parser.add_argument("--model", required=True)
+    probe_algo2_parser.add_argument(
+        "--provider", default="mistral", choices=["mistral", "anthropic"],
+        help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline"
+    )
     probe_algo2_parser.add_argument("--embedding-model", required=True)
     probe_algo2_parser.add_argument("--seed-label", action="append", required=True)
     probe_algo2_parser.add_argument("--convergence-threshold", type=float, required=True)
@@ -110,6 +122,10 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo3_parser = probe_subparsers.add_parser("algo3")
     probe_algo3_parser.add_argument("--run-name", required=True)
     probe_algo3_parser.add_argument("--model", required=True)
+    probe_algo3_parser.add_argument(
+        "--provider", default="mistral", choices=["mistral", "anthropic"],
+        help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline"
+    )
     probe_algo3_parser.add_argument("--source-label", action="append", required=True)
     probe_algo3_parser.add_argument("--target-label", action="append", required=True)
     probe_algo3_parser.add_argument("--child-count", type=int, required=True)
