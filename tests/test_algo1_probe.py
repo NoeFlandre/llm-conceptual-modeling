@@ -1,8 +1,8 @@
 import json
 
-from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.algo1.probe import (
     Algo1ProbeSpec,
+    Method1PromptConfig,
     _edges_to_json_compatible,
     run_algo1_probe,
 )

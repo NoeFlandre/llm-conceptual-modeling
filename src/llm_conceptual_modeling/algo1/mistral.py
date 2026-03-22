@@ -29,10 +29,10 @@ class MistralCoVeResult:
 
 
 class MistralChatClient:
-    def __init__(self, api_key: str, model: str):
+    def __init__(self, api_key: str, model: str, sdk_client: "Mistral | None" = None):
         self.api_key = api_key
         self.model = model
-        self._client = Mistral(api_key=api_key)
+        self._client = sdk_client if sdk_client is not None else Mistral(api_key=api_key)
 
     def complete_json(
         self,
