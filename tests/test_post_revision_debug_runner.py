@@ -16,7 +16,7 @@ def _load_runner_module():
 def test_default_probe_specs_cover_the_expected_representative_rows() -> None:
     module = _load_runner_module()
 
-    probe_specs = module._default_probe_specs(  # type: ignore[attr-defined]
+    probe_specs = module._default_probe_specs(
         algo1_rows=[],
         algo2_rows=[],
         algo3_rows=[],
@@ -35,7 +35,7 @@ def test_default_probe_specs_cover_the_expected_representative_rows() -> None:
 def test_custom_probe_rows_override_the_defaults() -> None:
     module = _load_runner_module()
 
-    probe_specs = module._default_probe_specs(  # type: ignore[attr-defined]
+    probe_specs = module._default_probe_specs(
         algo1_rows=[3],
         algo2_rows=[7, 11],
         algo3_rows=[13],
@@ -83,7 +83,7 @@ def test_call_mistral_with_retry_recovers_from_http_429(monkeypatch) -> None:
     monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
     monkeypatch.setattr(module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
 
-    actual = module._call_mistral_with_retry(  # type: ignore[attr-defined]
+    actual = module._call_mistral_with_retry(
         api_key="test-key",
         model="mistral-small-2603",
         prompt="prompt text",
@@ -123,7 +123,7 @@ def test_call_mistral_with_retry_recovers_from_urlerror(monkeypatch) -> None:
     monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
     monkeypatch.setattr(module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
 
-    actual = module._call_mistral_with_retry(  # type: ignore[attr-defined]
+    actual = module._call_mistral_with_retry(
         api_key="test-key",
         model="mistral-small-2603",
         prompt="prompt text",
@@ -163,7 +163,7 @@ def test_call_mistral_with_retry_exponential_backoff_for_urlerror(monkeypatch) -
     monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
     monkeypatch.setattr(module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
 
-    actual = module._call_mistral_with_retry(  # type: ignore[attr-defined]
+    actual = module._call_mistral_with_retry(
         api_key="test-key",
         model="mistral-small-2603",
         prompt="prompt text",
@@ -180,11 +180,11 @@ def test_load_existing_response_respects_resume_flag(tmp_path) -> None:
     response_path = tmp_path / "response.json"
     response_path.write_text('{"choices":[{"message":{"content":"cached"}}]}')
 
-    cached = module._load_existing_response(  # type: ignore[attr-defined]
+    cached = module._load_existing_response(
         response_path=response_path,
         resume=True,
     )
-    missing = module._load_existing_response(  # type: ignore[attr-defined]
+    missing = module._load_existing_response(
         response_path=response_path,
         resume=False,
     )
@@ -196,7 +196,7 @@ def test_load_existing_response_respects_resume_flag(tmp_path) -> None:
 def test_build_model_failure_record_preserves_context() -> None:
     module = _load_runner_module()
 
-    actual = module._build_model_failure_record(  # type: ignore[attr-defined]
+    actual = module._build_model_failure_record(
         algorithm="algo2",
         row_index=7,
         model="mistral-small-2603",

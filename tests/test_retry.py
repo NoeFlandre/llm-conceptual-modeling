@@ -1,3 +1,4 @@
+import email
 from urllib.error import HTTPError, URLError
 
 import httpx
@@ -40,7 +41,7 @@ def test_call_with_retry_does_not_retry_nonretryable_http_error() -> None:
             url="https://example.com",
             code=400,
             msg="bad request",
-            hdrs=None,
+            hdrs=email.message.Message(),
             fp=None,
         )
 
