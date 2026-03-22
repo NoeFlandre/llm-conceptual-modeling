@@ -1,3 +1,4 @@
+import typing
 """Tests for AnthropicChatClient (MiniMax-M2.7 support)."""
 
 from types import SimpleNamespace
@@ -163,8 +164,8 @@ class TestAnthropicChatClient:
             def create(self, **kwargs: Any) -> Any:
                 raise httpx.HTTPStatusError(
                     "bad request",
-                    request=SimpleNamespace(url="http://example.com"),
-                    response=SimpleNamespace(status_code=400),
+                    request=typing.cast(httpx.Request, SimpleNamespace(url="http://example.com")),
+                    response=typing.cast(httpx.Response, SimpleNamespace(status_code=400)),
                 )
 
         class FakeAnthropic:

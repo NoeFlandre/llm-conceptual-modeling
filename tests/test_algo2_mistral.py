@@ -254,7 +254,7 @@ def test_mistral_chat_client_retries_transient_transport_errors() -> None:
 
 class FakeChatClient:
     def __init__(self) -> None:
-        self.calls: list[dict[str, object]] = []
+        self.calls: list[dict[str, str | object]] = []
 
     def complete_json(
         self,

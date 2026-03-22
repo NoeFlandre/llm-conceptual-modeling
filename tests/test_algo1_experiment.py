@@ -8,6 +8,7 @@ from llm_conceptual_modeling.algo1.experiment import (
 def test_build_algo1_experiment_specs_expands_full_factorial_grid(tmp_path: Path) -> None:
     actual = build_algo1_experiment_specs(
         pair_name="sg1_sg2",
+        model="gpt-5",
         output_root=tmp_path,
     )
 
@@ -30,6 +31,7 @@ def test_build_algo1_experiment_specs_expands_full_factorial_grid(tmp_path: Path
 def test_build_algo1_experiment_specs_maps_pair_to_expected_subgraphs(tmp_path: Path) -> None:
     actual = build_algo1_experiment_specs(
         pair_name="sg2_sg3",
+        model="gpt-5",
         output_root=tmp_path,
     )
 

@@ -15,7 +15,7 @@ def _load_runner_module():
 def test_build_replay_plan_separates_models_and_pairs() -> None:
     module = _load_runner_module()
 
-    replay_plan = module._build_replay_plan(  # type: ignore[attr-defined]
+    replay_plan = module._build_replay_plan( 
         models=["mistral-small-2603", "mistral-medium-2508"],
         embedding_model="mistral-embed-2312",
         output_root=Path("/tmp/replay"),
@@ -70,7 +70,7 @@ def test_build_replay_plan_separates_models_and_pairs() -> None:
 def test_job_key_roundtrip_supports_resume_state() -> None:
     module = _load_runner_module()
 
-    spec = module.ReplaySpec(  # type: ignore[attr-defined]
+    spec = module.ReplaySpec( 
         model="mistral-small-2603",
         algorithm="algo2",
         pair="sg1_sg2",
@@ -78,12 +78,12 @@ def test_job_key_roundtrip_supports_resume_state() -> None:
         command=["uv", "run", "lcm", "generate", "algo2"],
     )
 
-    job_key = module._build_job_key(spec)  # type: ignore[attr-defined]
-    state = module._new_state("paper_replay_2models")  # type: ignore[attr-defined]
+    job_key = module._build_job_key(spec) 
+    state = module._new_state("paper_replay_2models") 
     state["completed_jobs"].append(job_key)
 
     state_path = Path("/tmp/replay/state.json")
-    module._write_state(state_path, state)  # type: ignore[attr-defined]
-    loaded_state = module._load_state(state_path)  # type: ignore[attr-defined]
+    module._write_state(state_path, state) 
+    loaded_state = module._load_state(state_path) 
 
     assert job_key in loaded_state["completed_jobs"]

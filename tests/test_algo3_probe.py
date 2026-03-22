@@ -9,7 +9,7 @@ from llm_conceptual_modeling.algo3.probe import (
 
 class FakeChatClient:
     def __init__(self) -> None:
-        self.calls: list[dict[str, object]] = []
+        self.calls: list[dict[str, str | object]] = []
 
     def complete_json(
         self,

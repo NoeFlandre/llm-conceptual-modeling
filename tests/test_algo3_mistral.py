@@ -16,7 +16,7 @@ def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
 
 class FakeChatClient:
     def __init__(self) -> None:
-        self.calls: list[dict[str, object]] = []
+        self.calls: list[dict[str, str | object]] = []
 
     def complete_json(
         self,

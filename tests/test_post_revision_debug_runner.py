@@ -73,7 +73,7 @@ def test_call_mistral_with_retry_recovers_from_http_429(monkeypatch) -> None:
                 url=request.full_url,
                 code=429,
                 msg="Too Many Requests",
-                hdrs=None,
+                hdrs=email.message.Message(),
                 fp=None,
             )
         return FakeResponse('{"choices":[{"message":{"content":"{\\"edges\\":[]}"}}]}')
