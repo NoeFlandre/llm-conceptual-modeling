@@ -5,6 +5,7 @@ import httpx
 
 from llm_conceptual_modeling.algo2.mistral import (
     Method2PromptConfig,
+    _build_prompt_prefix,
     MistralChatClient,
     build_edge_suggester,
     build_edge_suggestion_prompt,
@@ -139,6 +140,37 @@ def test_build_edge_suggestion_prompt_can_use_tag_edge_list_without_optional_sec
         "<knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
     )
     assert expected_map_text in actual
+
+
+def test_build_prompt_prefix_reuses_shared_sections_for_both_prompt_builders() -> None:
+    prompt_config = Method2PromptConfig(
+        use_adjacency_notation=True,
+        use_array_representation=False,
+        include_explanation=True,
+        include_example=True,
+        include_counterexample=True,
+    )
+
+    actual = _build_prompt_prefix(prompt_config)
+
+    assert actual == [
+        "You are a helpful assistant who can creatively suggest relevant ideas.",
+        "A knowledge map is a network consisting of nodes and edges. "
+        "Nodes must have a clear meaning, such that we can interpret having "
+        "'more' or 'less' of a node. Edges represent the existence of a direct "
+        "relation between two nodes.",
+        "The knowledge map is encoded using tags for nodes and an associated "
+        "adjacency matrix.",
+        "Here is an example of a desired output for your task. "
+        "We have the list of concepts ['capacity to hire', 'bad employees', "
+        "'good reputation']. In this example, you could recommend these 9 new concepts: "
+        "'employment potential', 'hiring capability', 'staffing ability', "
+        "'underperformers', 'inefficient staff', 'problematic workers', "
+        "'positive image', 'favorable standing', 'high regard'.",
+        "Here is an example of a bad output that we do not want to see. "
+        "A bad output would propose unrelated concepts such as 'moon', 'dog', "
+        "or 'thermodynamics'.",
+    ]
 
 
 def test_extract_label_list_from_chat_content_supports_json_schema_payload() -> None:

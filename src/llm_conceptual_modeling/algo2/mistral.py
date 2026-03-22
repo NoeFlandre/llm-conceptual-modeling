@@ -18,7 +18,6 @@ from llm_conceptual_modeling.common.mistral import (
     _build_notation_section,
     _build_example_section,
     _build_counterexample_section,
-    _collect_ordered_nodes,
     _format_knowledge_map,
 )
 
@@ -32,6 +31,7 @@ __all__ = [
     "LabelProposer",
     "Method2PromptConfig",
     "MistralChatClient",
+    "_build_prompt_prefix",
     "build_edge_suggester",
     "build_edge_suggestion_prompt",
     "build_label_expansion_prompt",
@@ -54,40 +54,43 @@ class Method2PromptConfig:
     include_counterexample: bool
 
 
-# ---------------------------------------------------------------------------
-# algo2-specific knowledge-map helpers (delegate to common.mistral)
-# ---------------------------------------------------------------------------
-
-def _format_knowledge_map_as_adjacency(
-    edges: list[Edge],
-    *,
-    use_array_representation: bool,
-) -> str:
-    from llm_conceptual_modeling.common.mistral import _build_adjacency_matrix
-
-    ordered_nodes = _collect_ordered_nodes(edges)
-    adjacency_matrix = _build_adjacency_matrix(edges, ordered_nodes=ordered_nodes)
-
-    if use_array_representation:
-        return str({"nodes": ordered_nodes, "adjacency_matrix": adjacency_matrix})
-
-    node_tags = "".join(f"<node>{node}</node>" for node in ordered_nodes)
-    return (
-        "<knowledge-map>"
-        f"<nodes>{node_tags}</nodes>"
-        f"<adjacency-matrix>{adjacency_matrix}</adjacency-matrix>"
-        "</knowledge-map>"
+def _resolve_prompt_config(prompt_config: Method2PromptConfig | None) -> Method2PromptConfig:
+    return prompt_config or Method2PromptConfig(
+        use_adjacency_notation=False,
+        use_array_representation=False,
+        include_explanation=False,
+        include_example=False,
+        include_counterexample=False,
     )
 
-def _format_knowledge_map_as_edge_list(
-    edges: list[Edge],
-    *,
-    use_array_representation: bool,
-) -> str:
-    if use_array_representation:
-        return str(edges)
-    edge_tags = [f"<edge source='{s}' target='{t}' />" for s, t in edges]
-    return f"<knowledge-map>{''.join(edge_tags)}</knowledge-map>"
+
+def _build_prompt_prefix(prompt_config: Method2PromptConfig) -> list[str]:
+    """Return the shared opening sections used by both Method 2 prompts."""
+    sections: list[str] = [
+        "You are a helpful assistant who can creatively suggest relevant ideas."
+    ]
+
+    if prompt_config.include_explanation:
+        sections.append(
+            "A knowledge map is a network consisting of nodes and edges. "
+            "Nodes must have a clear meaning, such that we can interpret having "
+            "'more' or 'less' of a node. Edges represent the existence of a direct "
+            "relation between two nodes."
+        )
+
+    sections.append(
+        _build_notation_section(
+            use_adjacency_notation=prompt_config.use_adjacency_notation,
+            use_array_representation=prompt_config.use_array_representation,
+        )
+    )
+
+    if prompt_config.include_example:
+        sections.append(_build_example_section())
+    if prompt_config.include_counterexample:
+        sections.append(_build_counterexample_section())
+
+    return sections
 
 
 # ---------------------------------------------------------------------------
@@ -101,35 +104,8 @@ def build_label_expansion_prompt(
     subgraph2: list[Edge] | None = None,
     prompt_config: Method2PromptConfig | None = None,
 ) -> str:
-    resolved = prompt_config or Method2PromptConfig(
-        use_adjacency_notation=False,
-        use_array_representation=False,
-        include_explanation=False,
-        include_example=False,
-        include_counterexample=False,
-    )
-    sections: list[str] = []
-    sections.append("You are a helpful assistant who can creatively suggest relevant ideas.")
-
-    if resolved.include_explanation:
-        sections.append(
-            "A knowledge map is a network consisting of nodes and edges. "
-            "Nodes must have a clear meaning, such that we can interpret having "
-            "'more' or 'less' of a node. Edges represent the existence of a direct "
-            "relation between two nodes."
-        )
-
-    sections.append(
-        _build_notation_section(
-            use_adjacency_notation=resolved.use_adjacency_notation,
-            use_array_representation=resolved.use_array_representation,
-        )
-    )
-
-    if resolved.include_example:
-        sections.append(_build_example_section())
-    if resolved.include_counterexample:
-        sections.append(_build_counterexample_section())
+    resolved = _resolve_prompt_config(prompt_config)
+    sections: list[str] = _build_prompt_prefix(resolved)
 
     if subgraph1 is not None and subgraph2 is not None:
         fmt1 = _format_knowledge_map(subgraph1, prompt_config=resolved)
@@ -160,35 +136,8 @@ def build_edge_suggestion_prompt(
     subgraph2: list[Edge] | None = None,
     prompt_config: Method2PromptConfig | None = None,
 ) -> str:
-    resolved = prompt_config or Method2PromptConfig(
-        use_adjacency_notation=False,
-        use_array_representation=False,
-        include_explanation=False,
-        include_example=False,
-        include_counterexample=False,
-    )
-    sections: list[str] = []
-    sections.append("You are a helpful assistant who can creatively suggest relevant ideas.")
-
-    if resolved.include_explanation:
-        sections.append(
-            "A knowledge map is a network consisting of nodes and edges. "
-            "Nodes must have a clear meaning, such that we can interpret having "
-            "'more' or 'less' of a node. Edges represent the existence of a direct "
-            "relation between two nodes."
-        )
-
-    sections.append(
-        _build_notation_section(
-            use_adjacency_notation=resolved.use_adjacency_notation,
-            use_array_representation=resolved.use_array_representation,
-        )
-    )
-
-    if resolved.include_example:
-        sections.append(_build_example_section())
-    if resolved.include_counterexample:
-        sections.append(_build_counterexample_section())
+    resolved = _resolve_prompt_config(prompt_config)
+    sections: list[str] = _build_prompt_prefix(resolved)
 
     if subgraph1 is not None and subgraph2 is not None:
         fmt1 = _format_knowledge_map(subgraph1, prompt_config=resolved)
