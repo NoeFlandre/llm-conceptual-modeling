@@ -84,6 +84,54 @@ uv run lcm verify all --json
 
 The [Makefile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/Makefile) exposes the same common tasks through `make test`, `make lint`, `make typecheck`, `make verify`, and `make ci`.
 
+## Citation
+
+If you use this software in academic work, please cite both the repository and the accompanying manuscript using `CITATION.cff`:
+
+```yaml
+cff-version: 1.2.0
+title: "On the variability of generative artificial intelligence methods in conceptual modeling"
+message: "If you use this software, please cite the repository and the accompanying manuscript."
+authors:
+  - family-names: Flandre
+    given-names: "Noe Y."
+    affiliation: "Old Dominion University (ODU) VMASC; IMT Ales"
+  - family-names: Daumas
+    given-names: Cedric
+    affiliation: "Old Dominion University (ODU) VMASC; IMT Ales"
+  - family-names: Giabbanelli
+    given-names: "Philippe J."
+    affiliation: "Old Dominion University (ODU) VMASC"
+repository-code: "https://github.com/NoeFlandre/llm-conceptual-modeling"
+license: MIT
+```
+
+Full details in [CITATION.cff](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/CITATION.cff).
+
+## License
+
+MIT License. Copyright (c) 2026 Noe Flandre. See the [LICENSE](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/LICENSE) file for details.
+
+## Docker
+
+The project includes a [Dockerfile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/Dockerfile) for containerized execution:
+
+```bash
+# Build the image
+docker build -t llm-conceptual-modeling .
+
+# Run the full test suite
+docker run --rm llm-conceptual-modeling uv run pytest
+
+# Run the verification gate
+docker run --rm llm-conceptual-modeling uv run lcm verify all --json
+
+# Run a specific CLI command
+docker run --rm llm-conceptual-modeling uv run lcm doctor --json
+```
+
+The image uses `python:3.12-slim` as the base and installs `uv` for fast dependency management.
+
 ## Command-Line Interface
 
 The repository exposes a single CLI, `lcm`, for evaluation, factorial analysis, verification, and generation-manifest inspection.
@@ -349,12 +397,30 @@ A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noef
 - [src/llm_conceptual_modeling/algo1](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1), [algo2](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo2), [algo3](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo3): algorithm-specific workflows
 - [src/llm_conceptual_modeling/common](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/common): shared evaluation, factorial-analysis, graph, and schema code
 - [src/llm_conceptual_modeling/commands](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/commands): CLI handlers
+- [src/llm_conceptual_modeling/cli.py](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py): CLI entry point (`lcm`)
 - [data/inputs](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/inputs): graph input files used by the generation layer
 - [data/results](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results): imported primary experiment outputs across algorithms and models
+- [data/baselines](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/baselines): deterministic structural baseline outputs (graph-heuristic comparators)
 - [data/analysis_artifacts](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts): audit artifacts backing revision-tracker findings
 - [tests/fixtures/legacy](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests/fixtures/legacy): committed oracle fixtures for regression checks
-- [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md): implementation-oriented structure and safety notes
+- [tests/](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests): full test suite including contracts, CSV schemas, graph data, snapshots, analysis, and baseline tests
+- [scripts/](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts): post-revision live-provider debugging tooling
+- [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md): implementation-oriented architecture and safety notes
 - [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md): short reviewer-oriented reproduction guide
+- [docs/post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md): live-provider debugging documentation
+- [Dockerfile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/Dockerfile): container build definition
+- [CITATION.cff](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/CITATION.cff): academic citation metadata
+- [LICENSE](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/LICENSE): MIT License
+- [Makefile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/Makefile): common task shortcuts
+- [uv.lock](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/uv.lock): pinned dependency lock file for reproducible environments
+
+> **Always use `uv sync`** to restore the exact environment from `uv.lock`. Do not use `pip install` directly.
+
+## Documentation
+
+- [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md) — implementation architecture, design decisions, and safety notes for contributors
+- [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md) — concise reviewer-oriented reproduction guide
+- [docs/post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md) — live-provider probing workflow and artifact layout
 
 ## Documentation Notes
 
