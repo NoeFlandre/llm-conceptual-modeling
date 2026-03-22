@@ -2,14 +2,14 @@ import json
 from dataclasses import dataclass
 from typing import Any, cast as typing_cast, Protocol
 
-Edge = tuple[str, str]
 from llm_conceptual_modeling.common.retry import call_with_retry
-
 from llm_conceptual_modeling.common.types import ChatCompletionClient
 
 from mistralai.models import ChatMessage
 
 from .cove import apply_cove_verification, build_cove_prompt
+
+Edge = tuple[str, str]
 
 
 @dataclass
