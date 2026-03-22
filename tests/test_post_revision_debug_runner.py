@@ -1,6 +1,6 @@
+import email
 from importlib import util
 from pathlib import Path
-import email
 from urllib.error import HTTPError, URLError
 
 
