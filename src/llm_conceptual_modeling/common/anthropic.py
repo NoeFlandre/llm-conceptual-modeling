@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import time
 from typing import Any, Protocol
 
@@ -98,7 +99,13 @@ class AnthropicChatClient:
     ) -> None:
         self._model = model
         self._api_key = api_key
-        self._sdk_client = sdk_client or anthropic.Anthropic(api_key=api_key)
+        base_url = os.environ.get("ANTHROPIC_BASE_URL")
+        if sdk_client is not None:
+            self._sdk_client = sdk_client
+        elif base_url:
+            self._sdk_client = anthropic.Anthropic(api_key=api_key, base_url=base_url)
+        else:
+            self._sdk_client = anthropic.Anthropic(api_key=api_key)
 
     def complete_json(
         self,
@@ -122,7 +129,8 @@ class AnthropicChatClient:
                     }
                 ],
                 temperature=temperature,
-                response_format={"type": "json_object"},
+                thinking={"type": "disabled"},
+                output_config={"type": "json_object"},
             )
 
         response = _call_with_retry(
@@ -134,6 +142,7 @@ class AnthropicChatClient:
         )
 
         # Extract text from content blocks
+        # MiniMax may return thinking blocks first, then text blocks
         text_parts: list[str] = []
         for block in response.content:
             if block.type == "text":

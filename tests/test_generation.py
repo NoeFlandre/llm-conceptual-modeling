@@ -117,8 +117,9 @@ def test_cli_generate_algo1_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["api_key"] = api_key
             captured_call["model"] = model
 
-    def fake_build_specs(*, pair_name, output_root, replications, resume):
+    def fake_build_specs(*, pair_name, model, output_root, replications, resume):
         captured_call["pair_name"] = pair_name
+        captured_call["model"] = model
         captured_call["output_root"] = str(output_root)
         captured_call["replications"] = replications
         captured_call["resume"] = resume

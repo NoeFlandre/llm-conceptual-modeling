@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 def build_algo1_experiment_specs(
     *,
     pair_name: str,
+    model: str,
     output_root: Path,
     replications: int = 5,
     resume: bool = False,
@@ -34,7 +35,7 @@ def build_algo1_experiment_specs(
             )
             experiment_spec = Algo1ProbeSpec(
                 run_name=run_name,
-                model="",
+                model=model,
                 subgraph1=subgraph1,
                 subgraph2=subgraph2,
                 prompt_config=prompt_config,

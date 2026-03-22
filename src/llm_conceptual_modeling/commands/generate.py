@@ -80,6 +80,7 @@ def _handle_algo1_execution(args: Namespace) -> int:
     output_root = Path(args.output_root)
     specs = build_algo1_experiment_specs(
         pair_name=args.pair,
+        model=args.model,
         output_root=output_root,
         replications=args.replications,
         resume=args.resume,

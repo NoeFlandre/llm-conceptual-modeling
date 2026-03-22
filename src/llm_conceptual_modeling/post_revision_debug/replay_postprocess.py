@@ -51,7 +51,7 @@ def _build_summary_record(*, root: Path, summary_path: Path) -> dict[str, object
         "pair": pair,
         "run_leaf": run_leaf,
         "run_name": payload.get("run_name", ""),
-        "model": payload.get("model", ""),
+        "model": payload.get("model", "") or root.name,
         "summary_path": str(summary_path),
     }
 

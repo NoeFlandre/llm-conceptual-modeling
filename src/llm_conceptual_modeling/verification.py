@@ -258,6 +258,7 @@ def _build_manifest_checks() -> list[dict[str, object]]:
 def _build_resume_checks(temp_root: Path) -> list[dict[str, object]]:
     algo1_spec = build_algo1_experiment_specs(
         pair_name="sg1_sg2",
+        model="verification",
         output_root=temp_root / "algo1",
         replications=1,
         resume=True,
