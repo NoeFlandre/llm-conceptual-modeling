@@ -76,7 +76,7 @@ def run_algo1_probe(
         )
 
     edge_generator = build_edge_generator(chat_client, spec.prompt_config)
-    cove_verifier = cast(CoveVerifier, build_cove_verifier(chat_client))
+    cove_verifier = build_cove_verifier(chat_client)
     try:
         cached_execution = context.load_json("execution_checkpoint.json")
         if spec.resume and cached_execution is not None and context.is_stage_complete(
