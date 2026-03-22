@@ -235,7 +235,7 @@ def test_cli_factorial_algo1_writes_legacy_parity_output(tmp_path) -> None:
 
 def test_cli_factorial_algo2_writes_legacy_parity_output(tmp_path) -> None:
     expected_path = (
-        "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv.csv"
+        "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv"
     )
     output_path = tmp_path / "factorial.csv"
 

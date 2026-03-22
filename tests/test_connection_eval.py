@@ -122,7 +122,7 @@ def test_algo2_factorial_matches_legacy_fixture(tmp_path) -> None:
         "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv",
     ]
     expected_path = (
-        "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv.csv"
+        "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv"
     )
     output_path = tmp_path / "factorial_analysis_gpt_5_algo2_without_error.csv"
 
