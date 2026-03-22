@@ -1,0 +1,246 @@
+# Experiment Manifest YAML Schema
+# =================================
+# This file documents the expected format for experiment YAML manifests.
+# Each experiment run produces a manifest.yaml in its output directory
+# capturing ALL configuration needed for exact reproducibility.
+#
+# Schema version: 1.0
+# Algorithm support: algo1, algo2, algo3
+
+$schema: http://json-schema.org/draft-07/schema#
+
+type: object
+required:
+  - experiment_id
+  - algorithm
+  - model
+  - provider
+  - temperature
+  - prompt_factors
+  - full_prompt
+  - input_subgraph_pairs
+  - output_dir
+  - timestamp
+  - repetitions
+  - condition_bits
+  - pair_name
+
+properties:
+
+  experiment_id:
+    type: string
+    description: >
+      Unique identifier for this experiment run. Format: {algorithm}_{pair_name}_rep{index}_cond{bits}.
+      Examples: algo1_sg1_sg2_rep0_cond00000, algo2_sg2_sg3_rep3_cond11001, algo3_subgraph_1_to_subgraph_3_rep2_cond0110
+    pattern: "^(algo1|algo2|algo3)_.+_rep[0-9]+_cond[0-9]+$"
+
+  algorithm:
+    type: string
+    enum: [algo1, algo2, algo3]
+    description: >
+      Which algorithm was used.
+      - algo1: Direct edge generation (Method 1 - COVE)
+      - algo2: Label expansion with embeddings (Method 2)
+      - algo3: Tree-based expansion (Method 3)
+
+  model:
+    type: string
+    description: >
+      The language model used for generation.
+      Examples: mistral-small-2603, mistral-medium-2508
+
+  provider:
+    type: string
+    enum: [mistral, anthropic]
+    description: The LLM API provider.
+
+  temperature:
+    type: number
+    description: Sampling temperature used for LLM calls. Typically 0.0.
+    minimum: 0.0
+    maximum: 2.0
+
+  top_p:
+    type: [number, "null"]
+    description: Nucleus sampling parameter. Null if not set.
+    minimum: 0.0
+    maximum: 1.0
+
+  max_tokens:
+    type: [integer, "null"]
+    description: Maximum tokens in LLM response. Null if not set.
+
+  prompt_factors:
+    type: object
+    description: >
+      All prompt factors and their levels (boolean) for this experiment condition.
+      Factors vary by algorithm.
+    properties:
+
+      # Algo1 & Algo2 shared factors
+      use_adjacency_notation:
+        type: boolean
+        description: >
+          If true, knowledge maps are encoded using XML tags with adjacency matrix.
+          If false, knowledge maps are encoded as edge lists.
+
+      use_array_representation:
+        type: boolean
+        description: >
+          If true, knowledge maps use array/list representation.
+          If false, knowledge maps use XML tag representation.
+
+      include_explanation:
+        type: boolean
+        description: >
+          If true, the prompt includes a textual explanation of what a knowledge map is.
+
+      include_example:
+        type: boolean
+        description: >
+          If true, the prompt includes a positive example of desired output.
+
+      include_counterexample:
+        type: boolean
+        description: >
+          If true, the prompt includes a negative example showing what NOT to output.
+
+      # Algo3-specific factors (in addition to include_example, include_counterexample)
+      child_count:
+        type: integer
+        description: >
+          For algo3 only: number of child nodes to propose per parent.
+          Derived from condition_bits[2]: 3 if bit=0, 5 if bit=1.
+        minimum: 1
+        maximum: 10
+
+      max_depth:
+        type: integer
+        description: >
+          For algo3 only: maximum tree expansion depth.
+          Derived from condition_bits[3]: 1 if bit=0, 2 if bit=1.
+        minimum: 1
+        maximum: 5
+
+  full_prompt:
+    type: string
+    description: The complete prompt text sent to the LLM for this experiment.
+
+  input_subgraph_pairs:
+    type: array
+    description: >
+      The input subgraph pairs used in this experiment.
+      Format differs slightly between algorithms.
+    items:
+      type: object
+      oneOf:
+        # Algo1 and Algo2 format
+        - type: object
+          required: [subgraph_name, edges]
+          properties:
+            subgraph_name:
+              type: string
+              enum: [subgraph1, subgraph2]
+            edges:
+              type: array
+              items:
+                type: array
+                minItems: 2
+                maxItems: 2
+                description: Edge as [source, target]
+                items:
+                  type: string
+        # Algo3 format
+        - type: object
+          required: [subgraph_name, labels]
+          properties:
+            subgraph_name:
+              type: string
+            labels:
+              type: array
+              items:
+                type: string
+
+  output_dir:
+    type: string
+    description: >
+      Absolute path to the experiment output directory.
+      Format: {output_root}/{algorithm}/{pair_name}/rep{index}_cond{bits}/
+
+  timestamp:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp of when the manifest was created.
+
+  repetitions:
+    type: integer
+    description: Total number of repetitions in the full experiment design.
+    minimum: 1
+
+  condition_bits:
+    type: string
+    description: >
+      Bitstring encoding the experimental condition.
+      - Algo1/Algo2: 5 bits (use_adjacency_notation, use_array_representation, include_explanation, include_example, include_counterexample)
+      - Algo3: 4 bits (include_example, include_counterexample, child_count_bit, max_depth_bit)
+    pattern: "^[01]+$"
+
+  pair_name:
+    type: string
+    description: >
+      Human-readable name for the subgraph pair used.
+      Algo1/2 pairs: sg1_sg2, sg2_sg3, sg3_sg1
+      Algo3 pairs: subgraph_1_to_subgraph_3, subgraph_2_to_subgraph_1, subgraph_2_to_subgraph_3
+
+# Example manifests for each algorithm:
+
+# Algo1 example:
+# experiment_id: algo1_sg1_sg2_rep0_cond00000
+# algorithm: algo1
+# model: mistral-small-2603
+# provider: mistral
+# temperature: 0.0
+# top_p: null
+# max_tokens: null
+# prompt_factors:
+#   use_adjacency_notation: false
+#   use_array_representation: false
+#   include_explanation: false
+#   include_example: false
+#   include_counterexample: false
+# full_prompt: "You are a helpful assistant who understands Knowledge Maps. ..."
+# input_subgraph_pairs:
+#   - subgraph_name: subgraph1
+#     edges: [["Culture of eating that promotes healthy choices", "Physical well-being"], ...]
+#   - subgraph_name: subgraph2
+#     edges: [["Medications", "Balance"], ...]
+# output_dir: /data/results/algo1/sg1_sg2/rep0_cond00000
+# timestamp: "2026-03-22T10:00:00+00:00"
+# repetitions: 5
+# condition_bits: "00000"
+# pair_name: sg1_sg2
+
+# Algo3 example:
+# experiment_id: algo3_subgraph_1_to_subgraph_3_rep2_cond1010
+# algorithm: algo3
+# model: mistral-medium-2508
+# provider: mistral
+# temperature: 0.0
+# top_p: null
+# max_tokens: null
+# prompt_factors:
+#   include_example: true
+#   include_counterexample: false
+#   child_count: 5
+#   max_depth: 2
+# full_prompt: "You are a helpful assistant who can creatively suggest relevant ideas. ..."
+# input_subgraph_pairs:
+#   - subgraph_name: source_labels
+#     labels: ["Culture of eating that promotes healthy choices", "Physical well-being", ...]
+#   - subgraph_name: target_labels
+#     labels: [...]
+# output_dir: /data/results/algo3/subgraph_1_to_subgraph_3/rep2_cond1010
+# timestamp: "2026-03-22T10:00:00+00:00"
+# repetitions: 5
+# condition_bits: "1010"
+# pair_name: subgraph_1_to_subgraph_3
