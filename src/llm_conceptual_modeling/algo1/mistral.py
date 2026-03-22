@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Callable
 from typing import cast as typing_cast
 
 from mistralai import Mistral
@@ -141,7 +142,7 @@ class CoveVerifier:
         return verified_edges
 
 
-def build_cove_verifier(chat_client: ChatCompletionClient) -> "CoveVerifier":
+def build_cove_verifier(chat_client: ChatCompletionClient) -> Callable[[list[Edge]], list[Edge]]:
     def verify_edges(candidate_edges: list[Edge]) -> list[Edge]:
         prompt = build_cove_prompt(candidate_edges)
         schema = {
