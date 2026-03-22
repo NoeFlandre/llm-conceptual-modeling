@@ -228,8 +228,6 @@ class FakeChatClient:
         schema_name: str,
         schema: dict[str, object],
     ) -> dict[str, object]:
-        # type: ignore[arg-type]
-
         self.calls.append({"prompt": prompt, "schema_name": schema_name})
         if schema_name == "edge_list":
             return {
