@@ -1,5 +1,4 @@
 import email
-import email
 from urllib.error import HTTPError, URLError
 
 import httpx

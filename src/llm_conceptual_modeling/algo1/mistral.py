@@ -1,13 +1,12 @@
-import json
 from dataclasses import dataclass
-from typing import Any, cast as typing_cast, Protocol
+from typing import cast as typing_cast
 
-from llm_conceptual_modeling.common.retry import call_with_retry
-from llm_conceptual_modeling.common.types import ChatCompletionClient
-
+from mistralai import Mistral
 from mistralai.models import ChatMessage
 
-from .cove import apply_cove_verification, build_cove_prompt
+from llm_conceptual_modeling.common.types import ChatCompletionClient
+
+from .cove import apply_cove_verification
 
 Edge = tuple[str, str]
 
@@ -87,7 +86,9 @@ def build_cove_prompt(candidate_edges: list[Edge]) -> str:
 {system_prompt}
 
 ## Task
-For each candidate edge below, judge whether a causal relationship exists from the source concept to the target concept. Return a YES if you believe the relationship is credible. Return NO otherwise.
+For each candidate edge below, judge whether a causal relationship exists
+from the source concept to the target concept. Return a YES if you believe
+the relationship is credible. Return NO otherwise.
 
 ## Candidate Edges
 {candidate_str}
