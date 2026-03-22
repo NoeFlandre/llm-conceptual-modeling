@@ -1,0 +1,406 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Behavioral Economics in Food Choices",
+    "Social Media Influence on Body Image",
+    "Accessibility of Recreational Facilities",
+    "Food Deserts",
+    "Nutritional Labeling",
+    "Body Positivity Movement",
+    "Policy Interventions for Health Promotion"
+  ],
+  "final_similarity": 0.7963401818486783,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Behavioral Economics in Food Choices"
+    ],
+    [
+      "Cost of healthy foods",
+      "Behavioral Economics in Food Choices"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Healthy eating"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movement"
+    ],
+    [
+      "Pressure to be thin",
+      "Weight bias"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional Labeling"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Behavioral Economics in Food Choices",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Behavioral Economics in Food Choices",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Social Media Influence on Body Image",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Social Media Influence on Body Image",
+      "Body Positivity Movement"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Food Deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "Body Positivity Movement",
+      "Mental well-being"
+    ],
+    [
+      "Policy Interventions for Health Promotion",
+      "Public support and demand for healthy products"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Behavioral Economics in Food Choices"
+    ],
+    [
+      "Cost of healthy foods",
+      "Behavioral Economics in Food Choices"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Healthy eating"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movement"
+    ],
+    [
+      "Pressure to be thin",
+      "Weight bias"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional Labeling"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Behavioral Economics in Food Choices",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Behavioral Economics in Food Choices",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Social Media Influence on Body Image",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Social Media Influence on Body Image",
+      "Body Positivity Movement"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Food Deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "Body Positivity Movement",
+      "Mental well-being"
+    ],
+    [
+      "Policy Interventions for Health Promotion",
+      "Public support and demand for healthy products"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep4_cond10111"
+}

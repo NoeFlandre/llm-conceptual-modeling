@@ -1,0 +1,102 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Supportive food environment",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Weight bias"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Weight bias"
+    ]
+  ]
+}

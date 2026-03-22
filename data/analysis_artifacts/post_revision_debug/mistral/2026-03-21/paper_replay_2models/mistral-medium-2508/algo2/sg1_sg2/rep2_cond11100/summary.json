@@ -1,0 +1,419 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Community Gardens and Local Food Production",
+    "Psychological Impact of Food Advertising",
+    "Accessibility of Recreational Facilities",
+    "Nutritional Labeling Clarity",
+    "Food Deserts",
+    "Body Positivity Movements",
+    "Policy Interventions for Health Promotion",
+    "Urban Green Spaces",
+    "Food Policy and Regulation",
+    "Nutritional Awareness Campaigns",
+    "Healthy Food Subsidies",
+    "Physical Activity Promotion"
+  ],
+  "final_similarity": 0.7893436377322092,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Awareness Campaigns"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens and Local Food Production"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food Deserts"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Healthy Food Subsidies"
+    ],
+    [
+      "Cost of healthy foods",
+      "Healthy Food Subsidies"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Physical Activity Promotion"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Poor body image",
+      "Weight bias"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Physical Activity Promotion"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional Labeling Clarity"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Supportive food environment"
+    ],
+    [
+      "Psychological Impact of Food Advertising",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Labeling Clarity",
+      "Healthy eating"
+    ],
+    [
+      "Food Deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Body Positivity Movements",
+      "Mental well-being"
+    ],
+    [
+      "Policy Interventions for Health Promotion",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Food Policy and Regulation",
+      "Healthy Food Subsidies"
+    ],
+    [
+      "Nutritional Awareness Campaigns",
+      "Healthy eating"
+    ],
+    [
+      "Healthy Food Subsidies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical Activity Promotion",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Awareness Campaigns"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens and Local Food Production"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food Deserts"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Healthy Food Subsidies"
+    ],
+    [
+      "Cost of healthy foods",
+      "Healthy Food Subsidies"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Physical Activity Promotion"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Poor body image",
+      "Weight bias"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Physical Activity Promotion"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional Labeling Clarity"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Policy Interventions for Health Promotion"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Supportive food environment"
+    ],
+    [
+      "Psychological Impact of Food Advertising",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Labeling Clarity",
+      "Healthy eating"
+    ],
+    [
+      "Food Deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Body Positivity Movements",
+      "Mental well-being"
+    ],
+    [
+      "Policy Interventions for Health Promotion",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Food Policy and Regulation",
+      "Healthy Food Subsidies"
+    ],
+    [
+      "Nutritional Awareness Campaigns",
+      "Healthy eating"
+    ],
+    [
+      "Healthy Food Subsidies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical Activity Promotion",
+      "Physical well-being"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep2_cond11100"
+}

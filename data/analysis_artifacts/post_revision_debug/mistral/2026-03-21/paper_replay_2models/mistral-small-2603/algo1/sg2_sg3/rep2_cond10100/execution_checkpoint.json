@@ -1,0 +1,98 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Resilience",
+      "Cortisol"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dyslipidemia"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Weight bias",
+      "Blood pressure"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Adipose storage of fatty acids"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Resilience",
+      "Cortisol"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Weight bias",
+      "Blood pressure"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Adipose storage of fatty acids"
+    ]
+  ]
+}

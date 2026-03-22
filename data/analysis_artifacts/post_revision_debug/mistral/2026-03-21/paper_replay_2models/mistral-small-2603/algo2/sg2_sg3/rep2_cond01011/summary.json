@@ -1,0 +1,526 @@
+{
+  "expanded_labels": [
+    "Nutritional literacy",
+    "Food deserts",
+    "Body neutrality movement",
+    "Metabolic syndrome",
+    "Chronic stress management",
+    "Health literacy",
+    "Food insecurity",
+    "Body positivity",
+    "Metabolic health",
+    "Chronic disease prevention"
+  ],
+  "final_similarity": 0.8015203306204948,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Food insecurity"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Nutritional literacy"
+    ],
+    [
+      "Obesity",
+      "Health literacy"
+    ],
+    [
+      "Obesity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Body neutrality movement"
+    ],
+    [
+      "Obesity",
+      "Body positivity"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Medications"
+    ],
+    [
+      "Obesity",
+      "Stimulants"
+    ],
+    [
+      "Obesity",
+      "Beta blockers"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Obesity",
+      "Chronic stress management"
+    ],
+    [
+      "Obesity",
+      "Chronic disease prevention"
+    ],
+    [
+      "Obesity",
+      "Metabolic health"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Food insecurity"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Nutritional literacy"
+    ],
+    [
+      "Obesity",
+      "Health literacy"
+    ],
+    [
+      "Obesity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Body neutrality movement"
+    ],
+    [
+      "Obesity",
+      "Body positivity"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Medications"
+    ],
+    [
+      "Obesity",
+      "Stimulants"
+    ],
+    [
+      "Obesity",
+      "Beta blockers"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Obesity",
+      "Chronic stress management"
+    ],
+    [
+      "Obesity",
+      "Chronic disease prevention"
+    ],
+    [
+      "Obesity",
+      "Metabolic health"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep2_cond01011"
+}

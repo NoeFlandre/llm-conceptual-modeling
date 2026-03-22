@@ -1,0 +1,1136 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Chronic low-grade inflammation",
+    "Endothelial dysfunction",
+    "Neuroendocrine dysregulation",
+    "Sedentary lifestyle behaviors",
+    "Metabolic flexibility",
+    "Gut microbiota dysbiosis",
+    "Chronic stress resilience",
+    "Neuroinflammation",
+    "Food deserts",
+    "Metabolic flexibility training",
+    "Gut-brain axis modulation",
+    "Chronic stress resilience programs",
+    "Neuroinflammation biomarkers",
+    "Food environment policy interventions",
+    "Metabolic flexibility interventions",
+    "Chronic stress management programs",
+    "Gut microbiota modulation",
+    "Neuroendocrine health markers",
+    "Food policy advocacy"
+  ],
+  "final_similarity": 0.8095422711907231,
+  "iteration_count": 4,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Food environment policy interventions"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic flexibility"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Dyslipidemia",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Blood pressure",
+      "Cortisol"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Release of adipokines",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Neuroinflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic syndrome"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic stress resilience"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic flexibility"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Atherosclerosis"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Coronary heart diseases"
+    ],
+    [
+      "Neuroinflammation",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Neuroinflammation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic flexibility"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Gut-brain axis modulation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Chronic stress resilience"
+    ],
+    [
+      "Chronic stress resilience",
+      "Metabolic flexibility"
+    ],
+    [
+      "Chronic stress resilience",
+      "Neuroendocrine health markers"
+    ],
+    [
+      "Metabolic flexibility",
+      "Metabolic flexibility training"
+    ],
+    [
+      "Metabolic flexibility",
+      "Metabolic flexibility interventions"
+    ],
+    [
+      "Chronic stress resilience",
+      "Chronic stress management programs"
+    ],
+    [
+      "Chronic stress resilience",
+      "Chronic stress resilience programs"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Gut microbiota modulation"
+    ],
+    [
+      "Neuroinflammation",
+      "Neuroinflammation biomarkers"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Healthy eating",
+      "Availability of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Supportive food environment"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Food environment policy interventions"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food environment policy interventions"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food environment policy interventions"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Metabolic flexibility"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Emotional eating",
+      "Appetite"
+    ],
+    [
+      "Appetite",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Eating disorders"
+    ],
+    [
+      "Eating disorders",
+      "Physical pain"
+    ],
+    [
+      "Eating disorders",
+      "Tiredness"
+    ],
+    [
+      "Physical pain",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Cortisol",
+      "Chronic stress resilience"
+    ],
+    [
+      "Cortisol",
+      "Neuroendocrine dysregulation"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Food environment policy interventions"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic flexibility"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Dyslipidemia",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Blood pressure",
+      "Cortisol"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Release of adipokines",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Neuroinflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic syndrome"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic stress resilience"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic flexibility"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Atherosclerosis"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Coronary heart diseases"
+    ],
+    [
+      "Neuroinflammation",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Neuroinflammation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic flexibility"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Gut-brain axis modulation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Chronic stress resilience"
+    ],
+    [
+      "Chronic stress resilience",
+      "Metabolic flexibility"
+    ],
+    [
+      "Chronic stress resilience",
+      "Neuroendocrine health markers"
+    ],
+    [
+      "Metabolic flexibility",
+      "Metabolic flexibility training"
+    ],
+    [
+      "Metabolic flexibility",
+      "Metabolic flexibility interventions"
+    ],
+    [
+      "Chronic stress resilience",
+      "Chronic stress management programs"
+    ],
+    [
+      "Chronic stress resilience",
+      "Chronic stress resilience programs"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Gut microbiota modulation"
+    ],
+    [
+      "Neuroinflammation",
+      "Neuroinflammation biomarkers"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Healthy eating",
+      "Availability of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Supportive food environment"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Food environment policy interventions"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food environment policy interventions"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food environment policy interventions"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Metabolic flexibility"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Emotional eating",
+      "Appetite"
+    ],
+    [
+      "Appetite",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Eating disorders"
+    ],
+    [
+      "Eating disorders",
+      "Physical pain"
+    ],
+    [
+      "Eating disorders",
+      "Tiredness"
+    ],
+    [
+      "Physical pain",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Cortisol",
+      "Chronic stress resilience"
+    ],
+    [
+      "Cortisol",
+      "Neuroendocrine dysregulation"
+    ]
+  ],
+  "run_name": "algo2_sg3_sg1_rep4_cond00101"
+}

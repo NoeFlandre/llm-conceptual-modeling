@@ -1,0 +1,422 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Healthy Eating Habits",
+    "Psychological Support",
+    "Nutritional Psychology",
+    "Body Image Acceptance",
+    "Health at Every Size",
+    "Mindful Eating",
+    "Social Determinants of Health"
+  ],
+  "final_similarity": 0.7988084126920654,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Coronary heart diseases",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Stress"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Socio-economic status",
+      "Access to Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Balance"
+    ],
+    [
+      "Balance",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Coordination"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Body Positivity",
+      "Body Image Acceptance"
+    ],
+    [
+      "Body Image Acceptance",
+      "Mental well-being"
+    ],
+    [
+      "Health at Every Size",
+      "Body Positivity"
+    ],
+    [
+      "Mindful Eating",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Psychological Support",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Coronary heart diseases",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Stress"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Socio-economic status",
+      "Access to Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Balance"
+    ],
+    [
+      "Balance",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Coordination"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Body Positivity",
+      "Body Image Acceptance"
+    ],
+    [
+      "Body Image Acceptance",
+      "Mental well-being"
+    ],
+    [
+      "Health at Every Size",
+      "Body Positivity"
+    ],
+    [
+      "Mindful Eating",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Psychological Support",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep4_cond00000"
+}

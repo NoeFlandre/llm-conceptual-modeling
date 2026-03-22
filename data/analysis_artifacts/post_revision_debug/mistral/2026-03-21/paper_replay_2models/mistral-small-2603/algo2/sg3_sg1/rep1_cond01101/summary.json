@@ -1,0 +1,880 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Chronic low-grade inflammation",
+    "Endothelial dysfunction",
+    "Neuroendocrine dysregulation",
+    "Sedentary lifestyle behaviors",
+    "Metabolic inflammation",
+    "Endocrine disruptors",
+    "Gut microbiota dysbiosis",
+    "Chronic stress physiology",
+    "Food deserts",
+    "Leptin resistance",
+    "Adiponectin levels",
+    "Visceral fat index",
+    "Sleep fragmentation",
+    "Food addiction",
+    "Metabolic flexibility",
+    "Gut-brain axis",
+    "Chronic pain syndromes",
+    "Neuroinflammation",
+    "Food literacy"
+  ],
+  "final_similarity": 0.8345021255637217,
+  "iteration_count": 4,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Leptin resistance"
+    ],
+    [
+      "Obesity",
+      "Visceral fat index"
+    ],
+    [
+      "Obesity",
+      "Food addiction"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Food literacy"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Dyslipidemia"
+    ],
+    [
+      "Insulin resistance",
+      "Inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Metabolic syndrome"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Atherosclerosis"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Blood pressure"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Inflammation"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Visceral fat index"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Insulin resistance"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Neuroinflammation"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood fatty acid level",
+      "Dyslipidemia"
+    ],
+    [
+      "Blood fatty acid level",
+      "Atherosclerosis"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Insulin resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Leptin resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adiponectin levels"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Insulin resistance"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Leptin resistance",
+      "Insulin resistance"
+    ],
+    [
+      "Leptin resistance",
+      "Inflammation"
+    ],
+    [
+      "Leptin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Adiponectin levels",
+      "Insulin sensitivity"
+    ],
+    [
+      "Adiponectin levels",
+      "Inflammation"
+    ],
+    [
+      "Visceral fat index",
+      "Insulin resistance"
+    ],
+    [
+      "Visceral fat index",
+      "Inflammation"
+    ],
+    [
+      "Visceral fat index",
+      "Metabolic syndrome"
+    ],
+    [
+      "Food addiction",
+      "Obesity"
+    ],
+    [
+      "Food addiction",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Food addiction",
+      "Eating disorders"
+    ],
+    [
+      "Food addiction",
+      "Emotional eating"
+    ],
+    [
+      "Metabolic flexibility",
+      "Insulin sensitivity"
+    ],
+    [
+      "Metabolic flexibility",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Food literacy",
+      "Healthy eating"
+    ],
+    [
+      "Food literacy",
+      "Supportive food environment"
+    ],
+    [
+      "Food literacy",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food literacy",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food literacy",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food literacy",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food literacy",
+      "Unhealthy foods are cheaper than healthy ones"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Leptin resistance"
+    ],
+    [
+      "Obesity",
+      "Visceral fat index"
+    ],
+    [
+      "Obesity",
+      "Food addiction"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Food literacy"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Dyslipidemia"
+    ],
+    [
+      "Insulin resistance",
+      "Inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Metabolic syndrome"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Atherosclerosis"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Blood pressure"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Inflammation"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Visceral fat index"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Insulin resistance"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Neuroinflammation"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood fatty acid level",
+      "Dyslipidemia"
+    ],
+    [
+      "Blood fatty acid level",
+      "Atherosclerosis"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Insulin resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Leptin resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adiponectin levels"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Insulin resistance"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Leptin resistance",
+      "Insulin resistance"
+    ],
+    [
+      "Leptin resistance",
+      "Inflammation"
+    ],
+    [
+      "Leptin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Adiponectin levels",
+      "Insulin sensitivity"
+    ],
+    [
+      "Adiponectin levels",
+      "Inflammation"
+    ],
+    [
+      "Visceral fat index",
+      "Insulin resistance"
+    ],
+    [
+      "Visceral fat index",
+      "Inflammation"
+    ],
+    [
+      "Visceral fat index",
+      "Metabolic syndrome"
+    ],
+    [
+      "Food addiction",
+      "Obesity"
+    ],
+    [
+      "Food addiction",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Food addiction",
+      "Eating disorders"
+    ],
+    [
+      "Food addiction",
+      "Emotional eating"
+    ],
+    [
+      "Metabolic flexibility",
+      "Insulin sensitivity"
+    ],
+    [
+      "Metabolic flexibility",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Food literacy",
+      "Healthy eating"
+    ],
+    [
+      "Food literacy",
+      "Supportive food environment"
+    ],
+    [
+      "Food literacy",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food literacy",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food literacy",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food literacy",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food literacy",
+      "Unhealthy foods are cheaper than healthy ones"
+    ]
+  ],
+  "run_name": "algo2_sg3_sg1_rep1_cond01101"
+}

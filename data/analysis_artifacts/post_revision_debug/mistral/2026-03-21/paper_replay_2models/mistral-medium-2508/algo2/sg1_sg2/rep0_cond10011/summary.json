@@ -1,0 +1,379 @@
+{
+  "expanded_labels": [
+    "Urban planning for physical activity",
+    "Nutritional education programs",
+    "Food industry lobbying",
+    "Body positivity movement",
+    "Subsidies for healthy food production",
+    "Accessibility of recreational facilities",
+    "Food deserts",
+    "Nutritional labeling",
+    "Corporate influence on dietary guidelines",
+    "Community gardens",
+    "Government policies on food production",
+    "Impact of social media on body image",
+    "Urban green spaces and mental health",
+    "Food pricing strategies",
+    "School-based physical activity programs"
+  ],
+  "final_similarity": 0.8005804399450194,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional education programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Government policies on food production"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food industry lobbying"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Aesthetics",
+      "Urban green spaces and mental health"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body positivity movement"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Urban planning for physical activity",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Nutritional education programs",
+      "Healthy eating"
+    ],
+    [
+      "Food industry lobbying",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Body positivity movement",
+      "Mental well-being"
+    ],
+    [
+      "Subsidies for healthy food production",
+      "Government policies on food production"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Nutritional labeling",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Corporate influence on dietary guidelines",
+      "Government policies on food production"
+    ],
+    [
+      "Community gardens",
+      "Availability of healthy foods"
+    ],
+    [
+      "Government policies on food production",
+      "Food pricing strategies"
+    ],
+    [
+      "Impact of social media on body image",
+      "Poor body image"
+    ],
+    [
+      "Urban green spaces and mental health",
+      "Mental well-being"
+    ],
+    [
+      "Food pricing strategies",
+      "Cost of healthy foods"
+    ],
+    [
+      "School-based physical activity programs",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional education programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Government policies on food production"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food industry lobbying"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Aesthetics",
+      "Urban green spaces and mental health"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body positivity movement"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Urban planning for physical activity",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Nutritional education programs",
+      "Healthy eating"
+    ],
+    [
+      "Food industry lobbying",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Body positivity movement",
+      "Mental well-being"
+    ],
+    [
+      "Subsidies for healthy food production",
+      "Government policies on food production"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Nutritional labeling",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Corporate influence on dietary guidelines",
+      "Government policies on food production"
+    ],
+    [
+      "Community gardens",
+      "Availability of healthy foods"
+    ],
+    [
+      "Government policies on food production",
+      "Food pricing strategies"
+    ],
+    [
+      "Impact of social media on body image",
+      "Poor body image"
+    ],
+    [
+      "Urban green spaces and mental health",
+      "Mental well-being"
+    ],
+    [
+      "Food pricing strategies",
+      "Cost of healthy foods"
+    ],
+    [
+      "School-based physical activity programs",
+      "Physical well-being"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep0_cond10011"
+}

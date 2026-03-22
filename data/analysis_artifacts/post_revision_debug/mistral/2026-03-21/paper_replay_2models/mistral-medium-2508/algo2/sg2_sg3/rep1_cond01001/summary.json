@@ -1,0 +1,670 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Psychological Stress",
+    "Health Inequality",
+    "Nutritional Psychology",
+    "Healthy Eating Habits",
+    "Body Image Acceptance",
+    "Chronic Disease Management",
+    "Health Literacy"
+  ],
+  "final_similarity": 0.7953267985563327,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Obesity"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Psychological Stress"
+    ],
+    [
+      "Psychological Stress",
+      "Stress"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Image Acceptance"
+    ],
+    [
+      "Body Image Acceptance",
+      "Body Positivity"
+    ],
+    [
+      "Body Positivity",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Socio-economic status",
+      "Health Inequality"
+    ],
+    [
+      "Health Inequality",
+      "Health Literacy"
+    ],
+    [
+      "Health Literacy",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Health Literacy",
+      "Chronic Disease Management"
+    ],
+    [
+      "Chronic Disease Management",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Nutritional Psychology",
+      "Mental well-being"
+    ],
+    [
+      "Balance",
+      "Physical well-being"
+    ],
+    [
+      "Balance",
+      "Mental well-being"
+    ],
+    [
+      "Coordination",
+      "Physical well-being"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Concentration",
+      "Health Literacy"
+    ],
+    [
+      "Physical pain",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Beta blockers",
+      "Blood pressure"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Blood pressure"
+    ],
+    [
+      "Medications",
+      "Physical well-being"
+    ],
+    [
+      "Medications",
+      "Mental well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Obesity"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Psychological Stress"
+    ],
+    [
+      "Psychological Stress",
+      "Stress"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Image Acceptance"
+    ],
+    [
+      "Body Image Acceptance",
+      "Body Positivity"
+    ],
+    [
+      "Body Positivity",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Socio-economic status",
+      "Health Inequality"
+    ],
+    [
+      "Health Inequality",
+      "Health Literacy"
+    ],
+    [
+      "Health Literacy",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Health Literacy",
+      "Chronic Disease Management"
+    ],
+    [
+      "Chronic Disease Management",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Nutritional Psychology",
+      "Mental well-being"
+    ],
+    [
+      "Balance",
+      "Physical well-being"
+    ],
+    [
+      "Balance",
+      "Mental well-being"
+    ],
+    [
+      "Coordination",
+      "Physical well-being"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Concentration",
+      "Health Literacy"
+    ],
+    [
+      "Physical pain",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Beta blockers",
+      "Blood pressure"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Blood pressure"
+    ],
+    [
+      "Medications",
+      "Physical well-being"
+    ],
+    [
+      "Medications",
+      "Mental well-being"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep1_cond01001"
+}

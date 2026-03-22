@@ -1,0 +1,419 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Eating disorders"
+    ],
+    [
+      "Inflammation",
+      "Healthy eating"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Inflammation",
+      "Emotional eating"
+    ],
+    [
+      "Insulin resistance",
+      "Eating disorders"
+    ],
+    [
+      "Insulin resistance",
+      "Healthy eating"
+    ],
+    [
+      "Insulin resistance",
+      "Supportive food environment"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Eating disorders"
+    ],
+    [
+      "Dyslipidemia",
+      "Healthy eating"
+    ],
+    [
+      "Dyslipidemia",
+      "Supportive food environment"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Eating disorders"
+    ],
+    [
+      "Atherosclerosis",
+      "Healthy eating"
+    ],
+    [
+      "Atherosclerosis",
+      "Supportive food environment"
+    ],
+    [
+      "Atherosclerosis",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Eating disorders"
+    ],
+    [
+      "Blood pressure",
+      "Healthy eating"
+    ],
+    [
+      "Blood pressure",
+      "Supportive food environment"
+    ],
+    [
+      "Blood pressure",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Eating disorders"
+    ],
+    [
+      "Short sleep duration",
+      "Healthy eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Physical pain",
+      "Eating disorders"
+    ],
+    [
+      "Physical pain",
+      "Healthy eating"
+    ],
+    [
+      "Physical pain",
+      "Appetite"
+    ],
+    [
+      "Physical pain",
+      "Emotional eating"
+    ],
+    [
+      "Tiredness",
+      "Eating disorders"
+    ],
+    [
+      "Tiredness",
+      "Healthy eating"
+    ],
+    [
+      "Tiredness",
+      "Appetite"
+    ],
+    [
+      "Tiredness",
+      "Emotional eating"
+    ],
+    [
+      "Dyspnea",
+      "Eating disorders"
+    ],
+    [
+      "Dyspnea",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Supportive food environment"
+    ],
+    [
+      "Dyspnea",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Balance",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Balance",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Balance",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Balance",
+      "Prevalence of green fields"
+    ],
+    [
+      "Coordination",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Coordination",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Coordination",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Coordination",
+      "Prevalence of green fields"
+    ],
+    [
+      "Concentration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Concentration",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Concentration",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Concentration",
+      "Prevalence of green fields"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Eating disorders"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Healthy eating"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Eating disorders"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Healthy eating"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Appetite"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Emotional eating"
+    ],
+    [
+      "Asthma",
+      "Eating disorders"
+    ],
+    [
+      "Asthma",
+      "Healthy eating"
+    ],
+    [
+      "Asthma",
+      "Supportive food environment"
+    ],
+    [
+      "Asthma",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Eating disorders"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Healthy eating"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Supportive food environment"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Coronary heart diseases",
+      "Eating disorders"
+    ],
+    [
+      "Coronary heart diseases",
+      "Healthy eating"
+    ],
+    [
+      "Coronary heart diseases",
+      "Supportive food environment"
+    ],
+    [
+      "Coronary heart diseases",
+      "Marketing of healthy foods"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg3_sg1_rep4_cond11110",
+  "verified_edges": [
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Emotional eating"
+    ],
+    [
+      "Physical pain",
+      "Appetite"
+    ],
+    [
+      "Tiredness",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Eating disorders"
+    ],
+    [
+      "Dyspnea",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Balance",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Coordination",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Concentration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Concentration",
+      "Prevalence of green fields"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Healthy eating"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Eating disorders"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Emotional eating"
+    ],
+    [
+      "Asthma",
+      "Supportive food environment"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Healthy eating"
+    ],
+    [
+      "Coronary heart diseases",
+      "Eating disorders"
+    ],
+    [
+      "Coronary heart diseases",
+      "Marketing of healthy foods"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

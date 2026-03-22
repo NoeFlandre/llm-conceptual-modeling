@@ -1,0 +1,566 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Healthy Eating Habits",
+    "Cardiovascular Health",
+    "Nutritional Psychology",
+    "Exercise Physiology",
+    "Healthy Lifestyle Interventions",
+    "Psychological Impact of Diet",
+    "Adipose Tissue Biology"
+  ],
+  "final_similarity": 0.7994746621274901,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cardiovascular Health"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Cardiovascular Health"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Physical pain",
+      "Concentration"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Nutritional Psychology"
+    ],
+    [
+      "Nutritional Psychology",
+      "Psychological Impact of Diet"
+    ],
+    [
+      "Psychological Impact of Diet",
+      "Body Positivity"
+    ],
+    [
+      "Body Positivity",
+      "Mental well-being"
+    ],
+    [
+      "Physical well-being",
+      "Exercise Physiology"
+    ],
+    [
+      "Exercise Physiology",
+      "Healthy Lifestyle Interventions"
+    ],
+    [
+      "Healthy Lifestyle Interventions",
+      "Balance"
+    ],
+    [
+      "Balance",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Adipose Tissue Biology"
+    ],
+    [
+      "Adipose Tissue Biology",
+      "Dysfunctional adipose tissue"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cardiovascular Health"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Cardiovascular Health"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Physical pain",
+      "Concentration"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Nutritional Psychology"
+    ],
+    [
+      "Nutritional Psychology",
+      "Psychological Impact of Diet"
+    ],
+    [
+      "Psychological Impact of Diet",
+      "Body Positivity"
+    ],
+    [
+      "Body Positivity",
+      "Mental well-being"
+    ],
+    [
+      "Physical well-being",
+      "Exercise Physiology"
+    ],
+    [
+      "Exercise Physiology",
+      "Healthy Lifestyle Interventions"
+    ],
+    [
+      "Healthy Lifestyle Interventions",
+      "Balance"
+    ],
+    [
+      "Balance",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Adipose Tissue Biology"
+    ],
+    [
+      "Adipose Tissue Biology",
+      "Dysfunctional adipose tissue"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep3_cond11110"
+}

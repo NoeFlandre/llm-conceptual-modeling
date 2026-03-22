@@ -1,0 +1,726 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Urban planning for active lifestyles",
+    "Food labeling policies",
+    "Social determinants of health",
+    "Food industry lobbying",
+    "Accessibility of recreational spaces",
+    "Food industry subsidies",
+    "Community resilience programs",
+    "Cultural attitudes toward body image",
+    "Policy interventions for food pricing",
+    "Food literacy programs",
+    "Community gardens and urban farming",
+    "School-based nutrition education",
+    "Food desert remediation strategies",
+    "Corporate wellness programs",
+    "Food desert mapping and GIS analysis",
+    "Corporate greenwashing in food marketing",
+    "Cultural capital and food choice disparities",
+    "Intergenerational transmission of eating behaviors",
+    "Food policy advocacy coalitions"
+  ],
+  "final_similarity": 0.8060010257737396,
+  "iteration_count": 4,
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food industry subsidies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food industry subsidies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food industry lobbying",
+      "Policy interventions for food pricing"
+    ],
+    [
+      "Food industry lobbying",
+      "Food labeling policies"
+    ],
+    [
+      "Food labeling policies",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food labeling policies",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food desert remediation strategies",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food desert remediation strategies",
+      "Food deserts"
+    ],
+    [
+      "Food desert mapping and GIS analysis",
+      "Food deserts"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Prevalence of green fields",
+      "Aesthetics"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Healthy eating",
+      "Food literacy programs"
+    ],
+    [
+      "Healthy eating",
+      "School-based nutrition education"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Healthy eating"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Food industry subsidies",
+      "Healthy eating"
+    ],
+    [
+      "Food deserts",
+      "Healthy eating"
+    ],
+    [
+      "Food desert remediation strategies",
+      "Healthy eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Emotional eating"
+    ],
+    [
+      "Poor body image",
+      "Weight bias"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Pressure to be thin",
+      "Emotional eating"
+    ],
+    [
+      "Pressure to be thin",
+      "Depression"
+    ],
+    [
+      "Pressure to be thin",
+      "Mental well-being"
+    ],
+    [
+      "Emotional eating",
+      "Healthy eating"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Socio-economic status",
+      "Healthy eating"
+    ],
+    [
+      "Socio-economic status",
+      "Physical well-being"
+    ],
+    [
+      "Socio-economic status",
+      "Mental well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Healthy eating"
+    ],
+    [
+      "Social determinants of health",
+      "Physical well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Mental well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Food deserts"
+    ],
+    [
+      "Community resilience programs",
+      "Resilience"
+    ],
+    [
+      "Community resilience programs",
+      "Mental well-being"
+    ],
+    [
+      "Community resilience programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Mental well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Healthy eating"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Cultural capital and food choice disparities",
+      "Socio-economic status"
+    ],
+    [
+      "Cultural capital and food choice disparities",
+      "Healthy eating"
+    ],
+    [
+      "Intergenerational transmission of eating behaviors",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Intergenerational transmission of eating behaviors",
+      "Healthy eating"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Policy interventions for food pricing"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Food labeling policies"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Public support and demand for healthy products"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food industry subsidies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food industry subsidies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food industry lobbying",
+      "Policy interventions for food pricing"
+    ],
+    [
+      "Food industry lobbying",
+      "Food labeling policies"
+    ],
+    [
+      "Food labeling policies",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food labeling policies",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food desert remediation strategies",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food desert remediation strategies",
+      "Food deserts"
+    ],
+    [
+      "Food desert mapping and GIS analysis",
+      "Food deserts"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Prevalence of green fields",
+      "Aesthetics"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Healthy eating",
+      "Food literacy programs"
+    ],
+    [
+      "Healthy eating",
+      "School-based nutrition education"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Healthy eating"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Food industry subsidies",
+      "Healthy eating"
+    ],
+    [
+      "Food deserts",
+      "Healthy eating"
+    ],
+    [
+      "Food desert remediation strategies",
+      "Healthy eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Emotional eating"
+    ],
+    [
+      "Poor body image",
+      "Weight bias"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Pressure to be thin",
+      "Emotional eating"
+    ],
+    [
+      "Pressure to be thin",
+      "Depression"
+    ],
+    [
+      "Pressure to be thin",
+      "Mental well-being"
+    ],
+    [
+      "Emotional eating",
+      "Healthy eating"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Socio-economic status",
+      "Healthy eating"
+    ],
+    [
+      "Socio-economic status",
+      "Physical well-being"
+    ],
+    [
+      "Socio-economic status",
+      "Mental well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Healthy eating"
+    ],
+    [
+      "Social determinants of health",
+      "Physical well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Mental well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Food deserts"
+    ],
+    [
+      "Community resilience programs",
+      "Resilience"
+    ],
+    [
+      "Community resilience programs",
+      "Mental well-being"
+    ],
+    [
+      "Community resilience programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Mental well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Healthy eating"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Cultural capital and food choice disparities",
+      "Socio-economic status"
+    ],
+    [
+      "Cultural capital and food choice disparities",
+      "Healthy eating"
+    ],
+    [
+      "Intergenerational transmission of eating behaviors",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Intergenerational transmission of eating behaviors",
+      "Healthy eating"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Policy interventions for food pricing"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Food labeling policies"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food policy advocacy coalitions",
+      "Public support and demand for healthy products"
+    ]
+  ]
+}

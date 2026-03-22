@@ -1,0 +1,108 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Supportive food environment",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Mental well-being"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg1_sg2_rep4_cond11111",
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ]
+  ]
+}

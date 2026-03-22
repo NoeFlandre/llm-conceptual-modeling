@@ -1,0 +1,910 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Social determinants of health",
+    "Food marketing regulations",
+    "Accessibility of recreational spaces",
+    "Food industry lobbying influence",
+    "Cultural attitudes toward body weight",
+    "Nutrition education in schools",
+    "Food pricing policies"
+  ],
+  "final_similarity": 0.8127290867541248,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban green spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Food marketing regulations"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Food pricing policies"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food marketing regulations",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food marketing regulations",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food marketing regulations",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Nutrition education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Nutrition education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Healthy eating"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Food literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Food deserts",
+      "Socio-economic status"
+    ],
+    [
+      "Urban green spaces",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Urban green spaces",
+      "Aesthetics"
+    ],
+    [
+      "Urban green spaces",
+      "Physical well-being"
+    ],
+    [
+      "Urban green spaces",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Supportive food environment",
+      "Cost of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Emotional eating"
+    ],
+    [
+      "Healthy eating",
+      "Poor body image"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Healthy eating"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Emotional eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Poor body image"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Pressure to be thin"
+    ],
+    [
+      "Emotional eating",
+      "Eating disorders"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Emotional eating"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Appetite",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Pressure to be thin",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Depression"
+    ],
+    [
+      "Pressure to be thin",
+      "Mental well-being"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Pressure to be thin",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Depression"
+    ],
+    [
+      "Weight bias",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Eating disorders"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Control",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Depression"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Food deserts"
+    ],
+    [
+      "Social determinants of health",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Social determinants of health",
+      "Availability of healthy foods"
+    ],
+    [
+      "Social determinants of health",
+      "Food literacy programs"
+    ],
+    [
+      "Social determinants of health",
+      "Mental well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban green spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Food marketing regulations"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Food pricing policies"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food marketing regulations",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food marketing regulations",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food marketing regulations",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Nutrition education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Nutrition education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Healthy eating"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Food literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Food deserts",
+      "Socio-economic status"
+    ],
+    [
+      "Urban green spaces",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Urban green spaces",
+      "Aesthetics"
+    ],
+    [
+      "Urban green spaces",
+      "Physical well-being"
+    ],
+    [
+      "Urban green spaces",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Supportive food environment",
+      "Cost of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Emotional eating"
+    ],
+    [
+      "Healthy eating",
+      "Poor body image"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Healthy eating"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Emotional eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Poor body image"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Pressure to be thin"
+    ],
+    [
+      "Emotional eating",
+      "Eating disorders"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Emotional eating"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Appetite",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Pressure to be thin",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Depression"
+    ],
+    [
+      "Pressure to be thin",
+      "Mental well-being"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Pressure to be thin",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Depression"
+    ],
+    [
+      "Weight bias",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Eating disorders"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Control",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Depression"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Food deserts"
+    ],
+    [
+      "Social determinants of health",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Social determinants of health",
+      "Availability of healthy foods"
+    ],
+    [
+      "Social determinants of health",
+      "Food literacy programs"
+    ],
+    [
+      "Social determinants of health",
+      "Mental well-being"
+    ],
+    [
+      "Social determinants of health",
+      "Physical well-being"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep4_cond10000"
+}

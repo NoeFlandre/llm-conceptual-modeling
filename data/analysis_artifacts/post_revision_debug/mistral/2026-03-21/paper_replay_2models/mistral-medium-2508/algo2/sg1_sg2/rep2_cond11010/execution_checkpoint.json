@@ -1,0 +1,297 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Subsidies",
+    "Body Positivity Movements",
+    "Accessibility of Recreational Facilities",
+    "Urban Green Spaces",
+    "Food Deserts",
+    "Nutritional Labeling",
+    "Community Gardens",
+    "Active Transportation Policies",
+    "Farmers Markets",
+    "School Nutrition Programs",
+    "Workplace Wellness Initiatives",
+    "Public Health Campaigns for Physical Activity",
+    "Food Swamps"
+  ],
+  "final_similarity": 0.766027918425511,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "School Nutrition Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Availability of healthy foods",
+      "Farmers Markets"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Food Deserts"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Swamps"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Mental well-being",
+      "Workplace Wellness Initiatives"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Nutritional Education Programs",
+      "School Nutrition Programs"
+    ],
+    [
+      "Urban Green Spaces",
+      "Community Gardens"
+    ],
+    [
+      "Food Deserts",
+      "Food Swamps"
+    ],
+    [
+      "Nutritional Labeling",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Community Gardens",
+      "Farmers Markets"
+    ],
+    [
+      "Active Transportation Policies",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Workplace Wellness Initiatives",
+      "Public Health Campaigns for Physical Activity"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "School Nutrition Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Availability of healthy foods",
+      "Farmers Markets"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Food Deserts"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Swamps"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Mental well-being",
+      "Workplace Wellness Initiatives"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Nutritional Education Programs",
+      "School Nutrition Programs"
+    ],
+    [
+      "Urban Green Spaces",
+      "Community Gardens"
+    ],
+    [
+      "Food Deserts",
+      "Food Swamps"
+    ],
+    [
+      "Nutritional Labeling",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Community Gardens",
+      "Farmers Markets"
+    ],
+    [
+      "Active Transportation Policies",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Workplace Wellness Initiatives",
+      "Public Health Campaigns for Physical Activity"
+    ]
+  ]
+}

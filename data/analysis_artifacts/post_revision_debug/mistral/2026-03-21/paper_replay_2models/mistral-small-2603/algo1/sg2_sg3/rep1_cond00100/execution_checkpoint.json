@@ -1,0 +1,280 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Inflammation",
+      "Mental well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Physical well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Mental well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Physical well-being"
+    ],
+    [
+      "Blood pressure",
+      "Mental well-being"
+    ],
+    [
+      "Blood pressure",
+      "Physical well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Physical well-being"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Physical pain",
+      "Physical well-being"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Resilience",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Obesity"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Insulin resistance"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Insulin resistance"
+    ],
+    [
+      "Poor body image",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Insulin resistance"
+    ],
+    [
+      "Depression",
+      "Inflammation"
+    ],
+    [
+      "Depression",
+      "Insulin resistance"
+    ],
+    [
+      "Stress",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Insulin resistance"
+    ],
+    [
+      "Socio-economic status",
+      "Inflammation"
+    ],
+    [
+      "Socio-economic status",
+      "Insulin resistance"
+    ],
+    [
+      "Pressure to be thin",
+      "Inflammation"
+    ],
+    [
+      "Pressure to be thin",
+      "Insulin resistance"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Physical pain",
+      "Physical well-being"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Resilience",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Obesity"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Insulin resistance"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Insulin resistance"
+    ],
+    [
+      "Poor body image",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Insulin resistance"
+    ],
+    [
+      "Depression",
+      "Inflammation"
+    ],
+    [
+      "Depression",
+      "Insulin resistance"
+    ],
+    [
+      "Stress",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Insulin resistance"
+    ],
+    [
+      "Socio-economic status",
+      "Inflammation"
+    ],
+    [
+      "Socio-economic status",
+      "Insulin resistance"
+    ],
+    [
+      "Pressure to be thin",
+      "Inflammation"
+    ],
+    [
+      "Pressure to be thin",
+      "Insulin resistance"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

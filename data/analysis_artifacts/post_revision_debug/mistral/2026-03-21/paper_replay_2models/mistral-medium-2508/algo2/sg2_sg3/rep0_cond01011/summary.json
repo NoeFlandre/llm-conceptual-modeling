@@ -1,0 +1,797 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Exercise Physiology",
+    "Psychological Counseling",
+    "Nutritional Psychology",
+    "Health at Every Size",
+    "Mindful Eating",
+    "Adiposity and Inflammation",
+    "Social Determinants of Health",
+    "Nutritional Inequality",
+    "Body Image Counseling",
+    "Chronic Stress and Metabolism",
+    "Adipose Tissue Dysfunction",
+    "Healthy Lifestyle Interventions",
+    "Nutritional Equity",
+    "Body Diversity Advocacy",
+    "Metabolic Health Education",
+    "Integrative Weight Management",
+    "Psychosocial Health Impact",
+    "Nutritional Literacy",
+    "Body Acceptance",
+    "Metabolic Health Disparities",
+    "Psychological Resilience",
+    "Adipose Tissue Biology"
+  ],
+  "final_similarity": 0.8011251219199501,
+  "iteration_count": 5,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Socio-economic status"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional Inequality"
+    ],
+    [
+      "Nutritional Inequality",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Lifestyle Interventions"
+    ],
+    [
+      "Healthy Lifestyle Interventions",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose Tissue Dysfunction"
+    ],
+    [
+      "Adipose Tissue Dysfunction",
+      "Adiposity and Inflammation"
+    ],
+    [
+      "Adiposity and Inflammation",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Physical pain",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Stimulants"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Body Positivity",
+      "Body Acceptance"
+    ],
+    [
+      "Body Acceptance",
+      "Body Diversity Advocacy"
+    ],
+    [
+      "Body Diversity Advocacy",
+      "Body Image Counseling"
+    ],
+    [
+      "Body Image Counseling",
+      "Poor body image"
+    ],
+    [
+      "Exercise Physiology",
+      "Physical well-being"
+    ],
+    [
+      "Psychological Counseling",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Nutritional Education"
+    ],
+    [
+      "Health at Every Size",
+      "Body Positivity"
+    ],
+    [
+      "Mindful Eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Adiposity and Inflammation",
+      "Inflammation"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ],
+    [
+      "Nutritional Inequality",
+      "Nutritional Literacy"
+    ],
+    [
+      "Chronic Stress and Metabolism",
+      "Stress"
+    ],
+    [
+      "Adipose Tissue Biology",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Healthy Lifestyle Interventions",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Equity",
+      "Nutritional Inequality"
+    ],
+    [
+      "Metabolic Health Education",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Integrative Weight Management",
+      "Healthy Lifestyle Interventions"
+    ],
+    [
+      "Psychosocial Health Impact",
+      "Mental well-being"
+    ],
+    [
+      "Metabolic Health Disparities",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Psychological Resilience",
+      "Resilience"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Socio-economic status"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional Inequality"
+    ],
+    [
+      "Nutritional Inequality",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Lifestyle Interventions"
+    ],
+    [
+      "Healthy Lifestyle Interventions",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose Tissue Dysfunction"
+    ],
+    [
+      "Adipose Tissue Dysfunction",
+      "Adiposity and Inflammation"
+    ],
+    [
+      "Adiposity and Inflammation",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Physical pain",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Stimulants"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Body Positivity",
+      "Body Acceptance"
+    ],
+    [
+      "Body Acceptance",
+      "Body Diversity Advocacy"
+    ],
+    [
+      "Body Diversity Advocacy",
+      "Body Image Counseling"
+    ],
+    [
+      "Body Image Counseling",
+      "Poor body image"
+    ],
+    [
+      "Exercise Physiology",
+      "Physical well-being"
+    ],
+    [
+      "Psychological Counseling",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Nutritional Education"
+    ],
+    [
+      "Health at Every Size",
+      "Body Positivity"
+    ],
+    [
+      "Mindful Eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Adiposity and Inflammation",
+      "Inflammation"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ],
+    [
+      "Nutritional Inequality",
+      "Nutritional Literacy"
+    ],
+    [
+      "Chronic Stress and Metabolism",
+      "Stress"
+    ],
+    [
+      "Adipose Tissue Biology",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Healthy Lifestyle Interventions",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Equity",
+      "Nutritional Inequality"
+    ],
+    [
+      "Metabolic Health Education",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Integrative Weight Management",
+      "Healthy Lifestyle Interventions"
+    ],
+    [
+      "Psychosocial Health Impact",
+      "Mental well-being"
+    ],
+    [
+      "Metabolic Health Disparities",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Psychological Resilience",
+      "Resilience"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep0_cond01011"
+}

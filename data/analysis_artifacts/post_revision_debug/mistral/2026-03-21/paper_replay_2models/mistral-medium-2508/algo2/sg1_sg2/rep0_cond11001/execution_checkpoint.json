@@ -1,0 +1,377 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Subsidies",
+    "Body Positivity Movements",
+    "Accessibility of Recreational Facilities",
+    "Urban Green Spaces",
+    "Nutritional Labeling",
+    "Food Deserts",
+    "Community Gardens",
+    "Active Transportation Policies",
+    "Farmers Markets",
+    "School Nutrition Programs",
+    "Workplace Wellness Initiatives",
+    "Public Health Campaigns for Physical Activity",
+    "Food Taxation Policies"
+  ],
+  "final_similarity": 0.771577478134294,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Taxation Policies"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Workplace Wellness Initiatives"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Availability of healthy foods",
+      "Farmers Markets"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Food Taxation Policies"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Food Taxation Policies"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Workplace Wellness Initiatives"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Food Deserts"
+    ],
+    [
+      "Mental well-being",
+      "School Nutrition Programs"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Healthy eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Poor body image",
+      "Weight bias"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Urban Green Spaces",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "Food Deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Community Gardens",
+      "Supportive food environment"
+    ],
+    [
+      "Active Transportation Policies",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Farmers Markets",
+      "Availability of healthy foods"
+    ],
+    [
+      "School Nutrition Programs",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Workplace Wellness Initiatives",
+      "Physical well-being"
+    ],
+    [
+      "Public Health Campaigns for Physical Activity",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Food Taxation Policies",
+      "Consumer demand for regulations"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Taxation Policies"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Workplace Wellness Initiatives"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Availability of healthy foods",
+      "Farmers Markets"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Food Taxation Policies"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Food Taxation Policies"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public Health Campaigns for Physical Activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Workplace Wellness Initiatives"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Food Deserts"
+    ],
+    [
+      "Mental well-being",
+      "School Nutrition Programs"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Healthy eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Poor body image",
+      "Weight bias"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Urban Green Spaces",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "Food Deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Community Gardens",
+      "Supportive food environment"
+    ],
+    [
+      "Active Transportation Policies",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Farmers Markets",
+      "Availability of healthy foods"
+    ],
+    [
+      "School Nutrition Programs",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Workplace Wellness Initiatives",
+      "Physical well-being"
+    ],
+    [
+      "Public Health Campaigns for Physical Activity",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Food Taxation Policies",
+      "Consumer demand for regulations"
+    ]
+  ]
+}

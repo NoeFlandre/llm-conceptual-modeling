@@ -1,0 +1,290 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Inflammation",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Eating disorders"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Dyslipidemia",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Availability of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Blood pressure",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Blood pressure",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Blood pressure",
+      "Prevalence of green fields"
+    ],
+    [
+      "Blood pressure",
+      "Aesthetics"
+    ],
+    [
+      "Asthma",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Asthma",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Asthma",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Asthma",
+      "Prevalence of green fields"
+    ],
+    [
+      "Asthma",
+      "Aesthetics"
+    ],
+    [
+      "Dyspnea",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Dyspnea",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Dyspnea",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Dyspnea",
+      "Prevalence of green fields"
+    ],
+    [
+      "Dyspnea",
+      "Aesthetics"
+    ],
+    [
+      "Physical pain",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Physical pain",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Physical pain",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Physical pain",
+      "Prevalence of green fields"
+    ],
+    [
+      "Physical pain",
+      "Aesthetics"
+    ],
+    [
+      "Tiredness",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Tiredness",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Tiredness",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Tiredness",
+      "Prevalence of green fields"
+    ],
+    [
+      "Tiredness",
+      "Aesthetics"
+    ],
+    [
+      "Concentration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Concentration",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Concentration",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Concentration",
+      "Prevalence of green fields"
+    ],
+    [
+      "Concentration",
+      "Aesthetics"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Aesthetics"
+    ],
+    [
+      "Balance",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Balance",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Balance",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Balance",
+      "Prevalence of green fields"
+    ],
+    [
+      "Balance",
+      "Aesthetics"
+    ],
+    [
+      "Coordination",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Coordination",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Coordination",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Coordination",
+      "Prevalence of green fields"
+    ],
+    [
+      "Coordination",
+      "Aesthetics"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Inflammation",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ]
+  ]
+}

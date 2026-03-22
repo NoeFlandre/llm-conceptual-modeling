@@ -1,0 +1,300 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Inflammation",
+      "Healthy eating"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Inflammation",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Inflammation",
+      "Aesthetics"
+    ],
+    [
+      "Inflammation",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Inflammation",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Inflammation",
+      "Prevalence of green fields"
+    ],
+    [
+      "Insulin resistance",
+      "Healthy eating"
+    ],
+    [
+      "Insulin resistance",
+      "Cost of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Availability of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Healthy eating"
+    ],
+    [
+      "Atherosclerosis",
+      "Cost of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Availability of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Healthy eating"
+    ],
+    [
+      "Dyslipidemia",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Healthy eating"
+    ],
+    [
+      "Blood pressure",
+      "Cost of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Availability of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Healthy eating"
+    ],
+    [
+      "Short sleep duration",
+      "Cost of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Availability of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Balance",
+      "Healthy eating"
+    ],
+    [
+      "Balance",
+      "Cost of healthy foods"
+    ],
+    [
+      "Balance",
+      "Availability of healthy foods"
+    ],
+    [
+      "Balance",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Coordination",
+      "Healthy eating"
+    ],
+    [
+      "Coordination",
+      "Cost of healthy foods"
+    ],
+    [
+      "Coordination",
+      "Availability of healthy foods"
+    ],
+    [
+      "Coordination",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Tiredness",
+      "Healthy eating"
+    ],
+    [
+      "Tiredness",
+      "Cost of healthy foods"
+    ],
+    [
+      "Tiredness",
+      "Availability of healthy foods"
+    ],
+    [
+      "Tiredness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Concentration",
+      "Healthy eating"
+    ],
+    [
+      "Concentration",
+      "Cost of healthy foods"
+    ],
+    [
+      "Concentration",
+      "Availability of healthy foods"
+    ],
+    [
+      "Concentration",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Physical pain",
+      "Healthy eating"
+    ],
+    [
+      "Physical pain",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical pain",
+      "Availability of healthy foods"
+    ],
+    [
+      "Physical pain",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Healthy eating"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Marketing of healthy foods"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg3_sg1_rep2_cond00110",
+  "verified_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ]
+  ]
+}

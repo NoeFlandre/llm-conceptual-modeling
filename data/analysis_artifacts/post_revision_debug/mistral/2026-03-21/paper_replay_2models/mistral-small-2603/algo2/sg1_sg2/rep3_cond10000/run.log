@@ -1,0 +1,6 @@
+2026-03-21T17:26:57.244019+00:00 level=INFO run=algo2_sg1_sg2_rep3_cond10000 algorithm=algo2 stage=manifest message=manifest written
+2026-03-21T17:26:57.246342+00:00 level=INFO run=algo2_sg1_sg2_rep3_cond10000 algorithm=algo2 stage=label_prompt_written message=prompt written to label_expansion_prompt.txt
+2026-03-21T17:27:12.356871+00:00 level=INFO run=algo2_sg1_sg2_rep3_cond10000 algorithm=algo2 stage=execution_completed message=checkpoint written to execution_checkpoint.json
+2026-03-21T17:27:12.358598+00:00 level=INFO run=algo2_sg1_sg2_rep3_cond10000 algorithm=algo2 stage=edge_prompt_written message=prompt written to edge_suggestion_prompt.txt
+2026-03-21T17:27:12.359870+00:00 level=INFO run=algo2_sg1_sg2_rep3_cond10000 algorithm=algo2 stage=summary_written message=checkpoint written to summary.json
+2026-03-21T17:27:12.360536+00:00 level=INFO run=algo2_sg1_sg2_rep3_cond10000 algorithm=algo2 stage=complete message=probe finished

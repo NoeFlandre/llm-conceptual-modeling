@@ -1,0 +1,304 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Inflammation",
+      "Mental well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Control"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Blood pressure",
+      "Physical well-being"
+    ],
+    [
+      "Blood pressure",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Control"
+    ],
+    [
+      "Short sleep duration",
+      "Resilience"
+    ],
+    [
+      "Physical pain",
+      "Physical well-being"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Physical pain",
+      "Control"
+    ],
+    [
+      "Physical pain",
+      "Resilience"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Control"
+    ],
+    [
+      "Dyspnea",
+      "Physical well-being"
+    ],
+    [
+      "Dyspnea",
+      "Mental well-being"
+    ],
+    [
+      "Asthma",
+      "Physical well-being"
+    ],
+    [
+      "Asthma",
+      "Mental well-being"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Physical well-being"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Mental well-being"
+    ],
+    [
+      "Coronary heart diseases",
+      "Physical well-being"
+    ],
+    [
+      "Coronary heart diseases",
+      "Mental well-being"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical well-being"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Mental well-being"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Physical well-being"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Mental well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Weight bias"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Stress"
+    ],
+    [
+      "Medications",
+      "Weight bias"
+    ],
+    [
+      "Medications",
+      "Poor body image"
+    ],
+    [
+      "Medications",
+      "Depression"
+    ],
+    [
+      "Medications",
+      "Stress"
+    ],
+    [
+      "Medications",
+      "Socio-economic status"
+    ],
+    [
+      "Balance",
+      "Weight bias"
+    ],
+    [
+      "Balance",
+      "Poor body image"
+    ],
+    [
+      "Balance",
+      "Depression"
+    ],
+    [
+      "Balance",
+      "Stress"
+    ],
+    [
+      "Coordination",
+      "Weight bias"
+    ],
+    [
+      "Coordination",
+      "Poor body image"
+    ],
+    [
+      "Coordination",
+      "Depression"
+    ],
+    [
+      "Coordination",
+      "Stress"
+    ],
+    [
+      "Concentration",
+      "Weight bias"
+    ],
+    [
+      "Concentration",
+      "Poor body image"
+    ],
+    [
+      "Concentration",
+      "Depression"
+    ],
+    [
+      "Concentration",
+      "Stress"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg2_sg3_rep1_cond10010",
+  "verified_edges": [
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Medications",
+      "Weight bias"
+    ],
+    [
+      "Medications",
+      "Poor body image"
+    ],
+    [
+      "Medications",
+      "Depression"
+    ],
+    [
+      "Medications",
+      "Stress"
+    ],
+    [
+      "Medications",
+      "Socio-economic status"
+    ],
+    [
+      "Balance",
+      "Weight bias"
+    ],
+    [
+      "Balance",
+      "Poor body image"
+    ],
+    [
+      "Balance",
+      "Depression"
+    ],
+    [
+      "Balance",
+      "Stress"
+    ],
+    [
+      "Coordination",
+      "Weight bias"
+    ],
+    [
+      "Coordination",
+      "Poor body image"
+    ],
+    [
+      "Coordination",
+      "Depression"
+    ],
+    [
+      "Coordination",
+      "Stress"
+    ],
+    [
+      "Concentration",
+      "Weight bias"
+    ],
+    [
+      "Concentration",
+      "Poor body image"
+    ],
+    [
+      "Concentration",
+      "Depression"
+    ]
+  ]
+}

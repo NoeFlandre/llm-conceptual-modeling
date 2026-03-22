@@ -1,0 +1,480 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Food swamps",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Body positivity movements",
+    "Accessibility of recreational spaces",
+    "Food industry lobbying",
+    "Nutritional education in schools",
+    "Social determinants of health",
+    "Urban planning for active lifestyles",
+    "Food deserts in urban areas",
+    "Community gardens and urban farming initiatives",
+    "Corporate influence on public health policies",
+    "Cultural attitudes toward body size and health",
+    "Policy incentives for healthy food production",
+    "Food deserts in rural areas",
+    "Food insecurity",
+    "Food labeling transparency",
+    "Gentrification and food access",
+    "Food waste reduction initiatives"
+  ],
+  "final_similarity": 0.7982519650798899,
+  "iteration_count": 4,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in urban areas",
+      "Food deserts"
+    ],
+    [
+      "Food deserts in rural areas",
+      "Food deserts"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Community gardens and urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food insecurity"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food insecurity",
+      "Eating disorders"
+    ],
+    [
+      "Food insecurity",
+      "Emotional eating"
+    ],
+    [
+      "Food insecurity",
+      "Poor body image"
+    ],
+    [
+      "Food insecurity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Food insecurity",
+      "Supportive food environment"
+    ],
+    [
+      "Food insecurity",
+      "Healthy eating"
+    ],
+    [
+      "Food insecurity",
+      "Mental well-being"
+    ],
+    [
+      "Food insecurity",
+      "Physical well-being"
+    ],
+    [
+      "Food insecurity",
+      "Stress"
+    ],
+    [
+      "Food insecurity",
+      "Depression"
+    ],
+    [
+      "Food insecurity",
+      "Resilience"
+    ],
+    [
+      "Food insecurity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Food insecurity",
+      "Pressure to be thin"
+    ],
+    [
+      "Food insecurity",
+      "Poor body image"
+    ],
+    [
+      "Food insecurity",
+      "Body positivity movements"
+    ],
+    [
+      "Food insecurity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food insecurity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food insecurity",
+      "Nutritional education in schools"
+    ],
+    [
+      "Food insecurity",
+      "Food literacy programs"
+    ],
+    [
+      "Food insecurity",
+      "Gentrification and food access"
+    ],
+    [
+      "Food insecurity",
+      "Food labeling transparency"
+    ],
+    [
+      "Food insecurity",
+      "Food waste reduction initiatives"
+    ],
+    [
+      "Food insecurity",
+      "Corporate influence on public health policies"
+    ],
+    [
+      "Food insecurity",
+      "Policy incentives for healthy food production"
+    ],
+    [
+      "Food insecurity",
+      "Social determinants of health"
+    ],
+    [
+      "Food insecurity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Food insecurity",
+      "Restrictive covenants"
+    ],
+    [
+      "Food insecurity",
+      "Aesthetics"
+    ],
+    [
+      "Food insecurity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food insecurity",
+      "Control"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in urban areas",
+      "Food deserts"
+    ],
+    [
+      "Food deserts in rural areas",
+      "Food deserts"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Community gardens and urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food insecurity"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food insecurity",
+      "Eating disorders"
+    ],
+    [
+      "Food insecurity",
+      "Emotional eating"
+    ],
+    [
+      "Food insecurity",
+      "Poor body image"
+    ],
+    [
+      "Food insecurity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Food insecurity",
+      "Supportive food environment"
+    ],
+    [
+      "Food insecurity",
+      "Healthy eating"
+    ],
+    [
+      "Food insecurity",
+      "Mental well-being"
+    ],
+    [
+      "Food insecurity",
+      "Physical well-being"
+    ],
+    [
+      "Food insecurity",
+      "Stress"
+    ],
+    [
+      "Food insecurity",
+      "Depression"
+    ],
+    [
+      "Food insecurity",
+      "Resilience"
+    ],
+    [
+      "Food insecurity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Food insecurity",
+      "Pressure to be thin"
+    ],
+    [
+      "Food insecurity",
+      "Poor body image"
+    ],
+    [
+      "Food insecurity",
+      "Body positivity movements"
+    ],
+    [
+      "Food insecurity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food insecurity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food insecurity",
+      "Nutritional education in schools"
+    ],
+    [
+      "Food insecurity",
+      "Food literacy programs"
+    ],
+    [
+      "Food insecurity",
+      "Gentrification and food access"
+    ],
+    [
+      "Food insecurity",
+      "Food labeling transparency"
+    ],
+    [
+      "Food insecurity",
+      "Food waste reduction initiatives"
+    ],
+    [
+      "Food insecurity",
+      "Corporate influence on public health policies"
+    ],
+    [
+      "Food insecurity",
+      "Policy incentives for healthy food production"
+    ],
+    [
+      "Food insecurity",
+      "Social determinants of health"
+    ],
+    [
+      "Food insecurity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Food insecurity",
+      "Restrictive covenants"
+    ],
+    [
+      "Food insecurity",
+      "Aesthetics"
+    ],
+    [
+      "Food insecurity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food insecurity",
+      "Control"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep0_cond00111"
+}

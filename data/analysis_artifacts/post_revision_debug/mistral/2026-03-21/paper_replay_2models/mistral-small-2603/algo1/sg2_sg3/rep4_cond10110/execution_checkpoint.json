@@ -1,0 +1,182 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Dyspnea"
+    ],
+    [
+      "Control",
+      "Coordination"
+    ],
+    [
+      "Socio-economic status",
+      "Short sleep duration"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Resilience",
+      "Concentration"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Weight bias",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Poor body image"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood glucose level",
+      "Physical well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Physical well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Resilience"
+    ],
+    [
+      "Balance",
+      "Mental well-being"
+    ],
+    [
+      "Medications",
+      "Physical well-being"
+    ],
+    [
+      "Sodium intake",
+      "Socio-economic status"
+    ],
+    [
+      "Stimulants",
+      "Control"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Dyspnea"
+    ],
+    [
+      "Control",
+      "Coordination"
+    ],
+    [
+      "Socio-economic status",
+      "Short sleep duration"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Resilience",
+      "Concentration"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Weight bias",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Poor body image"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Blood glucose level",
+      "Physical well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Physical well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Resilience"
+    ],
+    [
+      "Medications",
+      "Physical well-being"
+    ],
+    [
+      "Stimulants",
+      "Control"
+    ]
+  ]
+}

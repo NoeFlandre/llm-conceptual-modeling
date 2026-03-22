@@ -1,0 +1,109 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Supportive food environment",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Weight bias"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

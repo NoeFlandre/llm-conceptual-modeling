@@ -1,0 +1,534 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Psychological Stress Management",
+    "Cardiovascular Health",
+    "Nutritional Psychology",
+    "Healthy Eating Habits",
+    "Body Image Acceptance",
+    "Mindful Eating",
+    "Health at Every Size"
+  ],
+  "final_similarity": 0.8028821614299908,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Mental well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Pressure to be thin"
+    ],
+    [
+      "Socio-economic status",
+      "Stress"
+    ],
+    [
+      "Socio-economic status",
+      "Access to Nutritional Education"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Asthma",
+      "Dyspnea"
+    ],
+    [
+      "Asthma",
+      "Tiredness"
+    ],
+    [
+      "Respiratory diseases",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory diseases",
+      "Tiredness"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood glucose level"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Inflammation"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Nutritional Education",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Body Positivity",
+      "Body Image Acceptance"
+    ],
+    [
+      "Body Positivity",
+      "Mental well-being"
+    ],
+    [
+      "Psychological Stress Management",
+      "Stress"
+    ],
+    [
+      "Psychological Stress Management",
+      "Mental well-being"
+    ],
+    [
+      "Cardiovascular Health",
+      "Physical well-being"
+    ],
+    [
+      "Cardiovascular Health",
+      "Blood pressure"
+    ],
+    [
+      "Nutritional Psychology",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Blood glucose level"
+    ],
+    [
+      "Mindful Eating",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Mindful Eating",
+      "Mental well-being"
+    ],
+    [
+      "Health at Every Size",
+      "Body Image Acceptance"
+    ],
+    [
+      "Health at Every Size",
+      "Physical well-being"
+    ],
+    [
+      "Health at Every Size",
+      "Mental well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Mental well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Pressure to be thin"
+    ],
+    [
+      "Socio-economic status",
+      "Stress"
+    ],
+    [
+      "Socio-economic status",
+      "Access to Nutritional Education"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Asthma",
+      "Dyspnea"
+    ],
+    [
+      "Asthma",
+      "Tiredness"
+    ],
+    [
+      "Respiratory diseases",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory diseases",
+      "Tiredness"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood glucose level"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Inflammation"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Nutritional Education",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Body Positivity",
+      "Body Image Acceptance"
+    ],
+    [
+      "Body Positivity",
+      "Mental well-being"
+    ],
+    [
+      "Psychological Stress Management",
+      "Stress"
+    ],
+    [
+      "Psychological Stress Management",
+      "Mental well-being"
+    ],
+    [
+      "Cardiovascular Health",
+      "Physical well-being"
+    ],
+    [
+      "Cardiovascular Health",
+      "Blood pressure"
+    ],
+    [
+      "Nutritional Psychology",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Physical well-being"
+    ],
+    [
+      "Healthy Eating Habits",
+      "Blood glucose level"
+    ],
+    [
+      "Mindful Eating",
+      "Healthy Eating Habits"
+    ],
+    [
+      "Mindful Eating",
+      "Mental well-being"
+    ],
+    [
+      "Health at Every Size",
+      "Body Image Acceptance"
+    ],
+    [
+      "Health at Every Size",
+      "Physical well-being"
+    ],
+    [
+      "Health at Every Size",
+      "Mental well-being"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep1_cond11100"
+}

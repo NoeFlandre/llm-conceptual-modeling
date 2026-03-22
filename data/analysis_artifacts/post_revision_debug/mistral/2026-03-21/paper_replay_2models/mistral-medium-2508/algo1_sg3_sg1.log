@@ -1,0 +1,3128 @@
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond00111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond01111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 346, in verify_edges
+    response = chat_client.complete_json(
+        prompt=prompt,
+        schema_name="vote_list",
+        schema=schema,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 61, in complete_json
+    parsed_content = json.loads(content)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 382 (char 381)
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond10111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Transient transport error; retrying operation=mistral chat completion attempt=2/8 delay_seconds=2.000
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep0_cond11111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond00111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond01111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond10111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep1_cond11111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond00111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond01111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond10111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep2_cond11111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond00111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 346, in verify_edges
+    response = chat_client.complete_json(
+        prompt=prompt,
+        schema_name="vote_list",
+        schema=schema,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 61, in complete_json
+    parsed_content = json.loads(content)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 342 (char 341)
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond01111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Transient transport error; retrying operation=mistral chat completion attempt=2/8 delay_seconds=2.000
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 346, in verify_edges
+    response = chat_client.complete_json(
+        prompt=prompt,
+        schema_name="vote_list",
+        schema=schema,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 61, in complete_json
+    parsed_content = json.loads(content)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 392 (char 391)
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond10111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Transient transport error; retrying operation=mistral chat completion attempt=2/8 delay_seconds=2.000
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep3_cond11111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 346, in verify_edges
+    response = chat_client.complete_json(
+        prompt=prompt,
+        schema_name="vote_list",
+        schema=schema,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 61, in complete_json
+    parsed_content = json.loads(content)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 437 (char 436)
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond00111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond01111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 346, in verify_edges
+    response = chat_client.complete_json(
+        prompt=prompt,
+        schema_name="vote_list",
+        schema=schema,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 61, in complete_json
+    parsed_content = json.loads(content)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 342 (char 341)
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond10111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11000
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 346, in verify_edges
+    response = chat_client.complete_json(
+        prompt=prompt,
+        schema_name="vote_list",
+        schema=schema,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 61, in complete_json
+    parsed_content = json.loads(content)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 347 (char 346)
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11001
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11010
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11011
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11100
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11101
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11110
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+Method 1 experiment probe failed: run_name=algo1_sg3_sg1_rep4_cond11111
+Traceback (most recent call last):
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/experiment.py", line 58, in run_algo1_experiment
+    summary_record = run_algo1_probe(
+        spec=spec,
+        chat_client=chat_client,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/probe.py", line 86, in run_algo1_probe
+    execution = execute_method1(
+        subgraph1=spec.subgraph1,
+    ...<2 lines>...
+        verify_edges=cove_verifier,
+    )
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/method.py", line 29, in execute_method1
+    verified_edges = verify_edges(candidate_edges)
+  File "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling/algo1/mistral.py", line 351, in verify_edges
+    votes = response["votes"]
+            ~~~~~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+{"algorithm": "algo1", "mode": "executed-experiment", "pair": "sg3_sg1", "model": "mistral-medium-2508", "replications": 5, "result_count": 0, "results": []}

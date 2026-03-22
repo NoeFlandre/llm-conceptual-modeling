@@ -1,0 +1,409 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Exercise Physiology",
+    "Psychological Counseling",
+    "Nutritional Psychology",
+    "Health at Every Size",
+    "Mindful Eating",
+    "Social Determinants of Health",
+    "Adiposity and Metabolism",
+    "Nutritional Inequality",
+    "Self-Esteem",
+    "Chronic Stress",
+    "Health Literacy",
+    "Adipose Tissue Biology"
+  ],
+  "final_similarity": 0.8006076454131292,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional Inequality"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Blood pressure",
+      "Beta blockers"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Respiratory diseases",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory diseases",
+      "Airway resistance"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Exercise Physiology",
+      "Physical well-being"
+    ],
+    [
+      "Psychological Counseling",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Health at Every Size",
+      "Body Positivity"
+    ],
+    [
+      "Mindful Eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Obesity"
+    ],
+    [
+      "Nutritional Inequality",
+      "Health Literacy"
+    ],
+    [
+      "Self-Esteem",
+      "Mental well-being"
+    ],
+    [
+      "Chronic Stress",
+      "Stress"
+    ],
+    [
+      "Health Literacy",
+      "Nutritional Education"
+    ],
+    [
+      "Adipose Tissue Biology",
+      "Dysfunctional adipose tissue"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional Inequality"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Blood pressure",
+      "Beta blockers"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Respiratory diseases",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory diseases",
+      "Airway resistance"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Exercise Physiology",
+      "Physical well-being"
+    ],
+    [
+      "Psychological Counseling",
+      "Mental well-being"
+    ],
+    [
+      "Nutritional Psychology",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Health at Every Size",
+      "Body Positivity"
+    ],
+    [
+      "Mindful Eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Obesity"
+    ],
+    [
+      "Nutritional Inequality",
+      "Health Literacy"
+    ],
+    [
+      "Self-Esteem",
+      "Mental well-being"
+    ],
+    [
+      "Chronic Stress",
+      "Stress"
+    ],
+    [
+      "Health Literacy",
+      "Nutritional Education"
+    ],
+    [
+      "Adipose Tissue Biology",
+      "Dysfunctional adipose tissue"
+    ]
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Inflammation",
+      "Mental well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Physical well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Mental well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Physical well-being"
+    ],
+    [
+      "Blood pressure",
+      "Mental well-being"
+    ],
+    [
+      "Blood pressure",
+      "Physical well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Physical well-being"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Physical pain",
+      "Physical well-being"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Concentration",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Weight bias"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Stress"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Obesity"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Obesity"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Obesity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Insulin resistance"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Dyslipidemia"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood pressure"
+    ],
+    [
+      "Resilience",
+      "Obesity"
+    ],
+    [
+      "Resilience",
+      "Inflammation"
+    ],
+    [
+      "Control",
+      "Obesity"
+    ],
+    [
+      "Control",
+      "Insulin resistance"
+    ],
+    [
+      "Control",
+      "Dyslipidemia"
+    ],
+    [
+      "Control",
+      "Blood pressure"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Concentration",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Weight bias"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Stress"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Obesity"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Obesity"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Obesity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Insulin resistance"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Dyslipidemia"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood pressure"
+    ],
+    [
+      "Resilience",
+      "Obesity"
+    ],
+    [
+      "Resilience",
+      "Inflammation"
+    ],
+    [
+      "Control",
+      "Obesity"
+    ],
+    [
+      "Control",
+      "Insulin resistance"
+    ],
+    [
+      "Control",
+      "Dyslipidemia"
+    ],
+    [
+      "Control",
+      "Blood pressure"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

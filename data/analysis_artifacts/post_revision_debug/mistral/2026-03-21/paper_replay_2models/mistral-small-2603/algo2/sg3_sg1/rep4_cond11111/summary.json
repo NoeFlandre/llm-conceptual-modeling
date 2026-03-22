@@ -1,0 +1,1035 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Chronic low-grade inflammation",
+    "Endothelial dysfunction",
+    "Neuroendocrine dysregulation",
+    "Socioeconomic determinants of health",
+    "Metabolic flexibility",
+    "Gut microbiota dysbiosis",
+    "Chronic stress resilience",
+    "Food deserts",
+    "Sedentary behavior patterns",
+    "Metabolic inflammation",
+    "Neuroendocrine signaling",
+    "Food policy interventions",
+    "Built environment design",
+    "Chronic stress physiology"
+  ],
+  "final_similarity": 0.8170490612826175,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Obesity",
+      "Chronic stress physiology"
+    ],
+    [
+      "Obesity",
+      "Sedentary behavior patterns"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic determinants of health"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Airway resistance"
+    ],
+    [
+      "Obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Built environment design"
+    ],
+    [
+      "Obesity",
+      "Food policy interventions"
+    ],
+    [
+      "Obesity",
+      "Restrictive covenants"
+    ],
+    [
+      "Medications",
+      "Insulin resistance"
+    ],
+    [
+      "Medications",
+      "Dyslipidemia"
+    ],
+    [
+      "Medications",
+      "Blood pressure"
+    ],
+    [
+      "Medications",
+      "Inflammation"
+    ],
+    [
+      "Medications",
+      "Atherosclerosis"
+    ],
+    [
+      "Medications",
+      "Coronary heart diseases"
+    ],
+    [
+      "Medications",
+      "Blood glucose level"
+    ],
+    [
+      "Medications",
+      "Blood fatty acid level"
+    ],
+    [
+      "Medications",
+      "Metabolic syndrome"
+    ],
+    [
+      "Medications",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Medications",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Medications",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Medications",
+      "Metabolic inflammation"
+    ],
+    [
+      "Medications",
+      "Metabolic flexibility"
+    ],
+    [
+      "Medications",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Medications",
+      "Chronic stress physiology"
+    ],
+    [
+      "Medications",
+      "Sedentary behavior patterns"
+    ],
+    [
+      "Medications",
+      "Socioeconomic determinants of health"
+    ],
+    [
+      "Medications",
+      "Food deserts"
+    ],
+    [
+      "Medications",
+      "Balance"
+    ],
+    [
+      "Medications",
+      "Tiredness"
+    ],
+    [
+      "Medications",
+      "Physical pain"
+    ],
+    [
+      "Medications",
+      "Concentration"
+    ],
+    [
+      "Medications",
+      "Coordination"
+    ],
+    [
+      "Medications",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Medications",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Medications",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Medications",
+      "Asthma"
+    ],
+    [
+      "Medications",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Medications",
+      "Dyspnea"
+    ],
+    [
+      "Medications",
+      "Respiratory diseases"
+    ],
+    [
+      "Medications",
+      "Airway resistance"
+    ],
+    [
+      "Medications",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Medications",
+      "Short sleep duration"
+    ],
+    [
+      "Medications",
+      "Cortisol"
+    ],
+    [
+      "Medications",
+      "Sodium retention"
+    ],
+    [
+      "Medications",
+      "Sodium intake"
+    ],
+    [
+      "Medications",
+      "Heart rate"
+    ],
+    [
+      "Medications",
+      "Eating disorders"
+    ],
+    [
+      "Medications",
+      "Healthy eating"
+    ],
+    [
+      "Medications",
+      "Supportive food environment"
+    ],
+    [
+      "Medications",
+      "Availability of healthy foods"
+    ],
+    [
+      "Medications",
+      "Cost of healthy foods"
+    ],
+    [
+      "Medications",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Medications",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Medications",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Medications",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Medications",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Medications",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Medications",
+      "Prevalence of green fields"
+    ],
+    [
+      "Medications",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Medications",
+      "Built environment design"
+    ],
+    [
+      "Medications",
+      "Food policy interventions"
+    ],
+    [
+      "Medications",
+      "Restrictive covenants"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Obesity",
+      "Chronic stress physiology"
+    ],
+    [
+      "Obesity",
+      "Sedentary behavior patterns"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic determinants of health"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Airway resistance"
+    ],
+    [
+      "Obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Built environment design"
+    ],
+    [
+      "Obesity",
+      "Food policy interventions"
+    ],
+    [
+      "Obesity",
+      "Restrictive covenants"
+    ],
+    [
+      "Medications",
+      "Insulin resistance"
+    ],
+    [
+      "Medications",
+      "Dyslipidemia"
+    ],
+    [
+      "Medications",
+      "Blood pressure"
+    ],
+    [
+      "Medications",
+      "Inflammation"
+    ],
+    [
+      "Medications",
+      "Atherosclerosis"
+    ],
+    [
+      "Medications",
+      "Coronary heart diseases"
+    ],
+    [
+      "Medications",
+      "Blood glucose level"
+    ],
+    [
+      "Medications",
+      "Blood fatty acid level"
+    ],
+    [
+      "Medications",
+      "Metabolic syndrome"
+    ],
+    [
+      "Medications",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Medications",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Medications",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Medications",
+      "Metabolic inflammation"
+    ],
+    [
+      "Medications",
+      "Metabolic flexibility"
+    ],
+    [
+      "Medications",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Medications",
+      "Chronic stress physiology"
+    ],
+    [
+      "Medications",
+      "Sedentary behavior patterns"
+    ],
+    [
+      "Medications",
+      "Socioeconomic determinants of health"
+    ],
+    [
+      "Medications",
+      "Food deserts"
+    ],
+    [
+      "Medications",
+      "Balance"
+    ],
+    [
+      "Medications",
+      "Tiredness"
+    ],
+    [
+      "Medications",
+      "Physical pain"
+    ],
+    [
+      "Medications",
+      "Concentration"
+    ],
+    [
+      "Medications",
+      "Coordination"
+    ],
+    [
+      "Medications",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Medications",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Medications",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Medications",
+      "Asthma"
+    ],
+    [
+      "Medications",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Medications",
+      "Dyspnea"
+    ],
+    [
+      "Medications",
+      "Respiratory diseases"
+    ],
+    [
+      "Medications",
+      "Airway resistance"
+    ],
+    [
+      "Medications",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Medications",
+      "Short sleep duration"
+    ],
+    [
+      "Medications",
+      "Cortisol"
+    ],
+    [
+      "Medications",
+      "Sodium retention"
+    ],
+    [
+      "Medications",
+      "Sodium intake"
+    ],
+    [
+      "Medications",
+      "Heart rate"
+    ],
+    [
+      "Medications",
+      "Eating disorders"
+    ],
+    [
+      "Medications",
+      "Healthy eating"
+    ],
+    [
+      "Medications",
+      "Supportive food environment"
+    ],
+    [
+      "Medications",
+      "Availability of healthy foods"
+    ],
+    [
+      "Medications",
+      "Cost of healthy foods"
+    ],
+    [
+      "Medications",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Medications",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Medications",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Medications",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Medications",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Medications",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Medications",
+      "Prevalence of green fields"
+    ],
+    [
+      "Medications",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Medications",
+      "Built environment design"
+    ],
+    [
+      "Medications",
+      "Food policy interventions"
+    ],
+    [
+      "Medications",
+      "Restrictive covenants"
+    ]
+  ],
+  "run_name": "algo2_sg3_sg1_rep4_cond11111"
+}

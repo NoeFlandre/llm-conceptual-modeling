@@ -1,0 +1,430 @@
+{
+  "expanded_labels": [
+    "Metabolic Syndrome",
+    "Cardiovascular Health",
+    "Public Health Policies",
+    "Nutritional Education",
+    "Sedentary Lifestyle",
+    "Diabetes",
+    "Exercise",
+    "Stress",
+    "Genetics",
+    "Public Health Awareness"
+  ],
+  "final_similarity": 0.7948458719100971,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Obesity",
+      "Diabetes"
+    ],
+    [
+      "Insulin resistance",
+      "Diabetes"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Cardiovascular Health"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Cardiovascular Health"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Diabetes"
+    ],
+    [
+      "Diabetes",
+      "Blood glucose level"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cardiovascular Health",
+      "Heart rate"
+    ],
+    [
+      "Cardiovascular Health",
+      "Blood pressure"
+    ],
+    [
+      "Exercise",
+      "Cardiovascular Health"
+    ],
+    [
+      "Exercise",
+      "Blood pressure"
+    ],
+    [
+      "Exercise",
+      "Blood glucose level"
+    ],
+    [
+      "Exercise",
+      "Stress"
+    ],
+    [
+      "Exercise",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Healthy eating",
+      "Blood glucose level"
+    ],
+    [
+      "Healthy eating",
+      "Blood fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Cardiovascular Health"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Obesity"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Cardiovascular Health"
+    ],
+    [
+      "Public Health Policies",
+      "Nutritional Education"
+    ],
+    [
+      "Public Health Policies",
+      "Public Health Awareness"
+    ],
+    [
+      "Public Health Policies",
+      "Supportive food environment"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy eating"
+    ],
+    [
+      "Nutritional Education",
+      "Public Health Awareness"
+    ],
+    [
+      "Public Health Awareness",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public Health Awareness",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Genetics",
+      "Obesity"
+    ],
+    [
+      "Genetics",
+      "Diabetes"
+    ],
+    [
+      "Genetics",
+      "Cardiovascular Health"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Obesity",
+      "Diabetes"
+    ],
+    [
+      "Insulin resistance",
+      "Diabetes"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Cardiovascular Health"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Cardiovascular Health"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Diabetes"
+    ],
+    [
+      "Diabetes",
+      "Blood glucose level"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cardiovascular Health",
+      "Heart rate"
+    ],
+    [
+      "Cardiovascular Health",
+      "Blood pressure"
+    ],
+    [
+      "Exercise",
+      "Cardiovascular Health"
+    ],
+    [
+      "Exercise",
+      "Blood pressure"
+    ],
+    [
+      "Exercise",
+      "Blood glucose level"
+    ],
+    [
+      "Exercise",
+      "Stress"
+    ],
+    [
+      "Exercise",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Healthy eating",
+      "Blood glucose level"
+    ],
+    [
+      "Healthy eating",
+      "Blood fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Cardiovascular Health"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Obesity"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Cardiovascular Health"
+    ],
+    [
+      "Public Health Policies",
+      "Nutritional Education"
+    ],
+    [
+      "Public Health Policies",
+      "Public Health Awareness"
+    ],
+    [
+      "Public Health Policies",
+      "Supportive food environment"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy eating"
+    ],
+    [
+      "Nutritional Education",
+      "Public Health Awareness"
+    ],
+    [
+      "Public Health Awareness",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public Health Awareness",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Genetics",
+      "Obesity"
+    ],
+    [
+      "Genetics",
+      "Diabetes"
+    ],
+    [
+      "Genetics",
+      "Cardiovascular Health"
+    ]
+  ],
+  "run_name": "algo2_sg3_sg1_rep1_cond00011"
+}

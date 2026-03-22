@@ -1,0 +1,1396 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Chronic low-grade inflammation",
+    "Endothelial dysfunction",
+    "Sedentary lifestyle",
+    "Food deserts",
+    "Metabolic inflammation",
+    "Neuroendocrine dysregulation",
+    "Cardiometabolic risk factors",
+    "Socioeconomic determinants of health",
+    "Environmental obesogens"
+  ],
+  "final_similarity": 0.8298641025283597,
+  "iteration_count": 2,
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Exercise"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic determinants of health"
+    ],
+    [
+      "Obesity",
+      "Environmental obesogens"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Dyslipidemia"
+    ],
+    [
+      "Insulin resistance",
+      "Atherosclerosis"
+    ],
+    [
+      "Insulin resistance",
+      "Coronary heart diseases"
+    ],
+    [
+      "Insulin resistance",
+      "Inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Release of adipokines"
+    ],
+    [
+      "Insulin resistance",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Dyslipidemia",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Blood pressure"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Atherosclerosis",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Release of adipokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Metabolic inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Insulin resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic inflammation"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Dyspnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Tiredness"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Blood pressure"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Heart rate"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Dyspnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Short sleep duration",
+      "Concentration"
+    ],
+    [
+      "Short sleep duration",
+      "Physical pain"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Appetite"
+    ],
+    [
+      "Cortisol",
+      "Emotional eating"
+    ],
+    [
+      "Cortisol",
+      "Metabolic syndrome"
+    ],
+    [
+      "Cortisol",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Exercise",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Exercise",
+      "Metabolic syndrome"
+    ],
+    [
+      "Exercise",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Exercise",
+      "Obesity"
+    ],
+    [
+      "Exercise",
+      "Dyslipidemia"
+    ],
+    [
+      "Exercise",
+      "Insulin resistance"
+    ],
+    [
+      "Exercise",
+      "Blood pressure"
+    ],
+    [
+      "Exercise",
+      "Atherosclerosis"
+    ],
+    [
+      "Exercise",
+      "Inflammation"
+    ],
+    [
+      "Exercise",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Exercise",
+      "Metabolic inflammation"
+    ],
+    [
+      "Exercise",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Exercise"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Obesity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Tiredness"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Dyspnea"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Eating disorders"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Obesity"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Eating disorders"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Obesity"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Obesity"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Obesity"
+    ],
+    [
+      "Cost of healthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Cost of healthy foods",
+      "Obesity"
+    ],
+    [
+      "Cost of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Cost of healthy foods",
+      "Availability of healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Availability of healthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Availability of healthy foods",
+      "Obesity"
+    ],
+    [
+      "Supportive food environment",
+      "Eating disorders"
+    ],
+    [
+      "Supportive food environment",
+      "Obesity"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Healthy eating"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Healthy eating"
+    ],
+    [
+      "Healthy eating",
+      "Eating disorders"
+    ],
+    [
+      "Healthy eating",
+      "Obesity"
+    ],
+    [
+      "Healthy eating",
+      "Metabolic syndrome"
+    ],
+    [
+      "Healthy eating",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Eating disorders",
+      "Obesity"
+    ],
+    [
+      "Eating disorders",
+      "Metabolic syndrome"
+    ],
+    [
+      "Eating disorders",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Emotional eating",
+      "Obesity"
+    ],
+    [
+      "Emotional eating",
+      "Appetite"
+    ],
+    [
+      "Emotional eating",
+      "Metabolic syndrome"
+    ],
+    [
+      "Emotional eating",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Appetite",
+      "Obesity"
+    ],
+    [
+      "Appetite",
+      "Metabolic syndrome"
+    ],
+    [
+      "Appetite",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Supportive food environment"
+    ],
+    [
+      "Food deserts",
+      "Obesity"
+    ],
+    [
+      "Food deserts",
+      "Eating disorders"
+    ],
+    [
+      "Environmental obesogens",
+      "Obesity"
+    ],
+    [
+      "Environmental obesogens",
+      "Metabolic syndrome"
+    ],
+    [
+      "Environmental obesogens",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Environmental obesogens",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Environmental obesogens",
+      "Secretion of inflammatory molecules by adipose cells"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic determinants of health"
+    ],
+    [
+      "Obesity",
+      "Environmental obesogens"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Dyslipidemia"
+    ],
+    [
+      "Insulin resistance",
+      "Atherosclerosis"
+    ],
+    [
+      "Insulin resistance",
+      "Coronary heart diseases"
+    ],
+    [
+      "Insulin resistance",
+      "Inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Release of adipokines"
+    ],
+    [
+      "Insulin resistance",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Dyslipidemia",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Blood pressure"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Atherosclerosis",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Release of adipokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Metabolic inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Insulin resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic inflammation"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Dyspnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Tiredness"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Blood pressure"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Heart rate"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Dyspnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Short sleep duration",
+      "Concentration"
+    ],
+    [
+      "Short sleep duration",
+      "Physical pain"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Appetite"
+    ],
+    [
+      "Cortisol",
+      "Emotional eating"
+    ],
+    [
+      "Cortisol",
+      "Metabolic syndrome"
+    ],
+    [
+      "Cortisol",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Metabolic syndrome"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Obesity"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Dyslipidemia"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Insulin resistance"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Blood pressure"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Atherosclerosis"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Inflammation"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Metabolic inflammation"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Obesity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Tiredness"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Dyspnea"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Eating disorders"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Obesity"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Eating disorders"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Obesity"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Obesity"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Obesity"
+    ],
+    [
+      "Cost of healthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Cost of healthy foods",
+      "Obesity"
+    ],
+    [
+      "Cost of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Cost of healthy foods",
+      "Availability of healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Availability of healthy foods",
+      "Eating disorders"
+    ],
+    [
+      "Availability of healthy foods",
+      "Obesity"
+    ],
+    [
+      "Supportive food environment",
+      "Eating disorders"
+    ],
+    [
+      "Supportive food environment",
+      "Obesity"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Healthy eating"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Healthy eating"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Healthy eating"
+    ],
+    [
+      "Healthy eating",
+      "Eating disorders"
+    ],
+    [
+      "Healthy eating",
+      "Obesity"
+    ],
+    [
+      "Healthy eating",
+      "Metabolic syndrome"
+    ],
+    [
+      "Healthy eating",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Eating disorders",
+      "Obesity"
+    ],
+    [
+      "Eating disorders",
+      "Metabolic syndrome"
+    ],
+    [
+      "Eating disorders",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Emotional eating",
+      "Obesity"
+    ],
+    [
+      "Emotional eating",
+      "Appetite"
+    ],
+    [
+      "Emotional eating",
+      "Metabolic syndrome"
+    ],
+    [
+      "Emotional eating",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Appetite",
+      "Obesity"
+    ],
+    [
+      "Appetite",
+      "Metabolic syndrome"
+    ],
+    [
+      "Appetite",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Supportive food environment"
+    ],
+    [
+      "Food deserts",
+      "Obesity"
+    ],
+    [
+      "Food deserts",
+      "Eating disorders"
+    ],
+    [
+      "Environmental obesogens",
+      "Obesity"
+    ],
+    [
+      "Environmental obesogens",
+      "Metabolic syndrome"
+    ],
+    [
+      "Environmental obesogens",
+      "Cardiometabolic risk factors"
+    ],
+    [
+      "Environmental obesogens",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Environmental obesogens",
+      "Secretion of inflammatory molecules by adipose cells"
+    ]
+  ]
+}

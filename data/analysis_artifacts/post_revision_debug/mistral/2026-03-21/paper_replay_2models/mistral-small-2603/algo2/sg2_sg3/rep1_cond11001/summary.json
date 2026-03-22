@@ -1,0 +1,971 @@
+{
+  "expanded_labels": [
+    "Nutritional literacy programs",
+    "Food deserts and access to healthy options",
+    "Body neutrality movement",
+    "Health-at-every-size (HAES) approach",
+    "Chronic stress and metabolic syndrome",
+    "Metabolic inflammation",
+    "Body image resilience",
+    "Nutritional psychology",
+    "Health equity in obesity prevention",
+    "Chronic stress and adipokine dysregulation",
+    "Food literacy interventions",
+    "Social determinants of health in obesity",
+    "Neuroendocrine responses to chronic stress",
+    "Cultural capital and body image norms",
+    "Therapeutic lifestyle changes for metabolic health"
+  ],
+  "final_similarity": 0.8101836866644945,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic stress and adipokine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine responses to chronic stress"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Dyspnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Heart rate"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Stress"
+    ],
+    [
+      "Poor body image",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Poor body image",
+      "Body neutrality movement"
+    ],
+    [
+      "Poor body image",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Poor body image",
+      "Body image resilience"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Weight bias"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Socio-economic status"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Cultural capital and body image norms"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Weight bias"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Depression"
+    ],
+    [
+      "Weight bias",
+      "Stress"
+    ],
+    [
+      "Weight bias",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts and access to healthy options"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy interventions"
+    ],
+    [
+      "Socio-economic status",
+      "Health equity in obesity prevention"
+    ],
+    [
+      "Socio-economic status",
+      "Social determinants of health in obesity"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Stress",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Stress",
+      "Metabolic inflammation"
+    ],
+    [
+      "Stress",
+      "Chronic stress and adipokine dysregulation"
+    ],
+    [
+      "Stress",
+      "Neuroendocrine responses to chronic stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Resilience"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Depression",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Depression",
+      "Cortisol"
+    ],
+    [
+      "Depression",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Body image resilience"
+    ],
+    [
+      "Resilience",
+      "Control"
+    ],
+    [
+      "Resilience",
+      "Balance"
+    ],
+    [
+      "Resilience",
+      "Therapeutic lifestyle changes for metabolic health"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Control",
+      "Therapeutic lifestyle changes for metabolic health"
+    ],
+    [
+      "Balance",
+      "Therapeutic lifestyle changes for metabolic health"
+    ],
+    [
+      "Food deserts and access to healthy options",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Food deserts and access to healthy options",
+      "Food literacy interventions"
+    ],
+    [
+      "Food deserts and access to healthy options",
+      "Socio-economic status"
+    ],
+    [
+      "Nutritional literacy programs",
+      "Food literacy interventions"
+    ],
+    [
+      "Nutritional literacy programs",
+      "Nutritional psychology"
+    ],
+    [
+      "Nutritional literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy interventions",
+      "Nutritional psychology"
+    ],
+    [
+      "Food literacy interventions",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Body neutrality movement"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Body image resilience"
+    ],
+    [
+      "Body neutrality movement",
+      "Body image resilience"
+    ],
+    [
+      "Nutritional psychology",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Chronic stress and metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic stress and metabolic syndrome",
+      "Chronic stress and adipokine dysregulation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Metabolic inflammation",
+      "Insulin resistance"
+    ],
+    [
+      "Chronic stress and adipokine dysregulation",
+      "Release of adipokines"
+    ],
+    [
+      "Chronic stress and adipokine dysregulation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Neuroendocrine responses to chronic stress",
+      "Cortisol"
+    ],
+    [
+      "Neuroendocrine responses to chronic stress",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Social determinants of health in obesity",
+      "Health equity in obesity prevention"
+    ],
+    [
+      "Social determinants of health in obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Cultural capital and body image norms",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Therapeutic lifestyle changes for metabolic health",
+      "Balance"
+    ],
+    [
+      "Therapeutic lifestyle changes for metabolic health",
+      "Control"
+    ],
+    [
+      "Therapeutic lifestyle changes for metabolic health",
+      "Resilience"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic stress and adipokine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine responses to chronic stress"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Dyspnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Heart rate"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Stress"
+    ],
+    [
+      "Poor body image",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Poor body image",
+      "Body neutrality movement"
+    ],
+    [
+      "Poor body image",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Poor body image",
+      "Body image resilience"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Weight bias"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Socio-economic status"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Cultural capital and body image norms"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Weight bias"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Weight bias",
+      "Depression"
+    ],
+    [
+      "Weight bias",
+      "Stress"
+    ],
+    [
+      "Weight bias",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts and access to healthy options"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy interventions"
+    ],
+    [
+      "Socio-economic status",
+      "Health equity in obesity prevention"
+    ],
+    [
+      "Socio-economic status",
+      "Social determinants of health in obesity"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Stress",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Stress",
+      "Metabolic inflammation"
+    ],
+    [
+      "Stress",
+      "Chronic stress and adipokine dysregulation"
+    ],
+    [
+      "Stress",
+      "Neuroendocrine responses to chronic stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Resilience"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Depression",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Depression",
+      "Cortisol"
+    ],
+    [
+      "Depression",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Body image resilience"
+    ],
+    [
+      "Resilience",
+      "Control"
+    ],
+    [
+      "Resilience",
+      "Balance"
+    ],
+    [
+      "Resilience",
+      "Therapeutic lifestyle changes for metabolic health"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Control",
+      "Therapeutic lifestyle changes for metabolic health"
+    ],
+    [
+      "Balance",
+      "Therapeutic lifestyle changes for metabolic health"
+    ],
+    [
+      "Food deserts and access to healthy options",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Food deserts and access to healthy options",
+      "Food literacy interventions"
+    ],
+    [
+      "Food deserts and access to healthy options",
+      "Socio-economic status"
+    ],
+    [
+      "Nutritional literacy programs",
+      "Food literacy interventions"
+    ],
+    [
+      "Nutritional literacy programs",
+      "Nutritional psychology"
+    ],
+    [
+      "Nutritional literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy interventions",
+      "Nutritional psychology"
+    ],
+    [
+      "Food literacy interventions",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Body neutrality movement"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Body image resilience"
+    ],
+    [
+      "Body neutrality movement",
+      "Body image resilience"
+    ],
+    [
+      "Nutritional psychology",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Chronic stress and metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic stress and metabolic syndrome",
+      "Chronic stress and adipokine dysregulation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Metabolic inflammation",
+      "Insulin resistance"
+    ],
+    [
+      "Chronic stress and adipokine dysregulation",
+      "Release of adipokines"
+    ],
+    [
+      "Chronic stress and adipokine dysregulation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Neuroendocrine responses to chronic stress",
+      "Cortisol"
+    ],
+    [
+      "Neuroendocrine responses to chronic stress",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Social determinants of health in obesity",
+      "Health equity in obesity prevention"
+    ],
+    [
+      "Social determinants of health in obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Cultural capital and body image norms",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Therapeutic lifestyle changes for metabolic health",
+      "Balance"
+    ],
+    [
+      "Therapeutic lifestyle changes for metabolic health",
+      "Control"
+    ],
+    [
+      "Therapeutic lifestyle changes for metabolic health",
+      "Resilience"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep1_cond11001"
+}

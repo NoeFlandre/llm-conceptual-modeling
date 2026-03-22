@@ -1,0 +1,721 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Exercise Physiology",
+    "Psychological Counseling",
+    "Nutritional Psychology",
+    "Health at Every Size",
+    "Mindful Eating",
+    "Social Determinants of Health",
+    "Adipose Tissue Biology",
+    "Nutritional Inequality",
+    "Body Image Counseling",
+    "Chronic Stress and Metabolism",
+    "Public Health Policy on Obesity",
+    "Adipose Tissue and Immunity"
+  ],
+  "final_similarity": 0.803520630714298,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose Tissue Biology"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Stimulants"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Nutritional Psychology"
+    ],
+    [
+      "Physical well-being",
+      "Exercise Physiology"
+    ],
+    [
+      "Exercise Physiology",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Psychological Counseling"
+    ],
+    [
+      "Psychological Counseling",
+      "Body Image Counseling"
+    ],
+    [
+      "Stress",
+      "Chronic Stress and Metabolism"
+    ],
+    [
+      "Chronic Stress and Metabolism",
+      "Cortisol"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Public Health Policy on Obesity"
+    ],
+    [
+      "Public Health Policy on Obesity",
+      "Social Determinants of Health"
+    ],
+    [
+      "Obesity",
+      "Adipose Tissue and Immunity"
+    ],
+    [
+      "Adipose Tissue and Immunity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Nutritional Inequality"
+    ],
+    [
+      "Nutritional Inequality",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Body Positivity"
+    ],
+    [
+      "Body Positivity",
+      "Health at Every Size"
+    ],
+    [
+      "Health at Every Size",
+      "Mindful Eating"
+    ],
+    [
+      "Mindful Eating",
+      "Balance"
+    ],
+    [
+      "Balance",
+      "Coordination"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Control",
+      "Unhealthy weight control practices"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Weight bias"
+    ],
+    [
+      "Weight bias",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Release of adipokines",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose Tissue Biology"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Heart rate",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Stimulants"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Nutritional Psychology"
+    ],
+    [
+      "Physical well-being",
+      "Exercise Physiology"
+    ],
+    [
+      "Exercise Physiology",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Psychological Counseling"
+    ],
+    [
+      "Psychological Counseling",
+      "Body Image Counseling"
+    ],
+    [
+      "Stress",
+      "Chronic Stress and Metabolism"
+    ],
+    [
+      "Chronic Stress and Metabolism",
+      "Cortisol"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Public Health Policy on Obesity"
+    ],
+    [
+      "Public Health Policy on Obesity",
+      "Social Determinants of Health"
+    ],
+    [
+      "Obesity",
+      "Adipose Tissue and Immunity"
+    ],
+    [
+      "Adipose Tissue and Immunity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Nutritional Inequality"
+    ],
+    [
+      "Nutritional Inequality",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Body Positivity"
+    ],
+    [
+      "Body Positivity",
+      "Health at Every Size"
+    ],
+    [
+      "Health at Every Size",
+      "Mindful Eating"
+    ],
+    [
+      "Mindful Eating",
+      "Balance"
+    ],
+    [
+      "Balance",
+      "Coordination"
+    ],
+    [
+      "Coordination",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Control",
+      "Unhealthy weight control practices"
+    ]
+  ]
+}

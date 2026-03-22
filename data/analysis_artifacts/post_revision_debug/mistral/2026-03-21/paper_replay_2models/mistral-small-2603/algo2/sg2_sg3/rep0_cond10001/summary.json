@@ -1,0 +1,1536 @@
+{
+  "expanded_labels": [
+    "Nutritional literacy",
+    "Food environment accessibility",
+    "Body neutrality movement",
+    "Health-at-every-size (HAES) approach",
+    "Chronic stress management",
+    "Metabolic syndrome",
+    "Body positivity movement",
+    "Food deserts",
+    "Chronic inflammation",
+    "Neuroendocrine dysregulation",
+    "Food literacy programs",
+    "Access to affordable healthcare",
+    "Social determinants of health",
+    "Mindful eating practices",
+    "Health equity in nutrition policies",
+    "Food literacy education",
+    "Social stigma around obesity",
+    "Sleep hygiene and metabolic health",
+    "Neuropsychiatric impact of weight stigma",
+    "Cultural attitudes toward body diversity"
+  ],
+  "final_similarity": 0.8032109360778751,
+  "iteration_count": 4,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic inflammation"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Social stigma around obesity"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Food environment accessibility"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Nutritional literacy"
+    ],
+    [
+      "Obesity",
+      "Food literacy programs"
+    ],
+    [
+      "Obesity",
+      "Food literacy education"
+    ],
+    [
+      "Obesity",
+      "Access to affordable healthcare"
+    ],
+    [
+      "Obesity",
+      "Social determinants of health"
+    ],
+    [
+      "Obesity",
+      "Health equity in nutrition policies"
+    ],
+    [
+      "Obesity",
+      "Body positivity movement"
+    ],
+    [
+      "Obesity",
+      "Body neutrality movement"
+    ],
+    [
+      "Obesity",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Obesity",
+      "Mindful eating practices"
+    ],
+    [
+      "Obesity",
+      "Chronic stress management"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical well-being",
+      "Coordination"
+    ],
+    [
+      "Physical well-being",
+      "Tiredness"
+    ],
+    [
+      "Physical well-being",
+      "Dyspnea"
+    ],
+    [
+      "Physical well-being",
+      "Heart rate"
+    ],
+    [
+      "Physical well-being",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Physical well-being",
+      "Airway resistance"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Mental well-being",
+      "Concentration"
+    ],
+    [
+      "Mental well-being",
+      "Physical pain"
+    ],
+    [
+      "Mental well-being",
+      "Neuropsychiatric impact of weight stigma"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Chronic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Metabolic syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood glucose level"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Chronic inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood pressure",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Coronary heart diseases",
+      "Physical well-being"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Sodium retention"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Dyspnea"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Weight bias",
+      "Social stigma around obesity"
+    ],
+    [
+      "Weight bias",
+      "Depression"
+    ],
+    [
+      "Weight bias",
+      "Neuropsychiatric impact of weight stigma"
+    ],
+    [
+      "Social stigma around obesity",
+      "Mental well-being"
+    ],
+    [
+      "Social stigma around obesity",
+      "Depression"
+    ],
+    [
+      "Social stigma around obesity",
+      "Resilience"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body positivity movement"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body neutrality movement"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Mental well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Short sleep duration"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Sodium retention"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Stress"
+    ],
+    [
+      "Short sleep duration",
+      "Sodium retention"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Inflammation"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Stress",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Resilience"
+    ],
+    [
+      "Depression",
+      "Physical pain"
+    ],
+    [
+      "Depression",
+      "Concentration"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Cortisol"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Stress"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Chronic inflammation"
+    ],
+    [
+      "Socio-economic status",
+      "Food environment accessibility"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Socio-economic status",
+      "Access to affordable healthcare"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional literacy"
+    ],
+    [
+      "Food environment accessibility",
+      "Nutritional literacy"
+    ],
+    [
+      "Food environment accessibility",
+      "Food literacy programs"
+    ],
+    [
+      "Food environment accessibility",
+      "Food literacy education"
+    ],
+    [
+      "Food deserts",
+      "Nutritional literacy"
+    ],
+    [
+      "Food deserts",
+      "Food literacy programs"
+    ],
+    [
+      "Food deserts",
+      "Food literacy education"
+    ],
+    [
+      "Nutritional literacy",
+      "Food literacy programs"
+    ],
+    [
+      "Nutritional literacy",
+      "Food literacy education"
+    ],
+    [
+      "Nutritional literacy",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Food literacy education"
+    ],
+    [
+      "Food literacy programs",
+      "Mindful eating practices"
+    ],
+    [
+      "Food literacy education",
+      "Mindful eating practices"
+    ],
+    [
+      "Access to affordable healthcare",
+      "Health equity in nutrition policies"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Food environment accessibility"
+    ],
+    [
+      "Social determinants of health",
+      "Food deserts"
+    ],
+    [
+      "Social determinants of health",
+      "Access to affordable healthcare"
+    ],
+    [
+      "Health equity in nutrition policies",
+      "Food literacy education"
+    ],
+    [
+      "Health equity in nutrition policies",
+      "Food literacy programs"
+    ],
+    [
+      "Body positivity movement",
+      "Body neutrality movement"
+    ],
+    [
+      "Body positivity movement",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Body neutrality movement",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Mindful eating practices"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Mindful eating practices",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Mental well-being"
+    ],
+    [
+      "Chronic stress management",
+      "Stress"
+    ],
+    [
+      "Chronic stress management",
+      "Cortisol"
+    ],
+    [
+      "Chronic stress management",
+      "Resilience"
+    ],
+    [
+      "Sleep hygiene and metabolic health",
+      "Short sleep duration"
+    ],
+    [
+      "Sleep hygiene and metabolic health",
+      "Cortisol"
+    ],
+    [
+      "Sleep hygiene and metabolic health",
+      "Tiredness"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic inflammation"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Social stigma around obesity"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Food environment accessibility"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Nutritional literacy"
+    ],
+    [
+      "Obesity",
+      "Food literacy programs"
+    ],
+    [
+      "Obesity",
+      "Food literacy education"
+    ],
+    [
+      "Obesity",
+      "Access to affordable healthcare"
+    ],
+    [
+      "Obesity",
+      "Social determinants of health"
+    ],
+    [
+      "Obesity",
+      "Health equity in nutrition policies"
+    ],
+    [
+      "Obesity",
+      "Body positivity movement"
+    ],
+    [
+      "Obesity",
+      "Body neutrality movement"
+    ],
+    [
+      "Obesity",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Obesity",
+      "Mindful eating practices"
+    ],
+    [
+      "Obesity",
+      "Chronic stress management"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical well-being",
+      "Coordination"
+    ],
+    [
+      "Physical well-being",
+      "Tiredness"
+    ],
+    [
+      "Physical well-being",
+      "Dyspnea"
+    ],
+    [
+      "Physical well-being",
+      "Heart rate"
+    ],
+    [
+      "Physical well-being",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Physical well-being",
+      "Airway resistance"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Mental well-being",
+      "Concentration"
+    ],
+    [
+      "Mental well-being",
+      "Physical pain"
+    ],
+    [
+      "Mental well-being",
+      "Neuropsychiatric impact of weight stigma"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Chronic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Metabolic syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood glucose level"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Chronic inflammation"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Blood pressure",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood fatty acid level",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Coronary heart diseases",
+      "Physical well-being"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Sodium retention"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Dyspnea"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Weight bias",
+      "Social stigma around obesity"
+    ],
+    [
+      "Weight bias",
+      "Depression"
+    ],
+    [
+      "Weight bias",
+      "Neuropsychiatric impact of weight stigma"
+    ],
+    [
+      "Social stigma around obesity",
+      "Mental well-being"
+    ],
+    [
+      "Social stigma around obesity",
+      "Depression"
+    ],
+    [
+      "Social stigma around obesity",
+      "Resilience"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body positivity movement"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body neutrality movement"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Mental well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Short sleep duration"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Sodium retention"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Stress"
+    ],
+    [
+      "Short sleep duration",
+      "Sodium retention"
+    ],
+    [
+      "Short sleep duration",
+      "Tiredness"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Inflammation"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Stress",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Stress",
+      "Cortisol"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Resilience"
+    ],
+    [
+      "Depression",
+      "Physical pain"
+    ],
+    [
+      "Depression",
+      "Concentration"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Cortisol"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Stress"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Chronic inflammation"
+    ],
+    [
+      "Socio-economic status",
+      "Food environment accessibility"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Socio-economic status",
+      "Access to affordable healthcare"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional literacy"
+    ],
+    [
+      "Food environment accessibility",
+      "Nutritional literacy"
+    ],
+    [
+      "Food environment accessibility",
+      "Food literacy programs"
+    ],
+    [
+      "Food environment accessibility",
+      "Food literacy education"
+    ],
+    [
+      "Food deserts",
+      "Nutritional literacy"
+    ],
+    [
+      "Food deserts",
+      "Food literacy programs"
+    ],
+    [
+      "Food deserts",
+      "Food literacy education"
+    ],
+    [
+      "Nutritional literacy",
+      "Food literacy programs"
+    ],
+    [
+      "Nutritional literacy",
+      "Food literacy education"
+    ],
+    [
+      "Nutritional literacy",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Food literacy education"
+    ],
+    [
+      "Food literacy programs",
+      "Mindful eating practices"
+    ],
+    [
+      "Food literacy education",
+      "Mindful eating practices"
+    ],
+    [
+      "Access to affordable healthcare",
+      "Health equity in nutrition policies"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Food environment accessibility"
+    ],
+    [
+      "Social determinants of health",
+      "Food deserts"
+    ],
+    [
+      "Social determinants of health",
+      "Access to affordable healthcare"
+    ],
+    [
+      "Health equity in nutrition policies",
+      "Food literacy education"
+    ],
+    [
+      "Health equity in nutrition policies",
+      "Food literacy programs"
+    ],
+    [
+      "Body positivity movement",
+      "Body neutrality movement"
+    ],
+    [
+      "Body positivity movement",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Body neutrality movement",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Mindful eating practices"
+    ],
+    [
+      "Health-at-every-size (HAES) approach",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Mindful eating practices",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Physical well-being"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Mental well-being"
+    ],
+    [
+      "Chronic stress management",
+      "Stress"
+    ],
+    [
+      "Chronic stress management",
+      "Cortisol"
+    ],
+    [
+      "Chronic stress management",
+      "Resilience"
+    ],
+    [
+      "Sleep hygiene and metabolic health",
+      "Short sleep duration"
+    ],
+    [
+      "Sleep hygiene and metabolic health",
+      "Cortisol"
+    ],
+    [
+      "Sleep hygiene and metabolic health",
+      "Tiredness"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep0_cond10001"
+}

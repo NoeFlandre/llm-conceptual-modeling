@@ -1,0 +1,94 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Weight bias",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Pressure to be thin",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Resilience",
+      "Coordination"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Medications"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Sodium intake"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood saturated fatty acid level"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Weight bias",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Pressure to be thin",
+      "Thoracic and abdominal obesity"
+    ]
+  ]
+}

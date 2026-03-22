@@ -1,0 +1,761 @@
+{
+  "expanded_labels": [
+    "Metabolic Syndrome",
+    "Cardiovascular Health",
+    "Public Health Policies",
+    "Nutritional Education",
+    "Exercise Physiology",
+    "Endothelial dysfunction",
+    "Oxidative stress",
+    "Leptin resistance",
+    "Circadian rhythm disruption",
+    "Food deserts",
+    "Hormonal Imbalance",
+    "Exercise Intolerance",
+    "Nutritional Deficiencies",
+    "Public Health Awareness",
+    "Food Environment"
+  ],
+  "final_similarity": 0.8049932456815136,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Type 2 Diabetes"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Cardiovascular Health"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Cardiovascular Health"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cardiovascular Health"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Cardiovascular Health"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Type 2 Diabetes"
+    ],
+    [
+      "Cardiovascular Health",
+      "Exercise Physiology"
+    ],
+    [
+      "Exercise Physiology",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Balance"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Coordination"
+    ],
+    [
+      "Balance",
+      "Physical pain"
+    ],
+    [
+      "Coordination",
+      "Physical pain"
+    ],
+    [
+      "Physical pain",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Exercise Intolerance"
+    ],
+    [
+      "Exercise Intolerance",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Hormonal Imbalance",
+      "Leptin resistance"
+    ],
+    [
+      "Leptin resistance",
+      "Appetite"
+    ],
+    [
+      "Appetite",
+      "Emotional eating"
+    ],
+    [
+      "Emotional eating",
+      "Eating disorders"
+    ],
+    [
+      "Eating disorders",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Obesity"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Public Health Awareness"
+    ],
+    [
+      "Public Health Awareness",
+      "Public Health Policies"
+    ],
+    [
+      "Public Health Policies",
+      "Supportive food environment"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Cost of healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Food deserts",
+      "Nutritional Deficiencies"
+    ],
+    [
+      "Nutritional Deficiencies",
+      "Obesity"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Aesthetics",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Restrictive covenants",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Medications",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Heart rate"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Sodium intake",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Obesity"
+    ],
+    [
+      "Oxidative stress",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Atherosclerosis"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Concentration",
+      "Tiredness"
+    ],
+    [
+      "Public Health Policies",
+      "Food Environment"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Type 2 Diabetes"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Cardiovascular Health"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Cardiovascular Health"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cardiovascular Health"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Cardiovascular Health"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Type 2 Diabetes"
+    ],
+    [
+      "Cardiovascular Health",
+      "Exercise Physiology"
+    ],
+    [
+      "Exercise Physiology",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Balance"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Coordination"
+    ],
+    [
+      "Balance",
+      "Physical pain"
+    ],
+    [
+      "Coordination",
+      "Physical pain"
+    ],
+    [
+      "Physical pain",
+      "Tiredness"
+    ],
+    [
+      "Tiredness",
+      "Exercise Intolerance"
+    ],
+    [
+      "Exercise Intolerance",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Dyspnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory diseases",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Short sleep duration",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Cortisol"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Hormonal Imbalance",
+      "Leptin resistance"
+    ],
+    [
+      "Leptin resistance",
+      "Appetite"
+    ],
+    [
+      "Appetite",
+      "Emotional eating"
+    ],
+    [
+      "Emotional eating",
+      "Eating disorders"
+    ],
+    [
+      "Eating disorders",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Obesity"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education"
+    ],
+    [
+      "Nutritional Education",
+      "Public Health Awareness"
+    ],
+    [
+      "Public Health Awareness",
+      "Public Health Policies"
+    ],
+    [
+      "Public Health Policies",
+      "Supportive food environment"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Cost of healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Food deserts",
+      "Nutritional Deficiencies"
+    ],
+    [
+      "Nutritional Deficiencies",
+      "Obesity"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Aesthetics",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Restrictive covenants",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Medications",
+      "Beta blockers"
+    ],
+    [
+      "Beta blockers",
+      "Heart rate"
+    ],
+    [
+      "Stimulants",
+      "Heart rate"
+    ],
+    [
+      "Sodium intake",
+      "Blood pressure"
+    ],
+    [
+      "Sodium intake",
+      "Sodium retention"
+    ],
+    [
+      "Sodium retention",
+      "Blood pressure"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Blood fatty acid level"
+    ],
+    [
+      "Blood fatty acid level",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Atherosclerosis"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Obesity"
+    ],
+    [
+      "Oxidative stress",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Atherosclerosis"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Concentration",
+      "Tiredness"
+    ],
+    [
+      "Public Health Policies",
+      "Food Environment"
+    ]
+  ]
+}

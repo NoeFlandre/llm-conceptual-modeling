@@ -1,0 +1,659 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Food swamps",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Body neutrality movement",
+    "Accessibility of recreational spaces",
+    "Food industry lobbying",
+    "Nutritional education in schools",
+    "Social determinants of eating habits",
+    "Urban planning for active lifestyles",
+    "Community engagement in urban green space development",
+    "Policy interventions for reducing food deserts",
+    "Social media influence on body image perceptions",
+    "Corporate accountability in food marketing practices",
+    "Intergenerational transmission of eating habits"
+  ],
+  "final_similarity": 0.8006843372990993,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Availability of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Community engagement in urban green space development",
+      "Urban green spaces"
+    ],
+    [
+      "Community engagement in urban green space development",
+      "Prevalence of green fields"
+    ],
+    [
+      "Policy interventions for reducing food deserts",
+      "Food deserts"
+    ],
+    [
+      "Policy interventions for reducing food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food industry lobbying",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food industry lobbying",
+      "Corporate accountability in food marketing practices"
+    ],
+    [
+      "Food industry lobbying",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Nutritional education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Nutritional education in schools",
+      "Healthy eating"
+    ],
+    [
+      "Nutritional education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Intergenerational transmission of eating habits"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Food literacy programs"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Nutritional education in schools"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Poor body image"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Pressure to be thin"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Body neutrality movement"
+    ],
+    [
+      "Body neutrality movement",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movement",
+      "Mental well-being"
+    ],
+    [
+      "Body neutrality movement",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Emotional eating"
+    ],
+    [
+      "Emotional eating",
+      "Eating disorders"
+    ],
+    [
+      "Emotional eating",
+      "Weight bias"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Control",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Body neutrality movement"
+    ],
+    [
+      "Appetite",
+      "Emotional eating"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Appetite",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional education in schools"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Policy interventions for reducing food deserts"
+    ],
+    [
+      "Corporate accountability in food marketing practices",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate accountability in food marketing practices",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Corporate accountability in food marketing practices",
+      "Food industry lobbying"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Availability of healthy foods",
+      "Supportive food environment"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Supportive food environment"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Community engagement in urban green space development",
+      "Urban green spaces"
+    ],
+    [
+      "Community engagement in urban green space development",
+      "Prevalence of green fields"
+    ],
+    [
+      "Policy interventions for reducing food deserts",
+      "Food deserts"
+    ],
+    [
+      "Policy interventions for reducing food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food industry lobbying",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food industry lobbying",
+      "Corporate accountability in food marketing practices"
+    ],
+    [
+      "Food industry lobbying",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Nutritional education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Nutritional education in schools",
+      "Healthy eating"
+    ],
+    [
+      "Nutritional education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Intergenerational transmission of eating habits"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Food literacy programs"
+    ],
+    [
+      "Social determinants of eating habits",
+      "Nutritional education in schools"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Poor body image"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Pressure to be thin"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Body neutrality movement"
+    ],
+    [
+      "Body neutrality movement",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movement",
+      "Mental well-being"
+    ],
+    [
+      "Body neutrality movement",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Emotional eating"
+    ],
+    [
+      "Emotional eating",
+      "Eating disorders"
+    ],
+    [
+      "Emotional eating",
+      "Weight bias"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Control",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Body neutrality movement"
+    ],
+    [
+      "Appetite",
+      "Emotional eating"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Appetite",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional education in schools"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Policy interventions for reducing food deserts"
+    ],
+    [
+      "Corporate accountability in food marketing practices",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate accountability in food marketing practices",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Corporate accountability in food marketing practices",
+      "Food industry lobbying"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep1_cond11111"
+}

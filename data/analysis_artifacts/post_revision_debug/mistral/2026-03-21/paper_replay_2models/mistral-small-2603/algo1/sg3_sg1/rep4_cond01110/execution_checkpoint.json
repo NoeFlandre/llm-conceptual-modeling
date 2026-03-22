@@ -1,0 +1,230 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Inflammation",
+      "Eating disorders"
+    ],
+    [
+      "Inflammation",
+      "Healthy eating"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Inflammation",
+      "Emotional eating"
+    ],
+    [
+      "Insulin resistance",
+      "Eating disorders"
+    ],
+    [
+      "Insulin resistance",
+      "Healthy eating"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Atherosclerosis",
+      "Aesthetics"
+    ],
+    [
+      "Dyslipidemia",
+      "Eating disorders"
+    ],
+    [
+      "Dyslipidemia",
+      "Healthy eating"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Blood pressure",
+      "Aesthetics"
+    ],
+    [
+      "Short sleep duration",
+      "Eating disorders"
+    ],
+    [
+      "Short sleep duration",
+      "Healthy eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Physical pain",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Physical pain",
+      "Aesthetics"
+    ],
+    [
+      "Tiredness",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Tiredness",
+      "Aesthetics"
+    ],
+    [
+      "Dyspnea",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Dyspnea",
+      "Aesthetics"
+    ],
+    [
+      "Asthma",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Asthma",
+      "Aesthetics"
+    ],
+    [
+      "Balance",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Balance",
+      "Aesthetics"
+    ],
+    [
+      "Coordination",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Coordination",
+      "Aesthetics"
+    ],
+    [
+      "Concentration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Concentration",
+      "Aesthetics"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Healthy eating"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Appetite"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Emotional eating"
+    ],
+    [
+      "Release of adipokines",
+      "Eating disorders"
+    ],
+    [
+      "Release of adipokines",
+      "Healthy eating"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Eating disorders"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Healthy eating"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Inflammation",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Physical pain",
+      "Quality of the sport infrastructure"
+    ]
+  ]
+}

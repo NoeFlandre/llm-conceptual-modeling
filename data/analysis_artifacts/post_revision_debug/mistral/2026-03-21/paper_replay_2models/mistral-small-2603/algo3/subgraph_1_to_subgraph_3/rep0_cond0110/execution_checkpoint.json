@@ -1,0 +1,775 @@
+{
+  "expanded_nodes": [
+    {
+      "depth": 1,
+      "label": "Accessibility of walking trails",
+      "matched_target": false,
+      "parent_label": "Prevalence of walking trails",
+      "root_label": "Prevalence of walking trails"
+    },
+    {
+      "depth": 1,
+      "label": "Maintenance of walking trails",
+      "matched_target": false,
+      "parent_label": "Prevalence of walking trails",
+      "root_label": "Prevalence of walking trails"
+    },
+    {
+      "depth": 1,
+      "label": "Connectivity of walking trails",
+      "matched_target": false,
+      "parent_label": "Prevalence of walking trails",
+      "root_label": "Prevalence of walking trails"
+    },
+    {
+      "depth": 1,
+      "label": "Safety of walking trails",
+      "matched_target": false,
+      "parent_label": "Prevalence of walking trails",
+      "root_label": "Prevalence of walking trails"
+    },
+    {
+      "depth": 1,
+      "label": "Usage frequency of walking trails",
+      "matched_target": false,
+      "parent_label": "Prevalence of walking trails",
+      "root_label": "Prevalence of walking trails"
+    },
+    {
+      "depth": 1,
+      "label": "Accessibility of sports facilities",
+      "matched_target": false,
+      "parent_label": "Quality of the sport infrastructure",
+      "root_label": "Quality of the sport infrastructure"
+    },
+    {
+      "depth": 1,
+      "label": "Maintenance of sports equipment",
+      "matched_target": false,
+      "parent_label": "Quality of the sport infrastructure",
+      "root_label": "Quality of the sport infrastructure"
+    },
+    {
+      "depth": 1,
+      "label": "Availability of training programs",
+      "matched_target": false,
+      "parent_label": "Quality of the sport infrastructure",
+      "root_label": "Quality of the sport infrastructure"
+    },
+    {
+      "depth": 1,
+      "label": "Safety standards in sports venues",
+      "matched_target": false,
+      "parent_label": "Quality of the sport infrastructure",
+      "root_label": "Quality of the sport infrastructure"
+    },
+    {
+      "depth": 1,
+      "label": "Proximity of sports facilities to residential areas",
+      "matched_target": false,
+      "parent_label": "Quality of the sport infrastructure",
+      "root_label": "Quality of the sport infrastructure"
+    },
+    {
+      "depth": 1,
+      "label": "Body image dissatisfaction",
+      "matched_target": false,
+      "parent_label": "Eating disorders",
+      "root_label": "Eating disorders"
+    },
+    {
+      "depth": 1,
+      "label": "Binge eating",
+      "matched_target": false,
+      "parent_label": "Eating disorders",
+      "root_label": "Eating disorders"
+    },
+    {
+      "depth": 1,
+      "label": "Purging behaviors",
+      "matched_target": false,
+      "parent_label": "Eating disorders",
+      "root_label": "Eating disorders"
+    },
+    {
+      "depth": 1,
+      "label": "Restrictive dieting",
+      "matched_target": false,
+      "parent_label": "Eating disorders",
+      "root_label": "Eating disorders"
+    },
+    {
+      "depth": 1,
+      "label": "Body dysmorphia",
+      "matched_target": false,
+      "parent_label": "Eating disorders",
+      "root_label": "Eating disorders"
+    },
+    {
+      "depth": 1,
+      "label": "Nutrient density",
+      "matched_target": false,
+      "parent_label": "Healthy eating",
+      "root_label": "Healthy eating"
+    },
+    {
+      "depth": 1,
+      "label": "Portion control",
+      "matched_target": false,
+      "parent_label": "Healthy eating",
+      "root_label": "Healthy eating"
+    },
+    {
+      "depth": 1,
+      "label": "Whole foods consumption",
+      "matched_target": false,
+      "parent_label": "Healthy eating",
+      "root_label": "Healthy eating"
+    },
+    {
+      "depth": 1,
+      "label": "Hydration levels",
+      "matched_target": false,
+      "parent_label": "Healthy eating",
+      "root_label": "Healthy eating"
+    },
+    {
+      "depth": 1,
+      "label": "Meal timing",
+      "matched_target": false,
+      "parent_label": "Healthy eating",
+      "root_label": "Healthy eating"
+    },
+    {
+      "depth": 1,
+      "label": "Public support for government intervention",
+      "matched_target": false,
+      "parent_label": "Consumer demand for regulations",
+      "root_label": "Consumer demand for regulations"
+    },
+    {
+      "depth": 1,
+      "label": "Perceived necessity of regulations",
+      "matched_target": false,
+      "parent_label": "Consumer demand for regulations",
+      "root_label": "Consumer demand for regulations"
+    },
+    {
+      "depth": 1,
+      "label": "Trust in regulatory bodies",
+      "matched_target": false,
+      "parent_label": "Consumer demand for regulations",
+      "root_label": "Consumer demand for regulations"
+    },
+    {
+      "depth": 1,
+      "label": "Awareness of regulatory issues",
+      "matched_target": false,
+      "parent_label": "Consumer demand for regulations",
+      "root_label": "Consumer demand for regulations"
+    },
+    {
+      "depth": 1,
+      "label": "Preference for regulatory stringency",
+      "matched_target": false,
+      "parent_label": "Consumer demand for regulations",
+      "root_label": "Consumer demand for regulations"
+    },
+    {
+      "depth": 1,
+      "label": "Consumption of organic produce",
+      "matched_target": false,
+      "parent_label": "Marketing of healthy foods",
+      "root_label": "Marketing of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Nutritional education campaigns",
+      "matched_target": false,
+      "parent_label": "Marketing of healthy foods",
+      "root_label": "Marketing of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Accessibility of fresh fruits and vegetables",
+      "matched_target": false,
+      "parent_label": "Marketing of healthy foods",
+      "root_label": "Marketing of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Influence of food labeling on choices",
+      "matched_target": false,
+      "parent_label": "Marketing of healthy foods",
+      "root_label": "Marketing of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Corporate social responsibility in food marketing",
+      "matched_target": false,
+      "parent_label": "Marketing of healthy foods",
+      "root_label": "Marketing of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Consumer awareness of nutrition labels",
+      "matched_target": false,
+      "parent_label": "Public support and demand for healthy products",
+      "root_label": "Public support and demand for healthy products"
+    },
+    {
+      "depth": 1,
+      "label": "Preference for organic and non-GMO products",
+      "matched_target": false,
+      "parent_label": "Public support and demand for healthy products",
+      "root_label": "Public support and demand for healthy products"
+    },
+    {
+      "depth": 1,
+      "label": "Willingness to pay premium for healthy options",
+      "matched_target": false,
+      "parent_label": "Public support and demand for healthy products",
+      "root_label": "Public support and demand for healthy products"
+    },
+    {
+      "depth": 1,
+      "label": "Advocacy for public health policies",
+      "matched_target": false,
+      "parent_label": "Public support and demand for healthy products",
+      "root_label": "Public support and demand for healthy products"
+    },
+    {
+      "depth": 1,
+      "label": "Participation in community health initiatives",
+      "matched_target": false,
+      "parent_label": "Public support and demand for healthy products",
+      "root_label": "Public support and demand for healthy products"
+    },
+    {
+      "depth": 1,
+      "label": "Cost of fresh produce is higher than processed snacks",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are cheaper than healthy ones",
+      "root_label": "Unhealthy foods are cheaper than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Price gap between organic and conventional foods",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are cheaper than healthy ones",
+      "root_label": "Unhealthy foods are cheaper than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Affordability of fast food compared to home-cooked meals",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are cheaper than healthy ones",
+      "root_label": "Unhealthy foods are cheaper than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Subsidies favor unhealthy food production over healthy alternatives",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are cheaper than healthy ones",
+      "root_label": "Unhealthy foods are cheaper than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Economic barriers to accessing nutritious food options",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are cheaper than healthy ones",
+      "root_label": "Unhealthy foods are cheaper than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Accessible grocery stores",
+      "matched_target": false,
+      "parent_label": "Supportive food environment",
+      "root_label": "Supportive food environment"
+    },
+    {
+      "depth": 1,
+      "label": "Affordable healthy food options",
+      "matched_target": false,
+      "parent_label": "Supportive food environment",
+      "root_label": "Supportive food environment"
+    },
+    {
+      "depth": 1,
+      "label": "Community gardens",
+      "matched_target": false,
+      "parent_label": "Supportive food environment",
+      "root_label": "Supportive food environment"
+    },
+    {
+      "depth": 1,
+      "label": "Nutrition education programs",
+      "matched_target": false,
+      "parent_label": "Supportive food environment",
+      "root_label": "Supportive food environment"
+    },
+    {
+      "depth": 1,
+      "label": "Walkable neighborhoods",
+      "matched_target": false,
+      "parent_label": "Supportive food environment",
+      "root_label": "Supportive food environment"
+    },
+    {
+      "depth": 1,
+      "label": "Access to farmers' markets",
+      "matched_target": false,
+      "parent_label": "Availability of healthy foods",
+      "root_label": "Availability of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Proximity to grocery stores",
+      "matched_target": false,
+      "parent_label": "Availability of healthy foods",
+      "root_label": "Availability of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Density of fast-food restaurants",
+      "matched_target": false,
+      "parent_label": "Availability of healthy foods",
+      "root_label": "Availability of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Presence of community gardens",
+      "matched_target": false,
+      "parent_label": "Availability of healthy foods",
+      "root_label": "Availability of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Affordability of fresh produce",
+      "matched_target": false,
+      "parent_label": "Availability of healthy foods",
+      "root_label": "Availability of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Consumption of sugary beverages",
+      "matched_target": false,
+      "parent_label": "Marketing of unhealthy foods",
+      "root_label": "Marketing of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Fast food advertising",
+      "matched_target": false,
+      "parent_label": "Marketing of unhealthy foods",
+      "root_label": "Marketing of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Promotion of high-sodium snacks",
+      "matched_target": false,
+      "parent_label": "Marketing of unhealthy foods",
+      "root_label": "Marketing of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Influence of celebrity endorsements on junk food",
+      "matched_target": false,
+      "parent_label": "Marketing of unhealthy foods",
+      "root_label": "Marketing of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Targeted marketing to children",
+      "matched_target": false,
+      "parent_label": "Marketing of unhealthy foods",
+      "root_label": "Marketing of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Subsidies for high-calorie, low-nutrient ingredients",
+      "matched_target": false,
+      "parent_label": "Economic incentives to produce unhealthy food products",
+      "root_label": "Economic incentives to produce unhealthy food products"
+    },
+    {
+      "depth": 1,
+      "label": "Tax breaks for processed food manufacturers",
+      "matched_target": false,
+      "parent_label": "Economic incentives to produce unhealthy food products",
+      "root_label": "Economic incentives to produce unhealthy food products"
+    },
+    {
+      "depth": 1,
+      "label": "Profit margins on fast food and sugary drinks",
+      "matched_target": false,
+      "parent_label": "Economic incentives to produce unhealthy food products",
+      "root_label": "Economic incentives to produce unhealthy food products"
+    },
+    {
+      "depth": 1,
+      "label": "Advertising revenue from unhealthy food marketing",
+      "matched_target": false,
+      "parent_label": "Economic incentives to produce unhealthy food products",
+      "root_label": "Economic incentives to produce unhealthy food products"
+    },
+    {
+      "depth": 1,
+      "label": "Cost efficiency in large-scale production of unhealthy foods",
+      "matched_target": false,
+      "parent_label": "Economic incentives to produce unhealthy food products",
+      "root_label": "Economic incentives to produce unhealthy food products"
+    },
+    {
+      "depth": 1,
+      "label": "Price of fresh fruits and vegetables",
+      "matched_target": false,
+      "parent_label": "Cost of unhealthy foods",
+      "root_label": "Cost of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Cost of processed snacks",
+      "matched_target": false,
+      "parent_label": "Cost of unhealthy foods",
+      "root_label": "Cost of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Price of sugary beverages",
+      "matched_target": false,
+      "parent_label": "Cost of unhealthy foods",
+      "root_label": "Cost of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Cost of fast food meals",
+      "matched_target": false,
+      "parent_label": "Cost of unhealthy foods",
+      "root_label": "Cost of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Price of high-calorie convenience foods",
+      "matched_target": false,
+      "parent_label": "Cost of unhealthy foods",
+      "root_label": "Cost of unhealthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Density of bike lanes",
+      "matched_target": false,
+      "parent_label": "Prevalence of bike trails",
+      "root_label": "Prevalence of bike trails"
+    },
+    {
+      "depth": 1,
+      "label": "Accessibility of cycling infrastructure",
+      "matched_target": false,
+      "parent_label": "Prevalence of bike trails",
+      "root_label": "Prevalence of bike trails"
+    },
+    {
+      "depth": 1,
+      "label": "Number of bike-sharing stations",
+      "matched_target": false,
+      "parent_label": "Prevalence of bike trails",
+      "root_label": "Prevalence of bike trails"
+    },
+    {
+      "depth": 1,
+      "label": "Proportion of urban area covered by bike paths",
+      "matched_target": false,
+      "parent_label": "Prevalence of bike trails",
+      "root_label": "Prevalence of bike trails"
+    },
+    {
+      "depth": 1,
+      "label": "Connectivity of bike trail networks",
+      "matched_target": false,
+      "parent_label": "Prevalence of bike trails",
+      "root_label": "Prevalence of bike trails"
+    },
+    {
+      "depth": 1,
+      "label": "Area of protected natural habitats",
+      "matched_target": false,
+      "parent_label": "Prevalence of green fields",
+      "root_label": "Prevalence of green fields"
+    },
+    {
+      "depth": 1,
+      "label": "Urban green space coverage",
+      "matched_target": false,
+      "parent_label": "Prevalence of green fields",
+      "root_label": "Prevalence of green fields"
+    },
+    {
+      "depth": 1,
+      "label": "Agricultural land use intensity",
+      "matched_target": false,
+      "parent_label": "Prevalence of green fields",
+      "root_label": "Prevalence of green fields"
+    },
+    {
+      "depth": 1,
+      "label": "Forest cover percentage",
+      "matched_target": false,
+      "parent_label": "Prevalence of green fields",
+      "root_label": "Prevalence of green fields"
+    },
+    {
+      "depth": 1,
+      "label": "Wetland preservation rate",
+      "matched_target": false,
+      "parent_label": "Prevalence of green fields",
+      "root_label": "Prevalence of green fields"
+    },
+    {
+      "depth": 1,
+      "label": "Price of fresh produce",
+      "matched_target": false,
+      "parent_label": "Cost of healthy foods",
+      "root_label": "Cost of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Affordability of organic foods",
+      "matched_target": false,
+      "parent_label": "Cost of healthy foods",
+      "root_label": "Cost of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Cost of whole grains",
+      "matched_target": false,
+      "parent_label": "Cost of healthy foods",
+      "root_label": "Cost of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Price of lean proteins",
+      "matched_target": false,
+      "parent_label": "Cost of healthy foods",
+      "root_label": "Cost of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Cost of low-sugar snacks",
+      "matched_target": false,
+      "parent_label": "Cost of healthy foods",
+      "root_label": "Cost of healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Stress eating",
+      "matched_target": false,
+      "parent_label": "Emotional eating",
+      "root_label": "Emotional eating"
+    },
+    {
+      "depth": 1,
+      "label": "Comfort food consumption",
+      "matched_target": false,
+      "parent_label": "Emotional eating",
+      "root_label": "Emotional eating"
+    },
+    {
+      "depth": 1,
+      "label": "Mindful eating",
+      "matched_target": false,
+      "parent_label": "Emotional eating",
+      "root_label": "Emotional eating"
+    },
+    {
+      "depth": 1,
+      "label": "Food cravings",
+      "matched_target": false,
+      "parent_label": "Emotional eating",
+      "root_label": "Emotional eating"
+    },
+    {
+      "depth": 1,
+      "label": "Impulsive eating",
+      "matched_target": false,
+      "parent_label": "Emotional eating",
+      "root_label": "Emotional eating"
+    },
+    {
+      "depth": 1,
+      "label": "Fast food outlets are more prevalent than grocery stores in low-income neighborhoods",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are more available than healthy ones",
+      "root_label": "Unhealthy foods are more available than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Processed snacks are displayed more prominently than fresh produce in convenience stores",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are more available than healthy ones",
+      "root_label": "Unhealthy foods are more available than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Advertisements for sugary drinks are more widespread than those for water or milk",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are more available than healthy ones",
+      "root_label": "Unhealthy foods are more available than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Vending machines in schools primarily stock unhealthy options",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are more available than healthy ones",
+      "root_label": "Unhealthy foods are more available than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Food deserts have fewer healthy food retailers compared to areas with higher income",
+      "matched_target": false,
+      "parent_label": "Unhealthy foods are more available than healthy ones",
+      "root_label": "Unhealthy foods are more available than healthy ones"
+    },
+    {
+      "depth": 1,
+      "label": "Hunger",
+      "matched_target": false,
+      "parent_label": "Appetite",
+      "root_label": "Appetite"
+    },
+    {
+      "depth": 1,
+      "label": "Satiety",
+      "matched_target": false,
+      "parent_label": "Appetite",
+      "root_label": "Appetite"
+    },
+    {
+      "depth": 1,
+      "label": "Cravings",
+      "matched_target": false,
+      "parent_label": "Appetite",
+      "root_label": "Appetite"
+    },
+    {
+      "depth": 1,
+      "label": "Food Intake",
+      "matched_target": false,
+      "parent_label": "Appetite",
+      "root_label": "Appetite"
+    },
+    {
+      "depth": 1,
+      "label": "Metabolic Rate",
+      "matched_target": false,
+      "parent_label": "Appetite",
+      "root_label": "Appetite"
+    },
+    {
+      "depth": 1,
+      "label": "Beauty",
+      "matched_target": false,
+      "parent_label": "Aesthetics",
+      "root_label": "Aesthetics"
+    },
+    {
+      "depth": 1,
+      "label": "Elegance",
+      "matched_target": false,
+      "parent_label": "Aesthetics",
+      "root_label": "Aesthetics"
+    },
+    {
+      "depth": 1,
+      "label": "Harmony",
+      "matched_target": false,
+      "parent_label": "Aesthetics",
+      "root_label": "Aesthetics"
+    },
+    {
+      "depth": 1,
+      "label": "Style",
+      "matched_target": false,
+      "parent_label": "Aesthetics",
+      "root_label": "Aesthetics"
+    },
+    {
+      "depth": 1,
+      "label": "Creativity",
+      "matched_target": false,
+      "parent_label": "Aesthetics",
+      "root_label": "Aesthetics"
+    },
+    {
+      "depth": 1,
+      "label": "Non-compete agreements",
+      "matched_target": false,
+      "parent_label": "Restrictive covenants",
+      "root_label": "Restrictive covenants"
+    },
+    {
+      "depth": 1,
+      "label": "Confidentiality clauses",
+      "matched_target": false,
+      "parent_label": "Restrictive covenants",
+      "root_label": "Restrictive covenants"
+    },
+    {
+      "depth": 1,
+      "label": "Exclusivity provisions",
+      "matched_target": false,
+      "parent_label": "Restrictive covenants",
+      "root_label": "Restrictive covenants"
+    },
+    {
+      "depth": 1,
+      "label": "Intellectual property restrictions",
+      "matched_target": false,
+      "parent_label": "Restrictive covenants",
+      "root_label": "Restrictive covenants"
+    },
+    {
+      "depth": 1,
+      "label": "Employment termination conditions",
+      "matched_target": false,
+      "parent_label": "Restrictive covenants",
+      "root_label": "Restrictive covenants"
+    },
+    {
+      "depth": 1,
+      "label": "Advertising expenditure on unhealthy foods",
+      "matched_target": false,
+      "parent_label": "Marketing ratio of unhealthy to healthy foods",
+      "root_label": "Marketing ratio of unhealthy to healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Advertising expenditure on healthy foods",
+      "matched_target": false,
+      "parent_label": "Marketing ratio of unhealthy to healthy foods",
+      "root_label": "Marketing ratio of unhealthy to healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Ratio of fast-food to fruit-and-vegetable ads",
+      "matched_target": false,
+      "parent_label": "Marketing ratio of unhealthy to healthy foods",
+      "root_label": "Marketing ratio of unhealthy to healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Promotional spending on sugary drinks vs. water",
+      "matched_target": false,
+      "parent_label": "Marketing ratio of unhealthy to healthy foods",
+      "root_label": "Marketing ratio of unhealthy to healthy foods"
+    },
+    {
+      "depth": 1,
+      "label": "Ratio of junk food to whole food marketing campaigns",
+      "matched_target": false,
+      "parent_label": "Marketing ratio of unhealthy to healthy foods",
+      "root_label": "Marketing ratio of unhealthy to healthy foods"
+    }
+  ],
+  "matched_labels": []
+}

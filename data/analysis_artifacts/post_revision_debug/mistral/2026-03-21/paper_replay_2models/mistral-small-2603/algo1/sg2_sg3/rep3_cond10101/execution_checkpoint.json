@@ -1,0 +1,204 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Control",
+      "Coordination"
+    ],
+    [
+      "Socio-economic status",
+      "Blood pressure"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Resilience",
+      "Concentration"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Balance"
+    ],
+    [
+      "Stress",
+      "Heart rate"
+    ],
+    [
+      "Control",
+      "Beta blockers"
+    ],
+    [
+      "Socio-economic status",
+      "Dyslipidemia"
+    ],
+    [
+      "Poor body image",
+      "Respiratory diseases"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Resilience",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pressure to be thin",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Weight bias",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood mono-unsaturated fatty acid level"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Socio-economic status",
+      "Blood pressure"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Resilience",
+      "Concentration"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Balance"
+    ],
+    [
+      "Stress",
+      "Heart rate"
+    ],
+    [
+      "Socio-economic status",
+      "Dyslipidemia"
+    ],
+    [
+      "Poor body image",
+      "Respiratory diseases"
+    ],
+    [
+      "Resilience",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Pressure to be thin",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Weight bias",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

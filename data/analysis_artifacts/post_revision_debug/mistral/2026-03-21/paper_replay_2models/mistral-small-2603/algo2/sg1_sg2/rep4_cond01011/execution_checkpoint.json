@@ -1,0 +1,457 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Food swamps",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Body neutrality movements",
+    "Accessibility of recreational spaces",
+    "Food policy advocacy",
+    "Nutritional education in schools",
+    "Social determinants of eating behaviors",
+    "Urban planning for active lifestyles",
+    "Food deserts in rural areas",
+    "Corporate lobbying for unhealthy food subsidies",
+    "Community gardens and urban farming initiatives",
+    "Social media influence on body image perceptions",
+    "Policy incentives for grocery stores in underserved areas"
+  ],
+  "final_similarity": 0.7965867638997802,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in rural areas",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Community gardens and urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Nutritional education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Eating disorders"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Emotional eating"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Appetite"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Healthy eating"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Socio-economic status",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Socio-economic status",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Socio-economic status",
+      "Prevalence of green fields"
+    ],
+    [
+      "Corporate lobbying for unhealthy food subsidies",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Corporate lobbying for unhealthy food subsidies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Corporate lobbying for unhealthy food subsidies",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Policy incentives for grocery stores in underserved areas",
+      "Availability of healthy foods"
+    ],
+    [
+      "Policy incentives for grocery stores in underserved areas",
+      "Food deserts"
+    ],
+    [
+      "Food policy advocacy",
+      "Policy incentives for grocery stores in underserved areas"
+    ],
+    [
+      "Food policy advocacy",
+      "Corporate lobbying for unhealthy food subsidies"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Weight bias"
+    ],
+    [
+      "Body neutrality movements",
+      "Resilience"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Poor body image"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Poor body image"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Control",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in rural areas",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban planning for active lifestyles",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Community gardens and urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Nutritional education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Eating disorders"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Emotional eating"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Appetite"
+    ],
+    [
+      "Social determinants of eating behaviors",
+      "Healthy eating"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Socio-economic status",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Socio-economic status",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Socio-economic status",
+      "Prevalence of green fields"
+    ],
+    [
+      "Corporate lobbying for unhealthy food subsidies",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Corporate lobbying for unhealthy food subsidies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Corporate lobbying for unhealthy food subsidies",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Policy incentives for grocery stores in underserved areas",
+      "Availability of healthy foods"
+    ],
+    [
+      "Policy incentives for grocery stores in underserved areas",
+      "Food deserts"
+    ],
+    [
+      "Food policy advocacy",
+      "Policy incentives for grocery stores in underserved areas"
+    ],
+    [
+      "Food policy advocacy",
+      "Corporate lobbying for unhealthy food subsidies"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Weight bias"
+    ],
+    [
+      "Body neutrality movements",
+      "Resilience"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Poor body image"
+    ],
+    [
+      "Social media influence on body image perceptions",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Poor body image"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Control",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Physical well-being"
+    ]
+  ]
+}

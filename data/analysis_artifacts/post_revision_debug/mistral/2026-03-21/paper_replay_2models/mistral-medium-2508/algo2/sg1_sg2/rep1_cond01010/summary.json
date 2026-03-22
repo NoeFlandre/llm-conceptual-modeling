@@ -1,0 +1,358 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Community Gardens and Local Food Production",
+    "Psychological Impact of Food Advertising",
+    "Accessibility of Recreational Facilities",
+    "Food Policy and Regulation",
+    "Nutritional Labeling",
+    "Urban Green Spaces",
+    "Food Security"
+  ],
+  "final_similarity": 0.7902781230504123,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Security"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Food Security"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Pressure to be thin",
+      "Eating disorders"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Healthy eating"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Food Security"
+    ],
+    [
+      "Psychological Impact of Food Advertising",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Food Policy and Regulation",
+      "Supportive food environment"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Food Security",
+      "Socio-economic status"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Security"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Psychological Impact of Food Advertising"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Food Security"
+    ],
+    [
+      "Stress",
+      "Mental well-being"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Mental well-being"
+    ],
+    [
+      "Pressure to be thin",
+      "Eating disorders"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Healthy eating"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Food Policy and Regulation"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Food Security"
+    ],
+    [
+      "Psychological Impact of Food Advertising",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Food Policy and Regulation",
+      "Supportive food environment"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Food Security",
+      "Socio-economic status"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep1_cond01010"
+}

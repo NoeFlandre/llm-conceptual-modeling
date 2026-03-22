@@ -1,0 +1,5 @@
+2026-03-21T19:32:10.013327+00:00 level=INFO run=algo3_subgraph_1_to_subgraph_3_rep0_cond0101 algorithm=algo3 stage=manifest message=manifest written
+2026-03-21T19:32:10.014670+00:00 level=INFO run=algo3_subgraph_1_to_subgraph_3_rep0_cond0101 algorithm=algo3 stage=tree_prompt_written message=prompt written to tree_expansion_prompt.txt
+2026-03-21T19:33:48.313576+00:00 level=INFO run=algo3_subgraph_1_to_subgraph_3_rep0_cond0101 algorithm=algo3 stage=execution_completed message=checkpoint written to execution_checkpoint.json
+2026-03-21T19:33:48.315818+00:00 level=INFO run=algo3_subgraph_1_to_subgraph_3_rep0_cond0101 algorithm=algo3 stage=summary_written message=checkpoint written to summary.json
+2026-03-21T19:33:48.316289+00:00 level=INFO run=algo3_subgraph_1_to_subgraph_3_rep0_cond0101 algorithm=algo3 stage=complete message=probe finished

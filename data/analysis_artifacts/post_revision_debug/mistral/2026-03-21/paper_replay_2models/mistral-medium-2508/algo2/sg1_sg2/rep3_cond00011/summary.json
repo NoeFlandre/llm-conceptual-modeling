@@ -1,0 +1,275 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Community Gardens and Local Food Production",
+    "Body Positivity Movements",
+    "Accessibility of recreational facilities",
+    "Nutritional labeling transparency",
+    "Food deserts",
+    "Corporate influence on dietary guidelines",
+    "Social media impact on body image",
+    "Government Subsidies for Healthy Foods",
+    "Urban Green Spaces",
+    "Food Advertising Regulations",
+    "School Nutrition Programs",
+    "Workplace Wellness Initiatives"
+  ],
+  "final_similarity": 0.7927422007948076,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Advertising Regulations"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Cost of healthy foods",
+      "Government Subsidies for Healthy Foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Nutritional Education Programs",
+      "School Nutrition Programs"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Social media impact on body image",
+      "Poor body image"
+    ],
+    [
+      "Government Subsidies for Healthy Foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food Advertising Regulations",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Workplace Wellness Initiatives",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Advertising Regulations"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Cost of healthy foods",
+      "Government Subsidies for Healthy Foods"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Nutritional Education Programs",
+      "School Nutrition Programs"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Social media impact on body image",
+      "Poor body image"
+    ],
+    [
+      "Government Subsidies for Healthy Foods",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food Advertising Regulations",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Workplace Wellness Initiatives",
+      "Physical well-being"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep3_cond00011"
+}

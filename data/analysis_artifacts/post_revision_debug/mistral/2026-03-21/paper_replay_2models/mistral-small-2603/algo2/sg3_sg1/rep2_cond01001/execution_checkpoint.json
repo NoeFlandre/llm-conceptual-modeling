@@ -1,0 +1,1750 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Chronic low-grade inflammation",
+    "Endothelial dysfunction",
+    "Neuroendocrine dysregulation",
+    "Sedentary lifestyle behaviors",
+    "Metabolic flexibility",
+    "Gut microbiota dysbiosis",
+    "Chronic stress resilience",
+    "Sleep architecture disruption",
+    "Food addiction",
+    "Metabolic inflammation",
+    "Adipose tissue remodeling",
+    "Neuroinflammation",
+    "Cardiometabolic risk",
+    "Behavioral economics of nutrition",
+    "Gut-brain axis",
+    "Circadian rhythm disruption",
+    "Mitochondrial dysfunction",
+    "Epigenetic modifications in metabolic pathways",
+    "Socioeconomic disparities in food access"
+  ],
+  "final_similarity": 0.82628784364582,
+  "iteration_count": 4,
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Obesity",
+      "Chronic stress resilience"
+    ],
+    [
+      "Obesity",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Obesity",
+      "Food addiction"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Obesity",
+      "Neuroinflammation"
+    ],
+    [
+      "Obesity",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Obesity",
+      "Behavioral economics of nutrition"
+    ],
+    [
+      "Obesity",
+      "Gut-brain axis"
+    ],
+    [
+      "Obesity",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Obesity",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Obesity",
+      "Epigenetic modifications in metabolic pathways"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Cortisol"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Inflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Coronary heart diseases",
+      "Atherosclerosis"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic syndrome"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Dyspnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Concentration"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Physical pain"
+    ],
+    [
+      "Short sleep duration",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Chronic stress resilience"
+    ],
+    [
+      "Short sleep duration",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Short sleep duration",
+      "Metabolic syndrome"
+    ],
+    [
+      "Short sleep duration",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Metabolic inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Neuroinflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Metabolic syndrome"
+    ],
+    [
+      "Cortisol",
+      "Chronic stress resilience"
+    ],
+    [
+      "Cortisol",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood glucose level",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic flexibility"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic stress resilience"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Metabolic syndrome",
+      "Food addiction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroinflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic syndrome",
+      "Behavioral economics of nutrition"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut-brain axis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Metabolic syndrome",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Epigenetic modifications in metabolic pathways"
+    ],
+    [
+      "Metabolic syndrome",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Atherosclerosis"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Cortisol"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Metabolic flexibility"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic flexibility",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Metabolic flexibility",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Neuroinflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Gut-brain axis"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Chronic stress resilience",
+      "Cortisol"
+    ],
+    [
+      "Chronic stress resilience",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Chronic stress resilience",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Short sleep duration"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Chronic stress resilience"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Food addiction",
+      "Appetite"
+    ],
+    [
+      "Food addiction",
+      "Emotional eating"
+    ],
+    [
+      "Food addiction",
+      "Unhealthy eating"
+    ],
+    [
+      "Food addiction",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic inflammation",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic inflammation",
+      "Inflammation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Inflammation"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Metabolic syndrome"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Neuroinflammation",
+      "Inflammation"
+    ],
+    [
+      "Neuroinflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Neuroinflammation",
+      "Gut-brain axis"
+    ],
+    [
+      "Neuroinflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Atherosclerosis"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Metabolic syndrome"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Metabolic flexibility"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Chronic stress resilience"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Food addiction"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Metabolic inflammation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Neuroinflammation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Behavioral economics of nutrition"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Gut-brain axis"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Epigenetic modifications in metabolic pathways"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Cost of healthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Gut-brain axis",
+      "Appetite"
+    ],
+    [
+      "Gut-brain axis",
+      "Emotional eating"
+    ],
+    [
+      "Gut-brain axis",
+      "Food addiction"
+    ],
+    [
+      "Gut-brain axis",
+      "Neuroinflammation"
+    ],
+    [
+      "Gut-brain axis",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Cortisol"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Metabolic flexibility"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Mitochondrial dysfunction",
+      "Metabolic flexibility"
+    ],
+    [
+      "Mitochondrial dysfunction",
+      "Metabolic syndrome"
+    ],
+    [
+      "Mitochondrial dysfunction",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Epigenetic modifications in metabolic pathways",
+      "Metabolic flexibility"
+    ],
+    [
+      "Epigenetic modifications in metabolic pathways",
+      "Metabolic syndrome"
+    ],
+    [
+      "Epigenetic modifications in metabolic pathways",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Supportive food environment"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Behavioral economics of nutrition"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Obesity",
+      "Chronic stress resilience"
+    ],
+    [
+      "Obesity",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Obesity",
+      "Food addiction"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Obesity",
+      "Neuroinflammation"
+    ],
+    [
+      "Obesity",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Obesity",
+      "Behavioral economics of nutrition"
+    ],
+    [
+      "Obesity",
+      "Gut-brain axis"
+    ],
+    [
+      "Obesity",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Obesity",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Obesity",
+      "Epigenetic modifications in metabolic pathways"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Cortisol"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Inflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Coronary heart diseases",
+      "Atherosclerosis"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic syndrome"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Release of adipokines",
+      "Insulin resistance"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Metabolic syndrome"
+    ],
+    [
+      "Release of adipokines",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Dyspnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Concentration"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Physical pain"
+    ],
+    [
+      "Short sleep duration",
+      "Cortisol"
+    ],
+    [
+      "Short sleep duration",
+      "Chronic stress resilience"
+    ],
+    [
+      "Short sleep duration",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Short sleep duration",
+      "Metabolic syndrome"
+    ],
+    [
+      "Short sleep duration",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Metabolic inflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Neuroinflammation"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Cortisol",
+      "Insulin resistance"
+    ],
+    [
+      "Cortisol",
+      "Blood glucose level"
+    ],
+    [
+      "Cortisol",
+      "Metabolic syndrome"
+    ],
+    [
+      "Cortisol",
+      "Chronic stress resilience"
+    ],
+    [
+      "Cortisol",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood glucose level",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Inflammation"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic flexibility"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic stress resilience"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Metabolic syndrome",
+      "Food addiction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroinflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic syndrome",
+      "Behavioral economics of nutrition"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut-brain axis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Metabolic syndrome",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Metabolic syndrome",
+      "Epigenetic modifications in metabolic pathways"
+    ],
+    [
+      "Metabolic syndrome",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroinflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Atherosclerosis"
+    ],
+    [
+      "Endothelial dysfunction",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Cortisol"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Metabolic flexibility"
+    ],
+    [
+      "Sedentary lifestyle behaviors",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic flexibility",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Metabolic flexibility",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Neuroinflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Gut-brain axis"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Chronic stress resilience",
+      "Cortisol"
+    ],
+    [
+      "Chronic stress resilience",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Chronic stress resilience",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Short sleep duration"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Chronic stress resilience"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Food addiction",
+      "Appetite"
+    ],
+    [
+      "Food addiction",
+      "Emotional eating"
+    ],
+    [
+      "Food addiction",
+      "Unhealthy eating"
+    ],
+    [
+      "Food addiction",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Metabolic inflammation",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic inflammation",
+      "Inflammation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Inflammation"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Metabolic syndrome"
+    ],
+    [
+      "Adipose tissue remodeling",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Neuroinflammation",
+      "Inflammation"
+    ],
+    [
+      "Neuroinflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Neuroinflammation",
+      "Gut-brain axis"
+    ],
+    [
+      "Neuroinflammation",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Atherosclerosis"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Metabolic syndrome"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Metabolic flexibility"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Chronic stress resilience"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Food addiction"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Metabolic inflammation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Neuroinflammation"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Behavioral economics of nutrition"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Gut-brain axis"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Mitochondrial dysfunction"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Epigenetic modifications in metabolic pathways"
+    ],
+    [
+      "Cardiometabolic risk",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Cost of healthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Behavioral economics of nutrition",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Gut-brain axis",
+      "Appetite"
+    ],
+    [
+      "Gut-brain axis",
+      "Emotional eating"
+    ],
+    [
+      "Gut-brain axis",
+      "Food addiction"
+    ],
+    [
+      "Gut-brain axis",
+      "Neuroinflammation"
+    ],
+    [
+      "Gut-brain axis",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Cortisol"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Metabolic flexibility"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Mitochondrial dysfunction",
+      "Metabolic flexibility"
+    ],
+    [
+      "Mitochondrial dysfunction",
+      "Metabolic syndrome"
+    ],
+    [
+      "Mitochondrial dysfunction",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Epigenetic modifications in metabolic pathways",
+      "Metabolic flexibility"
+    ],
+    [
+      "Epigenetic modifications in metabolic pathways",
+      "Metabolic syndrome"
+    ],
+    [
+      "Epigenetic modifications in metabolic pathways",
+      "Cardiometabolic risk"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Supportive food environment"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Socioeconomic disparities in food access",
+      "Behavioral economics of nutrition"
+    ]
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Weight bias",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Pressure to be thin",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Dyslipidemia"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Insulin resistance"
+    ],
+    [
+      "Resilience",
+      "Coordination"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Poor body image"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Heart rate",
+      "Concentration"
+    ],
+    [
+      "Cortisol",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Dyslipidemia"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Physical well-being"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Mental well-being"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Weight bias"
+    ],
+    [
+      "Inflammation",
+      "Socio-economic status"
+    ],
+    [
+      "Balance",
+      "Mental well-being"
+    ],
+    [
+      "Medications",
+      "Poor body image"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg2_sg3_rep3_cond11100",
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Weight bias",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Pressure to be thin",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Dyslipidemia"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Insulin resistance"
+    ],
+    [
+      "Resilience",
+      "Coordination"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Heart rate",
+      "Concentration"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Dyslipidemia"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Physical well-being"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Mental well-being"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Weight bias"
+    ],
+    [
+      "Inflammation",
+      "Socio-economic status"
+    ],
+    [
+      "Medications",
+      "Poor body image"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

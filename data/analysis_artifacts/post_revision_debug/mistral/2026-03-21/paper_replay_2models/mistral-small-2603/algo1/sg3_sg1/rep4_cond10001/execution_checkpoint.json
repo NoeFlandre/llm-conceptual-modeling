@@ -1,0 +1,242 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Healthy eating"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Eating disorders"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Dyslipidemia",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Availability of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Cost of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Availability of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Cost of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Availability of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Cost of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Availability of healthy foods"
+    ],
+    [
+      "Balance",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Balance",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Balance",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Balance",
+      "Prevalence of green fields"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Tiredness",
+      "Eating disorders"
+    ],
+    [
+      "Tiredness",
+      "Emotional eating"
+    ],
+    [
+      "Tiredness",
+      "Appetite"
+    ],
+    [
+      "Physical pain",
+      "Healthy eating"
+    ],
+    [
+      "Physical pain",
+      "Appetite"
+    ],
+    [
+      "Concentration",
+      "Healthy eating"
+    ],
+    [
+      "Concentration",
+      "Appetite"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cost of healthy foods"
+    ],
+    [
+      "Coronary heart diseases",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Coronary heart diseases",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Appetite"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Tiredness",
+      "Appetite"
+    ],
+    [
+      "Physical pain",
+      "Healthy eating"
+    ],
+    [
+      "Physical pain",
+      "Appetite"
+    ],
+    [
+      "Concentration",
+      "Healthy eating"
+    ]
+  ]
+}

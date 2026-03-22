@@ -1,0 +1,292 @@
+{
+  "expanded_labels": [
+    "Urban planning for physical activity",
+    "Nutritional education programs",
+    "Food pricing policies",
+    "Body positivity movement",
+    "Corporate influence on food production",
+    "Accessibility of recreational facilities",
+    "Food deserts",
+    "Nutritional labeling",
+    "Public health campaigns",
+    "Workplace wellness programs"
+  ],
+  "final_similarity": 0.7999541267614835,
+  "iteration_count": 2,
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional education programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public health campaigns"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food pricing policies"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Corporate influence on food production"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Corporate influence on food production"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food pricing policies"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body positivity movement"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban planning for physical activity",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Nutritional education programs",
+      "Public health campaigns"
+    ],
+    [
+      "Food pricing policies",
+      "Corporate influence on food production"
+    ],
+    [
+      "Body positivity movement",
+      "Mental well-being"
+    ],
+    [
+      "Corporate influence on food production",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Accessibility of recreational facilities",
+      "Physical well-being"
+    ],
+    [
+      "Food deserts",
+      "Socio-economic status"
+    ],
+    [
+      "Nutritional labeling",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public health campaigns",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Workplace wellness programs",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban planning for physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional education programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public health campaigns"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food pricing policies"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Corporate influence on food production"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Corporate influence on food production"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food pricing policies"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body positivity movement"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban planning for physical activity",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Nutritional education programs",
+      "Public health campaigns"
+    ],
+    [
+      "Food pricing policies",
+      "Corporate influence on food production"
+    ],
+    [
+      "Body positivity movement",
+      "Mental well-being"
+    ],
+    [
+      "Corporate influence on food production",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Accessibility of recreational facilities",
+      "Physical well-being"
+    ],
+    [
+      "Food deserts",
+      "Socio-economic status"
+    ],
+    [
+      "Nutritional labeling",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public health campaigns",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Workplace wellness programs",
+      "Physical well-being"
+    ]
+  ]
+}

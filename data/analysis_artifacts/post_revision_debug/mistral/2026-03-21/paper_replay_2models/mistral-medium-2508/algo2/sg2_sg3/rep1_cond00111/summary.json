@@ -1,0 +1,542 @@
+{
+  "expanded_labels": [
+    "Nutritional Education",
+    "Body Positivity",
+    "Metabolic Syndrome",
+    "Exercise Physiology",
+    "Psychological Stress Management",
+    "Nutritional Psychology",
+    "Health at Every Size",
+    "Mindful Eating",
+    "Social Determinants of Health",
+    "Adiposity and Metabolism"
+  ],
+  "final_similarity": 0.7988444863702133,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Nutritional Education",
+      "Mindful Eating"
+    ],
+    [
+      "Nutritional Education",
+      "Health at Every Size"
+    ],
+    [
+      "Nutritional Education",
+      "Body Positivity"
+    ],
+    [
+      "Psychological Stress Management",
+      "Resilience"
+    ],
+    [
+      "Psychological Stress Management",
+      "Control"
+    ],
+    [
+      "Exercise Physiology",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Exercise Physiology",
+      "Coordination"
+    ],
+    [
+      "Exercise Physiology",
+      "Balance"
+    ],
+    [
+      "Nutritional Psychology",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Nutritional Psychology",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ],
+    [
+      "Social Determinants of Health",
+      "Access to healthcare"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Release of adipokines"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood fatty acid level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Cortisol"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood glucose level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Sodium retention"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Heart rate"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Short sleep duration"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Concentration"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Physical pain"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Tiredness"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Dyspnea"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Respiratory diseases"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Asthma"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Coronary heart diseases"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Atherosclerosis"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Inflammation"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Insulin resistance"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Dyslipidemia"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood pressure"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Obesity"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Pressure to be thin",
+      "Poor body image"
+    ],
+    [
+      "Poor body image",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Nutritional Education",
+      "Mindful Eating"
+    ],
+    [
+      "Nutritional Education",
+      "Health at Every Size"
+    ],
+    [
+      "Nutritional Education",
+      "Body Positivity"
+    ],
+    [
+      "Psychological Stress Management",
+      "Resilience"
+    ],
+    [
+      "Psychological Stress Management",
+      "Control"
+    ],
+    [
+      "Exercise Physiology",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Exercise Physiology",
+      "Coordination"
+    ],
+    [
+      "Exercise Physiology",
+      "Balance"
+    ],
+    [
+      "Nutritional Psychology",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Nutritional Psychology",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Social Determinants of Health",
+      "Socio-economic status"
+    ],
+    [
+      "Social Determinants of Health",
+      "Access to healthcare"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Release of adipokines"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood fatty acid level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Cortisol"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood glucose level"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Sodium retention"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Heart rate"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Short sleep duration"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Concentration"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Physical pain"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Tiredness"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Dyspnea"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Respiratory diseases"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Asthma"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Coronary heart diseases"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Atherosclerosis"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Inflammation"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Insulin resistance"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Dyslipidemia"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Blood pressure"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Adiposity and Metabolism",
+      "Obesity"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep1_cond00111"
+}

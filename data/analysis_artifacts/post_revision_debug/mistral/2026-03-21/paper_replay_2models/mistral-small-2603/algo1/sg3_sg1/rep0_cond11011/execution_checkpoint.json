@@ -1,0 +1,214 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Healthy eating"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Eating disorders"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ],
+    [
+      "Dyslipidemia",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Availability of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Blood pressure",
+      "Aesthetics"
+    ],
+    [
+      "Atherosclerosis",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Atherosclerosis",
+      "Aesthetics"
+    ],
+    [
+      "Coronary heart diseases",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Coronary heart diseases",
+      "Aesthetics"
+    ],
+    [
+      "Asthma",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Asthma",
+      "Aesthetics"
+    ],
+    [
+      "Dyspnea",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Dyspnea",
+      "Aesthetics"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Aesthetics"
+    ],
+    [
+      "Balance",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Balance",
+      "Aesthetics"
+    ],
+    [
+      "Coordination",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Coordination",
+      "Aesthetics"
+    ],
+    [
+      "Tiredness",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Tiredness",
+      "Aesthetics"
+    ],
+    [
+      "Concentration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Concentration",
+      "Aesthetics"
+    ],
+    [
+      "Physical pain",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Physical pain",
+      "Aesthetics"
+    ],
+    [
+      "Medications",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Medications",
+      "Aesthetics"
+    ],
+    [
+      "Beta blockers",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Beta blockers",
+      "Aesthetics"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Appetite"
+    ],
+    [
+      "Short sleep duration",
+      "Emotional eating"
+    ],
+    [
+      "Short sleep duration",
+      "Appetite"
+    ]
+  ]
+}

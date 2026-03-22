@@ -1,0 +1,233 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Subsidies",
+    "Body Positivity Movements",
+    "Accessibility of Recreational Facilities",
+    "Community Gardens",
+    "Farmers Markets",
+    "Physical Activity Guidelines",
+    "Food Labeling Transparency",
+    "Corporate Wellness Programs",
+    "Nutritional Policy Reforms",
+    "Urban Green Space Initiatives",
+    "Mindful Eating Practices",
+    "Food Desert Elimination Programs",
+    "Fitness Subsidy Programs"
+  ],
+  "final_similarity": 0.7648942379781049,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Space Initiatives"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Mindful Eating Practices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Nutritional Policy Reforms"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Food Labeling Transparency"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Supportive food environment",
+      "Farmers Markets"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food Desert Elimination Programs"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Cost of healthy foods",
+      "Fitness Subsidy Programs"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Aesthetics",
+      "Body Positivity Movements"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Mental well-being",
+      "Mindful Eating Practices"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Mental well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Space Initiatives"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Mindful Eating Practices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Nutritional Policy Reforms"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Food Labeling Transparency"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Supportive food environment",
+      "Farmers Markets"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food Desert Elimination Programs"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Cost of healthy foods",
+      "Fitness Subsidy Programs"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Aesthetics",
+      "Body Positivity Movements"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Mental well-being",
+      "Mindful Eating Practices"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Mental well-being"
+    ]
+  ]
+}

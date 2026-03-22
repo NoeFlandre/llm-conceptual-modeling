@@ -1,0 +1,270 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Accessibility of Recreational Facilities",
+    "Psychological Impact of Food Marketing",
+    "Nutritional Policy Reform",
+    "Community Gardens and Local Food Production",
+    "Corporate Responsibility in Food Marketing",
+    "Impact of Social Media on Eating Habits",
+    "Urban Green Spaces and Mental Health"
+  ],
+  "final_similarity": 0.8093388317404818,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Nutritional Policy Reform"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces and Mental Health"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Weight bias"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Urban Green Spaces and Mental Health",
+      "Prevalence of green fields"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Availability of healthy foods"
+    ],
+    [
+      "Impact of Social Media on Eating Habits",
+      "Psychological Impact of Food Marketing"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Nutritional Policy Reform"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Availability of healthy foods"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces and Mental Health"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Weight bias"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Urban Green Spaces and Mental Health",
+      "Prevalence of green fields"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Availability of healthy foods"
+    ],
+    [
+      "Impact of Social Media on Eating Habits",
+      "Psychological Impact of Food Marketing"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep4_cond11111"
+}

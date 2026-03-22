@@ -1,0 +1,387 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Subsidies",
+    "Body Positivity Movements",
+    "Accessibility of Recreational Facilities",
+    "Nutritional Policy Reforms",
+    "Community Gardens",
+    "Farmers Markets",
+    "Corporate Wellness Programs",
+    "Food Deserts",
+    "Nutritional Labeling",
+    "School Lunch Programs",
+    "Food Advertising Regulations",
+    "Urban Green Spaces",
+    "Physical Education Curriculum"
+  ],
+  "final_similarity": 0.7674698750223659,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Advertising Regulations"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Aesthetics",
+      "Body Positivity Movements"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Healthy eating"
+    ],
+    [
+      "Food Industry Subsidies",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Body Positivity Movements",
+      "Mental well-being"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Policy Reforms",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Community Gardens",
+      "Farmers Markets"
+    ],
+    [
+      "Farmers Markets",
+      "Availability of healthy foods"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Physical well-being"
+    ],
+    [
+      "Food Deserts",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "School Lunch Programs",
+      "Healthy eating"
+    ],
+    [
+      "Food Advertising Regulations",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Physical Education Curriculum",
+      "Physical well-being"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Advertising Regulations"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Deserts"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Eating disorders"
+    ],
+    [
+      "Aesthetics",
+      "Body Positivity Movements"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Pressure to be thin"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Healthy eating"
+    ],
+    [
+      "Food Industry Subsidies",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Body Positivity Movements",
+      "Mental well-being"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Policy Reforms",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Community Gardens",
+      "Farmers Markets"
+    ],
+    [
+      "Farmers Markets",
+      "Availability of healthy foods"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Physical well-being"
+    ],
+    [
+      "Food Deserts",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Nutritional Labeling",
+      "Healthy eating"
+    ],
+    [
+      "School Lunch Programs",
+      "Healthy eating"
+    ],
+    [
+      "Food Advertising Regulations",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Physical Education Curriculum",
+      "Physical well-being"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep2_cond10101"
+}

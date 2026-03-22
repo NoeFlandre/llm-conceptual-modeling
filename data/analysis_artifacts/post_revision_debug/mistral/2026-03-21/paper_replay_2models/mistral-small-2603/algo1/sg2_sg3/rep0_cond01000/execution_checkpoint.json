@@ -1,0 +1,173 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Resilience",
+      "Cortisol"
+    ],
+    [
+      "Poor body image",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dyslipidemia"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Weight bias",
+      "Blood pressure"
+    ],
+    [
+      "Physical well-being",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Mental well-being",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Stress",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Depression",
+      "Insulin resistance"
+    ],
+    [
+      "Control",
+      "Atherosclerosis"
+    ],
+    [
+      "Socio-economic status",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Resilience",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Release of adipokines"
+    ],
+    [
+      "Pressure to be thin",
+      "Dyspnea"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Heart rate"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Resilience",
+      "Cortisol"
+    ],
+    [
+      "Poor body image",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Dyslipidemia"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Weight bias",
+      "Blood pressure"
+    ],
+    [
+      "Physical well-being",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Depression",
+      "Insulin resistance"
+    ],
+    [
+      "Control",
+      "Atherosclerosis"
+    ],
+    [
+      "Resilience",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Release of adipokines"
+    ],
+    [
+      "Pressure to be thin",
+      "Dyspnea"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Heart rate"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

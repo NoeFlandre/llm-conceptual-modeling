@@ -1,0 +1,98 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Supportive food environment",
+      "Weight bias"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Resilience"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ]
+  ]
+}

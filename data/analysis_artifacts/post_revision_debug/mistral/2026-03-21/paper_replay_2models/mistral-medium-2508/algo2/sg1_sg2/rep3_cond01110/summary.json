@@ -1,0 +1,262 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Subsidies",
+    "Body Positivity Movements",
+    "Accessibility of Recreational Facilities",
+    "Nutritional labeling transparency",
+    "Community gardens and urban farming",
+    "Corporate wellness programs",
+    "Food deserts and their impact",
+    "Influence of social media on eating habits"
+  ],
+  "final_similarity": 0.7835088604128823,
+  "iteration_count": 2,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts and their impact"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Body Positivity Movements"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional labeling transparency"
+    ],
+    [
+      "Community gardens and urban farming",
+      "Availability of healthy foods"
+    ],
+    [
+      "Corporate wellness programs",
+      "Physical well-being"
+    ],
+    [
+      "Food deserts and their impact",
+      "Availability of healthy foods"
+    ],
+    [
+      "Influence of social media on eating habits",
+      "Pressure to be thin"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of healthy foods"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Availability of healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Healthy eating"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Poor body image"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts and their impact"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Body Positivity Movements"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Body Positivity Movements"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional labeling transparency"
+    ],
+    [
+      "Community gardens and urban farming",
+      "Availability of healthy foods"
+    ],
+    [
+      "Corporate wellness programs",
+      "Physical well-being"
+    ],
+    [
+      "Food deserts and their impact",
+      "Availability of healthy foods"
+    ],
+    [
+      "Influence of social media on eating habits",
+      "Pressure to be thin"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep3_cond01110"
+}

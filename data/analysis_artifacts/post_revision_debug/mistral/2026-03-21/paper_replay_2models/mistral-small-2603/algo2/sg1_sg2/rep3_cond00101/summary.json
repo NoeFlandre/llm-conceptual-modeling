@@ -1,0 +1,363 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Food swamps",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Body neutrality movements",
+    "Accessibility of recreational spaces",
+    "Food industry lobbying influence",
+    "Cultural attitudes toward body size",
+    "Nutrition education in schools",
+    "Food pricing policies",
+    "Food deserts in urban areas",
+    "Community gardens and urban farming initiatives",
+    "Food labeling transparency and front-of-pack nutrition labels",
+    "Corporate wellness programs promoting healthy lifestyles",
+    "Social media influence on body image and eating habits"
+  ],
+  "final_similarity": 0.7989565331073997,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in urban areas",
+      "Food deserts"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Community gardens and urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food labeling transparency and front-of-pack nutrition labels",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Corporate wellness programs promoting healthy lifestyles",
+      "Supportive food environment"
+    ],
+    [
+      "Nutrition education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Nutrition education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social media influence on body image and eating habits",
+      "Poor body image"
+    ],
+    [
+      "Social media influence on body image and eating habits",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Resilience"
+    ],
+    [
+      "Body neutrality movements",
+      "Mental well-being"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Appetite"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Aesthetics",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Restrictive covenants",
+      "Availability of healthy foods"
+    ],
+    [
+      "Restrictive covenants",
+      "Accessibility of recreational spaces"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in urban areas",
+      "Food deserts"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Community gardens and urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food pricing policies",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food labeling transparency and front-of-pack nutrition labels",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Corporate wellness programs promoting healthy lifestyles",
+      "Supportive food environment"
+    ],
+    [
+      "Nutrition education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Nutrition education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Social media influence on body image and eating habits",
+      "Poor body image"
+    ],
+    [
+      "Social media influence on body image and eating habits",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Resilience"
+    ],
+    [
+      "Body neutrality movements",
+      "Mental well-being"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food industry lobbying influence",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Appetite"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Aesthetics",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Restrictive covenants",
+      "Availability of healthy foods"
+    ],
+    [
+      "Restrictive covenants",
+      "Accessibility of recreational spaces"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep3_cond00101"
+}

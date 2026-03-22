@@ -1,0 +1,427 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Food swamps",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Body neutrality movements",
+    "Accessibility of recreational spaces",
+    "Food industry lobbying influence",
+    "Cultural attitudes toward body size",
+    "Food policy enforcement",
+    "Community-led health initiatives",
+    "Food deserts in urban areas",
+    "Public awareness campaigns for healthy eating",
+    "Corporate accountability in food marketing",
+    "Community gardens and urban farming",
+    "Cultural representation of body diversity"
+  ],
+  "final_similarity": 0.8007961449872583,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in urban areas",
+      "Food deserts"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Community gardens and urban farming",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food literacy programs",
+      "Healthy eating"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public awareness campaigns for healthy eating",
+      "Healthy eating"
+    ],
+    [
+      "Public awareness campaigns for healthy eating",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Corporate accountability in food marketing",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate accountability in food marketing",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food policy enforcement",
+      "Supportive food environment"
+    ],
+    [
+      "Food policy enforcement",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Mental well-being",
+      "Emotional eating"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Mental well-being",
+      "Poor body image"
+    ],
+    [
+      "Mental well-being",
+      "Control"
+    ],
+    [
+      "Physical well-being",
+      "Weight bias"
+    ],
+    [
+      "Physical well-being",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Physical well-being",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Physical well-being",
+      "Prevalence of green fields"
+    ],
+    [
+      "Cultural attitudes toward body size",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural attitudes toward body size",
+      "Body neutrality movements"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Community-led health initiatives",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Community-led health initiatives",
+      "Food literacy programs"
+    ],
+    [
+      "Community-led health initiatives",
+      "Food policy enforcement"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food deserts in urban areas",
+      "Food deserts"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Community gardens and urban farming",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food literacy programs",
+      "Healthy eating"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public awareness campaigns for healthy eating",
+      "Healthy eating"
+    ],
+    [
+      "Public awareness campaigns for healthy eating",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Corporate accountability in food marketing",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate accountability in food marketing",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food policy enforcement",
+      "Supportive food environment"
+    ],
+    [
+      "Food policy enforcement",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Socio-economic status",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Mental well-being",
+      "Emotional eating"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Mental well-being",
+      "Depression"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Mental well-being",
+      "Poor body image"
+    ],
+    [
+      "Mental well-being",
+      "Control"
+    ],
+    [
+      "Physical well-being",
+      "Weight bias"
+    ],
+    [
+      "Physical well-being",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Physical well-being",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Physical well-being",
+      "Prevalence of green fields"
+    ],
+    [
+      "Cultural attitudes toward body size",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural attitudes toward body size",
+      "Body neutrality movements"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Community-led health initiatives",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Community-led health initiatives",
+      "Food literacy programs"
+    ],
+    [
+      "Community-led health initiatives",
+      "Food policy enforcement"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep3_cond11101"
+}

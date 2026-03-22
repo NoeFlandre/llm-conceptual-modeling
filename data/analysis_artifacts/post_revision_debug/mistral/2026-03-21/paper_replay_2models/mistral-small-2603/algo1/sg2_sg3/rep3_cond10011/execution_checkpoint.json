@@ -1,0 +1,168 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Resilience",
+      "Coordination"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Weight bias",
+      "Dyslipidemia"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood glucose level"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Physical well-being",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Mental well-being",
+      "Respiratory diseases"
+    ],
+    [
+      "Stress",
+      "Heart rate"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Control",
+      "Concentration"
+    ],
+    [
+      "Socio-economic status",
+      "Medications"
+    ],
+    [
+      "Resilience",
+      "Beta blockers"
+    ],
+    [
+      "Poor body image",
+      "Stimulants"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Sodium intake"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Weight bias",
+      "Dyslipidemia"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood glucose level"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Physical well-being",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Mental well-being",
+      "Respiratory diseases"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Control",
+      "Concentration"
+    ],
+    [
+      "Poor body image",
+      "Stimulants"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

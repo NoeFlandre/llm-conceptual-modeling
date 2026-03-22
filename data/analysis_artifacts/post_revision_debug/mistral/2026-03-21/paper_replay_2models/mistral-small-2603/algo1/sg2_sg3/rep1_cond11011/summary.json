@@ -1,0 +1,108 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Tiredness"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Socio-economic status",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Poor body image",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood glucose level"
+    ],
+    [
+      "Pressure to be thin",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Resilience",
+      "Concentration"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Dyslipidemia"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood pressure"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Cells intake of fatty acids"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg2_sg3_rep1_cond11011",
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Tiredness"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Poor body image",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Pressure to be thin",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Resilience",
+      "Concentration"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Dyslipidemia"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood pressure"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Cells intake of fatty acids"
+    ]
+  ]
+}

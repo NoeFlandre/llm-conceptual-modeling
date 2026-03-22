@@ -1,0 +1,425 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Accessibility of Recreational Facilities",
+    "Psychological Impact of Food Marketing",
+    "Urban Green Spaces",
+    "Food Pricing Policies",
+    "Body Positivity Movements",
+    "Community Gardens",
+    "Corporate Wellness Programs",
+    "Nutritional labeling transparency",
+    "Farm-to-school programs",
+    "Active transportation policies",
+    "Mindful eating practices",
+    "Food deserts"
+  ],
+  "final_similarity": 0.778077505051016,
+  "iteration_count": 3,
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Supportive food environment"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Food Pricing Policies"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food deserts"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Pricing Policies"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Appetite",
+      "Mindful eating practices"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Mindful eating practices"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Active transportation policies"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Farm-to-school programs"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Food Pricing Policies"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Psychological Impact of Food Marketing",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Food Pricing Policies",
+      "Socio-economic status"
+    ],
+    [
+      "Body Positivity Movements",
+      "Mental well-being"
+    ],
+    [
+      "Community Gardens",
+      "Availability of healthy foods"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional labeling transparency",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Farm-to-school programs",
+      "Healthy eating"
+    ],
+    [
+      "Active transportation policies",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Mindful eating practices",
+      "Healthy eating"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Supportive food environment"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Food Pricing Policies"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food deserts"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Pricing Policies"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Appetite",
+      "Mindful eating practices"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Psychological Impact of Food Marketing"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Food deserts"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Control",
+      "Mindful eating practices"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Active transportation policies"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Farm-to-school programs"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Food Pricing Policies"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Physical well-being"
+    ],
+    [
+      "Psychological Impact of Food Marketing",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Urban Green Spaces",
+      "Mental well-being"
+    ],
+    [
+      "Food Pricing Policies",
+      "Socio-economic status"
+    ],
+    [
+      "Body Positivity Movements",
+      "Mental well-being"
+    ],
+    [
+      "Community Gardens",
+      "Availability of healthy foods"
+    ],
+    [
+      "Corporate Wellness Programs",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional labeling transparency",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Farm-to-school programs",
+      "Healthy eating"
+    ],
+    [
+      "Active transportation policies",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Mindful eating practices",
+      "Healthy eating"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ]
+  ]
+}

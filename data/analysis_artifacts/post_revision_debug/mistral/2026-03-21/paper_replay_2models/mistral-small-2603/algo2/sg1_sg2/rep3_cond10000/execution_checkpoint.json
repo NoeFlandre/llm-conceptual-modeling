@@ -1,0 +1,734 @@
+{
+  "expanded_labels": [
+    "Food deserts",
+    "Food swamps",
+    "Urban green spaces",
+    "Food literacy programs",
+    "Body neutrality movements",
+    "Accessibility of recreational spaces",
+    "Food industry lobbying",
+    "Nutritional education in schools",
+    "Social determinants of health",
+    "Cultural attitudes toward body size",
+    "Food policy advocacy groups",
+    "Community-led urban farming initiatives",
+    "Digital health and wellness apps",
+    "Corporate wellness programs",
+    "Cultural representation of body diversity in media",
+    "Food deserts vs. food swamps",
+    "Cultural stigma around obesity",
+    "Corporate greenwashing in food marketing",
+    "Intergenerational transmission of eating habits",
+    "Algorithmic bias in food delivery apps"
+  ],
+  "final_similarity": 0.7942755529857197,
+  "iteration_count": 4,
+  "normalized_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Aesthetics",
+      "Prevalence of green fields"
+    ],
+    [
+      "Aesthetics",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Aesthetics",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional education in schools"
+    ],
+    [
+      "Socio-economic status",
+      "Community-led urban farming initiatives"
+    ],
+    [
+      "Socio-economic status",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Socio-economic status",
+      "Food policy advocacy groups"
+    ],
+    [
+      "Food industry lobbying",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food industry lobbying",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food industry lobbying",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Food industry lobbying",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food industry lobbying",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Nutritional education in schools"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Food literacy programs"
+    ],
+    [
+      "Nutritional education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Nutritional education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Food literacy programs"
+    ],
+    [
+      "Community-led urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Community-led urban farming initiatives",
+      "Supportive food environment"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Physical well-being"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Mental well-being"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Resilience"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Control"
+    ],
+    [
+      "Corporate wellness programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Mental well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Resilience"
+    ],
+    [
+      "Corporate wellness programs",
+      "Control"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Cultural attitudes toward body size"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Body neutrality movements"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Poor body image"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Poor body image"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Weight bias"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Eating disorders"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Emotional eating"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Appetite"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Algorithmic bias in food delivery apps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Algorithmic bias in food delivery apps",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Algorithmic bias in food delivery apps",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Cultural attitudes toward body size"
+    ],
+    [
+      "Body neutrality movements",
+      "Weight bias"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Appetite"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Social determinants of health",
+      "Availability of healthy foods"
+    ],
+    [
+      "Social determinants of health",
+      "Food literacy programs"
+    ],
+    [
+      "Social determinants of health",
+      "Nutritional education in schools"
+    ],
+    [
+      "Social determinants of health",
+      "Food policy advocacy groups"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Cost of healthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Availability of healthy foods",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food deserts",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food swamps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban green spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Accessibility of recreational spaces",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Aesthetics",
+      "Prevalence of green fields"
+    ],
+    [
+      "Aesthetics",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Aesthetics",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Food literacy programs"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional education in schools"
+    ],
+    [
+      "Socio-economic status",
+      "Community-led urban farming initiatives"
+    ],
+    [
+      "Socio-economic status",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Socio-economic status",
+      "Food policy advocacy groups"
+    ],
+    [
+      "Food industry lobbying",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food industry lobbying",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food industry lobbying",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Food industry lobbying",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food industry lobbying",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Nutritional education in schools"
+    ],
+    [
+      "Food policy advocacy groups",
+      "Food literacy programs"
+    ],
+    [
+      "Nutritional education in schools",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Nutritional education in schools",
+      "Food literacy programs"
+    ],
+    [
+      "Food literacy programs",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Food literacy programs",
+      "Food literacy programs"
+    ],
+    [
+      "Community-led urban farming initiatives",
+      "Availability of healthy foods"
+    ],
+    [
+      "Community-led urban farming initiatives",
+      "Supportive food environment"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Physical well-being"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Mental well-being"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Resilience"
+    ],
+    [
+      "Digital health and wellness apps",
+      "Control"
+    ],
+    [
+      "Corporate wellness programs",
+      "Physical well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Mental well-being"
+    ],
+    [
+      "Corporate wellness programs",
+      "Resilience"
+    ],
+    [
+      "Corporate wellness programs",
+      "Control"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Cultural attitudes toward body size"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Body neutrality movements"
+    ],
+    [
+      "Cultural representation of body diversity in media",
+      "Poor body image"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Poor body image"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Weight bias"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Cultural stigma around obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Eating disorders"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Emotional eating"
+    ],
+    [
+      "Intergenerational transmission of eating habits",
+      "Appetite"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Corporate greenwashing in food marketing",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Algorithmic bias in food delivery apps",
+      "Availability of healthy foods"
+    ],
+    [
+      "Algorithmic bias in food delivery apps",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Algorithmic bias in food delivery apps",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Poor body image"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Pressure to be thin"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Poor body image"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Body neutrality movements",
+      "Poor body image"
+    ],
+    [
+      "Body neutrality movements",
+      "Cultural attitudes toward body size"
+    ],
+    [
+      "Body neutrality movements",
+      "Weight bias"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Stress",
+      "Appetite"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Social determinants of health",
+      "Socio-economic status"
+    ],
+    [
+      "Social determinants of health",
+      "Accessibility of recreational spaces"
+    ],
+    [
+      "Social determinants of health",
+      "Availability of healthy foods"
+    ],
+    [
+      "Social determinants of health",
+      "Food literacy programs"
+    ],
+    [
+      "Social determinants of health",
+      "Nutritional education in schools"
+    ],
+    [
+      "Social determinants of health",
+      "Food policy advocacy groups"
+    ]
+  ]
+}

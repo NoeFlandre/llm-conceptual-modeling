@@ -1,0 +1,960 @@
+{
+  "expanded_labels": [
+    "Nutritional literacy programs",
+    "Food deserts and access to healthy options",
+    "Body neutrality movement",
+    "Health-at-every-size (HAES) approach",
+    "Chronic stress and metabolic syndrome",
+    "Metabolic inflammation and cardiovascular risk",
+    "Neuroendocrine regulation of appetite",
+    "Social determinants of obesity-related stigma",
+    "Lifestyle interventions for metabolic syndrome",
+    "Cultural narratives around food and identity",
+    "Food literacy and education programs",
+    "Access to mental health resources",
+    "Cultural attitudes toward body diversity",
+    "Workplace wellness initiatives",
+    "Sleep hygiene and metabolic health",
+    "Metabolic syndrome and chronic inflammation",
+    "Cultural stigma and obesity bias",
+    "Nutritional education and metabolic health literacy",
+    "Sleep disorders and metabolic dysregulation",
+    "Body image resilience and mental health interventions"
+  ],
+  "final_similarity": 0.8022224548683858,
+  "iteration_count": 4,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation and cardiovascular risk"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome and chronic inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Food deserts and access to healthy options"
+    ],
+    [
+      "Obesity",
+      "Cultural attitudes toward body diversity"
+    ],
+    [
+      "Obesity",
+      "Cultural stigma and obesity bias"
+    ],
+    [
+      "Obesity",
+      "Body neutrality movement"
+    ],
+    [
+      "Obesity",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Obesity",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Obesity",
+      "Food literacy and education programs"
+    ],
+    [
+      "Obesity",
+      "Nutritional education and metabolic health literacy"
+    ],
+    [
+      "Obesity",
+      "Lifestyle interventions for metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Access to mental health resources"
+    ],
+    [
+      "Obesity",
+      "Workplace wellness initiatives"
+    ],
+    [
+      "Obesity",
+      "Sleep hygiene and metabolic health"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sleep disorders and metabolic dysregulation"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine regulation of appetite"
+    ],
+    [
+      "Obesity",
+      "Social determinants of obesity-related stigma"
+    ],
+    [
+      "Obesity",
+      "Cultural narratives around food and identity"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Airway resistance",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Blood pressure"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Dyspnea"
+    ],
+    [
+      "Asthma",
+      "Tiredness"
+    ],
+    [
+      "Asthma",
+      "Concentration"
+    ],
+    [
+      "Asthma",
+      "Physical pain"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Dyspnea"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Tiredness"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Concentration"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Physical pain"
+    ],
+    [
+      "Dyspnea",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical pain",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Concentration",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation and cardiovascular risk"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic syndrome and chronic inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic syndrome",
+      "Inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cortisol"
+    ],
+    [
+      "Metabolic syndrome",
+      "Stress"
+    ],
+    [
+      "Metabolic syndrome",
+      "Depression"
+    ],
+    [
+      "Metabolic syndrome",
+      "Mental well-being"
+    ],
+    [
+      "Metabolic syndrome",
+      "Physical well-being"
+    ],
+    [
+      "Metabolic syndrome",
+      "Resilience"
+    ],
+    [
+      "Metabolic syndrome",
+      "Control"
+    ],
+    [
+      "Metabolic syndrome",
+      "Balance"
+    ],
+    [
+      "Metabolic syndrome",
+      "Lifestyle interventions for metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Metabolic syndrome",
+      "Food literacy and education programs"
+    ],
+    [
+      "Metabolic syndrome",
+      "Nutritional education and metabolic health literacy"
+    ],
+    [
+      "Metabolic syndrome",
+      "Access to mental health resources"
+    ],
+    [
+      "Metabolic syndrome",
+      "Workplace wellness initiatives"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sleep hygiene and metabolic health"
+    ],
+    [
+      "Metabolic syndrome",
+      "Short sleep duration"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sleep disorders and metabolic dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Socio-economic status"
+    ],
+    [
+      "Metabolic syndrome",
+      "Food deserts and access to healthy options"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cultural attitudes toward body diversity"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cultural stigma and obesity bias"
+    ],
+    [
+      "Metabolic syndrome",
+      "Body neutrality movement"
+    ],
+    [
+      "Metabolic syndrome",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cultural narratives around food and identity"
+    ],
+    [
+      "Metabolic syndrome",
+      "Social determinants of obesity-related stigma"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation and cardiovascular risk"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome and chronic inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Food deserts and access to healthy options"
+    ],
+    [
+      "Obesity",
+      "Cultural attitudes toward body diversity"
+    ],
+    [
+      "Obesity",
+      "Cultural stigma and obesity bias"
+    ],
+    [
+      "Obesity",
+      "Body neutrality movement"
+    ],
+    [
+      "Obesity",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Obesity",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Obesity",
+      "Food literacy and education programs"
+    ],
+    [
+      "Obesity",
+      "Nutritional education and metabolic health literacy"
+    ],
+    [
+      "Obesity",
+      "Lifestyle interventions for metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Access to mental health resources"
+    ],
+    [
+      "Obesity",
+      "Workplace wellness initiatives"
+    ],
+    [
+      "Obesity",
+      "Sleep hygiene and metabolic health"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Sleep disorders and metabolic dysregulation"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine regulation of appetite"
+    ],
+    [
+      "Obesity",
+      "Social determinants of obesity-related stigma"
+    ],
+    [
+      "Obesity",
+      "Cultural narratives around food and identity"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Airway resistance",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Blood pressure"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Dyspnea"
+    ],
+    [
+      "Asthma",
+      "Tiredness"
+    ],
+    [
+      "Asthma",
+      "Concentration"
+    ],
+    [
+      "Asthma",
+      "Physical pain"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Dyspnea"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Tiredness"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Concentration"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Physical pain"
+    ],
+    [
+      "Dyspnea",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Tiredness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical pain",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Concentration",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Blood glucose level",
+      "Insulin resistance"
+    ],
+    [
+      "Blood glucose level",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation and cardiovascular risk"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic stress and metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic syndrome and chronic inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic syndrome",
+      "Inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cortisol"
+    ],
+    [
+      "Metabolic syndrome",
+      "Stress"
+    ],
+    [
+      "Metabolic syndrome",
+      "Depression"
+    ],
+    [
+      "Metabolic syndrome",
+      "Mental well-being"
+    ],
+    [
+      "Metabolic syndrome",
+      "Physical well-being"
+    ],
+    [
+      "Metabolic syndrome",
+      "Resilience"
+    ],
+    [
+      "Metabolic syndrome",
+      "Control"
+    ],
+    [
+      "Metabolic syndrome",
+      "Balance"
+    ],
+    [
+      "Metabolic syndrome",
+      "Lifestyle interventions for metabolic syndrome"
+    ],
+    [
+      "Metabolic syndrome",
+      "Nutritional literacy programs"
+    ],
+    [
+      "Metabolic syndrome",
+      "Food literacy and education programs"
+    ],
+    [
+      "Metabolic syndrome",
+      "Nutritional education and metabolic health literacy"
+    ],
+    [
+      "Metabolic syndrome",
+      "Access to mental health resources"
+    ],
+    [
+      "Metabolic syndrome",
+      "Workplace wellness initiatives"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sleep hygiene and metabolic health"
+    ],
+    [
+      "Metabolic syndrome",
+      "Short sleep duration"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sleep disorders and metabolic dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Socio-economic status"
+    ],
+    [
+      "Metabolic syndrome",
+      "Food deserts and access to healthy options"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cultural attitudes toward body diversity"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cultural stigma and obesity bias"
+    ],
+    [
+      "Metabolic syndrome",
+      "Body neutrality movement"
+    ],
+    [
+      "Metabolic syndrome",
+      "Health-at-every-size (HAES) approach"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cultural narratives around food and identity"
+    ],
+    [
+      "Metabolic syndrome",
+      "Social determinants of obesity-related stigma"
+    ]
+  ],
+  "run_name": "algo2_sg2_sg3_rep2_cond00010"
+}

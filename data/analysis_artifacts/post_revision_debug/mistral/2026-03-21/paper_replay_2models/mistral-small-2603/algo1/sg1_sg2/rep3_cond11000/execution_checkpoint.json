@@ -1,0 +1,138 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Weight bias"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Socio-economic status"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Socio-economic status"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Socio-economic status"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Culture of eating that promotes healthy choices"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Weight bias"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Culture of eating that promotes healthy choices"
+    ]
+  ]
+}

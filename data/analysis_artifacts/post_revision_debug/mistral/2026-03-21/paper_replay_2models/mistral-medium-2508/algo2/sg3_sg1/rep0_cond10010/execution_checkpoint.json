@@ -1,0 +1,822 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Cardiovascular diseases",
+    "Oxidative stress",
+    "Leptin resistance",
+    "Sedentary lifestyle",
+    "Hormonal Imbalance",
+    "Nutritional Deficiencies",
+    "Food Addiction",
+    "Urban Planning for Health",
+    "Health Education Programs",
+    "Endothelial Dysfunction",
+    "Gut Microbiota Imbalance",
+    "Psychological Stress",
+    "Food Policy Regulations",
+    "Exercise Motivation",
+    "Nutritional Counseling",
+    "Public Health Campaigns",
+    "Food Environment Index",
+    "Community Gardens",
+    "Physical Activity Guidelines"
+  ],
+  "final_similarity": 0.7950059538320936,
+  "iteration_count": 4,
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Exercise"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Cardiovascular diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cardiovascular diseases"
+    ],
+    [
+      "Exercise",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cardiovascular diseases",
+      "Heart rate"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Counseling"
+    ],
+    [
+      "Healthy eating",
+      "Public Health Campaigns"
+    ],
+    [
+      "Healthy eating",
+      "Food Policy Regulations"
+    ],
+    [
+      "Healthy eating",
+      "Supportive food environment"
+    ],
+    [
+      "Healthy eating",
+      "Availability of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Community Gardens"
+    ],
+    [
+      "Healthy eating",
+      "Exercise Motivation"
+    ],
+    [
+      "Healthy eating",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Healthy eating",
+      "Urban Planning for Health"
+    ],
+    [
+      "Healthy eating",
+      "Health Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Food Environment Index"
+    ],
+    [
+      "Healthy eating",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Healthy eating",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Healthy eating",
+      "Cost of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Healthy eating",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Healthy eating",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Healthy eating",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Restrictive covenants"
+    ],
+    [
+      "Healthy eating",
+      "Aesthetics"
+    ],
+    [
+      "Healthy eating",
+      "Emotional eating"
+    ],
+    [
+      "Healthy eating",
+      "Appetite"
+    ],
+    [
+      "Healthy eating",
+      "Food Addiction"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Deficiencies"
+    ],
+    [
+      "Healthy eating",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Healthy eating",
+      "Psychological Stress"
+    ],
+    [
+      "Healthy eating",
+      "Gut Microbiota Imbalance"
+    ],
+    [
+      "Healthy eating",
+      "Endothelial Dysfunction"
+    ],
+    [
+      "Healthy eating",
+      "Oxidative stress"
+    ],
+    [
+      "Healthy eating",
+      "Leptin resistance"
+    ],
+    [
+      "Healthy eating",
+      "Eating disorders"
+    ],
+    [
+      "Healthy eating",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Healthy eating",
+      "Physical pain"
+    ],
+    [
+      "Healthy eating",
+      "Tiredness"
+    ],
+    [
+      "Healthy eating",
+      "Concentration"
+    ],
+    [
+      "Healthy eating",
+      "Balance"
+    ],
+    [
+      "Healthy eating",
+      "Coordination"
+    ],
+    [
+      "Healthy eating",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Healthy eating",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Healthy eating",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Healthy eating",
+      "Prevalence of green fields"
+    ],
+    [
+      "Healthy eating",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Healthy eating",
+      "Medications"
+    ],
+    [
+      "Healthy eating",
+      "Stimulants"
+    ],
+    [
+      "Healthy eating",
+      "Beta blockers"
+    ],
+    [
+      "Healthy eating",
+      "Cortisol"
+    ],
+    [
+      "Healthy eating",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Healthy eating",
+      "Sodium intake"
+    ],
+    [
+      "Healthy eating",
+      "Sodium retention"
+    ],
+    [
+      "Healthy eating",
+      "Short sleep duration"
+    ],
+    [
+      "Healthy eating",
+      "Blood fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Healthy eating",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Healthy eating",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Healthy eating",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Healthy eating",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Healthy eating",
+      "Respiratory diseases"
+    ],
+    [
+      "Healthy eating",
+      "Dyspnea"
+    ],
+    [
+      "Healthy eating",
+      "Tiredness"
+    ],
+    [
+      "Healthy eating",
+      "Physical pain"
+    ],
+    [
+      "Healthy eating",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Healthy eating",
+      "Concentration"
+    ],
+    [
+      "Healthy eating",
+      "Balance"
+    ],
+    [
+      "Healthy eating",
+      "Coordination"
+    ],
+    [
+      "Healthy eating",
+      "Ability to engage in physical activity"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Cardiovascular diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Metabolic syndrome",
+      "Cardiovascular diseases"
+    ],
+    [
+      "Sedentary lifestyle",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cardiovascular diseases",
+      "Heart rate"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Inflammation"
+    ],
+    [
+      "Release of adipokines",
+      "Inflammation"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory diseases",
+      "Asthma"
+    ],
+    [
+      "Asthma",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Counseling"
+    ],
+    [
+      "Healthy eating",
+      "Public Health Campaigns"
+    ],
+    [
+      "Healthy eating",
+      "Food Policy Regulations"
+    ],
+    [
+      "Healthy eating",
+      "Supportive food environment"
+    ],
+    [
+      "Healthy eating",
+      "Availability of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Community Gardens"
+    ],
+    [
+      "Healthy eating",
+      "Exercise Motivation"
+    ],
+    [
+      "Healthy eating",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Healthy eating",
+      "Urban Planning for Health"
+    ],
+    [
+      "Healthy eating",
+      "Health Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Food Environment Index"
+    ],
+    [
+      "Healthy eating",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Healthy eating",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Healthy eating",
+      "Cost of healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Healthy eating",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Healthy eating",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Healthy eating",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Healthy eating",
+      "Restrictive covenants"
+    ],
+    [
+      "Healthy eating",
+      "Aesthetics"
+    ],
+    [
+      "Healthy eating",
+      "Emotional eating"
+    ],
+    [
+      "Healthy eating",
+      "Appetite"
+    ],
+    [
+      "Healthy eating",
+      "Food Addiction"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Deficiencies"
+    ],
+    [
+      "Healthy eating",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Healthy eating",
+      "Psychological Stress"
+    ],
+    [
+      "Healthy eating",
+      "Gut Microbiota Imbalance"
+    ],
+    [
+      "Healthy eating",
+      "Endothelial Dysfunction"
+    ],
+    [
+      "Healthy eating",
+      "Oxidative stress"
+    ],
+    [
+      "Healthy eating",
+      "Leptin resistance"
+    ],
+    [
+      "Healthy eating",
+      "Eating disorders"
+    ],
+    [
+      "Healthy eating",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Healthy eating",
+      "Physical pain"
+    ],
+    [
+      "Healthy eating",
+      "Tiredness"
+    ],
+    [
+      "Healthy eating",
+      "Concentration"
+    ],
+    [
+      "Healthy eating",
+      "Balance"
+    ],
+    [
+      "Healthy eating",
+      "Coordination"
+    ],
+    [
+      "Healthy eating",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Healthy eating",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Healthy eating",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Healthy eating",
+      "Prevalence of green fields"
+    ],
+    [
+      "Healthy eating",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Healthy eating",
+      "Medications"
+    ],
+    [
+      "Healthy eating",
+      "Stimulants"
+    ],
+    [
+      "Healthy eating",
+      "Beta blockers"
+    ],
+    [
+      "Healthy eating",
+      "Cortisol"
+    ],
+    [
+      "Healthy eating",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Healthy eating",
+      "Sodium intake"
+    ],
+    [
+      "Healthy eating",
+      "Sodium retention"
+    ],
+    [
+      "Healthy eating",
+      "Short sleep duration"
+    ],
+    [
+      "Healthy eating",
+      "Blood fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Healthy eating",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Healthy eating",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Healthy eating",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Healthy eating",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Healthy eating",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Healthy eating",
+      "Respiratory diseases"
+    ],
+    [
+      "Healthy eating",
+      "Dyspnea"
+    ],
+    [
+      "Healthy eating",
+      "Tiredness"
+    ],
+    [
+      "Healthy eating",
+      "Physical pain"
+    ],
+    [
+      "Healthy eating",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Healthy eating",
+      "Concentration"
+    ],
+    [
+      "Healthy eating",
+      "Balance"
+    ],
+    [
+      "Healthy eating",
+      "Coordination"
+    ],
+    [
+      "Healthy eating",
+      "Ability to engage in physical activity"
+    ]
+  ]
+}

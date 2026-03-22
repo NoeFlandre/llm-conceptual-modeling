@@ -1,0 +1,2206 @@
+{
+  "expanded_labels": [
+    "Metabolic syndrome",
+    "Chronic low-grade inflammation",
+    "Endothelial dysfunction",
+    "Neuroendocrine dysregulation",
+    "Sedentary lifestyle behaviors",
+    "Metabolic flexibility",
+    "Gut microbiota dysbiosis",
+    "Chronic stress resilience",
+    "Sleep architecture disruption",
+    "Food deserts",
+    "Metabolic flexibility training",
+    "Chronic stress resilience programs",
+    "Gut microbiota modulation",
+    "Neuroendocrine biomarkers",
+    "Socioeconomic disparities in food access",
+    "Metabolic inflammation",
+    "Adipose tissue remodeling",
+    "Circadian rhythm disruption",
+    "Food environment policy",
+    "Neuroendocrine-immune crosstalk"
+  ],
+  "final_similarity": 0.8109129042553539,
+  "iteration_count": 4,
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Obesity",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Chronic stress resilience"
+    ],
+    [
+      "Obesity",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Airway resistance"
+    ],
+    [
+      "Obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Medications"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Dyslipidemia"
+    ],
+    [
+      "Insulin resistance",
+      "Atherosclerosis"
+    ],
+    [
+      "Insulin resistance",
+      "Coronary heart diseases"
+    ],
+    [
+      "Insulin resistance",
+      "Inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Insulin resistance",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Insulin resistance",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic flexibility"
+    ],
+    [
+      "Insulin resistance",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Insulin resistance",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Insulin resistance",
+      "Release of adipokines"
+    ],
+    [
+      "Insulin resistance",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Insulin resistance",
+      "Blood fatty acid level"
+    ],
+    [
+      "Insulin resistance",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Insulin resistance",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Insulin resistance",
+      "Medications"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Dyslipidemia",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Insulin resistance"
+    ],
+    [
+      "Dyslipidemia",
+      "Obesity"
+    ],
+    [
+      "Dyslipidemia",
+      "Inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Medications"
+    ],
+    [
+      "Blood pressure",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Blood pressure",
+      "Medications"
+    ],
+    [
+      "Blood pressure",
+      "Obesity"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Insulin resistance"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Blood fatty acid level"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Atherosclerosis",
+      "Inflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic inflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Medications"
+    ],
+    [
+      "Coronary heart diseases",
+      "Medications"
+    ],
+    [
+      "Coronary heart diseases",
+      "Inflammation"
+    ],
+    [
+      "Coronary heart diseases",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Inflammation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Inflammation",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Medications"
+    ],
+    [
+      "Metabolic syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic syndrome",
+      "Inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Metabolic syndrome",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Metabolic syndrome",
+      "Medications"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Metabolic inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Metabolic inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Metabolic inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Metabolic inflammation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Metabolic inflammation",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Metabolic inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic inflammation",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic inflammation",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Metabolic inflammation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Metabolic inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic flexibility"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Chronic stress resilience"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Inflammation"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Metabolic syndrome"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Metabolic flexibility"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Chronic stress resilience"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Inflammation"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Metabolic inflammation"
+    ],
+    [
+      "Circadian rhythm dysbiosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Metabolic flexibility",
+      "Chronic stress resilience"
+    ],
+    [
+      "Metabolic flexibility",
+      "Inflammation"
+    ],
+    [
+      "Metabolic flexibility",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic flexibility",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic stress resilience",
+      "Inflammation"
+    ],
+    [
+      "Chronic stress resilience",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Chronic stress resilience",
+      "Metabolic inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Short sleep duration"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Airway resistance"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Metabolic inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Short sleep duration",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Short sleep duration",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Short sleep duration",
+      "Airway resistance"
+    ],
+    [
+      "Short sleep duration",
+      "Inflammation"
+    ],
+    [
+      "Short sleep duration",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Short sleep duration",
+      "Metabolic inflammation"
+    ],
+    [
+      "Short sleep duration",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Short sleep duration",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Short sleep duration",
+      "Metabolic flexibility"
+    ],
+    [
+      "Short sleep duration",
+      "Chronic stress resilience"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Airway resistance"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Inflammation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Chronic stress resilience"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Airway resistance"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Tiredness"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Balance"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Coordination"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Concentration"
+    ],
+    [
+      "Airway resistance",
+      "Dyspnea"
+    ],
+    [
+      "Airway resistance",
+      "Tiredness"
+    ],
+    [
+      "Airway resistance",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Airway resistance",
+      "Balance"
+    ],
+    [
+      "Airway resistance",
+      "Coordination"
+    ],
+    [
+      "Airway resistance",
+      "Concentration"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Dyspnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Dyspnea",
+      "Balance"
+    ],
+    [
+      "Dyspnea",
+      "Coordination"
+    ],
+    [
+      "Dyspnea",
+      "Concentration"
+    ],
+    [
+      "Tiredness",
+      "Balance"
+    ],
+    [
+      "Tiredness",
+      "Coordination"
+    ],
+    [
+      "Tiredness",
+      "Concentration"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Asthma"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Balance",
+      "Coordination"
+    ],
+    [
+      "Balance",
+      "Concentration"
+    ],
+    [
+      "Coordination",
+      "Concentration"
+    ],
+    [
+      "Food environment policy",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Supportive food environment"
+    ],
+    [
+      "Food environment policy",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Food environment policy",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Food environment policy",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food environment policy",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Food environment policy",
+      "Food deserts"
+    ],
+    [
+      "Food environment policy",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food environment policy",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food environment policy",
+      "Healthy eating"
+    ],
+    [
+      "Food environment policy",
+      "Restrictive covenants"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obesity",
+      "Metabolic syndrome"
+    ],
+    [
+      "Obesity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Obesity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Obesity",
+      "Emotional eating"
+    ],
+    [
+      "Obesity",
+      "Appetite"
+    ],
+    [
+      "Obesity",
+      "Eating disorders"
+    ],
+    [
+      "Obesity",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obesity",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obesity",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Obesity",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Obesity",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obesity",
+      "Chronic stress resilience"
+    ],
+    [
+      "Obesity",
+      "Sleep architecture disruption"
+    ],
+    [
+      "Obesity",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Obesity",
+      "Food deserts"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Obesity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Obesity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Obesity",
+      "Prevalence of green fields"
+    ],
+    [
+      "Obesity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Physical pain"
+    ],
+    [
+      "Obesity",
+      "Tiredness"
+    ],
+    [
+      "Obesity",
+      "Dyspnea"
+    ],
+    [
+      "Obesity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Obesity",
+      "Asthma"
+    ],
+    [
+      "Obesity",
+      "Respiratory diseases"
+    ],
+    [
+      "Obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Obesity",
+      "Airway resistance"
+    ],
+    [
+      "Obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obesity",
+      "Short sleep duration"
+    ],
+    [
+      "Obesity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Obesity",
+      "Balance"
+    ],
+    [
+      "Obesity",
+      "Coordination"
+    ],
+    [
+      "Obesity",
+      "Concentration"
+    ],
+    [
+      "Obesity",
+      "Heart rate"
+    ],
+    [
+      "Obesity",
+      "Cortisol"
+    ],
+    [
+      "Obesity",
+      "Blood glucose level"
+    ],
+    [
+      "Obesity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Obesity",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Obesity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Obesity",
+      "Sodium retention"
+    ],
+    [
+      "Obesity",
+      "Sodium intake"
+    ],
+    [
+      "Obesity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Obesity",
+      "Medications"
+    ],
+    [
+      "Obesity",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic syndrome"
+    ],
+    [
+      "Insulin resistance",
+      "Dyslipidemia"
+    ],
+    [
+      "Insulin resistance",
+      "Atherosclerosis"
+    ],
+    [
+      "Insulin resistance",
+      "Coronary heart diseases"
+    ],
+    [
+      "Insulin resistance",
+      "Inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic inflammation"
+    ],
+    [
+      "Insulin resistance",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Insulin resistance",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Insulin resistance",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic flexibility"
+    ],
+    [
+      "Insulin resistance",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Insulin resistance",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Insulin resistance",
+      "Release of adipokines"
+    ],
+    [
+      "Insulin resistance",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Insulin resistance",
+      "Blood fatty acid level"
+    ],
+    [
+      "Insulin resistance",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Insulin resistance",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Insulin resistance",
+      "Medications"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Dyslipidemia",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Insulin resistance"
+    ],
+    [
+      "Dyslipidemia",
+      "Obesity"
+    ],
+    [
+      "Dyslipidemia",
+      "Inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Metabolic inflammation"
+    ],
+    [
+      "Dyslipidemia",
+      "Medications"
+    ],
+    [
+      "Blood pressure",
+      "Atherosclerosis"
+    ],
+    [
+      "Blood pressure",
+      "Coronary heart diseases"
+    ],
+    [
+      "Blood pressure",
+      "Sodium retention"
+    ],
+    [
+      "Blood pressure",
+      "Sodium intake"
+    ],
+    [
+      "Blood pressure",
+      "Medications"
+    ],
+    [
+      "Blood pressure",
+      "Obesity"
+    ],
+    [
+      "Blood pressure",
+      "Metabolic syndrome"
+    ],
+    [
+      "Blood pressure",
+      "Insulin resistance"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Blood fatty acid level"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Atherosclerosis",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Atherosclerosis",
+      "Inflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Metabolic inflammation"
+    ],
+    [
+      "Atherosclerosis",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Atherosclerosis",
+      "Medications"
+    ],
+    [
+      "Coronary heart diseases",
+      "Medications"
+    ],
+    [
+      "Coronary heart diseases",
+      "Inflammation"
+    ],
+    [
+      "Coronary heart diseases",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Coronary heart diseases",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Inflammation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Inflammation",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Medications"
+    ],
+    [
+      "Metabolic syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic syndrome",
+      "Atherosclerosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Coronary heart diseases"
+    ],
+    [
+      "Metabolic syndrome",
+      "Inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Metabolic inflammation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic syndrome",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic syndrome",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Metabolic syndrome",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Metabolic syndrome",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Metabolic syndrome",
+      "Sedentary lifestyle behaviors"
+    ],
+    [
+      "Metabolic syndrome",
+      "Medications"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Chronic low-grade inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Metabolic inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Metabolic inflammation",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Metabolic inflammation",
+      "Release of adipokines"
+    ],
+    [
+      "Metabolic inflammation",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Metabolic inflammation",
+      "Adipose tissue remodeling"
+    ],
+    [
+      "Metabolic inflammation",
+      "Endothelial dysfunction"
+    ],
+    [
+      "Metabolic inflammation",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Metabolic inflammation",
+      "Gut microbiota dysbiosis"
+    ],
+    [
+      "Metabolic inflammation",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Metabolic inflammation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Metabolic inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic flexibility"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Chronic stress resilience"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic inflammation"
+    ],
+    [
+      "Gut microbiota dysbiosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Metabolic flexibility"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic stress resilience"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Inflammation"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Metabolic inflammation"
+    ],
+    [
+      "Neuroendocrine dysregulation",
+      "Metabolic syndrome"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Metabolic flexibility"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Chronic stress resilience"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Inflammation"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Circadian rhythm disruption",
+      "Metabolic inflammation"
+    ],
+    [
+      "Circadian rhythm dysbiosis",
+      "Metabolic syndrome"
+    ],
+    [
+      "Metabolic flexibility",
+      "Chronic stress resilience"
+    ],
+    [
+      "Metabolic flexibility",
+      "Inflammation"
+    ],
+    [
+      "Metabolic flexibility",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Metabolic flexibility",
+      "Metabolic inflammation"
+    ],
+    [
+      "Chronic stress resilience",
+      "Inflammation"
+    ],
+    [
+      "Chronic stress resilience",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Chronic stress resilience",
+      "Metabolic inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Short sleep duration"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Airway resistance"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Metabolic inflammation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Sleep architecture disruption",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Short sleep duration",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Short sleep duration",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Short sleep duration",
+      "Airway resistance"
+    ],
+    [
+      "Short sleep duration",
+      "Inflammation"
+    ],
+    [
+      "Short sleep duration",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Short sleep duration",
+      "Metabolic inflammation"
+    ],
+    [
+      "Short sleep duration",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Short sleep duration",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Short sleep duration",
+      "Metabolic flexibility"
+    ],
+    [
+      "Short sleep duration",
+      "Chronic stress resilience"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Airway resistance"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Inflammation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Chronic low-grade inflammation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Metabolic inflammation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Neuroendocrine dysregulation"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Circadian rhythm disruption"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Metabolic flexibility"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Chronic stress resilience"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Airway resistance"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Tiredness"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Balance"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Coordination"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Concentration"
+    ],
+    [
+      "Airway resistance",
+      "Dyspnea"
+    ],
+    [
+      "Airway resistance",
+      "Tiredness"
+    ],
+    [
+      "Airway resistance",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Airway resistance",
+      "Balance"
+    ],
+    [
+      "Airway resistance",
+      "Coordination"
+    ],
+    [
+      "Airway resistance",
+      "Concentration"
+    ],
+    [
+      "Dyspnea",
+      "Tiredness"
+    ],
+    [
+      "Dyspnea",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Dyspnea",
+      "Balance"
+    ],
+    [
+      "Dyspnea",
+      "Coordination"
+    ],
+    [
+      "Dyspnea",
+      "Concentration"
+    ],
+    [
+      "Tiredness",
+      "Balance"
+    ],
+    [
+      "Tiredness",
+      "Coordination"
+    ],
+    [
+      "Tiredness",
+      "Concentration"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Asthma"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Respiratory diseases"
+    ],
+    [
+      "Asthma",
+      "Respiratory diseases"
+    ],
+    [
+      "Balance",
+      "Coordination"
+    ],
+    [
+      "Balance",
+      "Concentration"
+    ],
+    [
+      "Coordination",
+      "Concentration"
+    ],
+    [
+      "Food environment policy",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Supportive food environment"
+    ],
+    [
+      "Food environment policy",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Food environment policy",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food environment policy",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Food environment policy",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Food environment policy",
+      "Socioeconomic disparities in food access"
+    ],
+    [
+      "Food environment policy",
+      "Food deserts"
+    ],
+    [
+      "Food environment policy",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food environment policy",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Food environment policy",
+      "Healthy eating"
+    ],
+    [
+      "Food environment policy",
+      "Restrictive covenants"
+    ]
+  ]
+}

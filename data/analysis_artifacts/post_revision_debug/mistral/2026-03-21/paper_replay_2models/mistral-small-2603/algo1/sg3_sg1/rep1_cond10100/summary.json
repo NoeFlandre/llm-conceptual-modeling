@@ -1,0 +1,454 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Healthy eating"
+    ],
+    [
+      "Obesity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Obesity",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Obesity",
+      "Aesthetics"
+    ],
+    [
+      "Inflammation",
+      "Healthy eating"
+    ],
+    [
+      "Inflammation",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Inflammation",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Cost of healthy foods"
+    ],
+    [
+      "Inflammation",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Availability of healthy foods"
+    ],
+    [
+      "Inflammation",
+      "Supportive food environment"
+    ],
+    [
+      "Inflammation",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Inflammation",
+      "Aesthetics"
+    ],
+    [
+      "Insulin resistance",
+      "Healthy eating"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Cost of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Availability of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Supportive food environment"
+    ],
+    [
+      "Insulin resistance",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Insulin resistance",
+      "Aesthetics"
+    ],
+    [
+      "Atherosclerosis",
+      "Healthy eating"
+    ],
+    [
+      "Atherosclerosis",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Cost of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Availability of healthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Supportive food environment"
+    ],
+    [
+      "Atherosclerosis",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Atherosclerosis",
+      "Aesthetics"
+    ],
+    [
+      "Dyslipidemia",
+      "Healthy eating"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Supportive food environment"
+    ],
+    [
+      "Dyslipidemia",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Dyslipidemia",
+      "Aesthetics"
+    ],
+    [
+      "Blood pressure",
+      "Healthy eating"
+    ],
+    [
+      "Blood pressure",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Cost of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Availability of healthy foods"
+    ],
+    [
+      "Blood pressure",
+      "Supportive food environment"
+    ],
+    [
+      "Blood pressure",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Blood pressure",
+      "Aesthetics"
+    ],
+    [
+      "Short sleep duration",
+      "Healthy eating"
+    ],
+    [
+      "Short sleep duration",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Cost of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Availability of healthy foods"
+    ],
+    [
+      "Short sleep duration",
+      "Supportive food environment"
+    ],
+    [
+      "Short sleep duration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Short sleep duration",
+      "Aesthetics"
+    ],
+    [
+      "Physical pain",
+      "Healthy eating"
+    ],
+    [
+      "Physical pain",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Physical pain",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Physical pain",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical pain",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Physical pain",
+      "Availability of healthy foods"
+    ],
+    [
+      "Physical pain",
+      "Supportive food environment"
+    ],
+    [
+      "Physical pain",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Physical pain",
+      "Aesthetics"
+    ],
+    [
+      "Tiredness",
+      "Healthy eating"
+    ],
+    [
+      "Tiredness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Tiredness",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Tiredness",
+      "Cost of healthy foods"
+    ],
+    [
+      "Tiredness",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Tiredness",
+      "Availability of healthy foods"
+    ],
+    [
+      "Tiredness",
+      "Supportive food environment"
+    ],
+    [
+      "Tiredness",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Tiredness",
+      "Aesthetics"
+    ],
+    [
+      "Dyspnea",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Cost of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyspnea",
+      "Supportive food environment"
+    ],
+    [
+      "Dyspnea",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Dyspnea",
+      "Aesthetics"
+    ]
+  ],
+  "model": "",
+  "run_name": "algo1_sg3_sg1_rep1_cond10100",
+  "verified_edges": [
+    [
+      "Obesity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Obesity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Obesity",
+      "Supportive food environment"
+    ],
+    [
+      "Inflammation",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Inflammation",
+      "Cost of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Cost of healthy foods"
+    ],
+    [
+      "Insulin resistance",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Atherosclerosis",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Availability of healthy foods"
+    ],
+    [
+      "Dyslipidemia",
+      "Supportive food environment"
+    ],
+    [
+      "Blood pressure",
+      "Supportive food environment"
+    ],
+    [
+      "Blood pressure",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Short sleep duration",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Short sleep duration",
+      "Aesthetics"
+    ],
+    [
+      "Physical pain",
+      "Aesthetics"
+    ],
+    [
+      "Tiredness",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Healthy eating"
+    ],
+    [
+      "Dyspnea",
+      "Marketing of healthy foods"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

@@ -1,0 +1,422 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Subsidies",
+    "Body Positivity Movements",
+    "Accessibility of Recreational Facilities",
+    "Community Gardens",
+    "Farmers Markets",
+    "Physical Activity Guidelines",
+    "Food Labeling Transparency",
+    "Urban Green Spaces",
+    "Nutritional Policy Reforms",
+    "Corporate Responsibility in Food Marketing",
+    "Urban Design for Pedestrian Safety",
+    "Public Health Campaigns for Body Diversity",
+    "Fiscal Policies for Health Promotion",
+    "Nutritional Awareness Campaigns",
+    "Farm-to-Table Initiatives",
+    "Active Transportation Policies",
+    "Food Environment Index",
+    "Health Equity in Food Access"
+  ],
+  "final_similarity": 0.7855772043593259,
+  "iteration_count": 4,
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Awareness Campaigns"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Labeling Transparency"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Fiscal Policies for Health Promotion"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Supportive food environment",
+      "Food Environment Index"
+    ],
+    [
+      "Availability of healthy foods",
+      "Farmers Markets"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Cost of healthy foods",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Environment Index"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Urban Design for Pedestrian Safety"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Socio-economic status",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public Health Campaigns for Body Diversity"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Active Transportation Policies"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional Policy Reforms"
+    ],
+    [
+      "Food Industry Subsidies",
+      "Fiscal Policies for Health Promotion"
+    ],
+    [
+      "Body Positivity Movements",
+      "Public Health Campaigns for Body Diversity"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Urban Green Spaces"
+    ],
+    [
+      "Community Gardens",
+      "Farm-to-Table Initiatives"
+    ],
+    [
+      "Farmers Markets",
+      "Farm-to-Table Initiatives"
+    ],
+    [
+      "Physical Activity Guidelines",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Food Labeling Transparency",
+      "Nutritional Policy Reforms"
+    ],
+    [
+      "Urban Green Spaces",
+      "Urban Design for Pedestrian Safety"
+    ],
+    [
+      "Nutritional Policy Reforms",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Corporate Responsibility in Food Marketing",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Urban Design for Pedestrian Safety",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Public Health Campaigns for Body Diversity",
+      "Body Positivity Movements"
+    ],
+    [
+      "Fiscal Policies for Health Promotion",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Nutritional Awareness Campaigns",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Farm-to-Table Initiatives",
+      "Supportive food environment"
+    ],
+    [
+      "Active Transportation Policies",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Food Environment Index",
+      "Availability of healthy foods"
+    ],
+    [
+      "Health Equity in Food Access",
+      "Socio-economic status"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of Recreational Facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Awareness Campaigns"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Labeling Transparency"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Fiscal Policies for Health Promotion"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Supportive food environment",
+      "Food Environment Index"
+    ],
+    [
+      "Availability of healthy foods",
+      "Farmers Markets"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Subsidies"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Prevalence of green fields",
+      "Urban Green Spaces"
+    ],
+    [
+      "Cost of healthy foods",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food Environment Index"
+    ],
+    [
+      "Emotional eating",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Urban Design for Pedestrian Safety"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Corporate Responsibility in Food Marketing"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Physical Activity Guidelines"
+    ],
+    [
+      "Mental well-being",
+      "Stress"
+    ],
+    [
+      "Socio-economic status",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public Health Campaigns for Body Diversity"
+    ],
+    [
+      "Poor body image",
+      "Body Positivity Movements"
+    ],
+    [
+      "Pressure to be thin",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Active Transportation Policies"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional Policy Reforms"
+    ],
+    [
+      "Food Industry Subsidies",
+      "Fiscal Policies for Health Promotion"
+    ],
+    [
+      "Body Positivity Movements",
+      "Public Health Campaigns for Body Diversity"
+    ],
+    [
+      "Accessibility of Recreational Facilities",
+      "Urban Green Spaces"
+    ],
+    [
+      "Community Gardens",
+      "Farm-to-Table Initiatives"
+    ],
+    [
+      "Farmers Markets",
+      "Farm-to-Table Initiatives"
+    ],
+    [
+      "Physical Activity Guidelines",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Food Labeling Transparency",
+      "Nutritional Policy Reforms"
+    ],
+    [
+      "Urban Green Spaces",
+      "Urban Design for Pedestrian Safety"
+    ],
+    [
+      "Nutritional Policy Reforms",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Corporate Responsibility in Food Marketing",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Urban Design for Pedestrian Safety",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Public Health Campaigns for Body Diversity",
+      "Body Positivity Movements"
+    ],
+    [
+      "Fiscal Policies for Health Promotion",
+      "Health Equity in Food Access"
+    ],
+    [
+      "Nutritional Awareness Campaigns",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Farm-to-Table Initiatives",
+      "Supportive food environment"
+    ],
+    [
+      "Active Transportation Policies",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Food Environment Index",
+      "Availability of healthy foods"
+    ],
+    [
+      "Health Equity in Food Access",
+      "Socio-economic status"
+    ]
+  ]
+}

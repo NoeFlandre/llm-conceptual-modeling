@@ -1,0 +1,224 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Poor body image"
+    ],
+    [
+      "Healthy eating",
+      "Stress"
+    ],
+    [
+      "Healthy eating",
+      "Depression"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Poor body image"
+    ],
+    [
+      "Supportive food environment",
+      "Stress"
+    ],
+    [
+      "Supportive food environment",
+      "Depression"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Aesthetics",
+      "Physical well-being"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Depression"
+    ],
+    [
+      "Eating disorders",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Stress"
+    ],
+    [
+      "Healthy eating",
+      "Depression"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Availability of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Depression"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Aesthetics",
+      "Physical well-being"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Eating disorders",
+      "Depression"
+    ],
+    [
+      "Eating disorders",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Control"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

@@ -1,0 +1,1308 @@
+{
+  "expanded_labels": [
+    "Metabolic Syndrome",
+    "Cardiovascular Health",
+    "Nutritional Education",
+    "Food Policy",
+    "Sedentary Lifestyle",
+    "Hormonal Imbalance",
+    "Oxidative Stress",
+    "Public Health Campaigns",
+    "Food Addiction",
+    "Urban Planning"
+  ],
+  "final_similarity": 0.77370924242152,
+  "iteration_count": 2,
+  "normalized_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Obesity",
+      "Cardiovascular Health"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Airway resistance",
+      "Asthma"
+    ],
+    [
+      "Airway resistance",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Cardiovascular Health"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Obesity"
+    ],
+    [
+      "Cardiovascular Health",
+      "Heart rate"
+    ],
+    [
+      "Cardiovascular Health",
+      "Blood pressure"
+    ],
+    [
+      "Cardiovascular Health",
+      "Atherosclerosis"
+    ],
+    [
+      "Cardiovascular Health",
+      "Coronary heart diseases"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Obesity"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Cardiovascular Health"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Healthy eating",
+      "Obesity"
+    ],
+    [
+      "Healthy eating",
+      "Blood glucose level"
+    ],
+    [
+      "Healthy eating",
+      "Dyslipidemia"
+    ],
+    [
+      "Healthy eating",
+      "Cardiovascular Health"
+    ],
+    [
+      "Healthy eating",
+      "Blood fatty acid level"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Obesity"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Dyslipidemia"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cardiovascular Health"
+    ],
+    [
+      "Public Health Campaigns",
+      "Healthy eating"
+    ],
+    [
+      "Public Health Campaigns",
+      "Nutritional Education"
+    ],
+    [
+      "Public Health Campaigns",
+      "Supportive food environment"
+    ],
+    [
+      "Public Health Campaigns",
+      "Physical activity"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy eating"
+    ],
+    [
+      "Nutritional Education",
+      "Obesity"
+    ],
+    [
+      "Nutritional Education",
+      "Cardiovascular Health"
+    ],
+    [
+      "Food Policy",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food Policy",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food Policy",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food Policy",
+      "Supportive food environment"
+    ],
+    [
+      "Urban Planning",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban Planning",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban Planning",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban Planning",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical activity"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Cardiovascular Health"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Cardiovascular Health"
+    ],
+    [
+      "Prevalence of green fields",
+      "Physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Cardiovascular Health"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Cardiovascular Health"
+    ],
+    [
+      "Physical activity",
+      "Cardiovascular Health"
+    ],
+    [
+      "Physical activity",
+      "Obesity"
+    ],
+    [
+      "Physical activity",
+      "Blood pressure"
+    ],
+    [
+      "Physical activity",
+      "Blood glucose level"
+    ],
+    [
+      "Physical activity",
+      "Dyslipidemia"
+    ],
+    [
+      "Physical activity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Physical activity",
+      "Insulin resistance"
+    ],
+    [
+      "Physical activity",
+      "Inflammation"
+    ],
+    [
+      "Physical activity",
+      "Atherosclerosis"
+    ],
+    [
+      "Physical activity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Physical activity",
+      "Heart rate"
+    ],
+    [
+      "Physical activity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical activity",
+      "Balance"
+    ],
+    [
+      "Physical activity",
+      "Coordination"
+    ],
+    [
+      "Physical activity",
+      "Tiredness"
+    ],
+    [
+      "Physical activity",
+      "Physical pain"
+    ],
+    [
+      "Physical activity",
+      "Concentration"
+    ],
+    [
+      "Physical activity",
+      "Aesthetics"
+    ],
+    [
+      "Physical activity",
+      "Appetite"
+    ],
+    [
+      "Physical activity",
+      "Emotional eating"
+    ],
+    [
+      "Physical activity",
+      "Eating disorders"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Physical activity",
+      "Healthy eating"
+    ],
+    [
+      "Physical activity",
+      "Restrictive covenants"
+    ],
+    [
+      "Physical activity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Physical activity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Physical activity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Physical activity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Supportive food environment"
+    ],
+    [
+      "Physical activity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Physical activity",
+      "Food Addiction"
+    ],
+    [
+      "Physical activity",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Physical activity",
+      "Oxidative Stress"
+    ],
+    [
+      "Physical activity",
+      "Cortisol"
+    ],
+    [
+      "Physical activity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Physical activity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Physical activity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Physical activity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Physical activity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Physical activity",
+      "Release of adipokines"
+    ],
+    [
+      "Physical activity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Physical activity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Physical activity",
+      "Sodium retention"
+    ],
+    [
+      "Physical activity",
+      "Sodium intake"
+    ],
+    [
+      "Physical activity",
+      "Beta blockers"
+    ],
+    [
+      "Physical activity",
+      "Stimulants"
+    ],
+    [
+      "Physical activity",
+      "Medications"
+    ],
+    [
+      "Physical activity",
+      "Respiratory diseases"
+    ],
+    [
+      "Physical activity",
+      "Asthma"
+    ],
+    [
+      "Physical activity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Physical activity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Physical activity",
+      "Dyspnea"
+    ],
+    [
+      "Physical activity",
+      "Tiredness"
+    ],
+    [
+      "Physical activity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Physical activity",
+      "Airway resistance"
+    ],
+    [
+      "Physical activity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Physical activity",
+      "Short sleep duration"
+    ],
+    [
+      "Physical activity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Physical activity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Physical activity",
+      "Oxidative Stress"
+    ],
+    [
+      "Physical activity",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Physical activity",
+      "Food Addiction"
+    ],
+    [
+      "Physical activity",
+      "Emotional eating"
+    ],
+    [
+      "Physical activity",
+      "Eating disorders"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Physical activity",
+      "Healthy eating"
+    ],
+    [
+      "Physical activity",
+      "Restrictive covenants"
+    ],
+    [
+      "Physical activity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Physical activity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Physical activity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Physical activity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Supportive food environment"
+    ],
+    [
+      "Physical activity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Obesity",
+      "Insulin resistance"
+    ],
+    [
+      "Obesity",
+      "Dyslipidemia"
+    ],
+    [
+      "Obesity",
+      "Blood pressure"
+    ],
+    [
+      "Obesity",
+      "Inflammation"
+    ],
+    [
+      "Obesity",
+      "Atherosclerosis"
+    ],
+    [
+      "Obesity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Obesity",
+      "Release of adipokines"
+    ],
+    [
+      "Obesity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Obesity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Obesity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Obesity",
+      "Cardiovascular Health"
+    ],
+    [
+      "Insulin resistance",
+      "Blood glucose level"
+    ],
+    [
+      "Insulin resistance",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Dyslipidemia",
+      "Atherosclerosis"
+    ],
+    [
+      "Dyslipidemia",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Atherosclerosis"
+    ],
+    [
+      "Inflammation",
+      "Coronary heart diseases"
+    ],
+    [
+      "Inflammation",
+      "Auto-inflammatory diseases"
+    ],
+    [
+      "Inflammation",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Atherosclerosis",
+      "Coronary heart diseases"
+    ],
+    [
+      "Atherosclerosis",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Airway resistance"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Airway resistance",
+      "Respiratory diseases"
+    ],
+    [
+      "Airway resistance",
+      "Asthma"
+    ],
+    [
+      "Airway resistance",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Dyspnea"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Tiredness"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Respiratory diseases"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Short sleep duration"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Release of adipokines"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Cardiovascular Health"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Insulin resistance"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Dyslipidemia"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Blood pressure"
+    ],
+    [
+      "Metabolic Syndrome",
+      "Obesity"
+    ],
+    [
+      "Cardiovascular Health",
+      "Heart rate"
+    ],
+    [
+      "Cardiovascular Health",
+      "Blood pressure"
+    ],
+    [
+      "Cardiovascular Health",
+      "Atherosclerosis"
+    ],
+    [
+      "Cardiovascular Health",
+      "Coronary heart diseases"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Obesity"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Cardiovascular Health"
+    ],
+    [
+      "Sedentary Lifestyle",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Healthy eating",
+      "Obesity"
+    ],
+    [
+      "Healthy eating",
+      "Blood glucose level"
+    ],
+    [
+      "Healthy eating",
+      "Dyslipidemia"
+    ],
+    [
+      "Healthy eating",
+      "Cardiovascular Health"
+    ],
+    [
+      "Healthy eating",
+      "Blood fatty acid level"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Obesity"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Dyslipidemia"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Cardiovascular Health"
+    ],
+    [
+      "Public Health Campaigns",
+      "Healthy eating"
+    ],
+    [
+      "Public Health Campaigns",
+      "Nutritional Education"
+    ],
+    [
+      "Public Health Campaigns",
+      "Supportive food environment"
+    ],
+    [
+      "Public Health Campaigns",
+      "Physical activity"
+    ],
+    [
+      "Nutritional Education",
+      "Healthy eating"
+    ],
+    [
+      "Nutritional Education",
+      "Obesity"
+    ],
+    [
+      "Nutritional Education",
+      "Cardiovascular Health"
+    ],
+    [
+      "Food Policy",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Food Policy",
+      "Availability of healthy foods"
+    ],
+    [
+      "Food Policy",
+      "Cost of healthy foods"
+    ],
+    [
+      "Food Policy",
+      "Supportive food environment"
+    ],
+    [
+      "Urban Planning",
+      "Prevalence of walking trails"
+    ],
+    [
+      "Urban Planning",
+      "Prevalence of bike trails"
+    ],
+    [
+      "Urban Planning",
+      "Prevalence of green fields"
+    ],
+    [
+      "Urban Planning",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical activity"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Cardiovascular Health"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical activity"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Cardiovascular Health"
+    ],
+    [
+      "Prevalence of green fields",
+      "Physical activity"
+    ],
+    [
+      "Prevalence of green fields",
+      "Cardiovascular Health"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical activity"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Cardiovascular Health"
+    ],
+    [
+      "Physical activity",
+      "Cardiovascular Health"
+    ],
+    [
+      "Physical activity",
+      "Obesity"
+    ],
+    [
+      "Physical activity",
+      "Blood pressure"
+    ],
+    [
+      "Physical activity",
+      "Blood glucose level"
+    ],
+    [
+      "Physical activity",
+      "Dyslipidemia"
+    ],
+    [
+      "Physical activity",
+      "Metabolic Syndrome"
+    ],
+    [
+      "Physical activity",
+      "Insulin resistance"
+    ],
+    [
+      "Physical activity",
+      "Inflammation"
+    ],
+    [
+      "Physical activity",
+      "Atherosclerosis"
+    ],
+    [
+      "Physical activity",
+      "Coronary heart diseases"
+    ],
+    [
+      "Physical activity",
+      "Heart rate"
+    ],
+    [
+      "Physical activity",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical activity",
+      "Balance"
+    ],
+    [
+      "Physical activity",
+      "Coordination"
+    ],
+    [
+      "Physical activity",
+      "Tiredness"
+    ],
+    [
+      "Physical activity",
+      "Physical pain"
+    ],
+    [
+      "Physical activity",
+      "Concentration"
+    ],
+    [
+      "Physical activity",
+      "Aesthetics"
+    ],
+    [
+      "Physical activity",
+      "Appetite"
+    ],
+    [
+      "Physical activity",
+      "Emotional eating"
+    ],
+    [
+      "Physical activity",
+      "Eating disorders"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Physical activity",
+      "Healthy eating"
+    ],
+    [
+      "Physical activity",
+      "Restrictive covenants"
+    ],
+    [
+      "Physical activity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Physical activity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Physical activity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Physical activity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Supportive food environment"
+    ],
+    [
+      "Physical activity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Physical activity",
+      "Food Addiction"
+    ],
+    [
+      "Physical activity",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Physical activity",
+      "Oxidative Stress"
+    ],
+    [
+      "Physical activity",
+      "Cortisol"
+    ],
+    [
+      "Physical activity",
+      "Blood fatty acid level"
+    ],
+    [
+      "Physical activity",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Physical activity",
+      "Blood mono-unsaturated fatty acid level"
+    ],
+    [
+      "Physical activity",
+      "Cells intake of fatty acids"
+    ],
+    [
+      "Physical activity",
+      "Adipose storage of fatty acids"
+    ],
+    [
+      "Physical activity",
+      "Release of adipokines"
+    ],
+    [
+      "Physical activity",
+      "Secretion of inflammatory molecules by adipose cells"
+    ],
+    [
+      "Physical activity",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Physical activity",
+      "Sodium retention"
+    ],
+    [
+      "Physical activity",
+      "Sodium intake"
+    ],
+    [
+      "Physical activity",
+      "Beta blockers"
+    ],
+    [
+      "Physical activity",
+      "Stimulants"
+    ],
+    [
+      "Physical activity",
+      "Medications"
+    ],
+    [
+      "Physical activity",
+      "Respiratory diseases"
+    ],
+    [
+      "Physical activity",
+      "Asthma"
+    ],
+    [
+      "Physical activity",
+      "Gastro-esophageal reflux disease"
+    ],
+    [
+      "Physical activity",
+      "Asthma-like symptoms"
+    ],
+    [
+      "Physical activity",
+      "Dyspnea"
+    ],
+    [
+      "Physical activity",
+      "Tiredness"
+    ],
+    [
+      "Physical activity",
+      "Respiratory muscle fatigue"
+    ],
+    [
+      "Physical activity",
+      "Airway resistance"
+    ],
+    [
+      "Physical activity",
+      "Obstructive sleep apnea"
+    ],
+    [
+      "Physical activity",
+      "Short sleep duration"
+    ],
+    [
+      "Physical activity",
+      "Thoracic and abdominal obesity"
+    ],
+    [
+      "Physical activity",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Physical activity",
+      "Oxidative Stress"
+    ],
+    [
+      "Physical activity",
+      "Hormonal Imbalance"
+    ],
+    [
+      "Physical activity",
+      "Food Addiction"
+    ],
+    [
+      "Physical activity",
+      "Emotional eating"
+    ],
+    [
+      "Physical activity",
+      "Eating disorders"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Physical activity",
+      "Healthy eating"
+    ],
+    [
+      "Physical activity",
+      "Restrictive covenants"
+    ],
+    [
+      "Physical activity",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Physical activity",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Physical activity",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "Physical activity",
+      "Cost of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Physical activity",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Supportive food environment"
+    ],
+    [
+      "Physical activity",
+      "Availability of healthy foods"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are more available than healthy ones"
+    ],
+    [
+      "Physical activity",
+      "Unhealthy foods are cheaper than healthy ones"
+    ]
+  ]
+}

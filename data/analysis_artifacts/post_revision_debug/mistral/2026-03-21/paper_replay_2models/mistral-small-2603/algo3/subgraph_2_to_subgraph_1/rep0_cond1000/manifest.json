@@ -1,0 +1,50 @@
+{
+  "child_count": 3,
+  "max_depth": 1,
+  "model": "",
+  "prompt_config": {
+    "include_counterexample": false,
+    "include_example": true
+  },
+  "run_name": "algo3_subgraph_2_to_subgraph_1_rep0_cond1000",
+  "source_labels": [
+    "Culture of eating that promotes healthy choices",
+    "Physical well-being",
+    "Weight bias",
+    "Socio-economic status",
+    "Mental well-being",
+    "Stress",
+    "Control",
+    "Public health messaging around thinness",
+    "Resilience",
+    "Medical perspective that thin is good",
+    "Depression",
+    "Cultural norms around thinness",
+    "Poor body image",
+    "Pressure to be thin"
+  ],
+  "target_labels": [
+    "Prevalence of walking trails",
+    "Quality of the sport infrastructure",
+    "Eating disorders",
+    "Healthy eating",
+    "Consumer demand for regulations",
+    "Marketing of healthy foods",
+    "Public support and demand for healthy products",
+    "Unhealthy foods are cheaper than healthy ones",
+    "Supportive food environment",
+    "Availability of healthy foods",
+    "Marketing of unhealthy foods",
+    "Economic incentives to produce unhealthy food products",
+    "Cost of unhealthy foods",
+    "Prevalence of bike trails",
+    "Prevalence of green fields",
+    "Cost of healthy foods",
+    "Emotional eating",
+    "Unhealthy foods are more available than healthy ones",
+    "Appetite",
+    "Aesthetics",
+    "Restrictive covenants",
+    "Marketing ratio of unhealthy to healthy foods"
+  ]
+}

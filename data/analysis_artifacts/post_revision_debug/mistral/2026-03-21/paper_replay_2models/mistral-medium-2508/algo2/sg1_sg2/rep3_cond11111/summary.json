@@ -1,0 +1,419 @@
+{
+  "expanded_labels": [
+    "Urban Planning for Active Lifestyles",
+    "Nutritional Education Programs",
+    "Food Industry Lobbying",
+    "Community Gardens and Local Food Production",
+    "Body Positivity Movements",
+    "Accessibility of recreational facilities",
+    "Nutritional labeling transparency",
+    "Food deserts",
+    "Corporate influence on dietary guidelines",
+    "Social media impact on body image",
+    "Urban Green Spaces",
+    "Food Pricing Policies",
+    "Body Image Education",
+    "Active Transportation Policies",
+    "Nutritional Equity"
+  ],
+  "final_similarity": 0.7900811554625219,
+  "iteration_count": 3,
+  "model": "",
+  "normalized_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Pricing Policies"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Nutritional labeling transparency"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food Pricing Policies"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens and Local Food Production"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food deserts"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Food Pricing Policies"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Pricing Policies"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional Equity"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Body Image Education"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Social media impact on body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Body Positivity Movements"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Active Transportation Policies"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional labeling transparency"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Food deserts"
+    ],
+    [
+      "Body Positivity Movements",
+      "Body Image Education"
+    ],
+    [
+      "Accessibility of recreational facilities",
+      "Urban Green Spaces"
+    ],
+    [
+      "Nutritional labeling transparency",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Nutritional Equity"
+    ],
+    [
+      "Corporate influence on dietary guidelines",
+      "Food Pricing Policies"
+    ],
+    [
+      "Social media impact on body image",
+      "Poor body image"
+    ],
+    [
+      "Urban Green Spaces",
+      "Physical well-being"
+    ],
+    [
+      "Food Pricing Policies",
+      "Nutritional Equity"
+    ],
+    [
+      "Body Image Education",
+      "Mental well-being"
+    ],
+    [
+      "Active Transportation Policies",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Equity",
+      "Public support and demand for healthy products"
+    ]
+  ],
+  "raw_edges": [
+    [
+      "Prevalence of walking trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Accessibility of recreational facilities"
+    ],
+    [
+      "Healthy eating",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Food Pricing Policies"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Nutritional labeling transparency"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Food Pricing Policies"
+    ],
+    [
+      "Supportive food environment",
+      "Community Gardens and Local Food Production"
+    ],
+    [
+      "Availability of healthy foods",
+      "Food deserts"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Food Industry Lobbying"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Food Pricing Policies"
+    ],
+    [
+      "Cost of healthy foods",
+      "Food Pricing Policies"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Food deserts"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Healthy eating"
+    ],
+    [
+      "Aesthetics",
+      "Urban Green Spaces"
+    ],
+    [
+      "Restrictive covenants",
+      "Urban Planning for Active Lifestyles"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Nutritional Education Programs"
+    ],
+    [
+      "Physical well-being",
+      "Mental well-being"
+    ],
+    [
+      "Weight bias",
+      "Body Positivity Movements"
+    ],
+    [
+      "Socio-economic status",
+      "Nutritional Equity"
+    ],
+    [
+      "Mental well-being",
+      "Resilience"
+    ],
+    [
+      "Stress",
+      "Depression"
+    ],
+    [
+      "Control",
+      "Resilience"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Body Image Education"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Pressure to be thin"
+    ],
+    [
+      "Poor body image",
+      "Social media impact on body image"
+    ],
+    [
+      "Pressure to be thin",
+      "Body Positivity Movements"
+    ],
+    [
+      "Urban Planning for Active Lifestyles",
+      "Active Transportation Policies"
+    ],
+    [
+      "Nutritional Education Programs",
+      "Nutritional labeling transparency"
+    ],
+    [
+      "Food Industry Lobbying",
+      "Corporate influence on dietary guidelines"
+    ],
+    [
+      "Community Gardens and Local Food Production",
+      "Food deserts"
+    ],
+    [
+      "Body Positivity Movements",
+      "Body Image Education"
+    ],
+    [
+      "Accessibility of recreational facilities",
+      "Urban Green Spaces"
+    ],
+    [
+      "Nutritional labeling transparency",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Food deserts",
+      "Nutritional Equity"
+    ],
+    [
+      "Corporate influence on dietary guidelines",
+      "Food Pricing Policies"
+    ],
+    [
+      "Social media impact on body image",
+      "Poor body image"
+    ],
+    [
+      "Urban Green Spaces",
+      "Physical well-being"
+    ],
+    [
+      "Food Pricing Policies",
+      "Nutritional Equity"
+    ],
+    [
+      "Body Image Education",
+      "Mental well-being"
+    ],
+    [
+      "Active Transportation Policies",
+      "Physical well-being"
+    ],
+    [
+      "Nutritional Equity",
+      "Public support and demand for healthy products"
+    ]
+  ],
+  "run_name": "algo2_sg1_sg2_rep3_cond11111"
+}
