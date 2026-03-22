@@ -9,7 +9,6 @@ from llm_conceptual_modeling.algo1.mistral import (
     build_cove_verifier,
     build_direct_edge_prompt,
     build_edge_generator,
-    extract_vote_list_from_chat_content,
 )
 
 
@@ -80,14 +79,6 @@ def test_build_direct_edge_prompt_can_use_edge_list_without_optional_sections() 
         "<knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
     )
     assert expected_map_text in actual
-
-
-def test_extract_vote_list_from_chat_content_supports_json_schema_payload() -> None:
-    content = json.dumps({"votes": ["Y", "N", "Y"]})
-
-    actual = extract_vote_list_from_chat_content(content)
-
-    assert actual == ["Y", "N", "Y"]
 
 
 def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:

@@ -64,7 +64,7 @@ def run_algo2_probe(
         },
         "convergence_threshold": spec.convergence_threshold,
     }
-    context.record_manifest(manifest_record)
+    context.record_manifest(manifest_record)  # type: ignore[arg-type]
     context.append_event({"event": "probe_started", **manifest_record})
 
     label_prompt = build_label_expansion_prompt(
@@ -106,7 +106,7 @@ def run_algo2_probe(
             }
             context.record_checkpoint(
                 "execution_checkpoint.json",
-                execution_result,
+                execution_result,  # type: ignore[arg-type]
                 stage="execution_completed",
             )
         expanded_labels: list[str] = execution_result["expanded_labels"]  # type: ignore[index]

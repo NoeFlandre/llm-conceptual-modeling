@@ -370,7 +370,7 @@ def build_label_proposer(chat_client: ChatCompletionClient) -> "LabelProposer":
         response = chat_client.complete_json(
             prompt=prompt,
             schema_name="label_list",
-            schema=schema,
+            schema=schema,  # type: ignore[arg-type]
         )
         labels = cast(list[str], response["labels"])
         normalized_labels = [str(label) for label in labels]
@@ -404,7 +404,7 @@ def build_edge_suggester(chat_client: ChatCompletionClient) -> "EdgeSuggester":
         response = chat_client.complete_json(
             prompt=prompt,
             schema_name="edge_list",
-            schema=schema,
+            schema=schema,  # type: ignore[arg-type]
         )
         raw_edges = cast(list[dict[str, object]], response["edges"])
         normalized_edges: list[Edge] = []

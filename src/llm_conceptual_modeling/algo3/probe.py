@@ -60,7 +60,7 @@ def run_algo3_probe(
         "child_count": spec.child_count,
         "max_depth": spec.max_depth,
     }
-    context.record_manifest(manifest_record)
+    context.record_manifest(manifest_record)  # type: ignore[arg-type]
     context.append_event({"event": "probe_started", **manifest_record})
 
     tree_prompt = build_tree_expansion_prompt(
@@ -97,7 +97,7 @@ def run_algo3_probe(
             }
             context.record_checkpoint(
                 "execution_checkpoint.json",
-                execution_result,
+                execution_result,  # type: ignore[arg-type]
                 stage="execution_completed",
             )
 

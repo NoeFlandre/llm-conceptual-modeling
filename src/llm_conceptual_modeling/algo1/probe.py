@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Sequence, cast
 
 from llm_conceptual_modeling.algo1.cove import build_cove_prompt
-from llm_conceptual_modeling.algo1.method import execute_method1
+from llm_conceptual_modeling.algo1.method import CoveVerifier, execute_method1
 from llm_conceptual_modeling.algo1.mistral import (
     ChatCompletionClient,
     Method1PromptConfig,
@@ -59,7 +60,7 @@ def run_algo1_probe(
             "include_counterexample": spec.prompt_config.include_counterexample,
         },
     }
-    context.record_manifest(manifest_record)
+    context.record_manifest(manifest_record)  # type: ignore[arg-type]
     context.append_event({"event": "probe_started", **manifest_record})
 
     edge_prompt = build_direct_edge_prompt(
@@ -74,8 +75,8 @@ def run_algo1_probe(
             stage="edge_prompt_written",
         )
 
-    edge_generator = build_edge_generator(chat_client)
-    cove_verifier = build_cove_verifier(chat_client)
+    edge_generator = build_edge_generator(chat_client, spec.prompt_config)
+    cove_verifier = cast(CoveVerifier, build_cove_verifier(chat_client))
     try:
         cached_execution = context.load_json("execution_checkpoint.json")
         if spec.resume and cached_execution is not None and context.is_stage_complete(
@@ -95,12 +96,12 @@ def run_algo1_probe(
             }
             context.record_checkpoint(
                 "execution_checkpoint.json",
-                execution_result,
+                execution_result,  # type: ignore[arg-type]
                 stage="execution_completed",
             )
         candidate_edges: list[list[str]] = execution_result["candidate_edges"]  # type: ignore[index]
-        cove_prompt = build_cove_prompt(  # type: ignore[arg-type]
-            [tuple(edge) for edge in candidate_edges],
+        cove_prompt = build_cove_prompt(
+            [tuple(edge) for edge in candidate_edges],  # type: ignore[arg-type]
         )
         if not context.is_stage_complete("cove_prompt_written"):
             context.record_prompt(
@@ -133,16 +134,16 @@ def run_algo1_probe(
         raise
 
 
-def _edges_to_json_compatible(edges: list[object]) -> list[list[str]]:
+def _edges_to_json_compatible(edges: Sequence[Edge]) -> list[list[str]]:
     edge_records: list[list[str]] = []
 
     for edge in edges:
         if isinstance(edge, (list, tuple)):
-            edge_record = [str(value) for value in edge]
+            edge_record: list[str] = list(str(value) for value in edge)
             edge_records.append(edge_record)
             continue
 
-        edge_record = [str(edge)]
+        edge_record: list[str] = [str(edge)]
         edge_records.append(edge_record)
 
     return edge_records

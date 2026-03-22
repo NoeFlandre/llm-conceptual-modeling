@@ -12,6 +12,15 @@ from .cove import apply_cove_verification
 Edge = tuple[str, str]
 
 
+@dataclass(frozen=True)
+class Method1PromptConfig:
+    use_adjacency_notation: bool
+    use_array_representation: bool
+    include_explanation: bool
+    include_example: bool
+    include_counterexample: bool
+
+
 @dataclass
 class MistralGenerationResult:
     raw_response: str
@@ -79,6 +88,17 @@ Your task is to recommend more links between the two maps.
 {subgraph2_str}
 
 {user_prompt(prompt_config)}"""
+
+
+# Aliases for backwards compatibility
+build_direct_edge_prompt = build_edge_generation_prompt
+
+
+def build_edge_generator(chat_client: ChatCompletionClient, prompt_config: object):
+    """Create an edge generator function."""
+    def generator(*, subgraph1: list[Edge], subgraph2: list[Edge]) -> list[Edge]:
+        return generate_edges(chat_client, subgraph1, subgraph2, prompt_config)
+    return generator
 
 
 def build_cove_prompt(candidate_edges: list[Edge]) -> str:
