@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence, cast
+from typing import Sequence
 
 from llm_conceptual_modeling.algo1.cove import build_cove_prompt
-from llm_conceptual_modeling.algo1.method import CoveVerifier, execute_method1
+from llm_conceptual_modeling.algo1.method import execute_method1
 from llm_conceptual_modeling.algo1.mistral import (
     ChatCompletionClient,
     Method1PromptConfig,
