@@ -112,7 +112,8 @@ def test_run_algo3_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert len(event_lines) == 2
     assert json.loads(event_lines[0])["event"] == "probe_started"
     assert json.loads(event_lines[1])["event"] == "probe_finished"
-    assert "You are a helpful assistant who understands Knowledge Maps." in tree_prompt
+    assert "You are a helpful assistant who can creatively suggest relevant ideas." in tree_prompt
+    assert "Your input is the following list of concept names:" in tree_prompt
     assert "recommend 2 related concept names for each of the names in the input" in tree_prompt
     assert "dictionary format" in tree_prompt
     assert "Here is an example of a desired output for your task." in tree_prompt

@@ -43,7 +43,7 @@ def test_build_tree_expansion_prompt_reflects_method3_contract() -> None:
         child_count=3,
     )
 
-    assert "You are a helpful assistant who understands Knowledge Maps." in actual
+    assert "You are a helpful assistant who can creatively suggest relevant ideas." in actual
     assert "recommend 3 related concept names for each of the names in the input" in actual
     assert "dictionary format" in actual
     assert "source_a" in actual
@@ -100,7 +100,7 @@ def test_build_child_proposer_returns_dictionary_children() -> None:
     }
     assert len(chat_client.calls) == 1
     assert chat_client.calls[0]["schema_name"] == "children_by_label"
-    assert "You are a helpful assistant who understands Knowledge Maps." in str(
+    assert "You are a helpful assistant who can creatively suggest relevant ideas." in str(
         chat_client.calls[0]["prompt"]
     )
 

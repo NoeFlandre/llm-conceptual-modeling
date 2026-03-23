@@ -36,7 +36,7 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
             "expansion_scope": "source_labels_only",
         },
         prompt_preview=(
-            "You are a helpful assistant who understands Knowledge Maps. Your task is to "
-            "recommend related concept names for each concept in the input."
+            "You are a helpful assistant who can creatively suggest relevant ideas. Your task is "
+            "to recommend related concept names for each concept in the input."
         ),
     ).to_dict()

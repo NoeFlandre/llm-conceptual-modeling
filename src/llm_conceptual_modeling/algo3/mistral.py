@@ -54,28 +54,27 @@ def build_tree_expansion_prompt(
         include_counterexample=False,
     )
     sections: list[str] = []
-    sections.append("You are a helpful assistant who understands Knowledge Maps.")
+    sections.append("You are a helpful assistant who can creatively suggest relevant ideas.")
     sections.append(
-        "Your input is a set of concept names. "
-        "All concept names must have a clear meaning, such that we can "
-        "interpret having 'more' or 'less' of a concept."
+        "Your input is a set of concept names. All concept names must have a clear meaning, such "
+        "that we can interpret having 'more' or 'less' of a concept."
     )
-    sections.append(f"Your input is the following list of concept names: {source_labels}")
+    sections.append("Your input is the following list of concept names:")
+    sections.append(str(source_labels))
     sections.append(
-        f"Your task is to recommend {child_count} related concept names for each of the names in "
-        "the input. Do not suggest names that are in the input. Your output must include the "
-        f"list of the {child_count} proposed names for each of the input names. Do not include "
-        "any other text. Return your proposed names in a dictionary format { 'A' : ['B' , 'C', "
-        "'D'], 'E' : ['F' , 'G' , 'H'], ..., 'U' : ['V' , 'W' , 'X'] }."
+        "Your task is to recommend {} related concept names for each of the names in the input. "
+        "Do not suggest names that are in the input. Your output must include the list of the {} "
+        "proposed names for each of the input names. Do not include any other text. Return your "
+        "proposed names in a dictionary format {{ 'A' : ['B' , 'C', 'D'], 'E' : ['F' , 'G' , "
+        "'H'], …, 'U' : ['V' , 'W' , 'X'] }}.".format(child_count, child_count)
     )
     if resolved.include_example:
         sections.append(_build_example_section(child_count))
     if resolved.include_counterexample:
         sections.append(_build_counterexample_section(child_count))
     sections.append(
-        "Your output must only be the list of proposed concepts. "
-        "Do not repeat any instructions I have given you and do not add "
-        "unnecessary words or phrases."
+        "Your output must only be the list of proposed concepts. Do not repeat any instructions I "
+        "have given you and do not add unnecessary words or phrases."
     )
     return " ".join(sections)
 
@@ -84,14 +83,14 @@ def _build_example_section(child_count: int) -> str:
     if child_count == 3:
         return (
             "Here is an example of a desired output for your task. We have the list of concepts "
-            "['capacity to hire', 'bad employees', 'good reputation']. In this example, you "
-            "could recommend these 9 new concepts: 'employment potential', 'hiring capability', "
+            "['capacity to hire', 'bad employees', 'good reputation']. In this example, you could "
+            "recommend these 9 new concepts: 'employment potential', 'hiring capability', "
             "'staffing ability', 'underperformers', 'inefficient staff', 'problematic workers', "
             "'positive image', 'favorable standing', 'high regard'. Therefore, this is the "
-            "expected output: { \"capacity to hire\": ['employment potential', 'hiring capability', "
+            "expected output: {{ \"capacity to hire\": ['employment potential', 'hiring capability', "
             "'staffing ability'], \"bad employees\": ['underperformers', 'inefficient staff', "
             "'problematic workers'], \"good reputation\": ['positive image', 'favorable standing', "
-            "'high regard'] }."
+            "'high regard'] }}."
         )
 
     return (
@@ -104,8 +103,7 @@ def _build_example_section(child_count: int) -> str:
         '"staffing ability", "recruitment capacity", "talent acquisition"], '
         '"bad employees": ["underperformers", "inefficient staff", "problematic workers", '
         '"low performers", "unproductive staff"], "good reputation": ["positive image", '
-        '"favorable standing", "high regard", "excellent reputation", "commendable status"] '
-        "}."
+        '"favorable standing", "high regard", "excellent reputation", "commendable status"] }.'
     )
 
 
@@ -114,16 +112,16 @@ def _build_counterexample_section(child_count: int) -> str:
         return (
             "Here is an example of a bad output that we do not want to see. We have the list of "
             "nodes ['capacity to hire', 'bad employees', 'good reputation']. A bad output would "
-            "be: { \"capacity to hire\": ['moon', 'dog', 'thermodynamics'], \"bad employees\": "
+            "be: {{ \"capacity to hire\": ['moon', 'dog', 'thermodynamics'], \"bad employees\": "
             "['swimming', 'red', 'happiness'], \"good reputation\": ['judo', 'canada', 'light'] "
-            "}. Adding the proposed concepts would be incorrect since they have no relationship "
+            "}}. Adding the proposed concepts would be incorrect since they have no relationship "
             "with the concepts in the input."
         )
 
     return (
         "Here is an example of a bad output that we do not want to see. We have the list of "
-        "nodes ['capacity to hire', 'bad employees', 'good reputation']. A bad output would "
-        "be: { \"capacity to hire\": ['moon', 'dog', 'thermodynamics', 'country', 'pillow'], "
+        "nodes ['capacity to hire', 'bad employees', 'good reputation']. A bad output would be: "
+        "{ \"capacity to hire\": ['moon', 'dog', 'thermodynamics', 'country', 'pillow'], "
         "\"bad employees\": ['swimming', 'red', 'happiness', 'food', 'shoe'], "
         "\"good reputation\": ['judo', 'canada', 'light', 'phone', 'electricity'] }. Adding the "
         "proposed concepts would be incorrect since they have no relationship with the concepts "

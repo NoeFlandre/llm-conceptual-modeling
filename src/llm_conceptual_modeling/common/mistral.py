@@ -208,18 +208,18 @@ def _complete_structured_json(
         parsed_payload = parsed_message.parsed.model_dump()
         return _normalize_structured_response(parsed_payload, schema_name=schema_name)
 
-        response = sdk_client.chat.complete(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.0,
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": schema_name,
-                    "schema": schema,
-                },
+    response = sdk_client.chat.complete(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.0,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": schema_name,
+                "schema": schema,
             },
-        )
+        },
+    )
     content = response.choices[0].message.content
     if content is None:
         raise ValueError("Mistral returned an empty chat completion content")
