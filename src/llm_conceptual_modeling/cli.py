@@ -24,6 +24,8 @@ def build_parser() -> argparse.ArgumentParser:
     generate_subparsers = generate_parser.add_subparsers(dest="algorithm", required=True)
     probe_parser = subparsers.add_parser("probe")
     probe_subparsers = probe_parser.add_subparsers(dest="algorithm", required=True)
+    monitor_parser = subparsers.add_parser("monitor")
+    monitor_subparsers = monitor_parser.add_subparsers(dest="algorithm", required=True)
 
     algo1_parser = eval_subparsers.add_parser("algo1")
     algo1_parser.add_argument("--input", required=True)
@@ -141,6 +143,12 @@ def build_parser() -> argparse.ArgumentParser:
     probe_algo3_parser.add_argument("--output-dir", required=True)
     probe_algo3_parser.add_argument("--resume", action="store_true")
 
+    for algorithm in ("algo1", "algo2", "algo3"):
+        monitor_algorithm_parser = monitor_subparsers.add_parser(algorithm)
+        monitor_algorithm_parser.add_argument("--root", required=True)
+        monitor_algorithm_parser.add_argument("--watch", action="store_true")
+        monitor_algorithm_parser.add_argument("--interval", type=float, default=5.0)
+
     summary_parser = analyze_subparsers.add_parser("summary")
     summary_parser.add_argument("--input", action="append", required=True)
     summary_parser.add_argument("--group-by", action="append", required=True)
@@ -223,6 +231,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         from llm_conceptual_modeling.commands.probe import handle_probe
 
         return handle_probe(args)
+    if args.command == "monitor":
+        from llm_conceptual_modeling.commands.monitor import handle_monitor
+
+        return handle_monitor(args)
 
     parser.error("unsupported command")
     return 2

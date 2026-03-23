@@ -358,6 +358,16 @@ uv run lcm generate algo3 \
 
 Method 2 uses the confirmed cosine-similarity thresholds `0.01` and `0.02` in the executable path and the tracked domain thesaurus under `data/inputs/algo2_thesaurus.json`. The default embedding backend remains Mistral, but the OpenRouter / `text-embedding-3-large` path is now available when you want the paper-faithful embedding configuration.
 
+To watch a live resume run without inspecting the directory tree manually:
+
+```bash
+PYTHONPATH=src python -c 'from llm_conceptual_modeling.cli import main; raise SystemExit(main(["monitor","algo1","--root","runs/mistral-medium-algo1-doe"]))'
+PYTHONPATH=src python -c 'from llm_conceptual_modeling.cli import main; raise SystemExit(main(["monitor","algo2","--root","runs/mistral-medium-algo2-doe"]))'
+PYTHONPATH=src python -c 'from llm_conceptual_modeling.cli import main; raise SystemExit(main(["monitor","algo3","--root","runs/mistral-medium-algo3-doe"]))'
+```
+
+Add `--watch --interval 5` to refresh the same summary on a loop.
+
 The paper model aliases exposed by the CLI are:
 
 - `paper:deepseek-v3-0324` -> `deepseek/deepseek-chat-v3-0324`

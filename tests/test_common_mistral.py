@@ -108,6 +108,39 @@ def test_mistral_chat_client_uses_parse_when_available() -> None:
     assert captured["temperature"] == 0.0
 
 
+def test_mistral_chat_client_falls_back_to_complete_when_parse_fails() -> None:
+    captured: dict[str, object] = {}
+
+    class FakeChat:
+        def parse(self, **kwargs: object) -> SimpleNamespace:
+            raise json.JSONDecodeError("bad json", "['Y', 'N']", 1)
+
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            captured.update(kwargs)
+            return _fake_chat_completion_response("['Y', 'N', 'Y']")
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-medium-2508",
+        sdk_client=FakeSDKClient(),
+    )
+
+    result = client.complete_json(
+        prompt="verify",
+        schema_name="vote_list",
+        schema={"type": "object", "properties": {"votes": {"type": "array"}}},
+    )
+
+    assert result == {"votes": ["Y", "N", "Y"]}
+    assert captured["model"] == "mistral-medium-2508"
+    assert captured["messages"] == [{"role": "user", "content": "verify"}]
+    assert captured["temperature"] == 0.0
+
+
 def test_normalize_structured_response_rejects_null_edge_endpoints() -> None:
     with pytest.raises(ValueError, match="null edge target"):
         _normalize_structured_response(
@@ -145,6 +178,54 @@ def test_mistral_chat_client_normalizes_list_edge_response() -> None:
             {"source": "bridge_node", "target": "delta"},
         ]
     }
+
+
+def test_mistral_chat_client_recovers_vote_list_from_single_quote_literal() -> None:
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            return _fake_chat_completion_response("['Y', 'N', 'Y']")
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-medium-2508",
+        sdk_client=FakeSDKClient(),
+    )
+
+    result = client.complete_json(
+        prompt="verify",
+        schema_name="vote_list",
+        schema={"type": "object", "properties": {"votes": {"type": "array"}}},
+    )
+
+    assert result == {"votes": ["Y", "N", "Y"]}
+
+
+def test_mistral_chat_client_recovers_vote_list_from_bare_tokens() -> None:
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            return _fake_chat_completion_response("Y, N, Y")
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-medium-2508",
+        sdk_client=FakeSDKClient(),
+    )
+
+    result = client.complete_json(
+        prompt="verify",
+        schema_name="vote_list",
+        schema={"type": "object", "properties": {"votes": {"type": "array"}}},
+    )
+
+    assert result == {"votes": ["Y", "N", "Y"]}
 
 
 def test_mistral_chat_client_passes_correct_payload_to_sdk() -> None:
