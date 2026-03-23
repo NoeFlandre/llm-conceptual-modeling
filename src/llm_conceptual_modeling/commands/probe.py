@@ -256,7 +256,12 @@ def _load_algo1_runtime_symbols():
 
 
 def _load_algo2_runtime_symbols():
-    global Algo2ChatClient, Algo2EmbeddingClient, Method2PromptConfig, Algo2ProbeSpec, run_algo2_probe
+    global \
+        Algo2ChatClient, \
+        Algo2EmbeddingClient, \
+        Method2PromptConfig, \
+        Algo2ProbeSpec, \
+        run_algo2_probe
 
     if (
         Algo2ChatClient is None

@@ -16,9 +16,7 @@ from llm_conceptual_modeling.algo2.mistral import (
 
 
 def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
-    return SimpleNamespace(
-        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
-    )
+    return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=content))])
 
 
 def test_build_label_expansion_prompt_mentions_related_concepts_and_output_format() -> None:
@@ -38,6 +36,7 @@ def test_build_label_expansion_prompt_can_include_all_paper_factors() -> None:
         include_explanation=True,
         include_example=True,
         include_counterexample=True,
+        use_relaxed_convergence=True,
     )
 
     actual = build_label_expansion_prompt(
@@ -63,6 +62,7 @@ def test_build_label_expansion_prompt_can_use_tag_edge_list_without_optional_sec
         include_explanation=False,
         include_example=False,
         include_counterexample=False,
+        use_relaxed_convergence=False,
     )
 
     actual = build_label_expansion_prompt(
@@ -77,8 +77,7 @@ def test_build_label_expansion_prompt_can_use_tag_edge_list_without_optional_sec
     assert "Here is an example of a bad output that we do not want to see." not in actual
     assert "adjacency matrix" not in actual
     expected_map_text = (
-        "Knowledge map 1: "
-        "<knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
+        "Knowledge map 1: <knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
     )
     assert expected_map_text in actual
 
@@ -99,6 +98,7 @@ def test_build_edge_suggestion_prompt_can_include_all_paper_factors() -> None:
         include_explanation=True,
         include_example=True,
         include_counterexample=True,
+        use_relaxed_convergence=False,
     )
 
     actual = build_edge_suggestion_prompt(
@@ -123,6 +123,7 @@ def test_build_edge_suggestion_prompt_can_use_tag_edge_list_without_optional_sec
         include_explanation=False,
         include_example=False,
         include_counterexample=False,
+        use_relaxed_convergence=False,
     )
 
     actual = build_edge_suggestion_prompt(
@@ -136,8 +137,7 @@ def test_build_edge_suggestion_prompt_can_use_tag_edge_list_without_optional_sec
     assert "Here is an example of a desired output for your task." not in actual
     assert "Here is an example of a bad output that we do not want to see." not in actual
     expected_map_text = (
-        "Knowledge map 1: "
-        "<knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
+        "Knowledge map 1: <knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
     )
     assert expected_map_text in actual
 
@@ -149,6 +149,7 @@ def test_build_prompt_prefix_reuses_shared_sections_for_both_prompt_builders() -
         include_explanation=True,
         include_example=True,
         include_counterexample=True,
+        use_relaxed_convergence=True,
     )
 
     actual = _build_prompt_prefix(prompt_config)
@@ -159,8 +160,7 @@ def test_build_prompt_prefix_reuses_shared_sections_for_both_prompt_builders() -
         "Nodes must have a clear meaning, such that we can interpret having "
         "'more' or 'less' of a node. Edges represent the existence of a direct "
         "relation between two nodes.",
-        "The knowledge map is encoded using tags for nodes and an associated "
-        "adjacency matrix.",
+        "The knowledge map is encoded using tags for nodes and an associated adjacency matrix.",
         "Here is an example of a desired output for your task. "
         "We have the list of concepts ['capacity to hire', 'bad employees', "
         "'good reputation']. In this example, you could recommend these 9 new concepts: "
@@ -187,9 +187,7 @@ def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:
     class FakeChat:
         def complete(self, **kwargs: object) -> SimpleNamespace:
             captured_request.update(kwargs)
-            return _fake_chat_completion_response(
-                json.dumps({"labels": ["bridge_a", "bridge_b"]})
-            )
+            return _fake_chat_completion_response(json.dumps({"labels": ["bridge_a", "bridge_b"]}))
 
     class FakeSDKClient:
         def __init__(self) -> None:
@@ -250,9 +248,7 @@ def test_mistral_chat_client_retries_transient_transport_errors() -> None:
             calls["count"] += 1
             if calls["count"] < 3:
                 raise httpx.ConnectError("temporary network issue")
-            return _fake_chat_completion_response(
-                json.dumps({"labels": ["bridge_a", "bridge_b"]})
-            )
+            return _fake_chat_completion_response(json.dumps({"labels": ["bridge_a", "bridge_b"]}))
 
     class FakeSDKClient:
         def __init__(self) -> None:

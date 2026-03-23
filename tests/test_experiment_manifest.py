@@ -277,6 +277,7 @@ class TestExperimentManifestSchema:
             include_explanation=True,
             include_example=True,
             include_counterexample=True,
+            use_relaxed_convergence=True,
         )
         factors = ExperimentManifest.prompt_config_to_factors(config, algorithm="algo2")
         assert factors == {
@@ -285,6 +286,7 @@ class TestExperimentManifestSchema:
             "include_explanation": True,
             "include_example": True,
             "include_counterexample": True,
+            "use_relaxed_convergence": True,
         }
 
     def test_algo3_prompt_config_serializes_correctly(self) -> None:

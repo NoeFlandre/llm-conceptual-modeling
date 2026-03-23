@@ -61,6 +61,7 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
             include_explanation=True,
             include_example=False,
             include_counterexample=False,
+            use_relaxed_convergence=False,
         ),
         convergence_threshold=0.01,
         output_dir=probe_dir,
@@ -97,6 +98,7 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
             "include_explanation": True,
             "include_example": False,
             "include_counterexample": False,
+            "use_relaxed_convergence": False,
         },
         "convergence_threshold": 0.01,
     }

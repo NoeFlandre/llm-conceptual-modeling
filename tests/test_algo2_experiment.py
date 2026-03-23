@@ -8,7 +8,7 @@ from llm_conceptual_modeling.algo2.mistral import Method2PromptConfig
 from llm_conceptual_modeling.experiment_manifest import parse_manifest
 
 
-def test_build_algo2_experiment_specs_uses_fixed_threshold_and_full_prompt_grid(
+def test_build_algo2_experiment_specs_uses_full_prompt_grid_and_convergence_factor(
     tmp_path,
 ) -> None:
     specs = build_algo2_experiment_specs(
@@ -18,7 +18,7 @@ def test_build_algo2_experiment_specs_uses_fixed_threshold_and_full_prompt_grid(
         replications=5,
     )
 
-    assert len(specs) == 160
+    assert len(specs) == 320
     first_spec = specs[0]
     assert first_spec.convergence_threshold == 0.01
     assert first_spec.prompt_config == Method2PromptConfig(
@@ -27,15 +27,18 @@ def test_build_algo2_experiment_specs_uses_fixed_threshold_and_full_prompt_grid(
         include_explanation=False,
         include_example=False,
         include_counterexample=False,
+        use_relaxed_convergence=False,
     )
-    assert first_spec.output_dir == Path(tmp_path / "runs" / "algo2" / "sg1_sg2" / "rep0_cond00000")
+    assert first_spec.output_dir == Path(
+        tmp_path / "runs" / "algo2" / "sg1_sg2" / "rep0_cond000000"
+    )
     first_manifest = parse_manifest(first_spec.output_dir / "manifest.yaml")
     assert first_manifest.algorithm == "algo2"
     assert first_manifest.model == "gpt-5"
     assert first_manifest.provider == "mistral"
     assert first_manifest.temperature == 0.0
     assert first_manifest.pair_name == "sg1_sg2"
-    assert first_manifest.condition_bits == "00000"
+    assert first_manifest.condition_bits == "000000"
     assert first_manifest.repetitions == 5
     assert first_manifest.full_prompt.startswith(
         "You are a helpful assistant who can creatively suggest relevant ideas."
@@ -94,7 +97,7 @@ def test_run_algo2_experiment_skips_failed_specs_and_continues(monkeypatch, tmp_
 
     def fake_run_probe(*, spec, chat_client, embedding_client):
         call_order.append(spec.run_name)
-        if spec.run_name == "algo2_sg1_sg2_rep0_cond00000":
+        if spec.run_name == "algo2_sg1_sg2_rep0_cond000000":
             raise RuntimeError("transient failure")
         return {"run_name": spec.run_name, "expanded_labels": ["alpha"]}
 

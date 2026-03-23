@@ -5,8 +5,14 @@ from typing import cast
 
 import pandas as pd
 
+from llm_conceptual_modeling.algo1.evaluation import (
+    evaluate_results_file as eval_algo1,
+)
 from llm_conceptual_modeling.algo1.generation import (
     build_generation_manifest as build_algo1_manifest,
+)
+from llm_conceptual_modeling.algo2.evaluation import (
+    evaluate_results_file as eval_algo2,
 )
 from llm_conceptual_modeling.algo2.generation import (
     build_generation_manifest as build_algo2_manifest,
@@ -111,15 +117,17 @@ def _build_manifest_checks() -> list[dict[str, object]]:
                 "requires_live_llm": algo2_manifest["requires_live_llm"],
                 "convergence_rule": algo2_method_contract["convergence_rule"],
                 "embedding_model": algo2_method_contract["embedding_model"],
-                "convergence_threshold": algo2_method_contract["convergence_threshold"],
+                "convergence_threshold_levels": algo2_method_contract[
+                    "convergence_threshold_levels"
+                ],
                 "thesaurus_path": algo2_method_contract["thesaurus_path"],
             },
         ),
         _check(
-            "algo2_convergence_threshold",
-            algo2_method_contract["convergence_threshold"] == 0.01,
+            "algo2_convergence_threshold_levels",
+            algo2_method_contract["convergence_threshold_levels"] == [0.01, 0.02],
             {
-                "value": algo2_method_contract["convergence_threshold"],
+                "value": algo2_method_contract["convergence_threshold_levels"],
                 "rule": algo2_method_contract["convergence_rule"],
             },
         ),

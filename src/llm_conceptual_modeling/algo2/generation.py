@@ -21,7 +21,7 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
         ],
         "embedding_model": "mistral-embed-2312",
         "convergence_rule": "absolute_cosine_similarity_delta <= threshold",
-        "convergence_threshold": 0.01,
+        "convergence_threshold_levels": [0.01, 0.02],
         "uses_domain_thesaurus": True,
         "uses_chain_of_verification": True,
         "thesaurus_path": str(ALGO2_THESAURUS_JSON),

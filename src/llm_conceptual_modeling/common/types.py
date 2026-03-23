@@ -98,9 +98,7 @@ class ExperimentManifest:
         )
 
     @staticmethod
-    def prompt_config_to_factors(
-        config: Any, algorithm: str
-    ) -> dict[str, bool | int]:
+    def prompt_config_to_factors(config: Any, algorithm: str) -> dict[str, bool | int]:
         """Convert a prompt config dataclass to a factors dictionary.
 
         Parameters
@@ -111,13 +109,16 @@ class ExperimentManifest:
             One of "algo1", "algo2", "algo3".
         """
         if algorithm in ("algo1", "algo2"):
-            return {
+            factors = {
                 "use_adjacency_notation": config.use_adjacency_notation,
                 "use_array_representation": config.use_array_representation,
                 "include_explanation": config.include_explanation,
                 "include_example": config.include_example,
                 "include_counterexample": config.include_counterexample,
             }
+            if algorithm == "algo2":
+                factors["use_relaxed_convergence"] = config.use_relaxed_convergence
+            return factors
         if algorithm == "algo3":
             return {
                 "include_example": config.include_example,

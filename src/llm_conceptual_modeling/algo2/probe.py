@@ -61,6 +61,7 @@ def run_algo2_probe(
             "include_explanation": spec.prompt_config.include_explanation,
             "include_example": spec.prompt_config.include_example,
             "include_counterexample": spec.prompt_config.include_counterexample,
+            "use_relaxed_convergence": spec.prompt_config.use_relaxed_convergence,
         },
         "convergence_threshold": spec.convergence_threshold,
     }
@@ -84,8 +85,10 @@ def run_algo2_probe(
     thesaurus = load_algo2_thesaurus()
     try:
         cached_execution = context.load_json("execution_checkpoint.json")
-        if spec.resume and cached_execution is not None and context.is_stage_complete(
-            "execution_completed"
+        if (
+            spec.resume
+            and cached_execution is not None
+            and context.is_stage_complete("execution_completed")
         ):
             execution_result = cached_execution
         else:

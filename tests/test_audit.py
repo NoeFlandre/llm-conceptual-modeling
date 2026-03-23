@@ -21,10 +21,10 @@ def test_cli_audit_paper_alignment_reports_core_contracts(capsys) -> None:
     assert checks["algo2_resume_support"]["status"] == "passed"
     assert checks["algo3_resume_support"]["status"] == "passed"
     assert checks["algo2_manifest"]["status"] == "passed"
-    assert checks["algo2_manifest"]["evidence"]["convergence_threshold"] == 0.01
+    assert checks["algo2_manifest"]["evidence"]["convergence_threshold_levels"] == [0.01, 0.02]
     assert checks["algo2_manifest"]["evidence"]["embedding_model"] == "mistral-embed-2312"
-    assert checks["algo2_convergence_threshold"]["status"] == "passed"
-    assert checks["algo2_convergence_threshold"]["evidence"]["value"] == 0.01
+    assert checks["algo2_convergence_threshold_levels"]["status"] == "passed"
+    assert checks["algo2_convergence_threshold_levels"]["evidence"]["value"] == [0.01, 0.02]
     assert checks["algo2_embedding_model"]["status"] == "passed"
     assert checks["algo2_embedding_model"]["evidence"]["value"] == "mistral-embed-2312"
     assert checks["algo2_thesaurus"]["status"] == "passed"

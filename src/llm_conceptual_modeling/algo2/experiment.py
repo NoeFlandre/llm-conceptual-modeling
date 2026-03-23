@@ -24,7 +24,7 @@ def build_algo2_experiment_specs(
     resume: bool = False,
 ) -> list[Algo2ProbeSpec]:
     seed_labels, subgraph1, subgraph2 = _load_pair_labels(pair_name)
-    condition_bits = list(product([0, 1], repeat=5))
+    condition_bits = list(product([0, 1], repeat=6))
     experiment_specs: list[Algo2ProbeSpec] = []
 
     for repetition_index in range(replications):
@@ -42,7 +42,7 @@ def build_algo2_experiment_specs(
                 subgraph1=subgraph1,
                 subgraph2=subgraph2,
                 prompt_config=prompt_config,
-                convergence_threshold=0.01,
+                convergence_threshold=_convergence_threshold(condition_bit_tuple[5]),
                 output_dir=output_dir,
                 resume=resume,
             )
@@ -111,17 +111,24 @@ def _load_pair_labels(
 
 
 def _build_prompt_config(
-    condition_bit_tuple: tuple[int, int, int, int, int],
+    condition_bit_tuple: tuple[int, int, int, int, int, int],
 ) -> Method2PromptConfig:
-    adjacency_bit, array_bit, explanation_bit, example_bit, counterexample_bit = condition_bit_tuple
+    adjacency_bit, array_bit, explanation_bit, example_bit, counterexample_bit, convergence_bit = (
+        condition_bit_tuple
+    )
     prompt_config = Method2PromptConfig(
         use_adjacency_notation=bool(adjacency_bit),
         use_array_representation=bool(array_bit),
         include_explanation=bool(explanation_bit),
         include_example=bool(example_bit),
         include_counterexample=bool(counterexample_bit),
+        use_relaxed_convergence=bool(convergence_bit),
     )
     return prompt_config
+
+
+def _convergence_threshold(convergence_bit: int) -> float:
+    return 0.02 if convergence_bit else 0.01
 
 
 def _collect_ordered_nodes(edges: list[tuple[str, str]]) -> list[str]:

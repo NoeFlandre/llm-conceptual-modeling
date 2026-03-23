@@ -85,7 +85,7 @@ def test_cli_generate_algo2_exposes_paper_method_contract(capsys) -> None:
     ]
     assert method_contract["embedding_model"] == "mistral-embed-2312"
     assert method_contract["convergence_rule"] == "absolute_cosine_similarity_delta <= threshold"
-    assert method_contract["convergence_threshold"] == 0.01
+    assert method_contract["convergence_threshold_levels"] == [0.01, 0.02]
     assert method_contract["uses_domain_thesaurus"] is True
     assert method_contract["uses_chain_of_verification"] is True
 

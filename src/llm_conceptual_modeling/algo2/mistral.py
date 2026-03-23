@@ -44,14 +44,17 @@ __all__ = [
 # Config
 # ---------------------------------------------------------------------------
 
+
 @dataclass(frozen=True)
 class Method2PromptConfig:
     """Prompt-config flags for Method 2 (label expansion + edge suggestion)."""
+
     use_adjacency_notation: bool
     use_array_representation: bool
     include_explanation: bool
     include_example: bool
     include_counterexample: bool
+    use_relaxed_convergence: bool
 
 
 def _resolve_prompt_config(prompt_config: Method2PromptConfig | None) -> Method2PromptConfig:
@@ -61,14 +64,13 @@ def _resolve_prompt_config(prompt_config: Method2PromptConfig | None) -> Method2
         include_explanation=False,
         include_example=False,
         include_counterexample=False,
+        use_relaxed_convergence=False,
     )
 
 
 def _build_prompt_prefix(prompt_config: Method2PromptConfig) -> list[str]:
     """Return the shared opening sections used by both Method 2 prompts."""
-    sections: list[str] = [
-        "You are a helpful assistant who can creatively suggest relevant ideas."
-    ]
+    sections: list[str] = ["You are a helpful assistant who can creatively suggest relevant ideas."]
 
     if prompt_config.include_explanation:
         sections.append(
@@ -97,6 +99,7 @@ def _build_prompt_prefix(prompt_config: Method2PromptConfig) -> list[str]:
 # Prompt builders
 # ---------------------------------------------------------------------------
 
+
 def build_label_expansion_prompt(
     seed_labels: list[str],
     *,
@@ -110,9 +113,7 @@ def build_label_expansion_prompt(
     if subgraph1 is not None and subgraph2 is not None:
         fmt1 = _format_knowledge_map(subgraph1, prompt_config=resolved)
         fmt2 = _format_knowledge_map(subgraph2, prompt_config=resolved)
-        sections.append(
-            f"You will get two inputs: Knowledge map 1: {fmt1} Knowledge map 2: {fmt2}"
-        )
+        sections.append(f"You will get two inputs: Knowledge map 1: {fmt1} Knowledge map 2: {fmt2}")
     else:
         sections.append(f"Input concepts: {', '.join(seed_labels)}")
 
@@ -142,9 +143,7 @@ def build_edge_suggestion_prompt(
     if subgraph1 is not None and subgraph2 is not None:
         fmt1 = _format_knowledge_map(subgraph1, prompt_config=resolved)
         fmt2 = _format_knowledge_map(subgraph2, prompt_config=resolved)
-        sections.append(
-            f"You will get two inputs: Knowledge map 1: {fmt1} Knowledge map 2: {fmt2}"
-        )
+        sections.append(f"You will get two inputs: Knowledge map 1: {fmt1} Knowledge map 2: {fmt2}")
 
     sections.append(
         f"Given a set of concept names, suggest edges that directly link concepts "
@@ -166,28 +165,33 @@ def extract_label_list_from_chat_content(content: str) -> list[str]:
 # Proposers
 # ---------------------------------------------------------------------------
 
+
 class LabelProposer:
     def __call__(self, current_labels: list[str]) -> list[str]: ...
 
+
 class EdgeSuggester:
     def __call__(self, expanded_label_context: list[str]) -> list[Edge]: ...
+
 
 def build_label_proposer(chat_client: ChatCompletionClient) -> LabelProposer:
     def propose(current_labels: list[str]) -> list[str]:
         prompt = build_label_expansion_prompt(current_labels)
         schema = {
             "type": "object",
-            "properties": {
-                "labels": {"type": "array", "items": {"type": "string"}}
-            },
+            "properties": {"labels": {"type": "array", "items": {"type": "string"}}},
             "required": ["labels"],
             "additionalProperties": False,
         }
         response = chat_client.complete_json(
-            prompt=prompt, schema_name="label_list", schema=schema,  # type: ignore[arg-type]
+            prompt=prompt,
+            schema_name="label_list",
+            schema=schema,  # type: ignore[arg-type]
         )
         return [str(label) for label in cast(list[str], response["labels"])]
+
     return propose
+
 
 def build_edge_suggester(chat_client: ChatCompletionClient) -> EdgeSuggester:
     def suggest(expanded_label_context: list[str]) -> list[Edge]:
@@ -209,8 +213,11 @@ def build_edge_suggester(chat_client: ChatCompletionClient) -> EdgeSuggester:
             "additionalProperties": False,
         }
         response = chat_client.complete_json(
-            prompt=prompt, schema_name="edge_list", schema=schema,  # type: ignore[arg-type]
+            prompt=prompt,
+            schema_name="edge_list",
+            schema=schema,  # type: ignore[arg-type]
         )
         raw_edges = cast(list[dict[str, object]], response["edges"])
         return [(str(e["source"]), str(e["target"])) for e in raw_edges]
+
     return suggest
