@@ -10,8 +10,10 @@ Purpose:
 Key files:
 
 - `cli.py`: CLI parser and dispatch.
+- `cli.py`: CLI parser and lazy dispatch into command handlers.
 - `generation.py`: algorithm-agnostic generation stub payload routing.
 - `verification.py`: repository-wide verification orchestration.
+- `verification_cases.py`: reusable verification case definitions and runners.
 - `experiment_manifest.py`: experiment-manifest parsing and validation.
 
 Working rules:

@@ -1,16 +1,6 @@
 import argparse
 from collections.abc import Sequence
 
-from llm_conceptual_modeling.commands.analyze import handle_analyze
-from llm_conceptual_modeling.commands.audit import handle_audit
-from llm_conceptual_modeling.commands.baseline import handle_baseline
-from llm_conceptual_modeling.commands.doctor import handle_doctor
-from llm_conceptual_modeling.commands.eval import handle_eval
-from llm_conceptual_modeling.commands.factorial import handle_factorial
-from llm_conceptual_modeling.commands.generate import handle_generate
-from llm_conceptual_modeling.commands.probe import handle_probe
-from llm_conceptual_modeling.commands.verify import handle_verify
-
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="lcm")
@@ -180,22 +170,40 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "doctor":
+        from llm_conceptual_modeling.commands.doctor import handle_doctor
+
         return handle_doctor(args)
     if args.command == "analyze":
+        from llm_conceptual_modeling.commands.analyze import handle_analyze
+
         return handle_analyze(args)
     if args.command == "audit":
+        from llm_conceptual_modeling.commands.audit import handle_audit
+
         return handle_audit(args)
     if args.command == "eval":
+        from llm_conceptual_modeling.commands.eval import handle_eval
+
         return handle_eval(args)
     if args.command == "baseline":
+        from llm_conceptual_modeling.commands.baseline import handle_baseline
+
         return handle_baseline(args)
     if args.command == "factorial":
+        from llm_conceptual_modeling.commands.factorial import handle_factorial
+
         return handle_factorial(args)
     if args.command == "verify":
+        from llm_conceptual_modeling.commands.verify import handle_verify
+
         return handle_verify(args)
     if args.command == "generate":
+        from llm_conceptual_modeling.commands.generate import handle_generate
+
         return handle_generate(args)
     if args.command == "probe":
+        from llm_conceptual_modeling.commands.probe import handle_probe
+
         return handle_probe(args)
 
     parser.error("unsupported command")
