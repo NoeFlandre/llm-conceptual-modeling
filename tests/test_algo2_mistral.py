@@ -5,8 +5,8 @@ import httpx
 
 from llm_conceptual_modeling.algo2.mistral import (
     Method2PromptConfig,
-    _build_prompt_prefix,
     MistralChatClient,
+    _build_prompt_prefix,
     build_edge_suggester,
     build_edge_suggestion_prompt,
     build_label_expansion_prompt,

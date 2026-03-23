@@ -301,8 +301,8 @@ class TestExperimentManifestSchema:
 
     def test_experiment_manifest_from_algo1_probe_spec(self) -> None:
         """Can construct ExperimentManifest from Algo1ProbeSpec + prompt text."""
-        from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec
         from llm_conceptual_modeling.algo1.mistral import build_direct_edge_prompt
+        from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec
 
         spec = Algo1ProbeSpec(
             run_name="algo1_sg1_sg2_rep0_cond00000",

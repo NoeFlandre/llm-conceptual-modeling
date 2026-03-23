@@ -16,14 +16,14 @@ mistral.py while delegating the shared primitives to this module.
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Any, Protocol, cast
+from typing import TYPE_CHECKING, Any, Protocol
 
 from mistralai.client import Mistral
 
 from llm_conceptual_modeling.common.retry import call_with_retry
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    pass
 
 __all__ = [
     "ChatCompletionClient",

@@ -9,15 +9,15 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, cast
 
 from llm_conceptual_modeling.common.mistral import (
     ChatCompletionClient,
     Edge,
     MistralChatClient,
-    _build_notation_section,
-    _build_example_section,
     _build_counterexample_section,
+    _build_example_section,
+    _build_notation_section,
     _format_knowledge_map,
 )
 
@@ -186,7 +186,7 @@ def build_label_proposer(chat_client: ChatCompletionClient) -> LabelProposer:
         response = chat_client.complete_json(
             prompt=prompt, schema_name="label_list", schema=schema,  # type: ignore[arg-type]
         )
-        return [str(l) for l in cast(list[str], response["labels"])]
+        return [str(label) for label in cast(list[str], response["labels"])]
     return propose
 
 def build_edge_suggester(chat_client: ChatCompletionClient) -> EdgeSuggester:

@@ -23,7 +23,6 @@ from llm_conceptual_modeling.common.mistral import (
     _format_knowledge_map_as_edge_list,
 )
 
-
 # ----------------------------------------------------------------------
 # Edge type alias
 # ----------------------------------------------------------------------

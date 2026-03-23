@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, cast
 
 from llm_conceptual_modeling.algo1.cove import apply_cove_verification, build_cove_prompt
 from llm_conceptual_modeling.common.mistral import (
@@ -17,10 +17,7 @@ from llm_conceptual_modeling.common.mistral import (
     Edge,
     MistralChatClient,
     _build_notation_section,
-    _collect_ordered_nodes,
     _format_knowledge_map,
-    _format_knowledge_map_as_adjacency,
-    _format_knowledge_map_as_edge_list,
 )
 
 if TYPE_CHECKING:
