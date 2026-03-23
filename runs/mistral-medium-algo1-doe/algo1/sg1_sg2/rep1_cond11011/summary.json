@@ -1,0 +1,72 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Restrictive covenants",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Pressure to be thin"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg1_sg2_rep1_cond11011",
+  "verified_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ]
+  ]
+}

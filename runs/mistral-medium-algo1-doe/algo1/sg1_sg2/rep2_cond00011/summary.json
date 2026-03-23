@@ -1,0 +1,44 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg1_sg2_rep2_cond00011",
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ]
+  ]
+}

@@ -44,8 +44,8 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
         replications=5,
         subgraph_pairs=["sg1_sg2", "sg2_sg3", "sg3_sg1"],
         prompt_preview=(
-            "Your task is to recommend 5 more nodes in relation to those already "
-            "in the two knowledge maps."
+            "You are a helpful assistant who understands Knowledge Maps. Your task is to "
+            "recommend 5 more nodes in relation to those already in the two knowledge maps."
         ),
         method_contract=method_contract,
     ).to_dict()

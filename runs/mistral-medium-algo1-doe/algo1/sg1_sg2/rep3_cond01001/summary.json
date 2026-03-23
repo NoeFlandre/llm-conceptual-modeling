@@ -1,0 +1,68 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Resilience",
+      "Healthy eating"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg1_sg2_rep3_cond01001",
+  "verified_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Resilience",
+      "Healthy eating"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ]
+  ]
+}

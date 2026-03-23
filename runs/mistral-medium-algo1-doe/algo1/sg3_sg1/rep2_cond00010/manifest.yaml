@@ -1,0 +1,269 @@
+experiment_id: algo1_sg3_sg1_rep2_cond00010
+algorithm: algo1
+model: mistral-medium-2508
+provider: mistral
+temperature: 0.0
+top_p: null
+max_tokens: null
+prompt_factors:
+  use_adjacency_notation: false
+  use_array_representation: false
+  include_explanation: false
+  include_example: true
+  include_counterexample: false
+full_prompt: 'You are a helpful assistant who understands Knowledge Maps. The knowledge
+  map is encoded using tags that store directed edges. Here is an example of a desired
+  output for your task. In knowledge map 1, we have the list of nodes [''capacity
+  to hire'', ''bad employees'', ''good reputation''] and the associated adjacency
+  matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the list of nodes
+  [''work motivation'', ''productivity'', ''financial growth''] and the associated
+  adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. In this example, you could recommend
+  3 new links: ''quality of managers'' with ''work motivation'', ''productivity''
+  with ''good reputation'' and ''bad employees'' with ''quality of managers''. These
+  links implicitly create 1 new node: ''quality of managers''. Therefore, this is
+  the expected output: [(''quality of managers'', ''work motivation''), (''productivity'',
+  ''good reputation''), (''bad employees'', ''quality of managers'')]. You will get
+  two inputs: Knowledge map 1: <knowledge-map><edge source=''Medications'' target=''Balance''
+  /><edge source=''Secretion of inflammatory molecules by adipose cells'' target=''Insulin
+  resistance'' /><edge source=''Obesity'' target=''Obstructive sleep apnea'' /><edge
+  source=''Dyslipidemia'' target=''Blood pressure'' /><edge source=''Obesity'' target=''Gastro-esophageal
+  reflux disease'' /><edge source=''Auto-inflammatory diseases'' target=''Inflammation''
+  /><edge source=''Atherosclerosis'' target=''Coronary heart diseases'' /><edge source=''Release
+  of adipokines'' target=''Atherosclerosis'' /><edge source=''Blood mono-unsaturated
+  fatty acid level'' target=''Secretion of inflammatory molecules by adipose cells''
+  /><edge source=''Insulin resistance'' target=''Fatty acids in the artery walls''
+  /><edge source=''Insulin resistance'' target=''Cells intake of fatty acids'' /><edge
+  source=''Adipose storage of fatty acids'' target=''Inflammation'' /><edge source=''Thoracic
+  and abdominal obesity'' target=''Airway resistance'' /><edge source=''Thoracic and
+  abdominal obesity'' target=''Respiratory muscle fatigue'' /><edge source=''Unhealthy
+  weight control practices'' target=''Obesity'' /><edge source=''Sodium retention''
+  target=''Blood pressure'' /><edge source=''Short sleep duration'' target=''Pro-inflammatory
+  cytokines'' /><edge source=''Medications'' target=''Obesity'' /><edge source=''Balance''
+  target=''Ability to engage in physical activity'' /><edge source=''Short sleep duration''
+  target=''Cortisol'' /><edge source=''Airway resistance'' target=''Asthma'' /><edge
+  source=''Short sleep duration'' target=''Blood pressure'' /><edge source=''Fatty
+  acids in the artery walls'' target=''Atherosclerosis'' /><edge source=''Dyslipidemia''
+  target=''Insulin resistance'' /><edge source=''Blood glucose level'' target=''Fatty
+  acids in the artery walls'' /><edge source=''Respiratory diseases'' target=''Ability
+  to engage in physical activity'' /><edge source=''Blood saturated fatty acid level''
+  target=''Secretion of inflammatory molecules by adipose cells'' /><edge source=''Dysfunctional
+  adipose tissue'' target=''Inflammation'' /><edge source=''Coordination'' target=''Ability
+  to engage in physical activity'' /><edge source=''Obesity'' target=''Short sleep
+  duration'' /><edge source=''Inflammation'' target=''Asthma'' /><edge source=''Coronary
+  heart diseases'' target=''Dyspnea'' /><edge source=''Tiredness'' target=''Ability
+  to engage in physical activity'' /><edge source=''Short sleep duration'' target=''Heart
+  rate'' /><edge source=''Blood fatty acid level'' target=''Blood glucose level''
+  /><edge source=''Pro-inflammatory cytokines'' target=''Inflammation'' /><edge source=''Respiratory
+  muscle fatigue'' target=''Dyspnea'' /><edge source=''Heart rate'' target=''Coronary
+  heart diseases'' /><edge source=''Medications'' target=''Coordination'' /><edge
+  source=''Beta blockers'' target=''Ability to engage in physical activity'' /><edge
+  source=''Sodium intake'' target=''Blood pressure'' /><edge source=''Airway resistance''
+  target=''Asthma-like symptoms'' /><edge source=''Medications'' target=''Concentration''
+  /><edge source=''Cells intake of fatty acids'' target=''Adipose storage of fatty
+  acids'' /><edge source=''Physical pain'' target=''Ability to engage in physical
+  activity'' /><edge source=''Concentration'' target=''Ability to engage in physical
+  activity'' /><edge source=''Obesity'' target=''Release of adipokines'' /><edge source=''Blood
+  glucose level'' target=''Sodium retention'' /><edge source=''Stimulants'' target=''Short
+  sleep duration'' /><edge source=''Obesity'' target=''Dysfunctional adipose tissue''
+  /><edge source=''Medications'' target=''Tiredness'' /><edge source=''Inflammation''
+  target=''Insulin resistance'' /><edge source=''Inflammation'' target=''Auto-inflammatory
+  diseases'' /><edge source=''Blood fatty acid level'' target=''Adipose storage of
+  fatty acids'' /><edge source=''Dysfunctional adipose tissue'' target=''Blood pressure''
+  /><edge source=''Dysfunctional adipose tissue'' target=''Dyslipidemia'' /><edge
+  source=''Obesity'' target=''Unhealthy weight control practices'' /><edge source=''Obesity''
+  target=''Asthma-like symptoms'' /><edge source=''Dyslipidemia'' target=''Atherosclerosis''
+  /></knowledge-map> Knowledge map 2: <knowledge-map><edge source=''Prevalence of
+  walking trails'' target=''Quality of the sport infrastructure'' /><edge source=''Eating
+  disorders'' target=''Healthy eating'' /><edge source=''Consumer demand for regulations''
+  target=''Marketing of healthy foods'' /><edge source=''Public support and demand
+  for healthy products'' target=''Marketing of healthy foods'' /><edge source=''Unhealthy
+  foods are cheaper than healthy ones'' target=''Supportive food environment'' /><edge
+  source=''Public support and demand for healthy products'' target=''Availability
+  of healthy foods'' /><edge source=''Consumer demand for regulations'' target=''Marketing
+  of unhealthy foods'' /><edge source=''Economic incentives to produce unhealthy food
+  products'' target=''Cost of unhealthy foods'' /><edge source=''Supportive food environment''
+  target=''Healthy eating'' /><edge source=''Prevalence of bike trails'' target=''Quality
+  of the sport infrastructure'' /><edge source=''Prevalence of green fields'' target=''Quality
+  of the sport infrastructure'' /><edge source=''Public support and demand for healthy
+  products'' target=''Cost of healthy foods'' /><edge source=''Public support and
+  demand for healthy products'' target=''Marketing of unhealthy foods'' /><edge source=''Emotional
+  eating'' target=''Healthy eating'' /><edge source=''Unhealthy foods are more available
+  than healthy ones'' target=''Supportive food environment'' /><edge source=''Appetite''
+  target=''Healthy eating'' /><edge source=''Prevalence of green fields'' target=''Aesthetics''
+  /><edge source=''Restrictive covenants'' target=''Availability of healthy foods''
+  /><edge source=''Marketing ratio of unhealthy to healthy foods'' target=''Supportive
+  food environment'' /><edge source=''Public support and demand for healthy products''
+  target=''Cost of unhealthy foods'' /></knowledge-map> Your task is to recommend
+  more links between the two maps. These links can use new nodes. Do not suggest links
+  that are already in the maps. Do not suggest links between nodes of the same map.
+  Return the recommended links as a list of edges in the format [(A, Z), ..., (X,
+  D)]. Your output must only be the list of proposed edges. Do not repeat any instructions
+  I have given you and do not add unnecessary words or phrases.'
+input_subgraph_pairs:
+- subgraph_name: subgraph1
+  edges:
+  - - Medications
+    - Balance
+  - - Secretion of inflammatory molecules by adipose cells
+    - Insulin resistance
+  - - Obesity
+    - Obstructive sleep apnea
+  - - Dyslipidemia
+    - Blood pressure
+  - - Obesity
+    - Gastro-esophageal reflux disease
+  - - Auto-inflammatory diseases
+    - Inflammation
+  - - Atherosclerosis
+    - Coronary heart diseases
+  - - Release of adipokines
+    - Atherosclerosis
+  - - Blood mono-unsaturated fatty acid level
+    - Secretion of inflammatory molecules by adipose cells
+  - - Insulin resistance
+    - Fatty acids in the artery walls
+  - - Insulin resistance
+    - Cells intake of fatty acids
+  - - Adipose storage of fatty acids
+    - Inflammation
+  - - Thoracic and abdominal obesity
+    - Airway resistance
+  - - Thoracic and abdominal obesity
+    - Respiratory muscle fatigue
+  - - Unhealthy weight control practices
+    - Obesity
+  - - Sodium retention
+    - Blood pressure
+  - - Short sleep duration
+    - Pro-inflammatory cytokines
+  - - Medications
+    - Obesity
+  - - Balance
+    - Ability to engage in physical activity
+  - - Short sleep duration
+    - Cortisol
+  - - Airway resistance
+    - Asthma
+  - - Short sleep duration
+    - Blood pressure
+  - - Fatty acids in the artery walls
+    - Atherosclerosis
+  - - Dyslipidemia
+    - Insulin resistance
+  - - Blood glucose level
+    - Fatty acids in the artery walls
+  - - Respiratory diseases
+    - Ability to engage in physical activity
+  - - Blood saturated fatty acid level
+    - Secretion of inflammatory molecules by adipose cells
+  - - Dysfunctional adipose tissue
+    - Inflammation
+  - - Coordination
+    - Ability to engage in physical activity
+  - - Obesity
+    - Short sleep duration
+  - - Inflammation
+    - Asthma
+  - - Coronary heart diseases
+    - Dyspnea
+  - - Tiredness
+    - Ability to engage in physical activity
+  - - Short sleep duration
+    - Heart rate
+  - - Blood fatty acid level
+    - Blood glucose level
+  - - Pro-inflammatory cytokines
+    - Inflammation
+  - - Respiratory muscle fatigue
+    - Dyspnea
+  - - Heart rate
+    - Coronary heart diseases
+  - - Medications
+    - Coordination
+  - - Beta blockers
+    - Ability to engage in physical activity
+  - - Sodium intake
+    - Blood pressure
+  - - Airway resistance
+    - Asthma-like symptoms
+  - - Medications
+    - Concentration
+  - - Cells intake of fatty acids
+    - Adipose storage of fatty acids
+  - - Physical pain
+    - Ability to engage in physical activity
+  - - Concentration
+    - Ability to engage in physical activity
+  - - Obesity
+    - Release of adipokines
+  - - Blood glucose level
+    - Sodium retention
+  - - Stimulants
+    - Short sleep duration
+  - - Obesity
+    - Dysfunctional adipose tissue
+  - - Medications
+    - Tiredness
+  - - Inflammation
+    - Insulin resistance
+  - - Inflammation
+    - Auto-inflammatory diseases
+  - - Blood fatty acid level
+    - Adipose storage of fatty acids
+  - - Dysfunctional adipose tissue
+    - Blood pressure
+  - - Dysfunctional adipose tissue
+    - Dyslipidemia
+  - - Obesity
+    - Unhealthy weight control practices
+  - - Obesity
+    - Asthma-like symptoms
+  - - Dyslipidemia
+    - Atherosclerosis
+- subgraph_name: subgraph2
+  edges:
+  - - Prevalence of walking trails
+    - Quality of the sport infrastructure
+  - - Eating disorders
+    - Healthy eating
+  - - Consumer demand for regulations
+    - Marketing of healthy foods
+  - - Public support and demand for healthy products
+    - Marketing of healthy foods
+  - - Unhealthy foods are cheaper than healthy ones
+    - Supportive food environment
+  - - Public support and demand for healthy products
+    - Availability of healthy foods
+  - - Consumer demand for regulations
+    - Marketing of unhealthy foods
+  - - Economic incentives to produce unhealthy food products
+    - Cost of unhealthy foods
+  - - Supportive food environment
+    - Healthy eating
+  - - Prevalence of bike trails
+    - Quality of the sport infrastructure
+  - - Prevalence of green fields
+    - Quality of the sport infrastructure
+  - - Public support and demand for healthy products
+    - Cost of healthy foods
+  - - Public support and demand for healthy products
+    - Marketing of unhealthy foods
+  - - Emotional eating
+    - Healthy eating
+  - - Unhealthy foods are more available than healthy ones
+    - Supportive food environment
+  - - Appetite
+    - Healthy eating
+  - - Prevalence of green fields
+    - Aesthetics
+  - - Restrictive covenants
+    - Availability of healthy foods
+  - - Marketing ratio of unhealthy to healthy foods
+    - Supportive food environment
+  - - Public support and demand for healthy products
+    - Cost of unhealthy foods
+output_dir: runs/mistral-medium-algo1-doe/algo1/sg3_sg1/rep2_cond00010
+timestamp: '2026-03-23T09:54:36.234934+00:00'
+repetitions: 5
+condition_bits: '00010'
+pair_name: sg3_sg1

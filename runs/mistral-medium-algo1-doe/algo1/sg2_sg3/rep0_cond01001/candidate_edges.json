@@ -1,0 +1,624 @@
+{
+  "candidate_edges": [
+    [
+      "Stress",
+      "Inflammation"
+    ],
+    [
+      "Depression",
+      "Inflammation"
+    ],
+    [
+      "Depression",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Depression",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Obesity"
+    ],
+    [
+      "Depression",
+      "Asthma"
+    ],
+    [
+      "Depression",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Depression",
+      "Dyslipidemia"
+    ],
+    [
+      "Depression",
+      "Insulin resistance"
+    ],
+    [
+      "Depression",
+      "Atherosclerosis"
+    ],
+    [
+      "Depression",
+      "Coronary heart diseases"
+    ],
+    [
+      "Depression",
+      "Dyspnea"
+    ],
+    [
+      "Depression",
+      "Respiratory diseases"
+    ],
+    [
+      "Depression",
+      "Physical pain"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Depression",
+      "Physical well-being"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ],
+    [
+      "Depression",
+      "Physical well-being"
+    ],
+    [
+      "Depression",
+      "Socio-economic status"
+    ],
+    [
+      "Depression",
+      "Control"
+    ],
+    [
+      "Depression",
+      "Resilience"
+    ],
+    [
+      "Depression",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Depression",
+      "Weight bias"
+    ],
+    [
+      "Depression",
+      "Poor body image"
+    ],
+    [
+      "Depression",
+      "Pressure to be thin"
+    ],
+    [
+      "Depression",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Depression",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Depression",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Inflammation",
+      "Stress"
+    ],
+    [
+      "Inflammation",
+      "Depression"
+    ],
+    [
+      "Inflammation",
+      "Poor body image"
+    ],
+    [
+      "Inflammation",
+      "Pressure to be thin"
+    ],
+    [
+      "Inflammation",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Inflammation",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Inflammation",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Inflammation",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Inflammation",
+      "Weight bias"
+    ],
+    [
+      "Inflammation",
+      "Mental well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Inflammation",
+      "Socio-economic status"
+    ],
+    [
+      "Inflammation",
+      "Control"
+    ],
+    [
+      "Inflammation",
+      "Resilience"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Pressure to be thin"
+    ],
+    [
+      "Obesity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Obesity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Obesity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Obesity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Obesity",
+      "Weight bias"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Socio-economic status"
+    ],
+    [
+      "Obesity",
+      "Control"
+    ],
+    [
+      "Obesity",
+      "Resilience"
+    ],
+    [
+      "Short sleep duration",
+      "Stress"
+    ],
+    [
+      "Short sleep duration",
+      "Depression"
+    ],
+    [
+      "Short sleep duration",
+      "Poor body image"
+    ],
+    [
+      "Short sleep duration",
+      "Pressure to be thin"
+    ],
+    [
+      "Short sleep duration",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Short sleep duration",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Short sleep duration",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Short sleep duration",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Short sleep duration",
+      "Weight bias"
+    ],
+    [
+      "Short sleep duration",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Physical well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Socio-economic status"
+    ],
+    [
+      "Short sleep duration",
+      "Control"
+    ],
+    [
+      "Short sleep duration",
+      "Resilience"
+    ],
+    [
+      "Blood pressure",
+      "Stress"
+    ],
+    [
+      "Blood pressure",
+      "Depression"
+    ],
+    [
+      "Blood pressure",
+      "Poor body image"
+    ],
+    [
+      "Blood pressure",
+      "Pressure to be thin"
+    ],
+    [
+      "Blood pressure",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Blood pressure",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Blood pressure",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Blood pressure",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Blood pressure",
+      "Weight bias"
+    ],
+    [
+      "Blood pressure",
+      "Mental well-being"
+    ],
+    [
+      "Blood pressure",
+      "Physical well-being"
+    ],
+    [
+      "Blood pressure",
+      "Socio-economic status"
+    ],
+    [
+      "Blood pressure",
+      "Control"
+    ],
+    [
+      "Blood pressure",
+      "Resilience"
+    ],
+    [
+      "Insulin resistance",
+      "Stress"
+    ],
+    [
+      "Insulin resistance",
+      "Depression"
+    ],
+    [
+      "Insulin resistance",
+      "Poor body image"
+    ],
+    [
+      "Insulin resistance",
+      "Pressure to be thin"
+    ],
+    [
+      "Insulin resistance",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Insulin resistance",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Insulin resistance",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Insulin resistance",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Insulin resistance",
+      "Weight bias"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Physical well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Socio-economic status"
+    ],
+    [
+      "Insulin resistance",
+      "Control"
+    ],
+    [
+      "Insulin resistance",
+      "Resilience"
+    ],
+    [
+      "Atherosclerosis",
+      "Stress"
+    ],
+    [
+      "Atherosclerosis",
+      "Depression"
+    ],
+    [
+      "Atherosclerosis",
+      "Poor body image"
+    ],
+    [
+      "Atherosclerosis",
+      "Pressure to be thin"
+    ],
+    [
+      "Atherosclerosis",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Atherosclerosis",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Atherosclerosis",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Atherosclerosis",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Atherosclerosis",
+      "Weight bias"
+    ],
+    [
+      "Atherosclerosis",
+      "Mental well-being"
+    ],
+    [
+      "Atherosclerosis",
+      "Physical well-being"
+    ],
+    [
+      "Atherosclerosis",
+      "Socio-economic status"
+    ],
+    [
+      "Atherosclerosis",
+      "Control"
+    ],
+    [
+      "Atherosclerosis",
+      "Resilience"
+    ],
+    [
+      "Coronary heart diseases",
+      "Stress"
+    ],
+    [
+      "Coronary heart diseases",
+      "Depression"
+    ],
+    [
+      "Coronary heart diseases",
+      "Poor body image"
+    ],
+    [
+      "Coronary heart diseases",
+      "Pressure to be thin"
+    ],
+    [
+      "Coronary heart diseases",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Coronary heart diseases",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Coronary heart diseases",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Coronary heart diseases",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Coronary heart diseases",
+      "Weight bias"
+    ],
+    [
+      "Coronary heart diseases",
+      "Mental well-being"
+    ],
+    [
+      "Coronary heart diseases",
+      "Physical well-being"
+    ],
+    [
+      "Coronary heart diseases",
+      "Socio-economic status"
+    ],
+    [
+      "Coronary heart diseases",
+      "Control"
+    ],
+    [
+      "Coronary heart diseases",
+      "Resilience"
+    ],
+    [
+      "Dyslipidemia",
+      "Stress"
+    ],
+    [
+      "Dyslipidemia",
+      "Depression"
+    ],
+    [
+      "Dyslipidemia",
+      "Poor body image"
+    ],
+    [
+      "Dyslipidemia",
+      "Pressure to be thin"
+    ],
+    [
+      "Dyslipidemia",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Dyslipidemia",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Dyslipidemia",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Dyslipidemia",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Dyslipidemia",
+      "Weight bias"
+    ],
+    [
+      "Dyslipidemia",
+      "Mental well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Physical well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Socio-economic status"
+    ],
+    [
+      "Dyslipidemia",
+      "Control"
+    ],
+    [
+      "Dyslipidemia",
+      "Resilience"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Stress"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Depression"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Poor body image"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Pressure to be thin"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Weight bias"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Mental well-being"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Socio-economic status"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Control"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Resilience"
+    ]
+  ]
+}

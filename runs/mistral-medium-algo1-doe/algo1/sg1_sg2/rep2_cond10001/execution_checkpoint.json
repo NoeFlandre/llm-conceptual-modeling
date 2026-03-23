@@ -1,0 +1,66 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Cultural norms around thinness"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Cultural norms around thinness"
+    ]
+  ]
+}

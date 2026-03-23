@@ -22,9 +22,10 @@ def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
 def test_build_label_expansion_prompt_mentions_related_concepts_and_output_format() -> None:
     actual = build_label_expansion_prompt(["alpha", "beta"])
 
-    assert "recommend 5 new related concept names" in actual
-    assert "Do not suggest names that are already in the input" in actual
-    assert "Return a JSON object" in actual
+    assert "You are a helpful assistant who understands Knowledge Maps." in actual
+    assert "recommend 5 more nodes in relation to those already in the two knowledge maps" in actual
+    assert "Do not suggest nodes that are already in the maps" in actual
+    assert "Return the recommended nodes as a list of nodes" in actual
     assert "alpha" in actual
     assert "beta" in actual
 
@@ -46,7 +47,7 @@ def test_build_label_expansion_prompt_can_include_all_paper_factors() -> None:
         prompt_config=prompt_config,
     )
 
-    assert "You are a helpful assistant who can creatively suggest relevant ideas." in actual
+    assert "You are a helpful assistant who understands Knowledge Maps." in actual
     assert "A knowledge map is a network consisting of nodes and edges." in actual
     assert "adjacency matrix" in actual
     assert "Here is an example of a desired output for your task." in actual
@@ -85,9 +86,9 @@ def test_build_label_expansion_prompt_can_use_tag_edge_list_without_optional_sec
 def test_build_edge_suggestion_prompt_mentions_exact_labels_and_edge_format() -> None:
     actual = build_edge_suggestion_prompt(["alpha", "beta", "bridge_a"])
 
-    assert "suggest edges that directly link concepts" in actual
-    assert "Use only exact concept names" in actual
-    assert "Return a JSON object" in actual
+    assert "recommend more links between the two maps" in actual
+    assert "Do not suggest links that are already in the maps" in actual
+    assert "Return the recommended links as a list of edges" in actual
     assert "bridge_a" in actual
 
 
@@ -113,7 +114,7 @@ def test_build_edge_suggestion_prompt_can_include_all_paper_factors() -> None:
     assert "Here is an example of a desired output for your task." in actual
     assert "Here is an example of a bad output that we do not want to see." in actual
     assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in actual
-    assert "suggest edges that directly link concepts" in actual
+    assert "recommend more links between the two maps" in actual
 
 
 def test_build_edge_suggestion_prompt_can_use_tag_edge_list_without_optional_sections() -> None:
@@ -155,21 +156,55 @@ def test_build_prompt_prefix_reuses_shared_sections_for_both_prompt_builders() -
     actual = _build_prompt_prefix(prompt_config)
 
     assert actual == [
-        "You are a helpful assistant who can creatively suggest relevant ideas.",
+        "You are a helpful assistant who understands Knowledge Maps.",
         "A knowledge map is a network consisting of nodes and edges. "
         "Nodes must have a clear meaning, such that we can interpret having "
         "'more' or 'less' of a node. Edges represent the existence of a direct "
         "relation between two nodes.",
-        "The knowledge map is encoded using tags for nodes and an associated adjacency matrix.",
-        "Here is an example of a desired output for your task. "
-        "We have the list of concepts ['capacity to hire', 'bad employees', "
-        "'good reputation']. In this example, you could recommend these 9 new concepts: "
-        "'employment potential', 'hiring capability', 'staffing ability', "
-        "'underperformers', 'inefficient staff', 'problematic workers', "
-        "'positive image', 'favorable standing', 'high regard'.",
-        "Here is an example of a bad output that we do not want to see. "
-        "A bad output would propose unrelated concepts such as 'moon', 'dog', "
-        "or 'thermodynamics'.",
+        "The knowledge map is encoded using a hierarchical markup language representation. "
+        "The list of nodes is defined between the opening tag <NODES> and the matching "
+        "closing tag </NODES>. For each node, we list all other nodes by ID and indicate "
+        "whether there is a connection ('True') or not ('False').",
+        "Here is an example of a desired output for your task. In knowledge map 1, we have "
+        "the following hierarchical markup language representation: <NODES><NODE ID= "
+        "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
+        "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
+        "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
+        "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
+        "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
+        "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
+        "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
+        "the following hierarchical markup language representation: <NODES><NODE ID= "
+        "'work motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
+        "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
+        "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
+        "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
+        "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
+        "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
+        "'financial growth' isConnected=False/></NODE></NODES>. In this example, you could "
+        "recommend these 5 new nodes: 'quality of managers', 'employee satisfaction', "
+        "'customer satisfaction', 'market share', 'performance incentives'. Therefore, this "
+        "is the expected output: ['quality of managers', 'employee satisfaction', "
+        "'customer satisfaction', 'market share', 'performance incentives'].",
+        "Here is an example of a bad output that we do not want to see. In knowledge map 1, "
+        "we have the following hierarchical markup language representation: <NODES><NODE ID= "
+        "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
+        "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
+        "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
+        "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
+        "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
+        "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
+        "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
+        "the following hierarchical markup language representation: <NODES><NODE ID= "
+        "'work motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
+        "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
+        "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
+        "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
+        "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
+        "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
+        "'financial growth' isConnected=False/></NODE></NODES>. A bad output would be: "
+        "['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes "
+        "would be incorrect since they have no relationship with the nodes in the input.",
     ]
 
 
@@ -316,7 +351,9 @@ def test_build_label_proposer_calls_chat_client_with_label_schema() -> None:
 
     assert actual == ["bridge_a", "bridge_b"]
     assert chat_client.calls[0]["schema_name"] == "label_list"
-    assert "recommend 5 new related concept names" in str(chat_client.calls[0]["prompt"])
+    assert "recommend 5 more nodes in relation to those already in the two knowledge maps" in str(
+        chat_client.calls[0]["prompt"]
+    )
 
 
 def test_build_edge_suggester_calls_chat_client_with_edge_schema() -> None:
@@ -330,4 +367,4 @@ def test_build_edge_suggester_calls_chat_client_with_edge_schema() -> None:
         ("bridge_b", "beta"),
     ]
     assert chat_client.calls[0]["schema_name"] == "edge_list"
-    assert "suggest edges that directly link concepts" in str(chat_client.calls[0]["prompt"])
+    assert "recommend more links between the two maps" in str(chat_client.calls[0]["prompt"])

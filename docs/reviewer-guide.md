@@ -93,7 +93,7 @@ uv run lcm generate algo2 \
   --json
 ```
 
-This executable Method 2 path uses the confirmed `0.01` convergence threshold and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
+This executable Method 2 path uses the confirmed convergence thresholds `0.01` and `0.02` and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
 Add `--resume` to any live-backed `generate` or `probe` command to reuse the existing run state and checkpoint files when rerunning a partially completed output directory. The live matrix runner also retries HTTP 429 responses and reloads cached per-row responses when resuming, so interrupted matrix runs can continue without repeating completed provider calls. The reusable Mistral clients now use the official `mistralai` SDK and still retry transient transport failures, including DNS-level network errors, before the command fails with a structured `error.json` and a matching `run.log` entry.
 
 To audit the paper-facing contract in one place, run:
@@ -102,7 +102,7 @@ To audit the paper-facing contract in one place, run:
 UV_CACHE_DIR=/tmp/uv-cache uv run python -c "from llm_conceptual_modeling.cli import main; raise SystemExit(main(['audit', 'paper-alignment', '--json']))"
 ```
 
-The resulting JSON report lists the method contracts, the confirmed Method 2 `0.01` convergence threshold, the Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence.
+The resulting JSON report lists the method contracts, the confirmed Method 2 convergence thresholds (`0.01` and `0.02`), the Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence.
 
 Grouped descriptive summaries:
 

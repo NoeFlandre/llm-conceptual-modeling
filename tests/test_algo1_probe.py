@@ -89,9 +89,13 @@ def test_run_algo1_probe_writes_auditable_artifacts(tmp_path) -> None:
         },
     }
     assert summary == actual
-    assert len(event_lines) == 2
+    assert len(event_lines) == 6
     assert json.loads(event_lines[0])["event"] == "probe_started"
-    assert json.loads(event_lines[1])["event"] == "probe_finished"
+    assert json.loads(event_lines[1])["event"] == "chat_call_started"
+    assert json.loads(event_lines[2])["event"] == "chat_call_completed"
+    assert json.loads(event_lines[3])["event"] == "chat_call_started"
+    assert json.loads(event_lines[4])["event"] == "chat_call_completed"
+    assert json.loads(event_lines[5])["event"] == "probe_finished"
     assert "recommend more links between the two maps" in edge_prompt
     assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in edge_prompt
     assert "causal relationship exists between the source and target concepts" in cove_prompt

@@ -1,0 +1,199 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Resilience"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "New node: Urban planning",
+      "Prevalence of walking trails"
+    ],
+    [
+      "New node: Urban planning",
+      "Prevalence of bike trails"
+    ],
+    [
+      "New node: Urban planning",
+      "Prevalence of green fields"
+    ],
+    [
+      "New node: Government policies",
+      "Consumer demand for regulations"
+    ],
+    [
+      "New node: Government policies",
+      "Public health messaging around thinness"
+    ],
+    [
+      "New node: Government policies",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "New node: Psychological factors",
+      "Eating disorders"
+    ],
+    [
+      "New node: Psychological factors",
+      "Depression"
+    ],
+    [
+      "New node: Psychological factors",
+      "Control"
+    ],
+    [
+      "New node: Economic factors",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "New node: Economic factors",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "New node: Economic factors",
+      "Socio-economic status"
+    ],
+    [
+      "New node: Social influence",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "New node: Social influence",
+      "Cultural norms around thinness"
+    ],
+    [
+      "New node: Social influence",
+      "Pressure to be thin"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Resilience"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "New node: Urban planning",
+      "Prevalence of walking trails"
+    ],
+    [
+      "New node: Urban planning",
+      "Prevalence of bike trails"
+    ],
+    [
+      "New node: Urban planning",
+      "Prevalence of green fields"
+    ],
+    [
+      "New node: Government policies",
+      "Consumer demand for regulations"
+    ],
+    [
+      "New node: Government policies",
+      "Public health messaging around thinness"
+    ],
+    [
+      "New node: Government policies",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "New node: Psychological factors",
+      "Eating disorders"
+    ],
+    [
+      "New node: Psychological factors",
+      "Depression"
+    ],
+    [
+      "New node: Psychological factors",
+      "Control"
+    ],
+    [
+      "New node: Economic factors",
+      "Economic incentives to produce unhealthy food products"
+    ],
+    [
+      "New node: Economic factors",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "New node: Economic factors",
+      "Socio-economic status"
+    ],
+    [
+      "New node: Social influence",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "New node: Social influence",
+      "Cultural norms around thinness"
+    ],
+    [
+      "New node: Social influence",
+      "Pressure to be thin"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

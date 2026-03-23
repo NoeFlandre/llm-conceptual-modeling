@@ -106,8 +106,11 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert len(event_lines) == 2
     assert json.loads(event_lines[0])["event"] == "probe_started"
     assert json.loads(event_lines[1])["event"] == "probe_finished"
-    assert "recommend 5 new related concept names" in label_prompt
+    assert (
+        "recommend 5 more nodes in relation to those already in the two knowledge maps"
+        in label_prompt
+    )
     assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in label_prompt
-    assert "suggest edges that directly link concepts" in edge_prompt
+    assert "recommend more links between the two maps" in edge_prompt
     assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in edge_prompt
     assert len(chat_client.calls) == 3

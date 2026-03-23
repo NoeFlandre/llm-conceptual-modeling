@@ -1,0 +1,130 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Stress"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Resilience"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Consumer demand for regulations",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Availability of healthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Pressure to be thin"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Depression"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Restrictive covenants",
+      "Control"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Mental well-being"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Stress"
+    ],
+    [
+      "Restrictive covenants",
+      "Control"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ]
+  ]
+}

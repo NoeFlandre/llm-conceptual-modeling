@@ -34,7 +34,7 @@ def test_build_algo3_experiment_specs_expands_full_factorial_grid(tmp_path: Path
     assert first_manifest.condition_bits == "0000"
     assert first_manifest.repetitions == 5
     assert first_manifest.full_prompt.startswith(
-        "You are a helpful assistant who can creatively suggest relevant ideas."
+        "You are a helpful assistant who understands Knowledge Maps."
     )
 
     assert last_spec.run_name == "algo3_subgraph_1_to_subgraph_3_rep4_cond1111"

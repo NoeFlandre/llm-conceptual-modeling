@@ -1,0 +1,8 @@
+2026-03-23T09:45:54.175793+00:00 level=INFO run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=manifest message=manifest written
+2026-03-23T09:45:54.178048+00:00 level=INFO run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
+2026-03-23T09:45:54.178489+00:00 level=INFO run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=chat_call_started message=chat call started schema=edge_list prompt_chars=4633
+2026-03-23T09:46:12.703491+00:00 level=INFO run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=chat_call_completed message=chat call completed schema=edge_list
+2026-03-23T09:46:12.706784+00:00 level=INFO run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=candidate_edges_completed message=checkpoint written to candidate_edges.json
+2026-03-23T09:46:12.707585+00:00 level=INFO run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=chat_call_started message=chat call started schema=vote_list prompt_chars=7266
+2026-03-23T09:46:16.591447+00:00 level=ERROR run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=chat_call_failed message=chat call failed schema=vote_list error=JSONDecodeError
+2026-03-23T09:46:16.594744+00:00 level=ERROR run=algo1_sg1_sg2_rep3_cond10001 algorithm=algo1 stage=probe_failed message=Expecting value: line 1 column 471 (char 470)

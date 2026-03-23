@@ -1,0 +1,44 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Mental well-being",
+      "Appetite"
+    ],
+    [
+      "Physical well-being",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ]
+  ]
+}

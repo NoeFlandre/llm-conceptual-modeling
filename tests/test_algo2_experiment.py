@@ -41,7 +41,7 @@ def test_build_algo2_experiment_specs_uses_full_prompt_grid_and_convergence_fact
     assert first_manifest.condition_bits == "000000"
     assert first_manifest.repetitions == 5
     assert first_manifest.full_prompt.startswith(
-        "You are a helpful assistant who can creatively suggest relevant ideas."
+        "You are a helpful assistant who understands Knowledge Maps."
     )
 
 

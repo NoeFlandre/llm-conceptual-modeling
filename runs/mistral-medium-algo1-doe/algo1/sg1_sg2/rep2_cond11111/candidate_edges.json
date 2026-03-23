@@ -1,0 +1,44 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Pressure to be thin"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Mental well-being"
+    ]
+  ]
+}

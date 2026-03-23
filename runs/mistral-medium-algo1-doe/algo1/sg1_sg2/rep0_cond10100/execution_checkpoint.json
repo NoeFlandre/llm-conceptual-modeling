@@ -1,0 +1,129 @@
+{
+  "candidate_edges": [
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Availability of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Depression"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Poor body image"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Poor body image"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Availability of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Depression"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Unhealthy foods are more available than healthy ones",
+      "Poor body image"
+    ],
+    [
+      "Unhealthy foods are cheaper than healthy ones",
+      "Poor body image"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

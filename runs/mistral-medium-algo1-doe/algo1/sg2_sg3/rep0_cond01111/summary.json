@@ -1,0 +1,68 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Concentration"
+    ],
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Weight bias",
+      "Inflammation"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Resilience",
+      "Coordination"
+    ],
+    [
+      "Poor body image",
+      "Physical pain"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg2_sg3_rep0_cond01111",
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Concentration"
+    ],
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Unhealthy weight control practices"
+    ]
+  ]
+}

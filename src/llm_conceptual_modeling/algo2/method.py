@@ -32,6 +32,7 @@ class Method2ExecutionResult:
 def execute_method2(
     *,
     seed_labels: list[str],
+    existing_edges: list[Edge] | None = None,
     propose_labels: LabelProposalFunction,
     suggest_edges: EdgeSuggestionFunction,
     embedding_client: EmbeddingClient,
@@ -55,13 +56,25 @@ def execute_method2(
     expanded_label_context = list(seed_labels) + expansion_result.expanded_labels
     raw_edges = suggest_edges(expanded_label_context)
     normalized_edges = normalize_edge_terms(raw_edges, thesaurus)
+    existing_edges = existing_edges or []
+    existing_edge_set = {
+        _normalize_edge(edge) for edge in normalize_edge_terms(existing_edges, thesaurus)
+    }
+    filtered_normalized_edges = [
+        edge for edge in normalized_edges if _normalize_edge(edge) not in existing_edge_set
+    ]
     final_iteration = expansion_result.iterations[-1]
     final_similarity = final_iteration.similarity
     iteration_count = len(expansion_result.iterations)
     return Method2ExecutionResult(
         expanded_labels=expansion_result.expanded_labels,
         raw_edges=raw_edges,
-        normalized_edges=normalized_edges,
+        normalized_edges=filtered_normalized_edges,
         final_similarity=final_similarity,
         iteration_count=iteration_count,
     )
+
+
+def _normalize_edge(edge: Edge) -> Edge:
+    left, right = edge
+    return (left, right) if left <= right else (right, left)

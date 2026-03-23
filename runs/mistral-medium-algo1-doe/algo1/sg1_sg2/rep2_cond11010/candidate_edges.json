@@ -1,0 +1,56 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Stress"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Healthy eating",
+      "Resilience"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Prevalence of green fields",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Aesthetics",
+      "Weight bias"
+    ],
+    [
+      "Restrictive covenants",
+      "Pressure to be thin"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Depression"
+    ]
+  ]
+}

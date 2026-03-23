@@ -92,9 +92,103 @@ class TestAnthropicChatClient:
         )
 
         assert captured["model"] == "MiniMax-M2.7"
-        assert captured["max_tokens"] == 4096
+        assert captured["max_tokens"] == 196608
         assert len(captured["messages"]) == 1
         assert captured["messages"][0]["role"] == "user"
+
+    def test_base_url_uses_auth_token(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """MiniMax base-url path should use Authorization-style auth."""
+
+        captured: dict[str, Any] = {}
+
+        class FakeMessages:
+            def create(self, **kwargs: Any) -> Any:
+                captured.update(kwargs)
+                return _fake_anthropic_response('{"edges": []}')
+
+        class FakeAnthropic:
+            def __init__(self, **kwargs: Any) -> None:
+                captured["init_kwargs"] = kwargs
+                self.messages = FakeMessages()
+
+        monkeypatch.setenv("ANTHROPIC_BASE_URL", "https://api.minimax.io/anthropic")
+        monkeypatch.setattr("anthropic.Anthropic", FakeAnthropic)
+
+        client = AnthropicChatClient(
+            api_key="test-key",
+            model="MiniMax-M2.7",
+        )
+
+        client.complete_json(
+            prompt="test",
+            schema_name="edge_list",
+            schema={"type": "object"},
+        )
+
+        assert captured["init_kwargs"]["auth_token"] == "test-key"
+        assert captured["init_kwargs"]["base_url"] == "https://api.minimax.io/anthropic"
+        assert "api_key" not in captured["init_kwargs"]
+
+    def test_complete_json_uses_env_budget_override(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """ANTHROPIC_MAX_TOKENS overrides the default response budget."""
+
+        captured: dict[str, Any] = {}
+
+        class FakeMessages:
+            def create(self, **kwargs: Any) -> Any:
+                captured.update(kwargs)
+                return _fake_anthropic_response('{"edges": []}')
+
+        class FakeAnthropic:
+            def __init__(self, **kwargs: Any) -> None:
+                self.messages = FakeMessages()
+
+        monkeypatch.setenv("ANTHROPIC_MAX_TOKENS", "4096")
+        client = AnthropicChatClient(
+            api_key="test-key",
+            model="MiniMax-M2.7",
+            sdk_client=FakeAnthropic(),
+        )
+
+        client.complete_json(
+            prompt="test prompt",
+            schema_name="edge_list",
+            schema={"type": "object"},
+        )
+
+        assert captured["max_tokens"] == 4096
+
+    def test_complete_json_recovers_unquoted_edge_list(self) -> None:
+        """MiniMax tuple-style edge output is coerced into the expected schema."""
+
+        class FakeMessages:
+            def create(self, **kwargs: Any) -> Any:
+                return _fake_anthropic_response(
+                    "[(Aesthetics, Mental well-being), (Appetite, Stress)]"
+                )
+
+        class FakeAnthropic:
+            def __init__(self, **kwargs: Any) -> None:
+                self.messages = FakeMessages()
+
+        client = AnthropicChatClient(
+            api_key="test-key",
+            model="MiniMax-M2.7",
+            sdk_client=FakeAnthropic(),
+        )
+
+        result = client.complete_json(
+            prompt="test prompt",
+            schema_name="edge_list",
+            schema={"type": "object"},
+        )
+
+        assert result == {
+            "edges": [
+                {"source": "Aesthetics", "target": "Mental well-being"},
+                {"source": "Appetite", "target": "Stress"},
+            ]
+        }
 
     def test_complete_json_with_custom_temperature(self) -> None:
         """Temperature parameter is forwarded to the API."""

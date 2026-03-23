@@ -8,11 +8,13 @@ models via the official Mistral SDK.
 
 from __future__ import annotations
 
+import ast
 import json
 import logging
 import os
+import re
 import time
-from typing import Any, Protocol, cast
+from typing import Any, Protocol
 
 import anthropic
 import httpx
@@ -29,8 +31,7 @@ class ChatCompletionClient(Protocol):
         prompt: str,
         schema_name: str,
         schema: dict[str, object],
-    ) -> dict[str, object]:
-        ...
+    ) -> dict[str, object]: ...
 
 
 def _call_with_retry(
@@ -95,15 +96,23 @@ class AnthropicChatClient:
         *,
         api_key: str,
         model: str,
+        max_tokens: int | None = None,
         sdk_client: Any | None = None,
     ) -> None:
         self._model = model
         self._api_key = api_key
+        env_max_tokens = os.environ.get("ANTHROPIC_MAX_TOKENS")
+        if max_tokens is not None:
+            self._max_tokens = max_tokens
+        elif env_max_tokens is not None:
+            self._max_tokens = int(env_max_tokens)
+        else:
+            self._max_tokens = 196608
         base_url = os.environ.get("ANTHROPIC_BASE_URL")
         if sdk_client is not None:
             self._sdk_client = sdk_client
         elif base_url:
-            self._sdk_client = anthropic.Anthropic(api_key=api_key, base_url=base_url)
+            self._sdk_client = anthropic.Anthropic(auth_token=api_key, base_url=base_url)
         else:
             self._sdk_client = anthropic.Anthropic(api_key=api_key)
 
@@ -116,12 +125,12 @@ class AnthropicChatClient:
         temperature: float = 0.0,
     ) -> dict[str, object]:
         """Call the Anthropic API with JSON output and return parsed result."""
-        del schema_name  # unused - schema guides the prompt but isn't sent as a name
 
         def operation() -> Any:
             return self._sdk_client.messages.create(
                 model=self._model,
-                max_tokens=4096,
+                max_tokens=self._max_tokens,
+                system="You are a helpful assistant.",
                 messages=[
                     {
                         "role": "user",
@@ -129,8 +138,6 @@ class AnthropicChatClient:
                     }
                 ],
                 temperature=temperature,
-                thinking={"type": "disabled"},
-                output_config=cast(Any, {"type": "object"}),
             )
 
         response = _call_with_retry(
@@ -155,9 +162,80 @@ class AnthropicChatClient:
         full_text = "".join(text_parts)
         try:
             parsed = json.loads(full_text)
-        except json.JSONDecodeError as exc:
-            raise ValueError(
-                f"Anthropic response was not valid JSON: {exc}. Response: {full_text[:500]}"
-            ) from exc
+        except json.JSONDecodeError:
+            parsed = self._recover_non_json_response(full_text=full_text, schema_name=schema_name)
 
         return parsed
+
+    def _recover_non_json_response(
+        self,
+        *,
+        full_text: str,
+        schema_name: str,
+    ) -> dict[str, object]:
+        parsed: object | None = None
+        stripped = full_text.strip()
+
+        try:
+            parsed = ast.literal_eval(stripped)
+        except (ValueError, SyntaxError):
+            parsed = self._parse_tuple_list_text(stripped)
+
+        if schema_name == "edge_list":
+            return {"edges": self._coerce_edge_list(parsed)}
+        if schema_name == "vote_list":
+            return {"votes": self._coerce_string_list(parsed)}
+        if schema_name == "label_list":
+            return {"labels": self._coerce_string_list(parsed)}
+        if isinstance(parsed, dict):
+            return parsed
+
+        raise ValueError(f"Anthropic response was not valid JSON: Response: {full_text[:500]}")
+
+    @staticmethod
+    def _parse_tuple_list_text(text: str) -> object:
+        tuple_texts = re.findall(r"\(([^()]*)\)", text)
+        if not tuple_texts:
+            raise ValueError("No tuple-like content found")
+        parsed_tuples: list[tuple[str, str]] = []
+        for tuple_text in tuple_texts:
+            parts = [part.strip().strip("'\"") for part in tuple_text.split(",", 1)]
+            if len(parts) != 2 or not parts[0] or not parts[1]:
+                raise ValueError(f"Could not parse tuple content: {tuple_text}")
+            parsed_tuples.append((parts[0], parts[1]))
+        return parsed_tuples
+
+    @staticmethod
+    def _coerce_edge_list(parsed: object) -> list[dict[str, str]]:
+        if isinstance(parsed, dict):
+            edges = parsed.get("edges")
+            if isinstance(edges, list):
+                return [
+                    {"source": str(edge["source"]), "target": str(edge["target"])}
+                    for edge in edges
+                    if isinstance(edge, dict) and "source" in edge and "target" in edge
+                ]
+            raise ValueError("Parsed response does not contain an edges list")
+
+        if not isinstance(parsed, list):
+            raise ValueError("Parsed response is not a list")
+
+        coerced_edges: list[dict[str, str]] = []
+        for item in parsed:
+            if not isinstance(item, (list, tuple)) or len(item) < 2:
+                raise ValueError(f"Unsupported edge item: {item!r}")
+            coerced_edges.append({"source": str(item[0]), "target": str(item[1])})
+        return coerced_edges
+
+    @staticmethod
+    def _coerce_string_list(parsed: object) -> list[str]:
+        if isinstance(parsed, dict):
+            first_value = next(iter(parsed.values()), [])
+            if not isinstance(first_value, list):
+                raise ValueError("Parsed response does not contain a list value")
+            return [str(item) for item in first_value]
+
+        if not isinstance(parsed, list):
+            raise ValueError("Parsed response is not a list")
+
+        return [str(item) for item in parsed]

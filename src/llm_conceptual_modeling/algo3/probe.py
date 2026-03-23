@@ -75,12 +75,14 @@ def run_algo3_probe(
             stage="tree_prompt_written",
         )
 
-    child_proposer = build_child_proposer(chat_client)
+    child_proposer = build_child_proposer(chat_client, spec.prompt_config)
     tree_expander = build_tree_expander(child_proposer)
     try:
         cached_execution = context.load_json("execution_checkpoint.json")
-        if spec.resume and cached_execution is not None and context.is_stage_complete(
-            "execution_completed"
+        if (
+            spec.resume
+            and cached_execution is not None
+            and context.is_stage_complete("execution_completed")
         ):
             execution_result = cached_execution
         else:

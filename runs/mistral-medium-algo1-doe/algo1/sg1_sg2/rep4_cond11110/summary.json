@@ -1,0 +1,76 @@
+{
+  "candidate_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Supportive food environment",
+      "Stress"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Pressure to be thin"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Weight bias"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ],
+    [
+      "Resilience",
+      "Consumer demand for regulations"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg1_sg2_rep4_cond11110",
+  "verified_edges": [
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Stress"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Pressure to be thin"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ]
+  ]
+}

@@ -1,0 +1,396 @@
+{
+  "candidate_edges": [
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Stress",
+      "Inflammation"
+    ],
+    [
+      "Stress",
+      "Short sleep duration"
+    ],
+    [
+      "Stress",
+      "Asthma"
+    ],
+    [
+      "Stress",
+      "Coronary heart diseases"
+    ],
+    [
+      "Stress",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Stress",
+      "Obesity"
+    ],
+    [
+      "Depression",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Inflammation"
+    ],
+    [
+      "Depression",
+      "Short sleep duration"
+    ],
+    [
+      "Depression",
+      "Asthma"
+    ],
+    [
+      "Depression",
+      "Coronary heart diseases"
+    ],
+    [
+      "Depression",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Depression",
+      "Obesity"
+    ],
+    [
+      "Mental well-being",
+      "Blood pressure"
+    ],
+    [
+      "Mental well-being",
+      "Inflammation"
+    ],
+    [
+      "Mental well-being",
+      "Short sleep duration"
+    ],
+    [
+      "Mental well-being",
+      "Asthma"
+    ],
+    [
+      "Mental well-being",
+      "Coronary heart diseases"
+    ],
+    [
+      "Mental well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Obesity"
+    ],
+    [
+      "Physical well-being",
+      "Blood pressure"
+    ],
+    [
+      "Physical well-being",
+      "Inflammation"
+    ],
+    [
+      "Physical well-being",
+      "Short sleep duration"
+    ],
+    [
+      "Physical well-being",
+      "Asthma"
+    ],
+    [
+      "Physical well-being",
+      "Coronary heart diseases"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Physical well-being",
+      "Obesity"
+    ],
+    [
+      "Socio-economic status",
+      "Blood pressure"
+    ],
+    [
+      "Socio-economic status",
+      "Inflammation"
+    ],
+    [
+      "Socio-economic status",
+      "Short sleep duration"
+    ],
+    [
+      "Socio-economic status",
+      "Asthma"
+    ],
+    [
+      "Socio-economic status",
+      "Coronary heart diseases"
+    ],
+    [
+      "Socio-economic status",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Socio-economic status",
+      "Obesity"
+    ],
+    [
+      "Control",
+      "Blood pressure"
+    ],
+    [
+      "Control",
+      "Inflammation"
+    ],
+    [
+      "Control",
+      "Short sleep duration"
+    ],
+    [
+      "Control",
+      "Asthma"
+    ],
+    [
+      "Control",
+      "Coronary heart diseases"
+    ],
+    [
+      "Control",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Control",
+      "Obesity"
+    ],
+    [
+      "Resilience",
+      "Blood pressure"
+    ],
+    [
+      "Resilience",
+      "Inflammation"
+    ],
+    [
+      "Resilience",
+      "Short sleep duration"
+    ],
+    [
+      "Resilience",
+      "Asthma"
+    ],
+    [
+      "Resilience",
+      "Coronary heart diseases"
+    ],
+    [
+      "Resilience",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Resilience",
+      "Obesity"
+    ],
+    [
+      "Poor body image",
+      "Blood pressure"
+    ],
+    [
+      "Poor body image",
+      "Inflammation"
+    ],
+    [
+      "Poor body image",
+      "Short sleep duration"
+    ],
+    [
+      "Poor body image",
+      "Asthma"
+    ],
+    [
+      "Poor body image",
+      "Coronary heart diseases"
+    ],
+    [
+      "Poor body image",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Poor body image",
+      "Obesity"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood pressure"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Inflammation"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Short sleep duration"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Asthma"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Coronary heart diseases"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Obesity"
+    ],
+    [
+      "Weight bias",
+      "Blood pressure"
+    ],
+    [
+      "Weight bias",
+      "Inflammation"
+    ],
+    [
+      "Weight bias",
+      "Short sleep duration"
+    ],
+    [
+      "Weight bias",
+      "Asthma"
+    ],
+    [
+      "Weight bias",
+      "Coronary heart diseases"
+    ],
+    [
+      "Weight bias",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Weight bias",
+      "Obesity"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Blood pressure"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Inflammation"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Short sleep duration"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Asthma"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Coronary heart diseases"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Obesity"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Blood pressure"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Inflammation"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Short sleep duration"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Asthma"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Coronary heart diseases"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Obesity"
+    ],
+    [
+      "Pressure to be thin",
+      "Blood pressure"
+    ],
+    [
+      "Pressure to be thin",
+      "Inflammation"
+    ],
+    [
+      "Pressure to be thin",
+      "Short sleep duration"
+    ],
+    [
+      "Pressure to be thin",
+      "Asthma"
+    ],
+    [
+      "Pressure to be thin",
+      "Coronary heart diseases"
+    ],
+    [
+      "Pressure to be thin",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Pressure to be thin",
+      "Obesity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Blood pressure"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Inflammation"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Short sleep duration"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Asthma"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Coronary heart diseases"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Culture of eating that promotes healthy choices",
+      "Obesity"
+    ]
+  ]
+}

@@ -66,7 +66,7 @@ For a compact audit of the paper-facing contract, run:
 UV_CACHE_DIR=/tmp/uv-cache uv run python -c "from llm_conceptual_modeling.cli import main; raise SystemExit(main(['audit', 'paper-alignment', '--json']))"
 ```
 
-The audit report includes the Method 2 `0.01` threshold, the Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence in a single JSON payload.
+The audit report includes the Method 2 convergence thresholds (`0.01` and `0.02`), the Mistral embedding model, resume support, fixture-backed metric schemas, and probe checkpointing evidence in a single JSON payload.
 
 ## Current Findings
 

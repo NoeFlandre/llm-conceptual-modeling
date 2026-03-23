@@ -1,0 +1,70 @@
+{
+  "candidate_edges": [
+    [
+      "Mental well-being",
+      "Blood pressure"
+    ],
+    [
+      "Stress",
+      "Inflammation"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Depression",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Weight bias",
+      "Asthma"
+    ],
+    [
+      "Control",
+      "Balance"
+    ],
+    [
+      "Resilience",
+      "Cortisol"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Mental well-being",
+      "Blood pressure"
+    ],
+    [
+      "Stress",
+      "Inflammation"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Depression",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Resilience",
+      "Cortisol"
+    ]
+  ]
+}

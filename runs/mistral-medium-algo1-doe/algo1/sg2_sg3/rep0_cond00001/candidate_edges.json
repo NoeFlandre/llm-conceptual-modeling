@@ -1,0 +1,676 @@
+{
+  "candidate_edges": [
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obesity",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Stress"
+    ],
+    [
+      "Obesity",
+      "Physical well-being"
+    ],
+    [
+      "Obesity",
+      "Mental well-being"
+    ],
+    [
+      "Inflammation",
+      "Physical well-being"
+    ],
+    [
+      "Inflammation",
+      "Mental well-being"
+    ],
+    [
+      "Inflammation",
+      "Stress"
+    ],
+    [
+      "Inflammation",
+      "Depression"
+    ],
+    [
+      "Insulin resistance",
+      "Physical well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Mental well-being"
+    ],
+    [
+      "Insulin resistance",
+      "Stress"
+    ],
+    [
+      "Insulin resistance",
+      "Depression"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Physical well-being"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Mental well-being"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Stress"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Depression"
+    ],
+    [
+      "Short sleep duration",
+      "Mental well-being"
+    ],
+    [
+      "Short sleep duration",
+      "Stress"
+    ],
+    [
+      "Short sleep duration",
+      "Depression"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Physical pain",
+      "Stress"
+    ],
+    [
+      "Physical pain",
+      "Depression"
+    ],
+    [
+      "Physical pain",
+      "Physical well-being"
+    ],
+    [
+      "Asthma",
+      "Physical well-being"
+    ],
+    [
+      "Asthma",
+      "Mental well-being"
+    ],
+    [
+      "Asthma",
+      "Stress"
+    ],
+    [
+      "Asthma",
+      "Depression"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Physical well-being"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Mental well-being"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Stress"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Depression"
+    ],
+    [
+      "Coronary heart diseases",
+      "Physical well-being"
+    ],
+    [
+      "Coronary heart diseases",
+      "Mental well-being"
+    ],
+    [
+      "Coronary heart diseases",
+      "Stress"
+    ],
+    [
+      "Coronary heart diseases",
+      "Depression"
+    ],
+    [
+      "Blood pressure",
+      "Physical well-being"
+    ],
+    [
+      "Blood pressure",
+      "Mental well-being"
+    ],
+    [
+      "Blood pressure",
+      "Stress"
+    ],
+    [
+      "Blood pressure",
+      "Depression"
+    ],
+    [
+      "Cortisol",
+      "Physical well-being"
+    ],
+    [
+      "Cortisol",
+      "Mental well-being"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Cortisol",
+      "Depression"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Physical well-being"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Mental well-being"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Stress"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Depression"
+    ],
+    [
+      "Dyslipidemia",
+      "Physical well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Mental well-being"
+    ],
+    [
+      "Dyslipidemia",
+      "Stress"
+    ],
+    [
+      "Dyslipidemia",
+      "Depression"
+    ],
+    [
+      "Atherosclerosis",
+      "Physical well-being"
+    ],
+    [
+      "Atherosclerosis",
+      "Mental well-being"
+    ],
+    [
+      "Atherosclerosis",
+      "Stress"
+    ],
+    [
+      "Atherosclerosis",
+      "Depression"
+    ],
+    [
+      "Dyspnea",
+      "Physical well-being"
+    ],
+    [
+      "Dyspnea",
+      "Mental well-being"
+    ],
+    [
+      "Dyspnea",
+      "Stress"
+    ],
+    [
+      "Dyspnea",
+      "Depression"
+    ],
+    [
+      "Respiratory diseases",
+      "Physical well-being"
+    ],
+    [
+      "Respiratory diseases",
+      "Mental well-being"
+    ],
+    [
+      "Respiratory diseases",
+      "Stress"
+    ],
+    [
+      "Respiratory diseases",
+      "Depression"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Physical well-being"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Mental well-being"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Stress"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Depression"
+    ],
+    [
+      "Airway resistance",
+      "Physical well-being"
+    ],
+    [
+      "Airway resistance",
+      "Mental well-being"
+    ],
+    [
+      "Airway resistance",
+      "Stress"
+    ],
+    [
+      "Airway resistance",
+      "Depression"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Physical well-being"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Mental well-being"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Stress"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Physical well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Mental well-being"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Stress"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Depression"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Physical well-being"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Mental well-being"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Stress"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Depression"
+    ],
+    [
+      "Release of adipokines",
+      "Physical well-being"
+    ],
+    [
+      "Release of adipokines",
+      "Mental well-being"
+    ],
+    [
+      "Release of adipokines",
+      "Stress"
+    ],
+    [
+      "Release of adipokines",
+      "Depression"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Physical well-being"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Mental well-being"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Stress"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Depression"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Physical well-being"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Mental well-being"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Stress"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Depression"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Physical well-being"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Mental well-being"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Stress"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Depression"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Physical well-being"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Mental well-being"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Stress"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Depression"
+    ],
+    [
+      "Blood fatty acid level",
+      "Physical well-being"
+    ],
+    [
+      "Blood fatty acid level",
+      "Mental well-being"
+    ],
+    [
+      "Blood fatty acid level",
+      "Stress"
+    ],
+    [
+      "Blood fatty acid level",
+      "Depression"
+    ],
+    [
+      "Blood glucose level",
+      "Physical well-being"
+    ],
+    [
+      "Blood glucose level",
+      "Mental well-being"
+    ],
+    [
+      "Blood glucose level",
+      "Stress"
+    ],
+    [
+      "Blood glucose level",
+      "Depression"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Physical well-being"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Mental well-being"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Stress"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Depression"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Physical well-being"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Mental well-being"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Stress"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Depression"
+    ],
+    [
+      "Sodium retention",
+      "Physical well-being"
+    ],
+    [
+      "Sodium retention",
+      "Mental well-being"
+    ],
+    [
+      "Sodium retention",
+      "Stress"
+    ],
+    [
+      "Sodium retention",
+      "Depression"
+    ],
+    [
+      "Sodium intake",
+      "Physical well-being"
+    ],
+    [
+      "Sodium intake",
+      "Mental well-being"
+    ],
+    [
+      "Sodium intake",
+      "Stress"
+    ],
+    [
+      "Sodium intake",
+      "Depression"
+    ],
+    [
+      "Medications",
+      "Physical well-being"
+    ],
+    [
+      "Medications",
+      "Mental well-being"
+    ],
+    [
+      "Medications",
+      "Stress"
+    ],
+    [
+      "Medications",
+      "Depression"
+    ],
+    [
+      "Balance",
+      "Physical well-being"
+    ],
+    [
+      "Balance",
+      "Mental well-being"
+    ],
+    [
+      "Balance",
+      "Stress"
+    ],
+    [
+      "Balance",
+      "Depression"
+    ],
+    [
+      "Coordination",
+      "Physical well-being"
+    ],
+    [
+      "Coordination",
+      "Mental well-being"
+    ],
+    [
+      "Coordination",
+      "Stress"
+    ],
+    [
+      "Coordination",
+      "Depression"
+    ],
+    [
+      "Concentration",
+      "Physical well-being"
+    ],
+    [
+      "Concentration",
+      "Mental well-being"
+    ],
+    [
+      "Concentration",
+      "Stress"
+    ],
+    [
+      "Concentration",
+      "Depression"
+    ],
+    [
+      "Tiredness",
+      "Physical well-being"
+    ],
+    [
+      "Tiredness",
+      "Mental well-being"
+    ],
+    [
+      "Tiredness",
+      "Stress"
+    ],
+    [
+      "Tiredness",
+      "Depression"
+    ],
+    [
+      "Beta blockers",
+      "Physical well-being"
+    ],
+    [
+      "Beta blockers",
+      "Mental well-being"
+    ],
+    [
+      "Beta blockers",
+      "Stress"
+    ],
+    [
+      "Beta blockers",
+      "Depression"
+    ],
+    [
+      "Stimulants",
+      "Physical well-being"
+    ],
+    [
+      "Stimulants",
+      "Mental well-being"
+    ],
+    [
+      "Stimulants",
+      "Stress"
+    ],
+    [
+      "Stimulants",
+      "Depression"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Physical well-being"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Mental well-being"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Stress"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Depression"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Physical well-being"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Mental well-being"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Stress"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Depression"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical well-being"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Mental well-being"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Stress"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Depression"
+    ]
+  ]
+}

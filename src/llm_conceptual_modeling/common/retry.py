@@ -9,8 +9,14 @@ from urllib.error import HTTPError, URLError
 import httpx
 
 try:
-    from mistralai.client.errors.sdkerror import SDKError
-    from mistralai.client.utils.retries import PermanentError
+    try:
+        from mistralai.models.sdkerror import SDKError
+    except ImportError:  # pragma: no cover - compatibility with older SDKs
+        from mistralai.client.errors.sdkerror import SDKError
+    try:
+        from mistralai.utils.retries import PermanentError
+    except ImportError:  # pragma: no cover - compatibility with older SDKs
+        from mistralai.client.utils.retries import PermanentError
 except ImportError:  # pragma: no cover - exercised indirectly in import-light tests
 
     class SDKError(Exception):
@@ -59,7 +65,11 @@ def call_with_retry(
                 retryable = False
                 exception = error
         except SDKError as error:
-            retryable = getattr(error, "status_code", None) in retry_http_status_codes
+            status_code = getattr(error, "status_code", None)
+            if status_code is None:
+                raw_response = getattr(error, "raw_response", None)
+                status_code = getattr(raw_response, "status_code", None)
+            retryable = status_code in retry_http_status_codes
             exception = error
 
         if not retryable or attempt >= max_attempts:

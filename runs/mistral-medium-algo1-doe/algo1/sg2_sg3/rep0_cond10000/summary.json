@@ -1,0 +1,276 @@
+{
+  "candidate_edges": [
+    [
+      "Culture of eating that promotes healthy choices",
+      "Balance"
+    ],
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Weight bias",
+      "Pro-inflammatory cytokines"
+    ],
+    [
+      "Socio-economic status",
+      "Sodium intake"
+    ],
+    [
+      "Mental well-being",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Blood glucose level"
+    ],
+    [
+      "Control",
+      "Medications"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Dysfunctional adipose tissue"
+    ],
+    [
+      "Resilience",
+      "Coordination"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Inflammation"
+    ],
+    [
+      "Depression",
+      "Asthma"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Blood saturated fatty acid level"
+    ],
+    [
+      "Poor body image",
+      "Dyspnea"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Secretion of inflammatory molecules by adipose cells",
+      "Stress"
+    ],
+    [
+      "Insulin resistance",
+      "Depression"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Obstructive sleep apnea",
+      "Tiredness"
+    ],
+    [
+      "Dyslipidemia",
+      "Fatty acids in the artery walls"
+    ],
+    [
+      "Blood pressure",
+      "Heart rate"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Weight bias"
+    ],
+    [
+      "Inflammation",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Atherosclerosis",
+      "Pressure to be thin"
+    ],
+    [
+      "Coronary heart diseases",
+      "Mental well-being"
+    ],
+    [
+      "Release of adipokines",
+      "Physical well-being"
+    ],
+    [
+      "Blood mono-unsaturated fatty acid level",
+      "Control"
+    ],
+    [
+      "Fatty acids in the artery walls",
+      "Resilience"
+    ],
+    [
+      "Cells intake of fatty acids",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Adipose storage of fatty acids",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Thoracic and abdominal obesity",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Airway resistance",
+      "Socio-economic status"
+    ],
+    [
+      "Respiratory muscle fatigue",
+      "Depression"
+    ],
+    [
+      "Unhealthy weight control practices",
+      "Stress"
+    ],
+    [
+      "Sodium retention",
+      "Weight bias"
+    ],
+    [
+      "Short sleep duration",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Poor body image"
+    ],
+    [
+      "Ability to engage in physical activity",
+      "Pressure to be thin"
+    ],
+    [
+      "Cortisol",
+      "Physical well-being"
+    ],
+    [
+      "Asthma",
+      "Mental well-being"
+    ],
+    [
+      "Blood glucose level",
+      "Control"
+    ],
+    [
+      "Respiratory diseases",
+      "Resilience"
+    ],
+    [
+      "Blood saturated fatty acid level",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Dysfunctional adipose tissue",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Coordination",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Dyspnea",
+      "Socio-economic status"
+    ],
+    [
+      "Tiredness",
+      "Depression"
+    ],
+    [
+      "Heart rate",
+      "Stress"
+    ],
+    [
+      "Blood fatty acid level",
+      "Weight bias"
+    ],
+    [
+      "Beta blockers",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Sodium intake",
+      "Poor body image"
+    ],
+    [
+      "Asthma-like symptoms",
+      "Pressure to be thin"
+    ],
+    [
+      "Concentration",
+      "Physical well-being"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ],
+    [
+      "Stimulants",
+      "Control"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg2_sg3_rep0_cond10000",
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Cortisol"
+    ],
+    [
+      "Stress",
+      "Blood glucose level"
+    ],
+    [
+      "Depression",
+      "Asthma"
+    ],
+    [
+      "Pressure to be thin",
+      "Unhealthy weight control practices"
+    ],
+    [
+      "Insulin resistance",
+      "Depression"
+    ],
+    [
+      "Blood pressure",
+      "Heart rate"
+    ],
+    [
+      "Gastro-esophageal reflux disease",
+      "Physical pain"
+    ],
+    [
+      "Auto-inflammatory diseases",
+      "Weight bias"
+    ],
+    [
+      "Inflammation",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Atherosclerosis",
+      "Pressure to be thin"
+    ],
+    [
+      "Coronary heart diseases",
+      "Mental well-being"
+    ]
+  ]
+}

@@ -142,15 +142,7 @@ def evaluate_results_file(input_csv_path: str | Path, output_csv_path: str | Pat
         target_edges = parse_edge_list(row.get("Target Graph"))
         mother_edges = parse_edge_list(row.get("Mother Graph"))
         result_edges = parse_edge_list(row.get("Results"))
-
-        try:
-            recall = compute_recall_for_row(source_edges, target_edges, mother_edges, result_edges)
-        except Exception:
-            previous_recall = row.get("Recall", 0.0)
-            try:
-                recall = float(previous_recall)
-            except Exception:
-                recall = 0.0
+        recall = compute_recall_for_row(source_edges, target_edges, mother_edges, result_edges)
 
         recalls.append(round(recall, 6))
 

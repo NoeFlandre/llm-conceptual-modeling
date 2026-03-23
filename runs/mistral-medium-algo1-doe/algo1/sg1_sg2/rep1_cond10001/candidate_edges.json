@@ -1,0 +1,316 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Stress"
+    ],
+    [
+      "Healthy eating",
+      "Resilience"
+    ],
+    [
+      "Healthy eating",
+      "Depression"
+    ],
+    [
+      "Healthy eating",
+      "Poor body image"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Stress"
+    ],
+    [
+      "Supportive food environment",
+      "Resilience"
+    ],
+    [
+      "Supportive food environment",
+      "Depression"
+    ],
+    [
+      "Supportive food environment",
+      "Poor body image"
+    ],
+    [
+      "Availability of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Availability of healthy foods",
+      "Physical well-being"
+    ],
+    [
+      "Availability of healthy foods",
+      "Mental well-being"
+    ],
+    [
+      "Availability of healthy foods",
+      "Stress"
+    ],
+    [
+      "Availability of healthy foods",
+      "Resilience"
+    ],
+    [
+      "Availability of healthy foods",
+      "Depression"
+    ],
+    [
+      "Availability of healthy foods",
+      "Poor body image"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of healthy foods",
+      "Stress"
+    ],
+    [
+      "Cost of healthy foods",
+      "Control"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Stress"
+    ],
+    [
+      "Cost of unhealthy foods",
+      "Control"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Marketing of healthy foods",
+      "Pressure to be thin"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Pressure to be thin"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Pressure to be thin"
+    ],
+    [
+      "Eating disorders",
+      "Weight bias"
+    ],
+    [
+      "Eating disorders",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Eating disorders",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Eating disorders",
+      "Cultural norms around thinness"
+    ],
+    [
+      "Eating disorders",
+      "Pressure to be thin"
+    ],
+    [
+      "Eating disorders",
+      "Poor body image"
+    ],
+    [
+      "Emotional eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Emotional eating",
+      "Resilience"
+    ],
+    [
+      "Emotional eating",
+      "Depression"
+    ],
+    [
+      "Emotional eating",
+      "Poor body image"
+    ],
+    [
+      "Appetite",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Appetite",
+      "Stress"
+    ],
+    [
+      "Appetite",
+      "Resilience"
+    ],
+    [
+      "Appetite",
+      "Depression"
+    ],
+    [
+      "Appetite",
+      "Poor body image"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Mental well-being"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Stress"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Resilience"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Depression"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Mental well-being"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Stress"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Resilience"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Depression"
+    ],
+    [
+      "Prevalence of green fields",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of green fields",
+      "Mental well-being"
+    ],
+    [
+      "Prevalence of green fields",
+      "Stress"
+    ],
+    [
+      "Prevalence of green fields",
+      "Resilience"
+    ],
+    [
+      "Prevalence of green fields",
+      "Depression"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Stress"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Resilience"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Depression"
+    ]
+  ]
+}

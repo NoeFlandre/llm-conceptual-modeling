@@ -1,0 +1,317 @@
+experiment_id: algo1_sg3_sg1_rep1_cond10110
+algorithm: algo1
+model: mistral-medium-2508
+provider: mistral
+temperature: 0.0
+top_p: null
+max_tokens: null
+prompt_factors:
+  use_adjacency_notation: true
+  use_array_representation: false
+  include_explanation: true
+  include_example: true
+  include_counterexample: false
+full_prompt: 'You are a helpful assistant who understands Knowledge Maps. A knowledge
+  map is a network consisting of nodes and edges. Nodes must have a clear meaning,
+  such that we can interpret having ''more'' or ''less'' of a node. Edges represent
+  the existence of a direct relation between two nodes. The knowledge map is encoded
+  using tags for nodes and an associated adjacency matrix. The knowledge map is encoded
+  using tags for nodes and an associated adjacency matrix. Here is an example of a
+  desired output for your task. In knowledge map 1, we have the list of nodes [''capacity
+  to hire'', ''bad employees'', ''good reputation''] and the associated adjacency
+  matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the list of nodes
+  [''work motivation'', ''productivity'', ''financial growth''] and the associated
+  adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. In this example, you could recommend
+  3 new links: ''quality of managers'' with ''work motivation'', ''productivity''
+  with ''good reputation'' and ''bad employees'' with ''quality of managers''. These
+  links implicitly create 1 new node: ''quality of managers''. Therefore, this is
+  the expected output: [(''quality of managers'', ''work motivation''), (''productivity'',
+  ''good reputation''), (''bad employees'', ''quality of managers'')]. You will get
+  two inputs: Knowledge map 1: <knowledge-map><nodes><node>Medications</node><node>Balance</node><node>Secretion
+  of inflammatory molecules by adipose cells</node><node>Insulin resistance</node><node>Obesity</node><node>Obstructive
+  sleep apnea</node><node>Dyslipidemia</node><node>Blood pressure</node><node>Gastro-esophageal
+  reflux disease</node><node>Auto-inflammatory diseases</node><node>Inflammation</node><node>Atherosclerosis</node><node>Coronary
+  heart diseases</node><node>Release of adipokines</node><node>Blood mono-unsaturated
+  fatty acid level</node><node>Fatty acids in the artery walls</node><node>Cells intake
+  of fatty acids</node><node>Adipose storage of fatty acids</node><node>Thoracic and
+  abdominal obesity</node><node>Airway resistance</node><node>Respiratory muscle fatigue</node><node>Unhealthy
+  weight control practices</node><node>Sodium retention</node><node>Short sleep duration</node><node>Pro-inflammatory
+  cytokines</node><node>Ability to engage in physical activity</node><node>Cortisol</node><node>Asthma</node><node>Blood
+  glucose level</node><node>Respiratory diseases</node><node>Blood saturated fatty
+  acid level</node><node>Dysfunctional adipose tissue</node><node>Coordination</node><node>Dyspnea</node><node>Tiredness</node><node>Heart
+  rate</node><node>Blood fatty acid level</node><node>Beta blockers</node><node>Sodium
+  intake</node><node>Asthma-like symptoms</node><node>Concentration</node><node>Physical
+  pain</node><node>Stimulants</node></nodes><adjacency-matrix>[[0, 1, 0, 0, 1, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+  0, 1, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+  0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+  0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+  0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]</adjacency-matrix></knowledge-map>
+  Knowledge map 2: <knowledge-map><nodes><node>Prevalence of walking trails</node><node>Quality
+  of the sport infrastructure</node><node>Eating disorders</node><node>Healthy eating</node><node>Consumer
+  demand for regulations</node><node>Marketing of healthy foods</node><node>Public
+  support and demand for healthy products</node><node>Unhealthy foods are cheaper
+  than healthy ones</node><node>Supportive food environment</node><node>Availability
+  of healthy foods</node><node>Marketing of unhealthy foods</node><node>Economic incentives
+  to produce unhealthy food products</node><node>Cost of unhealthy foods</node><node>Prevalence
+  of bike trails</node><node>Prevalence of green fields</node><node>Cost of healthy
+  foods</node><node>Emotional eating</node><node>Unhealthy foods are more available
+  than healthy ones</node><node>Appetite</node><node>Aesthetics</node><node>Restrictive
+  covenants</node><node>Marketing ratio of unhealthy to healthy foods</node></nodes><adjacency-matrix>[[0,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+  0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+  0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+  0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0,
+  0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]</adjacency-matrix></knowledge-map>
+  Your task is to recommend more links between the two maps. These links can use new
+  nodes. Do not suggest links that are already in the maps. Do not suggest links between
+  nodes of the same map. Return the recommended links as a list of edges in the format
+  [(A, Z), ..., (X, D)]. Your output must only be the list of proposed edges. Do not
+  repeat any instructions I have given you and do not add unnecessary words or phrases.'
+input_subgraph_pairs:
+- subgraph_name: subgraph1
+  edges:
+  - - Medications
+    - Balance
+  - - Secretion of inflammatory molecules by adipose cells
+    - Insulin resistance
+  - - Obesity
+    - Obstructive sleep apnea
+  - - Dyslipidemia
+    - Blood pressure
+  - - Obesity
+    - Gastro-esophageal reflux disease
+  - - Auto-inflammatory diseases
+    - Inflammation
+  - - Atherosclerosis
+    - Coronary heart diseases
+  - - Release of adipokines
+    - Atherosclerosis
+  - - Blood mono-unsaturated fatty acid level
+    - Secretion of inflammatory molecules by adipose cells
+  - - Insulin resistance
+    - Fatty acids in the artery walls
+  - - Insulin resistance
+    - Cells intake of fatty acids
+  - - Adipose storage of fatty acids
+    - Inflammation
+  - - Thoracic and abdominal obesity
+    - Airway resistance
+  - - Thoracic and abdominal obesity
+    - Respiratory muscle fatigue
+  - - Unhealthy weight control practices
+    - Obesity
+  - - Sodium retention
+    - Blood pressure
+  - - Short sleep duration
+    - Pro-inflammatory cytokines
+  - - Medications
+    - Obesity
+  - - Balance
+    - Ability to engage in physical activity
+  - - Short sleep duration
+    - Cortisol
+  - - Airway resistance
+    - Asthma
+  - - Short sleep duration
+    - Blood pressure
+  - - Fatty acids in the artery walls
+    - Atherosclerosis
+  - - Dyslipidemia
+    - Insulin resistance
+  - - Blood glucose level
+    - Fatty acids in the artery walls
+  - - Respiratory diseases
+    - Ability to engage in physical activity
+  - - Blood saturated fatty acid level
+    - Secretion of inflammatory molecules by adipose cells
+  - - Dysfunctional adipose tissue
+    - Inflammation
+  - - Coordination
+    - Ability to engage in physical activity
+  - - Obesity
+    - Short sleep duration
+  - - Inflammation
+    - Asthma
+  - - Coronary heart diseases
+    - Dyspnea
+  - - Tiredness
+    - Ability to engage in physical activity
+  - - Short sleep duration
+    - Heart rate
+  - - Blood fatty acid level
+    - Blood glucose level
+  - - Pro-inflammatory cytokines
+    - Inflammation
+  - - Respiratory muscle fatigue
+    - Dyspnea
+  - - Heart rate
+    - Coronary heart diseases
+  - - Medications
+    - Coordination
+  - - Beta blockers
+    - Ability to engage in physical activity
+  - - Sodium intake
+    - Blood pressure
+  - - Airway resistance
+    - Asthma-like symptoms
+  - - Medications
+    - Concentration
+  - - Cells intake of fatty acids
+    - Adipose storage of fatty acids
+  - - Physical pain
+    - Ability to engage in physical activity
+  - - Concentration
+    - Ability to engage in physical activity
+  - - Obesity
+    - Release of adipokines
+  - - Blood glucose level
+    - Sodium retention
+  - - Stimulants
+    - Short sleep duration
+  - - Obesity
+    - Dysfunctional adipose tissue
+  - - Medications
+    - Tiredness
+  - - Inflammation
+    - Insulin resistance
+  - - Inflammation
+    - Auto-inflammatory diseases
+  - - Blood fatty acid level
+    - Adipose storage of fatty acids
+  - - Dysfunctional adipose tissue
+    - Blood pressure
+  - - Dysfunctional adipose tissue
+    - Dyslipidemia
+  - - Obesity
+    - Unhealthy weight control practices
+  - - Obesity
+    - Asthma-like symptoms
+  - - Dyslipidemia
+    - Atherosclerosis
+- subgraph_name: subgraph2
+  edges:
+  - - Prevalence of walking trails
+    - Quality of the sport infrastructure
+  - - Eating disorders
+    - Healthy eating
+  - - Consumer demand for regulations
+    - Marketing of healthy foods
+  - - Public support and demand for healthy products
+    - Marketing of healthy foods
+  - - Unhealthy foods are cheaper than healthy ones
+    - Supportive food environment
+  - - Public support and demand for healthy products
+    - Availability of healthy foods
+  - - Consumer demand for regulations
+    - Marketing of unhealthy foods
+  - - Economic incentives to produce unhealthy food products
+    - Cost of unhealthy foods
+  - - Supportive food environment
+    - Healthy eating
+  - - Prevalence of bike trails
+    - Quality of the sport infrastructure
+  - - Prevalence of green fields
+    - Quality of the sport infrastructure
+  - - Public support and demand for healthy products
+    - Cost of healthy foods
+  - - Public support and demand for healthy products
+    - Marketing of unhealthy foods
+  - - Emotional eating
+    - Healthy eating
+  - - Unhealthy foods are more available than healthy ones
+    - Supportive food environment
+  - - Appetite
+    - Healthy eating
+  - - Prevalence of green fields
+    - Aesthetics
+  - - Restrictive covenants
+    - Availability of healthy foods
+  - - Marketing ratio of unhealthy to healthy foods
+    - Supportive food environment
+  - - Public support and demand for healthy products
+    - Cost of unhealthy foods
+output_dir: runs/mistral-medium-algo1-doe/algo1/sg3_sg1/rep1_cond10110
+timestamp: '2026-03-23T09:54:36.009504+00:00'
+repetitions: 5
+condition_bits: '10110'
+pair_name: sg3_sg1

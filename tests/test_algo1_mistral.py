@@ -13,9 +13,7 @@ from llm_conceptual_modeling.algo1.mistral import (
 
 
 def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
-    return SimpleNamespace(
-        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
-    )
+    return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=content))])
 
 
 def test_build_direct_edge_prompt_mentions_new_nodes_and_output_format() -> None:
@@ -27,7 +25,7 @@ def test_build_direct_edge_prompt_mentions_new_nodes_and_output_format() -> None
 
     assert "recommend more links between the two maps" in actual
     assert "These links can use new nodes" in actual
-    assert "Return a JSON object" in actual
+    assert "Return the recommended links as a list of edges" in actual
     assert "alpha" in actual
     assert "gamma" in actual
 
@@ -54,6 +52,7 @@ def test_build_direct_edge_prompt_can_include_all_paper_factors() -> None:
     assert "Here is an example of a bad output that we do not want to see." in actual
     assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in actual
     assert "[[0, 1, 0], [0, 0, 1], [0, 0, 0]]" in actual
+    assert "expected output: [('quality of managers', 'work motivation')" in actual
 
 
 def test_build_direct_edge_prompt_can_use_edge_list_without_optional_sections() -> None:
@@ -76,8 +75,7 @@ def test_build_direct_edge_prompt_can_use_edge_list_without_optional_sections() 
     assert "Here is an example of a bad output that we do not want to see." not in actual
     assert "adjacency matrix" not in actual
     expected_map_text = (
-        "Knowledge map 1: "
-        "<knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
+        "Knowledge map 1: <knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
     )
     assert expected_map_text in actual
 

@@ -1,0 +1,122 @@
+{
+  "candidate_edges": [
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Concentration"
+    ],
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Poor body image",
+      "Self-esteem"
+    ],
+    [
+      "Self-esteem",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Inflammation",
+      "Physical pain"
+    ],
+    [
+      "Insulin resistance",
+      "Tiredness"
+    ],
+    [
+      "Asthma",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Medications",
+      "Stress"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Depression"
+    ],
+    [
+      "Dyspnea",
+      "Physical well-being"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Physical well-being",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Mental well-being",
+      "Concentration"
+    ],
+    [
+      "Stress",
+      "Blood pressure"
+    ],
+    [
+      "Depression",
+      "Tiredness"
+    ],
+    [
+      "Poor body image",
+      "Self-esteem"
+    ],
+    [
+      "Self-esteem",
+      "Mental well-being"
+    ],
+    [
+      "Obesity",
+      "Poor body image"
+    ],
+    [
+      "Inflammation",
+      "Physical pain"
+    ],
+    [
+      "Insulin resistance",
+      "Tiredness"
+    ],
+    [
+      "Asthma",
+      "Ability to engage in physical activity"
+    ],
+    [
+      "Cortisol",
+      "Stress"
+    ],
+    [
+      "Pro-inflammatory cytokines",
+      "Depression"
+    ],
+    [
+      "Dyspnea",
+      "Physical well-being"
+    ],
+    [
+      "Physical pain",
+      "Mental well-being"
+    ]
+  ]
+}

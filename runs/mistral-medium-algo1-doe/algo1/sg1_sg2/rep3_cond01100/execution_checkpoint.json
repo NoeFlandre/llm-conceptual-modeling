@@ -1,0 +1,230 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Socio-economic status",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Appetite"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Poor body image",
+      "Emotional eating"
+    ],
+    [
+      "Poor body image",
+      "Appetite"
+    ],
+    [
+      "Poor body image",
+      "Healthy eating"
+    ],
+    [
+      "Control",
+      "Healthy eating"
+    ],
+    [
+      "Resilience",
+      "Healthy eating"
+    ],
+    [
+      "Resilience",
+      "Emotional eating"
+    ],
+    [
+      "Resilience",
+      "Appetite"
+    ],
+    [
+      "Resilience",
+      "Supportive food environment"
+    ],
+    [
+      "Resilience",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Resilience",
+      "Physical well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Socio-economic status",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Socio-economic status",
+      "Availability of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of unhealthy foods"
+    ],
+    [
+      "Depression",
+      "Emotional eating"
+    ],
+    [
+      "Depression",
+      "Appetite"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Poor body image",
+      "Emotional eating"
+    ],
+    [
+      "Poor body image",
+      "Appetite"
+    ],
+    [
+      "Poor body image",
+      "Healthy eating"
+    ],
+    [
+      "Control",
+      "Healthy eating"
+    ],
+    [
+      "Resilience",
+      "Healthy eating"
+    ],
+    [
+      "Resilience",
+      "Emotional eating"
+    ],
+    [
+      "Resilience",
+      "Appetite"
+    ],
+    [
+      "Resilience",
+      "Supportive food environment"
+    ],
+    [
+      "Resilience",
+      "Quality of the sport infrastructure"
+    ],
+    [
+      "Resilience",
+      "Physical well-being"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ],
+    [
+      "N"
+    ]
+  ]
+}

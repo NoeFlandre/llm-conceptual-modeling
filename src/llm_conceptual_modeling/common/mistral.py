@@ -19,9 +19,17 @@ import json
 from typing import TYPE_CHECKING, Any, Protocol
 
 try:
-    from mistralai.client import Mistral
+    from pydantic import BaseModel
+except ImportError:  # pragma: no cover - pydantic is an explicit runtime dependency
+    BaseModel = None  # type: ignore[assignment]
+
+try:
+    from mistralai import Mistral
 except ImportError:  # pragma: no cover - exercised indirectly in import-light tests
-    Mistral = None  # type: ignore[assignment]
+    try:
+        from mistralai.client import Mistral
+    except ImportError:
+        Mistral = None  # type: ignore[assignment]
 
 from llm_conceptual_modeling.common.retry import call_with_retry
 
@@ -114,28 +122,19 @@ class MistralChatClient:
             When the model returns a response with empty (None) content.
         """
         response = call_with_retry(
-            operation=lambda: self._sdk_client.chat.complete(
+            operation=lambda: _complete_structured_json(
+                sdk_client=self._sdk_client,
                 model=self._model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
-                response_format={
-                    "type": "json_schema",
-                    "json_schema": {
-                        "name": schema_name,
-                        "schema": schema,
-                    },
-                },
+                prompt=prompt,
+                schema_name=schema_name,
+                schema=schema,
             ),
             operation_name="mistral chat completion",
             max_attempts=8,
             initial_delay_seconds=2.0,
             max_delay_seconds=30.0,
         )
-        content = response.choices[0].message.content
-        if content is None:
-            raise ValueError("Mistral returned an empty chat completion content")
-        parsed_content = json.loads(content)
-        return parsed_content
+        return response
 
 
 # ---------------------------------------------------------------------------
@@ -159,11 +158,141 @@ class ChatCompletionClient(Protocol):
     ) -> dict[str, object]: ...
 
 
+class _EdgeItemModel(BaseModel):
+    source: str
+    target: str
+
+
+class _EdgeListModel(BaseModel):
+    edges: list[_EdgeItemModel]
+
+
+class _VoteListModel(BaseModel):
+    votes: list[str]
+
+
+class _LabelListModel(BaseModel):
+    labels: list[str]
+
+
+_STRUCTURED_RESPONSE_MODELS: dict[str, type[BaseModel]] = {
+    "edge_list": _EdgeListModel,
+    "vote_list": _VoteListModel,
+    "label_list": _LabelListModel,
+}
+
+
+def _complete_structured_json(
+    *,
+    sdk_client: Any,
+    model: str,
+    prompt: str,
+    schema_name: str,
+    schema: dict[str, object],
+) -> dict[str, object]:
+    parse_model = _STRUCTURED_RESPONSE_MODELS.get(schema_name)
+    if parse_model is not None and hasattr(sdk_client.chat, "parse"):
+        parsed_response = sdk_client.chat.parse(
+            response_format=parse_model,
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+        )
+        parsed_choice = parsed_response.choices[0]
+        parsed_message = parsed_choice.message
+        if parsed_message is None or parsed_message.parsed is None:
+            raise ValueError(f"Mistral returned an empty parsed completion for {schema_name}")
+        parsed_payload = parsed_message.parsed.model_dump()
+        return _normalize_structured_response(parsed_payload, schema_name=schema_name)
+
+    response = sdk_client.chat.complete(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.0,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": schema_name,
+                "schema": schema,
+            },
+        },
+    )
+    content = response.choices[0].message.content
+    if content is None:
+        raise ValueError("Mistral returned an empty chat completion content")
+    parsed_content = json.loads(content)
+    return _normalize_structured_response(parsed_content, schema_name=schema_name)
+
+
+def _normalize_structured_response(
+    parsed_content: object,
+    *,
+    schema_name: str,
+) -> dict[str, object]:
+    if isinstance(parsed_content, dict):
+        if schema_name == "edge_list" and "edges" in parsed_content:
+            edges = parsed_content["edges"]
+            if not isinstance(edges, list):
+                raise ValueError("Mistral edge_list response must contain a list of edges")
+            return {"edges": [_normalize_edge_item(item) for item in edges]}
+        if schema_name == "vote_list" and "votes" in parsed_content:
+            votes = parsed_content["votes"]
+            if not isinstance(votes, list):
+                raise ValueError("Mistral vote_list response must contain a list of votes")
+            return {"votes": [_normalize_string_item(item, "vote") for item in votes]}
+        if schema_name == "label_list" and "labels" in parsed_content:
+            labels = parsed_content["labels"]
+            if not isinstance(labels, list):
+                raise ValueError("Mistral label_list response must contain a list of labels")
+            return {"labels": [_normalize_string_item(item, "label") for item in labels]}
+        return parsed_content
+
+    if schema_name == "edge_list" and isinstance(parsed_content, list):
+        return {"edges": [_normalize_edge_item(item) for item in parsed_content]}
+
+    if schema_name == "vote_list" and isinstance(parsed_content, list):
+        return {"votes": [_normalize_string_item(item, "vote") for item in parsed_content]}
+
+    if schema_name == "label_list" and isinstance(parsed_content, list):
+        return {"labels": [_normalize_string_item(item, "label") for item in parsed_content]}
+
+    raise ValueError(
+        f"Unsupported structured response shape for schema {schema_name}: {type(parsed_content).__name__}"
+    )
+
+
+def _normalize_edge_item(item: object) -> dict[str, str]:
+    if isinstance(item, dict):
+        source = item.get("source")
+        target = item.get("target")
+        return {
+            "source": _normalize_string_item(source, "edge source"),
+            "target": _normalize_string_item(target, "edge target"),
+        }
+
+    if isinstance(item, (list, tuple)) and len(item) >= 2:
+        return {
+            "source": _normalize_string_item(item[0], "edge source"),
+            "target": _normalize_string_item(item[1], "edge target"),
+        }
+
+    raise ValueError(f"Invalid edge item shape: {item!r}")
+
+
+def _normalize_string_item(item: object, item_name: str) -> str:
+    if item is None:
+        raise ValueError(f"Mistral returned a null {item_name}")
+    text = str(item).strip()
+    if not text or text.lower() == "none":
+        raise ValueError(f"Mistral returned an empty {item_name}")
+    return text
+
+
 # ---------------------------------------------------------------------------
 # Knowledge-map prompt formatting helpers
 #
-# These helpers are shared between Method 1 (algo1/) and Method 2 (algo3/).
-# Method 3 (algo2/) does not use knowledge maps and therefore does not need
+# These helpers are shared between Method 1 (algo1/) and Method 2 (algo2/).
+# Method 3 (algo3/) does not use knowledge maps and therefore does not need
 # these helpers.
 # ---------------------------------------------------------------------------
 

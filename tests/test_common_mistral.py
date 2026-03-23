@@ -21,6 +21,7 @@ from llm_conceptual_modeling.common.mistral import (
     _format_knowledge_map,
     _format_knowledge_map_as_adjacency,
     _format_knowledge_map_as_edge_list,
+    _normalize_structured_response,
 )
 
 # ----------------------------------------------------------------------
@@ -41,9 +42,7 @@ def test_edge_is_a_tuple_of_strings() -> None:
 
 
 def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
-    return SimpleNamespace(
-        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
-    )
+    return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=content))])
 
 
 def test_mistral_chat_client_complete_json_returns_parsed_dict() -> None:
@@ -51,9 +50,7 @@ def test_mistral_chat_client_complete_json_returns_parsed_dict() -> None:
 
     class FakeChat:
         def complete(self, **kwargs: object) -> SimpleNamespace:
-            return _fake_chat_completion_response(
-                json.dumps({"result": "ok", "count": 42})
-            )
+            return _fake_chat_completion_response(json.dumps({"result": "ok", "count": 42}))
 
     class FakeSDKClient:
         def __init__(self) -> None:
@@ -72,6 +69,82 @@ def test_mistral_chat_client_complete_json_returns_parsed_dict() -> None:
     )
 
     assert result == {"result": "ok", "count": 42}
+
+
+def test_mistral_chat_client_uses_parse_when_available() -> None:
+    captured: dict[str, object] = {}
+
+    class ParsedEdgeList:
+        def model_dump(self) -> dict[str, object]:
+            return {"edges": [{"source": "alpha", "target": "beta"}]}
+
+    class FakeChat:
+        def parse(self, response_format, **kwargs: object) -> SimpleNamespace:
+            captured["response_format"] = response_format
+            captured.update(kwargs)
+            return SimpleNamespace(
+                choices=[SimpleNamespace(message=SimpleNamespace(parsed=ParsedEdgeList()))]
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-medium-2508",
+        sdk_client=FakeSDKClient(),
+    )
+
+    result = client.complete_json(
+        prompt="generate edges",
+        schema_name="edge_list",
+        schema={"type": "object", "properties": {"edges": {"type": "array"}}},
+    )
+
+    assert result == {"edges": [{"source": "alpha", "target": "beta"}]}
+    assert captured["model"] == "mistral-medium-2508"
+    assert captured["messages"] == [{"role": "user", "content": "generate edges"}]
+    assert captured["temperature"] == 0.0
+
+
+def test_normalize_structured_response_rejects_null_edge_endpoints() -> None:
+    with pytest.raises(ValueError, match="null edge target"):
+        _normalize_structured_response(
+            {"edges": [{"source": "alpha", "target": None}]},
+            schema_name="edge_list",
+        )
+
+
+def test_mistral_chat_client_normalizes_list_edge_response() -> None:
+    class FakeChat:
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            return _fake_chat_completion_response(
+                json.dumps([["alpha", "bridge_node"], {"source": "bridge_node", "target": "delta"}])
+            )
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-medium-2508",
+        sdk_client=FakeSDKClient(),
+    )
+
+    result = client.complete_json(
+        prompt="test prompt",
+        schema_name="edge_list",
+        schema={"type": "object", "properties": {"edges": {"type": "array"}}},
+    )
+
+    assert result == {
+        "edges": [
+            {"source": "alpha", "target": "bridge_node"},
+            {"source": "bridge_node", "target": "delta"},
+        ]
+    }
 
 
 def test_mistral_chat_client_passes_correct_payload_to_sdk() -> None:
@@ -148,9 +221,7 @@ def test_mistral_chat_client_raises_when_content_is_none() -> None:
 
     class FakeChat:
         def complete(self, **kwargs: object) -> SimpleNamespace:
-            return SimpleNamespace(
-                choices=[SimpleNamespace(message=SimpleNamespace(content=None))]
-            )
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=None))])
 
     class FakeSDKClient:
         def __init__(self) -> None:
@@ -177,6 +248,7 @@ def test_mistral_chat_client_raises_when_content_is_none() -> None:
 
 def test_chat_completion_client_protocol_exists() -> None:
     """ChatCompletionClient is a valid Protocol with the expected signature."""
+
     # duck-typing check: any class implementing complete_json satisfies the protocol
     class MyClient:
         def complete_json(
@@ -306,6 +378,7 @@ class TestFormatKnowledgeMapAsAdjacency:
 class TestFormatKnowledgeMap:
     def test_routes_to_adjacency_when_use_adjacency_notation(self) -> None:
         edges: list[Edge] = [("x", "y")]
+
         # We use a minimal config-like object to avoid importing the dataclass
         class AdjConfig:
             use_adjacency_notation = True
@@ -316,6 +389,7 @@ class TestFormatKnowledgeMap:
 
     def test_routes_to_edge_list_when_not_using_adjacency_notation(self) -> None:
         edges: list[Edge] = [("x", "y")]
+
         class EdgeListConfig:
             use_adjacency_notation = False
             use_array_representation = False

@@ -1,0 +1,68 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Mental well-being"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Emotional eating",
+      "Stress"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Prevalence of walking trails",
+      "Mental well-being"
+    ],
+    [
+      "Prevalence of bike trails",
+      "Resilience"
+    ],
+    [
+      "Prevalence of green fields",
+      "Physical well-being"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Restrictive covenants",
+      "Control"
+    ],
+    [
+      "Marketing ratio of unhealthy to healthy foods",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Economic incentives to produce unhealthy food products",
+      "Medical perspective that thin is good"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Marketing of unhealthy foods"
+    ],
+    [
+      "Pressure to be thin",
+      "Cost of healthy foods"
+    ]
+  ]
+}

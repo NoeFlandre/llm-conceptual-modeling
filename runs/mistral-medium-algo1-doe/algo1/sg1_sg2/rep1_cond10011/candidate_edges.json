@@ -1,0 +1,36 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Supportive food environment",
+      "Physical well-being"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Poor body image"
+    ],
+    [
+      "Public support and demand for healthy products",
+      "Public health messaging around thinness"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Mental well-being",
+      "Healthy eating"
+    ],
+    [
+      "Cost of healthy foods",
+      "Socio-economic status"
+    ],
+    [
+      "Resilience",
+      "Consumer demand for regulations"
+    ]
+  ]
+}

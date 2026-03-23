@@ -15,9 +15,6 @@ from llm_conceptual_modeling.common.mistral import (
     ChatCompletionClient,
     Edge,
     MistralChatClient,
-    _build_counterexample_section,
-    _build_example_section,
-    _build_notation_section,
     _format_knowledge_map,
 )
 
@@ -70,7 +67,7 @@ def _resolve_prompt_config(prompt_config: Method2PromptConfig | None) -> Method2
 
 def _build_prompt_prefix(prompt_config: Method2PromptConfig) -> list[str]:
     """Return the shared opening sections used by both Method 2 prompts."""
-    sections: list[str] = ["You are a helpful assistant who can creatively suggest relevant ideas."]
+    sections: list[str] = ["You are a helpful assistant who understands Knowledge Maps."]
 
     if prompt_config.include_explanation:
         sections.append(
@@ -80,19 +77,166 @@ def _build_prompt_prefix(prompt_config: Method2PromptConfig) -> list[str]:
             "relation between two nodes."
         )
 
-    sections.append(
-        _build_notation_section(
-            use_adjacency_notation=prompt_config.use_adjacency_notation,
-            use_array_representation=prompt_config.use_array_representation,
-        )
-    )
+    sections.append(_build_notation_section(prompt_config))
 
     if prompt_config.include_example:
-        sections.append(_build_example_section())
+        sections.append(_build_example_section(prompt_config))
     if prompt_config.include_counterexample:
-        sections.append(_build_counterexample_section())
+        sections.append(_build_counterexample_section(prompt_config))
 
     return sections
+
+
+def _build_notation_section(prompt_config: Method2PromptConfig) -> str:
+    if prompt_config.use_adjacency_notation and prompt_config.use_array_representation:
+        return (
+            "The knowledge map is encoded using a list of nodes and an associated adjacency "
+            "matrix. The adjacency matrix is an n*n square matrix that represents whether each "
+            "edge exists. In the matrix, each row and each column corresponds to a node. Rows "
+            "and columns come in the same order as the list of nodes. A relation between node A "
+            "and node B is represented as a 1 in the row corresponding to A and the column "
+            "corresponding to B."
+        )
+
+    if prompt_config.use_adjacency_notation:
+        return (
+            "The knowledge map is encoded using a hierarchical markup language representation. "
+            "The list of nodes is defined between the opening tag <NODES> and the matching "
+            "closing tag </NODES>. For each node, we list all other nodes by ID and indicate "
+            "whether there is a connection ('True') or not ('False')."
+        )
+
+    if prompt_config.use_array_representation:
+        return (
+            "The knowledge map is encoded using the RDF representation. The RDF representation "
+            "uses tags denoted by <>. <S> is the start of the map. <E> is the end of the map. "
+            "In between <S> and <E>, we list all edges of the map. Each edge is represented with "
+            "two tags: <H> precedes the node, then <T> precedes the target node."
+        )
+
+    return "The knowledge map is encoded as a list of edges. Each edge is a pair of nodes."
+
+
+def _build_example_section(prompt_config: Method2PromptConfig) -> str:
+    if prompt_config.use_adjacency_notation and prompt_config.use_array_representation:
+        return (
+            "Here is an example of a desired output for your task. In knowledge map 1, we have "
+            "the list of nodes ['capacity to hire', 'bad employees', 'good reputation'] and the "
+            "associated adjacency matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have "
+            "the list of nodes ['work motivation', 'productivity', 'financial growth'] and the "
+            "associated adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. In this example, you could "
+            "recommend these 5 new nodes: 'quality of managers', 'employee satisfaction', "
+            "'customer satisfaction', 'market share', 'performance incentives'. Therefore, this "
+            "is the expected output: ['quality of managers', 'employee satisfaction', "
+            "'customer satisfaction', 'market share', 'performance incentives']."
+        )
+
+    if prompt_config.use_adjacency_notation:
+        return (
+            "Here is an example of a desired output for your task. In knowledge map 1, we have "
+            "the following hierarchical markup language representation: <NODES><NODE ID= "
+            "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
+            "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
+            "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
+            "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
+            "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
+            "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
+            "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
+            "the following hierarchical markup language representation: <NODES><NODE ID= 'work "
+            "motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
+            "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
+            "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
+            "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
+            "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
+            "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
+            "'financial growth' isConnected=False/></NODE></NODES>. In this example, you could "
+            "recommend these 5 new nodes: 'quality of managers', 'employee satisfaction', "
+            "'customer satisfaction', 'market share', 'performance incentives'. Therefore, this "
+            "is the expected output: ['quality of managers', 'employee satisfaction', "
+            "'customer satisfaction', 'market share', 'performance incentives']."
+        )
+
+    if prompt_config.use_array_representation:
+        return (
+            "Here is an example of a desired output for your task. In knowledge map 1, we have "
+            "the following RDF representation: <S><H>capacity to hire<T>bad employees<H>bad "
+            "employees<T>good reputation<H>good reputation<T>capacity to hire<E>. In knowledge "
+            "map 2, we have the following RDF representation: <S><H>work motivation<T>productivity"
+            "<H>productivity<T>financial growth<E>. In this example, you could recommend these 5 "
+            "new nodes: 'quality of managers', 'employee satisfaction', 'customer satisfaction', "
+            "'market share', 'performance incentives'. Therefore, this is the expected output: "
+            "['quality of managers', 'employee satisfaction', 'customer satisfaction', 'market "
+            "share', 'performance incentives']."
+        )
+
+    return (
+        "Here is an example of a desired output for your task. In knowledge map 1, we have the "
+        "following list of edges: [('capacity to hire', 'bad employees'), ('bad employees', "
+        "'good reputation'), ('good reputation', 'capacity to hire')]. In knowledge map 2, we "
+        "have the following list of edges: [('work motivation', 'productivity'), "
+        "('productivity', 'financial growth')]. In this example, you could recommend these 5 "
+        "new nodes: 'quality of managers', 'employee satisfaction', 'customer satisfaction', "
+        "'market share', 'performance incentives'. Therefore, this is the expected output: "
+        "['quality of managers', 'employee satisfaction', 'customer satisfaction', 'market "
+        "share', 'performance incentives']."
+    )
+
+
+def _build_counterexample_section(prompt_config: Method2PromptConfig) -> str:
+    if prompt_config.use_adjacency_notation and prompt_config.use_array_representation:
+        return (
+            "Here is an example of a bad output that we do not want to see. In knowledge map 1, "
+            "we have the list of nodes ['capacity to hire', 'bad employees', 'good reputation'] "
+            "and the associated adjacency matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, "
+            "we have the list of nodes ['work motivation', 'productivity', 'financial growth'] "
+            "and the associated adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. A bad output would "
+            "be: ['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes "
+            "would be incorrect since they have no relationship with the nodes in the input."
+        )
+
+    if prompt_config.use_adjacency_notation:
+        return (
+            "Here is an example of a bad output that we do not want to see. In knowledge map 1, "
+            "we have the following hierarchical markup language representation: <NODES><NODE ID= "
+            "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
+            "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
+            "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
+            "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
+            "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
+            "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
+            "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
+            "the following hierarchical markup language representation: <NODES><NODE ID= 'work "
+            "motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
+            "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
+            "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
+            "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
+            "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
+            "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
+            "'financial growth' isConnected=False/></NODE></NODES>. A bad output would be: "
+            "['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes "
+            "would be incorrect since they have no relationship with the nodes in the input."
+        )
+
+    if prompt_config.use_array_representation:
+        return (
+            "Here is an example of a bad output that we do not want to see. In knowledge map 1, "
+            "we have the following RDF representation: <S><H>capacity to hire<T>bad employees<H>"
+            "bad employees<T>good reputation<H>good reputation<T>capacity to hire<E>. In knowledge "
+            "map 2, we have the following RDF representation: <S><H>work motivation<T>productivity"
+            "<H>productivity<T>financial growth<E>. A bad output would be: ['moon', 'dog', "
+            "'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be incorrect "
+            "since they have no relationship with the nodes in the input."
+        )
+
+    return (
+        "Here is an example of a bad output that we do not want to see. In knowledge map 1, we "
+        "have the following list of edges: [('capacity to hire', 'bad employees'), "
+        "('bad employees', 'good reputation'), ('good reputation', 'capacity to hire')]. In "
+        "knowledge map 2, we have the following list of edges: [('work motivation', "
+        "'productivity'), ('productivity', 'financial growth')]. A bad output would be: "
+        "['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would "
+        "be incorrect since they have no relationship with the nodes in the input."
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -118,9 +262,9 @@ def build_label_expansion_prompt(
         sections.append(f"Input concepts: {', '.join(seed_labels)}")
 
     sections.append(
-        "Your task is to recommend 5 new related concept names for the input concepts. "
-        "Do not suggest names that are already in the input. "
-        "Return a JSON object with a top-level 'labels' array containing only strings."
+        "Your task is to recommend 5 more nodes in relation to those already in the two "
+        "knowledge maps. Do not suggest nodes that are already in the maps. Return the "
+        "recommended nodes as a list of nodes in the format ['A', 'B', 'C', 'D', 'E']."
     )
     sections.append(
         "Your output must only be the list of proposed concepts. "
@@ -146,12 +290,12 @@ def build_edge_suggestion_prompt(
         sections.append(f"You will get two inputs: Knowledge map 1: {fmt1} Knowledge map 2: {fmt2}")
 
     sections.append(
-        f"Given a set of concept names, suggest edges that directly link concepts "
-        f"using the provided list. Use only exact concept names from the provided list. "
-        f"Return a JSON object with a top-level 'edges' array. "
-        f"Each edge must be an object with 'source' and 'target' string fields. "
-        f"Available concepts: {', '.join(expanded_label_context)}"
+        "Your task is to recommend more links between the two maps. These links can use new "
+        "nodes. Do not suggest links that are already in the maps. Do not suggest links between "
+        "nodes of the same map. Return the recommended links as a list of edges in the format "
+        "[(A, Z), ..., (X, D)]."
     )
+    sections.append(f"Available concepts: {', '.join(expanded_label_context)}")
     return " ".join(sections)
 
 
@@ -174,9 +318,15 @@ class EdgeSuggester:
     def __call__(self, expanded_label_context: list[str]) -> list[Edge]: ...
 
 
-def build_label_proposer(chat_client: ChatCompletionClient) -> LabelProposer:
+def build_label_proposer(
+    chat_client: ChatCompletionClient,
+    prompt_config: Method2PromptConfig | None = None,
+) -> LabelProposer:
     def propose(current_labels: list[str]) -> list[str]:
-        prompt = build_label_expansion_prompt(current_labels)
+        prompt = build_label_expansion_prompt(
+            current_labels,
+            prompt_config=prompt_config,
+        )
         schema = {
             "type": "object",
             "properties": {"labels": {"type": "array", "items": {"type": "string"}}},
@@ -193,9 +343,15 @@ def build_label_proposer(chat_client: ChatCompletionClient) -> LabelProposer:
     return propose
 
 
-def build_edge_suggester(chat_client: ChatCompletionClient) -> EdgeSuggester:
+def build_edge_suggester(
+    chat_client: ChatCompletionClient,
+    prompt_config: Method2PromptConfig | None = None,
+) -> EdgeSuggester:
     def suggest(expanded_label_context: list[str]) -> list[Edge]:
-        prompt = build_edge_suggestion_prompt(expanded_label_context)
+        prompt = build_edge_suggestion_prompt(
+            expanded_label_context,
+            prompt_config=prompt_config,
+        )
         schema = {
             "type": "object",
             "properties": {

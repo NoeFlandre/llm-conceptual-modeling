@@ -9,9 +9,7 @@ from llm_conceptual_modeling.algo3.mistral import (
 
 
 def _fake_chat_completion_response(content: str | None) -> SimpleNamespace:
-    return SimpleNamespace(
-        choices=[SimpleNamespace(message=SimpleNamespace(content=content))]
-    )
+    return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=content))])
 
 
 class FakeChatClient:
@@ -45,6 +43,7 @@ def test_build_tree_expansion_prompt_reflects_method3_contract() -> None:
         child_count=3,
     )
 
+    assert "You are a helpful assistant who understands Knowledge Maps." in actual
     assert "recommend 3 related concept names for each of the names in the input" in actual
     assert "dictionary format" in actual
     assert "source_a" in actual
@@ -66,6 +65,8 @@ def test_build_tree_expansion_prompt_can_include_example_and_counterexample() ->
     assert "All concept names must have a clear meaning" in actual
     assert "Here is an example of a desired output for your task." in actual
     assert "Here is an example of a bad output that we do not want to see." in actual
+    assert "employment potential" in actual
+    assert "moon" in actual
 
 
 def test_build_tree_expansion_prompt_can_omit_example_and_counterexample() -> None:
@@ -99,6 +100,9 @@ def test_build_child_proposer_returns_dictionary_children() -> None:
     }
     assert len(chat_client.calls) == 1
     assert chat_client.calls[0]["schema_name"] == "children_by_label"
+    assert "You are a helpful assistant who understands Knowledge Maps." in str(
+        chat_client.calls[0]["prompt"]
+    )
 
 
 def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:
@@ -140,9 +144,7 @@ def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:
         },
     )
 
-    assert actual == {
-        "children_by_label": {"source_a": ["bridge_one", "bridge_two"]}
-    }
+    assert actual == {"children_by_label": {"source_a": ["bridge_one", "bridge_two"]}}
     assert captured_request == {
         "model": "mistral-small-2603",
         "messages": [{"role": "user", "content": "expand tree"}],

@@ -80,8 +80,8 @@ def run_algo2_probe(
             label_prompt,
             stage="label_prompt_written",
         )
-    label_proposer = build_label_proposer(chat_client)
-    edge_suggester = build_edge_suggester(chat_client)
+    label_proposer = build_label_proposer(chat_client, spec.prompt_config)
+    edge_suggester = build_edge_suggester(chat_client, spec.prompt_config)
     thesaurus = load_algo2_thesaurus()
     try:
         cached_execution = context.load_json("execution_checkpoint.json")
@@ -94,6 +94,7 @@ def run_algo2_probe(
         else:
             execution = execute_method2(
                 seed_labels=spec.seed_labels,
+                existing_edges=spec.subgraph1 + spec.subgraph2,
                 propose_labels=label_proposer,
                 suggest_edges=edge_suggester,
                 embedding_client=embedding_client,

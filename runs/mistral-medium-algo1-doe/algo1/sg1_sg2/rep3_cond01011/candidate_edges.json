@@ -1,0 +1,24 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Mental well-being",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Depression",
+      "Eating disorders"
+    ]
+  ]
+}

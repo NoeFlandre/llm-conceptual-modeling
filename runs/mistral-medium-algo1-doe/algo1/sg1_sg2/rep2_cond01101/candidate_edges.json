@@ -1,0 +1,104 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Healthy eating",
+      "Mental well-being"
+    ],
+    [
+      "Healthy eating",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Healthy eating",
+      "Stress"
+    ],
+    [
+      "Healthy eating",
+      "Depression"
+    ],
+    [
+      "Healthy eating",
+      "Poor body image"
+    ],
+    [
+      "Healthy eating",
+      "Weight bias"
+    ],
+    [
+      "Healthy eating",
+      "Socio-economic status"
+    ],
+    [
+      "Healthy eating",
+      "Control"
+    ],
+    [
+      "Healthy eating",
+      "Resilience"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Physical well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Mental well-being"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Stress"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Depression"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Socio-economic status"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Control"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Resilience"
+    ],
+    [
+      "Aesthetics",
+      "Mental well-being"
+    ],
+    [
+      "Aesthetics",
+      "Stress"
+    ],
+    [
+      "Aesthetics",
+      "Depression"
+    ],
+    [
+      "Aesthetics",
+      "Poor body image"
+    ],
+    [
+      "Aesthetics",
+      "Weight bias"
+    ],
+    [
+      "Aesthetics",
+      "Socio-economic status"
+    ],
+    [
+      "Aesthetics",
+      "Control"
+    ],
+    [
+      "Aesthetics",
+      "Resilience"
+    ]
+  ]
+}

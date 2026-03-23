@@ -1,0 +1,80 @@
+{
+  "candidate_edges": [
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Marketing of unhealthy foods",
+      "Weight bias"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Medical perspective that thin is good",
+      "Healthy eating"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public support and demand for healthy products"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Marketing of healthy foods"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg1_sg2_rep4_cond10011",
+  "verified_edges": [
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Socio-economic status",
+      "Cost of healthy foods"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Resilience",
+      "Mental well-being"
+    ],
+    [
+      "Poor body image",
+      "Eating disorders"
+    ],
+    [
+      "Pressure to be thin",
+      "Marketing of healthy foods"
+    ]
+  ]
+}

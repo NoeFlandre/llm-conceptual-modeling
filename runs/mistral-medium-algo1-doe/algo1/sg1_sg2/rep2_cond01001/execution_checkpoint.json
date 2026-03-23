@@ -1,0 +1,46 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Mental well-being",
+      "Healthy eating"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Marketing ratio of unhealthy to healthy foods"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Supportive food environment"
+    ]
+  ],
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Mental well-being",
+      "Healthy eating"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ]
+  ]
+}

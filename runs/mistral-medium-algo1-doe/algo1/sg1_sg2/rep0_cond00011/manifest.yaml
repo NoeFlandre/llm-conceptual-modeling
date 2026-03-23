@@ -1,0 +1,182 @@
+experiment_id: algo1_sg1_sg2_rep0_cond00011
+algorithm: algo1
+model: mistral-medium-2508
+provider: mistral
+temperature: 0.0
+top_p: null
+max_tokens: null
+prompt_factors:
+  use_adjacency_notation: false
+  use_array_representation: false
+  include_explanation: false
+  include_example: true
+  include_counterexample: true
+full_prompt: 'You are a helpful assistant who understands Knowledge Maps. The knowledge
+  map is encoded using tags that store directed edges. Here is an example of a desired
+  output for your task. In knowledge map 1, we have the list of nodes [''capacity
+  to hire'', ''bad employees'', ''good reputation''] and the associated adjacency
+  matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the list of nodes
+  [''work motivation'', ''productivity'', ''financial growth''] and the associated
+  adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. In this example, you could recommend
+  3 new links: ''quality of managers'' with ''work motivation'', ''productivity''
+  with ''good reputation'' and ''bad employees'' with ''quality of managers''. These
+  links implicitly create 1 new node: ''quality of managers''. Therefore, this is
+  the expected output: [(''quality of managers'', ''work motivation''), (''productivity'',
+  ''good reputation''), (''bad employees'', ''quality of managers'')]. Here is an
+  example of a bad output that we do not want to see. A bad output would be: [(''moon'',
+  ''bad employees'')]. The error is the recommended link between ''moon'' and ''bad
+  employees''. Adding the node ''moon'' would be incorrect since it has no relationship
+  with the other nodes. The proposed link does not represent a true causal relationship.
+  You will get two inputs: Knowledge map 1: <knowledge-map><edge source=''Prevalence
+  of walking trails'' target=''Quality of the sport infrastructure'' /><edge source=''Eating
+  disorders'' target=''Healthy eating'' /><edge source=''Consumer demand for regulations''
+  target=''Marketing of healthy foods'' /><edge source=''Public support and demand
+  for healthy products'' target=''Marketing of healthy foods'' /><edge source=''Unhealthy
+  foods are cheaper than healthy ones'' target=''Supportive food environment'' /><edge
+  source=''Public support and demand for healthy products'' target=''Availability
+  of healthy foods'' /><edge source=''Consumer demand for regulations'' target=''Marketing
+  of unhealthy foods'' /><edge source=''Economic incentives to produce unhealthy food
+  products'' target=''Cost of unhealthy foods'' /><edge source=''Supportive food environment''
+  target=''Healthy eating'' /><edge source=''Prevalence of bike trails'' target=''Quality
+  of the sport infrastructure'' /><edge source=''Prevalence of green fields'' target=''Quality
+  of the sport infrastructure'' /><edge source=''Public support and demand for healthy
+  products'' target=''Cost of healthy foods'' /><edge source=''Public support and
+  demand for healthy products'' target=''Marketing of unhealthy foods'' /><edge source=''Emotional
+  eating'' target=''Healthy eating'' /><edge source=''Unhealthy foods are more available
+  than healthy ones'' target=''Supportive food environment'' /><edge source=''Appetite''
+  target=''Healthy eating'' /><edge source=''Prevalence of green fields'' target=''Aesthetics''
+  /><edge source=''Restrictive covenants'' target=''Availability of healthy foods''
+  /><edge source=''Marketing ratio of unhealthy to healthy foods'' target=''Supportive
+  food environment'' /><edge source=''Public support and demand for healthy products''
+  target=''Cost of unhealthy foods'' /></knowledge-map> Knowledge map 2: <knowledge-map><edge
+  source=''Culture of eating that promotes healthy choices'' target=''Physical well-being''
+  /><edge source=''Weight bias'' target=''Socio-economic status'' /><edge source=''Mental
+  well-being'' target=''Physical well-being'' /><edge source=''Socio-economic status''
+  target=''Stress'' /><edge source=''Control'' target=''Mental well-being'' /><edge
+  source=''Socio-economic status'' target=''Physical well-being'' /><edge source=''Public
+  health messaging around thinness'' target=''Weight bias'' /><edge source=''Resilience''
+  target=''Mental well-being'' /><edge source=''Medical perspective that thin is good''
+  target=''Public health messaging around thinness'' /><edge source=''Weight bias''
+  target=''Depression'' /><edge source=''Control'' target=''Stress'' /><edge source=''Socio-economic
+  status'' target=''Mental well-being'' /><edge source=''Medical perspective that
+  thin is good'' target=''Cultural norms around thinness'' /><edge source=''Weight
+  bias'' target=''Mental well-being'' /><edge source=''Cultural norms around thinness''
+  target=''Cultural norms around thinness'' /><edge source=''Cultural norms around
+  thinness'' target=''Poor body image'' /><edge source=''Weight bias'' target=''Stress''
+  /><edge source=''Poor body image'' target=''Poor body image'' /><edge source=''Socio-economic
+  status'' target=''Control'' /><edge source=''Weight bias'' target=''Poor body image''
+  /><edge source=''Pressure to be thin'' target=''Poor body image'' /><edge source=''Depression''
+  target=''Stress'' /><edge source=''Poor body image'' target=''Depression'' /><edge
+  source=''Culture of eating that promotes healthy choices'' target=''Mental well-being''
+  /><edge source=''Cultural norms around thinness'' target=''Pressure to be thin''
+  /><edge source=''Public health messaging around thinness'' target=''Pressure to
+  be thin'' /><edge source=''Physical well-being'' target=''Mental well-being'' /></knowledge-map>
+  Your task is to recommend more links between the two maps. These links can use new
+  nodes. Do not suggest links that are already in the maps. Do not suggest links between
+  nodes of the same map. Return the recommended links as a list of edges in the format
+  [(A, Z), ..., (X, D)]. Your output must only be the list of proposed edges. Do not
+  repeat any instructions I have given you and do not add unnecessary words or phrases.'
+input_subgraph_pairs:
+- subgraph_name: subgraph1
+  edges:
+  - - Prevalence of walking trails
+    - Quality of the sport infrastructure
+  - - Eating disorders
+    - Healthy eating
+  - - Consumer demand for regulations
+    - Marketing of healthy foods
+  - - Public support and demand for healthy products
+    - Marketing of healthy foods
+  - - Unhealthy foods are cheaper than healthy ones
+    - Supportive food environment
+  - - Public support and demand for healthy products
+    - Availability of healthy foods
+  - - Consumer demand for regulations
+    - Marketing of unhealthy foods
+  - - Economic incentives to produce unhealthy food products
+    - Cost of unhealthy foods
+  - - Supportive food environment
+    - Healthy eating
+  - - Prevalence of bike trails
+    - Quality of the sport infrastructure
+  - - Prevalence of green fields
+    - Quality of the sport infrastructure
+  - - Public support and demand for healthy products
+    - Cost of healthy foods
+  - - Public support and demand for healthy products
+    - Marketing of unhealthy foods
+  - - Emotional eating
+    - Healthy eating
+  - - Unhealthy foods are more available than healthy ones
+    - Supportive food environment
+  - - Appetite
+    - Healthy eating
+  - - Prevalence of green fields
+    - Aesthetics
+  - - Restrictive covenants
+    - Availability of healthy foods
+  - - Marketing ratio of unhealthy to healthy foods
+    - Supportive food environment
+  - - Public support and demand for healthy products
+    - Cost of unhealthy foods
+- subgraph_name: subgraph2
+  edges:
+  - - Culture of eating that promotes healthy choices
+    - Physical well-being
+  - - Weight bias
+    - Socio-economic status
+  - - Mental well-being
+    - Physical well-being
+  - - Socio-economic status
+    - Stress
+  - - Control
+    - Mental well-being
+  - - Socio-economic status
+    - Physical well-being
+  - - Public health messaging around thinness
+    - Weight bias
+  - - Resilience
+    - Mental well-being
+  - - Medical perspective that thin is good
+    - Public health messaging around thinness
+  - - Weight bias
+    - Depression
+  - - Control
+    - Stress
+  - - Socio-economic status
+    - Mental well-being
+  - - Medical perspective that thin is good
+    - Cultural norms around thinness
+  - - Weight bias
+    - Mental well-being
+  - - Cultural norms around thinness
+    - Cultural norms around thinness
+  - - Cultural norms around thinness
+    - Poor body image
+  - - Weight bias
+    - Stress
+  - - Poor body image
+    - Poor body image
+  - - Socio-economic status
+    - Control
+  - - Weight bias
+    - Poor body image
+  - - Pressure to be thin
+    - Poor body image
+  - - Depression
+    - Stress
+  - - Poor body image
+    - Depression
+  - - Culture of eating that promotes healthy choices
+    - Mental well-being
+  - - Cultural norms around thinness
+    - Pressure to be thin
+  - - Public health messaging around thinness
+    - Pressure to be thin
+  - - Physical well-being
+    - Mental well-being
+output_dir: runs/mistral-medium-algo1-doe/algo1/sg1_sg2/rep0_cond00011
+timestamp: '2026-03-23T09:32:55.607840+00:00'
+repetitions: 5
+condition_bits: '00011'
+pair_name: sg1_sg2

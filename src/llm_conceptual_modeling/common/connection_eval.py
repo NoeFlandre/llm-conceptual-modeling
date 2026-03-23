@@ -35,17 +35,11 @@ def find_valid_connections(
                 continue
 
             try:
-                paths = list(nx.all_shortest_paths(undirected_graph, start_node, end_node))
+                nx.shortest_path(undirected_graph, start_node, end_node)
             except nx.NetworkXNoPath:
                 continue
 
-            for path in paths:
-                if not any(
-                    (node in nodes1 and node != start_node)
-                    or (node in nodes2 and node != end_node)
-                    for node in path
-                ):
-                    connections.add(_sorted_edge(start_node, end_node))
+            connections.add(_sorted_edge(start_node, end_node))
 
     for start_node in nodes2:
         for end_node in nodes1:
@@ -55,16 +49,10 @@ def find_valid_connections(
                 continue
 
             try:
-                paths = list(nx.all_shortest_paths(undirected_graph, start_node, end_node))
+                nx.shortest_path(undirected_graph, start_node, end_node)
             except nx.NetworkXNoPath:
                 continue
 
-            for path in paths:
-                if not any(
-                    (node in nodes1 and node != end_node)
-                    or (node in nodes2 and node != start_node)
-                    for node in path
-                ):
-                    connections.add(_sorted_edge(start_node, end_node))
+            connections.add(_sorted_edge(start_node, end_node))
 
     return connections

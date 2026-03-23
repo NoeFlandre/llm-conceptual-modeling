@@ -1,0 +1,8 @@
+2026-03-23T09:58:00.987763+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=manifest message=manifest written
+2026-03-23T09:58:00.989210+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
+2026-03-23T09:58:00.989522+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=chat_call_started message=chat call started schema=edge_list prompt_chars=5152
+2026-03-23T09:58:49.260978+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=chat_call_completed message=chat call completed schema=edge_list
+2026-03-23T09:58:49.263618+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=candidate_edges_completed message=checkpoint written to candidate_edges.json
+2026-03-23T09:58:49.264173+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=chat_call_started message=chat call started schema=vote_list prompt_chars=7450
+2026-03-23T09:58:56.412323+00:00 level=ERROR run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=chat_call_failed message=chat call failed schema=vote_list error=JSONDecodeError
+2026-03-23T09:58:56.414513+00:00 level=ERROR run=algo1_sg2_sg3_rep0_cond01001 algorithm=algo1 stage=probe_failed message=Unterminated string starting at: line 1 column 552 (char 551)

@@ -1,0 +1,11 @@
+2026-03-23T09:34:13.432501+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=manifest message=manifest written
+2026-03-23T09:34:13.433416+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
+2026-03-23T09:34:13.433665+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=chat_call_started message=chat call started schema=edge_list prompt_chars=3578
+2026-03-23T09:34:22.440891+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=chat_call_completed message=chat call completed schema=edge_list
+2026-03-23T09:34:22.442500+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=candidate_edges_completed message=checkpoint written to candidate_edges.json
+2026-03-23T09:34:22.442911+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=chat_call_started message=chat call started schema=vote_list prompt_chars=2737
+2026-03-23T09:34:27.415130+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=chat_call_completed message=chat call completed schema=vote_list
+2026-03-23T09:34:27.417065+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=execution_completed message=checkpoint written to execution_checkpoint.json
+2026-03-23T09:34:27.418382+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=cove_prompt_written message=prompt written to cove_prompt.txt
+2026-03-23T09:34:27.419802+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=summary_written message=checkpoint written to summary.json
+2026-03-23T09:34:27.420622+00:00 level=INFO run=algo1_sg1_sg2_rep0_cond01100 algorithm=algo1 stage=complete message=probe finished

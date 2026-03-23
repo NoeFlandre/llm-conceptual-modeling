@@ -1,0 +1,76 @@
+{
+  "candidate_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Mental well-being",
+      "Appetite"
+    ],
+    [
+      "Public health messaging around thinness",
+      "Marketing of healthy foods"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Quality of the sport infrastructure",
+      "Resilience"
+    ],
+    [
+      "Depression",
+      "Unhealthy foods are cheaper than healthy ones"
+    ],
+    [
+      "Control",
+      "Availability of healthy foods"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public support and demand for healthy products"
+    ]
+  ],
+  "model": "mistral-medium-2508",
+  "run_name": "algo1_sg1_sg2_rep3_cond01010",
+  "verified_edges": [
+    [
+      "Healthy eating",
+      "Physical well-being"
+    ],
+    [
+      "Supportive food environment",
+      "Culture of eating that promotes healthy choices"
+    ],
+    [
+      "Stress",
+      "Emotional eating"
+    ],
+    [
+      "Mental well-being",
+      "Appetite"
+    ],
+    [
+      "Socio-economic status",
+      "Consumer demand for regulations"
+    ],
+    [
+      "Control",
+      "Availability of healthy foods"
+    ],
+    [
+      "Cultural norms around thinness",
+      "Public support and demand for healthy products"
+    ]
+  ]
+}
