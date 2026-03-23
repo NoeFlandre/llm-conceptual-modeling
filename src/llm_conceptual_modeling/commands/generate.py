@@ -4,8 +4,10 @@ from pathlib import Path
 
 from llm_conceptual_modeling.commands._provider_utils import (
     build_chat_client,
+    build_embedding_client,
     resolve_provider_api_key,
 )
+from llm_conceptual_modeling.common.model_catalog import resolve_model_alias
 from llm_conceptual_modeling.generation import (
     build_generation_stub_payload,
     emit_json,
@@ -47,7 +49,11 @@ def _should_execute_algo1_experiment(args: Namespace) -> bool:
 
 def _should_execute_algo2_experiment(args: Namespace) -> bool:
     return args.algorithm == "algo2" and bool(
-        args.model and args.embedding_model and args.pair and args.output_root
+        args.model
+        and args.embedding_model
+        and args.embedding_provider
+        and args.pair
+        and args.output_root
     )
 
 
@@ -58,6 +64,11 @@ def _should_execute_algo3_experiment(args: Namespace) -> bool:
 def _handle_algo1_execution(args: Namespace) -> int:
     try:
         api_key = resolve_provider_api_key(args.provider)
+        resolved_model = resolve_model_alias(
+            provider=args.provider,
+            model=args.model,
+            role="chat",
+        )
     except ValueError as error:
         print(error, file=sys.stderr)
         return 1
@@ -66,7 +77,8 @@ def _handle_algo1_execution(args: Namespace) -> int:
     output_root = Path(args.output_root)
     specs = build_specs(
         pair_name=args.pair,
-        model=args.model,
+        model=resolved_model,
+        provider=args.provider,
         output_root=output_root,
         replications=args.replications,
         resume=args.resume,
@@ -74,7 +86,7 @@ def _handle_algo1_execution(args: Namespace) -> int:
     chat_client = build_chat_client(
         provider=args.provider,
         api_key=api_key,
-        model=args.model,
+        model=resolved_model,
         mistral_chat_client_class=chat_client_class,
     )
     summary_records = run_experiment(
@@ -85,7 +97,8 @@ def _handle_algo1_execution(args: Namespace) -> int:
         "algorithm": "algo1",
         "mode": "executed-experiment",
         "pair": args.pair,
-        "model": args.model,
+        "model": resolved_model,
+        "provider": args.provider,
         "replications": args.replications,
         "result_count": len(summary_records),
         "results": summary_records,
@@ -97,6 +110,17 @@ def _handle_algo1_execution(args: Namespace) -> int:
 def _handle_algo2_execution(args: Namespace) -> int:
     try:
         api_key = resolve_provider_api_key(args.provider)
+        embedding_api_key = resolve_provider_api_key(args.embedding_provider)
+        resolved_model = resolve_model_alias(
+            provider=args.provider,
+            model=args.model,
+            role="chat",
+        )
+        resolved_embedding_model = resolve_model_alias(
+            provider=args.embedding_provider,
+            model=args.embedding_model,
+            role="embedding",
+        )
     except ValueError as error:
         print(error, file=sys.stderr)
         return 1
@@ -110,7 +134,10 @@ def _handle_algo2_execution(args: Namespace) -> int:
     output_root = Path(args.output_root)
     specs = build_specs(
         pair_name=args.pair,
-        model=args.model,
+        model=resolved_model,
+        provider=args.provider,
+        embedding_provider=args.embedding_provider,
+        embedding_model=resolved_embedding_model,
         output_root=output_root,
         replications=args.replications,
         resume=args.resume,
@@ -118,12 +145,14 @@ def _handle_algo2_execution(args: Namespace) -> int:
     chat_client = build_chat_client(
         provider=args.provider,
         api_key=api_key,
-        model=args.model,
+        model=resolved_model,
         mistral_chat_client_class=chat_client_class,
     )
-    embedding_client = embedding_client_class(
-        api_key=api_key,
-        model=args.embedding_model,
+    embedding_client = build_embedding_client(
+        provider=args.embedding_provider,
+        api_key=embedding_api_key,
+        model=resolved_embedding_model,
+        mistral_embedding_client_class=embedding_client_class,
     )
     summary_records = run_experiment(
         specs=specs,
@@ -134,8 +163,10 @@ def _handle_algo2_execution(args: Namespace) -> int:
         "algorithm": "algo2",
         "mode": "executed-experiment",
         "pair": args.pair,
-        "model": args.model,
-        "embedding_model": args.embedding_model,
+        "model": resolved_model,
+        "provider": args.provider,
+        "embedding_provider": args.embedding_provider,
+        "embedding_model": resolved_embedding_model,
         "replications": args.replications,
         "result_count": len(summary_records),
         "results": summary_records,
@@ -147,6 +178,11 @@ def _handle_algo2_execution(args: Namespace) -> int:
 def _handle_algo3_execution(args: Namespace) -> int:
     try:
         api_key = resolve_provider_api_key(args.provider)
+        resolved_model = resolve_model_alias(
+            provider=args.provider,
+            model=args.model,
+            role="chat",
+        )
     except ValueError as error:
         print(error, file=sys.stderr)
         return 1
@@ -155,7 +191,8 @@ def _handle_algo3_execution(args: Namespace) -> int:
     output_root = Path(args.output_root)
     specs = build_specs(
         pair_name=args.pair,
-        model=args.model,
+        model=resolved_model,
+        provider=args.provider,
         output_root=output_root,
         replications=args.replications,
         resume=args.resume,
@@ -163,7 +200,7 @@ def _handle_algo3_execution(args: Namespace) -> int:
     chat_client = build_chat_client(
         provider=args.provider,
         api_key=api_key,
-        model=args.model,
+        model=resolved_model,
         mistral_chat_client_class=chat_client_class,
     )
     summary_records = run_experiment(
@@ -174,7 +211,8 @@ def _handle_algo3_execution(args: Namespace) -> int:
         "algorithm": "algo3",
         "mode": "executed-experiment",
         "pair": args.pair,
-        "model": args.model,
+        "model": resolved_model,
+        "provider": args.provider,
         "replications": args.replications,
         "result_count": len(summary_records),
         "results": summary_records,

@@ -1,4 +1,3 @@
-import networkx as nx
 import pandas as pd
 
 from llm_conceptual_modeling.common.connection_eval import find_valid_connections
@@ -61,19 +60,14 @@ def evaluate_connection_results_file(
         subgraph_2 = parse_python_literal(row["subgraph2"])
         graph_edges = parse_python_literal(row["graph"])
 
-        ground_truth_graph = nx.DiGraph()
-        ground_truth_graph.add_edges_from(graph_edges)
         ground_truth_connections = find_valid_connections(
-            ground_truth_graph,
+            graph_edges,
             subgraph_1,
             subgraph_2,
         )
 
-        proposed_graph = nx.DiGraph()
-        proposed_graph.add_edges_from(subgraph_1)
-        proposed_graph.add_edges_from(subgraph_2)
-        proposed_graph.add_edges_from(edge_list)
-        generated_connections = find_valid_connections(proposed_graph, subgraph_1, subgraph_2)
+        proposed_edges = list(subgraph_1) + list(subgraph_2) + list(edge_list)
+        generated_connections = find_valid_connections(proposed_edges, subgraph_1, subgraph_2)
 
         nodes1 = {node for edge in subgraph_1 for node in edge}
         nodes2 = {node for edge in subgraph_2 for node in edge}

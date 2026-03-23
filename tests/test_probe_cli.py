@@ -76,6 +76,7 @@ def test_cli_probe_algo2_emits_summary_json(monkeypatch, capsys, tmp_path) -> No
         captured_call["run_name"] = spec.run_name
         captured_call["seed_labels"] = spec.seed_labels
         captured_call["threshold"] = spec.convergence_threshold
+        captured_call["embedding_provider"] = spec.embedding_provider
         captured_call["chat_client_type"] = type(chat_client).__name__
         captured_call["embedding_client_type"] = type(embedding_client).__name__
         return {"run_name": spec.run_name, "expanded_labels": ["bridge_a"]}
@@ -104,6 +105,8 @@ def test_cli_probe_algo2_emits_summary_json(monkeypatch, capsys, tmp_path) -> No
             "mistral-small-2603",
             "--embedding-model",
             "mistral-embed-2312",
+            "--embedding-provider",
+            "mistral",
             "--seed-label",
             "alpha",
             "--seed-label",
@@ -123,9 +126,151 @@ def test_cli_probe_algo2_emits_summary_json(monkeypatch, capsys, tmp_path) -> No
     assert captured_call["chat_api_key"] == "test-key"
     assert captured_call["chat_model"] == "mistral-small-2603"
     assert captured_call["embedding_api_key"] == "test-key"
+    assert captured_call["embedding_provider"] == "mistral"
     assert captured_call["embedding_model"] == "mistral-embed-2312"
     assert captured_call["seed_labels"] == ["alpha", "beta"]
     assert captured_call["threshold"] == 0.01
+    assert captured_call["chat_client_type"] == "FakeChatClient"
+    assert captured_call["embedding_client_type"] == "FakeEmbeddingClient"
+
+
+def test_cli_probe_algo2_can_select_openrouter_embeddings(monkeypatch, capsys, tmp_path) -> None:
+    captured_call: dict[str, object] = {}
+
+    class FakeChatClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["chat_api_key"] = api_key
+            captured_call["chat_model"] = model
+
+    class FakeOpenRouterEmbeddingClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["embedding_api_key"] = api_key
+            captured_call["embedding_model"] = model
+
+    def fake_run_algo2_probe(*, spec, chat_client, embedding_client) -> dict[str, object]:
+        captured_call["run_name"] = spec.run_name
+        captured_call["embedding_provider"] = spec.embedding_provider
+        captured_call["chat_client_type"] = type(chat_client).__name__
+        captured_call["embedding_client_type"] = type(embedding_client).__name__
+        return {"run_name": spec.run_name, "expanded_labels": ["bridge_a"]}
+
+    monkeypatch.setenv("MISTRAL_API_KEY", "mistral-key")
+    monkeypatch.setenv("OPENROUTER_API_KEY", "openrouter-key")
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.probe.Algo2ChatClient",
+        FakeChatClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands._provider_utils.OpenRouterEmbeddingClient",
+        FakeOpenRouterEmbeddingClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.probe.run_algo2_probe",
+        fake_run_algo2_probe,
+    )
+
+    exit_code = main(
+        [
+            "probe",
+            "algo2",
+            "--run-name",
+            "algo2_row0",
+            "--model",
+            "mistral-small-2603",
+            "--embedding-provider",
+            "openrouter",
+            "--embedding-model",
+            "text-embedding-3-large",
+            "--seed-label",
+            "alpha",
+            "--convergence-threshold",
+            "0.01",
+            "--output-dir",
+            str(tmp_path / "algo2_probe"),
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload == {"run_name": "algo2_row0", "expanded_labels": ["bridge_a"]}
+    assert captured_call["chat_api_key"] == "mistral-key"
+    assert captured_call["embedding_api_key"] == "openrouter-key"
+    assert captured_call["embedding_model"] == "text-embedding-3-large"
+    assert captured_call["embedding_provider"] == "openrouter"
+    assert captured_call["chat_client_type"] == "FakeChatClient"
+    assert captured_call["embedding_client_type"] == "FakeOpenRouterEmbeddingClient"
+
+
+def test_cli_probe_algo2_resolves_paper_model_aliases(monkeypatch, capsys, tmp_path) -> None:
+    captured_call: dict[str, object] = {}
+
+    class FakeChatClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["chat_api_key"] = api_key
+            captured_call["chat_model"] = model
+
+    class FakeEmbeddingClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["embedding_api_key"] = api_key
+            captured_call["embedding_model"] = model
+
+    def fake_run_algo2_probe(*, spec, chat_client, embedding_client) -> dict[str, object]:
+        captured_call["model"] = spec.model
+        captured_call["embedding_model"] = spec.embedding_model
+        captured_call["chat_client_type"] = type(chat_client).__name__
+        captured_call["embedding_client_type"] = type(embedding_client).__name__
+        return {"run_name": spec.run_name, "expanded_labels": ["bridge_a"]}
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "openrouter-key")
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands._provider_utils.OpenRouterChatClient",
+        FakeChatClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands._provider_utils.OpenRouterEmbeddingClient",
+        FakeEmbeddingClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.probe.run_algo2_probe",
+        fake_run_algo2_probe,
+    )
+
+    exit_code = main(
+        [
+            "probe",
+            "algo2",
+            "--provider",
+            "openrouter",
+            "--run-name",
+            "algo2_row0",
+            "--model",
+            "paper:gpt-5",
+            "--embedding-provider",
+            "openrouter",
+            "--embedding-model",
+            "paper:text-embedding-3-large",
+            "--seed-label",
+            "alpha",
+            "--convergence-threshold",
+            "0.01",
+            "--output-dir",
+            str(tmp_path / "algo2_probe"),
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload == {"run_name": "algo2_row0", "expanded_labels": ["bridge_a"]}
+    assert captured_call["chat_api_key"] == "openrouter-key"
+    assert captured_call["embedding_api_key"] == "openrouter-key"
+    assert captured_call["chat_model"] == "openai/gpt-5"
+    assert captured_call["embedding_model"] == "text-embedding-3-large"
+    assert captured_call["model"] == "openai/gpt-5"
+    assert captured_call["embedding_model"] == "text-embedding-3-large"
     assert captured_call["chat_client_type"] == "FakeChatClient"
     assert captured_call["embedding_client_type"] == "FakeEmbeddingClient"
 

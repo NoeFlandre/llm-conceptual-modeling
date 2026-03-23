@@ -19,6 +19,7 @@ def build_algo1_experiment_specs(
     pair_name: str,
     model: str,
     output_root: Path,
+    provider: str = "mistral",
     replications: int = 5,
     resume: bool = False,
 ) -> list[Algo1ProbeSpec]:
@@ -38,6 +39,7 @@ def build_algo1_experiment_specs(
             experiment_spec = Algo1ProbeSpec(
                 run_name=run_name,
                 model=model,
+                provider=provider,
                 subgraph1=subgraph1,
                 subgraph2=subgraph2,
                 prompt_config=prompt_config,
@@ -47,7 +49,7 @@ def build_algo1_experiment_specs(
             write_manifest(
                 spec=experiment_spec,
                 algorithm="algo1",
-                provider="mistral",
+                provider=provider,
                 temperature=0.0,
                 top_p=None,
                 max_tokens=None,

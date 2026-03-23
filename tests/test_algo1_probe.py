@@ -69,6 +69,7 @@ def test_run_algo1_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert actual == {
         "run_name": "algo1_single_row_v1",
         "model": "mistral-small-2603",
+        "provider": "mistral",
         "candidate_edges": [
             ["alpha", "bridge_node"],
             ["bridge_node", "delta"],
@@ -78,6 +79,7 @@ def test_run_algo1_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert manifest == {
         "run_name": "algo1_single_row_v1",
         "model": "mistral-small-2603",
+        "provider": "mistral",
         "subgraph1": [["alpha", "beta"], ["beta", "gamma"]],
         "subgraph2": [["delta", "epsilon"]],
         "prompt_config": {

@@ -27,6 +27,7 @@ class Algo3ProbeSpec:
     max_depth: int
     output_dir: Path
     resume: bool = False
+    provider: str = "mistral"
 
 
 def run_algo3_probe(
@@ -51,6 +52,7 @@ def run_algo3_probe(
     manifest_record = {
         "run_name": spec.run_name,
         "model": spec.model,
+        "provider": spec.provider,
         "source_labels": spec.source_labels,
         "target_labels": spec.target_labels,
         "prompt_config": {
@@ -108,6 +110,7 @@ def run_algo3_probe(
         summary_record: dict[str, object] = {
             "run_name": spec.run_name,
             "model": spec.model,
+            "provider": spec.provider,
             "expanded_nodes": expanded_nodes,
             "matched_labels": matched_labels,
         }

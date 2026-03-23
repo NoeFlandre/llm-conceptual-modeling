@@ -66,6 +66,8 @@ class ExperimentManifest:
     repetitions: int
     condition_bits: str
     pair_name: str
+    embedding_provider: str | None = None
+    embedding_model: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -95,6 +97,12 @@ class ExperimentManifest:
             repetitions=int(data["repetitions"]),
             condition_bits=str(data["condition_bits"]),
             pair_name=str(data["pair_name"]),
+            embedding_provider=str(data["embedding_provider"])
+            if data.get("embedding_provider") is not None
+            else None,
+            embedding_model=str(data["embedding_model"])
+            if data.get("embedding_model") is not None
+            else None,
         )
 
     @staticmethod
@@ -151,6 +159,8 @@ class ExperimentManifest:
             One of "algo1", "algo2", "algo3".
         provider
             The LLM provider ("mistral" or "anthropic").
+        embedding_provider
+            The embedding provider, when relevant.
         temperature
             LLM sampling temperature.
         top_p
@@ -196,4 +206,6 @@ class ExperimentManifest:
             repetitions=repetitions,
             condition_bits=condition_bits,
             pair_name=pair_name,
+            embedding_provider=getattr(spec, "embedding_provider", None),
+            embedding_model=getattr(spec, "embedding_model", None),
         )

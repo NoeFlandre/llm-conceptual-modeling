@@ -20,6 +20,9 @@ def build_algo2_experiment_specs(
     pair_name: str,
     model: str,
     output_root: Path,
+    provider: str = "mistral",
+    embedding_provider: str = "mistral",
+    embedding_model: str = "mistral-embed-2312",
     replications: int = 5,
     resume: bool = False,
 ) -> list[Algo2ProbeSpec]:
@@ -38,6 +41,9 @@ def build_algo2_experiment_specs(
             experiment_spec = Algo2ProbeSpec(
                 run_name=run_name,
                 model=model,
+                provider=provider,
+                embedding_provider=embedding_provider,
+                embedding_model=embedding_model,
                 seed_labels=seed_labels,
                 subgraph1=subgraph1,
                 subgraph2=subgraph2,
@@ -49,7 +55,7 @@ def build_algo2_experiment_specs(
             write_manifest(
                 spec=experiment_spec,
                 algorithm="algo2",
-                provider="mistral",
+                provider=provider,
                 temperature=0.0,
                 top_p=None,
                 max_tokens=None,

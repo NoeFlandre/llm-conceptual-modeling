@@ -52,6 +52,8 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
     spec = Algo2ProbeSpec(
         run_name="algo2_single_row_v1",
         model="mistral-small-2603",
+        embedding_provider="mistral",
+        embedding_model="mistral-embed-2312",
         seed_labels=["alpha", "beta"],
         subgraph1=[("alpha", "beta"), ("beta", "gamma")],
         subgraph2=[("delta", "epsilon")],
@@ -81,6 +83,9 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
 
     assert actual["run_name"] == "algo2_single_row_v1"
     assert actual["model"] == "mistral-small-2603"
+    assert actual["provider"] == "mistral"
+    assert actual["embedding_provider"] == "mistral"
+    assert actual["embedding_model"] == "mistral-embed-2312"
     assert actual["expanded_labels"] == ["bridge_a", "bridge_b"]
     assert actual["normalized_edges"] == [
         ["Blood saturated fatty acid level", "Obesity"],
@@ -89,6 +94,9 @@ def test_run_algo2_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert manifest == {
         "run_name": "algo2_single_row_v1",
         "model": "mistral-small-2603",
+        "provider": "mistral",
+        "embedding_provider": "mistral",
+        "embedding_model": "mistral-embed-2312",
         "seed_labels": ["alpha", "beta"],
         "subgraph1": [["alpha", "beta"], ["beta", "gamma"]],
         "subgraph2": [["delta", "epsilon"]],

@@ -117,9 +117,18 @@ def test_cli_generate_algo1_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["api_key"] = api_key
             captured_call["model"] = model
 
-    def fake_build_specs(*, pair_name, model, output_root, replications, resume):
+    def fake_build_specs(
+        *,
+        pair_name,
+        model,
+        provider,
+        output_root,
+        replications,
+        resume,
+    ):
         captured_call["pair_name"] = pair_name
         captured_call["model"] = model
+        captured_call["provider"] = provider
         captured_call["output_root"] = str(output_root)
         captured_call["replications"] = replications
         captured_call["resume"] = resume
@@ -172,10 +181,83 @@ def test_cli_generate_algo1_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert payload["result_count"] == 2
     assert captured_call["api_key"] == "test-key"
     assert captured_call["model"] == "mistral-small-2603"
+    assert captured_call["provider"] == "mistral"
     assert captured_call["pair_name"] == "sg1_sg2"
     assert captured_call["replications"] == 2
     assert captured_call["resume"] is False
     assert captured_call["specs"] == ["spec-a", "spec-b"]
+    assert captured_call["chat_client_type"] == "FakeChatClient"
+
+
+def test_cli_generate_algo1_resolves_paper_model_alias(monkeypatch, capsys, tmp_path) -> None:
+    captured_call: dict[str, object] = {}
+
+    class FakeChatClient:
+        def __init__(self, *, api_key: str, model: str) -> None:
+            captured_call["api_key"] = api_key
+            captured_call["model"] = model
+
+    def fake_build_specs(
+        *,
+        pair_name,
+        model,
+        provider,
+        output_root,
+        replications,
+        resume,
+    ):
+        captured_call["pair_name"] = pair_name
+        captured_call["model"] = model
+        captured_call["provider"] = provider
+        captured_call["output_root"] = str(output_root)
+        captured_call["replications"] = replications
+        captured_call["resume"] = resume
+        return ["spec-a"]
+
+    def fake_run_experiment(*, specs, chat_client):
+        captured_call["specs"] = specs
+        captured_call["chat_client_type"] = type(chat_client).__name__
+        return [{"run_name": "spec-a", "verified_edges": [["alpha", "beta"]]}]
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "router-key")
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands._provider_utils.OpenRouterChatClient",
+        FakeChatClient,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.build_algo1_experiment_specs",
+        fake_build_specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.generate.run_algo1_experiment",
+        fake_run_experiment,
+    )
+
+    exit_code = main(
+        [
+            "generate",
+            "algo1",
+            "--provider",
+            "openrouter",
+            "--model",
+            "paper:gpt-4o",
+            "--pair",
+            "sg1_sg2",
+            "--output-root",
+            str(tmp_path / "runs"),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload["model"] == "openai/gpt-4o-2024-05-13"
+    assert captured_call["api_key"] == "router-key"
+    assert captured_call["model"] == "openai/gpt-4o-2024-05-13"
+    assert captured_call["provider"] == "openrouter"
+    assert captured_call["pair_name"] == "sg1_sg2"
     assert captured_call["chat_client_type"] == "FakeChatClient"
 
 
@@ -187,10 +269,11 @@ def test_cli_generate_algo3_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["api_key"] = api_key
             captured_call["model"] = model
 
-    def fake_build_specs(*, pair_name, model, output_root, replications, resume):
+    def fake_build_specs(*, pair_name, model, provider, output_root, replications, resume):
         captured_call["pair_name"] = pair_name
         captured_call["output_root"] = str(output_root)
         captured_call["model"] = model
+        captured_call["provider"] = provider
         captured_call["replications"] = replications
         captured_call["resume"] = resume
         return ["spec-c", "spec-d"]
@@ -242,6 +325,7 @@ def test_cli_generate_algo3_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert payload["result_count"] == 2
     assert captured_call["api_key"] == "test-key"
     assert captured_call["model"] == "mistral-small-2603"
+    assert captured_call["provider"] == "mistral"
     assert captured_call["pair_name"] == "subgraph_1_to_subgraph_3"
     assert captured_call["replications"] == 2
     assert captured_call["resume"] is False
@@ -262,9 +346,22 @@ def test_cli_generate_algo2_can_execute_experiment_specs(monkeypatch, capsys, tm
             captured_call["embedding_api_key"] = api_key
             captured_call["embedding_model"] = model
 
-    def fake_build_specs(*, pair_name, model, output_root, replications, resume):
+    def fake_build_specs(
+        *,
+        pair_name,
+        model,
+        provider,
+        embedding_provider,
+        embedding_model,
+        output_root,
+        replications,
+        resume,
+    ):
         captured_call["pair_name"] = pair_name
         captured_call["model"] = model
+        captured_call["provider"] = provider
+        captured_call["embedding_provider"] = embedding_provider
+        captured_call["embedding_model"] = embedding_model
         captured_call["output_root"] = str(output_root)
         captured_call["replications"] = replications
         captured_call["resume"] = resume
@@ -305,6 +402,8 @@ def test_cli_generate_algo2_can_execute_experiment_specs(monkeypatch, capsys, tm
             "mistral-small-2603",
             "--embedding-model",
             "mistral-embed-2312",
+            "--embedding-provider",
+            "mistral",
             "--pair",
             "sg1_sg2",
             "--output-root",
@@ -324,7 +423,9 @@ def test_cli_generate_algo2_can_execute_experiment_specs(monkeypatch, capsys, tm
     assert payload["result_count"] == 2
     assert captured_call["api_key"] == "test-key"
     assert captured_call["model"] == "mistral-small-2603"
+    assert captured_call["provider"] == "mistral"
     assert captured_call["embedding_api_key"] == "test-key"
+    assert captured_call["embedding_provider"] == "mistral"
     assert captured_call["embedding_model"] == "mistral-embed-2312"
     assert captured_call["pair_name"] == "sg1_sg2"
     assert captured_call["replications"] == 2

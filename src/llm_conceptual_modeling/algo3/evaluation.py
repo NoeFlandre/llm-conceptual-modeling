@@ -2,7 +2,6 @@ import ast
 import re
 from pathlib import Path
 
-import networkx as nx
 import pandas as pd
 
 Edge = tuple[str, str]
@@ -68,14 +67,39 @@ def _nodes_from_edges(edges: list[Edge]) -> set[str]:
     return nodes
 
 
-def _build_undirected_graph(edges: list[Edge]) -> nx.Graph:
-    graph = nx.Graph()
+def _build_undirected_adjacency(edges: list[Edge]) -> dict[str, set[str]]:
+    adjacency: dict[str, set[str]] = {}
     for left, right in edges:
         left_text = str(left).strip()
         right_text = str(right).strip()
-        if left_text and right_text:
-            graph.add_edge(left_text, right_text)
-    return graph
+        if not left_text or not right_text:
+            continue
+        adjacency.setdefault(left_text, set()).add(right_text)
+        adjacency.setdefault(right_text, set()).add(left_text)
+    return adjacency
+
+
+def _connected_components(adjacency: dict[str, set[str]]) -> dict[str, int]:
+    components: dict[str, int] = {}
+    component_index = 0
+
+    for start_node in adjacency:
+        if start_node in components:
+            continue
+
+        stack = [start_node]
+        components[start_node] = component_index
+        while stack:
+            current = stack.pop()
+            for neighbor in adjacency.get(current, set()):
+                if neighbor in components:
+                    continue
+                components[neighbor] = component_index
+                stack.append(neighbor)
+
+        component_index += 1
+
+    return components
 
 
 def compute_recall_for_row(
@@ -84,18 +108,19 @@ def compute_recall_for_row(
     mother_edges: list[Edge],
     result_edges: list[Edge],
 ) -> float:
-    mother_graph = _build_undirected_graph(mother_edges)
-    predicted_graph = _build_undirected_graph(source_edges)
-    predicted_graph.add_edges_from(_build_undirected_graph(target_edges).edges())
-    predicted_graph.add_edges_from(result_edges)
+    mother_adjacency = _build_undirected_adjacency(mother_edges)
+    predicted_adjacency = _build_undirected_adjacency(source_edges)
+    target_adjacency = _build_undirected_adjacency(target_edges)
+    for left, neighbors in target_adjacency.items():
+        predicted_adjacency.setdefault(left, set()).update(neighbors)
+    result_adjacency = _build_undirected_adjacency(result_edges)
+    for left, neighbors in result_adjacency.items():
+        predicted_adjacency.setdefault(left, set()).update(neighbors)
 
     source_nodes = _nodes_from_edges(source_edges)
     target_nodes = _nodes_from_edges(target_edges)
 
-    mother_components: dict[str, int] = {}
-    for index, component in enumerate(nx.connected_components(mother_graph)):
-        for node in component:
-            mother_components[node] = index
+    mother_components = _connected_components(mother_adjacency)
 
     actual_positive_pairs: list[tuple[str, str]] = []
     for source_node in source_nodes:
@@ -110,10 +135,7 @@ def compute_recall_for_row(
     if not actual_positive_pairs:
         return 0.0
 
-    predicted_components: dict[str, int] = {}
-    for index, component in enumerate(nx.connected_components(predicted_graph)):
-        for node in component:
-            predicted_components[node] = index
+    predicted_components = _connected_components(predicted_adjacency)
 
     true_positives = 0
     for source_node, target_node in actual_positive_pairs:

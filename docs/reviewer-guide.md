@@ -87,13 +87,22 @@ Paper-aligned live-backed execution for Method 2:
 ```bash
 uv run lcm generate algo2 \
   --model mistral-small-2603 \
-  --embedding-model mistral-embed-2312 \
+  --embedding-provider openrouter \
+  --embedding-model paper:text-embedding-3-large \
   --pair sg1_sg2 \
   --output-root /tmp/algo2_runs \
   --json
 ```
 
-This executable Method 2 path uses the confirmed convergence thresholds `0.01` and `0.02` and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`.
+This executable Method 2 path uses the confirmed convergence thresholds `0.01` and `0.02` and the curated domain thesaurus tracked in `data/inputs/algo2_thesaurus.json`. The default embedding backend is still Mistral, but the OpenRouter / `text-embedding-3-large` option is now available when you want the paper-faithful embedding configuration. The CLI also exposes paper-model aliases for the live chat models:
+
+- `paper:deepseek-v3-0324` -> `deepseek/deepseek-chat-v3-0324`
+- `paper:deepseek-v3.1` -> `deepseek/deepseek-chat-v3.1`
+- `paper:gemini-2.0-flash` -> `google/gemini-2.0-flash-001`
+- `paper:gemini-2.5-pro` -> `google/gemini-2.5-pro`
+- `paper:gpt-4o` -> `openai/gpt-4o-2024-05-13`
+- `paper:gpt-5` -> `openai/gpt-5`
+
 Add `--resume` to any live-backed `generate` or `probe` command to reuse the existing run state and checkpoint files when rerunning a partially completed output directory. The live matrix runner also retries HTTP 429 responses and reloads cached per-row responses when resuming, so interrupted matrix runs can continue without repeating completed provider calls. The reusable Mistral clients now use the official `mistralai` SDK and still retry transient transport failures, including DNS-level network errors, before the command fails with a structured `error.json` and a matching `run.log` entry.
 
 To audit the paper-facing contract in one place, run:

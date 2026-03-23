@@ -117,6 +117,9 @@ def _build_manifest_checks() -> list[dict[str, object]]:
                 "requires_live_llm": algo2_manifest["requires_live_llm"],
                 "convergence_rule": algo2_method_contract["convergence_rule"],
                 "embedding_model": algo2_method_contract["embedding_model"],
+                "embedding_provider": algo2_method_contract["embedding_provider"],
+                "paper_embedding_model": algo2_method_contract["paper_embedding_model"],
+                "paper_embedding_provider": algo2_method_contract["paper_embedding_provider"],
                 "convergence_threshold_levels": algo2_method_contract[
                     "convergence_threshold_levels"
                 ],
@@ -136,6 +139,15 @@ def _build_manifest_checks() -> list[dict[str, object]]:
             algo2_method_contract["embedding_model"] == "mistral-embed-2312",
             {
                 "value": algo2_method_contract["embedding_model"],
+            },
+        ),
+        _check(
+            "algo2_paper_embedding_model",
+            algo2_method_contract["paper_embedding_model"] == "text-embedding-3-large"
+            and algo2_method_contract["paper_embedding_provider"] == "openrouter",
+            {
+                "paper_embedding_model": algo2_method_contract["paper_embedding_model"],
+                "paper_embedding_provider": algo2_method_contract["paper_embedding_provider"],
             },
         ),
         _check(

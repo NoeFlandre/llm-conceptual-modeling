@@ -62,6 +62,7 @@ def test_run_algo3_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert actual == {
         "run_name": "algo3_single_row_v1",
         "model": "mistral-small-2603",
+        "provider": "mistral",
         "expanded_nodes": [
             {
                 "root_label": "source_a",
@@ -97,6 +98,7 @@ def test_run_algo3_probe_writes_auditable_artifacts(tmp_path) -> None:
     assert manifest == {
         "run_name": "algo3_single_row_v1",
         "model": "mistral-small-2603",
+        "provider": "mistral",
         "source_labels": ["source_a"],
         "target_labels": ["bridge_hit", "target_z"],
         "prompt_config": {

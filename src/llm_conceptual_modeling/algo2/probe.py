@@ -27,6 +27,9 @@ class Algo2ProbeSpec:
     convergence_threshold: float
     output_dir: Path
     resume: bool = False
+    provider: str = "mistral"
+    embedding_provider: str = "mistral"
+    embedding_model: str = "mistral-embed-2312"
 
 
 def run_algo2_probe(
@@ -52,6 +55,9 @@ def run_algo2_probe(
     manifest_record = {
         "run_name": spec.run_name,
         "model": spec.model,
+        "provider": spec.provider,
+        "embedding_provider": spec.embedding_provider,
+        "embedding_model": spec.embedding_model,
         "seed_labels": spec.seed_labels,
         "subgraph1": _edges_to_json_compatible(spec.subgraph1),
         "subgraph2": _edges_to_json_compatible(spec.subgraph2),
@@ -131,6 +137,9 @@ def run_algo2_probe(
         summary_record = {
             "run_name": spec.run_name,
             "model": spec.model,
+            "provider": spec.provider,
+            "embedding_provider": spec.embedding_provider,
+            "embedding_model": spec.embedding_model,
             "expanded_labels": execution_result["expanded_labels"],
             "raw_edges": execution_result["raw_edges"],
             "normalized_edges": execution_result["normalized_edges"],

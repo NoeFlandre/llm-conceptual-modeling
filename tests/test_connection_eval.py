@@ -1,4 +1,3 @@
-import networkx as nx
 import pandas as pd
 import pytest
 
@@ -22,9 +21,16 @@ from llm_conceptual_modeling.common.connection_eval import find_valid_connection
 from llm_conceptual_modeling.common.evaluation_core import evaluate_connection_results_file
 
 
+class FakeGraph:
+    def __init__(self, edges: list[tuple[str, str]]) -> None:
+        self._edges = edges
+
+    def edges(self):
+        return list(self._edges)
+
+
 def test_find_valid_connections_accepts_any_path_between_subgraphs() -> None:
-    graph = nx.DiGraph()
-    graph.add_edges_from(
+    graph = FakeGraph(
         [
             ("a1", "a2"),
             ("a2", "b1"),

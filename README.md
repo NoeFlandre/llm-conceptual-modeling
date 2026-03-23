@@ -325,7 +325,7 @@ uv run lcm generate algo2 --json
 uv run lcm generate algo3 --fixture-only --json
 ```
 
-When explicit execution arguments are provided, `generate` also runs a live-backed experiment path for the selected algorithm. This is currently exposed for the paper-aligned Mistral workflows:
+When explicit execution arguments are provided, `generate` also runs a live-backed experiment path for the selected algorithm. The repo keeps the existing Mistral defaults, but it now also supports the paper-faithful OpenRouter-backed model aliases and Method 2 embedding path:
 
 ```bash
 uv run lcm generate algo1 \
@@ -334,9 +334,17 @@ uv run lcm generate algo1 \
   --output-root /tmp/algo1_runs \
   --json
 
+uv run lcm generate algo1 \
+  --provider openrouter \
+  --model paper:gpt-5 \
+  --pair sg1_sg2 \
+  --output-root /tmp/algo1_runs \
+  --json
+
 uv run lcm generate algo2 \
   --model mistral-small-2603 \
-  --embedding-model mistral-embed-2312 \
+  --embedding-provider openrouter \
+  --embedding-model paper:text-embedding-3-large \
   --pair sg1_sg2 \
   --output-root /tmp/algo2_runs \
   --json
@@ -348,7 +356,18 @@ uv run lcm generate algo3 \
   --json
 ```
 
-Method 2 uses the confirmed cosine-similarity thresholds `0.01` and `0.02` in the executable path and the tracked domain thesaurus under `data/inputs/algo2_thesaurus.json`.
+Method 2 uses the confirmed cosine-similarity thresholds `0.01` and `0.02` in the executable path and the tracked domain thesaurus under `data/inputs/algo2_thesaurus.json`. The default embedding backend remains Mistral, but the OpenRouter / `text-embedding-3-large` path is now available when you want the paper-faithful embedding configuration.
+
+The paper model aliases exposed by the CLI are:
+
+- `paper:deepseek-v3-0324` -> `deepseek/deepseek-chat-v3-0324`
+- `paper:deepseek-v3.1` -> `deepseek/deepseek-chat-v3.1`
+- `paper:gemini-2.0-flash` -> `google/gemini-2.0-flash-001`
+- `paper:gemini-2.5-pro` -> `google/gemini-2.5-pro`
+- `paper:gpt-4o` -> `openai/gpt-4o-2024-05-13`
+- `paper:gpt-5` -> `openai/gpt-5`
+- `paper:text-embedding-3-large` -> `text-embedding-3-large`
+
 All executable `generate` and `probe` paths accept `--resume` and write `run.log`, `state.json`, and `execution_checkpoint.json` alongside the existing prompt and summary artifacts. The reusable Mistral chat and embedding clients are now backed by the official `mistralai` SDK, and they retry transient transport failures with exponential backoff before surfacing a hard error, so the failure path is logged and checkpointed rather than silent.
 
 ## Post-Revision Debugging
@@ -406,6 +425,9 @@ A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noef
 - [tests/](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/tests): full test suite including contracts, CSV schemas, graph data, snapshots, analysis, and baseline tests
 - [scripts/](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts): post-revision live-provider debugging tooling
 - [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md): implementation-oriented architecture and safety notes
+- [docs/algo1-method1-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/algo1-method1-guide.md): exhaustive Method 1 runtime and prompt guide
+- [docs/algo2-method2-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/algo2-method2-guide.md): exhaustive Method 2 runtime and prompt guide
+- [docs/algo3-method3-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/algo3-method3-guide.md): exhaustive Method 3 runtime and prompt guide
 - [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md): short reviewer-oriented reproduction guide
 - [docs/post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md): live-provider debugging documentation
 - [Dockerfile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/Dockerfile): container build definition

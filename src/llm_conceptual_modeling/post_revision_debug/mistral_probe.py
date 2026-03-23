@@ -3,7 +3,6 @@ import json
 import re
 from typing import Any
 
-import networkx as nx
 import pandas as pd
 
 from llm_conceptual_modeling.algo3.evaluation import compute_recall_for_row, parse_edge_list
@@ -37,15 +36,10 @@ def score_connection_row(row: pd.Series, result_content: str) -> dict[str, float
     subgraph_2 = parse_python_literal(row["subgraph2"])
     graph_edges = parse_python_literal(row["graph"])
 
-    ground_truth_graph = nx.DiGraph()
-    ground_truth_graph.add_edges_from(graph_edges)
-    ground_truth_connections = find_valid_connections(ground_truth_graph, subgraph_1, subgraph_2)
+    ground_truth_connections = find_valid_connections(graph_edges, subgraph_1, subgraph_2)
 
-    proposed_graph = nx.DiGraph()
-    proposed_graph.add_edges_from(subgraph_1)
-    proposed_graph.add_edges_from(subgraph_2)
-    proposed_graph.add_edges_from(edge_list)
-    generated_connections = find_valid_connections(proposed_graph, subgraph_1, subgraph_2)
+    proposed_edges = list(subgraph_1) + list(subgraph_2) + list(edge_list)
+    generated_connections = find_valid_connections(proposed_edges, subgraph_1, subgraph_2)
     metrics = _compute_connection_metrics(
         generated_connections=generated_connections,
         ground_truth_connections=ground_truth_connections,
@@ -109,10 +103,7 @@ def _compute_connection_metrics(
     has_generated_connections = bool(generated_connections)
     if has_generated_connections:
         total_count = (
-            true_positive_count
-            + false_positive_count
-            + false_negative_count
-            + true_negative_count
+            true_positive_count + false_positive_count + false_negative_count + true_negative_count
         )
         accuracy = (true_positive_count + true_negative_count) / total_count
 

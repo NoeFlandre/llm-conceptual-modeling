@@ -32,6 +32,7 @@ except ImportError:  # pragma: no cover - exercised indirectly in import-light t
         Mistral = None  # type: ignore[assignment]
 
 from llm_conceptual_modeling.common.retry import call_with_retry
+from llm_conceptual_modeling.common.structured_output import normalize_structured_response
 
 if TYPE_CHECKING:
     pass
@@ -181,6 +182,8 @@ _STRUCTURED_RESPONSE_MODELS: dict[str, type[BaseModel]] = {
     "label_list": _LabelListModel,
 }
 
+_normalize_structured_response = normalize_structured_response
+
 
 def _complete_structured_json(
     *,
@@ -205,87 +208,23 @@ def _complete_structured_json(
         parsed_payload = parsed_message.parsed.model_dump()
         return _normalize_structured_response(parsed_payload, schema_name=schema_name)
 
-    response = sdk_client.chat.complete(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.0,
-        response_format={
-            "type": "json_schema",
-            "json_schema": {
-                "name": schema_name,
-                "schema": schema,
+        response = sdk_client.chat.complete(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": schema_name,
+                    "schema": schema,
+                },
             },
-        },
-    )
+        )
     content = response.choices[0].message.content
     if content is None:
         raise ValueError("Mistral returned an empty chat completion content")
     parsed_content = json.loads(content)
-    return _normalize_structured_response(parsed_content, schema_name=schema_name)
-
-
-def _normalize_structured_response(
-    parsed_content: object,
-    *,
-    schema_name: str,
-) -> dict[str, object]:
-    if isinstance(parsed_content, dict):
-        if schema_name == "edge_list" and "edges" in parsed_content:
-            edges = parsed_content["edges"]
-            if not isinstance(edges, list):
-                raise ValueError("Mistral edge_list response must contain a list of edges")
-            return {"edges": [_normalize_edge_item(item) for item in edges]}
-        if schema_name == "vote_list" and "votes" in parsed_content:
-            votes = parsed_content["votes"]
-            if not isinstance(votes, list):
-                raise ValueError("Mistral vote_list response must contain a list of votes")
-            return {"votes": [_normalize_string_item(item, "vote") for item in votes]}
-        if schema_name == "label_list" and "labels" in parsed_content:
-            labels = parsed_content["labels"]
-            if not isinstance(labels, list):
-                raise ValueError("Mistral label_list response must contain a list of labels")
-            return {"labels": [_normalize_string_item(item, "label") for item in labels]}
-        return parsed_content
-
-    if schema_name == "edge_list" and isinstance(parsed_content, list):
-        return {"edges": [_normalize_edge_item(item) for item in parsed_content]}
-
-    if schema_name == "vote_list" and isinstance(parsed_content, list):
-        return {"votes": [_normalize_string_item(item, "vote") for item in parsed_content]}
-
-    if schema_name == "label_list" and isinstance(parsed_content, list):
-        return {"labels": [_normalize_string_item(item, "label") for item in parsed_content]}
-
-    raise ValueError(
-        f"Unsupported structured response shape for schema {schema_name}: {type(parsed_content).__name__}"
-    )
-
-
-def _normalize_edge_item(item: object) -> dict[str, str]:
-    if isinstance(item, dict):
-        source = item.get("source")
-        target = item.get("target")
-        return {
-            "source": _normalize_string_item(source, "edge source"),
-            "target": _normalize_string_item(target, "edge target"),
-        }
-
-    if isinstance(item, (list, tuple)) and len(item) >= 2:
-        return {
-            "source": _normalize_string_item(item[0], "edge source"),
-            "target": _normalize_string_item(item[1], "edge target"),
-        }
-
-    raise ValueError(f"Invalid edge item shape: {item!r}")
-
-
-def _normalize_string_item(item: object, item_name: str) -> str:
-    if item is None:
-        raise ValueError(f"Mistral returned a null {item_name}")
-    text = str(item).strip()
-    if not text or text.lower() == "none":
-        raise ValueError(f"Mistral returned an empty {item_name}")
-    return text
+    return normalize_structured_response(parsed_content, schema_name=schema_name)
 
 
 # ---------------------------------------------------------------------------

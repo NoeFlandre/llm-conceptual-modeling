@@ -6,8 +6,10 @@ from pathlib import Path
 
 from llm_conceptual_modeling.commands._provider_utils import (
     build_chat_client,
+    build_embedding_client,
     resolve_provider_api_key,
 )
+from llm_conceptual_modeling.common.model_catalog import resolve_model_alias
 from llm_conceptual_modeling.generation import emit_json
 
 # Backward-compatible aliases for test monkeypatching.
@@ -51,6 +53,7 @@ class Algo1ProbeSpec:
     prompt_config: Method1PromptConfig
     output_dir: Path
     resume: bool = False
+    provider: str = "mistral"
 
 
 @dataclass(frozen=True)
@@ -64,6 +67,9 @@ class Algo2ProbeSpec:
     convergence_threshold: float
     output_dir: Path
     resume: bool = False
+    provider: str = "mistral"
+    embedding_provider: str = "mistral"
+    embedding_model: str = "mistral-embed-2312"
 
 
 @dataclass(frozen=True)
@@ -77,6 +83,7 @@ class Algo3ProbeSpec:
     max_depth: int
     output_dir: Path
     resume: bool = False
+    provider: str = "mistral"
 
 
 run_algo1_probe = None
@@ -91,7 +98,12 @@ def handle_probe(args: Namespace) -> int:
         if args.algorithm == "algo1":
             return _handle_algo1_probe(args, api_key=api_key)
         if args.algorithm == "algo2":
-            return _handle_algo2_probe(args, api_key=api_key)
+            embedding_api_key = resolve_provider_api_key(args.embedding_provider)
+            return _handle_algo2_probe(
+                args,
+                api_key=api_key,
+                embedding_api_key=embedding_api_key,
+            )
         if args.algorithm == "algo3":
             return _handle_algo3_probe(args, api_key=api_key)
 
@@ -108,12 +120,18 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
         probe_runner,
         chat_client_class,
     ) = _load_algo1_runtime_symbols()
+    resolved_model = resolve_model_alias(
+        provider=args.provider,
+        model=args.model,
+        role="chat",
+    )
     subgraph1 = _parse_edge_list(args.subgraph1_edge)
     subgraph2 = _parse_edge_list(args.subgraph2_edge)
     output_dir = Path(args.output_dir)
     spec = probe_spec_class(
         run_name=args.run_name,
-        model=args.model,
+        model=resolved_model,
+        provider=args.provider,
         subgraph1=subgraph1,
         subgraph2=subgraph2,
         prompt_config=prompt_config_class(
@@ -129,7 +147,7 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
     chat_client = build_chat_client(
         provider=args.provider,
         api_key=api_key,
-        model=args.model,
+        model=resolved_model,
         mistral_chat_client_class=chat_client_class,
     )
     summary = probe_runner(
@@ -140,7 +158,12 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
     return 0
 
 
-def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
+def _handle_algo2_probe(
+    args: Namespace,
+    *,
+    api_key: str,
+    embedding_api_key: str,
+) -> int:
     (
         probe_spec_class,
         prompt_config_class,
@@ -148,10 +171,23 @@ def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
         chat_client_class,
         embedding_client_class,
     ) = _load_algo2_runtime_symbols()
+    resolved_model = resolve_model_alias(
+        provider=args.provider,
+        model=args.model,
+        role="chat",
+    )
+    resolved_embedding_model = resolve_model_alias(
+        provider=args.embedding_provider,
+        model=args.embedding_model,
+        role="embedding",
+    )
     output_dir = Path(args.output_dir)
     spec = probe_spec_class(
         run_name=args.run_name,
-        model=args.model,
+        model=resolved_model,
+        provider=args.provider,
+        embedding_provider=args.embedding_provider,
+        embedding_model=resolved_embedding_model,
         seed_labels=args.seed_label,
         subgraph1=[],
         subgraph2=[],
@@ -169,12 +205,14 @@ def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
     chat_client = build_chat_client(
         provider=args.provider,
         api_key=api_key,
-        model=args.model,
+        model=resolved_model,
         mistral_chat_client_class=chat_client_class,
     )
-    embedding_client = embedding_client_class(
-        api_key=api_key,
-        model=args.embedding_model,
+    embedding_client = build_embedding_client(
+        provider=args.embedding_provider,
+        api_key=embedding_api_key,
+        model=resolved_embedding_model,
+        mistral_embedding_client_class=embedding_client_class,
     )
     summary = probe_runner(
         spec=spec,
@@ -192,10 +230,16 @@ def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
         probe_runner,
         chat_client_class,
     ) = _load_algo3_runtime_symbols()
+    resolved_model = resolve_model_alias(
+        provider=args.provider,
+        model=args.model,
+        role="chat",
+    )
     output_dir = Path(args.output_dir)
     spec = probe_spec_class(
         run_name=args.run_name,
-        model=args.model,
+        model=resolved_model,
+        provider=args.provider,
         source_labels=args.source_label,
         target_labels=args.target_label,
         prompt_config=prompt_config_class(
@@ -210,7 +254,7 @@ def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
     chat_client = build_chat_client(
         provider=args.provider,
         api_key=api_key,
-        model=args.model,
+        model=resolved_model,
         mistral_chat_client_class=chat_client_class,
     )
     summary = probe_runner(

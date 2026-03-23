@@ -25,6 +25,7 @@ class Algo1ProbeSpec:
     prompt_config: Method1PromptConfig
     output_dir: Path
     resume: bool = False
+    provider: str = "mistral"
 
 
 class _LoggedChatClient:
@@ -114,6 +115,7 @@ def run_algo1_probe(
     manifest_record = {
         "run_name": spec.run_name,
         "model": spec.model,
+        "provider": spec.provider,
         "subgraph1": _edges_to_json_compatible(spec.subgraph1),
         "subgraph2": _edges_to_json_compatible(spec.subgraph2),
         "prompt_config": {
@@ -169,6 +171,7 @@ def run_algo1_probe(
         summary_record = {
             "run_name": spec.run_name,
             "model": spec.model,
+            "provider": spec.provider,
             "candidate_edges": candidate_edges,
             "verified_edges": verified_edges,
         }
