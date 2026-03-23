@@ -46,9 +46,8 @@ def _should_execute_algo1_experiment(args: Namespace) -> bool:
 
 
 def _should_execute_algo2_experiment(args: Namespace) -> bool:
-    return (
-        args.algorithm == "algo2"
-        and bool(args.model and args.embedding_model and args.pair and args.output_root)
+    return args.algorithm == "algo2" and bool(
+        args.model and args.embedding_model and args.pair and args.output_root
     )
 
 
@@ -111,6 +110,7 @@ def _handle_algo2_execution(args: Namespace) -> int:
     output_root = Path(args.output_root)
     specs = build_specs(
         pair_name=args.pair,
+        model=args.model,
         output_root=output_root,
         replications=args.replications,
         resume=args.resume,
@@ -155,6 +155,7 @@ def _handle_algo3_execution(args: Namespace) -> int:
     output_root = Path(args.output_root)
     specs = build_specs(
         pair_name=args.pair,
+        model=args.model,
         output_root=output_root,
         replications=args.replications,
         resume=args.resume,
@@ -180,6 +181,8 @@ def _handle_algo3_execution(args: Namespace) -> int:
     }
     emit_json(payload)
     return 0
+
+
 def _load_algo1_runtime_symbols():
     global Algo1ChatClient, build_algo1_experiment_specs, run_algo1_experiment
 

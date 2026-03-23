@@ -89,9 +89,7 @@ def _validate(data: dict[str, Any]) -> None:
     """
     missing = [f for f in _REQUIRED_FIELDS if f not in data]
     if missing:
-        raise ManifestValidationError(
-            f"Manifest is missing required fields: {missing}"
-        )
+        raise ManifestValidationError(f"Manifest is missing required fields: {missing}")
 
     algorithm = data.get("algorithm", "")
     if algorithm not in _VALID_ALGORITHMS:
@@ -109,9 +107,7 @@ def _validate(data: dict[str, Any]) -> None:
     # Validate temperature
     temperature = data.get("temperature")
     if not isinstance(temperature, (int, float)):
-        raise ManifestValidationError(
-            f"temperature must be a number, got {temperature!r}"
-        )
+        raise ManifestValidationError(f"temperature must be a number, got {temperature!r}")
 
     # Validate input_subgraph_pairs is a list
     isp = data.get("input_subgraph_pairs")
@@ -153,3 +149,38 @@ def parse_manifest(yaml_path: str | Path) -> ExperimentManifest:
     _validate(data)
 
     return ExperimentManifest.from_dict(data)
+
+
+def write_manifest(
+    *,
+    spec: Any,
+    algorithm: str,
+    provider: str,
+    temperature: float,
+    top_p: float | None,
+    max_tokens: int | None,
+    full_prompt: str,
+    pair_name: str,
+    condition_bits: str,
+    repetitions: int,
+    yaml_path: str | Path,
+) -> ExperimentManifest:
+    """Build and write an experiment manifest YAML file.
+
+    This keeps the manifest generation logic in one place so experiment
+    builders can emit a canonical ``manifest.yaml`` before execution starts.
+    """
+    manifest = ExperimentManifest.from_probe_spec(
+        spec=spec,
+        algorithm=algorithm,
+        provider=provider,
+        temperature=temperature,
+        top_p=top_p,
+        max_tokens=max_tokens,
+        full_prompt=full_prompt,
+        pair_name=pair_name,
+        condition_bits=condition_bits,
+        repetitions=repetitions,
+    )
+    manifest.to_yaml(Path(yaml_path))
+    return manifest

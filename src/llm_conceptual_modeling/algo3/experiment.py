@@ -2,9 +2,14 @@ import logging
 from itertools import product
 from pathlib import Path
 
-from llm_conceptual_modeling.algo3.mistral import ChatCompletionClient, Method3PromptConfig
+from llm_conceptual_modeling.algo3.mistral import (
+    ChatCompletionClient,
+    Method3PromptConfig,
+    build_tree_expansion_prompt,
+)
 from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec, run_algo3_probe
 from llm_conceptual_modeling.common.graph_data import load_default_graph
+from llm_conceptual_modeling.experiment_manifest import write_manifest
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +17,7 @@ logger = logging.getLogger(__name__)
 def build_algo3_experiment_specs(
     *,
     pair_name: str,
+    model: str,
     output_root: Path,
     replications: int = 5,
     resume: bool = False,
@@ -28,14 +34,11 @@ def build_algo3_experiment_specs(
             child_count = 3 if condition_bit_tuple[2] == 0 else 5
             max_depth = 1 if condition_bit_tuple[3] == 0 else 2
             output_dir = (
-                output_root
-                / "algo3"
-                / pair_name
-                / f"rep{repetition_index}_cond{condition_name}"
+                output_root / "algo3" / pair_name / f"rep{repetition_index}_cond{condition_name}"
             )
             experiment_spec = Algo3ProbeSpec(
                 run_name=run_name,
-                model="",
+                model=model,
                 source_labels=source_labels,
                 target_labels=target_labels,
                 prompt_config=prompt_config,
@@ -43,6 +46,23 @@ def build_algo3_experiment_specs(
                 max_depth=max_depth,
                 output_dir=output_dir,
                 resume=resume,
+            )
+            write_manifest(
+                spec=experiment_spec,
+                algorithm="algo3",
+                provider="mistral",
+                temperature=0.0,
+                top_p=None,
+                max_tokens=None,
+                full_prompt=build_tree_expansion_prompt(
+                    source_labels=source_labels,
+                    child_count=child_count,
+                    prompt_config=prompt_config,
+                ),
+                pair_name=pair_name,
+                condition_bits=condition_name,
+                repetitions=replications,
+                yaml_path=output_dir / "manifest.yaml",
             )
             experiment_specs.append(experiment_spec)
 

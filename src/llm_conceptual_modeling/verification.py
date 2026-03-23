@@ -16,7 +16,11 @@ from llm_conceptual_modeling.algo3.generation import (
 )
 from llm_conceptual_modeling.common.types import VerificationResult
 from llm_conceptual_modeling.post_revision_debug.run_context import ProbeRunContext
-from llm_conceptual_modeling.verification_cases import FIXTURES_ROOT, build_legacy_parity_cases, run_verification_case
+from llm_conceptual_modeling.verification_cases import (
+    FIXTURES_ROOT,
+    build_legacy_parity_cases,
+    run_verification_case,
+)
 
 
 def build_doctor_report() -> dict[str, object]:
@@ -101,8 +105,7 @@ def _build_manifest_checks() -> list[dict[str, object]]:
         ),
         _check(
             "algo2_manifest",
-            algo2_manifest["implemented"] is True
-            and algo2_manifest["requires_live_llm"] is True,
+            algo2_manifest["implemented"] is True and algo2_manifest["requires_live_llm"] is True,
             {
                 "implemented": algo2_manifest["implemented"],
                 "requires_live_llm": algo2_manifest["requires_live_llm"],
@@ -166,12 +169,14 @@ def _build_resume_checks(temp_root: Path) -> list[dict[str, object]]:
     )[0]
     algo2_spec = build_algo2_experiment_specs(
         pair_name="sg1_sg2",
+        model="verification",
         output_root=temp_root / "algo2",
         replications=1,
         resume=True,
     )[0]
     algo3_spec = build_algo3_experiment_specs(
         pair_name="subgraph_1_to_subgraph_3",
+        model="verification",
         output_root=temp_root / "algo3",
         replications=1,
         resume=True,
@@ -229,7 +234,8 @@ def _build_probe_context_check(temp_root: Path) -> dict[str, object]:
         and context.state_path.exists()
         and context.log_path.exists()
         and context.events_path.exists() is False
-        and state["completed_stages"] == [
+        and state["completed_stages"]
+        == [
             "manifest_written",
             "prompt_written",
             "checkpoint_written",

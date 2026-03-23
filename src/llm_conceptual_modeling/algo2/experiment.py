@@ -6,9 +6,11 @@ from llm_conceptual_modeling.algo2.embeddings import EmbeddingClient
 from llm_conceptual_modeling.algo2.mistral import (
     ChatCompletionClient,
     Method2PromptConfig,
+    build_label_expansion_prompt,
 )
 from llm_conceptual_modeling.algo2.probe import Algo2ProbeSpec, run_algo2_probe
 from llm_conceptual_modeling.common.graph_data import load_default_graph
+from llm_conceptual_modeling.experiment_manifest import write_manifest
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +18,7 @@ logger = logging.getLogger(__name__)
 def build_algo2_experiment_specs(
     *,
     pair_name: str,
+    model: str,
     output_root: Path,
     replications: int = 5,
     resume: bool = False,
@@ -30,14 +33,11 @@ def build_algo2_experiment_specs(
             run_name = f"algo2_{pair_name}_rep{repetition_index}_cond{condition_name}"
             prompt_config = _build_prompt_config(condition_bit_tuple)
             output_dir = (
-                output_root
-                / "algo2"
-                / pair_name
-                / f"rep{repetition_index}_cond{condition_name}"
+                output_root / "algo2" / pair_name / f"rep{repetition_index}_cond{condition_name}"
             )
             experiment_spec = Algo2ProbeSpec(
                 run_name=run_name,
-                model="",
+                model=model,
                 seed_labels=seed_labels,
                 subgraph1=subgraph1,
                 subgraph2=subgraph2,
@@ -45,6 +45,24 @@ def build_algo2_experiment_specs(
                 convergence_threshold=0.01,
                 output_dir=output_dir,
                 resume=resume,
+            )
+            write_manifest(
+                spec=experiment_spec,
+                algorithm="algo2",
+                provider="mistral",
+                temperature=0.0,
+                top_p=None,
+                max_tokens=None,
+                full_prompt=build_label_expansion_prompt(
+                    seed_labels,
+                    subgraph1=subgraph1,
+                    subgraph2=subgraph2,
+                    prompt_config=prompt_config,
+                ),
+                pair_name=pair_name,
+                condition_bits=condition_name,
+                repetitions=replications,
+                yaml_path=output_dir / "manifest.yaml",
             )
             experiment_specs.append(experiment_spec)
 
@@ -95,9 +113,7 @@ def _load_pair_labels(
 def _build_prompt_config(
     condition_bit_tuple: tuple[int, int, int, int, int],
 ) -> Method2PromptConfig:
-    adjacency_bit, array_bit, explanation_bit, example_bit, counterexample_bit = (
-        condition_bit_tuple
-    )
+    adjacency_bit, array_bit, explanation_bit, example_bit, counterexample_bit = condition_bit_tuple
     prompt_config = Method2PromptConfig(
         use_adjacency_notation=bool(adjacency_bit),
         use_array_representation=bool(array_bit),

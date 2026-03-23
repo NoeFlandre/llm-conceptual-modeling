@@ -18,7 +18,10 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING, Any, Protocol
 
-from mistralai.client import Mistral
+try:
+    from mistralai.client import Mistral
+except ImportError:  # pragma: no cover - exercised indirectly in import-light tests
+    Mistral = None  # type: ignore[assignment]
 
 from llm_conceptual_modeling.common.retry import call_with_retry
 
@@ -72,7 +75,15 @@ class MistralChatClient:
         sdk_client: Any | None = None,
     ) -> None:
         self._model = model
-        self._sdk_client = sdk_client or Mistral(api_key=api_key)
+        if sdk_client is not None:
+            self._sdk_client = sdk_client
+            return
+        if Mistral is None:
+            raise ImportError(
+                "mistralai.client.Mistral is unavailable; install mistralai or "
+                "inject sdk_client for tests"
+            )
+        self._sdk_client = Mistral(api_key=api_key)
 
     def complete_json(
         self,
@@ -171,8 +182,7 @@ def _build_notation_section(
             )
 
         return (
-            "The knowledge map is encoded using tags for nodes and an associated "
-            "adjacency matrix."
+            "The knowledge map is encoded using tags for nodes and an associated adjacency matrix."
         )
 
     if use_array_representation:

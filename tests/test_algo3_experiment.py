@@ -3,11 +3,13 @@ from pathlib import Path
 from llm_conceptual_modeling.algo3.experiment import (
     build_algo3_experiment_specs,
 )
+from llm_conceptual_modeling.experiment_manifest import parse_manifest
 
 
 def test_build_algo3_experiment_specs_expands_full_factorial_grid(tmp_path: Path) -> None:
     actual = build_algo3_experiment_specs(
         pair_name="subgraph_1_to_subgraph_3",
+        model="gpt-5",
         output_root=tmp_path,
     )
 
@@ -23,6 +25,17 @@ def test_build_algo3_experiment_specs_expands_full_factorial_grid(tmp_path: Path
     assert first_spec.output_dir == (
         tmp_path / "algo3" / "subgraph_1_to_subgraph_3" / "rep0_cond0000"
     )
+    first_manifest = parse_manifest(first_spec.output_dir / "manifest.yaml")
+    assert first_manifest.algorithm == "algo3"
+    assert first_manifest.model == "gpt-5"
+    assert first_manifest.provider == "mistral"
+    assert first_manifest.temperature == 0.0
+    assert first_manifest.pair_name == "subgraph_1_to_subgraph_3"
+    assert first_manifest.condition_bits == "0000"
+    assert first_manifest.repetitions == 5
+    assert first_manifest.full_prompt.startswith(
+        "You are a helpful assistant who can creatively suggest relevant ideas."
+    )
 
     assert last_spec.run_name == "algo3_subgraph_1_to_subgraph_3_rep4_cond1111"
     assert last_spec.prompt_config.include_example is True
@@ -34,6 +47,7 @@ def test_build_algo3_experiment_specs_expands_full_factorial_grid(tmp_path: Path
 def test_build_algo3_experiment_specs_maps_pair_to_expected_node_sets(tmp_path: Path) -> None:
     actual = build_algo3_experiment_specs(
         pair_name="subgraph_2_to_subgraph_1",
+        model="gpt-5",
         output_root=tmp_path,
     )
 

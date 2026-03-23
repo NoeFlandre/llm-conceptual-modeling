@@ -3,6 +3,7 @@ from pathlib import Path
 from llm_conceptual_modeling.algo1.experiment import (
     build_algo1_experiment_specs,
 )
+from llm_conceptual_modeling.experiment_manifest import parse_manifest
 
 
 def test_build_algo1_experiment_specs_expands_full_factorial_grid(tmp_path: Path) -> None:
@@ -21,6 +22,17 @@ def test_build_algo1_experiment_specs_expands_full_factorial_grid(tmp_path: Path
     assert first_spec.prompt_config.include_example is False
     assert first_spec.prompt_config.include_counterexample is False
     assert first_spec.output_dir == tmp_path / "algo1" / "sg1_sg2" / "rep0_cond00000"
+    first_manifest = parse_manifest(first_spec.output_dir / "manifest.yaml")
+    assert first_manifest.algorithm == "algo1"
+    assert first_manifest.model == "gpt-5"
+    assert first_manifest.provider == "mistral"
+    assert first_manifest.temperature == 0.0
+    assert first_manifest.pair_name == "sg1_sg2"
+    assert first_manifest.condition_bits == "00000"
+    assert first_manifest.repetitions == 5
+    assert first_manifest.full_prompt.startswith(
+        "You are a helpful assistant who understands Knowledge Maps."
+    )
 
     assert last_spec.run_name == "algo1_sg1_sg2_rep4_cond11111"
     assert last_spec.prompt_config.include_explanation is True

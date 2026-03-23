@@ -5,6 +5,7 @@ from llm_conceptual_modeling.algo2.experiment import (
     run_algo2_experiment,
 )
 from llm_conceptual_modeling.algo2.mistral import Method2PromptConfig
+from llm_conceptual_modeling.experiment_manifest import parse_manifest
 
 
 def test_build_algo2_experiment_specs_uses_fixed_threshold_and_full_prompt_grid(
@@ -12,6 +13,7 @@ def test_build_algo2_experiment_specs_uses_fixed_threshold_and_full_prompt_grid(
 ) -> None:
     specs = build_algo2_experiment_specs(
         pair_name="sg1_sg2",
+        model="gpt-5",
         output_root=tmp_path / "runs",
         replications=5,
     )
@@ -27,6 +29,17 @@ def test_build_algo2_experiment_specs_uses_fixed_threshold_and_full_prompt_grid(
         include_counterexample=False,
     )
     assert first_spec.output_dir == Path(tmp_path / "runs" / "algo2" / "sg1_sg2" / "rep0_cond00000")
+    first_manifest = parse_manifest(first_spec.output_dir / "manifest.yaml")
+    assert first_manifest.algorithm == "algo2"
+    assert first_manifest.model == "gpt-5"
+    assert first_manifest.provider == "mistral"
+    assert first_manifest.temperature == 0.0
+    assert first_manifest.pair_name == "sg1_sg2"
+    assert first_manifest.condition_bits == "00000"
+    assert first_manifest.repetitions == 5
+    assert first_manifest.full_prompt.startswith(
+        "You are a helpful assistant who can creatively suggest relevant ideas."
+    )
 
 
 def test_run_algo2_experiment_delegates_to_probe(monkeypatch, tmp_path) -> None:
@@ -49,6 +62,7 @@ def test_run_algo2_experiment_delegates_to_probe(monkeypatch, tmp_path) -> None:
 
     specs = build_algo2_experiment_specs(
         pair_name="sg1_sg2",
+        model="gpt-5",
         output_root=tmp_path / "runs",
         replications=1,
     )
@@ -91,6 +105,7 @@ def test_run_algo2_experiment_skips_failed_specs_and_continues(monkeypatch, tmp_
 
     specs = build_algo2_experiment_specs(
         pair_name="sg1_sg2",
+        model="gpt-5",
         output_root=tmp_path / "runs",
         replications=1,
     )

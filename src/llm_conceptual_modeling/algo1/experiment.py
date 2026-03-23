@@ -2,9 +2,14 @@ import logging
 from itertools import product
 from pathlib import Path
 
-from llm_conceptual_modeling.algo1.mistral import ChatCompletionClient, Method1PromptConfig
+from llm_conceptual_modeling.algo1.mistral import (
+    ChatCompletionClient,
+    Method1PromptConfig,
+    build_direct_edge_prompt,
+)
 from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec, run_algo1_probe
 from llm_conceptual_modeling.common.graph_data import load_default_graph
+from llm_conceptual_modeling.experiment_manifest import write_manifest
 
 logger = logging.getLogger(__name__)
 
@@ -28,10 +33,7 @@ def build_algo1_experiment_specs(
             run_name = f"algo1_{pair_name}_rep{repetition_index}_cond{condition_name}"
             prompt_config = _build_prompt_config(condition_bit_tuple)
             output_dir = (
-                output_root
-                / "algo1"
-                / pair_name
-                / f"rep{repetition_index}_cond{condition_name}"
+                output_root / "algo1" / pair_name / f"rep{repetition_index}_cond{condition_name}"
             )
             experiment_spec = Algo1ProbeSpec(
                 run_name=run_name,
@@ -41,6 +43,23 @@ def build_algo1_experiment_specs(
                 prompt_config=prompt_config,
                 output_dir=output_dir,
                 resume=resume,
+            )
+            write_manifest(
+                spec=experiment_spec,
+                algorithm="algo1",
+                provider="mistral",
+                temperature=0.0,
+                top_p=None,
+                max_tokens=None,
+                full_prompt=build_direct_edge_prompt(
+                    subgraph1=subgraph1,
+                    subgraph2=subgraph2,
+                    prompt_config=prompt_config,
+                ),
+                pair_name=pair_name,
+                condition_bits=condition_name,
+                repetitions=replications,
+                yaml_path=output_dir / "manifest.yaml",
             )
             experiment_specs.append(experiment_spec)
 

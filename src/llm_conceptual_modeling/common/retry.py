@@ -7,8 +7,18 @@ from typing import TypeVar
 from urllib.error import HTTPError, URLError
 
 import httpx
-from mistralai.client.errors.sdkerror import SDKError
-from mistralai.client.utils.retries import PermanentError
+
+try:
+    from mistralai.client.errors.sdkerror import SDKError
+    from mistralai.client.utils.retries import PermanentError
+except ImportError:  # pragma: no cover - exercised indirectly in import-light tests
+
+    class SDKError(Exception):
+        pass
+
+    class PermanentError(Exception):
+        inner: Exception | None = None
+
 
 T = TypeVar("T")
 
