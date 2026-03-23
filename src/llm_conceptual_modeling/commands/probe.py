@@ -1,48 +1,92 @@
 import json
-import os
 import sys
 from argparse import Namespace
+from dataclasses import dataclass
 from pathlib import Path
 
-from llm_conceptual_modeling.algo1.mistral import (
-    Method1PromptConfig,
+from llm_conceptual_modeling.commands._provider_utils import (
+    build_chat_client,
+    resolve_provider_api_key,
 )
-from llm_conceptual_modeling.algo1.mistral import (
-    MistralChatClient as Algo1MistralChatClient,
-)
-from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec, run_algo1_probe
-from llm_conceptual_modeling.algo2.embeddings import MistralEmbeddingClient as Algo2EmbeddingClient
-from llm_conceptual_modeling.algo2.mistral import (
-    Method2PromptConfig,
-)
-from llm_conceptual_modeling.algo2.mistral import (
-    MistralChatClient as Algo2MistralChatClient,
-)
-from llm_conceptual_modeling.algo2.probe import Algo2ProbeSpec, run_algo2_probe
-from llm_conceptual_modeling.algo3.mistral import (
-    Method3PromptConfig,
-)
-from llm_conceptual_modeling.algo3.mistral import (
-    MistralChatClient as Algo3MistralChatClient,
-)
-from llm_conceptual_modeling.algo3.probe import Algo3ProbeSpec, run_algo3_probe
-from llm_conceptual_modeling.common.anthropic import AnthropicChatClient
 from llm_conceptual_modeling.generation import emit_json
 
-# Backward-compatible aliases for test monkeypatching
-Algo1ChatClient = Algo1MistralChatClient
-Algo2ChatClient = Algo2MistralChatClient
-Algo3ChatClient = Algo3MistralChatClient
-
+# Backward-compatible aliases for test monkeypatching.
+Algo1ChatClient = None
+Algo2ChatClient = None
+Algo3ChatClient = None
+Algo2EmbeddingClient = None
 Edge = tuple[str, str]
+
+
+@dataclass(frozen=True)
+class Method1PromptConfig:
+    use_adjacency_notation: bool
+    use_array_representation: bool
+    include_explanation: bool
+    include_example: bool
+    include_counterexample: bool
+
+
+@dataclass(frozen=True)
+class Method2PromptConfig:
+    use_adjacency_notation: bool
+    use_array_representation: bool
+    include_explanation: bool
+    include_example: bool
+    include_counterexample: bool
+
+
+@dataclass(frozen=True)
+class Method3PromptConfig:
+    include_example: bool
+    include_counterexample: bool
+
+
+@dataclass(frozen=True)
+class Algo1ProbeSpec:
+    run_name: str
+    model: str
+    subgraph1: list[Edge]
+    subgraph2: list[Edge]
+    prompt_config: Method1PromptConfig
+    output_dir: Path
+    resume: bool = False
+
+
+@dataclass(frozen=True)
+class Algo2ProbeSpec:
+    run_name: str
+    model: str
+    seed_labels: list[str]
+    subgraph1: list[Edge]
+    subgraph2: list[Edge]
+    prompt_config: Method2PromptConfig
+    convergence_threshold: float
+    output_dir: Path
+    resume: bool = False
+
+
+@dataclass(frozen=True)
+class Algo3ProbeSpec:
+    run_name: str
+    model: str
+    source_labels: list[str]
+    target_labels: list[str]
+    prompt_config: Method3PromptConfig
+    child_count: int
+    max_depth: int
+    output_dir: Path
+    resume: bool = False
+
+
+run_algo1_probe = None
+run_algo2_probe = None
+run_algo3_probe = None
 
 
 def handle_probe(args: Namespace) -> int:
     try:
-        if args.provider == "anthropic":
-            api_key = _require_api_key("ANTHROPIC_API_KEY")
-        else:
-            api_key = _require_api_key("MISTRAL_API_KEY")
+        api_key = resolve_provider_api_key(args.provider)
 
         if args.algorithm == "algo1":
             return _handle_algo1_probe(args, api_key=api_key)
@@ -58,15 +102,21 @@ def handle_probe(args: Namespace) -> int:
 
 
 def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
+    (
+        probe_spec_class,
+        prompt_config_class,
+        probe_runner,
+        chat_client_class,
+    ) = _load_algo1_runtime_symbols()
     subgraph1 = _parse_edge_list(args.subgraph1_edge)
     subgraph2 = _parse_edge_list(args.subgraph2_edge)
     output_dir = Path(args.output_dir)
-    spec = Algo1ProbeSpec(
+    spec = probe_spec_class(
         run_name=args.run_name,
         model=args.model,
         subgraph1=subgraph1,
         subgraph2=subgraph2,
-        prompt_config=Method1PromptConfig(
+        prompt_config=prompt_config_class(
             use_adjacency_notation=False,
             use_array_representation=False,
             include_explanation=False,
@@ -76,17 +126,13 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
         output_dir=output_dir,
         resume=args.resume,
     )
-    if args.provider == "anthropic":
-        chat_client = AnthropicChatClient(
-            api_key=api_key,
-            model=args.model,
-        )
-    else:
-        chat_client = Algo1ChatClient(
-            api_key=api_key,
-            model=args.model,
-        )
-    summary = run_algo1_probe(
+    chat_client = build_chat_client(
+        provider=args.provider,
+        api_key=api_key,
+        model=args.model,
+        mistral_chat_client_class=chat_client_class,
+    )
+    summary = probe_runner(
         spec=spec,
         chat_client=chat_client,
     )
@@ -95,14 +141,21 @@ def _handle_algo1_probe(args: Namespace, *, api_key: str) -> int:
 
 
 def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
+    (
+        probe_spec_class,
+        prompt_config_class,
+        probe_runner,
+        chat_client_class,
+        embedding_client_class,
+    ) = _load_algo2_runtime_symbols()
     output_dir = Path(args.output_dir)
-    spec = Algo2ProbeSpec(
+    spec = probe_spec_class(
         run_name=args.run_name,
         model=args.model,
         seed_labels=args.seed_label,
         subgraph1=[],
         subgraph2=[],
-        prompt_config=Method2PromptConfig(
+        prompt_config=prompt_config_class(
             use_adjacency_notation=False,
             use_array_representation=False,
             include_explanation=False,
@@ -113,21 +166,17 @@ def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
         output_dir=output_dir,
         resume=args.resume,
     )
-    if args.provider == "anthropic":
-        chat_client = AnthropicChatClient(
-            api_key=api_key,
-            model=args.model,
-        )
-    else:
-        chat_client = Algo2ChatClient(
-            api_key=api_key,
-            model=args.model,
-        )
-    embedding_client = Algo2EmbeddingClient(
+    chat_client = build_chat_client(
+        provider=args.provider,
+        api_key=api_key,
+        model=args.model,
+        mistral_chat_client_class=chat_client_class,
+    )
+    embedding_client = embedding_client_class(
         api_key=api_key,
         model=args.embedding_model,
     )
-    summary = run_algo2_probe(
+    summary = probe_runner(
         spec=spec,
         chat_client=chat_client,
         embedding_client=embedding_client,
@@ -137,13 +186,19 @@ def _handle_algo2_probe(args: Namespace, *, api_key: str) -> int:
 
 
 def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
+    (
+        probe_spec_class,
+        prompt_config_class,
+        probe_runner,
+        chat_client_class,
+    ) = _load_algo3_runtime_symbols()
     output_dir = Path(args.output_dir)
-    spec = Algo3ProbeSpec(
+    spec = probe_spec_class(
         run_name=args.run_name,
         model=args.model,
         source_labels=args.source_label,
         target_labels=args.target_label,
-        prompt_config=Method3PromptConfig(
+        prompt_config=prompt_config_class(
             include_example=False,
             include_counterexample=False,
         ),
@@ -152,17 +207,13 @@ def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
         output_dir=output_dir,
         resume=args.resume,
     )
-    if args.provider == "anthropic":
-        chat_client = AnthropicChatClient(
-            api_key=api_key,
-            model=args.model,
-        )
-    else:
-        chat_client = Algo3ChatClient(
-            api_key=api_key,
-            model=args.model,
-        )
-    summary = run_algo3_probe(
+    chat_client = build_chat_client(
+        provider=args.provider,
+        api_key=api_key,
+        model=args.model,
+        mistral_chat_client_class=chat_client_class,
+    )
+    summary = probe_runner(
         spec=spec,
         chat_client=chat_client,
     )
@@ -170,12 +221,118 @@ def _handle_algo3_probe(args: Namespace, *, api_key: str) -> int:
     return 0
 
 
-def _require_api_key(environment_variable: str) -> str:
-    api_key = os.environ.get(environment_variable)
-    if api_key:
-        return api_key
+def _load_algo1_runtime_symbols():
+    global Algo1ChatClient, Method1PromptConfig, Algo1ProbeSpec, run_algo1_probe
 
-    raise ValueError(f"Missing required environment variable: {environment_variable}")
+    if (
+        Algo1ChatClient is None
+        or Method1PromptConfig is None
+        or Algo1ProbeSpec is None
+        or run_algo1_probe is None
+    ):
+        from llm_conceptual_modeling.algo1.mistral import (
+            Method1PromptConfig as loaded_prompt_config,
+        )
+        from llm_conceptual_modeling.algo1.mistral import (
+            MistralChatClient as loaded_chat_client,
+        )
+        from llm_conceptual_modeling.algo1.probe import (
+            Algo1ProbeSpec as loaded_probe_spec,
+        )
+        from llm_conceptual_modeling.algo1.probe import (
+            run_algo1_probe as loaded_probe_runner,
+        )
+
+        if Algo1ChatClient is None:
+            Algo1ChatClient = loaded_chat_client
+        if Method1PromptConfig is None:
+            Method1PromptConfig = loaded_prompt_config
+        if Algo1ProbeSpec is None:
+            Algo1ProbeSpec = loaded_probe_spec
+        if run_algo1_probe is None:
+            run_algo1_probe = loaded_probe_runner
+
+    return Algo1ProbeSpec, Method1PromptConfig, run_algo1_probe, Algo1ChatClient
+
+
+def _load_algo2_runtime_symbols():
+    global Algo2ChatClient, Algo2EmbeddingClient, Method2PromptConfig, Algo2ProbeSpec, run_algo2_probe
+
+    if (
+        Algo2ChatClient is None
+        or Algo2EmbeddingClient is None
+        or Method2PromptConfig is None
+        or Algo2ProbeSpec is None
+        or run_algo2_probe is None
+    ):
+        from llm_conceptual_modeling.algo2.embeddings import (
+            MistralEmbeddingClient as loaded_embedding_client,
+        )
+        from llm_conceptual_modeling.algo2.mistral import (
+            Method2PromptConfig as loaded_prompt_config,
+        )
+        from llm_conceptual_modeling.algo2.mistral import (
+            MistralChatClient as loaded_chat_client,
+        )
+        from llm_conceptual_modeling.algo2.probe import (
+            Algo2ProbeSpec as loaded_probe_spec,
+        )
+        from llm_conceptual_modeling.algo2.probe import (
+            run_algo2_probe as loaded_probe_runner,
+        )
+
+        if Algo2ChatClient is None:
+            Algo2ChatClient = loaded_chat_client
+        if Algo2EmbeddingClient is None:
+            Algo2EmbeddingClient = loaded_embedding_client
+        if Method2PromptConfig is None:
+            Method2PromptConfig = loaded_prompt_config
+        if Algo2ProbeSpec is None:
+            Algo2ProbeSpec = loaded_probe_spec
+        if run_algo2_probe is None:
+            run_algo2_probe = loaded_probe_runner
+
+    return (
+        Algo2ProbeSpec,
+        Method2PromptConfig,
+        run_algo2_probe,
+        Algo2ChatClient,
+        Algo2EmbeddingClient,
+    )
+
+
+def _load_algo3_runtime_symbols():
+    global Algo3ChatClient, Method3PromptConfig, Algo3ProbeSpec, run_algo3_probe
+
+    if (
+        Algo3ChatClient is None
+        or Method3PromptConfig is None
+        or Algo3ProbeSpec is None
+        or run_algo3_probe is None
+    ):
+        from llm_conceptual_modeling.algo3.mistral import (
+            Method3PromptConfig as loaded_prompt_config,
+        )
+        from llm_conceptual_modeling.algo3.mistral import (
+            MistralChatClient as loaded_chat_client,
+        )
+        from llm_conceptual_modeling.algo3.probe import (
+            Algo3ProbeSpec as loaded_probe_spec,
+        )
+        from llm_conceptual_modeling.algo3.probe import (
+            run_algo3_probe as loaded_probe_runner,
+        )
+
+        if Algo3ChatClient is None:
+            Algo3ChatClient = loaded_chat_client
+        if Method3PromptConfig is None:
+            Method3PromptConfig = loaded_prompt_config
+        if Algo3ProbeSpec is None:
+            Algo3ProbeSpec = loaded_probe_spec
+        if run_algo3_probe is None:
+            run_algo3_probe = loaded_probe_runner
+
+    return Algo3ProbeSpec, Method3PromptConfig, run_algo3_probe, Algo3ChatClient
 
 
 def _parse_edge_list(edge_values: list[str]) -> list[Edge]:
