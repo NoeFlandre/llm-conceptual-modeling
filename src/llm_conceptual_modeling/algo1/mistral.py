@@ -150,39 +150,43 @@ def _build_representation_explanation(
     use_adjacency_notation: bool,
     use_array_representation: bool,
 ) -> str:
+    intro = (
+        "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
+        "meaning, such that we can interpret having 'more' or 'less' of a node. "
+        "Edges represent the existence of a direct relation between two nodes. "
+    )
     if use_adjacency_notation and use_array_representation:
         return (
-            "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
-            "meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent "
-            "the existence of a direct relation between two nodes. The knowledge map is encoded using "
-            "a list of nodes and an associated adjacency matrix. The adjacency matrix is an n*n square "
-            "matrix that represents whether each edge exists. In the matrix, each row and each column "
-            "corresponds to a node. Rows and columns come in the same order as the list of nodes. A "
-            "relation between node A and node B is represented as a 1 in the row corresponding to A "
-            "and the column corresponding to B."
+            intro
+            + (
+                "The knowledge map is encoded using a list of nodes and an associated adjacency "
+                "matrix. "
+            )
+            + (
+                "The adjacency matrix is an n*n square matrix that represents whether each edge "
+                "exists. "
+            )
+            + "In the matrix, each row and each column corresponds to a node. "
+            + "Rows and columns come in the same order as the list of nodes. "
+            + (
+                "A relation between node A and node B is represented as a 1 in the row "
+                "corresponding to A "
+            )
+            + "and the column corresponding to B."
         )
 
     if use_adjacency_notation and not use_array_representation:
-        return (
-            "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
-            "meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent "
-            "the existence of a direct relation between two nodes. The knowledge map is encoded using "
-            "tags for nodes and an associated adjacency matrix."
+        return intro + (
+            "The knowledge map is encoded using tags for nodes and an associated adjacency matrix."
         )
 
     if not use_adjacency_notation and use_array_representation:
         return (
-            "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
-            "meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent "
-            "the existence of a direct relation between two nodes. The knowledge map is encoded as a "
-            "list of edges. Each edge is a pair of nodes."
+            intro + "The knowledge map is encoded as a list of edges. Each edge is a pair of nodes."
         )
 
     return (
-        "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
-        "meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent "
-        "the existence of a direct relation between two nodes. The knowledge map is encoded using "
-        "a hierarchical markup language representation."
+        intro + "The knowledge map is encoded using a hierarchical markup language representation."
     )
 
 

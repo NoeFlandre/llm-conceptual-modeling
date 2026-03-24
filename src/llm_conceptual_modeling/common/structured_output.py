@@ -33,9 +33,11 @@ def normalize_structured_response(
     if schema_name == "label_list" and isinstance(parsed_content, list):
         return {"labels": [_normalize_string_item(item, "label") for item in parsed_content]}
 
-    raise ValueError(
-        f"Unsupported structured response shape for schema {schema_name}: {type(parsed_content).__name__}"
+    message = (
+        "Unsupported structured response shape for schema "
+        f"{schema_name}: {type(parsed_content).__name__}"
     )
+    raise ValueError(message)
 
 
 def _normalize_edge_item(item: object) -> dict[str, str]:

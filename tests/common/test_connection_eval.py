@@ -107,7 +107,10 @@ def test_algo1_factorial_matches_legacy_fixture(tmp_path) -> None:
         "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
         "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv",
     ]
-    expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/factorial/factorial_analysis_algo1_gpt_5_without_error.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo1/gpt-5/factorial/"
+        "factorial_analysis_algo1_gpt_5_without_error.csv"
+    )
     output_path = tmp_path / "factorial_analysis_algo1_gpt_5_without_error.csv"
 
     run_algo1_factorial_analysis(input_paths, output_path)
@@ -124,7 +127,10 @@ def test_algo2_factorial_matches_legacy_fixture(tmp_path) -> None:
         "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv",
         "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv",
     ]
-    expected_path = "tests/reference_fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo2/gpt-5/factorial/"
+        "factorial_analysis_gpt_5_algo2_without_error.csv"
+    )
     output_path = tmp_path / "factorial_analysis_gpt_5_algo2_without_error.csv"
 
     run_algo2_factorial_analysis(input_paths, output_path)
@@ -139,7 +145,10 @@ def test_algo3_factorial_matches_legacy_fixture(tmp_path) -> None:
     input_path = (
         "tests/reference_fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
     )
-    expected_path = "tests/reference_fixtures/legacy/algo3/gpt-5/factorial/factorial_analysis_results_gpt5_without_error.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo3/gpt-5/factorial/"
+        "factorial_analysis_results_gpt5_without_error.csv"
+    )
     output_path = tmp_path / "factorial_analysis_results_gpt5_without_error.csv"
 
     run_algo3_factorial_analysis(input_path, output_path)

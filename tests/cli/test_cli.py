@@ -208,7 +208,10 @@ def test_cli_eval_algo3_writes_legacy_parity_recall(tmp_path) -> None:
 
 
 def test_cli_factorial_algo1_writes_legacy_parity_output(tmp_path) -> None:
-    expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/factorial/factorial_analysis_algo1_gpt_5_without_error.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo1/gpt-5/factorial/"
+        "factorial_analysis_algo1_gpt_5_without_error.csv"
+    )
     output_path = tmp_path / "factorial.csv"
 
     exit_code = main(
@@ -234,7 +237,10 @@ def test_cli_factorial_algo1_writes_legacy_parity_output(tmp_path) -> None:
 
 
 def test_cli_factorial_algo2_writes_legacy_parity_output(tmp_path) -> None:
-    expected_path = "tests/reference_fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo2/gpt-5/factorial/"
+        "factorial_analysis_gpt_5_algo2_without_error.csv"
+    )
     output_path = tmp_path / "factorial.csv"
 
     exit_code = main(
@@ -260,7 +266,10 @@ def test_cli_factorial_algo2_writes_legacy_parity_output(tmp_path) -> None:
 
 
 def test_cli_factorial_algo3_writes_legacy_parity_output(tmp_path) -> None:
-    expected_path = "tests/reference_fixtures/legacy/algo3/gpt-5/factorial/factorial_analysis_results_gpt5_without_error.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo3/gpt-5/factorial/"
+        "factorial_analysis_results_gpt5_without_error.csv"
+    )
     output_path = tmp_path / "factorial.csv"
 
     exit_code = main(
