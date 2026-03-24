@@ -1,8 +1,11 @@
 .venv/
+.work-venv/
 .pytest_cache/
 .ruff_cache/
 .coverage
 __pycache__/
+*.pyc
 .DS_Store
+runs/
 paper/
 AGENTS.md

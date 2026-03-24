@@ -1,3 +1,0 @@
-2026-03-23T10:01:30.219524+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond10011 algorithm=algo1 stage=manifest message=manifest written
-2026-03-23T10:01:30.221126+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond10011 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
-2026-03-23T10:01:30.221645+00:00 level=INFO run=algo1_sg2_sg3_rep0_cond10011 algorithm=algo1 stage=chat_call_started message=chat call started schema=edge_list prompt_chars=10076
