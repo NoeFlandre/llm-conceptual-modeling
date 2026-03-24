@@ -1,0 +1,2 @@
+algorithm,factor,metric,source_file_count,level_low,level_high,global_mean_low,global_mean_high,global_mean_difference_high_minus_low,winner_count_low,winner_count_high,tie_count
+algo3,Number of Words,Recall,6,3,5,0.031755051388888865,0.047790406944444426,0.01603535555555556,2,2,2

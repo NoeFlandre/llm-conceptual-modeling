@@ -1,0 +1,13 @@
+source_input,Counter-Example,metric,n,mean,sample_std,median,min,max,ci95_low,ci95_high
+data/results/algo3/deepseek-chat-v3.1/evaluated/method3_results_evaluated_deepseek-chat-v3.1.csv,-1,Recall,120,0.055303033333333335,0.21108783319873436,0.0,0.0,1.0,0.01753462783310733,0.09307143883355934
+data/results/algo3/deepseek-chat-v3.1/evaluated/method3_results_evaluated_deepseek-chat-v3.1.csv,1,Recall,120,0.060227275000000004,0.2257906254868596,0.0,0.0,1.0,0.019828206174897736,0.10062634382510227
+data/results/algo3/deepseek-v3-chat-0324/evaluated/method3_results_evaluated_deepseek-chat-v3.csv,-1,Recall,120,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+data/results/algo3/deepseek-v3-chat-0324/evaluated/method3_results_evaluated_deepseek-chat-v3.csv,1,Recall,120,0.014772725000000002,0.11489560508441417,0.0,0.0,1.0,-0.0057847071232267015,0.03533015712322671
+data/results/algo3/gemini-2.0-flash-exp/evaluated/method3_results_evaluated_gemini_2.0.csv,-1,Recall,120,0.07272728333333332,0.19891016761740188,0.0,0.0,1.0,0.037137738664413014,0.10831682800225363
+data/results/algo3/gemini-2.0-flash-exp/evaluated/method3_results_evaluated_gemini_2.0.csv,1,Recall,120,0.040530308333333334,0.15809696569132278,0.0,0.0,1.0,0.012243172035129115,0.06881744463153755
+data/results/algo3/google-gemini-2.5-pro/evaluated/method3_results_evaluated_gemini_2.5pro.csv,-1,Recall,120,0.018560608333333332,0.1107926671813827,0.0,0.0,1.0,-0.0012627150536591684,0.03838393172032584
+data/results/algo3/google-gemini-2.5-pro/evaluated/method3_results_evaluated_gemini_2.5pro.csv,1,Recall,120,0.042045458333333334,0.17452549748537965,0.0,0.0,1.0,0.010818884734699163,0.0732720319319675
+data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv,-1,Recall,120,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+data/results/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv,1,Recall,120,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+data/results/algo3/openai-gpt-4o/evaluated/method3_results_evaluated_gpt4o.csv,-1,Recall,120,0.10833333333333334,0.3121040909463286,0.0,0.0,1.0,0.052490826039023636,0.16417584062764304
+data/results/algo3/openai-gpt-4o/evaluated/method3_results_evaluated_gpt4o.csv,1,Recall,120,0.064772725,0.24415256127462057,0.0,0.0,1.0,0.021088289007627832,0.10845716099237218

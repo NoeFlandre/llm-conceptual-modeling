@@ -76,6 +76,10 @@ def build_parser() -> argparse.ArgumentParser:
     summary_parser.add_argument("--metric", action="append", required=True)
     summary_parser.add_argument("--output", required=True)
 
+    summary_bundle_parser = analyze_subparsers.add_parser("summary-bundle")
+    summary_bundle_parser.add_argument("--results-root", default="data/results")
+    summary_bundle_parser.add_argument("--output-dir", required=True)
+
     failures_parser = analyze_subparsers.add_parser("failures")
     failures_parser.add_argument("--input", action="append", required=True)
     failures_parser.add_argument("--result-column", required=True)

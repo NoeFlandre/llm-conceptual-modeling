@@ -1,0 +1,4 @@
+algorithm,factor,metric,source_file_count,level_low,level_high,global_mean_low,global_mean_high,global_mean_difference_high_minus_low,winner_count_low,winner_count_high,tie_count
+algo2,Counterexample,accuracy,18,-1,1,0.8685947147974764,0.8581837110725192,-0.01041100372495718,12,6,0
+algo2,Counterexample,precision,18,-1,1,0.3500179566409767,0.33218350735227753,-0.01783444928869915,12,6,0
+algo2,Counterexample,recall,18,-1,1,0.11156798245614027,0.10508996970234137,-0.0064780127537989035,10,7,1

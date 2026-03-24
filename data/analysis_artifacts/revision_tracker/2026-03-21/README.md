@@ -8,16 +8,10 @@ The source data for these artifacts comes from the imported primary result files
 
 ## Files
 
-- `algo1_explanation_directionality.csv`
-  File-level mean comparisons for ALGO1 under the `Explanation` factor.
-- `algo2_convergence_directionality.csv`
-  File-level mean comparisons for ALGO2 under the `Convergence` factor.
-- `algo2_explanation_directionality.csv`
-  File-level mean comparisons for ALGO2 under the `Explanation` factor.
-- `algo3_depth_summary.csv`
-  Mean recall summaries for ALGO3 grouped by `Depth`.
-- `algo3_number_of_words_summary.csv`
-  Mean recall summaries for ALGO3 grouped by `Number of Words`.
+- `statistical_reporting/`
+  Organized descriptive-statistics bundle for the statistical-reporting revision item.
+  It contains per-algorithm, per-factor grouped summaries plus compact metric overviews and
+  bundle-level manifest and overview files.
 - `all_row_level_failures.csv`
   Row-level failure classification across all imported raw result files.
 - `failure_counts_by_model.csv`

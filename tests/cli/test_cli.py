@@ -3,6 +3,41 @@ import pandas as pd
 from llm_conceptual_modeling.cli import main
 
 
+def test_cli_analyze_summary_bundle_writes_organized_review_artifacts(tmp_path) -> None:
+    results_root = tmp_path / "results"
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        results_root / "algo1" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+    )
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        results_root / "algo2" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+    )
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+        results_root / "algo3" / "gpt-5" / "evaluated" / "method3_results_evaluated_gpt5.csv",
+    )
+    output_dir = tmp_path / "bundle"
+
+    exit_code = main(
+        [
+            "analyze",
+            "summary-bundle",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "bundle_manifest.csv").exists()
+    assert (output_dir / "bundle_overview.csv").exists()
+    assert (output_dir / "algo1" / "explanation" / "grouped_metric_summary.csv").exists()
+    assert (output_dir / "algo2" / "convergence" / "metric_overview.csv").exists()
+    assert (output_dir / "algo3" / "depth" / "metric_overview.csv").exists()
+
+
 def test_cli_eval_algo1_writes_legacy_parity_metrics(tmp_path) -> None:
     raw_path = "tests/reference_fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
     expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
@@ -234,6 +269,11 @@ def test_cli_factorial_algo1_writes_legacy_parity_output(tmp_path) -> None:
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def _copy_fixture(source: str, destination) -> None:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    pd.read_csv(source).to_csv(destination, index=False)
 
 
 def test_cli_factorial_algo2_writes_legacy_parity_output(tmp_path) -> None:

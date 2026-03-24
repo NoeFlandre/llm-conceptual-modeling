@@ -1,0 +1,4 @@
+algorithm,factor,metric,source_file_count,level_low,level_high,global_mean_low,global_mean_high,global_mean_difference_high_minus_low,winner_count_low,winner_count_high,tie_count
+algo1,Example,accuracy,18,-1,1,0.9117062967717037,0.9094507156280413,-0.002255581143662422,3,15,0
+algo1,Example,precision,18,-1,1,0.2987260850252707,0.3305816977359905,0.031855612710719794,3,15,0
+algo1,Example,recall,18,-1,1,0.12342297780522572,0.09579674788612112,-0.0276262299191046,16,2,0

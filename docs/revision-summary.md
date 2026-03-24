@@ -77,17 +77,24 @@ The strongest new reviewer-facing conclusion is therefore not just "LLMs are var
 
 ### What The Reviewer Was Asking For
 
-The repository originally produced raw evaluated metric files, but it did not produce reviewer-facing summaries that could answer questions such as:
+This request was broader than "add one confidence interval." The reviewer was effectively asking for a descriptive-analysis layer that could support all of the following:
 
-- What is the mean effect of a factor level?
-- How much spread is there around that mean?
-- Are the apparent differences stable enough to report with confidence intervals?
+- per-factor summaries rather than raw row dumps,
+- uncertainty information rather than means alone,
+- clearer factor-level comparisons for every algorithm,
+- and a structure that a reviewer can actually inspect without reverse-engineering ad hoc files.
 
-### What Was Implemented
+The earlier version of this section was too narrow because it highlighted only a few factors, especially ALGO1 `Explanation`. That was useful as an initial example, but not a full response to the review request.
 
-The revision added `lcm analyze summary`, which computes grouped descriptive statistics from evaluated CSVs.
+### What Was Implemented In Code
 
-For each metric and grouping, the command exports:
+Two pieces now answer this request.
+
+1. The generic descriptive-analysis command:
+
+- `lcm analyze summary`
+
+This computes grouped descriptive statistics from evaluated CSVs and exports:
 
 - `n`
 - `mean`
@@ -98,94 +105,181 @@ For each metric and grouping, the command exports:
 - `ci95_low`
 - `ci95_high`
 
+2. A new organized bundle generator for this reviewer item:
+
+- `lcm analyze summary-bundle`
+
+This new bundle command was added specifically to make the evidence exhaustive and navigable. It now generates:
+
+- one subdirectory per algorithm,
+- one subdirectory per reviewed factor,
+- one `grouped_metric_summary.csv` per factor,
+- one `metric_overview.csv` per factor,
+- a top-level `bundle_manifest.csv`,
+- a top-level `bundle_overview.csv`,
+- and a local `README.md` explaining the layout.
+
+Code locations:
+
+- `src/llm_conceptual_modeling/analysis/summary.py`
+- `src/llm_conceptual_modeling/analysis/summary_bundle.py`
+
 ### Commands Used
 
-Representative audited commands:
+The organized reviewer-facing bundle is now produced by:
 
 ```bash
-lcm analyze summary \
-  --input data/results/algo1/*/evaluated/*.csv \
-  --group-by Explanation \
-  --metrics accuracy precision recall \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/algo1_explanation_directionality.csv
-
-lcm analyze summary \
-  --input data/results/algo2/*/evaluated/*.csv \
-  --group-by Convergence \
-  --metrics accuracy precision recall \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/algo2_convergence_directionality.csv
-
-lcm analyze summary \
-  --input data/results/algo3/*/evaluated/*.csv \
-  --group-by Depth \
-  --metrics Recall \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/algo3_depth_summary.csv
+lcm analyze summary-bundle \
+  --results-root data/results \
+  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting
 ```
+
+That bundle internally expands the descriptive analysis across all audited factors:
+
+- ALGO1:
+  - `Explanation`
+  - `Example`
+  - `Counterexample`
+  - `Array/List(1/-1)`
+  - `Tag/Adjacency(1/-1)`
+- ALGO2:
+  - `Explanation`
+  - `Example`
+  - `Counterexample`
+  - `Array/List(1/-1)`
+  - `Tag/Adjacency(1/-1)`
+  - `Convergence`
+- ALGO3:
+  - `Depth`
+  - `Number of Words`
+  - `Example`
+  - `Counter-Example`
+
+### Evidence Organization
+
+The evidence for this reviewer item is now organized under:
+
+- `data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting/README.md`
+- `data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting/bundle_manifest.csv`
+- `data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting/bundle_overview.csv`
+
+Per-factor evidence now lives in nested directories such as:
+
+- `.../statistical_reporting/algo1/explanation/`
+- `.../statistical_reporting/algo2/convergence/`
+- `.../statistical_reporting/algo3/depth/`
+
+This replaces the earlier evidence pattern where a few summary CSVs were sitting directly in the revision-tracker root.
 
 ### Most Informative Output
 
-ALGO1 `Explanation` directionality:
+The most compact reviewer-facing artifact is `bundle_overview.csv`. It shows, for every algorithm-factor-metric combination:
 
-| Metric | Winner count across 18 file-level comparisons |
-| --- | --- |
-| Accuracy | `Explanation=1` won in 11 of 18 |
-| Precision | `Explanation=1` won in 12 of 18 |
-| Recall | `Explanation=-1` won in 13 of 18 |
+- the two levels being compared,
+- the global mean at each level,
+- the difference between those global means,
+- how many source files favored each level,
+- and how many source files tied.
 
-ALGO2 `Convergence` directionality:
+Representative rows:
 
-| Metric | Winner count across 18 file-level comparisons |
-| --- | --- |
-| Accuracy | `Convergence=-1` won in 13 of 18 |
-| Precision | `Convergence=-1` won in 12 of 18 |
-| Recall | `Convergence=1` won in 13 of 18 |
-
-ALGO2 `Explanation` directionality:
-
-| Metric | Winner count across 18 file-level comparisons |
-| --- | --- |
-| Accuracy | split 9 to 9 |
-| Precision | split 9 to 9 |
-| Recall | split 9 to 9 |
-
-ALGO3 `Depth` summary:
-
-| Depth | Global mean recall |
-| --- | --- |
-| `Depth=2` | `0.0652` |
-| `Depth=1` | `0.0144` |
-
-ALGO3 `Number of Words` summary:
-
-| Number of Words | Global mean recall |
-| --- | --- |
-| `5` | `0.0478` |
-| `3` | `0.0318` |
+| Algorithm | Factor | Metric | Low level | High level | Global mean low | Global mean high | High-low difference | Winner count low | Winner count high | Ties |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ALGO1 | `Explanation` | Accuracy | `-1` | `1` | `0.9062` | `0.9149` | `+0.0087` | `7` | `11` | `0` |
+| ALGO1 | `Explanation` | Precision | `-1` | `1` | `0.3043` | `0.3250` | `+0.0207` | `6` | `12` | `0` |
+| ALGO1 | `Explanation` | Recall | `-1` | `1` | `0.1153` | `0.1039` | `-0.0114` | `13` | `5` | `0` |
+| ALGO1 | `Example` | Precision | `-1` | `1` | `0.2987` | `0.3306` | `+0.0319` | `3` | `15` | `0` |
+| ALGO1 | `Example` | Recall | `-1` | `1` | `0.1234` | `0.0958` | `-0.0276` | `16` | `2` | `0` |
+| ALGO2 | `Convergence` | Accuracy | `-1` | `1` | `0.8472` | `0.8796` | `+0.0324` | `13` | `5` | `0` |
+| ALGO2 | `Convergence` | Precision | `-1` | `1` | `0.3508` | `0.3314` | `-0.0194` | `12` | `6` | `0` |
+| ALGO2 | `Convergence` | Recall | `-1` | `1` | `0.1022` | `0.1144` | `+0.0122` | `5` | `13` | `0` |
+| ALGO2 | `Tag/Adjacency(1/-1)` | Accuracy | `-1` | `1` | `0.8545` | `0.8723` | `+0.0178` | `4` | `14` | `0` |
+| ALGO2 | `Explanation` | Accuracy | `-1` | `1` | `0.8633` | `0.8635` | `+0.0002` | `9` | `9` | `0` |
+| ALGO3 | `Depth` | Recall | `1` | `2` | `0.0144` | `0.0652` | `+0.0508` | `0` | `5` | `1` |
+| ALGO3 | `Number of Words` | Recall | `3` | `5` | `0.0318` | `0.0478` | `+0.0160` | `2` | `2` | `2` |
 
 ### Detailed Findings
 
-The descriptive layer made several patterns much clearer than before.
+The more exhaustive bundle changes the statistical-reporting interpretation in several useful ways.
 
-- In ALGO1, adding explanation text was usually associated with better accuracy and precision, but not with better recall.
-- In ALGO2, the `Convergence` factor behaved like a precision-recall tradeoff:
-  - `Convergence=-1` more often improved accuracy and precision.
-  - `Convergence=1` more often improved recall.
-- In ALGO2, `Explanation` was much weaker than `Convergence`; there was no dominant direction across the imported files.
-- In ALGO3, increasing depth from `1` to `2` improved mean recall for every model except GPT-5, where both levels remained at zero.
-- For `Number of Words`, the global direction favored `5`, but it was not universal:
-  - DeepSeek Chat v3.1 improved from `0.0284` to `0.0871`
-  - Gemini 2.0 Flash improved from `0.0273` to `0.0860`
-  - Google Gemini 2.5 Pro stayed flat at `0.0303`
-  - GPT-5 stayed flat at `0.0000`
-  - GPT-4o decreased slightly from `0.0898` to `0.0833`
+#### ALGO1
+
+The initial explanation-focused slice was real, but incomplete.
+
+- `Explanation`:
+  - accuracy and precision favor `1`
+  - recall favors `-1`
+- `Example`:
+  - precision strongly favors `1`
+  - recall strongly favors `-1`
+  - accuracy actually favors `-1` globally and only `3` source files prefer `-1` versus `15` preferring `1`, which shows the importance of reporting both global means and per-file winner counts
+- `Counterexample`:
+  - effects are comparatively small
+  - recall is nearly neutral, with one tie and a global mean difference of only `-0.0006`
+- `Array/List(1/-1)`:
+  - accuracy and precision favor `-1`
+  - recall is nearly balanced
+- `Tag/Adjacency(1/-1)`:
+  - accuracy favors `1`
+  - precision favors `-1`
+  - recall slightly favors `1`
+
+This makes ALGO1 look less like "Explanation is the story" and more like a set of precision-recall and representation tradeoffs across several prompt dimensions.
+
+#### ALGO2
+
+The first version of the section was also too narrow here.
+
+- `Convergence` remains the strongest descriptive factor:
+  - higher global mean accuracy at `1`
+  - higher global mean recall at `1`
+  - higher global mean precision at `-1`
+  - winner counts reinforce the precision-recall tradeoff rather than a single uniformly better setting
+- `Explanation` is descriptively weak:
+  - accuracy split `9` to `9`
+  - precision split `9` to `9`
+  - recall split `9` to `9`
+  - global mean differences are tiny
+- `Example` and `Counterexample` both matter more descriptively than `Explanation`:
+  - both tend to reduce accuracy and precision when moved from `-1` to `1`
+  - both also slightly reduce recall on average
+- `Tag/Adjacency(1/-1)` has a meaningful descriptive effect on accuracy:
+  - global mean rises from `0.8545` to `0.8723`
+  - `14` of `18` files favor level `1`
+
+So ALGO2 is not just "Convergence plus everything else." It has a broader descriptive structure, but `Convergence` is still the clearest factor.
+
+#### ALGO3
+
+The earlier section mentioned only `Depth` and `Number of Words`, but the bundle also exposes the example-related factors.
+
+- `Depth` is the clearest descriptive signal:
+  - global recall rises from `0.0144` to `0.0652`
+  - `5` of `6` files favor `Depth=2`
+  - `1` file ties
+- `Number of Words` is mixed:
+  - global mean favors `5`
+  - winner counts are split `2` to `2` with `2` ties
+- `Example` is mildly favorable:
+  - recall rises from `0.0347` to `0.0449`
+  - `4` of `6` files favor `1`
+- `Counter-Example` is weak and mixed:
+  - global mean slightly decreases from `0.0425` to `0.0371`
+  - winner counts are `2` low, `3` high, `1` tie
+
+This means that, even before formal hypothesis testing, ALGO3 already shows a distinction between one relatively strong descriptive factor (`Depth`) and several weaker ones.
 
 ### Interpretation
 
-The main value of this revision item is not just that confidence intervals now exist. It is that the repository can now support more precise claims:
+The reworked response to this reviewer item is more complete in three ways.
 
-- some factors show directional effects,
-- some factors primarily induce tradeoffs,
-- and some factors are much weaker than they first appear from raw metric tables.
+1. It now covers all audited factors for all three algorithms rather than only a few example factors.
+2. It now organizes the evidence in a reviewer-readable structure instead of dropping a handful of CSVs into one directory.
+3. It now supports a stronger descriptive conclusion:
+
+> The imported corpus does not show one universal prompt setting that improves everything. Instead, it shows a collection of factor-specific tradeoffs, with some dimensions clearly stronger than others.
+
+That is a much better statistical-reporting answer than the earlier narrow explanation-focused summary.
 
 ## 2. Formal Hypothesis Testing
 
