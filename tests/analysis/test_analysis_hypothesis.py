@@ -41,7 +41,12 @@ def test_cli_analyze_hypothesis_writes_paired_factor_tests(tmp_path) -> None:
     actual = pd.read_csv(output_path)
     low_values = [0.1, 0.4, 0.2, 0.3]
     high_values = [0.3, 0.5, 0.6, 0.4]
+    differences = pd.Series(high_values) - pd.Series(low_values)
     expected_statistic, expected_p_value = ttest_rel(high_values, low_values)
+    difference_sample_std = differences.std(ddof=1)
+    difference_standard_error = difference_sample_std / (len(differences) ** 0.5)
+    difference_margin = 1.96 * difference_standard_error
+    effect_size_paired_d = differences.mean() / difference_sample_std
 
     expected = pd.DataFrame(
         {
@@ -53,7 +58,11 @@ def test_cli_analyze_hypothesis_writes_paired_factor_tests(tmp_path) -> None:
             "pair_count": [4],
             "mean_low": [sum(low_values) / 4],
             "mean_high": [sum(high_values) / 4],
-            "mean_difference": [(sum(high_values) - sum(low_values)) / 4],
+            "mean_difference": [differences.mean()],
+            "difference_sample_std": [difference_sample_std],
+            "difference_ci95_low": [differences.mean() - difference_margin],
+            "difference_ci95_high": [differences.mean() + difference_margin],
+            "effect_size_paired_d": [effect_size_paired_d],
             "t_statistic": [expected_statistic],
             "p_value": [expected_p_value],
             "p_value_adjusted": [expected_p_value],

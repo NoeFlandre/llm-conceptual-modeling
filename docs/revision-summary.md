@@ -59,7 +59,7 @@ The strongest new reviewer-facing conclusion is therefore not just "LLMs are var
 | Revision theme | Exact reviewer concern | Repository response | Main finding |
 | --- | --- | --- | --- |
 | Statistical reporting | Missing confidence intervals and grouped summaries | Added `lcm analyze summary` | Factor-level descriptive patterns are now explicit and auditable |
-| Formal testing | Missing p-values and multiple-comparison adjustment | Added `lcm analyze hypothesis` with Benjamini-Hochberg correction | ALGO2 `Convergence` is the strongest tested factor in the imported corpus |
+| Formal testing | Missing p-values and multiple-comparison adjustment | Added `lcm analyze hypothesis` and `lcm analyze hypothesis-bundle` with Benjamini-Hochberg FDR correction | Exhaustive 16-factor formal test confirms ALGO2 `Convergence` as dominant; ALGO3 has no robust factor effects |
 | Failure understanding | Need reasons behind failures, not only successes | Added `lcm analyze failures` | Imported raw outputs are overwhelmingly valid; the issue is variability, not parse failure |
 | Replication justification | Five repetitions not justified | Added `lcm analyze stability` | ALGO1 and ALGO2 are nearly repetition-stable; ALGO3 is not |
 | Plot-ready reporting | Need distributional and figure-ready outputs | Added `lcm analyze figures` | The imported corpus can now be plotted directly with preserved provenance |
@@ -83,8 +83,6 @@ This request was broader than "add one confidence interval." The reviewer was ef
 - uncertainty information rather than means alone,
 - clearer factor-level comparisons for every algorithm,
 - and a structure that a reviewer can actually inspect without reverse-engineering ad hoc files.
-
-The earlier version of this section was too narrow because it highlighted only a few factors, especially ALGO1 `Explanation`. That was useful as an initial example, but not a full response to the review request.
 
 ### What Was Implemented In Code
 
@@ -169,8 +167,6 @@ Per-factor evidence now lives in nested directories such as:
 - `.../statistical_reporting/algo2/convergence/`
 - `.../statistical_reporting/algo3/depth/`
 
-This replaces the earlier evidence pattern where a few summary CSVs were sitting directly in the revision-tracker root.
-
 ### Most Informative Output
 
 The most compact reviewer-facing artifact is `bundle_overview.csv`. It shows, for every algorithm-factor-metric combination:
@@ -204,8 +200,6 @@ The more exhaustive bundle changes the statistical-reporting interpretation in s
 
 #### ALGO1
 
-The initial explanation-focused slice was real, but incomplete.
-
 - `Explanation`:
   - accuracy and precision favor `1`
   - recall favors `-1`
@@ -228,8 +222,6 @@ This makes ALGO1 look less like "Explanation is the story" and more like a set o
 
 #### ALGO2
 
-The first version of the section was also too narrow here.
-
 - `Convergence` remains the strongest descriptive factor:
   - higher global mean accuracy at `1`
   - higher global mean recall at `1`
@@ -251,8 +243,6 @@ So ALGO2 is not just "Convergence plus everything else." It has a broader descri
 
 #### ALGO3
 
-The earlier section mentioned only `Depth` and `Number of Words`, but the bundle also exposes the example-related factors.
-
 - `Depth` is the clearest descriptive signal:
   - global recall rises from `0.0144` to `0.0652`
   - `5` of `6` files favor `Depth=2`
@@ -271,15 +261,13 @@ This means that, even before formal hypothesis testing, ALGO3 already shows a di
 
 ### Interpretation
 
-The reworked response to this reviewer item is more complete in three ways.
+These numbers translate to three concise messages.
 
-1. It now covers all audited factors for all three algorithms rather than only a few example factors.
-2. It now organizes the evidence in a reviewer-readable structure instead of dropping a handful of CSVs into one directory.
-3. It now supports a stronger descriptive conclusion:
+1. There is no single prompt setting that improves every metric at once. The descriptive summaries repeatedly show tradeoffs, especially between precision and recall.
+2. Some factors matter much more than others. In particular, ALGO2 `Convergence` and ALGO3 `Depth` show clear directional structure, whereas ALGO2 `Explanation` is nearly neutral in the imported corpus.
+3. The algorithms are not behaving in the same way. ALGO1 and ALGO2 are shaped by several prompt-design tradeoffs, while ALGO3 is driven much more strongly by search depth than by the example-related factors.
 
-> The imported corpus does not show one universal prompt setting that improves everything. Instead, it shows a collection of factor-specific tradeoffs, with some dimensions clearly stronger than others.
-
-That is a much better statistical-reporting answer than the earlier narrow explanation-focused summary.
+In plain terms, the descriptive layer says the observed variability is structured rather than random noise: certain design choices reliably push the methods toward broader recall, others toward cleaner precision, and some settings barely move results at all.
 
 ## 2. Formal Hypothesis Testing
 
@@ -299,84 +287,183 @@ The reviewers wanted the paper to move beyond descriptive patterns into formal t
 
 ### What Was Implemented
 
-The revision added `lcm analyze hypothesis`, which performs paired two-level tests and applies Benjamini-Hochberg correction within each output file.
+The revision added two commands. The first is the generic hypothesis-testing command:
 
-The command emits:
+- `lcm analyze hypothesis`
 
-- `pair_count`
-- `mean_low`
-- `mean_high`
-- `mean_difference`
-- `t_statistic`
-- `p_value`
-- `p_value_adjusted`
-- `correction_method`
+The second is the organized bundle generator that produces the reviewer-facing evidence:
 
-### Commands Used
+- `lcm analyze hypothesis-bundle`
 
-Representative audited commands:
+Both apply the same core logic: paired two-level tests with Benjamini-Hochberg FDR correction.
+
+The output columns are:
+
+- `pair_count`: number of paired observations in the test
+- `mean_low` / `mean_high`: mean metric value at each factor level
+- `mean_difference`: mean of (high − low) across pairs
+- `difference_ci95_low` / `difference_ci95_high`: 95% confidence interval on the mean difference
+- `effect_size_paired_d`: Cohen's d for paired samples (standardized mean difference)
+- `t_statistic` / `p_value`: raw paired t-test output
+- `p_value_adjusted`: BH-corrected q-value
+- `correction_method`: always `benjamini-hochberg`
+
+Code locations:
+
+- `src/llm_conceptual_modeling/analysis/hypothesis.py`
+- `src/llm_conceptual_modeling/analysis/hypothesis_bundle.py`
+
+### Command Used
+
+The organized reviewer-facing bundle is produced by:
 
 ```bash
-lcm analyze hypothesis \
-  --input data/results/algo1/*/evaluated/*.csv \
-  --factor Explanation \
-  --pair-by Repetition Example Counterexample Array/List(1/-1) Tag/Adjacency(1/-1) \
-  --metrics accuracy precision recall \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/algo1_explanation_hypothesis.csv
-
-lcm analyze hypothesis \
-  --input data/results/algo2/*/evaluated/*.csv \
-  --factor Convergence \
-  --pair-by Repetition Explanation Example Counterexample Array/List(1/-1) Tag/Adjacency(1/-1) \
-  --metrics accuracy precision recall \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/algo2_convergence_hypothesis.csv
+lcm analyze hypothesis-bundle \
+  --results-root data/results \
+  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing
 ```
+
+This internally generates all factor-level paired tests and per-factor significance summaries.
+The generic single-factor command (`lcm analyze hypothesis`) is also available for focused investigations.
+
+### Why These Analytical Choices
+
+The reviewer asked for the analytical choices to be made explicit. Three decisions merit direct justification.
+
+**Paired t-test over independent-samples t-test.** Every source file in the corpus contains observations at both levels of each two-level factor, matched on all other design dimensions. A paired t-test exploits this structure and removes source-level variation from the error term, giving sharper tests than treating all observations as independent. The paired statistic is therefore strictly more appropriate here.
+
+**Benjamini-Hochberg over Bonferroni.** Bonferroni controls familywise error rate (FWER) by dividing alpha by the number of tests, which becomes very conservative as test counts grow. BH controls false-discovery rate (FDR) instead, which is a less stringent criterion appropriate for exploratory factor analysis. The reviewer asked for "multiple comparison adjustment" without specifying FWER control; BH is the standard choice when the goal is to identify which factor effects are real while keeping false discoveries below 5%. The `correction_method` column makes this choice auditable.
+
+**Cohen's d as the effect-size measure.** A significant p-value tells only whether an effect is unlikely to be zero; it says nothing about practical magnitude. Cohen's d for paired samples is computed as the mean difference divided by the standard deviation of the differences — the same information as the t-statistic but on a scale interpretable across factors. The bundle overview uses the standard scale: |d| < 0.2 negligible, 0.2–0.5 small, 0.5–0.8 medium, > 0.8 large. This allows direct comparison of effect strength across algorithm-factor combinations even when sample sizes differ.
+
+### Evidence Organization
+
+The evidence for this reviewer item is organized under:
+
+- `data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/README.md`
+- `data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/bundle_manifest.csv`
+- `data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/bundle_overview.csv`
+
+Per-factor evidence lives in nested directories such as:
+
+- `.../hypothesis_testing/algo1/explanation/`
+- `.../hypothesis_testing/algo2/convergence/`
+- `.../hypothesis_testing/algo3/depth/`
+
+### Audited Factors
+
+This bundle exhausts all valid two-level factors with explicit pairing:
+
+- ALGO1: `Explanation`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`
+- ALGO2: `Convergence`, `Explanation`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`
+- ALGO3: `Depth`, `Number of Words`, `Example`, `Counter-Example`
+
+This is 16 factor combinations across 3 algorithms, not a selective subset.
 
 ### Most Informative Output
 
-ALGO2 `Convergence` significance summary:
+The most compact reviewer-facing artifact is `bundle_overview.csv`. The strongest effects by combined significance count and effect size are:
 
-| Metric | Significant tests after BH correction | Dominant direction |
-| --- | --- | --- |
-| Accuracy | 15 of 18 | mostly `high_lt_low`, meaning `Convergence=-1` wins |
-| Precision | 14 of 18 | mostly `high_lt_low`, meaning `Convergence=-1` wins |
-| Recall | 15 of 18 | mostly `high_gt_low`, meaning `Convergence=1` wins |
-
-ALGO1 `Explanation` significance summary:
-
-| Metric | Significant tests after BH correction | Directional pattern |
-| --- | --- | --- |
-| Accuracy | 8 of 18 | mostly toward `Explanation=1` |
-| Precision | 9 of 18 | mixed, but more favorable to `Explanation=1` |
-| Recall | 8 of 18 | mostly toward `Explanation=-1` |
-
-ALGO3 factor testing:
-
-| Factor | Significant tests after BH correction |
-| --- | --- |
-| `Depth` | 2 of 6, both favoring `Depth=2` |
-| `Number of Words` | 0 of 6 |
+| Algorithm | Factor | Metric | Sig. tests | Sig. share | Cohen's d | Direction |
+| --- | --- | --- | --- | --- | --- | --- |
+| ALGO2 | `Convergence` | Accuracy | 15 / 18 | 83 % | +1.37 | low > high |
+| ALGO2 | `Convergence` | Recall | 15 / 18 | 83 % | +0.86 | high > low |
+| ALGO2 | `Convergence` | Precision | 14 / 18 | 78 % | −0.74 | low > high |
+| ALGO1 | `Example` | Accuracy | 15 / 18 | 83 % | +1.02 | high > low |
+| ALGO1 | `Example` | Recall | 13 / 18 | 72 % | −1.26 | high < low |
+| ALGO1 | `Example` | Precision | 9 / 18 | 50 % | +0.77 | high > low |
+| ALGO1 | `Tag/Adjacency(1/-1)` | Recall | 13 / 18 | 72 % | −0.66 | high < low |
+| ALGO2 | `Example` | Accuracy | 10 / 18 | 56 % | −1.33 | high < low |
+| ALGO2 | `Example` | Precision | 11 / 18 | 61 % | −1.16 | high < low |
+| ALGO1 | `Explanation` | Precision | 9 / 18 | 50 % | +1.05 | high > low |
+| ALGO1 | `Array/List(1/-1)` | Recall | 11 / 18 | 61 % | +0.88 | high > low |
+| ALGO1 | `Tag/Adjacency(1/-1)` | Accuracy | 10 / 18 | 56 % | −0.80 | high < low |
 
 ### Detailed Findings
 
-This revision item shows that the descriptive patterns were not all equally strong.
+The exhaustive bundle reveals structure that a selective set of factors would miss.
 
-- ALGO2 `Convergence` was the strongest factor tested in the imported corpus:
-  - `44` of `54` metric-level tests were significant after correction.
-- ALGO1 `Explanation` was weaker:
-  - `25` of `54` tests were significant after correction.
-- ALGO2 `Explanation` was weaker again:
-  - `21` of `54` tests were significant after correction.
-- ALGO3's `Depth` effect existed, but it was much less uniform than the ALGO2 `Convergence` effect.
-- ALGO3's `Number of Words` effect did not survive correction at all.
+#### ALGO1
+
+- `Example` is the strongest ALGO1 factor:
+  - Accuracy and precision favor `1` (large Cohen's d)
+  - Recall strongly favors `−1` (large Cohen's d, negative)
+  - This is a precision-recall tradeoff: adding examples improves precision but hurts recall
+- `Explanation` is moderate:
+  - Precision favors `1` (large d = 1.05)
+  - Accuracy and recall are mixed and weaker
+- `Tag/Adjacency(1/-1)` and `Array/List(1/-1)` both have measurable recall effects:
+  - Both reach large Cohen's d on recall despite moderate significance counts
+  - The recall direction is opposite between them (one favors high, one favors low), suggesting distinct mechanisms
+- `Counterexample` is the weakest factor:
+  - No metric reaches above 6 significant tests out of 18
+  - Effect sizes are consistently small
+
+The aggregate picture for ALGO1: `Example` dominates, and the remaining factors have metric-specific rather than uniform effects.
+
+#### ALGO2
+
+- `Convergence` is the strongest factor overall:
+  - 44 of 54 metric-level tests significant (81 %)
+  - Precision-recall tradeoff: precision favors `−1`, recall favors `+1`
+  - Accuracy favors `−1` (d = 1.37 — the largest single effect in the corpus)
+- `Example` and `Counterexample` are moderately strong and consistently reduce accuracy and precision:
+  - Both move accuracy toward `−1` with d in the medium-to-large range
+  - Neither is as strong as `Convergence`
+- `Explanation` is weak in ALGO2 specifically:
+  - only 21 of 54 tests significant
+  - Effect sizes are small
+  - This contrasts with ALGO1 where `Explanation` matters more — an important algorithm-by-factor interaction
+- `Tag/Adjacency(1/-1)` has a meaningful accuracy effect:
+  - 9 of 18 significant, d = 0.54
+  - Precision and recall are weaker
+
+The aggregate picture for ALGO2: `Convergence` is the dominant factor; `Explanation` matters much less than it does in ALGO1; `Example` and `Counterexample` have consistent but moderate accuracy effects.
+
+#### ALGO3
+
+- `Depth` is the only factor with meaningful formal support:
+  - 2 of 6 tests significant (both for GPT-4o)
+  - Effect size is large (d = 0.43, not as large as ALGO1/ALGO2 but notable given n = 6)
+  - Both significant results favor `Depth = 2`
+- `Number of Words`, `Example`, and `Counter-Example` all fail to reach significance:
+  - 0 of 6 significant tests each
+  - Effect sizes are small
+  - Consistent with the replication-stability finding that ALGO3 is too noisy for firm factor conclusions
+
+The aggregate picture for ALGO3: formal hypothesis testing adds little over descriptive analysis — `Depth` is the only factor with a directional signal, and even it is fragile given the small sample size and high noise.
+
+### Full Significance Summary
+
+For reference, the complete table of significant-test counts across all 16 factors:
+
+| Algorithm | Factor | Accuracy | Precision | Recall |
+| --- | --- | --- | --- | --- |
+| ALGO1 | `Explanation` | 8 / 18 | 9 / 18 | 8 / 18 |
+| ALGO1 | `Example` | 15 / 18 | 9 / 18 | 13 / 18 |
+| ALGO1 | `Counterexample` | 4 / 18 | 6 / 18 | 8 / 18 |
+| ALGO1 | `Array/List(1/-1)` | 8 / 18 | 10 / 18 | 11 / 18 |
+| ALGO1 | `Tag/Adjacency(1/-1)` | 10 / 18 | 12 / 18 | 13 / 18 |
+| ALGO2 | `Convergence` | 15 / 18 | 14 / 18 | 15 / 18 |
+| ALGO2 | `Explanation` | 6 / 18 | 6 / 18 | 9 / 18 |
+| ALGO2 | `Example` | 10 / 18 | 11 / 18 | 10 / 18 |
+| ALGO2 | `Counterexample` | 9 / 18 | 7 / 18 | 7 / 18 |
+| ALGO2 | `Array/List(1/-1)` | 8 / 18 | 5 / 18 | 1 / 18 |
+| ALGO2 | `Tag/Adjacency(1/-1)` | 9 / 18 | 7 / 18 | 7 / 18 |
+| ALGO3 | `Depth` | — | — | 2 / 6 |
+| ALGO3 | `Number of Words` | — | — | 0 / 6 |
+| ALGO3 | `Example` | — | — | 0 / 6 |
+| ALGO3 | `Counter-Example` | — | — | 0 / 6 |
 
 ### Interpretation
 
-The main contribution here is not simply the presence of p-values. It is that the codebase can now separate:
+The formal testing changes the narrative in three ways.
 
-- strong factor effects from weak ones,
-- stable directional factors from mixed ones,
-- and effects that are visually plausible from effects that remain statistically fragile.
+**First, significance and effect size must be read together.** A factor can be statistically significant with a small effect (ALGO2 `Explanation` recall: 9/18 sig, d = 0.37) or borderline significant with a large effect (ALGO3 `Depth`: 2/6 sig, d = 0.43). Reporting both prevents overclaiming either direction.
+
+**Second, the precision-recall tradeoff is a genuine structured effect, not noise.** Both ALGO1 `Example` and ALGO2 `Convergence` show the pattern where one metric improves and another degrades as a factor moves from low to high. This is visible in the raw descriptive summaries and confirmed by formal testing with consistent direction and large Cohen's d.
+
+**Third, the algorithms are not equally factor-sensitive.** ALGO1 and ALGO2 have multiple factors with large Cohen's d and high significance shares. ALGO3 has essentially none. This is consistent with the replication-stability finding: ALGO3's run-to-run noise is large enough to swamp most factor-level signals.
 
 ## 3. Failure Analysis
 
@@ -879,7 +966,7 @@ This section is intended to make the document operational as well as interpretiv
 | Revision item | Main command | Main audited outputs |
 | --- | --- | --- |
 | Descriptive summaries | `lcm analyze summary` | `algo1_explanation_directionality.csv`, `algo2_convergence_directionality.csv`, `algo3_depth_summary.csv` |
-| Hypothesis testing | `lcm analyze hypothesis` | `hypothesis_testing/*.csv` |
+| Hypothesis testing | `lcm analyze hypothesis`, `lcm analyze hypothesis-bundle` | `hypothesis_testing/bundle_overview.csv`, `hypothesis_testing/algo{1,2,3}/*/` |
 | Failure analysis | `lcm analyze failures` | `all_row_level_failures.csv`, `failure_counts_by_model.csv`, `parsed_edge_counts_by_model.csv` |
 | Replication stability | `lcm analyze stability` | `replication_stability/*.csv` |
 | Figure exports | `lcm analyze figures` | `figure_exports/*.csv` |

@@ -33,7 +33,17 @@ def write_paired_factor_hypothesis_tests(
             pair_frame = _build_pair_frame(dataframe, factor=factor, pair_by=pair_by, metric=metric)
             low_values = pair_frame["value_low"]
             high_values = pair_frame["value_high"]
+            differences = high_values - low_values
             statistic, p_value = ttest_rel(high_values, low_values)
+            difference_sample_std = differences.std(ddof=1)
+            difference_standard_error = difference_sample_std / (len(differences) ** 0.5)
+            difference_margin = (
+                1.96 * difference_standard_error if pd.notna(difference_standard_error) else 0.0
+            )
+            if pd.isna(difference_sample_std) or difference_sample_std == 0:
+                effect_size_paired_d = 0.0
+            else:
+                effect_size_paired_d = float(differences.mean() / difference_sample_std)
             frames.append(
                 pd.DataFrame(
                     {
@@ -45,7 +55,11 @@ def write_paired_factor_hypothesis_tests(
                         "pair_count": [len(pair_frame)],
                         "mean_low": [low_values.mean()],
                         "mean_high": [high_values.mean()],
-                        "mean_difference": [(high_values - low_values).mean()],
+                        "mean_difference": [differences.mean()],
+                        "difference_sample_std": [difference_sample_std],
+                        "difference_ci95_low": [differences.mean() - difference_margin],
+                        "difference_ci95_high": [differences.mean() + difference_margin],
+                        "effect_size_paired_d": [effect_size_paired_d],
                         "t_statistic": [statistic],
                         "p_value": [p_value],
                     }

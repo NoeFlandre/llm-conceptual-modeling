@@ -1,53 +1,70 @@
-# Hypothesis-Testing Audit Artifacts
+# Hypothesis-Testing Audit Bundle
 
-These files support the formal statistical-testing findings recorded in `paper/revision-tracker.md`.
+This directory contains the organized artifacts for the formal hypothesis-testing revision item.
 
-## Source Data
+## Purpose
 
-The source data comes from the imported evaluated result files under `data/results/`.
+The reviewer asked for p-values, multiple-comparison adjustment, and stronger inferential support.
+This bundle captures those paired tests in a structure that can be read by factor rather than as a
+flat directory of unrelated CSV files.
 
-## Method
+## Statistical Design
 
-The command surface for this slice is `lcm analyze hypothesis`. It performs paired two-level tests with explicit pairing columns and applies Benjamini-Hochberg correction within each generated output file.
+### Pairing logic
 
-Benjamini-Hochberg was chosen because each output file contains a family of related tests across metrics or source files. The intent is to control the false discovery rate without adopting a more conservative familywise correction that would be poorly matched to this exploratory reviewer-facing analysis layer.
+Each source file provides a paired observation by matching on all other design factors
+(`Repetition`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`,
+`Convergence`, `Depth`, `Number of Words`, `Source Subgraph Name`, `Target Subgraph Name`).
+Within a source file, the two levels of the tested factor define the pair.
+This means every comparison is within-source, controlling for source-level confounds.
 
-The pairing keys used for the audited outputs are:
+### Why paired t-test
 
-- ALGO1 `Explanation`
-  `Repetition`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`
-- ALGO2 `Convergence`
-  `Repetition`, `Explanation`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`
-- ALGO2 `Explanation`
-  `Repetition`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`, `Convergence`
-- ALGO3 `Depth`
-  `Repetition`, `Example`, `Counter-Example`, `Number of Words`, `Source Subgraph Name`, `Target Subgraph Name`
-- ALGO3 `Number of Words`
-  `Repetition`, `Example`, `Counter-Example`, `Depth`, `Source Subgraph Name`, `Target Subgraph Name`
+A paired t-test is appropriate here because every source file contains observations at both
+levels of each two-level factor. This controls for source-level variation that would otherwise
+inflate the error term. The test reports:
 
-## Files
+- `mean_difference`: mean of (high − low) across pairs
+- `difference_ci95_low/high`: 95% confidence interval on the mean difference
+- `effect_size_paired_d`: standardized mean difference (Cohen's d for paired samples)
+- `t_statistic` and `p_value`: standard paired t-test output
 
-- `algo1_explanation_hypothesis.csv`
-  Paired tests for the ALGO1 `Explanation` factor.
-- `algo1_explanation_hypothesis_significance_summary.csv`
-  Count summary of ALGO1 `Explanation` tests by metric, direction, and adjusted-significance status.
-- `algo2_convergence_hypothesis.csv`
-  Paired tests for the ALGO2 `Convergence` factor.
-- `algo2_convergence_hypothesis_significance_summary.csv`
-  Count summary of ALGO2 `Convergence` tests by metric, direction, and adjusted-significance status.
-- `algo2_explanation_hypothesis.csv`
-  Paired tests for the ALGO2 `Explanation` factor.
-- `algo2_explanation_hypothesis_significance_summary.csv`
-  Count summary of ALGO2 `Explanation` tests by metric, direction, and adjusted-significance status.
-- `algo3_depth_hypothesis.csv`
-  Paired tests for the ALGO3 `Depth` factor.
-- `algo3_depth_hypothesis_significance_summary.csv`
-  Count summary of ALGO3 `Depth` tests by direction and adjusted-significance status.
-- `algo3_number_of_words_hypothesis.csv`
-  Paired tests for the ALGO3 `Number of Words` factor.
-- `algo3_number_of_words_hypothesis_significance_summary.csv`
-  Count summary of ALGO3 `Number of Words` tests by direction and adjusted-significance status.
+### Multiple-comparison correction
 
-## Interpretation Notes
+Benjamini-Hochberg (BH) FDR correction is applied within each source file × metric group.
+BH is less conservative than Bonferroni and is appropriate when the goal is discovery across
+many tests rather than strict familywise error control. The FDR target is 5%.
+`p_value_adjusted` is the BH-corrected q-value; it is compared to 0.05 to determine significance.
 
-These artifacts provide p-values and adjusted p-values for narrow paired factor comparisons. They are more specific than the earlier descriptive summaries, but they are not a full multi-factor ANOVA model.
+### Effect size interpretation (Cohen's d for paired samples)
+
+| \|d\| range | Interpretation |
+| --- | --- |
+| < 0.2 | negligible |
+| 0.2 – 0.5 | small |
+| 0.5 – 0.8 | medium |
+| > 0.8 | large |
+
+The bundle overview uses this scale to distinguish strong factor effects from fragile ones.
+
+## Layout
+
+- `bundle_manifest.csv`
+  Index of every generated paired-test file, significance-summary file, and factor overview file.
+- `bundle_overview.csv`
+  One row per algorithm, factor, and metric with significant-test counts, direction counts, and
+  the strongest adjusted result.
+- `<algorithm>/<factor_slug>/paired_tests.csv`
+  Full paired t-test output for that factor. One row per source file × metric.
+- `<algorithm>/<factor_slug>/significance_summary.csv`
+  Count summary by metric, direction, and adjusted-significance status.
+- `<algorithm>/<factor_slug>/factor_overview.csv`
+  Compact reviewer-facing overview for that factor.
+
+## Audited Factors
+
+This bundle exhausts all valid two-level factors with explicit pairing:
+
+- ALGO1: `Explanation`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`
+- ALGO2: `Convergence`, `Explanation`, `Example`, `Counterexample`, `Array/List(1/-1)`, `Tag/Adjacency(1/-1)`
+- ALGO3: `Depth`, `Number of Words`, `Example`, `Counter-Example`

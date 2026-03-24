@@ -38,6 +38,41 @@ def test_cli_analyze_summary_bundle_writes_organized_review_artifacts(tmp_path) 
     assert (output_dir / "algo3" / "depth" / "metric_overview.csv").exists()
 
 
+def test_cli_analyze_hypothesis_bundle_writes_organized_review_artifacts(tmp_path) -> None:
+    results_root = tmp_path / "results"
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        results_root / "algo1" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+    )
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        results_root / "algo2" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+    )
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv",
+        results_root / "algo3" / "gpt-5" / "evaluated" / "method3_results_evaluated_gpt5.csv",
+    )
+    output_dir = tmp_path / "bundle"
+
+    exit_code = main(
+        [
+            "analyze",
+            "hypothesis-bundle",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "bundle_manifest.csv").exists()
+    assert (output_dir / "bundle_overview.csv").exists()
+    assert (output_dir / "algo1" / "explanation" / "paired_tests.csv").exists()
+    assert (output_dir / "algo2" / "convergence" / "factor_overview.csv").exists()
+    assert (output_dir / "algo3" / "depth" / "significance_summary.csv").exists()
+
+
 def test_cli_eval_algo1_writes_legacy_parity_metrics(tmp_path) -> None:
     raw_path = "tests/reference_fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
     expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"

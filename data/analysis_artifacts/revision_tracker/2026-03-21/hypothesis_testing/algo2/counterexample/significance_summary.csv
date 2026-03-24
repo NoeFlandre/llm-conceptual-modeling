@@ -1,0 +1,12 @@
+metric,direction,is_significant,test_count
+accuracy,high_gt_low,False,3
+accuracy,high_gt_low,True,3
+accuracy,high_lt_low,False,6
+accuracy,high_lt_low,True,6
+precision,high_gt_low,False,5
+precision,high_gt_low,True,1
+precision,high_lt_low,False,6
+precision,high_lt_low,True,6
+recall,high_gt_low,False,7
+recall,high_lt_low,False,4
+recall,high_lt_low,True,7

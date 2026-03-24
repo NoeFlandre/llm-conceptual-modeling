@@ -1,0 +1,2 @@
+algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
+algo3,Number of Words,Recall,6,0,0.0,0.016035355555555564,0.09531451469849755,3,2,1,data/results/algo3/gemini-2.0-flash-exp/evaluated/method3_results_evaluated_gemini_2.0.csv,0.0677354205201457,0.234945041542191

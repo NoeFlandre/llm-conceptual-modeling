@@ -98,6 +98,10 @@ def build_parser() -> argparse.ArgumentParser:
     hypothesis_parser.add_argument("--metric", action="append", required=True)
     hypothesis_parser.add_argument("--output", required=True)
 
+    hypothesis_bundle_parser = analyze_subparsers.add_parser("hypothesis-bundle")
+    hypothesis_bundle_parser.add_argument("--results-root", default="data/results")
+    hypothesis_bundle_parser.add_argument("--output-dir", required=True)
+
     figures_parser = analyze_subparsers.add_parser("figures")
     figures_parser.add_argument("--input", action="append", required=True)
     figures_parser.add_argument("--id-column", action="append", required=True)

@@ -5,6 +5,7 @@ from llm_conceptual_modeling.analysis.baseline_comparison import write_baseline_
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
 from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_rows
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
+from llm_conceptual_modeling.analysis.hypothesis_bundle import write_hypothesis_testing_bundle
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
 from llm_conceptual_modeling.analysis.summary_bundle import write_statistical_reporting_bundle
@@ -49,6 +50,12 @@ def handle_analyze(args: Namespace) -> int:
                 factor=args.factor,
                 pair_by=args.pair_by,
                 metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "hypothesis-bundle":
+            write_hypothesis_testing_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
             )
             return 0
         if args.analysis_target == "figures":
