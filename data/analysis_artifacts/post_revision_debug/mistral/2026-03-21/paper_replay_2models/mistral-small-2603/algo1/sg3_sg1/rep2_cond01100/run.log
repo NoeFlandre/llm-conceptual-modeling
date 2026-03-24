@@ -1,3 +1,0 @@
-2026-03-21T16:53:36.075539+00:00 level=INFO run=algo1_sg3_sg1_rep2_cond01100 algorithm=algo1 stage=manifest message=manifest written
-2026-03-21T16:53:36.078058+00:00 level=INFO run=algo1_sg3_sg1_rep2_cond01100 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
-2026-03-21T16:53:44.014134+00:00 level=ERROR run=algo1_sg3_sg1_rep2_cond01100 algorithm=algo1 stage=probe_failed message=Unterminated string starting at: line 1 column 412 (char 411)

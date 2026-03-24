@@ -1,3 +1,0 @@
-2026-03-21T23:49:18.308556+00:00 level=INFO run=algo3_subgraph_2_to_subgraph_1_rep3_cond1011 algorithm=algo3 stage=manifest message=manifest written
-2026-03-21T23:49:18.309765+00:00 level=INFO run=algo3_subgraph_2_to_subgraph_1_rep3_cond1011 algorithm=algo3 stage=tree_prompt_written message=prompt written to tree_expansion_prompt.txt
-2026-03-21T23:51:20.349435+00:00 level=ERROR run=algo3_subgraph_2_to_subgraph_1_rep3_cond1011 algorithm=algo3 stage=probe_failed message=API error occurred: Status 429. Body: {"object":"error","message":"Rate limit exceeded","type":"rate_limited","param":null,"code":"1300","raw_status_code":429}

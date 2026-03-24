@@ -1,3 +1,0 @@
-2026-03-22T03:57:56.007348+00:00 level=INFO run=algo1_sg2_sg3_rep3_cond11111 algorithm=algo1 stage=manifest message=manifest written
-2026-03-22T03:57:56.009754+00:00 level=INFO run=algo1_sg2_sg3_rep3_cond11111 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
-2026-03-22T03:58:04.311407+00:00 level=ERROR run=algo1_sg2_sg3_rep3_cond11111 algorithm=algo1 stage=probe_failed message=list indices must be integers or slices, not str

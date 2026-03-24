@@ -1,3 +1,0 @@
-2026-03-21T16:58:20.128999+00:00 level=INFO run=algo1_sg3_sg1_rep3_cond01110 algorithm=algo1 stage=manifest message=manifest written
-2026-03-21T16:58:20.130432+00:00 level=INFO run=algo1_sg3_sg1_rep3_cond01110 algorithm=algo1 stage=edge_prompt_written message=prompt written to edge_generation_prompt.txt
-2026-03-21T16:58:32.540380+00:00 level=ERROR run=algo1_sg3_sg1_rep3_cond01110 algorithm=algo1 stage=probe_failed message=Expecting value: line 1 column 391 (char 390)
