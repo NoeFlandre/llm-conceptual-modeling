@@ -102,6 +102,10 @@ def build_parser() -> argparse.ArgumentParser:
     hypothesis_bundle_parser.add_argument("--results-root", default="data/results")
     hypothesis_bundle_parser.add_argument("--output-dir", required=True)
 
+    output_validity_bundle_parser = analyze_subparsers.add_parser("output-validity-bundle")
+    output_validity_bundle_parser.add_argument("--results-root", default="data/results")
+    output_validity_bundle_parser.add_argument("--output-dir", required=True)
+
     figures_parser = analyze_subparsers.add_parser("figures")
     figures_parser.add_argument("--input", action="append", required=True)
     figures_parser.add_argument("--id-column", action="append", required=True)

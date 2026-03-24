@@ -1,0 +1,13 @@
+algorithm,file,description
+algo1,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo1/row_level_validity.csv,"One row per raw output, classified as valid/empty/malformed"
+algo1,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo1/validity_summary.csv,Validity counts per model (valid/empty/malformed rows)
+algo1,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo1/breadth_distribution.csv,"Edge count statistics per model: mean, median, std, min, max"
+algo2,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo2/row_level_validity.csv,"One row per raw output, classified as valid/empty/malformed"
+algo2,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo2/validity_summary.csv,Validity counts per model (valid/empty/malformed rows)
+algo2,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo2/breadth_distribution.csv,"Edge count statistics per model: mean, median, std, min, max"
+algo3,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo3/row_level_validity.csv,"One row per raw output, classified as valid/empty/malformed"
+algo3,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo3/validity_summary.csv,Validity counts per model (valid/empty/malformed rows)
+algo3,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/algo3/breadth_distribution.csv,"Edge count statistics per model: mean, median, std, min, max"
+all,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/failure_rates.csv,Failure rate per algorithm-model combination across all algorithms
+all,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/parsed_edge_counts.csv,Parsed edge count statistics per algorithm-model
+all,data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/parsed_edge_quartiles.csv,Edge count quartile and percentile distribution per algorithm-model
