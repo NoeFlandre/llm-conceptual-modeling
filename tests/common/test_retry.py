@@ -2,10 +2,8 @@ import email
 from urllib.error import HTTPError, URLError
 
 import httpx
-from mistralai import models
-from mistralai.utils.retries import PermanentError
 
-from llm_conceptual_modeling.common.retry import call_with_retry
+from llm_conceptual_modeling.common.retry import PermanentError, SDKError, call_with_retry
 
 
 def test_call_with_retry_retries_transient_urle_error_before_succeeding() -> None:
@@ -120,7 +118,7 @@ def test_call_with_retry_retries_sdk_error_429_before_succeeding() -> None:
     def operation() -> str:
         calls["count"] += 1
         if calls["count"] < 3:
-            raise models.SDKError("API error occurred", response, body='{"message":"rate limited"}')
+            raise SDKError("API error occurred", response, body='{"message":"rate limited"}')
         return "ok"
 
     actual = call_with_retry(

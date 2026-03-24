@@ -3,10 +3,10 @@
 from pathlib import Path
 
 VER_FILE = (
-    Path(__file__).resolve().parents[1] / "src" / "llm_conceptual_modeling" / "verification.py"
+    Path(__file__).resolve().parents[2] / "src" / "llm_conceptual_modeling" / "verification.py"
 )
 
-FIXTURES_ROOT = Path(__file__).resolve().parents[1] / "tests" / "reference_fixtures" / "legacy"
+FIXTURES_ROOT = Path(__file__).resolve().parents[2] / "tests" / "reference_fixtures" / "legacy"
 
 FACTORIAL_FIXTURES = [
     FIXTURES_ROOT
