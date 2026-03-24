@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import cast
 
 import pandas as pd
 
@@ -21,7 +20,6 @@ from llm_conceptual_modeling.algo3.generation import (
     build_generation_manifest as build_algo3_manifest,
 )
 from llm_conceptual_modeling.common.types import VerificationResult
-from llm_conceptual_modeling.post_revision_debug.run_context import ProbeRunContext
 from llm_conceptual_modeling.verification_cases import (
     FIXTURES_ROOT,
     build_legacy_parity_cases,
@@ -67,22 +65,6 @@ def run_full_verification() -> dict[str, object]:
     }
 
 
-def build_paper_alignment_report() -> dict[str, object]:
-    checks: list[dict[str, object]] = []
-    with TemporaryDirectory() as tmpdir:
-        temp_root = Path(tmpdir)
-        checks.extend(_build_manifest_checks())
-        checks.extend(_build_resume_checks(temp_root))
-        checks.extend(_build_schema_checks(temp_root))
-        checks.append(_build_probe_context_check(temp_root))
-
-    status = "ok" if all(check["status"] == "passed" for check in checks) else "error"
-    return {
-        "status": status,
-        "checks": checks,
-    }
-
-
 def emit_json(payload: dict[str, object]) -> None:
     print(json.dumps(payload))
 
@@ -91,9 +73,9 @@ def _build_manifest_checks() -> list[dict[str, object]]:
     algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
     algo2_manifest: dict[str, object] = build_algo2_manifest(fixture_only=False)
     algo3_manifest: dict[str, object] = build_algo3_manifest(fixture_only=False)
-    mc1 = cast(dict[str, object], algo1_manifest.get("method_contract") or {})
-    mc2 = cast(dict[str, object], algo2_manifest.get("method_contract") or {})
-    mc3 = cast(dict[str, object], algo3_manifest.get("method_contract") or {})
+    mc1 = algo1_manifest.get("method_contract") or {}
+    mc2 = algo2_manifest.get("method_contract") or {}
+    mc3 = algo3_manifest.get("method_contract") or {}
     algo1_method_contract: dict[str, object] = mc1
     algo2_method_contract: dict[str, object] = mc2
     algo3_method_contract: dict[str, object] = mc3
@@ -175,39 +157,6 @@ def _build_manifest_checks() -> list[dict[str, object]]:
     ]
 
 
-def _build_resume_checks(temp_root: Path) -> list[dict[str, object]]:
-    from llm_conceptual_modeling.algo1.experiment import build_algo1_experiment_specs
-    from llm_conceptual_modeling.algo2.experiment import build_algo2_experiment_specs
-    from llm_conceptual_modeling.algo3.experiment import build_algo3_experiment_specs
-
-    algo1_spec = build_algo1_experiment_specs(
-        pair_name="sg1_sg2",
-        model="verification",
-        output_root=temp_root / "algo1",
-        replications=1,
-        resume=True,
-    )[0]
-    algo2_spec = build_algo2_experiment_specs(
-        pair_name="sg1_sg2",
-        model="verification",
-        output_root=temp_root / "algo2",
-        replications=1,
-        resume=True,
-    )[0]
-    algo3_spec = build_algo3_experiment_specs(
-        pair_name="subgraph_1_to_subgraph_3",
-        model="verification",
-        output_root=temp_root / "algo3",
-        replications=1,
-        resume=True,
-    )[0]
-    return [
-        _check("algo1_resume_support", algo1_spec.resume is True, {"resume": algo1_spec.resume}),
-        _check("algo2_resume_support", algo2_spec.resume is True, {"resume": algo2_spec.resume}),
-        _check("algo3_resume_support", algo3_spec.resume is True, {"resume": algo3_spec.resume}),
-    ]
-
-
 def _build_schema_checks(temp_root: Path) -> list[dict[str, object]]:
     algo1_output = temp_root / "algo1_eval.csv"
     algo2_output = temp_root / "algo2_eval.csv"
@@ -231,42 +180,6 @@ def _build_schema_checks(temp_root: Path) -> list[dict[str, object]]:
             {"columns": algo2_columns},
         ),
     ]
-
-
-def _build_probe_context_check(temp_root: Path) -> dict[str, object]:
-    context = ProbeRunContext(
-        output_dir=temp_root / "probe_run",
-        run_name="paper_alignment_audit",
-        algorithm="algo2",
-    )
-    context.record_manifest({"run_name": "paper_alignment_audit"})
-    context.record_prompt("prompt.txt", "prompt", stage="prompt_written")
-    context.record_checkpoint(
-        "checkpoint.json",
-        {"status": "done"},
-        stage="checkpoint_written",
-    )
-    state = context.load_state()
-    return _check(
-        "probe_context_checkpointing",
-        context.manifest_path.exists()
-        and context.summary_path.exists() is False
-        and context.state_path.exists()
-        and context.log_path.exists()
-        and context.events_path.exists() is False
-        and state["completed_stages"]
-        == [
-            "manifest_written",
-            "prompt_written",
-            "checkpoint_written",
-        ],
-        {
-            "manifest_path": str(context.manifest_path),
-            "state_path": str(context.state_path),
-            "log_path": str(context.log_path),
-            "completed_stages": state["completed_stages"],
-        },
-    )
 
 
 def _check(name: str, passed: bool, evidence: dict[str, object]) -> dict[str, object]:

@@ -8,8 +8,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     analyze_parser = subparsers.add_parser("analyze")
     analyze_subparsers = analyze_parser.add_subparsers(dest="analysis_target", required=True)
-    audit_parser = subparsers.add_parser("audit")
-    audit_subparsers = audit_parser.add_subparsers(dest="audit_target", required=True)
     baseline_parser = subparsers.add_parser("baseline")
     baseline_subparsers = baseline_parser.add_subparsers(dest="algorithm", required=True)
     eval_parser = subparsers.add_parser("eval")
@@ -22,10 +20,6 @@ def build_parser() -> argparse.ArgumentParser:
     verify_subparsers = verify_parser.add_subparsers(dest="verify_target", required=True)
     generate_parser = subparsers.add_parser("generate")
     generate_subparsers = generate_parser.add_subparsers(dest="algorithm", required=True)
-    probe_parser = subparsers.add_parser("probe")
-    probe_subparsers = probe_parser.add_subparsers(dest="algorithm", required=True)
-    monitor_parser = subparsers.add_parser("monitor")
-    monitor_subparsers = monitor_parser.add_subparsers(dest="algorithm", required=True)
 
     algo1_parser = eval_subparsers.add_parser("algo1")
     algo1_parser.add_argument("--input", required=True)
@@ -75,79 +69,6 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser = generate_subparsers.add_parser(algorithm)
         generate_algorithm_parser.add_argument("--fixture-only", action="store_true")
         generate_algorithm_parser.add_argument("--json", action="store_true")
-        generate_algorithm_parser.add_argument("--model")
-        generate_algorithm_parser.add_argument("--pair")
-        generate_algorithm_parser.add_argument("--output-root")
-        generate_algorithm_parser.add_argument(
-            "--provider",
-            default="mistral",
-            choices=["mistral", "anthropic", "openrouter"],
-            help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline",
-        )
-        generate_algorithm_parser.add_argument("--replications", type=int, default=5)
-        generate_algorithm_parser.add_argument("--resume", action="store_true")
-    generate_subparsers.choices["algo2"].add_argument("--embedding-model")
-    generate_subparsers.choices["algo2"].add_argument(
-        "--embedding-provider",
-        default="mistral",
-        choices=["mistral", "openrouter"],
-    )
-
-    probe_algo1_parser = probe_subparsers.add_parser("algo1")
-    probe_algo1_parser.add_argument("--run-name", required=True)
-    probe_algo1_parser.add_argument("--model", required=True)
-    probe_algo1_parser.add_argument(
-        "--provider",
-        default="mistral",
-        choices=["mistral", "anthropic", "openrouter"],
-        help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline",
-    )
-    probe_algo1_parser.add_argument("--subgraph1-edge", action="append", required=True)
-    probe_algo1_parser.add_argument("--subgraph2-edge", action="append", required=True)
-    probe_algo1_parser.add_argument("--output-dir", required=True)
-    probe_algo1_parser.add_argument("--resume", action="store_true")
-
-    probe_algo2_parser = probe_subparsers.add_parser("algo2")
-    probe_algo2_parser.add_argument("--run-name", required=True)
-    probe_algo2_parser.add_argument("--model", required=True)
-    probe_algo2_parser.add_argument(
-        "--provider",
-        default="mistral",
-        choices=["mistral", "anthropic", "openrouter"],
-        help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline",
-    )
-    probe_algo2_parser.add_argument("--embedding-model", required=True)
-    probe_algo2_parser.add_argument(
-        "--embedding-provider",
-        default="mistral",
-        choices=["mistral", "openrouter"],
-    )
-    probe_algo2_parser.add_argument("--seed-label", action="append", required=True)
-    probe_algo2_parser.add_argument("--convergence-threshold", type=float, required=True)
-    probe_algo2_parser.add_argument("--output-dir", required=True)
-    probe_algo2_parser.add_argument("--resume", action="store_true")
-
-    probe_algo3_parser = probe_subparsers.add_parser("algo3")
-    probe_algo3_parser.add_argument("--run-name", required=True)
-    probe_algo3_parser.add_argument("--model", required=True)
-    probe_algo3_parser.add_argument(
-        "--provider",
-        default="mistral",
-        choices=["mistral", "anthropic", "openrouter"],
-        help="DEBUG: 'anthropic' is for research/debugging only, not part of paper pipeline",
-    )
-    probe_algo3_parser.add_argument("--source-label", action="append", required=True)
-    probe_algo3_parser.add_argument("--target-label", action="append", required=True)
-    probe_algo3_parser.add_argument("--child-count", type=int, required=True)
-    probe_algo3_parser.add_argument("--max-depth", type=int, required=True)
-    probe_algo3_parser.add_argument("--output-dir", required=True)
-    probe_algo3_parser.add_argument("--resume", action="store_true")
-
-    for algorithm in ("algo1", "algo2", "algo3"):
-        monitor_algorithm_parser = monitor_subparsers.add_parser(algorithm)
-        monitor_algorithm_parser.add_argument("--root", required=True)
-        monitor_algorithm_parser.add_argument("--watch", action="store_true")
-        monitor_algorithm_parser.add_argument("--interval", type=float, default=5.0)
 
     summary_parser = analyze_subparsers.add_parser("summary")
     summary_parser.add_argument("--input", action="append", required=True)
@@ -191,9 +112,6 @@ def build_parser() -> argparse.ArgumentParser:
     variability_parser.add_argument("--result-column", required=True)
     variability_parser.add_argument("--output", required=True)
 
-    paper_alignment_parser = audit_subparsers.add_parser("paper-alignment")
-    paper_alignment_parser.add_argument("--json", action="store_true")
-
     return parser
 
 
@@ -209,10 +127,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         from llm_conceptual_modeling.commands.analyze import handle_analyze
 
         return handle_analyze(args)
-    if args.command == "audit":
-        from llm_conceptual_modeling.commands.audit import handle_audit
-
-        return handle_audit(args)
     if args.command == "eval":
         from llm_conceptual_modeling.commands.eval import handle_eval
 
@@ -233,14 +147,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         from llm_conceptual_modeling.commands.generate import handle_generate
 
         return handle_generate(args)
-    if args.command == "probe":
-        from llm_conceptual_modeling.commands.probe import handle_probe
-
-        return handle_probe(args)
-    if args.command == "monitor":
-        from llm_conceptual_modeling.commands.monitor import handle_monitor
-
-        return handle_monitor(args)
 
     parser.error("unsupported command")
     return 2

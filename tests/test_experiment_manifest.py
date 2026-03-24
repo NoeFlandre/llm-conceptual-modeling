@@ -304,23 +304,23 @@ class TestExperimentManifestSchema:
     def test_experiment_manifest_from_algo1_probe_spec(self) -> None:
         """Can construct ExperimentManifest from Algo1ProbeSpec + prompt text."""
         from llm_conceptual_modeling.algo1.mistral import build_direct_edge_prompt
-        from llm_conceptual_modeling.algo1.probe import Algo1ProbeSpec
 
-        spec = Algo1ProbeSpec(
-            run_name="algo1_sg1_sg2_rep0_cond00000",
-            model="mistral-small-2603",
-            subgraph1=[("A", "B"), ("B", "C")],
-            subgraph2=[("X", "Y"), ("Y", "Z")],
-            prompt_config=Method1PromptConfig(
-                use_adjacency_notation=False,
-                use_array_representation=False,
-                include_explanation=False,
-                include_example=False,
-                include_counterexample=False,
-            ),
-            output_dir=Path("/data/results/algo1/sg1_sg2/rep0_cond00000"),
-            resume=False,
-        )
+        class ProbeLikeSpec:
+            def __init__(self) -> None:
+                self.run_name = "algo1_sg1_sg2_rep0_cond00000"
+                self.model = "mistral-small-2603"
+                self.subgraph1 = [("A", "B"), ("B", "C")]
+                self.subgraph2 = [("X", "Y"), ("Y", "Z")]
+                self.prompt_config = Method1PromptConfig(
+                    use_adjacency_notation=False,
+                    use_array_representation=False,
+                    include_explanation=False,
+                    include_example=False,
+                    include_counterexample=False,
+                )
+                self.output_dir = Path("/data/results/algo1/sg1_sg2/rep0_cond00000")
+
+        spec = ProbeLikeSpec()
         full_prompt = build_direct_edge_prompt(
             subgraph1=spec.subgraph1,
             subgraph2=spec.subgraph2,
