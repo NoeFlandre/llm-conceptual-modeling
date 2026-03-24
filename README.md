@@ -397,25 +397,6 @@ The paper model aliases exposed by the CLI are:
 
 All executable `generate` and `probe` paths accept `--resume` and write `run.log`, `state.json`, and `execution_checkpoint.json` alongside the existing prompt and summary artifacts. The reusable Mistral chat and embedding clients are now backed by the official `mistralai` SDK, and they retry transient transport failures with exponential backoff before surfacing a hard error, so the failure path is logged and checkpointed rather than silent.
 
-## Post-Revision Debugging
-
-Post-freeze live-provider probing is documented in [post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md).
-
-The current audited live-debug workflow uses structured Mistral outputs and writes:
-
-- `manifest.json`
-- `run.log`
-- `state.json`
-- `execution_checkpoint.json`
-- `events.jsonl`
-- per-row prompts
-- raw provider responses
-- scored CSV summaries
-
-The first canonical run is stored under:
-
-- [representative_matrix_v1](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/analysis_artifacts/post_revision_debug/mistral/2026-03-21/representative_matrix_v1)
-
 ## Reproducibility And Verification
 
 The repository is designed to make wrongness visible rather than implicit.
@@ -435,8 +416,6 @@ The repository is designed to make wrongness visible rather than implicit.
 
 Continuous integration is configured in [.github/workflows/ci.yml](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/.github/workflows/ci.yml).
 
-A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md).
-
 ## Repository Structure
 
 - [src/llm_conceptual_modeling](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/src/llm_conceptual_modeling): package source code
@@ -455,8 +434,6 @@ A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noef
 - [docs/algo1-method1-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/algo1-method1-guide.md): exhaustive Method 1 runtime and prompt guide
 - [docs/algo2-method2-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/algo2-method2-guide.md): exhaustive Method 2 runtime and prompt guide
 - [docs/algo3-method3-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/algo3-method3-guide.md): exhaustive Method 3 runtime and prompt guide
-- [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md): short reviewer-oriented reproduction guide
-- [docs/post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md): live-provider debugging documentation
 - [Dockerfile](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/Dockerfile): container build definition
 - [CITATION.cff](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/CITATION.cff): academic citation metadata
 - [LICENSE](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/LICENSE): MIT License
@@ -468,8 +445,6 @@ A concise reviewer workflow is available in [docs/reviewer-guide.md](/Users/noef
 ## Documentation
 
 - [docs/architecture.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/architecture.md) — implementation architecture, design decisions, and safety notes for contributors
-- [docs/reviewer-guide.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/reviewer-guide.md) — concise reviewer-oriented reproduction guide
-- [docs/post-revision-debug.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/post-revision-debug.md) — live-provider probing workflow and artifact layout
 
 ## Documentation Notes
 
