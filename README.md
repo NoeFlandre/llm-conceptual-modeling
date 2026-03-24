@@ -253,6 +253,23 @@ uv run lcm analyze stability \
   --output /tmp/algo1_stability.csv
 ```
 
+Raw-output variability decomposition across repeated runs:
+
+```bash
+uv run lcm analyze variability \
+  --input data/results/algo3/gpt-5/raw/method3_results_gpt5.csv \
+  --group-by Example \
+  --group-by Counter-Example \
+  --group-by Number\ of\ Words \
+  --group-by Depth \
+  --group-by Source\ Subgraph\ Name \
+  --group-by Target\ Subgraph\ Name \
+  --result-column Results \
+  --output /tmp/algo3_output_variability.csv
+```
+
+This workflow is intentionally output-side only. It does not claim access to model internals; instead, it measures how much repeated runs drift in edge-set content and output breadth through `mean_pairwise_jaccard`, `exact_match_pair_rate`, `mean_edge_count`, `sample_std_edge_count`, and `union_edge_count`.
+
 Paired factor-level hypothesis tests with Benjamini-Hochberg correction:
 
 ```bash

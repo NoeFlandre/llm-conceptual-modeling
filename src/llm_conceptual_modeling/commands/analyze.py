@@ -7,6 +7,7 @@ from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_r
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
+from llm_conceptual_modeling.analysis.variability import write_output_variability_analysis
 
 
 def handle_analyze(args: Namespace) -> int:
@@ -57,6 +58,14 @@ def handle_analyze(args: Namespace) -> int:
                 args.baseline_input,
                 args.output,
                 metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "variability":
+            write_output_variability_analysis(
+                args.input,
+                args.output,
+                group_by=args.group_by,
+                result_column=args.result_column,
             )
             return 0
         raise ValueError(f"Unsupported analyze target: {args.analysis_target}")

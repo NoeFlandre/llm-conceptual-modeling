@@ -185,6 +185,12 @@ def build_parser() -> argparse.ArgumentParser:
     baseline_comparison_parser.add_argument("--metric", action="append", required=True)
     baseline_comparison_parser.add_argument("--output", required=True)
 
+    variability_parser = analyze_subparsers.add_parser("variability")
+    variability_parser.add_argument("--input", action="append", required=True)
+    variability_parser.add_argument("--group-by", action="append", required=True)
+    variability_parser.add_argument("--result-column", required=True)
+    variability_parser.add_argument("--output", required=True)
+
     paper_alignment_parser = audit_subparsers.add_parser("paper-alignment")
     paper_alignment_parser.add_argument("--json", action="store_true")
 

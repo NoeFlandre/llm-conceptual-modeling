@@ -1,0 +1,289 @@
+source_input,Example,Counter-Example,Number of Words,Depth,Source Subgraph Name,Target Subgraph Name,n_outputs,unique_output_count,mean_edge_count,sample_std_edge_count,mean_pairwise_jaccard,min_pairwise_jaccard,exact_match_pair_rate,union_edge_count
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,3,1,subgraph_1,subgraph_3,5,5,21.8,16.37681287674742,0.038181818181818185,0.0,0.0,88
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,3,1,subgraph_2,subgraph_1,5,5,50.2,29.252350332921967,0.022522875816993464,0.0,0.0,227
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,3,1,subgraph_2,subgraph_3,5,5,40.0,22.39419567655869,0.08340953039478849,0.037383177570093455,0.0,169
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,3,2,subgraph_1,subgraph_3,5,5,33.0,22.0,0.009816862661607117,0.0,0.0,159
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,3,2,subgraph_2,subgraph_1,5,5,52.4,21.007141642784248,0.06636812283799344,0.0,0.0,207
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,3,2,subgraph_2,subgraph_3,5,5,21.2,14.042791745233567,0.04842464980462413,0.0,0.0,85
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,5,1,subgraph_1,subgraph_3,5,5,43.4,18.24280680158621,0.03137607153111029,0.0,0.0,200
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,5,1,subgraph_2,subgraph_1,5,5,66.0,6.892024376045111,0.13149425459411276,0.0,0.0,239
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,5,1,subgraph_2,subgraph_3,5,5,37.4,37.85894874398918,0.010218978102189781,0.0,0.0,173
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,5,2,subgraph_1,subgraph_3,5,5,36.6,13.446189051177289,0.0,0.0,0.0,183
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,5,2,subgraph_2,subgraph_1,5,5,70.6,34.03380672214026,0.02384171591568363,0.0,0.0,323
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,-1,5,2,subgraph_2,subgraph_3,5,5,29.0,31.945265689926575,0.041999999999999996,0.0,0.0,136
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,3,1,subgraph_1,subgraph_3,5,5,34.2,17.079227148791013,0.009210526315789473,0.0,0.0,164
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,3,1,subgraph_2,subgraph_1,5,5,19.2,12.93058390019569,0.02137756343312607,0.0,0.0,90
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,3,1,subgraph_2,subgraph_3,5,5,36.0,18.096961070853858,0.15713793103285856,0.0125,0.0,119
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,3,2,subgraph_1,subgraph_3,5,5,39.6,20.719555979798407,0.0,0.0,0.0,198
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,3,2,subgraph_2,subgraph_1,5,5,52.2,23.15599274485981,0.0531830195038571,0.0,0.0,219
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,3,2,subgraph_2,subgraph_3,5,5,33.8,17.42699056062176,0.06597540447586371,0.0,0.0,135
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,5,1,subgraph_1,subgraph_3,5,5,32.0,29.740544715926102,0.009821428571428571,0.0,0.0,149
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,5,1,subgraph_2,subgraph_1,5,5,61.2,34.72319109759355,0.022183692388780027,0.0,0.0,278
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,5,1,subgraph_2,subgraph_3,5,5,50.2,34.142349069740355,0.03239669926055688,0.0,0.0,219
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,5,2,subgraph_1,subgraph_3,5,5,46.6,31.34166555880526,0.007191809500655078,0.0,0.0,226
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,5,2,subgraph_2,subgraph_1,5,5,94.6,35.210793799629116,0.07631999911297903,0.0,0.0,372
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,-1,1,5,2,subgraph_2,subgraph_3,5,5,52.2,44.110089548764236,0.04194884967670238,0.0,0.0,223
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,3,1,subgraph_1,subgraph_3,5,5,29.6,12.759310326189265,0.00625,0.0,0.0,146
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,3,1,subgraph_2,subgraph_1,5,5,28.6,28.684490582891655,0.032812755391623497,0.009523809523809525,0.0,135
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,3,1,subgraph_2,subgraph_3,5,5,15.6,23.13655116909173,0.13615023474178403,0.0,0.0,74
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,3,2,subgraph_1,subgraph_3,5,5,35.2,24.641428530018302,0.015308787047917483,0.0,0.0,167
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,3,2,subgraph_2,subgraph_1,5,5,19.8,5.890670590009257,0.4067478632478633,0.0,0.0,55
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,3,2,subgraph_2,subgraph_3,5,5,23.8,11.691877522451216,0.020359807011819556,0.0,0.0,111
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,5,1,subgraph_1,subgraph_3,5,5,63.6,27.844209451877063,0.0261074889098034,0.0,0.0,288
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,5,1,subgraph_2,subgraph_1,5,5,59.2,41.80550203023521,0.05636782858203171,0.0,0.0,252
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,5,1,subgraph_2,subgraph_3,5,4,25.2,30.019993337774075,0.1,0.0,0.1,125
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,5,2,subgraph_1,subgraph_3,5,5,61.4,34.76780119593415,0.002666666666666667,0.0,0.0,303
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,5,2,subgraph_2,subgraph_1,5,5,86.6,58.99406749835105,0.02275304650287801,0.0,0.0,389
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,-1,5,2,subgraph_2,subgraph_3,5,5,19.6,19.65451602049768,0.1630033416875522,0.0,0.0,76
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,3,1,subgraph_1,subgraph_3,5,5,23.8,7.981227975693966,0.02815934065934066,0.0,0.0,109
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,3,1,subgraph_2,subgraph_1,5,5,49.4,17.98054504179448,0.06543838202071302,0.0,0.0,205
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,3,1,subgraph_2,subgraph_3,5,5,29.4,14.046351839534706,0.08138803900941737,0.0,0.0,109
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,3,2,subgraph_1,subgraph_3,5,5,27.6,11.949895397031725,0.06986054880791723,0.0,0.0,106
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,3,2,subgraph_2,subgraph_1,5,5,20.8,8.87130204648675,0.002040816326530612,0.0,0.0,103
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,3,2,subgraph_2,subgraph_3,5,5,20.6,16.07171428317465,0.03464985994397759,0.0,0.0,93
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,5,1,subgraph_1,subgraph_3,5,5,67.0,20.579115627256677,0.011848546108374537,0.0,0.0,317
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,5,1,subgraph_2,subgraph_1,5,5,51.8,43.22846284567611,0.08428427871563073,0.0,0.0,207
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,5,1,subgraph_2,subgraph_3,5,5,46.8,10.986355173577813,0.08623992658400767,0.0,0.0,186
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,5,2,subgraph_1,subgraph_3,5,5,87.8,29.218145047213383,0.017573303273259504,0.0,0.0,417
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,5,2,subgraph_2,subgraph_1,5,5,74.6,47.977077860161515,0.017048156802877686,0.0,0.0,342
+data/results/algo3/deepseek-chat-v3.1/raw/Method 3 Results Deepseek Chat v3.1.csv,1,1,5,2,subgraph_2,subgraph_3,5,5,52.2,28.38485511676958,0.08858283108382334,0.0,0.0,181
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,3,1,subgraph_1,subgraph_3,5,5,35.4,16.36459593146131,0.017644851043865824,0.0,0.0,169
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,3,1,subgraph_2,subgraph_1,5,5,48.2,10.66302021005306,0.023088507877664505,0.0,0.0,221
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,3,1,subgraph_2,subgraph_3,5,5,44.6,6.58027355054484,0.013822762243637984,0.0,0.0,211
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,3,2,subgraph_1,subgraph_3,5,5,51.2,9.148770409186143,0.07541473118302935,0.0,0.0,201
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,3,2,subgraph_2,subgraph_1,5,5,111.6,45.97064280603438,0.015361672683691551,0.0,0.0,522
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,3,2,subgraph_2,subgraph_3,5,5,66.4,18.352111595127138,0.0035264560427833574,0.0,0.0,327
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,5,1,subgraph_1,subgraph_3,5,5,48.8,23.413671220037237,0.012444504851120777,0.0,0.0,234
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,5,1,subgraph_2,subgraph_1,5,5,81.0,39.96873778342268,0.01888888888888889,0.0,0.0,388
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,5,1,subgraph_2,subgraph_3,5,5,77.8,31.83865575051811,0.039179779543081404,0.0,0.0,344
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,5,2,subgraph_1,subgraph_3,5,5,74.8,24.52957398733211,0.0012331334332833584,0.0,0.0,372
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,5,2,subgraph_2,subgraph_1,5,5,157.8,123.35598891014574,0.020577381796031247,0.0,0.0,731
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,-1,5,2,subgraph_2,subgraph_3,5,5,110.8,20.32732151563506,0.0038774910813144546,0.0,0.0,547
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,3,1,subgraph_1,subgraph_3,5,5,44.6,7.536577472566709,0.018073198271556686,0.0,0.0,208
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,3,1,subgraph_2,subgraph_1,5,5,53.8,16.02186006679624,0.08202691748325108,0.0,0.0,209
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,3,1,subgraph_2,subgraph_3,5,5,51.2,5.215361924162119,0.020639590340658355,0.0,0.0,237
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,3,2,subgraph_1,subgraph_3,5,5,45.6,12.421755109484328,0.012003058103975535,0.0,0.0,219
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,3,2,subgraph_2,subgraph_1,5,5,96.0,69.6670653896086,0.0030303030303030303,0.0,0.0,476
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,3,2,subgraph_2,subgraph_3,5,5,78.0,34.85685011586675,0.005612613242633268,0.0,0.0,381
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,5,1,subgraph_1,subgraph_3,5,5,74.8,15.319921670818033,0.0026490066225165563,0.0,0.0,370
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,5,1,subgraph_2,subgraph_1,5,5,94.6,25.55973395792687,0.04489417993877538,0.0,0.0,407
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,5,1,subgraph_2,subgraph_3,5,5,62.4,26.415904300250638,0.01655510988767118,0.0,0.0,292
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,5,2,subgraph_1,subgraph_3,5,5,81.0,17.421251390184345,0.01531104310354694,0.0,0.0,385
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,5,2,subgraph_2,subgraph_1,5,5,177.6,115.44176020834055,0.008786700472369645,0.0,0.0,856
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,-1,1,5,2,subgraph_2,subgraph_3,5,5,81.2,11.755849607748475,0.024926330279145904,0.0,0.0,369
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,3,1,subgraph_1,subgraph_3,5,5,42.4,4.03732584763727,0.06571087409322704,0.0,0.0,175
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,3,1,subgraph_2,subgraph_1,5,5,46.8,15.770225109363532,0.01737377434455125,0.0,0.0,221
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,3,1,subgraph_2,subgraph_3,5,5,34.0,5.958187643906492,0.03824031910762822,0.0,0.0,158
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,3,2,subgraph_1,subgraph_3,5,5,48.8,7.3280283842245035,0.0683383760388367,0.0,0.0,196
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,3,2,subgraph_2,subgraph_1,5,5,72.0,15.84297951775486,0.027869689518682093,0.0,0.0,338
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,3,2,subgraph_2,subgraph_3,5,5,58.8,9.833615815151617,0.015927059140385356,0.0,0.0,280
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,5,1,subgraph_1,subgraph_3,5,5,62.0,3.9370039370059056,0.06213564816335768,0.015625,0.0,252
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,5,1,subgraph_2,subgraph_1,5,5,41.8,21.40560674215987,0.013906926406926406,0.0,0.0,203
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,5,1,subgraph_2,subgraph_3,5,5,44.0,5.522680508593631,0.01636550244145181,0.0,0.0,211
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,5,2,subgraph_1,subgraph_3,5,5,89.2,17.253985046939157,0.02952407712385528,0.006097560975609756,0.0,404
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,5,2,subgraph_2,subgraph_1,5,5,74.8,41.62571320710313,0.001177486187845304,0.0,0.0,372
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,-1,5,2,subgraph_2,subgraph_3,5,5,90.6,40.90598978144888,0.0,0.0,0.0,453
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,3,1,subgraph_1,subgraph_3,5,5,36.0,13.435028842544403,0.0159824729046697,0.0,0.0,171
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,3,1,subgraph_2,subgraph_1,5,5,31.8,9.808159868191382,0.02682926829268293,0.0,0.0,148
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,3,1,subgraph_2,subgraph_3,5,5,34.6,5.856620185738529,0.019333333333333334,0.0,0.0,161
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,3,2,subgraph_1,subgraph_3,5,5,46.2,5.167204273105526,0.038916629331601914,0.0,0.0,203
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,3,2,subgraph_2,subgraph_1,5,5,81.6,5.683308895353129,0.0005747126436781609,0.0,0.0,407
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,3,2,subgraph_2,subgraph_3,5,5,58.0,13.322912594474229,0.03071679297659769,0.0,0.0,272
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,5,1,subgraph_1,subgraph_3,5,5,63.6,6.024948132556828,0.06456339643578264,0.0,0.0,259
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,5,1,subgraph_2,subgraph_1,5,5,73.0,25.288337232803585,0.009339496791180436,0.0,0.0,349
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,5,1,subgraph_2,subgraph_3,5,5,56.6,12.300406497347964,0.013426127301725387,0.0,0.0,267
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,5,2,subgraph_1,subgraph_3,5,5,87.0,14.124446891825535,0.046739517040950945,0.004975124378109453,0.0,376
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,5,2,subgraph_2,subgraph_1,5,5,80.4,56.809330219603886,0.005137632589314765,0.0,0.0,389
+data/results/algo3/deepseek-v3-chat-0324/raw/method3_results_deepseek.csv,1,1,5,2,subgraph_2,subgraph_3,5,5,95.0,37.02026472082554,0.0034151631667159615,0.0,0.0,467
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,3,1,subgraph_1,subgraph_3,5,5,25.8,18.185158784019457,0.0711482522130578,0.0,0.0,95
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,3,1,subgraph_2,subgraph_1,5,5,45.0,11.157956802210698,0.17241077255170392,0.009523809523809525,0.0,159
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,3,1,subgraph_2,subgraph_3,5,5,20.0,4.183300132670378,0.07301202501930275,0.0,0.0,83
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,3,2,subgraph_1,subgraph_3,5,5,25.0,10.8397416943394,0.04396537842190016,0.0,0.0,107
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,3,2,subgraph_2,subgraph_1,5,5,51.6,15.549919613940132,0.09294077789487978,0.0,0.0,202
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,3,2,subgraph_2,subgraph_3,5,5,33.0,16.56804152578089,0.08035200766389351,0.0,0.0,123
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,5,1,subgraph_1,subgraph_3,5,5,50.6,24.90582261239327,0.028153153153153154,0.0,0.0,226
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,5,1,subgraph_2,subgraph_1,5,5,62.0,14.560219778561036,0.2564335169368942,0.007518796992481203,0.0,181
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,5,1,subgraph_2,subgraph_3,5,5,53.6,20.181674856165927,0.11726943056047498,0.023529411764705882,0.0,196
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,5,2,subgraph_1,subgraph_3,5,5,51.6,22.523321247098526,0.038181414507869924,0.0,0.0,224
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,5,2,subgraph_2,subgraph_1,5,5,101.0,84.80566018845676,0.04709916813698277,0.003278688524590164,0.0,452
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,-1,5,2,subgraph_2,subgraph_3,5,5,66.6,11.545561917897283,0.06370401359841837,0.017391304347826087,0.0,272
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,3,1,subgraph_1,subgraph_3,5,5,35.2,17.369513522260778,0.0515761912907947,0.0,0.0,146
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,3,1,subgraph_2,subgraph_1,5,5,43.6,6.8044103344816,0.07013797082108278,0.0,0.0,166
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,3,1,subgraph_2,subgraph_3,5,5,25.4,8.87693640846886,0.2180117112319116,0.041666666666666664,0.0,64
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,3,2,subgraph_1,subgraph_3,5,5,23.4,11.86591757935306,0.0781815972860749,0.0,0.0,95
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,3,2,subgraph_2,subgraph_1,5,5,52.2,14.737706741552431,0.25970861603068607,0.018518518518518517,0.0,155
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,3,2,subgraph_2,subgraph_3,5,5,26.6,10.573551910309043,0.15137768784827607,0.02702702702702703,0.0,99
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,5,1,subgraph_1,subgraph_3,5,5,61.4,21.066561181170506,0.04275609329058823,0.0,0.0,256
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,5,1,subgraph_2,subgraph_1,5,5,79.8,30.219199195213626,0.09608092883284146,0.015625,0.0,286
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,5,1,subgraph_2,subgraph_3,5,5,59.0,7.968688725254614,0.16723319157778405,0.043478260869565216,0.0,204
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,5,2,subgraph_1,subgraph_3,5,5,59.4,44.2300802621926,0.08876503228094329,0.0,0.0,263
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,5,2,subgraph_2,subgraph_1,5,5,85.2,26.21449980449751,0.06574084866328557,0.0,0.0,357
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,-1,1,5,2,subgraph_2,subgraph_3,5,5,63.8,42.745760023656146,0.05656352368271326,0.005780346820809248,0.0,258
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,3,1,subgraph_1,subgraph_3,5,5,45.0,9.565563234854496,0.030219233502815596,0.0,0.0,200
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,3,1,subgraph_2,subgraph_1,5,5,44.2,22.241852440837746,0.0716971540129785,0.009345794392523364,0.0,176
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,3,1,subgraph_2,subgraph_3,5,5,32.6,13.649175799292792,0.0765784257255511,0.022727272727272728,0.0,133
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,3,2,subgraph_1,subgraph_3,5,5,39.2,16.513630733427462,0.017669577168728273,0.0,0.0,180
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,3,2,subgraph_2,subgraph_1,5,5,44.8,31.075713990188543,0.0420372754374871,0.0,0.0,192
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,3,2,subgraph_2,subgraph_3,5,5,37.4,14.08190328045183,0.12466629116775112,0.0,0.0,124
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,5,1,subgraph_1,subgraph_3,5,5,78.2,22.58760722166029,0.06524115717481398,0.0,0.0,316
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,5,1,subgraph_2,subgraph_1,5,5,58.4,25.314027731674784,0.06084973226597275,0.0,0.0,245
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,5,1,subgraph_2,subgraph_3,5,5,55.6,15.109599597606815,0.042457345755166215,0.0,0.0,236
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,5,2,subgraph_1,subgraph_3,5,5,85.2,26.938819573247823,0.054469491315267404,0.0,0.0,357
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,5,2,subgraph_2,subgraph_1,5,5,65.2,20.59611613872868,0.11956591210007131,0.006578947368421052,0.0,252
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,-1,5,2,subgraph_2,subgraph_3,5,5,53.0,9.669539802906858,0.07967603686234949,0.03409090909090909,0.0,216
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,3,1,subgraph_1,subgraph_3,5,5,30.8,18.430952227163957,0.044144144144144144,0.0,0.0,125
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,3,1,subgraph_2,subgraph_1,5,5,61.4,17.357995275952806,0.09747791108876377,0.007751937984496124,0.0,235
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,3,1,subgraph_2,subgraph_3,5,5,31.2,17.049926686059386,0.08915177387570407,0.02197802197802198,0.0,125
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,3,2,subgraph_1,subgraph_3,5,5,44.0,11.895377253370318,0.021354166666666667,0.0,0.0,206
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,3,2,subgraph_2,subgraph_1,5,5,50.0,22.58317958127243,0.06691088069038736,0.007407407407407408,0.0,205
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,3,2,subgraph_2,subgraph_3,5,5,31.8,9.364827814754525,0.08952085754442453,0.029850746268656716,0.0,124
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,5,1,subgraph_1,subgraph_3,5,5,87.2,10.232301793829187,0.06934505578865033,0.023952095808383235,0.0,364
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,5,1,subgraph_2,subgraph_1,5,5,80.6,25.43226297441893,0.06118555570369523,0.011111111111111112,0.0,338
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,5,1,subgraph_2,subgraph_3,5,5,54.8,17.166828478201793,0.10450607438747153,0.021739130434782608,0.0,212
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,5,2,subgraph_1,subgraph_3,5,5,75.2,20.437710243566915,0.025111965740812314,0.0,0.0,341
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,5,2,subgraph_2,subgraph_1,5,5,119.6,30.45980958574758,0.12078808517480602,0.049586776859504134,0.0,442
+data/results/algo3/gemini-2.0-flash-exp/raw/method3_results_gemini-2.0-flash-exp.csv,1,1,5,2,subgraph_2,subgraph_3,5,5,57.8,21.417282740814716,0.0629683147804968,0.007518796992481203,0.0,230
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,3,1,subgraph_1,subgraph_3,5,5,30.4,13.66747965061591,0.15975053895834274,0.05063291139240506,0.0,110
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,3,1,subgraph_2,subgraph_1,5,5,32.2,11.233877335986895,0.11417393163652148,0.0,0.0,122
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,3,1,subgraph_2,subgraph_3,5,5,23.8,10.2810505299799,0.12385955676067069,0.0,0.0,87
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,3,2,subgraph_1,subgraph_3,5,5,49.8,15.139352694220449,0.09806567706645777,0.03669724770642202,0.0,198
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,3,2,subgraph_2,subgraph_1,5,5,70.2,19.690099034794112,0.07272964496624199,0.005747126436781609,0.0,289
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,3,2,subgraph_2,subgraph_3,5,5,41.4,4.878524367060187,0.12479871322786315,0.03571428571428571,0.0,145
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,5,1,subgraph_1,subgraph_3,5,5,49.4,9.154233993076646,0.08778731217435407,0.027522935779816515,0.0,193
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,5,1,subgraph_2,subgraph_1,5,5,56.6,17.329166165744965,0.2863475741134962,0.13559322033898305,0.0,148
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,5,1,subgraph_2,subgraph_3,5,5,54.6,9.864076236526156,0.13571962786809488,0.05309734513274336,0.0,200
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,5,2,subgraph_1,subgraph_3,5,5,135.4,16.349311912126456,0.06205938069346436,0.017006802721088437,0.0,559
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,5,2,subgraph_2,subgraph_1,5,5,231.6,52.07974654316205,0.0710242507177667,0.04411764705882353,0.0,944
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,-1,5,2,subgraph_2,subgraph_3,5,5,96.2,17.8801565988668,0.11007752910093509,0.06111111111111111,0.0,370
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,3,1,subgraph_1,subgraph_3,5,5,27.0,3.3166247903554,0.10841742700510734,0.07547169811320754,0.0,109
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,3,1,subgraph_2,subgraph_1,5,5,39.8,20.48658097389606,0.05206389943074623,0.0,0.0,175
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,3,1,subgraph_2,subgraph_3,5,5,25.2,7.9498427657407165,0.08232828282828283,0.0,0.0,98
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,3,2,subgraph_1,subgraph_3,5,5,53.2,6.978538528947161,0.10293827368455274,0.04807692307692308,0.0,211
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,3,2,subgraph_2,subgraph_1,5,5,65.2,24.40696621868437,0.07385775084101737,0.007462686567164179,0.0,266
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,3,2,subgraph_2,subgraph_3,5,5,38.0,10.024968827881711,0.13683979801826904,0.05555555555555555,0.0,128
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,5,1,subgraph_1,subgraph_3,5,5,62.4,12.798437404620925,0.018328008400732832,0.0,0.0,293
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,5,1,subgraph_2,subgraph_1,5,5,72.2,9.391485505499116,0.14467880762669819,0.04132231404958678,0.0,217
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,5,1,subgraph_2,subgraph_3,5,5,48.6,8.384509526501834,0.16583490049320987,0.0625,0.0,141
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,5,2,subgraph_1,subgraph_3,5,5,97.6,41.79473651071388,0.05877180499058384,0.018867924528301886,0.0,424
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,5,2,subgraph_2,subgraph_1,5,5,136.2,60.54915358615676,0.07662119353959282,0.0,0.0,524
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,-1,1,5,2,subgraph_2,subgraph_3,5,5,76.0,15.620499351813308,0.1351024733314819,0.04,0.0,268
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,3,1,subgraph_1,subgraph_3,5,5,35.6,11.349008767288886,0.16987826127902564,0.04285714285714286,0.0,123
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,3,1,subgraph_2,subgraph_1,5,5,41.6,19.204166214652485,0.10304938532133115,0.0,0.0,151
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,3,1,subgraph_2,subgraph_3,5,5,24.4,7.436396977031283,0.13266998318790457,0.06,0.0,88
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,3,2,subgraph_1,subgraph_3,5,5,61.8,6.379655163094632,0.028617900799751378,0.0,0.0,284
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,3,2,subgraph_2,subgraph_1,5,5,62.2,16.90266251216062,0.0924938231145704,0.00847457627118644,0.0,235
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,3,2,subgraph_2,subgraph_3,5,5,42.0,4.358898943540674,0.17587740165727334,0.046511627906976744,0.0,135
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,5,1,subgraph_1,subgraph_3,5,5,68.4,17.700282483621553,0.07917332349141046,0.0,0.0,260
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,5,1,subgraph_2,subgraph_1,5,5,80.2,13.682105101189656,0.18993303774313391,0.06748466257668712,0.0,251
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,5,1,subgraph_2,subgraph_3,5,5,52.8,20.6082507748717,0.1196203348521803,0.0,0.0,209
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,5,2,subgraph_1,subgraph_3,5,5,122.8,33.32716609614445,0.04392587321646285,0.0,0.0,544
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,5,2,subgraph_2,subgraph_1,5,5,116.6,26.034592372457073,0.12860424836822829,0.0,0.0,440
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,-1,5,2,subgraph_2,subgraph_3,5,5,81.2,8.228000972289685,0.07203985998243548,0.03225806451612903,0.0,328
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,3,1,subgraph_1,subgraph_3,5,5,32.2,7.854934754662192,0.09726471281128854,0.05333333333333334,0.0,124
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,3,1,subgraph_2,subgraph_1,5,5,32.6,9.91463564635635,0.14749100604363763,0.0,0.0,114
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,3,1,subgraph_2,subgraph_3,5,5,21.4,3.2093613071762426,0.16625120504058905,0.0,0.0,69
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,3,2,subgraph_1,subgraph_3,5,5,62.4,19.83179265724609,0.06232778174916838,0.0,0.0,265
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,3,2,subgraph_2,subgraph_1,5,5,63.0,17.930421077041107,0.14132936778120947,0.007692307692307693,0.0,221
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,3,2,subgraph_2,subgraph_3,5,5,48.2,7.661592523751182,0.18848485875252693,0.15476190476190477,0.0,166
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,5,1,subgraph_1,subgraph_3,5,5,54.6,12.934450123604018,0.062333889820963086,0.02564102564102564,0.0,231
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,5,1,subgraph_2,subgraph_1,5,5,76.4,14.170391667134682,0.17671191268335334,0.0,0.0,241
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,5,1,subgraph_2,subgraph_3,5,5,66.4,16.28803241647069,0.046211351146913125,0.0,0.0,290
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,5,2,subgraph_1,subgraph_3,5,5,114.0,38.60699418499192,0.036916403292784575,0.0,0.0,503
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,5,2,subgraph_2,subgraph_1,5,5,133.8,42.938327866837106,0.058224942912366885,0.0,0.0,558
+data/results/algo3/google-gemini-2.5-pro/raw/method3_results_google-gemini-2.5-pro.csv,1,1,5,2,subgraph_2,subgraph_3,5,5,86.4,2.792848008753788,0.10469332985950155,0.060240963855421686,0.0,326
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,3,1,subgraph_1,subgraph_3,5,5,18.4,9.370165420097983,0.037655677655677657,0.0,0.0,78
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,3,1,subgraph_2,subgraph_1,5,5,13.2,7.52994023880668,0.03666666666666667,0.0,0.0,55
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,3,1,subgraph_2,subgraph_3,5,5,25.8,6.572670690061994,0.10155880552939375,0.03333333333333333,0.0,101
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,3,2,subgraph_1,subgraph_3,5,5,49.0,10.793516572461451,0.01670493629154415,0.0,0.0,235
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,3,2,subgraph_2,subgraph_1,5,5,36.2,9.705668446840743,0.04248714140828745,0.0,0.0,159
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,3,2,subgraph_2,subgraph_3,5,5,48.2,10.66302021005306,0.046551425255165105,0.018867924528301886,0.0,209
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,5,1,subgraph_1,subgraph_3,5,5,60.6,19.37266114915553,0.04747492029355598,0.024193548387096774,0.0,272
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,5,1,subgraph_2,subgraph_1,5,5,23.0,17.97220075561143,0.026083092186854073,0.0,0.0,102
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,5,1,subgraph_2,subgraph_3,5,5,52.4,11.304866208850063,0.08527076428862143,0.0,0.0,194
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,5,2,subgraph_1,subgraph_3,5,5,130.2,23.530830839560256,0.031601727092630635,0.0,0.0,604
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,5,2,subgraph_2,subgraph_1,5,5,72.4,10.039920318408907,0.1424829800716723,0.013333333333333334,0.0,264
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,-1,5,2,subgraph_2,subgraph_3,5,5,93.4,8.933084573650918,0.30764015426261987,0.14545454545454545,0.0,236
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,3,1,subgraph_1,subgraph_3,5,5,34.2,8.526429498916883,0.04898955843497823,0.037037037037037035,0.0,158
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,3,1,subgraph_2,subgraph_1,5,5,19.2,8.408329203831164,0.15360021825539066,0.0,0.0,60
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,3,1,subgraph_2,subgraph_3,5,5,35.2,1.3038404810405297,0.17147319006444942,0.0,0.0,108
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,3,2,subgraph_1,subgraph_3,5,5,60.0,9.591663046625438,0.03208953986286758,0.0,0.0,274
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,3,2,subgraph_2,subgraph_1,5,5,28.6,9.98999499499374,0.05755902924384557,0.0,0.0,111
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,3,2,subgraph_2,subgraph_3,5,5,47.0,8.54400374531753,0.1343214585153512,0.0,0.0,161
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,5,1,subgraph_1,subgraph_3,5,5,59.2,9.884331034521253,0.07433388084637751,0.02727272727272727,0.0,246
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,5,1,subgraph_2,subgraph_1,5,5,21.6,8.87693640846886,0.061743925006291264,0.0,0.0,89
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,5,1,subgraph_2,subgraph_3,5,5,52.8,4.207136793592526,0.5001392534304319,0.3048780487804878,0.0,98
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,5,2,subgraph_1,subgraph_3,5,5,85.0,15.215124054702938,0.02611086700545317,0.0,0.0,394
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,5,2,subgraph_2,subgraph_1,5,5,85.6,31.213779008636557,0.06059209260821058,0.0,0.0,354
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,-1,1,5,2,subgraph_2,subgraph_3,5,5,89.4,8.763560920082659,0.19635832658728283,0.0,0.0,285
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,3,1,subgraph_1,subgraph_3,5,5,34.8,6.870225614927067,0.013241736360015929,0.0,0.0,166
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,3,1,subgraph_2,subgraph_1,5,5,14.6,8.648699324175862,0.047407407407407405,0.0,0.0,61
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,3,1,subgraph_2,subgraph_3,5,5,28.4,3.361547262794322,0.06380494505494505,0.0,0.0,113
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,3,2,subgraph_1,subgraph_3,5,5,49.4,12.25969004502153,0.08865348389266559,0.008928571428571428,0.0,198
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,3,2,subgraph_2,subgraph_1,5,5,30.2,7.726577508832744,0.21582894756903212,0.0136986301369863,0.0,104
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,3,2,subgraph_2,subgraph_3,5,5,45.2,9.909591313469996,0.07544585133191467,0.0,0.0,176
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,5,1,subgraph_1,subgraph_3,5,5,56.2,9.06642156531451,0.06818285755789386,0.0,0.0,240
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,5,1,subgraph_2,subgraph_1,5,5,19.4,11.88696765369537,0.0076315789473684215,0.0,0.0,95
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,5,1,subgraph_2,subgraph_3,5,5,48.6,11.523888232710346,0.0628288362810716,0.0,0.0,197
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,5,2,subgraph_1,subgraph_3,5,5,71.2,20.117156856772777,0.029420614804740775,0.0,0.0,321
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,5,2,subgraph_2,subgraph_1,5,5,53.0,15.443445211480501,0.08384197539170515,0.0,0.0,198
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,-1,5,2,subgraph_2,subgraph_3,5,5,106.6,13.049904214207858,0.11744137498094187,0.0,0.0,386
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,3,1,subgraph_1,subgraph_3,5,5,39.0,6.164414002968976,0.0743390682270363,0.0,0.0,157
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,3,1,subgraph_2,subgraph_1,5,5,15.8,7.463243262818116,0.01027126099706745,0.0,0.0,77
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,3,1,subgraph_2,subgraph_3,5,4,27.4,2.6076809620810595,0.3342463092463092,0.0,0.1,71
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,3,2,subgraph_1,subgraph_3,5,5,44.0,5.431390245600108,0.02745400305017779,0.0,0.0,204
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,3,2,subgraph_2,subgraph_1,5,5,38.6,11.88696765369537,0.0014285714285714286,0.0,0.0,192
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,3,2,subgraph_2,subgraph_3,5,5,46.2,6.180614856144977,0.1118167695102521,0.0,0.0,176
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,5,1,subgraph_1,subgraph_3,5,5,65.2,8.228000972289685,0.04958525844961771,0.0,0.0,289
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,5,1,subgraph_2,subgraph_1,5,5,17.8,3.271085446759225,0.15101061076604555,0.0,0.0,63
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,5,1,subgraph_2,subgraph_3,5,5,56.0,12.083045973594572,0.08585225489515919,0.0,0.0,205
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,5,2,subgraph_1,subgraph_3,5,5,84.6,12.541929676090517,0.0444140375218534,0.0,0.0,369
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,5,2,subgraph_2,subgraph_1,5,5,62.6,14.892951352905172,0.07667066380432556,0.0,0.0,249
+data/results/algo3/gpt-5/raw/method3_results_gpt5.csv,1,1,5,2,subgraph_2,subgraph_3,5,5,99.6,24.945941553687646,0.17644716062195825,0.07142857142857142,0.0,323
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,3,1,subgraph_1,subgraph_3,5,5,4.2,1.6431676725154984,0.06833333333333333,0.0,0.0,17
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,3,1,subgraph_2,subgraph_1,5,5,19.2,5.403702434442518,0.316653732512857,0.0,0.0,57
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,3,1,subgraph_2,subgraph_3,5,5,8.8,3.03315017762062,0.20107776983937975,0.05,0.0,28
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,3,2,subgraph_1,subgraph_3,5,5,6.8,2.6832815729997477,0.03222222222222222,0.0,0.0,31
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,3,2,subgraph_2,subgraph_1,5,5,33.6,12.09545369136685,0.08843621176537653,0.0125,0.0,128
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,3,2,subgraph_2,subgraph_3,5,5,20.6,4.39317652729776,0.1283146244436567,0.022222222222222223,0.0,76
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,5,1,subgraph_1,subgraph_3,5,5,5.2,3.492849839314596,0.021111111111111112,0.0,0.0,24
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,5,1,subgraph_2,subgraph_1,5,5,28.4,10.549881515922348,0.18256131239137943,0.03636363636363636,0.0,96
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,5,1,subgraph_2,subgraph_3,5,5,12.2,5.06951674225463,0.18087980646804175,0.03333333333333333,0.0,41
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,5,2,subgraph_1,subgraph_3,5,5,9.6,5.5497747702046425,0.023645510835913312,0.0,0.0,44
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,5,2,subgraph_2,subgraph_1,5,5,55.2,15.336231610144651,0.1254413599409518,0.022222222222222223,0.0,198
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,-1,5,2,subgraph_2,subgraph_3,5,5,41.0,8.860022573334675,0.1533531278814267,0.07352941176470588,0.0,143
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,3,1,subgraph_1,subgraph_3,5,4,3.2,2.4899799195977463,0.18333333333333332,0.0,0.1,13
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,3,1,subgraph_2,subgraph_1,5,5,14.2,6.1400325732035,0.27285331825037706,0.038461538461538464,0.0,38
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,3,1,subgraph_2,subgraph_3,5,5,10.6,3.286335345030997,0.11693609364964863,0.037037037037037035,0.0,40
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,3,2,subgraph_1,subgraph_3,5,5,11.0,7.176350047203662,0.021823548578766793,0.0,0.0,52
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,3,2,subgraph_2,subgraph_1,5,5,22.6,6.877499545619759,0.07702096838030358,0.017241379310344827,0.0,96
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,3,2,subgraph_2,subgraph_3,5,5,19.2,3.7682887362833544,0.1505225573798548,0.047619047619047616,0.0,69
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,5,1,subgraph_1,subgraph_3,5,5,6.0,5.787918451395113,0.06666666666666667,0.0,0.0,28
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,5,1,subgraph_2,subgraph_1,5,5,30.0,6.244997998398398,0.18650064503088432,0.016666666666666666,0.0,102
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,5,1,subgraph_2,subgraph_3,5,5,16.4,7.436396977031283,0.06607612832653433,0.0,0.0,71
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,5,2,subgraph_1,subgraph_3,5,5,14.4,4.335896677735761,0.008333333333333333,0.0,0.0,70
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,5,2,subgraph_2,subgraph_1,5,5,47.4,14.99333185119305,0.04409376335469619,0.011111111111111112,0.0,212
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,-1,1,5,2,subgraph_2,subgraph_3,5,5,37.4,10.99090533122727,0.09226276846673404,0.03225806451612903,0.0,142
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,3,1,subgraph_1,subgraph_3,5,5,13.4,2.9664793948382653,0.03822967380136164,0.0,0.0,60
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,3,1,subgraph_2,subgraph_1,5,5,16.6,6.9498201415576215,0.03046466541588493,0.0,0.0,76
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,3,1,subgraph_2,subgraph_3,5,5,11.8,4.764451699828638,0.2575832775420482,0.10344827586206896,0.0,40
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,3,2,subgraph_1,subgraph_3,5,5,9.8,6.457553716385176,0.03398541114058355,0.0,0.0,43
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,3,2,subgraph_2,subgraph_1,5,5,22.0,16.852299546352718,0.10727627174199754,0.046875,0.0,93
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,3,2,subgraph_2,subgraph_3,5,5,22.8,2.4899799195977463,0.060107466371646746,0.0,0.0,97
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,5,1,subgraph_1,subgraph_3,5,5,13.2,7.395944834840239,0.07284313725490196,0.0,0.0,56
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,5,1,subgraph_2,subgraph_1,5,5,26.6,7.46993975879324,0.07378446786589785,0.0,0.0,103
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,5,1,subgraph_2,subgraph_3,5,5,21.2,7.328028384224504,0.05773722956806589,0.0,0.0,90
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,5,2,subgraph_1,subgraph_3,5,5,18.0,5.196152422706632,0.04567425026664157,0.0,0.0,79
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,5,2,subgraph_2,subgraph_1,5,5,42.0,6.082762530298219,0.19465976435294377,0.02197802197802198,0.0,142
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,-1,5,2,subgraph_2,subgraph_3,5,5,51.6,14.310835055998655,0.03594225191625021,0.0,0.0,227
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,3,1,subgraph_1,subgraph_3,5,5,12.8,4.08656334834051,0.094934822073672,0.0,0.0,48
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,3,1,subgraph_2,subgraph_1,5,5,18.8,8.983317872590282,0.0651854458241257,0.0,0.0,75
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,3,1,subgraph_2,subgraph_3,5,5,7.8,2.3874672772626644,0.03601190476190476,0.0,0.0,34
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,3,2,subgraph_1,subgraph_3,5,5,18.0,6.082762530298219,0.05837981466054102,0.0,0.0,78
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,3,2,subgraph_2,subgraph_1,5,5,29.4,11.193748255164577,0.052436870154219176,0.0,0.0,127
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,3,2,subgraph_2,subgraph_3,5,5,20.4,5.941380311005179,0.09569534935148297,0.030303030303030304,0.0,77
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,5,1,subgraph_1,subgraph_3,5,5,14.2,8.67179335547152,0.05775835275835276,0.0,0.0,61
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,5,1,subgraph_2,subgraph_1,5,5,21.6,5.5497747702046425,0.054104432896471336,0.0,0.0,90
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,5,1,subgraph_2,subgraph_3,5,5,19.2,5.263078946776307,0.08509890875794371,0.022727272727272728,0.0,79
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,5,2,subgraph_1,subgraph_3,5,5,20.8,8.927485648266257,0.025237668366757844,0.0,0.0,96
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,5,2,subgraph_2,subgraph_1,5,5,51.4,11.610340218959994,0.15842397362268704,0.010752688172043012,0.0,165
+data/results/algo3/openai-gpt-4o/raw/method3_results_openai-gpt-4o.csv,1,1,5,2,subgraph_2,subgraph_3,5,5,46.0,11.20267825120404,0.10905630226406984,0.06796116504854369,0.0,175
