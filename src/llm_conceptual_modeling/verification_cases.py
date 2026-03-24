@@ -14,7 +14,7 @@ from llm_conceptual_modeling.algo3.evaluation import evaluate_results_file as ev
 from llm_conceptual_modeling.algo3.factorial import run_factorial_analysis as factorial_algo3
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "legacy"
+FIXTURES_ROOT = REPO_ROOT / "tests" / "reference_fixtures" / "legacy"
 
 
 @dataclass(frozen=True)
@@ -52,7 +52,11 @@ def build_legacy_parity_cases(temp_root: Path | None = None) -> list[Verificatio
             name="algo3-eval",
             evaluator=eval_algo3,
             raw_path=FIXTURES_ROOT / "algo3" / "gpt-5" / "raw" / "method3_results_gpt5.csv",
-            expected_path=FIXTURES_ROOT / "algo3" / "gpt-5" / "evaluated" / "method3_results_evaluated_gpt5.csv",
+            expected_path=FIXTURES_ROOT
+            / "algo3"
+            / "gpt-5"
+            / "evaluated"
+            / "method3_results_evaluated_gpt5.csv",
             output_path=root / "algo3_metrics.csv",
             metric_column="Recall",
         ),
@@ -89,7 +93,11 @@ def build_legacy_parity_cases(temp_root: Path | None = None) -> list[Verificatio
         VerificationCase(
             name="algo3-factorial",
             evaluator=factorial_algo3,
-            input_path=FIXTURES_ROOT / "algo3" / "gpt-5" / "evaluated" / "method3_results_evaluated_gpt5.csv",
+            input_path=FIXTURES_ROOT
+            / "algo3"
+            / "gpt-5"
+            / "evaluated"
+            / "method3_results_evaluated_gpt5.csv",
             expected_path=FIXTURES_ROOT
             / "algo3"
             / "gpt-5"

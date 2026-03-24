@@ -4,7 +4,7 @@ from llm_conceptual_modeling.cli import main
 
 
 def test_cli_analyze_summary_writes_grouped_metric_statistics(tmp_path) -> None:
-    input_path = "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
+    input_path = "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
     output_path = tmp_path / "summary.csv"
 
     exit_code = main(
@@ -67,7 +67,7 @@ def test_cli_analyze_summary_rejects_missing_metric_column(tmp_path, capsys) -> 
             "analyze",
             "summary",
             "--input",
-            "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+            "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
             "--group-by",
             "Explanation",
             "--metric",
@@ -92,9 +92,9 @@ def test_cli_analyze_summary_combines_multiple_inputs_with_source_labels(tmp_pat
             "analyze",
             "summary",
             "--input",
-            "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+            "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
             "--input",
-            "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
+            "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
             "--group-by",
             "Explanation",
             "--metric",
@@ -110,16 +110,14 @@ def test_cli_analyze_summary_combines_multiple_inputs_with_source_labels(tmp_pat
 
     assert "source_input" in actual.columns
     assert set(actual["source_input"]) == {
-        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
-        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
     }
     assert len(actual) == 4
 
 
 def test_cli_analyze_baseline_comparison_writes_model_deltas(tmp_path) -> None:
-    baseline_dir = (
-        tmp_path / "data" / "baselines" / "direct-cross-graph" / "algo1" / "evaluated"
-    )
+    baseline_dir = tmp_path / "data" / "baselines" / "direct-cross-graph" / "algo1" / "evaluated"
     llm_dir = tmp_path / "data" / "results" / "algo1" / "model-x" / "evaluated"
     baseline_pair_a_path = baseline_dir / "metrics_sg1_sg2.csv"
     baseline_pair_b_path = baseline_dir / "metrics_sg2_sg3.csv"
@@ -175,9 +173,7 @@ def test_cli_analyze_baseline_comparison_writes_model_deltas(tmp_path) -> None:
 
 
 def test_cli_analyze_baseline_comparison_reuses_single_baseline_input(tmp_path) -> None:
-    baseline_dir = (
-        tmp_path / "data" / "baselines" / "direct-cross-graph" / "algo3" / "evaluated"
-    )
+    baseline_dir = tmp_path / "data" / "baselines" / "direct-cross-graph" / "algo3" / "evaluated"
     llm_dir = tmp_path / "data" / "results" / "algo3" / "model-y" / "evaluated"
     baseline_path = baseline_dir / "baseline.csv"
     llm_path = llm_dir / "method3_results_evaluated_model_y.csv"

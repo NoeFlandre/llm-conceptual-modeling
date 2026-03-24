@@ -9,8 +9,8 @@ from llm_conceptual_modeling.cli import main
 
 
 def test_algo1_evaluation_matches_full_legacy_csv(tmp_path) -> None:
-    raw_path = "tests/fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
-    expected_path = "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
+    raw_path = "tests/reference_fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
+    expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
     output_path = tmp_path / "algo1_metrics.csv"
 
     eval_algo1(raw_path, output_path)
@@ -19,8 +19,8 @@ def test_algo1_evaluation_matches_full_legacy_csv(tmp_path) -> None:
 
 
 def test_algo2_evaluation_matches_full_legacy_csv(tmp_path) -> None:
-    raw_path = "tests/fixtures/legacy/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv"
-    expected_path = "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv"
+    raw_path = "tests/reference_fixtures/legacy/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv"
+    expected_path = "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv"
     output_path = tmp_path / "algo2_metrics.csv"
 
     eval_algo2(raw_path, output_path)
@@ -29,8 +29,10 @@ def test_algo2_evaluation_matches_full_legacy_csv(tmp_path) -> None:
 
 
 def test_algo3_evaluation_matches_full_legacy_csv(tmp_path) -> None:
-    raw_path = "tests/fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv"
-    expected_path = "tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
+    raw_path = "tests/reference_fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
+    )
     output_path = tmp_path / "algo3_metrics.csv"
 
     eval_algo3(raw_path, output_path)

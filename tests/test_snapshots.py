@@ -3,7 +3,7 @@ from pathlib import Path
 
 from llm_conceptual_modeling.cli import main
 
-SNAPSHOT_ROOT = Path("tests/fixtures/snapshots")
+SNAPSHOT_ROOT = Path("tests/snapshots")
 
 
 def _read_snapshot(name: str) -> dict[str, object]:

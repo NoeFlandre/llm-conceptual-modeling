@@ -22,6 +22,7 @@ from llm_conceptual_modeling.common.mistral import (
     _format_knowledge_map_as_adjacency,
     _format_knowledge_map_as_edge_list,
     _normalize_structured_response,
+    _recover_non_json_response,
 )
 
 # ----------------------------------------------------------------------
@@ -226,6 +227,18 @@ def test_mistral_chat_client_recovers_vote_list_from_bare_tokens() -> None:
     )
 
     assert result == {"votes": ["Y", "N", "Y"]}
+
+
+def test_recover_non_json_response_parses_tuple_text_into_edge_dicts() -> None:
+    actual = _recover_non_json_response(
+        content="(alpha, beta)\n(gamma, delta)",
+        schema_name="edge_list",
+    )
+
+    assert actual == [
+        {"source": "alpha", "target": "beta"},
+        {"source": "gamma", "target": "delta"},
+    ]
 
 
 def test_mistral_chat_client_passes_correct_payload_to_sdk() -> None:

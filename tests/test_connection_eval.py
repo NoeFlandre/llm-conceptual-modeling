@@ -47,8 +47,8 @@ def test_find_valid_connections_accepts_any_path_between_subgraphs() -> None:
 
 
 def test_algo1_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
-    raw_path = "tests/fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
-    expected_path = "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
+    raw_path = "tests/reference_fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
+    expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"
     output_path = tmp_path / "metrics_sg1_sg2.csv"
 
     evaluate_results_file(raw_path, output_path)
@@ -67,8 +67,8 @@ def test_algo1_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
 
 
 def test_algo2_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
-    raw_path = "tests/fixtures/legacy/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv"
-    expected_path = "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv"
+    raw_path = "tests/reference_fixtures/legacy/algo2/gpt-5/raw/algorithm2_results_sg1_sg2.csv"
+    expected_path = "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv"
     output_path = tmp_path / "metrics_sg1_sg2.csv"
 
     evaluate_algo2_results_file(raw_path, output_path)
@@ -87,8 +87,10 @@ def test_algo2_evaluation_matches_legacy_metrics_fixture(tmp_path) -> None:
 
 
 def test_algo3_evaluation_matches_legacy_recall_fixture(tmp_path) -> None:
-    raw_path = "tests/fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv"
-    expected_path = "tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
+    raw_path = "tests/reference_fixtures/legacy/algo3/gpt-5/raw/method3_results_gpt5.csv"
+    expected_path = (
+        "tests/reference_fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
+    )
     output_path = tmp_path / "method3_results_evaluated_gpt5.csv"
 
     evaluate_algo3_results_file(raw_path, output_path)
@@ -101,11 +103,11 @@ def test_algo3_evaluation_matches_legacy_recall_fixture(tmp_path) -> None:
 
 def test_algo1_factorial_matches_legacy_fixture(tmp_path) -> None:
     input_paths = [
-        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
-        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
-        "tests/fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv",
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv",
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv",
     ]
-    expected_path = "tests/fixtures/legacy/algo1/gpt-5/factorial/factorial_analysis_algo1_gpt_5_without_error.csv"
+    expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/factorial/factorial_analysis_algo1_gpt_5_without_error.csv"
     output_path = tmp_path / "factorial_analysis_algo1_gpt_5_without_error.csv"
 
     run_algo1_factorial_analysis(input_paths, output_path)
@@ -118,11 +120,11 @@ def test_algo1_factorial_matches_legacy_fixture(tmp_path) -> None:
 
 def test_algo2_factorial_matches_legacy_fixture(tmp_path) -> None:
     input_paths = [
-        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
-        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv",
-        "tests/fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv",
+        "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg2_sg3.csv",
+        "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg3_sg1.csv",
     ]
-    expected_path = "tests/fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv"
+    expected_path = "tests/reference_fixtures/legacy/algo2/gpt-5/factorial/factorial_analysis_gpt_5_algo2_without_error.csv"
     output_path = tmp_path / "factorial_analysis_gpt_5_algo2_without_error.csv"
 
     run_algo2_factorial_analysis(input_paths, output_path)
@@ -134,8 +136,10 @@ def test_algo2_factorial_matches_legacy_fixture(tmp_path) -> None:
 
 
 def test_algo3_factorial_matches_legacy_fixture(tmp_path) -> None:
-    input_path = "tests/fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
-    expected_path = "tests/fixtures/legacy/algo3/gpt-5/factorial/factorial_analysis_results_gpt5_without_error.csv"
+    input_path = (
+        "tests/reference_fixtures/legacy/algo3/gpt-5/evaluated/method3_results_evaluated_gpt5.csv"
+    )
+    expected_path = "tests/reference_fixtures/legacy/algo3/gpt-5/factorial/factorial_analysis_results_gpt5_without_error.csv"
     output_path = tmp_path / "factorial_analysis_results_gpt5_without_error.csv"
 
     run_algo3_factorial_analysis(input_path, output_path)
