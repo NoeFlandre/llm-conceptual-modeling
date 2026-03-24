@@ -108,17 +108,16 @@ def test_call_with_retry_retries_sdk_permanent_error_wrapping_transport_failure(
 def test_call_with_retry_retries_sdk_error_429_before_succeeding() -> None:
     calls = {"count": 0}
     delays: list[float] = []
-    request = httpx.Request("POST", "https://api.mistral.ai/v1/chat/completions")
-    response = httpx.Response(
-        429,
-        request=request,
-        text='{"message":"rate limited"}',
-    )
+
+    class RateLimitedSDKError(SDKError):
+        def __init__(self) -> None:
+            super().__init__("rate limited")
+            self.status_code = 429
 
     def operation() -> str:
         calls["count"] += 1
         if calls["count"] < 3:
-            raise SDKError("API error occurred", response, body='{"message":"rate limited"}')
+            raise RateLimitedSDKError()
         return "ok"
 
     actual = call_with_retry(

@@ -141,7 +141,7 @@ def parse_manifest(yaml_path: str | Path) -> ExperimentManifest:
     """
     path = Path(yaml_path)
     with path.open(encoding="utf-8") as handle:
-        data: dict[str, Any] = yaml.safe_load(handle)  # type: ignore[assignment]
+        data: dict[str, Any] | None = yaml.safe_load(handle)
 
     if data is None:
         raise ManifestValidationError("Manifest YAML file is empty")

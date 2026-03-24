@@ -74,9 +74,9 @@ def _build_manifest_checks() -> list[dict[str, object]]:
     algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
     algo2_manifest: dict[str, object] = build_algo2_manifest(fixture_only=False)
     algo3_manifest: dict[str, object] = build_algo3_manifest(fixture_only=False)
-    mc1 = algo1_manifest.get("method_contract") or {}
-    mc2 = algo2_manifest.get("method_contract") or {}
-    mc3 = algo3_manifest.get("method_contract") or {}
+    mc1 = cast(dict[str, object], algo1_manifest.get("method_contract") or {})
+    mc2 = cast(dict[str, object], algo2_manifest.get("method_contract") or {})
+    mc3 = cast(dict[str, object], algo3_manifest.get("method_contract") or {})
     algo1_method_contract: dict[str, object] = mc1
     algo2_method_contract: dict[str, object] = mc2
     algo3_method_contract: dict[str, object] = mc3

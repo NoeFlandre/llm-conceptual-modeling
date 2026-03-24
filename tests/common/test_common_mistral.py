@@ -7,6 +7,7 @@ from the common module.
 
 import json
 from types import SimpleNamespace
+from typing import cast
 
 import httpx
 import pytest
@@ -273,10 +274,11 @@ def test_mistral_chat_client_passes_correct_payload_to_sdk() -> None:
     assert captured["model"] == "mistral-medium-2407"
     assert captured["messages"] == [{"role": "user", "content": "count the edges"}]
     assert captured["temperature"] == 0.0
-    response_format = captured["response_format"]
+    response_format = cast(dict[str, object], captured["response_format"])
     assert isinstance(response_format, dict)
     assert response_format["type"] == "json_schema"
-    assert response_format["json_schema"]["name"] == "edge_count"
+    json_schema = cast(dict[str, object], response_format["json_schema"])
+    assert json_schema["name"] == "edge_count"
 
 
 def test_mistral_chat_client_retries_on_transient_httpx_connect_error() -> None:
@@ -354,8 +356,7 @@ def test_chat_completion_client_protocol_exists() -> None:
         ) -> dict[str, object]:
             return {}
 
-    # mypy/pyright would catch signature mismatches; at runtime this is a no-op
-    _: ChatCompletionClient = MyClient()  # type: ignore[assignment]
+    _: ChatCompletionClient = MyClient()
 
 
 # ----------------------------------------------------------------------
@@ -478,7 +479,7 @@ class TestFormatKnowledgeMap:
             use_adjacency_notation = True
             use_array_representation = False
 
-        result = _format_knowledge_map(edges, prompt_config=AdjConfig())  # type: ignore[arg-type]
+        result = _format_knowledge_map(edges, prompt_config=AdjConfig())
         assert "<adjacency-matrix>" in result
 
     def test_routes_to_edge_list_when_not_using_adjacency_notation(self) -> None:
@@ -488,5 +489,5 @@ class TestFormatKnowledgeMap:
             use_adjacency_notation = False
             use_array_representation = False
 
-        result = _format_knowledge_map(edges, prompt_config=EdgeListConfig())  # type: ignore[arg-type]
+        result = _format_knowledge_map(edges, prompt_config=EdgeListConfig())
         assert "<edge source='x' target='y' />" in result

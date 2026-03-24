@@ -196,7 +196,7 @@ def test_algo3_evaluation_raises_on_bad_recall_input(tmp_path, monkeypatch) -> N
         ]
     ).to_csv(input_path, index=False)
 
-    def boom(*args, **kwargs):  # type: ignore[no-untyped-def]
+    def boom(*args, **kwargs):
         raise RuntimeError("bad parse")
 
     monkeypatch.setattr(

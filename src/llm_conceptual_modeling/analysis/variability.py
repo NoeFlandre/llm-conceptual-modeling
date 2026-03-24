@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from itertools import combinations
+from typing import cast
 
 import pandas as pd
 
@@ -61,7 +62,8 @@ def _coerce_group_values(group_by: list[str], group_values: object) -> dict[str,
         if isinstance(group_values, tuple):
             return {group_by[0]: group_values[0]}
         return {group_by[0]: group_values}
-    return dict(zip(group_by, group_values, strict=True))
+    typed_group_values = cast(tuple[object, ...], group_values)
+    return dict(zip(group_by, typed_group_values, strict=True))
 
 
 def _normalize_edge_set(edges: list[Edge]) -> frozenset[Edge]:

@@ -8,7 +8,7 @@ algo3 does not use knowledge maps.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Protocol, cast
 
 from llm_conceptual_modeling.common.mistral import ChatCompletionClient, MistralChatClient
 
@@ -135,7 +135,7 @@ def _build_counterexample_section(child_count: int) -> str:
 # ---------------------------------------------------------------------------
 
 
-class ChildProposer:
+class ChildProposer(Protocol):
     def __call__(
         self,
         source_labels: list[str],

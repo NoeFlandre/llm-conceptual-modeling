@@ -16,22 +16,16 @@ mistral.py while delegating the shared primitives to this module.
 from __future__ import annotations
 
 import ast
+import importlib
 import json
 import re
-from typing import TYPE_CHECKING, Any, Protocol
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, Protocol, cast
 
 try:
     from pydantic import BaseModel
 except ImportError:  # pragma: no cover - pydantic is an explicit runtime dependency
     BaseModel = None  # type: ignore[assignment]
-
-try:
-    from mistralai import Mistral
-except ImportError:  # pragma: no cover - exercised indirectly in import-light tests
-    try:
-        from mistralai.client import Mistral
-    except ImportError:
-        Mistral = None  # type: ignore[assignment]
 
 from llm_conceptual_modeling.common.retry import call_with_retry
 from llm_conceptual_modeling.common.structured_output import normalize_structured_response
@@ -89,12 +83,13 @@ class MistralChatClient:
         if sdk_client is not None:
             self._sdk_client = sdk_client
             return
-        if Mistral is None:
+        mistral_client_class = _resolve_mistral_client_class()
+        if mistral_client_class is None:
             raise ImportError(
                 "mistralai.client.Mistral is unavailable; install mistralai or "
                 "inject sdk_client for tests"
             )
-        self._sdk_client = Mistral(api_key=api_key)
+        self._sdk_client = mistral_client_class(api_key=api_key)
 
     def complete_json(
         self,
@@ -187,6 +182,22 @@ _STRUCTURED_RESPONSE_MODELS: dict[str, type[BaseModel]] = {
 _normalize_structured_response = normalize_structured_response
 
 
+def _resolve_mistral_client_class() -> Any | None:
+    try:
+        module = importlib.import_module("mistralai")
+        client_class = getattr(module, "Mistral", None)
+        if client_class is not None:
+            return client_class
+    except ImportError:
+        pass
+
+    try:
+        module = importlib.import_module("mistralai.client")
+        return getattr(module, "Mistral", None)
+    except ImportError:
+        return None
+
+
 def _complete_structured_json(
     *,
     sdk_client: Any,
@@ -273,14 +284,19 @@ def _parse_tuple_list_text(text: str) -> object:
 
 
 def _coerce_edge_list(parsed: object) -> list[dict[str, str]]:
-    if isinstance(parsed, dict):
-        edges = parsed.get("edges")
+    if isinstance(parsed, Mapping):
+        parsed_mapping = cast(Mapping[str, object], parsed)
+        edges = parsed_mapping.get("edges")
         if isinstance(edges, list):
             coerced_edges: list[dict[str, str]] = []
             for edge in edges:
-                if isinstance(edge, dict) and "source" in edge and "target" in edge:
+                if isinstance(edge, Mapping) and "source" in edge and "target" in edge:
+                    edge_mapping = cast(Mapping[str, object], edge)
                     coerced_edges.append(
-                        {"source": str(edge["source"]), "target": str(edge["target"])}
+                        {
+                            "source": str(edge_mapping["source"]),
+                            "target": str(edge_mapping["target"]),
+                        }
                     )
             return coerced_edges
         raise ValueError("Parsed response does not contain an edges list")

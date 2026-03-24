@@ -14,7 +14,8 @@ import logging
 import os
 import re
 import time
-from typing import Any, Protocol
+from collections.abc import Mapping
+from typing import Any, Protocol, cast
 
 import anthropic
 import httpx
@@ -188,7 +189,7 @@ class AnthropicChatClient:
         if schema_name == "label_list":
             return {"labels": self._coerce_string_list(parsed)}
         if isinstance(parsed, dict):
-            return parsed
+            return cast(dict[str, object], parsed)
 
         raise ValueError(f"Anthropic response was not valid JSON: Response: {full_text[:500]}")
 
@@ -207,14 +208,21 @@ class AnthropicChatClient:
 
     @staticmethod
     def _coerce_edge_list(parsed: object) -> list[dict[str, str]]:
-        if isinstance(parsed, dict):
-            edges = parsed.get("edges")
+        if isinstance(parsed, Mapping):
+            parsed_mapping = cast(Mapping[str, object], parsed)
+            edges = parsed_mapping.get("edges")
             if isinstance(edges, list):
-                return [
-                    {"source": str(edge["source"]), "target": str(edge["target"])}
-                    for edge in edges
-                    if isinstance(edge, dict) and "source" in edge and "target" in edge
-                ]
+                coerced_edges: list[dict[str, str]] = []
+                for edge in edges:
+                    if isinstance(edge, Mapping) and "source" in edge and "target" in edge:
+                        edge_mapping = cast(Mapping[str, object], edge)
+                        coerced_edges.append(
+                            {
+                                "source": str(edge_mapping["source"]),
+                                "target": str(edge_mapping["target"]),
+                            }
+                        )
+                return coerced_edges
             raise ValueError("Parsed response does not contain an edges list")
 
         if not isinstance(parsed, list):

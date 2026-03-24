@@ -1,4 +1,5 @@
 import json
+from typing import cast
 
 from llm_conceptual_modeling.common.openrouter import (
     OpenRouterChatClient,
@@ -52,7 +53,9 @@ def test_openrouter_chat_client_uses_openai_compatible_chat_api() -> None:
     assert captured["model"] == "gpt-5"
     assert captured["temperature"] == 0.0
     assert captured["messages"] == [{"role": "user", "content": "hello"}]
-    assert captured["response_format"]["json_schema"]["name"] == "label_list"
+    response_format = cast(dict[str, object], captured["response_format"])
+    json_schema = cast(dict[str, object], response_format["json_schema"])
+    assert json_schema["name"] == "label_list"
 
 
 def test_openrouter_embedding_client_uses_openai_compatible_embeddings_api() -> None:

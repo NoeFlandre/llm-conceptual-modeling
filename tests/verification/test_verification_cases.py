@@ -12,6 +12,7 @@ def test_build_legacy_parity_cases_covers_all_verified_workflows() -> None:
         "algo2-factorial",
         "algo3-factorial",
     ]
+    assert cases[0].raw_path is not None
     assert (
         cases[0]
         .raw_path.as_posix()
