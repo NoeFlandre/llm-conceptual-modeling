@@ -138,6 +138,13 @@ def build_parser() -> argparse.ArgumentParser:
     variability_parser.add_argument("--result-column", required=True)
     variability_parser.add_argument("--output", required=True)
 
+    variability_bundle_parser = analyze_subparsers.add_parser("variability-bundle")
+    variability_bundle_parser.add_argument(
+        "--results-root",
+        default="data/analysis_artifacts/revision_tracker/2026-03-24/output_variability",
+    )
+    variability_bundle_parser.add_argument("--output-dir", required=True)
+
     return parser
 
 

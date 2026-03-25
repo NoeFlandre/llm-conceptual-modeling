@@ -28,10 +28,6 @@ _FIGURES_BUNDLE_SPECS: tuple[FiguresAlgorithmSpec, ...] = (
             "Counterexample",
             "Array/List(1/-1)",
             "Tag/Adjacency(1/-1)",
-            "subgraph1",
-            "subgraph2",
-            "graph",
-            "Result",
         ),
     ),
     FiguresAlgorithmSpec(
@@ -45,10 +41,6 @@ _FIGURES_BUNDLE_SPECS: tuple[FiguresAlgorithmSpec, ...] = (
             "Array/List(1/-1)",
             "Tag/Adjacency(1/-1)",
             "Convergence",
-            "subgraph1",
-            "subgraph2",
-            "graph",
-            "Result",
         ),
     ),
     FiguresAlgorithmSpec(
@@ -60,9 +52,6 @@ _FIGURES_BUNDLE_SPECS: tuple[FiguresAlgorithmSpec, ...] = (
             "Example",
             "Counter-Example",
             "Number of Words",
-            "Source Subgraph Name",
-            "Target Subgraph Name",
-            "Results",
         ),
     ),
 )

@@ -13,6 +13,7 @@ from llm_conceptual_modeling.analysis.stability_bundle import write_stability_bu
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
 from llm_conceptual_modeling.analysis.summary_bundle import write_statistical_reporting_bundle
 from llm_conceptual_modeling.analysis.variability import write_output_variability_analysis
+from llm_conceptual_modeling.analysis.variability_bundle import write_variability_bundle
 
 
 def handle_analyze(args: Namespace) -> int:
@@ -101,6 +102,12 @@ def handle_analyze(args: Namespace) -> int:
                 args.output,
                 group_by=args.group_by,
                 result_column=args.result_column,
+            )
+            return 0
+        if args.analysis_target == "variability-bundle":
+            write_variability_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
             )
             return 0
         raise ValueError(f"Unsupported analyze target: {args.analysis_target}")

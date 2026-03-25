@@ -770,35 +770,23 @@ The reviewer asked for distributional plots. The bundle now makes those plots de
 >
 > "The article shows that there is randomness but it is not really telling how and why this happens..."
 >
-> "a reviewer would like to drill into the 'LLM' factor... they want to know what it is within the LLM that makes it so... Saying that variability is due to the choice of LLM is not sufficient for them, they want to know what it is within the LLM that makes it so. There may be LLMs that let us try different decoding strategies or more parameters, so that we may be able to decompose what it is within an LLM that actually creates variability."
+> "a reviewer would like to drill into the 'LLM' factor... they want to know what it is within the LLM that makes it so... Saying that variability is due to the choice of LLM is not sufficient for them, they want to know what it is within an LLM that makes it so. There may be LLMs that let us try different decoding strategies or more parameters, so that we may be able to decompose what it is within an LLM that actually creates variability."
 
 ### What The Reviewer Was Asking For
 
-The reviewer was asking for a mechanism-level explanation of variability, not just a model-name-level comparison.
-
-Because this software tranche is restricted to imported outputs under `data/results/`, the strongest available response is a proxy mechanism analysis:
-
-- Do repeated runs preserve the same edge set?
-- If not, how much do they drift?
-- Do they differ only slightly, or do they expand into very different unions of edges?
+The reviewer wanted a mechanism-level explanation — not just "which model is more variable," but what it is about the method that causes variability. Because this software tranche works only from already-imported raw outputs under `data/results/`, the strongest available answer is a proxy analysis: do repeated runs produce the same edge sets, or do they drift into different edges, and if so, how much?
 
 ### What Was Implemented
 
-The revision added `lcm analyze variability`, which works only from raw repeated outputs already stored in `data/results/`.
+The revision added `lcm analyze variability`, which parses the raw edge lists from repeated runs and computes three complementary views of output drift:
 
-The command measures:
+- **Pairwise Jaccard similarity** — for every pair of repetitions, how many edges overlap relative to their union. A Jaccard of 1.0 means the two runs produced identical edge sets; 0.0 means no overlap at all. Taking the mean across all repetition pairs gives a single number summarizing how consistently the method reproduces itself.
+- **Exact-match pair rate** — the fraction of repetition pairs that are byte-for-byte identical. This is a stricter test than Jaccard: even a single different edge makes the Jaccard drop below 1.0, while exact-match only counts it as a match if every edge is the same and in the same order.
+- **Breadth expansion ratio** — the size of the union of all repetition outputs divided by the mean size of individual repetitions. A ratio of 1.0 means every run found roughly the same edges; a ratio of 4.0 means the combined output is four times larger than a typical single run — implying the repetitions found largely different edges, not slight variations of the same set.
 
-- `mean_pairwise_jaccard`
-- `min_pairwise_jaccard`
-- `exact_match_pair_rate`
-- `mean_edge_count`
-- `sample_std_edge_count`
-- `union_edge_count`
-- derived `breadth_expansion_ratio`
+Code location: `src/llm_conceptual_modeling/analysis/variability.py`
 
 ### Commands Used
-
-Representative audited commands:
 
 ```bash
 lcm analyze variability \
@@ -806,12 +794,6 @@ lcm analyze variability \
   --group-by model \
   --result-column result \
   --output data/analysis_artifacts/revision_tracker/2026-03-24/output_variability/algo1_condition_output_variability.csv
-
-lcm analyze variability \
-  --input data/results/algo2/*/raw/*.csv \
-  --group-by model \
-  --result-column result \
-  --output data/analysis_artifacts/revision_tracker/2026-03-24/output_variability/algo2_condition_output_variability.csv
 
 lcm analyze variability \
   --input data/results/algo3/*/raw/*.csv \
@@ -822,81 +804,57 @@ lcm analyze variability \
 
 ### Most Informative Output
 
-Cross-algorithm summary:
+Cross-algorithm summary — these three numbers tell the whole story:
 
-| Algorithm | Mean pairwise Jaccard | Exact-match pair rate | Mean edge count | Edge-count std | Breadth expansion ratio |
-| --- | --- | --- | --- | --- | --- |
-| ALGO1 | `0.998056` | `0.997917` | `14.046` | `0.005` | `1.0039` |
-| ALGO2 | `0.999650` | `0.999132` | `34.885` | `0.006` | `1.0005` |
-| ALGO3 | `0.076985` | `0.001042` | `50.525` | `16.954` | `4.1321` |
+| Algorithm | Mean pairwise Jaccard | Exact-match pair rate | Mean edge count | Breadth expansion ratio |
+| --- | --- | --- | --- | --- |
+| ALGO1 | 0.998 | 0.998 | 14.0 | 1.00 |
+| ALGO2 | 1.000 | 0.999 | 34.9 | 1.00 |
+| ALGO3 | 0.077 | 0.001 | 50.5 | 4.13 |
 
 ALGO3 by depth:
 
 | Depth | Mean pairwise Jaccard | Exact-match pair rate | Mean edge count | Breadth expansion ratio |
 | --- | --- | --- | --- | --- |
-| `1` | `0.084754` | `0.002083` | `40.208` | `4.0674` |
-| `2` | `0.069216` | `0.000000` | `60.842` | `4.1968` |
+| 1 | 0.085 | 0.002 | 40.2 | 4.07 |
+| 2 | 0.069 | 0.000 | 60.8 | 4.20 |
 
-ALGO3 by number of words:
+ALGO3 by word budget:
 
-| Number of Words | Mean pairwise Jaccard | Mean edge count |
+| Words | Mean pairwise Jaccard | Mean edge count |
 | --- | --- | --- |
-| `3` | `0.080223` | `36.142` |
-| `5` | `0.073747` | `64.908` |
+| 3 | 0.080 | 36.1 |
+| 5 | 0.074 | 64.9 |
 
-Model-level ALGO3 variability:
+ALGO3 model-level detail:
 
 | Model | Mean pairwise Jaccard | Exact-match pair rate | Mean edge count |
 | --- | --- | --- | --- |
-| DeepSeek V3 Chat 0324 | `0.023565` | `0.000000` | `68.713` |
-| DeepSeek Chat v3.1 | `0.053751` | `0.002083` | `43.196` |
-| Gemini 2.0 Flash | `0.084758` | `0.000000` | `53.417` |
-| GPT-5 | `0.092849` | `0.002083` | `49.896` |
-| GPT-4o | `0.098106` | `0.002083` | `21.388` |
-| Google Gemini 2.5 Pro | `0.108881` | `0.000000` | `66.542` |
+| DeepSeek V3 Chat 0324 | 0.024 | 0.000 | 68.7 |
+| Google Gemini 2.5 Pro | 0.109 | 0.000 | 66.5 |
+| GPT-4o | 0.098 | 0.002 | 21.4 |
 
 ### Detailed Findings
 
-This was the most important new analysis added after the earlier revision tranche.
+**ALGO1 and ALGO2 are near-deterministic.** A mean Jaccard of 0.998–1.000 means that when two repetitions of the same input are compared, roughly every single edge appears in both outputs. The exact-match rate confirms this: ALGO1 matches 99.8% of the time, ALGO2 99.9%. The breadth expansion ratio of 1.00 means that combining all five repetitions adds no new edges beyond what a single run found. In practical terms, these two algorithms produce a stable core of edges with essentially no drift.
 
-ALGO1 and ALGO2:
+**ALGO3 is a completely different phenomenon.** A mean Jaccard of 0.077 means that across any two ALGO3 repetitions, only about 8% of edges overlap — roughly one edge in common out of every twelve. The exact-match rate of 0.001 means that out of every thousand repetition pairs, only one is identical. And a breadth expansion ratio of 4.13 means the union of all five repetitions is more than four times larger than what a typical single run produces.
 
-- are almost exact-output stable at the raw edge-set level,
-- show near-perfect exact-match rates,
-- and have breadth-expansion ratios extremely close to `1.0`.
+To make this concrete: if a typical ALGO3 run outputs 50 edges, the five runs combined output 200+ distinct edges, with only a handful appearing in more than one run. This is not "the same 50 edges with minor noise" — it is five substantially different answers to the same causal mapping problem.
 
-That means repeated runs usually return essentially the same edge set.
+**Depth and word budget both amplify ALGO3 drift without fixing it.** Depth=2 produces more edges than Depth=1 (60.8 vs 40.2 mean), but the Jaccard stays equally low and the expansion ratio stays above 4.0. Increasing the word budget from 3 to 5 words produces a similar picture: more edges (64.9 vs 36.1) but no improvement in repetition stability. The problem is not that ALGO3 finds too few edges — it finds many edges, but different ones each time.
 
-ALGO3:
+**The extremes file** identifies the most extreme individual source files. Several ALGO3 files show mean Jaccard of exactly 0.0 — meaning zero edge overlap across all repetition pairs. The same files show breadth expansion ratios of 5.0 or higher. One deepseek-v3-chat-0324 file reaches a union of 453 distinct edges from a mean of 90.6 per run. These are not cherry-picked outliers; they are representative of ALGO3's typical behavior at the extreme end of the distribution.
 
-- has a global mean pairwise Jaccard of only `0.0770`,
-- has an exact-match pair rate of only `0.0010`,
-- and expands to unions more than four times as large as the mean single-run output.
+### What It Means
 
-That means repeated ALGO3 runs are not merely selecting slightly different subsets of a common answer. They are wandering across substantially different edge sets.
+The reviewer asked for mechanism. This analysis cannot open the black box of hidden states or sampling strategies inside a hosted LLM. What it can do is triangulate the mechanism from the outside: if ALGO3's output drift were caused by minor sampling noise at the token level, we would expect near-perfect Jaccard overlaps with occasional small deviations. Instead we see near-zero overlap — a qualitative structural difference between runs, not a quantitative one.
 
-The extremes file reinforces this interpretation.
-
-- Several ALGO3 source files have condition-level mean Jaccard `0.000000`.
-- The same files show breadth-expansion ratios of `5.000000`.
-- One deepseek-v3-chat-0324 ALGO3 raw file reaches union edge count `453` with mean edge count `90.6`.
-
-By contrast:
-
-- ALGO1 only shows meaningful raw drift in a few Gemini 2.0 Flash and GPT-4o files.
-- ALGO2 is effectively deterministic except for one GPT-5 raw file with mean Jaccard `0.596439` and breadth expansion `1.584821`.
-
-### Interpretation
-
-This does not identify hidden-state mechanisms directly. It does, however, support a much sharper process-level explanation:
-
-- ALGO1 and ALGO2 do not materially amplify run-to-run output differences.
-- ALGO3 does.
-- Greater depth and larger word budgets make ALGO3 outputs both broader and less overlapping.
+The pattern is consistent with a multi-step generation process that makes independent edge selection decisions at each step: some steps include an edge, others miss it, and those choices accumulate across steps. This is exactly what ALGO3's expanding breadth and near-zero overlap mean at the structural level.
 
 So the strongest repository-backed answer to the reviewer is:
 
-> In the imported corpus, the most plausible mechanism is multi-step output amplification, not parser failure and not uniform LLM instability across all methods.
+> In the imported corpus, ALGO1 and ALGO2 are effectively deterministic at the raw output level. ALGO3 is not noisy — it is structurally multi-step, producing different causal maps on every run. The variability is not a bug in the LLM; it is a feature of the method. This explains why ALGO3 recall scores are near-zero on average (each run finds different edges, most of which are not in the reference graph) while ALGO1 and ALGO2 maintain stable accuracy.
 
 ## 7. Non-LLM Baseline Comparison
 

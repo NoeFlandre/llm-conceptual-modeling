@@ -188,9 +188,7 @@ def _extract_model(source_input: str) -> str:
 
 def _build_validity_summary(df: pd.DataFrame, algorithm: str) -> pd.DataFrame:
     df = df.copy()
-    # Extract model from source_input path
-    source_inputs: pd.Series = df["source_input"]  # type: ignore[assignment]
-    df["model"] = [_extract_model(s) for s in source_inputs.tolist()]
+    df["model"] = df["source_input"].apply(_extract_model)
     records: list[dict[str, object]] = []
     for model, model_frame in df.groupby("model", dropna=False):
         valid = int((model_frame["failure_category"] == "valid_output").sum())
@@ -214,13 +212,12 @@ def _build_validity_summary(df: pd.DataFrame, algorithm: str) -> pd.DataFrame:
 
 def _build_breadth_distribution(df: pd.DataFrame, algorithm: str) -> pd.DataFrame:
     valid = df[df["failure_category"] == "valid_output"].copy()
-    source_inputs: pd.Series = valid["source_input"]  # type: ignore[assignment]
-    valid["model"] = [_extract_model(s) for s in source_inputs.tolist()]
+    valid["model"] = valid["source_input"].apply(_extract_model)
     records: list[dict[str, object]] = []
     for model, model_frame in valid.groupby("model", dropna=False):
         counts = model_frame["parsed_edge_count"]
         mean_val = float(counts.mean())
-        median_val: float = float(counts.median())  # type: ignore[assignment]
+        median_val = float(counts.median())
         records.append(
             {
                 "algorithm": algorithm,
@@ -240,13 +237,12 @@ def _build_breadth_distribution(df: pd.DataFrame, algorithm: str) -> pd.DataFram
 def _build_parsed_edge_quartiles(df: pd.DataFrame) -> pd.DataFrame:
     valid = df[df["failure_category"] == "valid_output"].copy()
     records: list[dict[str, object]] = []
-    for (algorithm_val, model), group in valid.groupby(
-        ["algorithm", "model"], dropna=False
-    ):
+    for keys, group in valid.groupby(["algorithm", "model"], dropna=False):
+        algorithm_val, model = keys
         counts = group["parsed_edge_count"]
-        q1: float = float(counts.quantile(0.25))  # type: ignore[assignment]
-        q2: float = float(counts.quantile(0.50))  # type: ignore[assignment]
-        q3: float = float(counts.quantile(0.75))  # type: ignore[assignment]
+        q1 = float(counts.quantile(0.25))
+        q2 = float(counts.quantile(0.50))
+        q3 = float(counts.quantile(0.75))
         records.append(
             {
                 "algorithm": str(algorithm_val),
@@ -254,9 +250,9 @@ def _build_parsed_edge_quartiles(df: pd.DataFrame) -> pd.DataFrame:
                 "q1": q1,
                 "q2": q2,
                 "q3": q3,
-                "p90": float(counts.quantile(0.90)),  # type: ignore[assignment]
-                "p95": float(counts.quantile(0.95)),  # type: ignore[assignment]
-                "p99": float(counts.quantile(0.99)),  # type: ignore[assignment]
+                "p90": float(counts.quantile(0.90)),
+                "p95": float(counts.quantile(0.95)),
+                "p99": float(counts.quantile(0.99)),
                 "iqr": q3 - q1,
             }
         )
@@ -266,7 +262,7 @@ def _build_parsed_edge_quartiles(df: pd.DataFrame) -> pd.DataFrame:
 def _build_failure_rates(df: pd.DataFrame) -> pd.DataFrame:
     records: list[dict[str, object]] = []
     for keys, group in df.groupby(["algorithm", "model"], dropna=False):
-        algorithm_val, model = keys
+        algorithm_val, model = keys  # type: ignore[assignment]
         total = int(len(group))
         failures = int((group["failure_category"] != "valid_output").sum())
         records.append(
@@ -284,12 +280,11 @@ def _build_failure_rates(df: pd.DataFrame) -> pd.DataFrame:
 def _build_parsed_edge_counts(df: pd.DataFrame) -> pd.DataFrame:
     valid = df[df["failure_category"] == "valid_output"].copy()
     records: list[dict[str, object]] = []
-    for (algorithm_val, model), group in valid.groupby(
-        ["algorithm", "model"], dropna=False
-    ):
+    for keys, group in valid.groupby(["algorithm", "model"], dropna=False):
+        algorithm_val, model = keys
         counts = group["parsed_edge_count"]
         mean_val = float(counts.mean())
-        median_val: float = float(counts.median())  # type: ignore[assignment]
+        median_val = float(counts.median())
         records.append(
             {
                 "algorithm": str(algorithm_val),
