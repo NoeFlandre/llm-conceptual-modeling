@@ -791,13 +791,13 @@ lcm analyze variability \
   --input data/results/algo1/*/raw/*.csv \
   --group-by model \
   --result-column result \
-  --output data/analysis_artifacts/revision_tracker/2026-03-24/output_variability/algo1_condition_output_variability.csv
+  --output data/analysis_artifacts/revision_tracker/output_variability/algo1_condition_output_variability.csv
 
 lcm analyze variability \
   --input data/results/algo3/*/raw/*.csv \
   --group-by model \
   --result-column Result \
-  --output data/analysis_artifacts/revision_tracker/2026-03-24/output_variability/algo3_condition_output_variability.csv
+  --output data/analysis_artifacts/revision_tracker/output_variability/algo3_condition_output_variability.csv
 ```
 
 ### Most Informative Output
