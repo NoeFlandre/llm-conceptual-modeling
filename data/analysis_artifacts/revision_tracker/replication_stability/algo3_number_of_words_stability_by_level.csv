@@ -1,0 +1,3 @@
+Number of Words,metric,condition_count,mean_cv,median_cv,mean_range_width,max_range_width
+3,Recall,48,3.3508526431991283,3.872983346207417,0.2840909166666667,1.0
+5,Recall,48,3.09448072639004,3.38368150197462,0.3892045625,1.0

@@ -1,0 +1,7 @@
+Convergence,metric,condition_count,varying_condition_count,varying_condition_share
+-1,accuracy,576,1,0.0017361111111111
+-1,precision,576,1,0.0017361111111111
+-1,recall,576,1,0.0017361111111111
+1,accuracy,576,0,0.0
+1,precision,576,0,0.0
+1,recall,576,0,0.0
