@@ -63,6 +63,25 @@ def write_baseline_comparison_bundle(
         manifest_records=manifest_records,
     )
 
+    # --- Build all-model combined file from per-algo files (overwrite, don't append) ---
+    all_out = output_dir_path / "all_models_vs_baseline.csv"
+    all_rows: list[pd.DataFrame] = []
+    for algo_csv in ["algo1_model_vs_baseline.csv", "algo2_model_vs_baseline.csv", "algo3_model_vs_baseline.csv"]:
+        path = output_dir_path / algo_csv
+        if path.exists():
+            all_rows.append(pd.read_csv(path))
+    if all_rows:
+        pd.concat(all_rows, ignore_index=True).to_csv(all_out, index=False)
+        manifest_records.append(
+            {
+                "file": all_out.name,
+                "description": (
+                    "All-model combined comparison across ALGO1/2/3. "
+                    "Columns: algorithm, model, metric, llm_mean, baseline_mean, mean_delta."
+                ),
+            }
+        )
+
     # --- Build summary table ---
     summary_path = output_dir_path / "baseline_advantage_summary.csv"
     _write_advantage_summary(output_dir_path, summary_path)
@@ -223,19 +242,9 @@ def _run_algo_comparison(
         }
     )
 
-    # All-model combined
+    # All-model combined (overwrite each time, don't append)
     all_out = output_dir / "all_models_vs_baseline.csv"
-    all_combined = (
-        pd.concat([grouped], ignore_index=True)
-        if (all_out.exists() and False)
-        else grouped
-    )
-    if all_out.exists():
-        existing = pd.read_csv(all_out)
-        all_combined = pd.concat([existing, grouped], ignore_index=True)
-    else:
-        all_combined = grouped
-    all_combined.to_csv(all_out, index=False)
+    grouped.to_csv(all_out, index=False)
 
 
 def _raw_from_evaluated(eval_file: Path, model_dir: Path) -> Path | None:
@@ -490,7 +499,7 @@ def _run_algo3_comparison(
             "file": out_path.name,
             "description": (
                 "ALGO3 per-model comparison against the random-k baseline "
-                "(samples k pairs from source×target nodes, k = LLM's edge count per row). "
+                "(samples k edges from mother graph, k = LLM's edge count per row). "
                 "Columns: algorithm, model, metric, llm_mean, baseline_mean, mean_delta."
             ),
         }

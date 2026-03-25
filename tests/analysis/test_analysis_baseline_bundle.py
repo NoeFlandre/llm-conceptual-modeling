@@ -81,13 +81,33 @@ class TestWriteBaselineComparisonBundle:
             assert "baseline_mean" in df.columns
             assert "mean_delta" in df.columns
 
-    def test_bundle_generation_produces_valid_output(self, tmp_path: Path) -> None:
-        """Smoke test: generate bundle to a temp dir with minimal results root.
-        This test is slow (generates and evaluates baseline for all models)."""
-        output_dir = tmp_path / "baseline_bundle"
+    def test_all_models_vs_baseline_overwrites_not_appends(self, tmp_path: Path) -> None:
+        """all_models_vs_baseline.csv must be overwritten (not appended to) on each run.
+
+        Bug: the code used `if (all_out.exists() and False)` in the write logic,
+        making the intended-overwrite branch unreachable and always appending instead.
+        This test runs the generator twice on the same output dir and verifies the
+        file still has exactly one row per (algorithm, model, metric)."""
+        output_dir = tmp_path / "bundle"
+
+        # First run: creates all_models_vs_baseline.csv
         write_baseline_comparison_bundle(
             results_root=str(_REAL_RESULTS_ROOT),
             output_dir=str(output_dir),
         )
-        assert (output_dir / "bundle_manifest.csv").exists()
-        assert (output_dir / "README.md").exists()
+
+        # Second run: must overwrite, not append
+        write_baseline_comparison_bundle(
+            results_root=str(_REAL_RESULTS_ROOT),
+            output_dir=str(output_dir),
+        )
+
+        all_df = pd.read_csv(output_dir / "all_models_vs_baseline.csv")
+        unique = all_df.groupby(["algorithm", "model", "metric"]).ngroups
+        total = len(all_df)
+
+        assert total == unique, (
+            f"all_models_vs_baseline has {total} rows but only {unique} unique "
+            f"(algorithm, model, metric) combos — rows are being duplicated on "
+            "regeneration. The file should be overwritten, not appended to."
+        )
