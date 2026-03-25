@@ -91,6 +91,13 @@ def build_parser() -> argparse.ArgumentParser:
     stability_parser.add_argument("--metric", action="append", required=True)
     stability_parser.add_argument("--output", required=True)
 
+    stability_bundle_parser = analyze_subparsers.add_parser("stability-bundle")
+    stability_bundle_parser.add_argument(
+        "--results-root",
+        default="data/analysis_artifacts/revision_tracker/2026-03-21/replication_stability",
+    )
+    stability_bundle_parser.add_argument("--output-dir", required=True)
+
     hypothesis_parser = analyze_subparsers.add_parser("hypothesis")
     hypothesis_parser.add_argument("--input", action="append", required=True)
     hypothesis_parser.add_argument("--factor", required=True)

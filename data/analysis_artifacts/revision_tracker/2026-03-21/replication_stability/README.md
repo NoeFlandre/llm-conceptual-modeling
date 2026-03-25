@@ -1,42 +1,35 @@
-# Replication Stability Audit Artifacts
+# Replication Stability Audit Bundle
 
-These files support the replication-stability findings recorded in `paper/revision-tracker.md`.
+This directory contains the organized artifacts for the replication-stability revision item.
 
-## Source Data
+## Purpose
 
-The source data comes from the imported evaluated result files under `data/results/`:
+The reviewer asked for a principled justification of the five-replication decision. This bundle
+captures repetition-level stability analysis over the five recorded runs in the imported corpus.
+Rather than a formal power analysis, this bundle shows how much the evaluated metrics actually
+moved across repetitions — confirming that five runs are enough to reveal which methods are
+stable and which are not.
 
-- `data/results/algo1/*/evaluated/*.csv`
-- `data/results/algo2/*/evaluated/*.csv`
-- `data/results/algo3/*/evaluated/*.csv`
+## Layout
 
-## Files
-
-- `algo1_condition_stability.csv`
-  Per-file, per-condition stability statistics for ALGO1 across the five repetitions.
-- `algo1_explanation_stability_by_level.csv`
-  Aggregated ALGO1 stability summaries grouped by `Explanation`.
-- `algo2_condition_stability.csv`
-  Per-file, per-condition stability statistics for ALGO2 across the five repetitions.
-- `algo2_convergence_stability_by_level.csv`
-  Aggregated ALGO2 stability summaries grouped by `Convergence`.
-- `algo2_convergence_variability_incidence.csv`
-  Incidence of any run-to-run variation in ALGO2 grouped by `Convergence`.
-- `algo2_explanation_stability_by_level.csv`
-  Aggregated ALGO2 stability summaries grouped by `Explanation`.
-- `algo3_condition_stability.csv`
-  Per-file, per-condition stability statistics for ALGO3 across the five repetitions.
-- `algo3_depth_stability_by_level.csv`
-  Aggregated ALGO3 stability summaries grouped by `Depth`.
-- `algo3_depth_variability_incidence.csv`
-  Incidence of any run-to-run variation in ALGO3 grouped by `Depth`.
-- `algo3_number_of_words_stability_by_level.csv`
-  Aggregated ALGO3 stability summaries grouped by `Number of Words`.
-- `overall_metric_stability_by_algorithm.csv`
-  Cross-algorithm summary of coefficient of variation and range width by metric.
+- `bundle_manifest.csv`
+  Index of every generated file with descriptions.
+- `bundle_overview.csv`
+  Cross-algorithm stability summary (CV and range-width) by algorithm and metric.
 - `variability_incidence_by_algorithm.csv`
   Cross-algorithm count and share of conditions that changed across repetitions.
+- `overall_metric_stability_by_algorithm.csv`
+  Coefficient-of-variation and range-width summaries by algorithm and metric.
+- `<algorithm>/condition_stability.csv`
+  Per-file, per-condition stability statistics across the five repetitions.
+- `<algorithm>/<factor>_stability_by_level.csv`
+  Aggregated stability summaries grouped by a specific factor level.
+- `<algorithm>/<factor>_variability_incidence.csv`
+  Incidence of any run-to-run variation grouped by a specific factor level.
 
-## Interpretation Notes
+## Key Interpretation
 
-These artifacts are descriptive and deterministic. They do not justify a replication count by themselves, but they do show how much the observed evaluated metrics moved across the five recorded repetitions for each condition.
+- **ALGO1 and ALGO2 are nearly repetition-stable**: median CVs are 0.0 across most conditions.
+- **ALGO2 is especially stable when Convergence = 1**: zero varying conditions.
+- **ALGO3 is orders of magnitude noisier**: median CV on recall is 3.87, meaning noise is
+  nearly 4 times the signal size — not a small or marginal difference.

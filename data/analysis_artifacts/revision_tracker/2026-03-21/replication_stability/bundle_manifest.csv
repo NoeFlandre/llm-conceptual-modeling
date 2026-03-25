@@ -1,0 +1,13 @@
+algorithm,factor,relative_path,description
+cross_algorithm,overall,variability_incidence_by_algorithm.csv,Cross-algorithm count and share of conditions that changed across the five repetitions. Key column: varying_condition_share.
+cross_algorithm,overall,overall_metric_stability_by_algorithm.csv,"Cross-algorithm coefficient of variation and range-width summaries by metric. Key columns: mean_cv, median_cv, mean_range_width."
+algo1,condition,algo1/condition_stability.csv,"Per-file, per-condition stability statistics for ALGO1 across the five repetitions. Columns: n, mean, sample_std, min, max, range_width, coefficient_of_variation."
+algo1,Explanation,algo1/explanation_stability_by_level.csv,"Aggregated ALGO1 stability summaries grouped by 'Explanation'. Columns: n, mean_cv, median_cv, mean_range_width, max_range_width."
+algo2,condition,algo2/condition_stability.csv,"Per-file, per-condition stability statistics for ALGO2 across the five repetitions. Columns: n, mean, sample_std, min, max, range_width, coefficient_of_variation."
+algo2,Convergence,algo2/convergence_stability_by_level.csv,"Aggregated ALGO2 stability summaries grouped by 'Convergence'. Columns: n, mean_cv, median_cv, mean_range_width, max_range_width."
+algo2,Convergence,algo2/convergence_variability_incidence.csv,Incidence of any run-to-run variation in ALGO2 grouped by 'Convergence'. Key column: varying_condition_share.
+algo2,Explanation,algo2/explanation_stability_by_level.csv,"Aggregated ALGO2 stability summaries grouped by 'Explanation'. Columns: n, mean_cv, median_cv, mean_range_width, max_range_width."
+algo3,condition,algo3/condition_stability.csv,"Per-file, per-condition stability statistics for ALGO3 across the five repetitions. Columns: n, mean, sample_std, min, max, range_width, coefficient_of_variation."
+algo3,Depth,algo3/depth_stability_by_level.csv,"Aggregated ALGO3 stability summaries grouped by 'Depth'. Columns: n, mean_cv, median_cv, mean_range_width, max_range_width."
+algo3,Depth,algo3/depth_variability_incidence.csv,Incidence of any run-to-run variation in ALGO3 grouped by 'Depth'. Key column: varying_condition_share.
+algo3,Number of Words,algo3/number_of_words_stability_by_level.csv,"Aggregated ALGO3 stability summaries grouped by 'Number of Words'. Columns: n, mean_cv, median_cv, mean_range_width, max_range_width."

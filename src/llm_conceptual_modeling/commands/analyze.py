@@ -8,6 +8,7 @@ from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypo
 from llm_conceptual_modeling.analysis.hypothesis_bundle import write_hypothesis_testing_bundle
 from llm_conceptual_modeling.analysis.output_validity_bundle import write_output_validity_bundle
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
+from llm_conceptual_modeling.analysis.stability_bundle import write_stability_bundle
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
 from llm_conceptual_modeling.analysis.summary_bundle import write_statistical_reporting_bundle
 from llm_conceptual_modeling.analysis.variability import write_output_variability_analysis
@@ -42,6 +43,12 @@ def handle_analyze(args: Namespace) -> int:
                 args.output,
                 group_by=args.group_by,
                 metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "stability-bundle":
+            write_stability_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
             )
             return 0
         if args.analysis_target == "hypothesis":

@@ -1,8 +1,0 @@
-algorithm,metric,condition_count,varying_condition_count,varying_condition_share
-algo1,accuracy,576,2,0.003472222222222222
-algo1,precision,576,3,0.005208333333333333
-algo1,recall,576,2,0.003472222222222222
-algo2,accuracy,1152,1,0.0008680555555555555
-algo2,precision,1152,1,0.0008680555555555555
-algo2,recall,1152,1,0.0008680555555555555
-algo3,Recall,96,44,0.4583333333333333

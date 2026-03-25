@@ -1,6 +1,6 @@
 # Revision Summary
 
-This document is the self-contained software record of the revision work completed for the manuscript:
+This document is a self-contained software record of the revision work completed for the manuscript:
 
 _On the variability of generative artificial intelligence methods in conceptual modeling: an experimental evaluation on combining causal maps_.
 
@@ -32,8 +32,6 @@ This document covers the deterministic, offline revision work that is reproducib
   - `lcm analyze variability`
   - `lcm baseline`
   - `lcm analyze baseline-comparison`
-
-Important limitation: this document does not claim direct observation of hidden states, logits, or attention weights inside provider-hosted LLMs. The "internal variability" response is therefore an output-side proxy analysis over repeated raw results.
 
 ## Executive Summary
 
@@ -97,14 +95,14 @@ Two pieces now answer this request.
 
 This computes grouped descriptive statistics from evaluated CSVs and exports:
 
-- `n`
-- `mean`
-- `sample_std`
-- `median`
-- `min`
-- `max`
-- `ci95_low`
-- `ci95_high`
+- `n` — count of observations in the group
+- `mean` — arithmetic average of the metric values
+- `sample_std` — standard deviation of the metric values (uses n−1 denominator)
+- `median` — middle value when observations are sorted
+- `min` — smallest observed value
+- `max` — largest observed value
+- `ci95_low` — lower boundary of the 95% confidence interval around the mean
+- `ci95_high` — upper boundary of the 95% confidence interval around the mean
 
 2. A new organized bundle generator for this reviewer item:
 
@@ -284,7 +282,7 @@ In plain terms, the descriptive layer says the observed variability is structure
 
 The reviewers wanted the paper to move beyond descriptive summaries and establish whether observed patterns are genuine or could arise by chance. Descriptive statistics show averages and winner counts, but they cannot tell us whether a difference between two factor levels is reliable. Formal hypothesis testing provides that answer in a probabilistically grounded way.
 
-The reviewer also asked for multiple-comparison adjustment. When many tests are run simultaneously — for example, testing 5 factors × 3 metrics × 18 source files — the chance of finding at least one spurious significant result grows. Adjusting for multiple comparisons keeps the false-discovery rate under control.
+The reviewer also asked for multiple-comparison adjustment. When many tests are run at the same time, the odds of accidentally finding a "significant" result purely by chance increase. Imagine flipping a fair coin five times — getting all heads is unlikely, but if you repeat that experiment fifty times, getting five heads in a row becomes quite possible. Similarly, with 270 separate tests running (5 factors × 3 metrics × 18 source files), a few will appear significant even if nothing real is happening. Multiple-comparison adjustment is a statistical correction that makes it harder to call a result significant unless the evidence is strong enough to survive the multiplied testing burden — keeping the false-discovery rate (the expected share of results that look real but are not) below 5%.
 
 ### What Was Implemented
 
@@ -300,16 +298,16 @@ The second is the organized bundle generator that produces the full reviewer-fac
 lcm analyze hypothesis-bundle
 ```
 
-Both apply the same core logic, described in detail below. The output columns for each test are:
+Both apply the same core logic, described in detail below. Each row of the output corresponds to one hypothesis test — comparing two factor levels (e.g., Convergence = −1 vs. Convergence = 1) on one metric (e.g., accuracy) across all source files that have both levels. The columns produced for each test are:
 
-- `pair_count`: number of source files providing a paired observation
-- `mean_low` / `mean_high`: mean metric value at each factor level (e.g., mean accuracy when Convergence = −1 vs. Convergence = 1)
-- `mean_difference`: mean of (high − low) across pairs
-- `difference_ci95_low` / `difference_ci95_high`: 95% confidence interval on the mean difference — the width directly communicates precision
-- `effect_size_paired_d`: Cohen's d for paired samples (standardized mean difference; see below for interpretation)
-- `t_statistic` / `p_value`: raw paired t-test output
-- `p_value_adjusted`: Benjamini-Hochberg q-value (see below)
-- `correction_method`: always `benjamini-hochberg`
+- `pair_count` — how many source files contributed data to this comparison; a higher number means more reliable results
+- `mean_low` / `mean_high` — the average metric value when the factor is set to its lower level (e.g., −1) or higher level (e.g., 1); these are the two numbers being compared
+- `mean_difference` — the difference between them (high minus low); a positive value means the higher factor level tends to produce higher metric values
+- `difference_ci95_low` / `difference_ci95_high` — the lower and upper ends of the 95% confidence interval around the mean difference; if this interval does not cross zero, the difference is considered reliable rather than noise
+- `effect_size_paired_d` — Cohen's d for paired samples. This expresses the size of the difference between the two factor levels in units of standard deviation, rather than in the original metric units. Because accuracy, precision, and recall are on different scales, Cohen's d lets you compare effect sizes across metrics and factors fairly. A d of 1.0 means the two levels differ by one full standard deviation; the interpretation scale is given below.
+- `t_statistic` / `p_value` — the raw paired t-test output. The t-statistic measures how many standard errors the observed mean difference is away from zero — larger values indicate a more extreme result. The p-value is the probability of observing a difference at least as large as the one found, if the true difference were actually zero. Smaller p-values mean stronger evidence against the null hypothesis. "Raw" here means before the multiple-comparison correction is applied, so raw p-values are optimistically biased.
+- `p_value_adjusted` — the Benjamini-Hochberg corrected q-value. After running many tests, a raw p-value of 0.01 no longer means what it usually means — the multiple-testing burden has inflated the chance of a false positive. The BH q-value corrects for this by raising the threshold for significance in proportion to how many tests are in the family. The q-value can be interpreted as: "if I called this result significant, the expected proportion of false discoveries among all results I called significant is at most q." When comparing against 0.05, a q-value below 0.05 passes the adjusted threshold.
+- `correction_method` — always `benjamini-hochberg`, recording that the Benjamini-Hochberg procedure was the specific correction applied. This field is included for full auditability of the decision rule.
 
 Code locations:
 
@@ -582,15 +580,15 @@ The strongest software-side answer available from existing data is to measure ho
 
 The revision added `lcm analyze stability`, which computes repetition-level stability summaries over evaluated files.
 
-The exported stability fields include:
+The exported stability fields are computed over the five recorded repetitions for each unique experimental condition (holding model, subgraph pair, and all prompt factors constant):
 
-- `n`
-- `mean`
-- `sample_std`
-- `min`
-- `max`
-- `range_width`
-- `coefficient_of_variation`
+- `n` — count of repetitions in this condition (always 5 in this corpus)
+- `mean` — arithmetic average of the metric values across repetitions
+- `sample_std` — standard deviation across repetitions (uses n−1 denominator); a low value means the metric is consistent across runs
+- `min` — smallest metric value observed across repetitions
+- `max` — largest metric value observed across repetitions
+- `range_width` — max minus min; the total spread of observed values; smaller means more stable
+- `coefficient_of_variation` — the standard deviation divided by the absolute mean (|mean|); this is a scale-free stability measure, so a CV of 0.01 means the noise is about 1% of the signal, making it comparable across metrics and conditions of very different magnitudes
 
 ### Commands Used
 

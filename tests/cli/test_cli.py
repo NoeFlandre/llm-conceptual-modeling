@@ -363,3 +363,85 @@ def test_cli_factorial_algo3_writes_legacy_parity_output(tmp_path) -> None:
     actual = pd.read_csv(output_path)
     expected = pd.read_csv(expected_path)
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_cli_analyze_stability_bundle_reorganizes_flat_files(tmp_path) -> None:
+    # stability-bundle reads pre-computed flat stability CSVs, not raw/evaluated CSVs
+    results_root = tmp_path / "results"
+    results_root.mkdir(parents=True)
+    output_dir = tmp_path / "bundle"
+
+    _write_flat(
+        results_root / "variability_incidence_by_algorithm.csv",
+        [
+            (
+                "algorithm,metric,condition_count,varying_condition_count,"
+                "varying_condition_share"
+            ),
+            "algo1,accuracy,576,2,0.0035",
+            "algo3,Recall,96,44,0.4583",
+        ],
+    )
+    _write_flat(
+        results_root / "overall_metric_stability_by_algorithm.csv",
+        [
+            (
+                "algorithm,metric,condition_count,mean_cv,median_cv,"
+                "max_cv,mean_range_width,max_range_width"
+            ),
+            "algo1,accuracy,576,0.00002,0.0,0.012,0.00005,0.026",
+            "algo3,Recall,96,3.21,3.87,3.87,0.337,1.0",
+        ],
+    )
+    _write_flat(
+        results_root / "algo2_convergence_stability_by_level.csv",
+        [
+            (
+                "Convergence,metric,condition_count,mean_cv,median_cv,"
+                "mean_range_width,max_range_width"
+            ),
+            "-1,accuracy,576,0.00003,0.0,0.00007,0.042",
+            "1,accuracy,576,0.0,0.0,0.0,0.0",
+        ],
+    )
+    _write_flat(
+        results_root / "algo2_convergence_variability_incidence.csv",
+        [
+            (
+                "Convergence,metric,condition_count,varying_condition_count,"
+                "varying_condition_share"
+            ),
+            "-1,accuracy,576,1,0.0017",
+            "1,accuracy,576,0,0.0",
+        ],
+    )
+
+    exit_code = main(
+        [
+            "analyze",
+            "stability-bundle",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "bundle_manifest.csv").exists()
+    assert (output_dir / "bundle_overview.csv").exists()
+    assert (output_dir / "variability_incidence_by_algorithm.csv").exists()
+    assert (output_dir / "overall_metric_stability_by_algorithm.csv").exists()
+    assert (output_dir / "algo2" / "convergence_stability_by_level.csv").exists()
+    assert (output_dir / "algo2" / "convergence_variability_incidence.csv").exists()
+
+    # Verify convergence=1 is perfectly stable (key finding)
+    var = pd.read_csv(output_dir / "algo2" / "convergence_variability_incidence.csv")
+    conv_1 = var[var["Convergence"] == 1].iloc[0]
+    assert conv_1["varying_condition_count"] == 0
+    assert conv_1["varying_condition_share"] == 0.0
+
+
+def _write_flat(path, lines: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
