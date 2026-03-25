@@ -442,6 +442,43 @@ def test_cli_analyze_stability_bundle_reorganizes_flat_files(tmp_path) -> None:
     assert conv_1["varying_condition_share"] == 0.0
 
 
+def test_cli_analyze_figures_bundle_writes_distributional_summaries(tmp_path) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir(parents=True)
+    output_dir = tmp_path / "bundle"
+
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        results_root / "algo1" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+    )
+    _copy_fixture(
+        "tests/reference_fixtures/legacy/algo2/gpt-5/evaluated/metrics_sg1_sg2.csv",
+        results_root / "algo2" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+    )
+
+    exit_code = main(
+        [
+            "analyze",
+            "figures-bundle",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "bundle_manifest.csv").exists()
+    assert (output_dir / "bundle_overview.csv").exists()
+    assert (output_dir / "algo1_metric_rows.csv").exists()
+    assert (output_dir / "algo2_metric_rows.csv").exists()
+    assert (output_dir / "algo1" / "gpt-5" / "distributional_summary.csv").exists()
+    assert (output_dir / "algo2" / "gpt-5" / "distributional_summary.csv").exists()
+
+    overview = pd.read_csv(output_dir / "bundle_overview.csv")
+    assert {"ci95_low", "ci95_high", "median", "q1", "q3"}.issubset(overview.columns)
+
+
 def _write_flat(path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

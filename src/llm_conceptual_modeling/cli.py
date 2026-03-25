@@ -119,6 +119,13 @@ def build_parser() -> argparse.ArgumentParser:
     figures_parser.add_argument("--metric", action="append", required=True)
     figures_parser.add_argument("--output", required=True)
 
+    figures_bundle_parser = analyze_subparsers.add_parser("figures-bundle")
+    figures_bundle_parser.add_argument(
+        "--results-root",
+        default="data/results",
+    )
+    figures_bundle_parser.add_argument("--output-dir", required=True)
+
     baseline_comparison_parser = analyze_subparsers.add_parser("baseline-comparison")
     baseline_comparison_parser.add_argument("--input", action="append", required=True)
     baseline_comparison_parser.add_argument("--baseline-input", action="append", required=True)

@@ -1,0 +1,2 @@
+algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
+algo3,google-gemini-2.5-pro,Recall,240,0.030303,0.146343,0.011694,0.048912,0.0,0.0,0.0,0.0,1.0

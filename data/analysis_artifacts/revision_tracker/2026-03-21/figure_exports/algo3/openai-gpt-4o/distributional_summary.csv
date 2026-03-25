@@ -1,0 +1,2 @@
+algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
+algo3,openai-gpt-4o,Recall,240,0.086553,0.28046,0.05089,0.122216,0.0,0.0,0.0,0.0,1.0

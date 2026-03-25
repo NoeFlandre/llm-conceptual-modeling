@@ -670,36 +670,79 @@ it shows that five repetitions are enough to reveal that ALGO1 and ALGO2 are alr
 
 ### What The Reviewer Was Asking For
 
-The reviewer needed the repository to support plotting and distributional analysis directly, instead of leaving figure assembly as a manual step outside the audited workflow.
+The reviewer needed more than tables — they wanted visual evidence of variability. Specifically, confidence intervals around means and distributional plots that show how much the data scatters around each metric value across conditions.
 
 ### What Was Implemented
 
-The revision added `lcm analyze figures`, which converts evaluated CSVs into long-format metric rows with explicit provenance.
+Two pieces address this request.
 
-Each row preserves:
+1. The generic long-format export command:
 
-- `source_input`
-- `algorithm`
-- `model`
-- factor columns from the original evaluated rows
-- metric name
-- metric value
+- `lcm analyze figures`
 
-### Commands Used
+This melts evaluated CSVs into tidy long-format rows (one row per repetition per metric) with preserved provenance columns. It is the building block for box plots, violin plots, and faceted model comparisons in any external tool.
 
-Representative audited command:
+2. The organized bundle generator:
+
+- `lcm analyze figures-bundle`
+
+This new bundle command wraps the long-format export and adds per-model distributional summaries — producing a self-contained evidence package ready for a reviewer to open in a plotting tool without any manual assembly.
+
+Code location:
+
+- `src/llm_conceptual_modeling/analysis/figures_bundle.py`
+
+### Command Used
 
 ```bash
-lcm analyze figures \
-  --input data/results/algo1/*/evaluated/*.csv \
-  --input data/results/algo2/*/evaluated/*.csv \
-  --input data/results/algo3/*/evaluated/*.csv \
-  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/figure_exports/
+lcm analyze figures-bundle \
+  --results-root data/results \
+  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/figure_exports
 ```
+
+This generates long-format metric rows per algorithm plus per-model distributional summaries covering all 18 algorithm-model combinations.
+
+### Evidence Organization
+
+```
+data/analysis_artifacts/revision_tracker/2026-03-21/figure_exports/
+├── README.md
+├── bundle_manifest.csv
+├── bundle_overview.csv           ← distributional summary across all models
+├── algo1_metric_rows.csv        ← long-format rows for all ALGO1 models
+├── algo2_metric_rows.csv        ← long-format rows for all ALGO2 models
+├── algo3_metric_rows.csv        ← long-format rows for all ALGO3 models
+├── algo1/<model>/distributional_summary.csv
+├── algo2/<model>/distributional_summary.csv
+└── algo3/<model>/distributional_summary.csv
+```
+
+Each `distributional_summary.csv` contains: `n`, `mean`, `sample_std`, `ci95_low`, `ci95_high`, `median`, `q1`, `q3`, `min`, `max` — all per metric per model.
+
+The `bundle_overview.csv` aggregates all model-level summaries into one reviewer-facing table.
 
 ### Most Informative Output
 
-Export sizes:
+ALGO1 accuracy distributional summary across models:
+
+| Model | n | Mean | 95% CI low | 95% CI high | Median | Q1 | Q3 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| DeepSeek V3 Chat | 160 | 0.915 | 0.913 | 0.917 | 0.919 | 0.909 | 0.922 |
+| Gemini 2.0 Flash | 160 | 0.917 | 0.915 | 0.919 | 0.916 | 0.909 | 0.925 |
+| Gemini 2.5 Pro | 160 | 0.933 | 0.932 | 0.934 | 0.935 | 0.929 | 0.938 |
+| GPT-5 | 160 | 0.896 | 0.893 | 0.899 | 0.899 | 0.890 | 0.909 |
+| GPT-4o | 160 | 0.931 | 0.930 | 0.933 | 0.932 | 0.925 | 0.938 |
+
+ALGO3 recall distributional summary — showing extreme skew:
+
+| Model | n | Mean | 95% CI low | 95% CI high | Median |
+| --- | --- | --- | --- | --- | --- |
+| DeepSeek V3 Chat | 240 | 0.058 | 0.030 | 0.086 | 0.0 |
+| Gemini 2.0 Flash | 240 | 0.057 | 0.034 | 0.080 | 0.0 |
+| GPT-4o | 240 | 0.087 | 0.051 | 0.122 | 0.0 |
+| GPT-5 | 240 | 0.000 | 0.000 | 0.000 | 0.0 |
+
+Long-format export row counts:
 
 | File | Rows |
 | --- | --- |
@@ -707,23 +750,17 @@ Export sizes:
 | `algo2_metric_rows.csv` | `17,280` |
 | `algo3_metric_rows.csv` | `1,440` |
 
-Per-model row counts are perfectly regular, which is itself useful:
-
-- ALGO1: each model contributes `480` rows per metric.
-- ALGO2: each model contributes `960` rows per metric.
-- ALGO3: each model contributes `240` recall rows.
-
 ### Detailed Findings
 
-This item is more about infrastructure than new scientific claims, but the resulting exports matter for interpretability.
+Two patterns are directly visible from the distributional summaries.
 
-- The exports can now support box plots, violin plots, faceted model comparisons, and confidence interval plots directly.
-- The model provenance is already embedded in the rows, so downstream figures do not need ad hoc filename parsing.
-- The regular per-model row counts also make the exported corpus easier to audit for omissions.
+**ALGO1 accuracy is compact and reproducible.** All six models have 95% CIs that are tight and entirely above 0.89 — GPT-4o and Gemini 2.5 Pro are the strongest, GPT-5 the weakest. The IQR (Q1 to Q3) spans roughly 0.02 for every model, confirming that repetition-level scatter is small. This is consistent with the replication-stability findings: ALGO1 is not a source of meaningful visual spread in any figure drawn from this corpus.
 
-### Interpretation
+**ALGO3 recall is extremely right-skewed.** Every model shows a median of exactly 0.0 with a positive mean and a wide CI that does not include zero — meaning the evaluated outputs are mostly empty but occasionally produce non-zero recall. GPT-4o has the highest mean recall (0.087) with the widest CI [0.051, 0.122], while GPT-5 has a mean of exactly 0.0. This bimodal pattern (near-zero median, positive tail) is exactly what the output-variability analysis (Section 6) attributes to ALGO3's multi-step amplification wandering.
 
-The repository is no longer limited to summary tables. It now supports figure generation from a deterministic, provenance-preserving analysis layer.
+### What It Means
+
+The reviewer asked for distributional plots. The bundle now makes those plots deterministic and auditable: a reviewer can open `bundle_overview.csv` directly in a plotting tool and reproduce any figure without manual post-processing. The key takeaway is visual rather than tabular — the gap between the compact, high-accuracy ALGO1 distributions and the sparse, skewed ALGO3 recall distributions communicates the variability story more directly than any summary table.
 
 ## 6. Output Variability And Proxy Mechanisms
 

@@ -4,6 +4,7 @@ from argparse import Namespace
 from llm_conceptual_modeling.analysis.baseline_comparison import write_baseline_metric_comparison
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
 from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_rows
+from llm_conceptual_modeling.analysis.figures_bundle import write_figures_bundle
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.hypothesis_bundle import write_hypothesis_testing_bundle
 from llm_conceptual_modeling.analysis.output_validity_bundle import write_output_validity_bundle
@@ -78,6 +79,12 @@ def handle_analyze(args: Namespace) -> int:
                 args.output,
                 id_columns=args.id_column,
                 metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "figures-bundle":
+            write_figures_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
             )
             return 0
         if args.analysis_target == "baseline-comparison":
