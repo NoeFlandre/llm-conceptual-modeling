@@ -94,7 +94,7 @@ def build_parser() -> argparse.ArgumentParser:
     stability_bundle_parser = analyze_subparsers.add_parser("stability-bundle")
     stability_bundle_parser.add_argument(
         "--results-root",
-        default="data/analysis_artifacts/revision_tracker/2026-03-21/replication_stability",
+        default="data/analysis_artifacts/revision_tracker/replication_stability",
     )
     stability_bundle_parser.add_argument("--output-dir", required=True)
 

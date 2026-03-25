@@ -18,7 +18,7 @@ This document covers the deterministic, offline revision work that is reproducib
 
 - Primary imported corpus: `data/results/`
 - Audited revision artifacts:
-  - `data/analysis_artifacts/revision_tracker/2026-03-21/`
+  - `data/analysis_artifacts/revision_tracker/`
   - `data/analysis_artifacts/revision_tracker/2026-03-24/`
 - Main command surface:
   - `lcm analyze summary`
@@ -130,7 +130,7 @@ The organized reviewer-facing bundle is now produced by:
 ```bash
 lcm analyze summary-bundle \
   --results-root data/results \
-  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting
+  --output-dir data/analysis_artifacts/revision_tracker/statistical_reporting
 ```
 
 That bundle internally expands the descriptive analysis across all audited factors:
@@ -158,9 +158,9 @@ That bundle internally expands the descriptive analysis across all audited facto
 
 The evidence for this reviewer item is now organized under:
 
-- `data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting/README.md`
-- `data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting/bundle_manifest.csv`
-- `data/analysis_artifacts/revision_tracker/2026-03-21/statistical_reporting/bundle_overview.csv`
+- `data/analysis_artifacts/revision_tracker/statistical_reporting/README.md`
+- `data/analysis_artifacts/revision_tracker/statistical_reporting/bundle_manifest.csv`
+- `data/analysis_artifacts/revision_tracker/statistical_reporting/bundle_overview.csv`
 
 Per-factor evidence now lives in nested directories such as:
 
@@ -321,7 +321,7 @@ The organized reviewer-facing bundle was produced by:
 ```bash
 lcm analyze hypothesis-bundle \
   --results-root data/results \
-  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing
+  --output-dir data/analysis_artifacts/revision_tracker/hypothesis_testing
 ```
 
 This generates all factor-level paired tests and significance summaries internally. The generic single-factor command (`lcm analyze hypothesis`) is also available for focused investigations.
@@ -336,9 +336,9 @@ This bundle covers all valid two-level factors with explicit pairing across the 
 
 ### Evidence Organization
 
-- `data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/README.md`
-- `data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/bundle_manifest.csv`
-- `data/analysis_artifacts/revision_tracker/2026-03-21/hypothesis_testing/bundle_overview.csv`
+- `data/analysis_artifacts/revision_tracker/hypothesis_testing/README.md`
+- `data/analysis_artifacts/revision_tracker/hypothesis_testing/bundle_manifest.csv`
+- `data/analysis_artifacts/revision_tracker/hypothesis_testing/bundle_overview.csv`
 
 Per-factor evidence lives in nested directories such as:
 
@@ -482,7 +482,7 @@ Code locations:
 ```bash
 lcm analyze output-validity-bundle \
   --results-root data/results \
-  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/output_validity
+  --output-dir data/analysis_artifacts/revision_tracker/output_validity
 ```
 
 This generates the full bundle with per-algorithm and per-model breakdowns. The single-input command (`lcm analyze failures`) remains available for targeted investigations.
@@ -490,7 +490,7 @@ This generates the full bundle with per-algorithm and per-model breakdowns. The 
 ### Evidence Organization
 
 ```
-data/analysis_artifacts/revision_tracker/2026-03-21/output_validity/
+data/analysis_artifacts/revision_tracker/output_validity/
 ├── README.md
 ├── bundle_manifest.csv
 ├── bundle_overview.csv
@@ -599,13 +599,13 @@ lcm analyze stability \
   --input data/results/algo1/*/evaluated/*.csv \
   --group-by model metric Explanation Example Counterexample Array/List(1/-1) Tag/Adjacency(1/-1) \
   --value-column value \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/replication_stability/algo1_condition_stability.csv
+  --output data/analysis_artifacts/revision_tracker/replication_stability/algo1_condition_stability.csv
 
 lcm analyze stability \
   --input data/results/algo3/*/evaluated/*.csv \
   --group-by model Recall Depth Number\ of\ Words Example Counter-Example Source\ Subgraph\ Name Target\ Subgraph\ Name \
   --value-column Recall \
-  --output data/analysis_artifacts/revision_tracker/2026-03-21/replication_stability/algo3_condition_stability.csv
+  --output data/analysis_artifacts/revision_tracker/replication_stability/algo3_condition_stability.csv
 ```
 
 ### Most Informative Output
@@ -697,7 +697,7 @@ Code location:
 ```bash
 lcm analyze figures-bundle \
   --results-root data/results \
-  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/figure_exports
+  --output-dir data/analysis_artifacts/revision_tracker/figure_exports
 ```
 
 This generates long-format metric rows per algorithm plus per-model distributional summaries covering all 18 algorithm-model combinations.
@@ -705,7 +705,7 @@ This generates long-format metric rows per algorithm plus per-model distribution
 ### Evidence Organization
 
 ```
-data/analysis_artifacts/revision_tracker/2026-03-21/figure_exports/
+data/analysis_artifacts/revision_tracker/figure_exports/
 ├── README.md
 ├── bundle_manifest.csv
 ├── bundle_overview.csv           ← distributional summary across all models
@@ -889,7 +889,7 @@ lcm analyze baseline-comparison \
   --inputs data/results/algo1/*/evaluated/*.csv \
   --inputs data/results/algo2/*/evaluated/*.csv \
   --inputs data/results/algo3/*/evaluated/*.csv \
-  --output-dir data/analysis_artifacts/revision_tracker/2026-03-21/baseline_comparison/
+  --output-dir data/analysis_artifacts/revision_tracker/baseline_comparison/
 ```
 
 ### Most Informative Output
@@ -993,6 +993,6 @@ Taken together, the implemented revision work supports six concrete conclusions.
 
 - `paper/revision/reviewer-response-log.md`
 - `paper/revision/revision-tracker.md`
-- `data/analysis_artifacts/revision_tracker/2026-03-21/`
+- `data/analysis_artifacts/revision_tracker/`
 - `data/analysis_artifacts/revision_tracker/2026-03-24/`
 - `docs/architecture.md`
