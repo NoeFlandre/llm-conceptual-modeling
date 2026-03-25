@@ -8,14 +8,15 @@ from llm_conceptual_modeling.algo3.baseline import write_baseline_results_file a
 
 def handle_baseline(args: Namespace) -> int:
     try:
+        strategy = getattr(args, "strategy", "random-uniform-subset")
         if args.algorithm == "algo1":
-            write_algo1(args.pair, args.output)
+            write_algo1(args.pair, args.output, strategy=strategy)
             return 0
         if args.algorithm == "algo2":
-            write_algo2(args.pair, args.output)
+            write_algo2(args.pair, args.output, strategy=strategy)
             return 0
         if args.algorithm == "algo3":
-            write_algo3(args.pair, args.output)
+            write_algo3(args.pair, args.output, strategy=strategy)
             return 0
         raise ValueError(f"Unsupported baseline algorithm: {args.algorithm}")
     except ValueError as error:

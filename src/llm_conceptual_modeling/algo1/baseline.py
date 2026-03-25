@@ -2,18 +2,19 @@ from itertools import product
 
 import pandas as pd
 
-from llm_conceptual_modeling.common.baseline import propose_direct_cross_subgraph_edges
+from llm_conceptual_modeling.common.baseline import (
+    propose_direct_cross_subgraph_edges,
+    propose_random_cross_subgraph_edges,
+)
 from llm_conceptual_modeling.common.graph_data import load_default_graph
 from llm_conceptual_modeling.common.types import PathLike
 
-_PAIR_MAP = {
-    "sg1_sg2": (0, 1),
-    "sg2_sg3": (1, 2),
-    "sg3_sg1": (2, 0),
-}
 
-
-def write_baseline_results_file(pair_name: str, output_csv_path: PathLike) -> None:
+def write_baseline_results_file(
+    pair_name: str,
+    output_csv_path: PathLike,
+    strategy: str = "random-uniform-subset",
+) -> None:
     subgraphs = load_default_graph()
     sg1, sg2, sg3, graph = subgraphs
     pair_lookup = {
@@ -25,7 +26,10 @@ def write_baseline_results_file(pair_name: str, output_csv_path: PathLike) -> No
         raise ValueError(f"Unsupported pair: {pair_name}")
 
     subgraph1, subgraph2 = pair_lookup[pair_name]
-    baseline_result = propose_direct_cross_subgraph_edges(graph, subgraph1, subgraph2)
+    if strategy == "direct-cross-graph":
+        baseline_result = propose_direct_cross_subgraph_edges(graph, subgraph1, subgraph2)
+    else:
+        baseline_result = propose_random_cross_subgraph_edges(subgraph1, subgraph2)
 
     rows: list[dict[str, object]] = []
     for repetition in range(5):

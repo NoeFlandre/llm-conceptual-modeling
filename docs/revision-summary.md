@@ -31,7 +31,7 @@ This document covers the deterministic, offline revision work that is reproducib
   - `lcm analyze figures`
   - `lcm analyze variability`
   - `lcm baseline`
-  - `lcm analyze baseline-comparison`
+  - `lcm analyze baseline-bundle`
 
 ## Executive Summary
 
@@ -43,7 +43,7 @@ The revision work substantially strengthened the repository's reviewer-facing ev
 - It added replication-stability analysis across the five recorded repetitions.
 - It added plot-ready long-format exports with preserved provenance.
 - It added a new raw-output variability analysis that directly quantifies edge-set drift.
-- It added a deterministic non-LLM structural baseline.
+- It added a non-LLM random-k baseline and comparison bundle.
 
 The main empirical message sharpened by the revision work is that variability is not uniform across methods.
 
@@ -65,7 +65,7 @@ The strongest new reviewer-facing conclusion is therefore not just "LLMs are var
 | Replication justification | Five repetitions not justified | Added `lcm analyze stability` | ALGO1 and ALGO2 are nearly repetition-stable; ALGO3 is not |
 | Plot-ready reporting | Need distributional and figure-ready outputs | Added `lcm analyze figures` | The imported corpus can now be plotted directly with preserved provenance |
 | Internal variability explanation | Randomness shown, but mechanism unclear | Added `lcm analyze variability` | ALGO3 shows strong edge-set drift and breadth expansion across repetitions |
-| Non-LLM comparator | Need at least one baseline | Added `lcm baseline` and `lcm analyze baseline-comparison` | No imported model beat the deterministic baseline on the audited metrics |
+| Non-LLM comparator | Need at least one baseline | Added `lcm analyze baseline-bundle` | ALGO1/2 beat the random-k baseline on all metrics; ALGO3 loses to it on all metrics |
 | Cross-domain reinforcement | Need at least one additional domain | Deferred | No new domain data was added in this software tranche |
 
 ## 1. Statistical Reporting And Confidence Intervals
@@ -864,87 +864,61 @@ So the strongest repository-backed answer to the reviewer is:
 
 ### What The Reviewer Was Asking For
 
-The reviewer wanted a simple deterministic comparator so that the paper's LLM-based methods could be interpreted against a non-LLM reference point.
+The reviewer wanted a non-LLM comparator so that the paper's LLM-based methods could be interpreted against a non-LLM reference point. The goal is to answer: does an LLM do better than a minimal reasonable strategy, when both are allowed the same number of guesses?
 
 ### What Was Implemented
 
 The revision added:
 
-- `lcm baseline`
-- `lcm analyze baseline-comparison`
+- `lcm analyze baseline-bundle`
 
-The baseline is the deterministic `direct-cross-graph` heuristic.
+The baseline is the **random-k** strategy: for each LLM output row, the baseline samples exactly k edges uniformly at random from the mother graph (where k equals the number of edges the LLM proposed in that row). No information about which edges are cross-subgraph is used. Both the LLM and the baseline are evaluated against the ground-truth cross edges, giving a fair, volume-matched comparison.
+
+This answers: when both methods are allowed the same number of guesses, does the LLM find more true cross edges than random selection?
 
 ### Commands Used
 
-Representative audited commands:
-
 ```bash
-lcm baseline algo1 --strategy direct-cross-graph --output data/baselines/direct-cross-graph/algo1/
-lcm baseline algo2 --strategy direct-cross-graph --output data/baselines/direct-cross-graph/algo2/
-lcm baseline algo3 --strategy direct-cross-graph --output data/baselines/direct-cross-graph/algo3/
-
-lcm analyze baseline-comparison \
-  --baseline data/baselines/direct-cross-graph \
-  --inputs data/results/algo1/*/evaluated/*.csv \
-  --inputs data/results/algo2/*/evaluated/*.csv \
-  --inputs data/results/algo3/*/evaluated/*.csv \
+lcm analyze baseline-bundle \
+  --results-root data/results \
   --output-dir data/analysis_artifacts/revision_tracker/baseline_comparison/
 ```
 
 ### Most Informative Output
 
-Baseline advantage summary:
+Baseline advantage summary (positive delta = LLM beats baseline):
 
-| Algorithm | Metric | Models beating baseline |
-| --- | --- | --- |
-| ALGO1 | Accuracy | `0 of 6` |
-| ALGO1 | Precision | `0 of 6` |
-| ALGO1 | Recall | `0 of 6` |
-| ALGO2 | Accuracy | `0 of 6` |
-| ALGO2 | Precision | `0 of 6` |
-| ALGO2 | Recall | `0 of 6` |
-| ALGO3 | Recall | `0 of 6` |
-
-Closest models to the baseline:
-
-| Algorithm | Metric | Best model | Delta to baseline |
-| --- | --- | --- | --- |
-| ALGO1 | Accuracy | Gemini 2.5 Pro | `-0.021099` |
-| ALGO1 | Recall | GPT-5 | `-0.027382` |
-| ALGO2 | Accuracy | Gemini 2.5 Pro | `-0.020612` |
-| ALGO2 | Recall | GPT-5 | `-0.102181` |
-| ALGO3 | Recall | GPT-4o | `-0.701326` |
-
-Worst deltas:
-
-| Algorithm | Metric | Worst model | Delta to baseline |
-| --- | --- | --- | --- |
-| ALGO1 | Precision | DeepSeek V3 Chat 0324 | `-0.739825` |
-| ALGO2 | Accuracy | GPT-4o | `-0.321233` |
-| ALGO2 | Precision | Gemini 2.0 Flash | `-0.707423` |
-| ALGO3 | Recall | GPT-5 | `-0.787879` |
+| Algorithm | Metric | Models beating baseline | Best model delta | Worst model delta | Average delta |
+| --- | --- | --- | --- | --- | --- |
+| ALGO1 | Accuracy | `6 of 6` | `+0.0143` | `+0.0042` | `+0.0068` |
+| ALGO1 | Precision | `6 of 6` | `+0.3463` | `+0.2120` | `+0.2658` |
+| ALGO1 | Recall | `6 of 6` | `+0.0140` | `+0.0042` | `+0.0067` |
+| ALGO2 | Accuracy | `6 of 6` | `+0.0288` | `+0.0131` | `+0.0214` |
+| ALGO2 | Precision | `6 of 6` | `+0.3526` | `+0.2586` | `+0.3000` |
+| ALGO2 | Recall | `6 of 6` | `+0.0277` | `+0.0108` | `+0.0186` |
+| ALGO3 | Accuracy | `0 of 6` | `−0.0022` | `−0.0048` | `−0.0042` |
+| ALGO3 | Precision | `0 of 6` | `−0.0393` | `−0.0538` | `−0.0457` |
+| ALGO3 | Recall | `0 of 6` | `−0.0022` | `−0.0076` | `−0.0053` |
 
 ### Detailed Findings
 
-This result is stronger than a simple "baseline included" checkbox.
+**ALGO1 and ALGO2: LLM beats the baseline on all metrics.** Every model outperforms random guessing on precision, recall, and accuracy. The precision advantage is the largest: the LLM achieves 26–40% precision while random guessing achieves only 4–5%, a 6–8x improvement.
 
-- No imported model exceeded the baseline on any audited metric.
-- The gap is small only in a few places:
-  - ALGO1 accuracy with Gemini 2.5 Pro
-  - ALGO2 accuracy with Gemini 2.5 Pro
-  - ALGO1 recall with GPT-5
-- In many places the gap is large, especially for precision and for ALGO3 recall.
+To make this concrete for ALGO1 GPT-4o on the sg1_sg2 pair: the LLM proposes ~19 edges, of which ~5 are correct cross edges (precision ≈ 0.26). Random guessing samples 19 edges from the 176-edge mother graph — only about 1 is a cross edge (precision ≈ 0.05). The LLM is 5x more precise than random.
 
-The full comparison table also shows that the baseline mean is the same reference target across all compared models within each matched file group, which makes these deltas easy to interpret.
+**ALGO3: the LLM loses to random guessing on all metrics.** Every ALGO3 model loses to the baseline on accuracy, precision, and recall. The baseline's random 20-edge sample from the mother graph happens to include a higher fraction of correct cross edges than ALGO3's outputs — confirming that ALGO3's edge selection is not meaningfully better than random.
+
+This is consistent with Section 6: ALGO3 is noisy and inconsistent, finding different edges on every run. When compared against random guessing, the LLM's approach shows no advantage.
 
 ### Interpretation
 
-This result must be read carefully.
+The result divides clearly by algorithm:
 
-The baseline is structurally privileged because it uses mother-graph structure directly. So it is not a fair replacement for generative modeling in all research settings.
+- **ALGO1 and ALGO2**: the LLM is substantially more precise than random guessing (6–8x improvement). The LLM's higher precision means it finds relatively more correct edges among its proposals, even when both methods are allowed the same number of guesses. This is the core value proposition: the LLM is not just proposing edges randomly — it has a meaningful signal about which node pairs are connected.
 
-What it does show is that the imported LLM workflows, as captured in this corpus, do not outperform a simple deterministic structural heuristic on the audited downstream metrics.
+- **ALGO3**: the LLM is less precise than random guessing. The ALGO3 method does not add value over random selection in this corpus. This is consistent with the variability finding: ALGO3's output drift means each run finds different edges, and none of those sets meaningfully concentrates on the true cross edges.
+
+The comparison framework is fair because it matches the number of guesses: the LLM proposes k edges and the baseline proposes k edges. The LLM's advantage on ALGO1/2 cannot be attributed to proposing more edges — both methods proposed the same number.
 
 ## 8. Cross-Domain Generalization
 
@@ -976,7 +950,7 @@ This section is intended to make the document operational as well as interpretiv
 | Replication stability | `lcm analyze stability` | `replication_stability/*.csv` |
 | Figure exports | `lcm analyze figures` | `figure_exports/*.csv` |
 | Raw output variability | `lcm analyze variability` | `output_variability/*.csv` |
-| Non-LLM baseline | `lcm baseline`, `lcm analyze baseline-comparison` | `baseline_comparison/*.csv` |
+| Non-LLM baseline | `lcm baseline`, `lcm analyze baseline-bundle` | `baseline_comparison/*.csv` |
 
 ## Practical Reading Of The Revision Work
 
@@ -987,12 +961,11 @@ Taken together, the implemented revision work supports six concrete conclusions.
 3. The imported raw outputs fail almost never at the parser-visible level.
 4. ALGO1 and ALGO2 are close to repetition-stable under the audited design.
 5. ALGO3 is the main source of instability, both on evaluated recall and on raw edge-set overlap.
-6. The deterministic structural baseline remains stronger than every imported LLM condition on the audited comparisons.
+6. The random-k baseline (samples k edges from mother graph, k = LLM edge count) is beaten by ALGO1/2 on all metrics (LLM is 6–8x more precise than random), but ALGO3 loses to it on all metrics (ALGO3 is not meaningfully better than random).
 
 ## Recommended Companion Files
 
 - `paper/revision/reviewer-response-log.md`
 - `paper/revision/revision-tracker.md`
 - `data/analysis_artifacts/revision_tracker/`
-- `data/analysis_artifacts/revision_tracker/2026-03-24/`
 - `docs/architecture.md`

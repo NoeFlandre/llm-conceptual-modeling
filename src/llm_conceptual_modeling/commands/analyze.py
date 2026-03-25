@@ -1,6 +1,7 @@
 import sys
 from argparse import Namespace
 
+from llm_conceptual_modeling.analysis.baseline_bundle import write_baseline_comparison_bundle
 from llm_conceptual_modeling.analysis.baseline_comparison import write_baseline_metric_comparison
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
 from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_rows
@@ -106,6 +107,12 @@ def handle_analyze(args: Namespace) -> int:
             return 0
         if args.analysis_target == "variability-bundle":
             write_variability_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
+            )
+            return 0
+        if args.analysis_target == "baseline-bundle":
+            write_baseline_comparison_bundle(
                 results_root=args.results_root,
                 output_dir=args.output_dir,
             )

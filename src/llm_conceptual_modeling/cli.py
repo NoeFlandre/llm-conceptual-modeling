@@ -36,14 +36,29 @@ def build_parser() -> argparse.ArgumentParser:
     baseline_algo1_parser = baseline_subparsers.add_parser("algo1")
     baseline_algo1_parser.add_argument("--pair", required=True)
     baseline_algo1_parser.add_argument("--output", required=True)
+    baseline_algo1_parser.add_argument(
+        "--strategy",
+        default="random-uniform-subset",
+        choices=["direct-cross-graph", "random-uniform-subset"],
+    )
 
     baseline_algo2_parser = baseline_subparsers.add_parser("algo2")
     baseline_algo2_parser.add_argument("--pair", required=True)
     baseline_algo2_parser.add_argument("--output", required=True)
+    baseline_algo2_parser.add_argument(
+        "--strategy",
+        default="random-uniform-subset",
+        choices=["direct-cross-graph", "random-uniform-subset"],
+    )
 
     baseline_algo3_parser = baseline_subparsers.add_parser("algo3")
     baseline_algo3_parser.add_argument("--pair", required=True)
     baseline_algo3_parser.add_argument("--output", required=True)
+    baseline_algo3_parser.add_argument(
+        "--strategy",
+        default="random-uniform-subset",
+        choices=["direct-cross-graph", "random-uniform-subset"],
+    )
 
     factorial_algo1_parser = factorial_subparsers.add_parser("algo1")
     factorial_algo1_parser.add_argument("--input", action="append", required=True)
@@ -144,6 +159,13 @@ def build_parser() -> argparse.ArgumentParser:
         default="data/analysis_artifacts/revision_tracker/output_variability",
     )
     variability_bundle_parser.add_argument("--output-dir", required=True)
+
+    baseline_bundle_parser = analyze_subparsers.add_parser("baseline-bundle")
+    baseline_bundle_parser.add_argument(
+        "--results-root",
+        default="data/results",
+    )
+    baseline_bundle_parser.add_argument("--output-dir", required=True)
 
     return parser
 
