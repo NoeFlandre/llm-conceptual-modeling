@@ -17,9 +17,7 @@ It is designed to answer five questions in one place:
 This document covers the deterministic, offline revision work that is reproducible from the current repository without rerunning live provider calls.
 
 - Primary imported corpus: `data/results/`
-- Audited revision artifacts:
-  - `data/analysis_artifacts/revision_tracker/`
-  - `data/analysis_artifacts/revision_tracker/2026-03-24/`
+- Audited revision artifacts: `data/analysis_artifacts/revision_tracker/`
 - Main command surface:
   - `lcm analyze summary`
   - `lcm analyze summary-bundle`
