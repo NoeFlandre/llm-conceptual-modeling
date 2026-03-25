@@ -38,7 +38,7 @@ many tests rather than strict familywise error control. The FDR target is 5%.
 
 ### Effect size interpretation (Cohen's d for paired samples)
 
-| \|d\| range | Interpretation |
+| |d| range | Interpretation |
 | --- | --- |
 | < 0.2 | negligible |
 | 0.2 – 0.5 | small |
