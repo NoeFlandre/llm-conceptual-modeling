@@ -76,15 +76,13 @@ def write_figures_bundle(
         if not input_paths:
             continue
 
-        # --- Collect per-model distributional summaries ---
-        model_dirs: dict[str, Path] = {}
-        model_frames: list[pd.DataFrame] = []
+        # --- Collect per-model frames (keyed by model so all files aggregate) ---
+        model_frames: dict[str, list[pd.DataFrame]] = {}
 
         for input_path in input_paths:
             model = _extract_model(input_path)
-            model_dir = output_dir_path / algorithm_spec.algorithm / model
-            model_dir.mkdir(parents=True, exist_ok=True)
-            model_dirs[model] = model_dir
+            if model not in model_frames:
+                model_frames[model] = []
 
             dataframe = pd.read_csv(input_path)
             df_long = _melt_to_long(
@@ -95,11 +93,20 @@ def write_figures_bundle(
                 id_columns=list(algorithm_spec.id_columns),
                 metrics=list(algorithm_spec.metrics),
             )
-            model_frames.append(df_long)
+            model_frames[model].append(df_long)
 
-            # Per-model distributional summary
+        # --- Per-model: aggregate all files, write distributional summary once ---
+        model_all_rows: list[pd.DataFrame] = []
+        for model, frames in model_frames.items():
+            model_dir = output_dir_path / algorithm_spec.algorithm / model
+            model_dir.mkdir(parents=True, exist_ok=True)
+
+            # Aggregate all source files for this model before computing summary
+            aggregated = pd.concat(frames, ignore_index=True)
+            model_all_rows.append(aggregated)
+
             dist_summary = _compute_distributional_summary(
-                df_long,
+                aggregated,
                 algorithm=algorithm_spec.algorithm,
                 model=model,
             )
@@ -114,15 +121,16 @@ def write_figures_bundle(
                     ),
                     "description": (
                         f"Distributional summary (n, mean, std, 95% CI, median, "
-                        f"quartiles, min, max) per metric for {model}."
+                        f"quartiles, min, max) per metric for {model}, "
+                        "aggregated across all source files."
                     ),
                 }
             )
             overview_records.extend(dist_summary.to_dict(orient="records"))
 
         # --- Concatenate all model rows into one long-format file per algorithm ---
-        if model_frames:
-            all_rows = pd.concat(model_frames, ignore_index=True)
+        if model_all_rows:
+            all_rows = pd.concat(model_all_rows, ignore_index=True)
             metric_rows_path = output_dir_path / f"{algorithm_spec.algorithm}_metric_rows.csv"
             all_rows.to_csv(metric_rows_path, index=False)
             manifest_records.append(
