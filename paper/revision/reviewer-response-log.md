@@ -158,6 +158,7 @@ Beyond descriptive statistics, the reviewer wanted **formal statistical tests** 
 Implemented `lcm analyze hypothesis` command for **paired two-level factor tests** with:
 
 - **Paired t-test (`ttest_rel`)** — tests whether the mean difference between two factor levels is significantly different from zero
+- **Repeated-measures-ANOVA-equivalent F-statistic** — for these two-level within-source comparisons, the repository now also reports the equivalent ANOVA-style statistic with `F = t²`, `df_num = 1`, and `df_den = pair_count - 1`
 - **Benjamini-Hochberg (BH) correction** — controls the False Discovery Rate (FDR) rather than the Family-Wise Error Rate
 
 **Why Benjamini-Hochberg and not Bonferroni?**
@@ -208,8 +209,11 @@ lcm analyze hypothesis \
 | `mean_low`, `mean_high` | Group means |
 | `mean_difference` | High minus Low mean |
 | `t_statistic` | Paired t-test statistic |
+| `f_statistic` | Repeated-measures-ANOVA-equivalent F-statistic (`t²` for these two-level paired tests) |
+| `f_df_num`, `f_df_den` | Numerator and denominator degrees of freedom for the F-statistic |
 | `p_value` | Raw p-value |
 | `p_value_adjusted` | BH-corrected p-value |
+| `test_family` | Records that the F-statistic is the repeated-measures-ANOVA-equivalent view of the paired comparison |
 | `correction_method` | "benjamini-hochberg" |
 
 ### Findings from Implementing the Solution

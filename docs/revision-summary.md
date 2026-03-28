@@ -58,7 +58,7 @@ The strongest new reviewer-facing conclusion is therefore not just "LLMs are var
 | Revision theme | Exact reviewer concern | Repository response | Main finding |
 | --- | --- | --- | --- |
 | Statistical reporting | Missing confidence intervals and grouped summaries | Added `lcm analyze summary` | Factor-level descriptive patterns are now explicit and auditable |
-| Formal testing | Missing p-values and multiple-comparison adjustment | Added `lcm analyze hypothesis` and `lcm analyze hypothesis-bundle` with Benjamini-Hochberg FDR correction | Exhaustive 16-factor formal test confirms ALGO2 `Convergence` as dominant; ALGO3 has no robust factor effects |
+| Formal testing | Missing ANOVA/F-style statistics, p-values, and multiple-comparison adjustment | Added `lcm analyze hypothesis` and `lcm analyze hypothesis-bundle` with paired tests, ANOVA-equivalent F-statistics, and Benjamini-Hochberg FDR correction | Exhaustive 16-factor formal test confirms ALGO2 `Convergence` as dominant; ALGO3 has no robust factor effects |
 | Failure understanding | Need reasons behind failures, not only successes | Added `lcm analyze failures` | Imported raw outputs are overwhelmingly valid; the issue is variability, not parse failure |
 | Replication justification | Five repetitions not justified | Added `lcm analyze stability` | ALGO1 and ALGO2 are nearly repetition-stable; ALGO3 is not |
 | Plot-ready reporting | Need distributional and figure-ready outputs | Added `lcm analyze figures` | The imported corpus can now be plotted directly with preserved provenance |
@@ -296,7 +296,7 @@ The second is the organized bundle generator that produces the full reviewer-fac
 lcm analyze hypothesis-bundle
 ```
 
-Both apply the same core logic, described in detail below. Each row of the output corresponds to one hypothesis test — comparing two factor levels (e.g., Convergence = −1 vs. Convergence = 1) on one metric (e.g., accuracy) across all source files that have both levels. The columns produced for each test are:
+Both apply the same core logic, described in detail below. Each row of the output corresponds to one hypothesis test — comparing two factor levels (e.g., Convergence = −1 vs. Convergence = 1) on one metric (e.g., accuracy) across all source files that have both levels. Because every audited factor in this command has exactly two levels and uses within-source pairing, the repository now reports both the paired t-test and the mathematically equivalent repeated-measures ANOVA F-statistic for the same comparison. The columns produced for each test are:
 
 - `pair_count` — how many source files contributed data to this comparison; a higher number means more reliable results
 - `mean_low` / `mean_high` — the average metric value when the factor is set to its lower level (e.g., −1) or higher level (e.g., 1); these are the two numbers being compared
@@ -304,8 +304,10 @@ Both apply the same core logic, described in detail below. Each row of the outpu
 - `difference_ci95_low` / `difference_ci95_high` — the lower and upper ends of the 95% confidence interval around the mean difference; if this interval does not cross zero, the difference is considered reliable rather than noise
 - `effect_size_paired_d` — Cohen's d for paired samples. This expresses the size of the difference between the two factor levels in units of standard deviation, rather than in the original metric units. Because accuracy, precision, and recall are on different scales, Cohen's d lets you compare effect sizes across metrics and factors fairly. A d of 1.0 means the two levels differ by one full standard deviation; the interpretation scale is given below.
 - `t_statistic` / `p_value` — the raw paired t-test output. The t-statistic measures how many standard errors the observed mean difference is away from zero — larger values indicate a more extreme result. The p-value is the probability of observing a difference at least as large as the one found, if the true difference were actually zero. Smaller p-values mean stronger evidence against the null hypothesis. "Raw" here means before the multiple-comparison correction is applied, so raw p-values are optimistically biased.
+- `f_statistic`, `f_df_num`, `f_df_den` — the explicit ANOVA/F-style reporting surface requested by the reviewer. For these two-level within-source comparisons, the repeated-measures ANOVA test is equivalent to the paired t-test, so the code reports `F = t²` with numerator degrees of freedom `1` and denominator degrees of freedom `pair_count - 1`.
 - `p_value_adjusted` — the Benjamini-Hochberg corrected q-value. After running many tests, a raw p-value of 0.01 no longer means what it usually means — the multiple-testing burden has inflated the chance of a false positive. The BH q-value corrects for this by raising the threshold for significance in proportion to how many tests are in the family. The q-value can be interpreted as: "if I called this result significant, the expected proportion of false discoveries among all results I called significant is at most q." When comparing against 0.05, a q-value below 0.05 passes the adjusted threshold.
 - `correction_method` — always `benjamini-hochberg`, recording that the Benjamini-Hochberg procedure was the specific correction applied. This field is included for full auditability of the decision rule.
+- `test_family` — records that the exported F-statistic is the repeated-measures-ANOVA-equivalent view of the same paired two-level comparison.
 
 Code locations:
 
@@ -352,7 +354,7 @@ Each directory contains `paired_tests.csv` (full test results per source file ×
 
 Every source file in the corpus contains results at both levels of each two-level factor — for example, each source file was run once with Convergence = −1 and once with Convergence = 1, holding all other factors constant. This means each source file provides a natural paired comparison: the same underlying causal map processed at two factor levels.
 
-Treating these as independent observations would ignore this structure and inflate the error term, making tests artificially conservative. The paired t-test is the appropriate tool here because it uses each source file as its own control.
+Treating these as independent observations would ignore this structure and inflate the error term, making tests artificially conservative. The paired t-test is the appropriate tool here because it uses each source file as its own control. For a factor with exactly two levels, that same within-source comparison can also be written as a repeated-measures ANOVA with one numerator degree of freedom, which is why the repository now exposes both views. In this restricted two-level case, they are numerically equivalent: `F = t²`.
 
 #### The multiple-comparison problem
 

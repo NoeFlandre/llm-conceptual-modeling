@@ -64,9 +64,13 @@ def test_cli_analyze_hypothesis_writes_paired_factor_tests(tmp_path) -> None:
             "difference_ci95_high": [differences.mean() + difference_margin],
             "effect_size_paired_d": [effect_size_paired_d],
             "t_statistic": [expected_statistic],
+            "f_statistic": [expected_statistic**2],
+            "f_df_num": [1],
+            "f_df_den": [3],
             "p_value": [expected_p_value],
             "p_value_adjusted": [expected_p_value],
             "correction_method": ["benjamini-hochberg"],
+            "test_family": ["repeated-measures-anova-equivalent"],
         }
     )
 
@@ -148,3 +152,7 @@ def test_cli_analyze_hypothesis_combines_inputs_and_adjusts_p_values(tmp_path) -
     assert set(actual["source_input"]) == {str(first_input_path), str(second_input_path)}
     assert (actual["p_value_adjusted"] >= actual["p_value"]).all()
     assert (actual["correction_method"] == "benjamini-hochberg").all()
+    assert (actual["f_statistic"] == actual["t_statistic"] ** 2).all()
+    assert (actual["f_df_num"] == 1).all()
+    assert (actual["f_df_den"] == actual["pair_count"] - 1).all()
+    assert (actual["test_family"] == "repeated-measures-anova-equivalent").all()

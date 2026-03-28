@@ -35,6 +35,7 @@ def write_paired_factor_hypothesis_tests(
             high_values = pair_frame["value_high"]
             differences = high_values - low_values
             statistic, p_value = ttest_rel(high_values, low_values)
+            f_statistic = float(statistic**2)
             difference_sample_std = differences.std(ddof=1)
             difference_standard_error = difference_sample_std / (len(differences) ** 0.5)
             difference_margin = (
@@ -61,6 +62,9 @@ def write_paired_factor_hypothesis_tests(
                         "difference_ci95_high": [differences.mean() + difference_margin],
                         "effect_size_paired_d": [effect_size_paired_d],
                         "t_statistic": [statistic],
+                        "f_statistic": [f_statistic],
+                        "f_df_num": [1],
+                        "f_df_den": [len(pair_frame) - 1],
                         "p_value": [p_value],
                     }
                 )
@@ -69,6 +73,7 @@ def write_paired_factor_hypothesis_tests(
     output = pd.concat(frames, ignore_index=True)
     output["p_value_adjusted"] = _benjamini_hochberg(output["p_value"].tolist())
     output["correction_method"] = "benjamini-hochberg"
+    output["test_family"] = "repeated-measures-anova-equivalent"
     output.to_csv(output_csv_path, index=False)
 
 

@@ -24,7 +24,7 @@ Corpus: `data/results/` · Artifacts: `data/analysis_artifacts/revision_tracker/
 
 **What it means:** The paper needed to distinguish genuine factor effects from noise. With hundreds of simultaneous tests (5 factors × 3 metrics × 18 source files), some will appear significant by chance. Multiple-comparison correction is required to keep the false-discovery rate below 5%.
 
-**Implemented:** `lcm analyze hypothesis` and `lcm analyze hypothesis-bundle` with Benjamini-Hochberg FDR correction. For each factor, compares two levels (e.g., Convergence = −1 vs. Convergence = 1) on each metric. Reports raw p-values, BH-adjusted q-values, Cohen's d effect sizes, and 95% CIs around the mean difference.
+**Implemented:** `lcm analyze hypothesis` and `lcm analyze hypothesis-bundle` with paired tests, Benjamini-Hochberg FDR correction, and explicit ANOVA-equivalent F-statistics for the two-level within-subject factors already present in the design. For each factor, compares two levels (e.g., Convergence = −1 vs. Convergence = 1) on each metric. Reports raw p-values, BH-adjusted q-values, repeated-measures-ANOVA-equivalent `F = t²` values, Cohen's d effect sizes, and 95% CIs around the mean difference.
 
 **Finding:** Exhaustive 16-factor formal test confirms ALGO2 Convergence as dominant — high convergence reliably boosts all three metrics. ALGO3 has no robust factor effects: none of the tested factors produce a statistically significant difference after correction.
 
