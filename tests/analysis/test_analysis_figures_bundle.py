@@ -5,7 +5,9 @@ import pandas as pd
 from llm_conceptual_modeling.analysis.figures_bundle import write_figures_bundle
 
 
-def test_figures_bundle_distributional_summary_aggregates_all_files_per_model(tmp_path: Path) -> None:
+def test_figures_bundle_distributional_summary_aggregates_all_files_per_model(
+    tmp_path: Path,
+) -> None:
     """When a model has multiple evaluated source files, the distributional summary
     must be computed over ALL files for that model (not just the last one).
 

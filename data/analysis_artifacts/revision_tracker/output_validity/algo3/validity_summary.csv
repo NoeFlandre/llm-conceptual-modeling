@@ -1,7 +1,0 @@
-algorithm,model,total_rows,valid_count,empty_count,malformed_count,failure_count,failure_rate
-algo3,deepseek-chat-v3.1,240,240,0,0,0,0.0
-algo3,deepseek-v3-chat-0324,240,240,0,0,0,0.0
-algo3,gemini-2.0-flash-exp,240,240,0,0,0,0.0
-algo3,google-gemini-2.5-pro,240,240,0,0,0,0.0
-algo3,gpt-5,240,240,0,0,0,0.0
-algo3,openai-gpt-4o,240,240,0,0,0,0.0

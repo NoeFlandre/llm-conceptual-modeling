@@ -1,6 +1,18 @@
 import argparse
 from collections.abc import Sequence
 
+from llm_conceptual_modeling.paths import (
+    default_results_root,
+    default_revision_tracker_root,
+)
+
+BASELINE_STRATEGY_CHOICES = [
+    "direct-cross-graph",
+    "random-uniform-subset",
+    "wordnet-ontology-match",
+    "edit-distance",
+]
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="lcm")
@@ -39,7 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
     baseline_algo1_parser.add_argument(
         "--strategy",
         default="random-uniform-subset",
-        choices=["direct-cross-graph", "random-uniform-subset"],
+        choices=BASELINE_STRATEGY_CHOICES,
     )
 
     baseline_algo2_parser = baseline_subparsers.add_parser("algo2")
@@ -48,7 +60,7 @@ def build_parser() -> argparse.ArgumentParser:
     baseline_algo2_parser.add_argument(
         "--strategy",
         default="random-uniform-subset",
-        choices=["direct-cross-graph", "random-uniform-subset"],
+        choices=BASELINE_STRATEGY_CHOICES,
     )
 
     baseline_algo3_parser = baseline_subparsers.add_parser("algo3")
@@ -57,7 +69,7 @@ def build_parser() -> argparse.ArgumentParser:
     baseline_algo3_parser.add_argument(
         "--strategy",
         default="random-uniform-subset",
-        choices=["direct-cross-graph", "random-uniform-subset"],
+        choices=BASELINE_STRATEGY_CHOICES,
     )
 
     factorial_algo1_parser = factorial_subparsers.add_parser("algo1")
@@ -92,7 +104,7 @@ def build_parser() -> argparse.ArgumentParser:
     summary_parser.add_argument("--output", required=True)
 
     summary_bundle_parser = analyze_subparsers.add_parser("summary-bundle")
-    summary_bundle_parser.add_argument("--results-root", default="data/results")
+    summary_bundle_parser.add_argument("--results-root", default=default_results_root())
     summary_bundle_parser.add_argument("--output-dir", required=True)
 
     failures_parser = analyze_subparsers.add_parser("failures")
@@ -106,10 +118,16 @@ def build_parser() -> argparse.ArgumentParser:
     stability_parser.add_argument("--metric", action="append", required=True)
     stability_parser.add_argument("--output", required=True)
 
+    replication_budget_parser = analyze_subparsers.add_parser("replication-budget")
+    replication_budget_parser.add_argument("--input", action="append", required=True)
+    replication_budget_parser.add_argument("--output", required=True)
+    replication_budget_parser.add_argument("--relative-half-width-target", type=float, default=0.05)
+    replication_budget_parser.add_argument("--z-score", type=float, default=1.96)
+
     stability_bundle_parser = analyze_subparsers.add_parser("stability-bundle")
     stability_bundle_parser.add_argument(
         "--results-root",
-        default="data/analysis_artifacts/revision_tracker/replication_stability",
+        default=f"{default_revision_tracker_root()}/replication_stability",
     )
     stability_bundle_parser.add_argument("--output-dir", required=True)
 
@@ -121,11 +139,11 @@ def build_parser() -> argparse.ArgumentParser:
     hypothesis_parser.add_argument("--output", required=True)
 
     hypothesis_bundle_parser = analyze_subparsers.add_parser("hypothesis-bundle")
-    hypothesis_bundle_parser.add_argument("--results-root", default="data/results")
+    hypothesis_bundle_parser.add_argument("--results-root", default=default_results_root())
     hypothesis_bundle_parser.add_argument("--output-dir", required=True)
 
     output_validity_bundle_parser = analyze_subparsers.add_parser("output-validity-bundle")
-    output_validity_bundle_parser.add_argument("--results-root", default="data/results")
+    output_validity_bundle_parser.add_argument("--results-root", default=default_results_root())
     output_validity_bundle_parser.add_argument("--output-dir", required=True)
 
     figures_parser = analyze_subparsers.add_parser("figures")
@@ -137,7 +155,7 @@ def build_parser() -> argparse.ArgumentParser:
     figures_bundle_parser = analyze_subparsers.add_parser("figures-bundle")
     figures_bundle_parser.add_argument(
         "--results-root",
-        default="data/results",
+        default=default_results_root(),
     )
     figures_bundle_parser.add_argument("--output-dir", required=True)
 
@@ -156,14 +174,14 @@ def build_parser() -> argparse.ArgumentParser:
     variability_bundle_parser = analyze_subparsers.add_parser("variability-bundle")
     variability_bundle_parser.add_argument(
         "--results-root",
-        default="data/analysis_artifacts/revision_tracker/output_variability",
+        default=f"{default_revision_tracker_root()}/output_variability",
     )
     variability_bundle_parser.add_argument("--output-dir", required=True)
 
     baseline_bundle_parser = analyze_subparsers.add_parser("baseline-bundle")
     baseline_bundle_parser.add_argument(
         "--results-root",
-        default="data/results",
+        default=default_results_root(),
     )
     baseline_bundle_parser.add_argument("--output-dir", required=True)
 

@@ -1,9 +1,0 @@
-relative_path,description
-algorithm_output_variability_summary.csv,"Cross-algorithm variability summary: mean Jaccard, exact-match rate, edge counts, and breadth expansion ratio per algorithm."
-model_output_variability_summary.csv,Model-level variability summary grouped by algorithm and model.
-output_variability_extremes.csv,"Most extreme source files by Jaccard and breadth expansion ratio, per algorithm."
-algo1/condition_output_variability.csv,"Per-model, per-source-file variability metrics for ALGO1. Columns: model, source_input, mean_pairwise_jaccard, exact_match_pair_rate, mean_edge_count, sample_std_edge_count, breadth_expansion_ratio."
-algo2/condition_output_variability.csv,"Per-model, per-source-file variability metrics for ALGO2. Columns: model, source_input, mean_pairwise_jaccard, exact_match_pair_rate, mean_edge_count, sample_std_edge_count, breadth_expansion_ratio."
-algo3/condition_output_variability.csv,"Per-model, per-source-file variability metrics for ALGO3. Columns: model, source_input, mean_pairwise_jaccard, exact_match_pair_rate, mean_edge_count, sample_std_edge_count, breadth_expansion_ratio."
-algo3/by_depth.csv,"ALGO3 variability broken down by search Depth. Columns: Depth, mean_pairwise_jaccard, exact_match_pair_rate, mean_edge_count, breadth_expansion_ratio."
-algo3/by_word_count.csv,"ALGO3 variability broken down by word budget. Columns: Number of Words, mean_pairwise_jaccard, mean_edge_count."

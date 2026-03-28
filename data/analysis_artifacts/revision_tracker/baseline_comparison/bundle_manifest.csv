@@ -1,6 +1,0 @@
-file,description
-algo1_model_vs_baseline.csv,"ALGO1 per-model comparison against the random-k baseline (samples k edges from mother graph, k = LLM's edge count per row). Columns: algorithm, model, metric, llm_mean, baseline_mean, mean_delta."
-algo2_model_vs_baseline.csv,"ALGO2 per-model comparison against the random-k baseline (samples k edges from mother graph, k = LLM's edge count per row). Columns: algorithm, model, metric, llm_mean, baseline_mean, mean_delta."
-algo3_model_vs_baseline.csv,"ALGO3 per-model comparison against the random-k baseline (samples k edges from mother graph, k = LLM's edge count per row). Columns: algorithm, model, metric, llm_mean, baseline_mean, mean_delta."
-all_models_vs_baseline.csv,"All-model combined comparison across ALGO1/2/3. Columns: algorithm, model, metric, llm_mean, baseline_mean, mean_delta."
-baseline_advantage_summary.csv,"Cross-model summary: for each algorithm and metric, how many models beat the random-k baseline and by how much. Columns: algorithm, metric, model_count, models_beating_baseline, best_model, best_model_delta, worst_model, worst_model_delta, average_model_delta."

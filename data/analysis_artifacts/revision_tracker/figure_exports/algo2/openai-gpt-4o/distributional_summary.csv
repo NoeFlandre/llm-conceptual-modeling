@@ -1,4 +1,0 @@
-algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
-algo2,openai-gpt-4o,accuracy,960,0.62473,0.437211,0.597038,0.652422,0.903654,0.0,0.943975,0.0,0.954545
-algo2,openai-gpt-4o,precision,960,0.303491,0.377557,0.279577,0.327404,0.0,0.0,0.6,0.0,1.0
-algo2,openai-gpt-4o,recall,960,0.047603,0.070636,0.043129,0.052077,0.0,0.0,0.105263,0.0,0.326923

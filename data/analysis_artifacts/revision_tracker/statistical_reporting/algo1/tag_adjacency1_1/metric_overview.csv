@@ -1,4 +1,0 @@
-algorithm,factor,metric,source_file_count,level_low,level_high,global_mean_low,global_mean_high,global_mean_difference_high_minus_low,winner_count_low,winner_count_high,tie_count
-algo1,Tag/Adjacency(1/-1),accuracy,18,-1,1,0.9081953253464883,0.9129616870532568,0.004766361706768474,12,5,1
-algo1,Tag/Adjacency(1/-1),precision,18,-1,1,0.323045466739682,0.3062623160215793,-0.016783150718102713,11,7,0
-algo1,Tag/Adjacency(1/-1),recall,18,-1,1,0.10653334362634087,0.11268638206500597,0.006153038438665104,7,11,0

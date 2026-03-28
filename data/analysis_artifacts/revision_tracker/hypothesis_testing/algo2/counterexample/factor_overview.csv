@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo2,Counterexample,accuracy,18,9,0.5,-0.010411003724957204,0.17853934212636466,6,12,0,data/results/algo2/gemini-2.0-flash-exp/evaluated/metrics_sg2_sg3.csv,9.39811369444368e-07,-0.458516105505447
-algo2,Counterexample,precision,18,7,0.3888888888888889,-0.017834449288699157,0.16164354330116068,6,12,0,data/results/algo2/gemini-2.0-flash-exp/evaluated/metrics_sg2_sg3.csv,4.739135807108837e-06,-0.4252627867720592
-algo2,Counterexample,recall,18,7,0.3888888888888889,-0.006478012753798862,0.15468885725905218,7,11,0,data/results/algo2/openai-gpt-4o/evaluated/metrics_sg1_sg2.csv,6.249453319114591e-10,-0.578740708607441

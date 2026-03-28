@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo2,Convergence,accuracy,18,15,0.8333333333333334,0.03241782442363838,0.4271467300177858,5,13,0,data/results/algo2/openai-gpt-4o/evaluated/metrics_sg2_sg3.csv,7.230624568626234e-37,1.3741980670689806
-algo2,Convergence,precision,18,14,0.7777777777777778,-0.019432241607282304,0.3688239083130332,6,12,0,data/results/algo2/gemini-2.5-pro/evaluated/metrics_sg1_sg2.csv,5.618481271349024e-16,-0.7421030583476933
-algo2,Convergence,recall,18,15,0.8333333333333334,0.012216781462293266,0.378070454859209,13,5,0,data/results/algo2/deepseek-chat-v3-0324/evaluated/metrics_sg3_sg1.csv,2.088398593250412e-19,0.8566865348561532

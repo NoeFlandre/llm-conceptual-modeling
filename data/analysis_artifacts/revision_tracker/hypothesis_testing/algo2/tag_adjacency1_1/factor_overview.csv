@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo2,Tag/Adjacency(1/-1),accuracy,18,9,0.5,0.017837899342259784,0.21116266042634865,14,4,0,data/results/algo2/deepseek-chat-v3.1/evaluated/metrics_sg3_sg1.csv,1.0634028797580661e-08,0.5378339147647505
-algo2,Tag/Adjacency(1/-1),precision,18,7,0.3888888888888889,0.007956438964656263,0.1647480617141089,11,7,0,data/results/algo2/deepseek-chat-v3.1/evaluated/metrics_sg3_sg1.csv,1.8764268120784477e-07,0.4839877813495388
-algo2,Tag/Adjacency(1/-1),recall,18,7,0.3888888888888889,-0.0015446957177276,0.14130808116280946,9,9,0,data/results/algo2/deepseek-chat-v3-0324/evaluated/metrics_sg2_sg3.csv,3.889058472727464e-05,-0.3836639051306048

@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo1,Tag/Adjacency(1/-1),accuracy,18,10,0.5555555555555556,0.004766361706768715,0.2763765380282187,5,13,0,data/results/algo1/gemini-2.0-flash-exp/evaluated/metrics_sg1_sg2.csv,1.8653724110620744e-08,-0.8021692671228997
-algo1,Tag/Adjacency(1/-1),precision,18,12,0.6666666666666666,-0.01678315071810268,0.2948069758881544,7,11,0,data/results/algo1/gpt-5/evaluated/metrics_sg3_sg1.csv,2.9155894668487785e-08,-0.773264648617431
-algo1,Tag/Adjacency(1/-1),recall,18,13,0.7222222222222222,0.006153038438665112,0.32317355433965234,11,7,0,data/results/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv,1.5232854111056682e-06,-0.6600803790980523

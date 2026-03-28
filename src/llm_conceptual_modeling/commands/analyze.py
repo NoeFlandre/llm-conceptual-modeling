@@ -9,6 +9,7 @@ from llm_conceptual_modeling.analysis.figures_bundle import write_figures_bundle
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.hypothesis_bundle import write_hypothesis_testing_bundle
 from llm_conceptual_modeling.analysis.output_validity_bundle import write_output_validity_bundle
+from llm_conceptual_modeling.analysis.replication_budget import write_replication_budget_analysis
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.stability_bundle import write_stability_bundle
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
@@ -46,6 +47,14 @@ def handle_analyze(args: Namespace) -> int:
                 args.output,
                 group_by=args.group_by,
                 metrics=args.metric,
+            )
+            return 0
+        if args.analysis_target == "replication-budget":
+            write_replication_budget_analysis(
+                args.input,
+                args.output,
+                relative_half_width_target=args.relative_half_width_target,
+                z_score=args.z_score,
             )
             return 0
         if args.analysis_target == "stability-bundle":

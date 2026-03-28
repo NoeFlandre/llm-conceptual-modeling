@@ -1,2 +1,0 @@
-algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
-algo3,deepseek-chat-v3.1,Recall,240,0.057765,0.218119,0.030029,0.085501,0.0,0.0,0.0,0.0,1.0

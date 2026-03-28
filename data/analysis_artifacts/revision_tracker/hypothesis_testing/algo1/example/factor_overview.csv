@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo1,Example,accuracy,18,15,0.8333333333333334,-0.0022555811436625775,0.5118408344451834,15,3,0,data/results/algo1/gemini-2.5-pro/evaluated/metrics_sg3_sg1.csv,1.5583737960002248e-12,1.019214747390703
-algo1,Example,precision,18,9,0.5,0.031855612710719766,0.28602363562993555,15,3,0,data/results/algo1/gemini-2.5-pro/evaluated/metrics_sg3_sg1.csv,5.458070461516436e-09,0.7749473253591216
-algo1,Example,recall,18,13,0.7222222222222222,-0.027626229919104545,0.5321555065105295,2,16,0,data/results/algo1/gpt-5/evaluated/metrics_sg2_sg3.csv,2.438154241519376e-16,-1.2574398477701565

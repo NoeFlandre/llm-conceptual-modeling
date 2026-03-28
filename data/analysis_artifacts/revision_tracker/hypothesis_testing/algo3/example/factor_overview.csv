@@ -1,2 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo3,Example,Recall,6,0,0.0,0.010227272222222184,0.07042761969390161,4,1,1,data/results/algo3/openai-gpt-4o/evaluated/method3_results_evaluated_gpt4o.csv,0.1372924417640237,0.2104440506223952

@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from llm_conceptual_modeling.analysis.replication_budget import write_replication_budget_analysis
 from llm_conceptual_modeling.common.types import PathLike
 
 
@@ -109,6 +110,8 @@ def write_stability_bundle(
                 }
             )
 
+    replication_budget_overview_records: list[dict[str, object]] = []
+
     # --- per-algorithm subdirectories ---
     for algorithm_spec in _STABILITY_BUNDLE_SPECS:
         algorithm_output_dir = output_dir_path / algorithm_spec.algorithm
@@ -134,6 +137,53 @@ def write_stability_bundle(
                     ),
                 }
             )
+
+            replication_budget_path = algorithm_output_dir / "replication_budget_by_condition.csv"
+            write_replication_budget_analysis(
+                [source_condition],
+                replication_budget_path,
+            )
+            manifest_records.append(
+                {
+                    "algorithm": algorithm_spec.algorithm,
+                    "factor": "condition",
+                    "relative_path": (
+                        f"{algorithm_spec.algorithm}/replication_budget_by_condition.csv"
+                    ),
+                    "description": (
+                        f"Per-condition replication budget for {algorithm_spec.algorithm.upper()} "
+                        "using a 95% CI z-score of 1.96 and a 5% relative half-width target. "
+                        "Key columns: required_total_runs, additional_runs_needed."
+                    ),
+                }
+            )
+            budget_frame = pd.read_csv(replication_budget_path)
+            for _, row in (
+                budget_frame.groupby("metric", dropna=False)
+                .agg(
+                    condition_count=("metric", "size"),
+                    max_required_total_runs=("required_total_runs", "max"),
+                    max_additional_runs_needed=("additional_runs_needed", "max"),
+                    mean_required_total_runs=("required_total_runs", "mean"),
+                    conditions_needing_more_runs=(
+                        "additional_runs_needed",
+                        lambda series: int((series > 0).sum()),
+                    ),
+                )
+                .reset_index()
+                .iterrows()
+            ):
+                replication_budget_overview_records.append(
+                    {
+                        "algorithm": algorithm_spec.algorithm,
+                        "metric": row["metric"],
+                        "condition_count": int(row["condition_count"]),
+                        "max_required_total_runs": int(row["max_required_total_runs"]),
+                        "max_additional_runs_needed": int(row["max_additional_runs_needed"]),
+                        "mean_required_total_runs": float(row["mean_required_total_runs"]),
+                        "conditions_needing_more_runs": int(row["conditions_needing_more_runs"]),
+                    }
+                )
 
         # Level-specific stability and variability-incidence files
         for level_factor in algorithm_spec.level_factors:
@@ -194,6 +244,27 @@ def write_stability_bundle(
             output_dir_path / "bundle_overview.csv",
             index=False,
         )
+    if replication_budget_overview_records:
+        pd.DataFrame.from_records(replication_budget_overview_records).to_csv(
+            output_dir_path / "replication_budget_overview.csv",
+            index=False,
+        )
+        manifest_records.append(
+            {
+                "algorithm": "cross_algorithm",
+                "factor": "overall",
+                "relative_path": "replication_budget_overview.csv",
+                "description": (
+                    "Conservative required-run summary by algorithm and metric under the "
+                    "95% CI precision calculation. Key columns: max_required_total_runs, "
+                    "max_additional_runs_needed, conditions_needing_more_runs."
+                ),
+            }
+        )
+        pd.DataFrame.from_records(manifest_records).to_csv(
+            output_dir_path / "bundle_manifest.csv",
+            index=False,
+        )
     _write_bundle_readme(output_dir_path)
 
 
@@ -206,9 +277,11 @@ This directory contains the organized artifacts for the replication-stability re
 
 The reviewer asked for a principled justification of the five-replication decision. This bundle
 captures repetition-level stability analysis over the five recorded runs in the imported corpus.
-Rather than a formal power analysis, this bundle shows how much the evaluated metrics actually
-moved across repetitions — confirming that five runs are enough to reveal which methods are
-stable and which are not.
+It now also adds a conservative confidence-interval run calculation using
+
+  n = ((1.96 * s) / (r * |x_bar|))^2
+
+with a 95% CI (`1.96`) and a 5% relative half-width target (`r = 0.05`).
 
 ## Layout
 
@@ -220,8 +293,12 @@ stable and which are not.
   Cross-algorithm count and share of conditions that changed across repetitions.
 - `overall_metric_stability_by_algorithm.csv`
   Coefficient-of-variation and range-width summaries by algorithm and metric.
+- `replication_budget_overview.csv`
+  Conservative required-run summary by algorithm and metric under the CI precision rule.
 - `<algorithm>/condition_stability.csv`
   Per-file, per-condition stability statistics across the five repetitions.
+- `<algorithm>/replication_budget_by_condition.csv`
+  Per-condition required total runs and additional runs needed under the CI precision rule.
 - `<algorithm>/<factor>_stability_by_level.csv`
   Aggregated stability summaries grouped by a specific factor level.
 - `<algorithm>/<factor>_variability_incidence.csv`
@@ -233,6 +310,8 @@ stable and which are not.
 - **ALGO2 is especially stable when Convergence = 1**: zero varying conditions.
 - **ALGO3 is orders of magnitude noisier**: median CV on recall is 3.87, meaning noise is
   nearly 4 times the signal size — not a small or marginal difference.
+- **The CI-based run budget is conservative**: low-variance conditions can be justified with the
+  existing runs, while low-mean high-variance conditions can demand many more.
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")
 

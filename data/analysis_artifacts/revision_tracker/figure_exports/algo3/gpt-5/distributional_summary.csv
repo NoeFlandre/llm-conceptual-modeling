@@ -1,2 +1,0 @@
-algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
-algo3,gpt-5,Recall,240,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

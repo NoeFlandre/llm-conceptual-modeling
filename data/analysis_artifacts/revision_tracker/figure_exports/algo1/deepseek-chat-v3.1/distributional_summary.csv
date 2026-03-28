@@ -1,4 +1,0 @@
-algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
-algo1,deepseek-chat-v3.1,accuracy,480,0.918102,0.018805,0.916416,0.919789,0.918831,0.900332,0.938689,0.87987,0.947146
-algo1,deepseek-chat-v3.1,precision,480,0.284698,0.161104,0.270249,0.299146,0.272727,0.166667,0.35,0.0,1.0
-algo1,deepseek-chat-v3.1,recall,480,0.069137,0.047903,0.064841,0.073433,0.052632,0.038462,0.101695,0.0,0.263158

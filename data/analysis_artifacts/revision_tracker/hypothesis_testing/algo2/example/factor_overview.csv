@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo2,Example,accuracy,18,10,0.5555555555555556,-0.04685963664888081,0.3435688989205532,6,12,0,data/results/algo2/openai-gpt-4o/evaluated/metrics_sg3_sg1.csv,1.6617359472279538e-35,-1.3331734316301402
-algo2,Example,precision,18,11,0.6111111111111112,-0.021120181963917076,0.359743257125407,7,11,0,data/results/algo2/deepseek-chat-v3-0324/evaluated/metrics_sg2_sg3.csv,6.372949333782286e-30,-1.159597806051103
-algo2,Example,recall,18,10,0.5555555555555556,-0.008279706048857466,0.2654042396349719,7,11,0,data/results/algo2/openai-gpt-4o/evaluated/metrics_sg1_sg2.csv,9.921075688098873e-19,-0.8318852880837121

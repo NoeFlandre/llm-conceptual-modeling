@@ -1,2 +1,0 @@
-algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
-algo3,gemini-2.0-flash-exp,Recall,240,0.056629,0.180014,0.033738,0.079519,0.0,0.0,0.0,0.0,1.0

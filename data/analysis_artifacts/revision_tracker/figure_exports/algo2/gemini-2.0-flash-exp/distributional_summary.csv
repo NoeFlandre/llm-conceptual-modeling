@@ -1,4 +1,0 @@
-algorithm,model,metric,n,mean,sample_std,ci95_low,ci95_high,median,q1,q3,min,max
-algo2,gemini-2.0-flash-exp,accuracy,960,0.881851,0.196494,0.869405,0.894296,0.935065,0.901993,0.940803,0.0,0.946089
-algo2,gemini-2.0-flash-exp,precision,960,0.292577,0.233594,0.277782,0.307373,0.375,0.0,0.5,0.0,1.0
-algo2,gemini-2.0-flash-exp,recall,960,0.055183,0.065619,0.051027,0.05934,0.033898,0.0,0.067797,0.0,0.263158

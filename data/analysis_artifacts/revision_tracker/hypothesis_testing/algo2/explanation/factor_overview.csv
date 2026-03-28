@@ -1,4 +1,0 @@
-algorithm,factor,metric,test_count,significant_test_count,significant_share,mean_difference_average,mean_absolute_effect_size,positive_direction_count,negative_direction_count,null_direction_count,strongest_source_input,strongest_adjusted_p_value,strongest_effect_size_paired_d
-algo2,Explanation,accuracy,18,6,0.3333333333333333,0.00022216559280513904,0.15687401777427012,9,9,0,data/results/algo2/gemini-2.5-pro/evaluated/metrics_sg2_sg3.csv,1.5582011650830605e-12,-0.6613117286966642
-algo2,Explanation,precision,18,6,0.3333333333333333,-0.005516701363698078,0.1687662612751343,9,9,0,data/results/algo2/gemini-2.5-pro/evaluated/metrics_sg2_sg3.csv,1.6060051622885056e-08,-0.5214529581259899
-algo2,Explanation,recall,18,9,0.5,-0.002841567024634606,0.18562942361515578,9,9,0,data/results/algo2/deepseek-chat-v3-0324/evaluated/metrics_sg2_sg3.csv,6.494908115972867e-05,0.3702566346133024

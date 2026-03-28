@@ -48,9 +48,9 @@ Corpus: `data/results/` · Artifacts: `data/analysis_artifacts/revision_tracker/
 
 **What it means:** Five repetitions needed justification: are five runs enough to characterize run-to-run variability, or do metrics keep drifting with more runs?
 
-**Implemented:** `lcm analyze stability`. Computes per-condition mean, standard deviation, min/max, range width, and coefficient of variation across the five recorded repetitions.
+**Implemented:** `lcm analyze stability`, `lcm analyze replication-budget`, and the updated `lcm analyze stability-bundle`. The new run-budget analysis applies the supervisor's 95% CI precision formula `n = ((1.96 * s) / (r * |x_bar|))^2` with a 5% relative half-width target, then reports the conservative additional runs needed per metric and condition.
 
-**Finding:** ALGO1 and ALGO2 are nearly repetition-stable — coefficient of variation is very low across all metrics. ALGO3 is not: its metrics drift noticeably across repetitions, especially recall. Five repetitions are sufficient to expose ALGO3's instability; they are more than sufficient to confirm ALGO1/2 stability.
+**Finding:** The answer is metric- and algorithm-dependent. ALGO1 and ALGO2 accuracy already satisfy the precision target with the existing runs. A small number of low-mean precision/recall conditions in ALGO1 and ALGO2 need more. ALGO3 recall does not: under this conservative target, 44 of 96 ALGO3 conditions still need more runs, and the worst-case required total reaches 23,050 because the observed recall mean is near zero while variability remains substantial.
 
 ---
 
@@ -84,17 +84,9 @@ Corpus: `data/results/` · Artifacts: `data/analysis_artifacts/revision_tracker/
 
 **What it means:** The paper needed a fair reference point: does an LLM do better than a minimal reasonable strategy when both are allowed the same number of guesses?
 
-**Implemented:** `lcm analyze baseline-bundle`. The random-k baseline: for each LLM output row, sample exactly k edges uniformly from the mother graph (k = LLM edge count per row, seed=42). No subgraph structure used. Both LLM and baseline evaluated against ground-truth cross edges.
+**Implemented:** `lcm baseline` plus `lcm analyze baseline-bundle`. The bundle now compares three deterministic non-LLM strategies: `random-k`, `wordnet-ontology-match`, and `edit-distance`.
 
-**Finding:**
-
-| | ALGO1 | ALGO2 | ALGO3 |
-|---|---|---|---|
-| Precision | LLM wins (6/6 models, avg +0.27) | LLM wins (6/6 models, avg +0.30) | LLM loses (0/6 models, avg −0.05) |
-| Recall | LLM wins (6/6 models, avg +0.01) | LLM wins (6/6 models, avg +0.02) | LLM loses (0/6 models, avg −0.01) |
-| Accuracy | LLM wins (6/6 models, avg +0.01) | LLM wins (6/6 models, avg +0.02) | LLM loses (0/6 models, avg −0.00) |
-
-ALGO1/2: LLM is 6–8x more precise than random (26–40% vs 4–5%). The LLM has a genuine signal about which node pairs are connected — not just random guessing. ALGO3: the LLM loses to random on all metrics. ALGO3's noisy, inconsistent edge selection offers no advantage over picking edges at random.
+**Finding:** Against `random-k`, ALGO1 and ALGO2 beat the baseline on all metrics, while ALGO3 loses on all metrics. Against `wordnet-ontology-match` and `edit-distance`, no imported model beats the baseline on any audited metric for any algorithm. In this corpus, the WordNet and edit-distance baselines produce identical aggregate comparison numbers.
 
 ---
 
@@ -113,5 +105,6 @@ ALGO1/2: LLM is 6–8x more precise than random (26–40% vs 4–5%). The LLM ha
 1. Variability is not uniform: ALGO1 is very stable, ALGO2 is very stable, ALGO3 is the main source of instability.
 2. Imported raw outputs almost never fail at the parser level. The issue is variability, not parse failure.
 3. ALGO3's instability is genuine: repeated runs produce substantially different edge sets (low Jaccard, high breadth expansion).
-4. ALGO1/2 beat random guessing by a large margin on precision (6–8x). The LLM is not just proposing edges at random — it has real signal.
-5. ALGO3 adds no value over random guessing in this corpus.
+4. ALGO1/2 beat random guessing by a large margin on precision, so they are not merely proposing arbitrary edges.
+5. None of the imported models beats the stronger WordNet-based or edit-distance baselines in this corpus.
+6. ALGO3 adds no value even over the weak random reference.

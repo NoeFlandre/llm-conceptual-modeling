@@ -41,7 +41,7 @@ The revision work substantially strengthened the repository's reviewer-facing ev
 - It added replication-stability analysis across the five recorded repetitions.
 - It added plot-ready long-format exports with preserved provenance.
 - It added a new raw-output variability analysis that directly quantifies edge-set drift.
-- It added a non-LLM random-k baseline and comparison bundle.
+- It added a non-LLM baseline bundle that now covers the random-k reference plus the reviewer-requested WordNet and edit-distance baselines.
 
 The main empirical message sharpened by the revision work is that variability is not uniform across methods.
 
@@ -63,7 +63,7 @@ The strongest new reviewer-facing conclusion is therefore not just "LLMs are var
 | Replication justification | Five repetitions not justified | Added `lcm analyze stability` | ALGO1 and ALGO2 are nearly repetition-stable; ALGO3 is not |
 | Plot-ready reporting | Need distributional and figure-ready outputs | Added `lcm analyze figures` | The imported corpus can now be plotted directly with preserved provenance |
 | Internal variability explanation | Randomness shown, but mechanism unclear | Added `lcm analyze variability` | ALGO3 shows strong edge-set drift and breadth expansion across repetitions |
-| Non-LLM comparator | Need at least one baseline | Added `lcm analyze baseline-bundle` | ALGO1/2 beat the random-k baseline on all metrics; ALGO3 loses to it on all metrics |
+| Non-LLM comparator | Need at least one baseline | Added `lcm baseline` strategies and `lcm analyze baseline-bundle` | ALGO1/2 beat the random-k baseline, but no imported model beats the stronger WordNet or edit-distance baselines; ALGO3 loses to all three |
 | Cross-domain reinforcement | Need at least one additional domain | Deferred | No new domain data was added in this software tranche |
 
 ## 1. Statistical Reporting And Confidence Intervals
@@ -572,11 +572,20 @@ The quartile data reveals the severity of the skew. For ALGO2 GPT-4o: q1 = 9, q2
 
 The key question was whether five repetitions are enough to characterize run-to-run variability.
 
-The strongest software-side answer available from existing data is to measure how much the evaluated metrics actually move across the five recorded repetitions.
+The strongest software-side answer available from the existing corpus is two-part:
+
+1. measure how much the evaluated metrics actually move across the five recorded repetitions, and
+2. convert those observed means and standard deviations into a conservative required-run calculation using the requested confidence-interval logic.
 
 ### What Was Implemented
 
-The revision added `lcm analyze stability`, which computes repetition-level stability summaries over evaluated files.
+The revision now provides both pieces:
+
+- `lcm analyze stability`
+- `lcm analyze replication-budget`
+- the updated `lcm analyze stability-bundle`
+
+`lcm analyze stability` computes repetition-level stability summaries over evaluated files.
 
 The exported stability fields are computed over the five recorded repetitions for each unique experimental condition (holding model, subgraph pair, and all prompt factors constant):
 
@@ -587,6 +596,26 @@ The exported stability fields are computed over the five recorded repetitions fo
 - `max` — largest metric value observed across repetitions
 - `range_width` — max minus min; the total spread of observed values; smaller means more stable
 - `coefficient_of_variation` — the standard deviation divided by the absolute mean (|mean|); this is a scale-free stability measure, so a CV of 0.01 means the noise is about 1% of the signal, making it comparable across metrics and conditions of very different magnitudes
+
+`lcm analyze replication-budget` then applies the supervisor's precision-based rule to those observed summaries:
+
+`n = ((1.96 * s) / (r * |x_bar|))^2`
+
+with:
+
+- `1.96` for a 95% confidence interval,
+- `s` equal to the observed sample standard deviation from the existing runs,
+- `r = 0.05` for a 5% relative half-width target,
+- and `|x_bar|` equal to the absolute observed mean.
+
+The output records:
+
+- `precision_margin` = `r * |x_bar|`
+- `required_total_runs`
+- `additional_runs_needed`
+- `requirement_status`
+
+This is conservative because the paper must continue collecting runs until every audited metric-condition row meets the target.
 
 ### Commands Used
 
@@ -604,6 +633,16 @@ lcm analyze stability \
   --group-by model Recall Depth Number\ of\ Words Example Counter-Example Source\ Subgraph\ Name Target\ Subgraph\ Name \
   --value-column Recall \
   --output data/analysis_artifacts/revision_tracker/replication_stability/algo3_condition_stability.csv
+
+lcm analyze replication-budget \
+  --input data/analysis_artifacts/revision_tracker/replication_stability/algo1_condition_stability.csv \
+  --input data/analysis_artifacts/revision_tracker/replication_stability/algo2_condition_stability.csv \
+  --input data/analysis_artifacts/revision_tracker/replication_stability/algo3_condition_stability.csv \
+  --output /tmp/replication_budget.csv
+
+lcm analyze stability-bundle \
+  --results-root data/analysis_artifacts/revision_tracker/replication_stability \
+  --output-dir data/analysis_artifacts/revision_tracker/replication_stability
 ```
 
 ### Most Informative Output
@@ -639,6 +678,18 @@ Level-specific stability:
 | ALGO3 `Depth=1` | `0.354167` |
 | ALGO3 `Depth=2` | `0.562500` |
 
+Conservative run-budget overview under the 95% CI and 5% relative half-width rule:
+
+| Algorithm | Metric | Conditions needing more runs | Max required total runs | Max additional runs needed |
+| --- | --- | --- | --- | --- |
+| ALGO1 | Accuracy | `0 / 576` | `5` | `0` |
+| ALGO1 | Precision | `3 / 576` | `564` | `559` |
+| ALGO1 | Recall | `2 / 576` | `481` | `476` |
+| ALGO2 | Accuracy | `0 / 1152` | `5` | `0` |
+| ALGO2 | Precision | `1 / 1152` | `69` | `64` |
+| ALGO2 | Recall | `1 / 1152` | `48` | `43` |
+| ALGO3 | Recall | `44 / 96` | `23050` | `23035` |
+
 ### Detailed Findings
 
 The most important result is the separation between ALGO1/ALGO2 and ALGO3.
@@ -646,6 +697,7 @@ The most important result is the separation between ALGO1/ALGO2 and ALGO3.
 - ALGO1 and ALGO2 are almost completely stable on evaluated metrics across the five recorded repetitions.
 - ALGO2 is especially stable when `Convergence=1`: no varying conditions at all in the audited incidence table.
 - ALGO3 is not merely a little noisier; it is orders of magnitude noisier on evaluated recall.
+- The CI-based run budget sharpens that conclusion: for accuracy, ALGO1 and ALGO2 already meet the precision target with five runs, but ALGO3 recall does not come close.
 
 The CV table is particularly informative.
 
@@ -654,11 +706,24 @@ The CV table is particularly informative.
 
 This means that the typical ALGO3 condition varies at a scale far larger than what is seen in ALGO1 or ALGO2.
 
+The precision calculation makes the reviewer-facing implication explicit rather than implicit:
+
+- **ALGO1 accuracy and ALGO2 accuracy are already justified by the existing runs** under the chosen CI target.
+- **A few ALGO1 and ALGO2 precision/recall rows remain underpowered by this conservative rule** because their means are small enough that even modest absolute variation becomes large on a relative scale.
+- **ALGO3 recall is fundamentally incompatible with a tight 5% relative half-width target** in the current corpus. The required totals become extremely large because the observed recall means are close to zero while the observed variation is still substantial.
+
 ### Interpretation
 
-This revision item does not provide a formal power analysis. It does something more concrete for the existing corpus:
+This revision item still does not provide a prospective power analysis. It now does the next-best thing that can be audited from the existing corpus:
 
-it shows that five repetitions are enough to reveal that ALGO1 and ALGO2 are already essentially stable, while ALGO3 is not.
+- retrospective stability analysis over the five recorded repetitions, and
+- a conservative confidence-interval run calculation based on the observed means and standard deviations.
+
+That lets the paper say something more precise than "five seemed reasonable":
+
+- five runs are already enough for the stable accuracy surfaces in ALGO1 and ALGO2,
+- a handful of low-mean ALGO1/2 precision-recall conditions would require more if the paper insists on a 5% relative CI target,
+- and ALGO3 recall is unstable enough that the same target implies a very large additional-run demand.
 
 ## 5. Figure-Ready Exports
 
@@ -868,11 +933,19 @@ The reviewer wanted a non-LLM comparator so that the paper's LLM-based methods c
 
 The revision added:
 
+- `lcm baseline`
 - `lcm analyze baseline-bundle`
 
-The baseline is the **random-k** strategy: for each LLM output row, the baseline samples exactly k edges uniformly at random from the mother graph (where k equals the number of edges the LLM proposed in that row). No information about which edges are cross-subgraph is used. Both the LLM and the baseline are evaluated against the ground-truth cross edges, giving a fair, volume-matched comparison.
+The bundle now compares three deterministic non-LLM strategies:
 
-This answers: when both methods are allowed the same number of guesses, does the LLM find more true cross edges than random selection?
+- `random-k`
+  For each model output row, sample exactly `k` candidate edges uniformly from the mother graph, where `k` equals the number of edges proposed in that row.
+- `wordnet-ontology-match`
+  Rank cross-subgraph node pairs by overlap in a tracked WordNet-derived lexical resource and take the top `k`.
+- `edit-distance`
+  Rank cross-subgraph node pairs by normalized label similarity and take the top `k`.
+
+All three strategies are volume-matched to the model output they are compared against and evaluated against the same ground-truth cross edges.
 
 ### Commands Used
 
@@ -884,39 +957,58 @@ lcm analyze baseline-bundle \
 
 ### Most Informative Output
 
-Baseline advantage summary (positive delta = LLM beats baseline):
+Baseline advantage summary (positive delta = model beats baseline):
 
-| Algorithm | Metric | Models beating baseline | Best model delta | Worst model delta | Average delta |
-| --- | --- | --- | --- | --- | --- |
-| ALGO1 | Accuracy | `6 of 6` | `+0.0143` | `+0.0042` | `+0.0068` |
-| ALGO1 | Precision | `6 of 6` | `+0.3463` | `+0.2120` | `+0.2658` |
-| ALGO1 | Recall | `6 of 6` | `+0.0140` | `+0.0042` | `+0.0067` |
-| ALGO2 | Accuracy | `6 of 6` | `+0.0288` | `+0.0131` | `+0.0214` |
-| ALGO2 | Precision | `6 of 6` | `+0.3526` | `+0.2586` | `+0.3000` |
-| ALGO2 | Recall | `6 of 6` | `+0.0277` | `+0.0108` | `+0.0186` |
-| ALGO3 | Accuracy | `0 of 6` | `−0.0022` | `−0.0048` | `−0.0042` |
-| ALGO3 | Precision | `0 of 6` | `−0.0393` | `−0.0538` | `−0.0457` |
-| ALGO3 | Recall | `0 of 6` | `−0.0022` | `−0.0076` | `−0.0053` |
+Against `random-k`:
+
+| Algorithm | Metric | Models beating baseline | Average delta |
+| --- | --- | --- | --- |
+| ALGO1 | Accuracy | `6 of 6` | `+0.0070` |
+| ALGO1 | Precision | `6 of 6` | `+0.3009` |
+| ALGO1 | Recall | `6 of 6` | `+0.0069` |
+| ALGO2 | Accuracy | `6 of 6` | `+0.0209` |
+| ALGO2 | Precision | `6 of 6` | `+0.3026` |
+| ALGO2 | Recall | `6 of 6` | `+0.0182` |
+| ALGO3 | Accuracy | `0 of 6` | `-0.0050` |
+| ALGO3 | Precision | `0 of 6` | `-0.0372` |
+| ALGO3 | Recall | `0 of 6` | `-0.0058` |
+
+Against `wordnet-ontology-match`:
+
+| Algorithm | Metric | Models beating baseline | Average delta |
+| --- | --- | --- | --- |
+| ALGO1 | Accuracy | `0 of 6` | `-0.0197` |
+| ALGO1 | Precision | `0 of 6` | `-0.6866` |
+| ALGO1 | Recall | `0 of 6` | `-0.0194` |
+| ALGO2 | Accuracy | `0 of 6` | `-0.0570` |
+| ALGO2 | Precision | `0 of 6` | `-0.6588` |
+| ALGO2 | Recall | `0 of 6` | `-0.0556` |
+| ALGO3 | Accuracy | `0 of 6` | `-0.1047` |
+| ALGO3 | Precision | `0 of 6` | `-0.9971` |
+| ALGO3 | Recall | `0 of 6` | `-0.1047` |
+
+The `edit-distance` baseline produces the same aggregate numbers as `wordnet-ontology-match` in this corpus.
 
 ### Detailed Findings
 
-**ALGO1 and ALGO2: LLM beats the baseline on all metrics.** Every model outperforms random guessing on precision, recall, and accuracy. The precision advantage is the largest: the LLM achieves 26–40% precision while random guessing achieves only 4–5%, a 6–8x improvement.
+**ALGO1 and ALGO2 beat only the weak random reference.** Every model outperforms `random-k` on precision, recall, and accuracy. The precision advantage is the largest: the model outputs are roughly 0.30 precision points above the random baseline on average.
 
 To make this concrete for ALGO1 GPT-4o on the sg1_sg2 pair: the LLM proposes ~19 edges, of which ~5 are correct cross edges (precision ≈ 0.26). Random guessing samples 19 edges from the 176-edge mother graph — only about 1 is a cross edge (precision ≈ 0.05). The LLM is 5x more precise than random.
 
-**ALGO3: the LLM loses to random guessing on all metrics.** Every ALGO3 model loses to the baseline on accuracy, precision, and recall. The baseline's random 20-edge sample from the mother graph happens to include a higher fraction of correct cross edges than ALGO3's outputs — confirming that ALGO3's edge selection is not meaningfully better than random.
+**The stronger lexical baselines beat every imported model.** Neither the WordNet-based baseline nor the edit-distance baseline is beaten by any imported model on any audited metric for ALGO1, ALGO2, or ALGO3.
+
+**ALGO3 loses even to random guessing.** Every ALGO3 model loses to `random-k` on accuracy, precision, and recall, confirming that ALGO3's edge selection is not meaningfully better than random in this corpus.
 
 This is consistent with Section 6: ALGO3 is noisy and inconsistent, finding different edges on every run. When compared against random guessing, the LLM's approach shows no advantage.
 
 ### Interpretation
 
-The result divides clearly by algorithm:
+The result divides into two claims:
 
-- **ALGO1 and ALGO2**: the LLM is substantially more precise than random guessing (6–8x improvement). The LLM's higher precision means it finds relatively more correct edges among its proposals, even when both methods are allowed the same number of guesses. This is the core value proposition: the LLM is not just proposing edges randomly — it has a meaningful signal about which node pairs are connected.
+- **Against a weak non-LLM floor**, ALGO1 and ALGO2 are clearly better than random guessing, while ALGO3 is not.
+- **Against stronger lexical heuristics**, none of the imported models wins in this corpus.
 
-- **ALGO3**: the LLM is less precise than random guessing. The ALGO3 method does not add value over random selection in this corpus. This is consistent with the variability finding: ALGO3's output drift means each run finds different edges, and none of those sets meaningfully concentrates on the true cross edges.
-
-The comparison framework is fair because it matches the number of guesses: the LLM proposes k edges and the baseline proposes k edges. The LLM's advantage on ALGO1/2 cannot be attributed to proposing more edges — both methods proposed the same number.
+The comparison framework remains fair because each baseline is volume-matched to the model output. The observed equality between the WordNet and edit-distance aggregates should be treated as a corpus-specific result, not a universal claim about those methods.
 
 ## 8. Cross-Domain Generalization
 
@@ -959,7 +1051,7 @@ Taken together, the implemented revision work supports six concrete conclusions.
 3. The imported raw outputs fail almost never at the parser-visible level.
 4. ALGO1 and ALGO2 are close to repetition-stable under the audited design.
 5. ALGO3 is the main source of instability, both on evaluated recall and on raw edge-set overlap.
-6. The random-k baseline (samples k edges from mother graph, k = LLM edge count) is beaten by ALGO1/2 on all metrics (LLM is 6–8x more precise than random), but ALGO3 loses to it on all metrics (ALGO3 is not meaningfully better than random).
+6. The baseline evidence is now more specific: ALGO1/2 beat the weak random-k reference on all metrics, but none of the imported models beats the reviewer-requested WordNet or edit-distance baselines; ALGO3 loses to all three.
 
 ## Recommended Companion Files
 
