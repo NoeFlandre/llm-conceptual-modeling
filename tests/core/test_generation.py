@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from llm_conceptual_modeling.cli import main
 
@@ -134,3 +135,87 @@ def test_cli_generate_algo2_hf_transformers_includes_local_runtime_contract(caps
     assert payload["embedding_models"] == ["Qwen/Qwen3-Embedding-8B"]
     assert payload["supported_decoding_algorithms"] == ["greedy", "beam", "contrastive"]
     assert method_contract["embedding_model"] == "Qwen/Qwen3-Embedding-8B"
+
+
+def test_cli_generate_hf_transformers_reads_source_of_truth_config(
+    capsys,
+    tmp_path: Path,
+) -> None:
+    config_path = tmp_path / "run.yaml"
+    config_path.write_text(
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 3
+runtime:
+  seed: 17
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    Qwen/Qwen3.5-9B: disabled
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    edge_list: 256
+models:
+  chat_models:
+    - Qwen/Qwen3.5-9B
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  greedy:
+    enabled: true
+  beam:
+    enabled: true
+    num_beams: [2]
+inputs:
+  graph_source: default
+shared_fragments: {}
+algorithms:
+  algo1:
+    base_fragments: []
+    factors: {}
+    fragment_definitions: {}
+    prompt_templates:
+      body: "Task body."
+""",
+        encoding="utf-8",
+    )
+
+    exit_code = main(
+        [
+            "generate",
+            "algo1",
+            "--provider",
+            "hf-transformers",
+            "--config",
+            str(config_path),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+
+    assert exit_code == 0
+    assert payload["chat_models"] == ["Qwen/Qwen3.5-9B"]
+    assert payload["embedding_models"] == ["Qwen/Qwen3-Embedding-8B"]
+    assert payload["replications"] == 3
+    assert payload["seed"] == 17
+    assert payload["decoding_conditions"] == [
+        {
+            "algorithm": "greedy",
+            "num_beams": None,
+            "penalty_alpha": None,
+            "top_k": None,
+            "temperature": 0.0,
+        },
+        {
+            "algorithm": "beam",
+            "num_beams": 2,
+            "penalty_alpha": None,
+            "top_k": None,
+            "temperature": 0.0,
+        },
+    ]

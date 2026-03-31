@@ -98,6 +98,7 @@ def build_parser() -> argparse.ArgumentParser:
         generate_algorithm_parser = generate_subparsers.add_parser(algorithm)
         generate_algorithm_parser.add_argument("--fixture-only", action="store_true")
         generate_algorithm_parser.add_argument("--provider", default="mistral")
+        generate_algorithm_parser.add_argument("--config")
         generate_algorithm_parser.add_argument("--json", action="store_true")
 
     summary_parser = analyze_subparsers.add_parser("summary")

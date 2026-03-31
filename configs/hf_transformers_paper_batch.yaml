@@ -8,6 +8,10 @@ runtime:
   temperature: 0.0
   quantization: none
   device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+    Qwen/Qwen3.5-9B: disabled
+    allenai/Olmo-3-7B-Instruct: acknowledged-unsupported
   context_policy:
     prompt_truncation: forbid
     safety_margin_tokens: 64

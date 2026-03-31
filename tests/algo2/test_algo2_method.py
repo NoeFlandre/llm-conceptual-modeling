@@ -69,3 +69,43 @@ def test_execute_method2_runs_expansion_then_normalizes_suggested_edges() -> Non
     assert edge_calls == [
         ["alpha", "beta", "bridge_a", "bridge_b", "bridge_c"],
     ]
+
+
+def test_execute_method2_verifies_final_edges_after_normalization() -> None:
+    thesaurus = load_algo2_thesaurus()
+    embedding_client: EmbeddingClient = FakeEmbeddingClient()
+    verification_calls: list[list[tuple[str, str]]] = []
+
+    def propose_labels(current_labels: list[str]) -> list[str]:
+        if len(current_labels) == 2:
+            return ["bridge_a", "bridge_b"]
+        return ["bridge_c"]
+
+    def suggest_edges(expanded_label_context: list[str]) -> list[tuple[str, str]]:
+        _ = expanded_label_context
+        return [
+            ("Cholesterol", "Weight loss"),
+            ("bridge_c", "beta"),
+        ]
+
+    def verify_edges(candidate_edges: list[tuple[str, str]]) -> list[tuple[str, str]]:
+        verification_calls.append(candidate_edges)
+        return [candidate_edges[1]]
+
+    actual = execute_method2(
+        seed_labels=["alpha", "beta"],
+        propose_labels=propose_labels,
+        suggest_edges=suggest_edges,
+        verify_edges=verify_edges,
+        embedding_client=embedding_client,
+        convergence_threshold=0.01,
+        thesaurus=thesaurus,
+    )
+
+    assert actual.normalized_edges == [("bridge_c", "beta")]
+    assert verification_calls == [
+        [
+            ("Blood saturated fatty acid level", "Obesity"),
+            ("bridge_c", "beta"),
+        ]
+    ]

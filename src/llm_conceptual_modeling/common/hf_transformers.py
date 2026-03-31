@@ -20,6 +20,10 @@ _SUPPORTED_CHAT_MODELS = {
 _SUPPORTED_EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-8B"
 
 
+def supports_explicit_thinking_disable(model: str) -> bool:
+    return model == _QWEN_CHAT_MODEL
+
+
 @dataclass(frozen=True)
 class DecodingConfig:
     algorithm: str
@@ -483,7 +487,7 @@ def _build_runtime_profile(model: str, *, context_limit: int | None) -> RuntimeP
         torch.backends.cudnn.allow_tf32 = True
 
     dtype = "bfloat16" if torch.cuda.is_bf16_supported() else "float16"
-    supports_thinking_toggle = model == _QWEN_CHAT_MODEL
+    supports_thinking_toggle = supports_explicit_thinking_disable(model)
     return RuntimeProfile(
         device="cuda",
         dtype=dtype,

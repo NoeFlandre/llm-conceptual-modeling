@@ -690,6 +690,8 @@ runtime:
   temperature: 0.0
   quantization: none
   device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
   context_policy:
     prompt_truncation: forbid
   max_new_tokens_by_schema:

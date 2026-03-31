@@ -214,9 +214,20 @@ The YAML file is the execution source of truth for:
 
 - chat models and embedding model
 - decoding algorithms and their parameters
+- per-model thinking-mode control declarations
 - temperature, seed, per-schema initial generation budgets, and context-window safety margin
 - algorithm prompt fragments and DOE-controlled optional prompt elements
 - output root and replication count
+
+You can also inspect the HF planning surface through the existing `generate` command by pointing it
+at the same config:
+
+```bash
+uv run lcm generate algo1 \
+  --provider hf-transformers \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --json
+```
 
 The HF batch writes both per-decoding-condition outputs and combined model-level outputs under
 `aggregated/<algorithm>/<model>/combined/`. The combined surface is the one that now carries the

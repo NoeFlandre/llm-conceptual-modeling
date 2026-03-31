@@ -42,7 +42,9 @@ def _build_algo1_prompt_bundle(
             definitions[f"explanation_variable_{variant}"],
         ]
     example_section = (
-        definitions[f"example_variable_{variant}"] if bool(prompt_factors["include_example"]) else ""
+        definitions[f"example_variable_{variant}"]
+        if bool(prompt_factors["include_example"])
+        else ""
     )
     counterexample_section = (
         definitions[f"counter_example_variable_{variant}"]
@@ -73,8 +75,14 @@ def _build_algo2_prompt_bundle(
     definitions = algorithm_config.fragment_definitions
     if "system_message" not in definitions:
         return {
-            "label_expansion": algorithm_config.assemble_prompt([], template_name="label_expansion"),
-            "edge_suggestion": algorithm_config.assemble_prompt([], template_name="edge_suggestion"),
+            "label_expansion": algorithm_config.assemble_prompt(
+                [],
+                template_name="label_expansion",
+            ),
+            "edge_suggestion": algorithm_config.assemble_prompt(
+                [],
+                template_name="edge_suggestion",
+            ),
         }
     variant = _resolve_representation_variant(prompt_factors)
     explanation_sections: list[str] = []
@@ -84,7 +92,9 @@ def _build_algo2_prompt_bundle(
             definitions[f"explanation_variable_{variant}"],
         ]
     example_section = (
-        definitions[f"example_variable_{variant}"] if bool(prompt_factors["include_example"]) else ""
+        definitions[f"example_variable_{variant}"]
+        if bool(prompt_factors["include_example"])
+        else ""
     )
     counterexample_section = (
         definitions[f"counter_example_variable_{variant}"]
@@ -103,6 +113,10 @@ def _build_algo2_prompt_bundle(
         definitions["conclusion_fixed"],
     )
     edge_suggestion_prompt = _join_prompt_sections(
+        definitions["system_message"],
+        *explanation_sections,
+        example_section,
+        counterexample_section,
         f"{definitions['edge_task_fixed_sub_1']} {{formatted_subgraph1}}",
         f"{definitions['edge_task_fixed_sub_2']} {{formatted_subgraph2}}",
         f"{definitions['edge_task_fixed_sub_3']} {{expanded_label_context}}.",

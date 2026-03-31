@@ -12,6 +12,7 @@ def handle_generate(args: Namespace) -> int:
             args.algorithm,
             fixture_only=args.fixture_only,
             provider=args.provider,
+            config_path=getattr(args, "config", None),
         )
     )
     return 0

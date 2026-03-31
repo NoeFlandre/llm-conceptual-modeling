@@ -52,9 +52,15 @@ This writes:
 - `prompt_preview/...`
 
 The YAML controls the actual run settings, including models, decoding parameters, temperature,
-seed, prompt fragments, DOE factor fragments, and the output root. The
+seed, per-model thinking-mode declarations, prompt fragments, DOE factor fragments, and the output
+root. The
 `max_new_tokens_by_schema` values are starting budgets, not hard caps: the runtime can grow them
 when needed, but it will fail loudly instead of returning a truncated output.
+
+Supported thinking control is explicit in the config:
+
+- `Qwen/Qwen3.5-9B` must be declared as `disabled`
+- models without a documented public toggle must be declared as `acknowledged-unsupported`
 
 ## Run Commands
 
@@ -72,6 +78,15 @@ Single-algorithm smoke run:
 uv run lcm run algo1 \
   --config configs/hf_transformers_paper_batch.yaml \
   --resume
+```
+
+Config-driven planning preview through the legacy `generate` surface:
+
+```bash
+uv run lcm generate algo1 \
+  --provider hf-transformers \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --json
 ```
 
 The run layout is resumable. Each condition writes:

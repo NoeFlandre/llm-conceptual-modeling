@@ -8,7 +8,10 @@ from typing import cast
 
 import yaml
 
-from llm_conceptual_modeling.common.hf_transformers import DecodingConfig
+from llm_conceptual_modeling.common.hf_transformers import (
+    DecodingConfig,
+    supports_explicit_thinking_disable,
+)
 
 
 @dataclass(frozen=True)
@@ -26,6 +29,7 @@ class RuntimeConfig:
     device_policy: str
     context_policy: dict[str, object]
     max_new_tokens_by_schema: dict[str, int]
+    thinking_mode_by_model: dict[str, str]
 
 
 @dataclass(frozen=True)
@@ -195,6 +199,10 @@ def load_hf_run_config(path: str | Path) -> HFRunConfig:
             max_new_tokens_by_schema={
                 str(name): int(value)
                 for name, value in dict(raw["runtime"]["max_new_tokens_by_schema"]).items()
+            },
+            thinking_mode_by_model={
+                str(name): str(value)
+                for name, value in dict(raw["runtime"].get("thinking_mode_by_model", {})).items()
             },
         ),
         models=ModelsConfig(
@@ -386,6 +394,22 @@ def _validate_top_level_config(config: HFRunConfig) -> None:
         raise ValueError("HF run config must list at least one chat model.")
     if not config.decoding:
         raise ValueError("HF run config must enable at least one decoding condition.")
+    for model in config.models.chat_models:
+        declared_mode = config.runtime.thinking_mode_by_model.get(model)
+        if declared_mode is None:
+            raise ValueError(f"HF run config must declare thinking_mode_by_model for {model}.")
+        if supports_explicit_thinking_disable(model):
+            if declared_mode != "disabled":
+                raise ValueError(
+                    f"Model {model} supports explicit thinking disable and must be set to "
+                    "'disabled'."
+                )
+            continue
+        if declared_mode != "acknowledged-unsupported":
+            raise ValueError(
+                f"Model {model} does not support explicit thinking disable and must be "
+                "'acknowledged-unsupported'."
+            )
 
 
 def _default_preview_template_name(config: AlgorithmPromptConfig) -> str:

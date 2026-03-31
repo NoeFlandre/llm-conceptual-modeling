@@ -159,13 +159,13 @@ def run_generalized_factorial_analysis(
 
     term_builders: list[tuple[str, list[str]]] = []
     term_frames: dict[str, pd.DataFrame] = {}
-    binary_terms: list[tuple[str, str]] = []
+    factor_term_builders: list[tuple[str, list[str]]] = []
     for factor_column in spec.factor_columns:
         encoded = _encode_factor_column(working, factor_column)
         term_frames[factor_column] = encoded
-        term_builders.append((factor_column, list(encoded.columns)))
-        if len(encoded.columns) == 1 and _is_binary_series(working[factor_column]):
-            binary_terms.append((factor_column, encoded.columns[0]))
+        encoded_columns = list(encoded.columns)
+        term_builders.append((factor_column, encoded_columns))
+        factor_term_builders.append((factor_column, encoded_columns))
 
     if spec.replication_column is not None:
         encoded = _encode_factor_column(working, spec.replication_column)
@@ -173,18 +173,24 @@ def run_generalized_factorial_analysis(
         term_builders.append((spec.replication_column, list(encoded.columns)))
 
     if spec.include_pairwise_interactions:
-        for (left_name, _left_column), (right_name, _right_column) in itertools.combinations(
-            binary_terms, 2
+        for (left_name, left_columns), (right_name, right_columns) in itertools.combinations(
+            factor_term_builders, 2
         ):
             interaction_name = f"{left_name}_AND_{right_name}"
-            interaction_values = (
-                working[left_name].astype(float) * working[right_name].astype(float)
-            )
-            interaction_frame = pd.DataFrame(
-                {interaction_name: interaction_values}
-            )
+            interaction_columns: dict[str, pd.Series] = {}
+            left_frame = term_frames[left_name]
+            right_frame = term_frames[right_name]
+            for left_column in left_columns:
+                for right_column in right_columns:
+                    column_name = (
+                        f"{interaction_name}__{left_column}__{right_column}"
+                    )
+                    interaction_columns[column_name] = (
+                        left_frame[left_column] * right_frame[right_column]
+                    )
+            interaction_frame = pd.DataFrame(interaction_columns)
             term_frames[interaction_name] = interaction_frame
-            term_builders.append((interaction_name, [interaction_name]))
+            term_builders.append((interaction_name, list(interaction_frame.columns)))
 
     intercept = pd.DataFrame({"Intercept": np.ones(len(working), dtype=float)})
     design_frames = [intercept]

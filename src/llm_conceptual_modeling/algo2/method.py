@@ -20,6 +20,10 @@ class EdgeSuggestionFunction(Protocol):
     def __call__(self, expanded_label_context: list[str]) -> list[Edge]: ...
 
 
+class EdgeVerificationFunction(Protocol):
+    def __call__(self, candidate_edges: list[Edge]) -> list[Edge]: ...
+
+
 @dataclass(frozen=True)
 class Method2ExecutionResult:
     expanded_labels: list[str]
@@ -35,6 +39,7 @@ def execute_method2(
     existing_edges: list[Edge] | None = None,
     propose_labels: LabelProposalFunction,
     suggest_edges: EdgeSuggestionFunction,
+    verify_edges: EdgeVerificationFunction | None = None,
     embedding_client: EmbeddingClient,
     convergence_threshold: float,
     thesaurus: Thesaurus,
@@ -60,16 +65,18 @@ def execute_method2(
     existing_edge_set = {
         _normalize_edge(edge) for edge in normalize_edge_terms(existing_edges, thesaurus)
     }
-    filtered_normalized_edges = [
+    filtered_candidate_edges = [
         edge for edge in normalized_edges if _normalize_edge(edge) not in existing_edge_set
     ]
+    verification_function = verify_edges or _identity_verifier
+    verified_edges = verification_function(filtered_candidate_edges)
     final_iteration = expansion_result.iterations[-1]
     final_similarity = final_iteration.similarity
     iteration_count = len(expansion_result.iterations)
     return Method2ExecutionResult(
         expanded_labels=expansion_result.expanded_labels,
         raw_edges=raw_edges,
-        normalized_edges=filtered_normalized_edges,
+        normalized_edges=verified_edges,
         final_similarity=final_similarity,
         iteration_count=iteration_count,
     )
@@ -78,3 +85,7 @@ def execute_method2(
 def _normalize_edge(edge: Edge) -> Edge:
     left, right = edge
     return (left, right) if left <= right else (right, left)
+
+
+def _identity_verifier(candidate_edges: list[Edge]) -> list[Edge]:
+    return candidate_edges

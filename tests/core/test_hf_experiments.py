@@ -249,6 +249,8 @@ runtime:
   temperature: 1.0
   quantization: none
   device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
   context_policy:
     prompt_truncation: forbid
     safety_margin_tokens: 32
@@ -483,6 +485,35 @@ def test_checked_in_config_algo2_prompt_matches_paper_markup_variant() -> None:
     )
 
     assert label_prompt == expected_prompt
+
+
+def test_checked_in_config_algo2_edge_suggestion_prompt_carries_same_prompt_factors() -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo2 = config.algorithms["algo2"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo2",
+        algorithm_config=algo2,
+        active_high_factors=["explanation", "example", "counterexample"],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": True,
+            "include_example": True,
+            "include_counterexample": True,
+            "use_relaxed_convergence": False,
+        },
+    )
+
+    edge_prompt = prompt_bundle["edge_suggestion"]
+
+    assert edge_prompt.startswith("You are a helpful assistant who understands Knowledge Maps.")
+    assert "A knowledge map is a network consisting of nodes and edges." in edge_prompt
+    assert "Here is an example of a desired output for your task." in edge_prompt
+    assert "Here is an example of a bad output that we do not want to see." in edge_prompt
+    assert "Available concepts: {expanded_label_context}." in edge_prompt
 
 
 def test_checked_in_config_algo3_prompt_matches_paper_and_excludes_depth_text() -> None:
@@ -767,6 +798,7 @@ def test_run_algo2_configured_prompt_uses_evolving_label_context_across_iteratio
             {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
             {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
             {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
         ]
     )
 
@@ -775,6 +807,73 @@ def test_run_algo2_configured_prompt_uses_evolving_label_context_across_iteratio
 
     assert "theta" in raw_response[1]["prompt"]
     assert raw_response[0]["prompt"] != raw_response[1]["prompt"]
+
+
+def test_run_algo2_configured_prompt_applies_cove_verification_to_final_edges() -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo2 = config.algorithms["algo2"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo2",
+        algorithm_config=algo2,
+        active_high_factors=["explanation", "example", "counterexample", "array_repr"],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": True,
+            "include_example": True,
+            "include_counterexample": True,
+            "use_relaxed_convergence": False,
+        },
+    )
+    spec = HFRunSpec(
+        algorithm="algo2",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="111100",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": True,
+            "include_example": True,
+            "include_counterexample": True,
+            "use_relaxed_convergence": False,
+        },
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=prompt_bundle,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=19,
+    )
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
+            {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["N"]},
+        ]
+    )
+
+    result = _run_algo2(spec, hf_runtime=runtime)
+    raw_response = json.loads(result["raw_response"])
+
+    assert raw_response[-1]["schema_name"] == "vote_list"
+    assert "causal relationship exists between the source and target concepts" in raw_response[-1][
+        "prompt"
+    ]
+    assert result["raw_row"]["Result"] == "[]"
 
 
 def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(
