@@ -770,6 +770,134 @@ def test_cli_run_status_reports_batch_health_as_json(tmp_path, capsys) -> None:
     assert '"failed_count": 0' in captured.out
 
 
+def test_cli_run_smoke_executes_single_selected_spec(monkeypatch, tmp_path, capsys) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/hf-smoke
+  replications: 1
+runtime:
+  seed: 123
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    Qwen/Qwen3.5-9B: disabled
+  context_policy:
+    prompt_truncation: forbid
+    safety_margin_tokens: 64
+  max_new_tokens_by_schema:
+    edge_list: 256
+    vote_list: 64
+    label_list: 128
+    children_by_label: 384
+models:
+  chat_models:
+    - Qwen/Qwen3.5-9B
+  embedding_model: Qwen/Qwen3-Embedding-0.6B
+decoding:
+  greedy:
+    enabled: true
+inputs:
+  graph_source: default
+shared_fragments:
+  assistant_role: "You are a helpful assistant."
+algorithms:
+  algo1:
+    pair_names: [sg1_sg2, sg2_sg3, sg3_sg1]
+    base_fragments: [assistant_role]
+    factors:
+      explanation:
+        column: Explanation
+        levels: [-1, 1]
+        runtime_field: include_explanation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      counterexample:
+        column: Counterexample
+        levels: [-1, 1]
+        runtime_field: include_counterexample
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      array_repr:
+        column: Array/List(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_array_representation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      adjacency_repr:
+        column: Tag/Adjacency(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_adjacency_notation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+    fragment_definitions: {}
+    prompt_templates:
+      direct_edge: "Task body."
+      cove_verification: "Verify body."
+""",
+        encoding="utf-8",
+    )
+    captured_call: dict[str, object] = {}
+
+    def fake_run_single_spec(**kwargs):
+        captured_call.update(kwargs)
+        return {"pair_name": "sg2_sg3"}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.run_single_spec",
+        fake_run_single_spec,
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "smoke",
+            "--config",
+            str(config_path),
+            "--algorithm",
+            "algo1",
+            "--model",
+            "Qwen/Qwen3.5-9B",
+            "--pair-name",
+            "sg2_sg3",
+            "--condition-bits",
+            "00000",
+            "--decoding",
+            "greedy",
+            "--output-root",
+            str(tmp_path / "smoke"),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert captured_call["spec"].pair_name == "sg2_sg3"
+    assert captured_call["spec"].condition_bits == "00000"
+    assert captured_call["spec"].model == "Qwen/Qwen3.5-9B"
+    assert captured_call["spec"].decoding.algorithm == "greedy"
+    assert '"pair_name": "sg2_sg3"' in captured.out
+
+
 def _write_flat(path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -11,10 +11,12 @@ from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.hf_experiments import (
     HFRunSpec,
     _build_prompt_bundle,
+    _run_algo1,
     _run_algo2,
     _run_algo3,
     plan_paper_batch,
     run_paper_batch,
+    run_single_spec,
 )
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
 
@@ -278,6 +280,45 @@ def test_run_paper_batch_writes_batch_summary_csv(tmp_path: Path) -> None:
     assert {"algorithm", "model", "decoding_algorithm", "replication", "status"}.issubset(
         summary.columns
     )
+
+
+def test_run_paper_batch_summary_includes_result_metrics_for_connection_algorithms(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "runs"
+
+    def runtime_factory(spec):
+        row = {
+            **spec.raw_context,
+            "Result": "[('alpha', 'gamma')]",
+            "graph": "[('alpha', 'gamma')]",
+            "subgraph1": "[('alpha', 'beta')]",
+            "subgraph2": "[('gamma', 'delta')]",
+        }
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=2,
+        algorithms=("algo1",),
+        runtime_factory=runtime_factory,
+    )
+
+    summary_paths = sorted(output_root.rglob("summary.json"))
+    assert summary_paths
+    summary = json.loads(summary_paths[0].read_text(encoding="utf-8"))
+
+    assert summary["candidate_edge_count"] == 1
+    assert summary["verified_edge_count"] == 1
+    assert isinstance(summary["accuracy"], float)
+    assert isinstance(summary["precision"], float)
+    assert isinstance(summary["recall"], float)
 
 
 def test_run_paper_batch_writes_live_batch_status_file(tmp_path: Path) -> None:
@@ -1173,6 +1214,204 @@ def test_run_algo2_writes_intermediate_stage_artifacts(tmp_path: Path) -> None:
     assert label_stage["iteration_count"] == 2
     assert edge_stage["verified_edges"] == [["alpha", "theta"]]
     assert raw_trace[-1]["schema_name"] == "vote_list"
+
+
+def test_run_algo1_writes_and_reuses_edge_generation_stage(tmp_path: Path) -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo1 = config.algorithms["algo1"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo1",
+        algorithm_config=algo1,
+        active_high_factors=[],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+    )
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model=config.models.embedding_model,
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma"), ("theta", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=prompt_bundle,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=29,
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    first_runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
+        ]
+    )
+    first_result = _run_algo1(spec, hf_runtime=first_runtime, run_dir=run_dir)
+
+    stage = json.loads((run_dir / "stages" / "algo1_edge_generation.json").read_text())
+    assert stage["candidate_edges"] == [["alpha", "theta"]]
+    assert first_result["raw_row"]["Result"] == "[('alpha', 'theta')]"
+
+    second_runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"votes": ["Y"]},
+        ]
+    )
+    second_result = _run_algo1(spec, hf_runtime=second_runtime, run_dir=run_dir)
+    raw_trace = json.loads(second_result["raw_response"])
+
+    assert [record["schema_name"] for record in raw_trace] == ["vote_list"]
+    assert second_result["raw_row"]["Result"] == "[('alpha', 'theta')]"
+
+
+def test_run_algo1_writes_active_stage_tracking(tmp_path: Path) -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo1 = config.algorithms["algo1"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo1",
+        algorithm_config=algo1,
+        active_high_factors=[],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+    )
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model=config.models.embedding_model,
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma"), ("theta", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=prompt_bundle,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=29,
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
+        ]
+    )
+
+    _run_algo1(spec, hf_runtime=runtime, run_dir=run_dir)
+
+    active_stage = json.loads((run_dir / "active_stage.json").read_text())
+    assert active_stage["status"] == "completed"
+    assert active_stage["schema_name"] == "vote_list"
+    assert active_stage["algorithm"] == "algo1"
+    assert active_stage["pair_name"] == "sg2_sg3"
+
+
+def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+    )
+
+    def runtime_factory(spec, *, run_dir=None):
+        _ = (spec, run_dir)
+        return {
+            "raw_row": {
+                "pair_name": "sg2_sg3",
+                "Repetition": 0,
+                "Result": "[('alpha', 'gamma')]",
+                "graph": "[('alpha', 'gamma')]",
+                "subgraph1": "[('alpha', 'beta')]",
+                "subgraph2": "[('gamma', 'delta')]",
+            },
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    summary = run_single_spec(
+        spec=spec,
+        output_root=tmp_path / "smoke",
+        runtime_factory=runtime_factory,
+        dry_run=False,
+        resume=False,
+    )
+
+    run_dir = (
+        tmp_path
+        / "smoke"
+        / "runs"
+        / "algo1"
+        / "Qwen__Qwen3.5-9B"
+        / "greedy"
+        / "sg2_sg3"
+        / "00000"
+        / "rep_00"
+    )
+    assert (run_dir / "manifest.json").exists()
+    assert (run_dir / "runtime.json").exists()
+    assert (run_dir / "raw_row.json").exists()
+    assert (run_dir / "summary.json").exists()
+    assert summary["pair_name"] == "sg2_sg3"
 
 
 def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(

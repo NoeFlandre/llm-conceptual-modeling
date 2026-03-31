@@ -206,6 +206,25 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser.add_argument("--results-root", required=True)
     status_parser.add_argument("--json", action="store_true")
 
+    smoke_parser = run_subparsers.add_parser("smoke")
+    smoke_parser.add_argument("--config", required=True)
+    smoke_parser.add_argument("--algorithm", choices=("algo1", "algo2", "algo3"), required=True)
+    smoke_parser.add_argument("--model", required=True)
+    smoke_parser.add_argument("--pair-name", required=True)
+    smoke_parser.add_argument("--condition-bits", required=True)
+    smoke_parser.add_argument(
+        "--decoding",
+        choices=("greedy", "beam", "contrastive"),
+        required=True,
+    )
+    smoke_parser.add_argument("--num-beams", type=int)
+    smoke_parser.add_argument("--penalty-alpha", type=float)
+    smoke_parser.add_argument("--top-k", type=int, default=4)
+    smoke_parser.add_argument("--replication", type=int, default=0)
+    smoke_parser.add_argument("--output-root", required=True)
+    smoke_parser.add_argument("--resume", action="store_true")
+    smoke_parser.add_argument("--dry-run", action="store_true")
+
     paper_batch_parser = run_subparsers.add_parser("paper-batch")
     paper_batch_parser.add_argument("--provider", default="hf-transformers")
     paper_batch_parser.add_argument("--model", action="append")

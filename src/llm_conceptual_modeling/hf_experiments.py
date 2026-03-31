@@ -22,12 +22,15 @@ from llm_conceptual_modeling.algo3.method import (
     execute_method3,
 )
 from llm_conceptual_modeling.algo3.mistral import build_child_proposer
+from llm_conceptual_modeling.common.connection_eval import find_valid_connections
 from llm_conceptual_modeling.common.graph_data import load_algo2_thesaurus
 from llm_conceptual_modeling.common.hf_transformers import (
+    DecodingConfig,
     HFTransformersRuntimeFactory,
     RuntimeProfile,
     build_runtime_factory,
 )
+from llm_conceptual_modeling.common.literals import parse_python_literal
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
 from llm_conceptual_modeling.hf_batch.monitoring import (
     current_run_payload as _current_run_payload,
@@ -284,6 +287,8 @@ def run_paper_batch(
                 "thinking_mode_supported", False
             ),
             "raw_row_path": str(raw_row_path),
+            **_summary_from_raw_row(spec.algorithm, raw_row),
+            **runtime_result.get("summary", {}),
         }
         _write_json(summary_path, summary)
         summary_rows.append(summary)
@@ -306,6 +311,114 @@ def run_paper_batch(
         return
 
     write_aggregated_outputs(output_root_path, summary_frame)
+
+
+def select_run_spec(
+    *,
+    config: HFRunConfig,
+    algorithm: str,
+    model: str,
+    pair_name: str,
+    condition_bits: str,
+    decoding: DecodingConfig,
+    replication: int,
+    runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
+) -> HFRunSpec:
+    specs = plan_paper_batch(
+        models=[model],
+        embedding_model=config.models.embedding_model,
+        replications=max(replication + 1, 1),
+        algorithms=(algorithm,),
+        config=config,
+        runtime_profile_provider=runtime_profile_provider,
+    )
+    for spec in specs:
+        if (
+            spec.algorithm == algorithm
+            and spec.model == model
+            and spec.pair_name == pair_name
+            and spec.condition_bits == condition_bits
+            and spec.replication == replication
+            and spec.decoding == decoding
+        ):
+            return spec
+    raise ValueError(
+        "No configured run spec matches "
+        f"algorithm={algorithm!r}, model={model!r}, pair_name={pair_name!r}, "
+        f"condition_bits={condition_bits!r}, decoding={decoding!r}, "
+        f"replication={replication!r}."
+    )
+
+
+def run_single_spec(
+    *,
+    spec: HFRunSpec,
+    output_root: str | Path,
+    runtime_factory: RuntimeFactory | None = None,
+    dry_run: bool = False,
+    resume: bool = False,
+) -> dict[str, object]:
+    output_root_path = Path(output_root)
+    output_root_path.mkdir(parents=True, exist_ok=True)
+
+    hf_runtime = None if runtime_factory is not None else build_runtime_factory(
+        hf_token=_resolve_hf_token()
+    )
+    if runtime_factory is None:
+        if hf_runtime is None:
+            raise ValueError("Missing HF runtime for non-dry local execution.")
+        runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
+
+    run_dir = (
+        output_root_path
+        / "runs"
+        / spec.algorithm
+        / _slugify_model(spec.model)
+        / spec.condition_label
+        / spec.pair_name
+        / spec.condition_bits
+        / f"rep_{spec.replication:02d}"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = run_dir / "summary.json"
+    raw_row_path = run_dir / "raw_row.json"
+
+    if resume and _is_finished_run_directory(run_dir):
+        return json.loads(summary_path.read_text(encoding="utf-8"))
+
+    _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
+    _write_json(run_dir / "state.json", {"status": "running"})
+    runtime_result = _execute_run(
+        spec=spec,
+        runtime_factory=runtime_factory,
+        dry_run=dry_run,
+        run_dir=run_dir,
+    )
+    raw_row = runtime_result["raw_row"]
+    _write_json(raw_row_path, raw_row)
+    _write_json(run_dir / "state.json", {"status": "finished"})
+    _write_json(run_dir / "runtime.json", runtime_result["runtime"])
+    _write_text(run_dir / "raw_response.json", runtime_result["raw_response"])
+
+    summary = {
+        "algorithm": spec.algorithm,
+        "model": spec.model,
+        "embedding_model": spec.embedding_model,
+        "decoding_algorithm": spec.decoding.algorithm,
+        "condition_label": spec.condition_label,
+        "pair_name": spec.pair_name,
+        "condition_bits": spec.condition_bits,
+        "replication": spec.replication,
+        "status": "finished",
+        "thinking_mode_supported": runtime_result["runtime"].get(
+            "thinking_mode_supported", False
+        ),
+        "raw_row_path": str(raw_row_path),
+        **_summary_from_raw_row(spec.algorithm, raw_row),
+        **runtime_result.get("summary", {}),
+    }
+    _write_json(summary_path, summary)
+    return summary
 
 
 def _is_finished_run_directory(run_dir: Path) -> bool:
@@ -388,6 +501,15 @@ def _run_algo1(
     recorder = _RecordingChatClient(
         chat_client,
         persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
+        active_stage_path=(run_dir / "active_stage.json") if run_dir is not None else None,
+        active_stage_context={
+            "algorithm": spec.algorithm,
+            "pair_name": spec.pair_name,
+            "condition_bits": spec.condition_bits,
+            "replication": spec.replication,
+            "model": spec.model,
+            "decoding_algorithm": spec.decoding.algorithm,
+        },
     )
     if spec.prompt_bundle is None:
         result = execute_method1(
@@ -400,25 +522,38 @@ def _run_algo1(
         prompt_bundle = spec.prompt_bundle
         formatted_subgraph1 = _format_knowledge_map(subgraph1, prompt_config=prompt_config)
         formatted_subgraph2 = _format_knowledge_map(subgraph2, prompt_config=prompt_config)
-        result = execute_method1(
-            subgraph1=subgraph1,
-            subgraph2=subgraph2,
-            generate_edges=lambda *, subgraph1, subgraph2: _generate_edges_from_prompt(
+        stage_path = None if run_dir is None else run_dir / "stages" / "algo1_edge_generation.json"
+        if stage_path is not None and stage_path.exists():
+            stage_payload = json.loads(stage_path.read_text(encoding="utf-8"))
+            candidate_edges = [tuple(edge) for edge in stage_payload["candidate_edges"]]
+        else:
+            candidate_edges = _generate_edges_from_prompt(
                 recorder,
                 _render_prompt(
                     prompt_bundle["direct_edge"],
                     formatted_subgraph1=formatted_subgraph1,
                     formatted_subgraph2=formatted_subgraph2,
                 ),
+            )
+            if stage_path is not None:
+                stage_path.parent.mkdir(parents=True, exist_ok=True)
+                _write_json(
+                    stage_path,
+                    {"candidate_edges": [list(edge) for edge in candidate_edges]},
+                )
+        verified_edges = _verify_edges_from_prompt(
+            recorder,
+            _render_prompt(
+                prompt_bundle["cove_verification"],
+                candidate_edges=repr(candidate_edges),
             ),
-            verify_edges=lambda candidate_edges: _verify_edges_from_prompt(
-                recorder,
-                _render_prompt(
-                    prompt_bundle["cove_verification"],
-                    candidate_edges=repr(candidate_edges),
-                ),
-                candidate_edges,
-            ),
+            candidate_edges,
+        )
+        result = execute_method1(
+            subgraph1=subgraph1,
+            subgraph2=subgraph2,
+            generate_edges=lambda *, subgraph1, subgraph2: candidate_edges,
+            verify_edges=lambda candidate_edges: verified_edges,
         )
     raw_row = {
         **spec.raw_context,
@@ -431,6 +566,11 @@ def _run_algo1(
         "raw_row": raw_row,
         "runtime": _runtime_details(spec.runtime_profile),
         "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
+        "summary": {
+            "candidate_edge_count": len(result.candidate_edges),
+            "verified_edge_count": len(result.verified_edges),
+            **_connection_metric_summary(raw_row),
+        },
     }
 
 
@@ -454,6 +594,15 @@ def _run_algo2(
     recorder = _RecordingChatClient(
         chat_client,
         persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
+        active_stage_path=(run_dir / "active_stage.json") if run_dir is not None else None,
+        active_stage_context={
+            "algorithm": spec.algorithm,
+            "pair_name": spec.pair_name,
+            "condition_bits": spec.condition_bits,
+            "replication": spec.replication,
+            "model": spec.model,
+            "decoding_algorithm": spec.decoding.algorithm,
+        },
     )
     embedding_client = hf_runtime.build_embedding_client(model=spec.embedding_model)
     source_labels = _collect_nodes(subgraph1)
@@ -538,6 +687,11 @@ def _run_algo2(
         "raw_row": raw_row,
         "runtime": _runtime_details(spec.runtime_profile),
         "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
+        "summary": {
+            "candidate_edge_count": len(result.raw_edges),
+            "verified_edge_count": len(result.normalized_edges),
+            **_connection_metric_summary(raw_row),
+        },
     }
 
 
@@ -566,6 +720,15 @@ def _run_algo3(
     recorder = _RecordingChatClient(
         chat_client,
         persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
+        active_stage_path=(run_dir / "active_stage.json") if run_dir is not None else None,
+        active_stage_context={
+            "algorithm": spec.algorithm,
+            "pair_name": spec.pair_name,
+            "condition_bits": spec.condition_bits,
+            "replication": spec.replication,
+            "model": spec.model,
+            "decoding_algorithm": spec.decoding.algorithm,
+        },
     )
     if spec.prompt_bundle is None:
         result = execute_method3(
@@ -615,4 +778,54 @@ def _run_algo3(
         "raw_row": raw_row,
         "runtime": _runtime_details(spec.runtime_profile),
         "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
+        "summary": {
+            "result_edge_count": len(result_edges),
+            "recall": float(raw_row["Recall"]),
+        },
     }
+
+
+def _connection_metric_summary(raw_row: dict[str, object]) -> dict[str, float]:
+    graph = parse_python_literal(str(raw_row["graph"]))
+    subgraph1 = parse_python_literal(str(raw_row["subgraph1"]))
+    subgraph2 = parse_python_literal(str(raw_row["subgraph2"]))
+    result_edges = parse_python_literal(str(raw_row["Result"]))
+    ground_truth_connections = find_valid_connections(graph, subgraph1, subgraph2)
+    proposed_edges = list(subgraph1) + list(subgraph2) + list(result_edges)
+    generated_connections = find_valid_connections(proposed_edges, subgraph1, subgraph2)
+    nodes1 = {node for edge in subgraph1 for node in edge}
+    nodes2 = {node for edge in subgraph2 for node in edge}
+    tp = len(generated_connections & ground_truth_connections)
+    fp = len(generated_connections - ground_truth_connections)
+    fn = len(ground_truth_connections - generated_connections)
+    tn = (len(nodes1) * len(nodes2)) - (tp + fp + fn)
+    total = tp + fp + fn + tn
+    accuracy = (tp + tn) / total if total > 0 else 0.0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    denominator = precision + recall
+    f1 = (2 * precision * recall) / denominator if denominator > 0 else 0.0
+    return {
+        "accuracy": accuracy,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+    }
+
+
+def _summary_from_raw_row(algorithm: str, raw_row: dict[str, object]) -> dict[str, object]:
+    if algorithm in {"algo1", "algo2"} and "Result" in raw_row:
+        result_edges = parse_python_literal(str(raw_row["Result"]))
+        result_count = len(result_edges)
+        return {
+            "candidate_edge_count": result_count,
+            "verified_edge_count": result_count,
+            **_connection_metric_summary(raw_row),
+        }
+    if algorithm == "algo3" and "Results" in raw_row:
+        result_edges = parse_python_literal(str(raw_row["Results"]))
+        return {
+            "result_edge_count": len(result_edges),
+            "recall": float(str(raw_row.get("Recall", 0.0))),
+        }
+    return {}

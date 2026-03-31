@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import asdict
+from datetime import UTC, datetime
 from hashlib import sha256
 from pathlib import Path
 from typing import Any
@@ -154,9 +155,18 @@ def algo3_prompt_config(prompt_factors: dict[str, bool | int]) -> Method3PromptC
 
 
 class RecordingChatClient:
-    def __init__(self, inner: Any, *, persist_path: Path | None = None) -> None:
+    def __init__(
+        self,
+        inner: Any,
+        *,
+        persist_path: Path | None = None,
+        active_stage_path: Path | None = None,
+        active_stage_context: dict[str, object] | None = None,
+    ) -> None:
         self._inner = inner
         self._persist_path = persist_path
+        self._active_stage_path = active_stage_path
+        self._active_stage_context = active_stage_context or {}
         self.records: list[dict[str, object]] = []
 
     def complete_json(
@@ -166,6 +176,11 @@ class RecordingChatClient:
         schema_name: str,
         schema: dict[str, object],
     ) -> dict[str, object]:
+        self._write_active_stage(
+            status="running",
+            schema_name=schema_name,
+            prompt=prompt,
+        )
         response = self._inner.complete_json(
             prompt=prompt,
             schema_name=schema_name,
@@ -183,7 +198,34 @@ class RecordingChatClient:
                 self._persist_path,
                 json.dumps(self.records, indent=2, sort_keys=True),
             )
+        self._write_active_stage(
+            status="completed",
+            schema_name=schema_name,
+            prompt=prompt,
+            response=response,
+        )
         return response
+
+    def _write_active_stage(
+        self,
+        *,
+        status: str,
+        schema_name: str,
+        prompt: str,
+        response: dict[str, object] | None = None,
+    ) -> None:
+        if self._active_stage_path is None:
+            return
+        payload = {
+            **self._active_stage_context,
+            "status": status,
+            "schema_name": schema_name,
+            "prompt": prompt,
+            "updated_at": datetime.now(UTC).isoformat(),
+        }
+        if response is not None:
+            payload["response"] = response
+        write_json(self._active_stage_path, payload)
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:

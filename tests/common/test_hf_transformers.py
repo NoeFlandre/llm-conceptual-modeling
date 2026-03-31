@@ -1,8 +1,10 @@
 import pytest
 
+import llm_conceptual_modeling.common.hf_transformers as hf_transformers
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     HFTransformersChatClient,
+    HFTransformersRuntimeFactory,
     _response_hit_generation_limit,
     derive_context_window,
 )
@@ -34,6 +36,15 @@ class _Tensor:
 
 
 class _ChatTemplateTokenizer(_Tokenizer):
+    def __init__(
+        self,
+        *,
+        model_max_length: int = 128,
+        decoded_text: str = '{"edges": []}',
+    ) -> None:
+        super().__init__(model_max_length=model_max_length)
+        self._decoded_text = decoded_text
+
     def apply_chat_template(
         self,
         conversation=None,
@@ -53,11 +64,58 @@ class _ChatTemplateTokenizer(_Tokenizer):
         )
         return {"input_ids": _Tensor([[1, 2, 3, 4, 5, 6, 7, 8, 9]])}
 
+    def decode(self, token_ids, skip_special_tokens: bool = True) -> str:
+        _ = (token_ids, skip_special_tokens)
+        return self._decoded_text
+
 
 class _Model:
+    def __init__(self) -> None:
+        self.generation_config = type("GenerationConfig", (), {})()
+
     def generate(self, **kwargs):
         _ = kwargs
         return [[1, 2, 3, 4, 5, 6, 7, 8, 9, 99]]
+
+    def to(self, _device: str):
+        return self
+
+    def eval(self):
+        return None
+
+
+class _RejectingGeneratorModel(_Model):
+    def __init__(self) -> None:
+        self.calls: list[dict[str, object]] = []
+
+    def generate(self, **kwargs):
+        self.calls.append(dict(kwargs))
+        if "generator" in kwargs:
+            raise ValueError(
+                "The following `model_kwargs` are not used by the model: ['generator']"
+            )
+        return [[1, 2, 3, 4, 5, 6, 7, 8, 9, 99]]
+
+
+class _NoEosAtLimitModel(_Model):
+    def __init__(self) -> None:
+        super().__init__()
+        self.calls = 0
+
+    def generate(self, **kwargs):
+        self.calls += 1
+        _ = kwargs
+        return [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]]
+
+
+class _CapturingModel(_Model):
+    def __init__(self) -> None:
+        super().__init__()
+        self.calls: list[dict[str, object]] = []
+
+    def generate(self, **kwargs):
+        self.calls.append(dict(kwargs))
+        return super().generate(**kwargs)
 
 
 def test_decoding_config_accepts_non_zero_temperature_when_configured() -> None:
@@ -113,3 +171,208 @@ def test_complete_json_rejects_chat_template_prompt_that_would_overflow_context(
             schema_name="edge_list",
             schema={"type": "object"},
         )
+
+
+def test_complete_json_retries_without_generator_when_model_rejects_it() -> None:
+    tokenizer = _ChatTemplateTokenizer(model_max_length=128)
+    model = _RejectingGeneratorModel()
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(algorithm="greedy"),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=True,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+        seed=7,
+    )
+
+    response = client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert response == {"edges": []}
+    assert len(model.calls) == 2
+    assert "generator" in model.calls[0]
+    assert "generator" not in model.calls[1]
+
+
+def test_complete_json_passes_generation_timeout_as_max_time() -> None:
+    tokenizer = _ChatTemplateTokenizer(model_max_length=128)
+    model = _CapturingModel()
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(algorithm="greedy"),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=True,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1, "generation_timeout_seconds": 123},
+        seed=7,
+    )
+
+    client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert model.calls
+    assert model.calls[-1]["max_time"] == 123
+
+
+def test_greedy_decoding_kwargs_do_not_pass_temperature() -> None:
+    kwargs = hf_transformers._decoding_kwargs(DecodingConfig(algorithm="greedy"))
+
+    assert kwargs == {"do_sample": False}
+
+
+def test_beam_decoding_kwargs_do_not_pass_temperature() -> None:
+    kwargs = hf_transformers._decoding_kwargs(DecodingConfig(algorithm="beam", num_beams=2))
+
+    assert kwargs == {"do_sample": False, "num_beams": 2}
+
+
+def test_contrastive_decoding_kwargs_do_not_pass_temperature() -> None:
+    kwargs = hf_transformers._decoding_kwargs(
+        DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4)
+    )
+
+    assert kwargs == {"do_sample": False, "penalty_alpha": 0.2, "top_k": 4}
+
+
+def test_chat_client_sets_model_generation_temperature_to_zero() -> None:
+    tokenizer = _ChatTemplateTokenizer(model_max_length=128)
+    model = _Model()
+    model.generation_config.temperature = 0.7
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(algorithm="greedy", temperature=0.0),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=True,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+    )
+
+    _ = client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert model.generation_config.temperature == 0.0
+
+
+def test_parse_generated_json_recovers_newline_vote_list() -> None:
+    parsed = hf_transformers._parse_generated_json("Y\nY\nN\nY", schema_name="vote_list")
+
+    assert parsed == ["Y", "Y", "N", "Y"]
+
+
+def test_complete_json_accepts_parseable_vote_list_without_eos() -> None:
+    tokenizer = _ChatTemplateTokenizer(
+        model_max_length=128,
+        decoded_text="Y\nN\nY\nN",
+    )
+    model = _NoEosAtLimitModel()
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(algorithm="greedy", temperature=0.0),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=True,
+        max_new_tokens_by_schema={"vote_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+    )
+
+    response = client.complete_json(
+        prompt="one two",
+        schema_name="vote_list",
+        schema={"type": "object"},
+    )
+
+    assert response == {"votes": ["Y", "N", "Y", "N"]}
+    assert model.calls == 1
+
+
+def test_runtime_factory_uses_mistral3_loader_for_ministral_models(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[str, str]] = []
+
+    class _AutoTokenizer:
+        @staticmethod
+        def from_pretrained(model: str, token: str | None = None):
+            calls.append(("auto-tokenizer", model))
+            _ = token
+            return _Tokenizer(model_max_length=2048)
+
+    class _MistralCommonBackend:
+        @staticmethod
+        def from_pretrained(model: str, token: str | None = None):
+            calls.append(("mistral-tokenizer", model))
+            _ = token
+            return _Tokenizer(model_max_length=2048)
+
+    class _AutoModelForCausalLM:
+        @staticmethod
+        def from_pretrained(*args, **kwargs):
+            raise AssertionError("AutoModelForCausalLM should not be used for Ministral 3.")
+
+    class _Mistral3ForConditionalGeneration:
+        @staticmethod
+        def from_pretrained(model: str, **kwargs):
+            calls.append(("model", model))
+            assert kwargs["device_map"] == "auto"
+            assert kwargs["quantization_config"] == ("fp8-config", True)
+            return _Model()
+
+    class _FineGrainedFP8Config:
+        def __new__(cls, *, dequantize: bool):
+            return ("fp8-config", dequantize)
+
+    class _Transformers:
+        AutoTokenizer = _AutoTokenizer
+        AutoModelForCausalLM = _AutoModelForCausalLM
+        FineGrainedFP8Config = _FineGrainedFP8Config
+        MistralCommonBackend = _MistralCommonBackend
+        Mistral3ForConditionalGeneration = _Mistral3ForConditionalGeneration
+
+    class _Cuda:
+        @staticmethod
+        def is_available() -> bool:
+            return True
+
+        @staticmethod
+        def is_bf16_supported() -> bool:
+            return True
+
+    class _Torch:
+        class backends:
+            class cuda:
+                class matmul:
+                    allow_tf32 = False
+
+        cuda = _Cuda()
+        bfloat16 = "bfloat16"
+        float16 = "float16"
+        float32 = "float32"
+
+    monkeypatch.setattr(hf_transformers, "_transformers", lambda: _Transformers)
+    monkeypatch.setattr(hf_transformers, "_torch", lambda: _Torch)
+
+    factory = HFTransformersRuntimeFactory(hf_token="hf-token")
+
+    _ = factory.profile_for_chat_model("mistralai/Ministral-3-8B-Instruct-2512")
+
+    assert calls == [
+        ("mistral-tokenizer", "mistralai/Ministral-3-8B-Instruct-2512"),
+        ("model", "mistralai/Ministral-3-8B-Instruct-2512"),
+    ]

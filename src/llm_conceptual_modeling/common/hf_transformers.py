@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import json
 import random
+import re
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
@@ -12,8 +13,9 @@ import numpy as np
 from llm_conceptual_modeling.common.structured_output import normalize_structured_response
 
 _QWEN_CHAT_MODEL = "Qwen/Qwen3.5-9B"
+_MINISTRAL_CHAT_MODEL = "mistralai/Ministral-3-8B-Instruct-2512"
 _SUPPORTED_CHAT_MODELS = {
-    "mistralai/Ministral-3-8B-Instruct-2512",
+    _MINISTRAL_CHAT_MODEL,
     _QWEN_CHAT_MODEL,
     "allenai/Olmo-3-7B-Instruct",
 }
@@ -140,6 +142,7 @@ class HFTransformersChatClient:
             "label_list": 128,
             "children_by_label": 384,
         }
+        _set_generation_temperature(model_object=self._model_object, temperature=0.0)
 
     def complete_json(
         self,
@@ -171,12 +174,16 @@ class HFTransformersChatClient:
             generation_kwargs = {
                 **encoded_inputs,
                 "max_new_tokens": max_new_tokens,
-                "temperature": self._decoding_config.temperature,
                 "pad_token_id": _resolve_pad_token_id(self._tokenizer),
                 "eos_token_id": eos_token_id,
                 "use_cache": True,
                 **_decoding_kwargs(self._decoding_config),
             }
+            generation_timeout_seconds = _resolve_generation_timeout_seconds(
+                self._context_policy
+            )
+            if generation_timeout_seconds is not None:
+                generation_kwargs["max_time"] = generation_timeout_seconds
 
             torch = _torch()
             torch.manual_seed(self._seed)
@@ -186,24 +193,17 @@ class HFTransformersChatClient:
             generator = torch.Generator(device=self._device).manual_seed(self._seed)
             generation_kwargs["generator"] = generator
             with torch.inference_mode():
-                generated_ids = self._model_object.generate(**generation_kwargs)
+                try:
+                    generated_ids = self._model_object.generate(**generation_kwargs)
+                except ValueError as error:
+                    if not _generator_kwarg_rejected(error):
+                        raise
+                    generation_kwargs.pop("generator", None)
+                    generated_ids = self._model_object.generate(**generation_kwargs)
             completion_ids = generated_ids[0][input_length:]
-            if _response_hit_generation_limit(
-                completion_ids=completion_ids,
-                max_new_tokens=max_new_tokens,
-                eos_token_id=eos_token_id,
-            ):
-                next_max_new_tokens = _next_max_new_tokens(
-                    tokenizer=self._tokenizer,
-                    input_token_count=input_length,
-                    current_max_new_tokens=max_new_tokens,
-                    safety_margin_tokens=safety_margin_tokens,
-                )
-                max_new_tokens = next_max_new_tokens
-                continue
             text = self._tokenizer.decode(completion_ids, skip_special_tokens=True)
             try:
-                parsed_content = _parse_generated_json(text)
+                parsed_content = _parse_generated_json(text, schema_name=schema_name)
             except ValueError as error:
                 if _response_hit_generation_limit(
                     completion_ids=completion_ids,
@@ -302,16 +302,20 @@ class HFTransformersRuntimeFactory:
         transformers = _transformers()
         torch = _torch()
         _require_cuda(torch)
-        tokenizer = transformers.AutoTokenizer.from_pretrained(model, token=self._hf_token)
+        tokenizer = _load_chat_tokenizer(
+            transformers=transformers,
+            model=model,
+            hf_token=self._hf_token,
+        )
         profile = _build_runtime_profile(
             model,
             context_limit=_resolve_context_limit(tokenizer),
         )
-        model_object = transformers.AutoModelForCausalLM.from_pretrained(
-            model,
-            token=self._hf_token,
+        model_object = _load_chat_model(
+            transformers=transformers,
+            model=model,
+            hf_token=self._hf_token,
             torch_dtype=_dtype_from_profile(torch, profile.dtype),
-            attn_implementation="sdpa",
         )
         model_object.to(profile.device)
         model_object.eval()
@@ -351,6 +355,38 @@ def build_runtime_factory(*, hf_token: str | None = None) -> HFTransformersRunti
     return HFTransformersRuntimeFactory(hf_token=hf_token)
 
 
+def _load_chat_tokenizer(*, transformers: Any, model: str, hf_token: str | None) -> Any:
+    if model == _MINISTRAL_CHAT_MODEL and hasattr(transformers, "MistralCommonBackend"):
+        return transformers.MistralCommonBackend.from_pretrained(model, token=hf_token)
+    return transformers.AutoTokenizer.from_pretrained(model, token=hf_token)
+
+
+def _load_chat_model(
+    *,
+    transformers: Any,
+    model: str,
+    hf_token: str | None,
+    torch_dtype: Any,
+) -> Any:
+    if model == _MINISTRAL_CHAT_MODEL and hasattr(
+        transformers, "Mistral3ForConditionalGeneration"
+    ):
+        fp8_config = transformers.FineGrainedFP8Config(dequantize=True)
+        return transformers.Mistral3ForConditionalGeneration.from_pretrained(
+            model,
+            token=hf_token,
+            device_map="auto",
+            dtype=torch_dtype,
+            quantization_config=fp8_config,
+        )
+    return transformers.AutoModelForCausalLM.from_pretrained(
+        model,
+        token=hf_token,
+        dtype=torch_dtype,
+        attn_implementation="sdpa",
+    )
+
+
 def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:
     if config.algorithm == "greedy":
         return {"do_sample": False}
@@ -363,15 +399,33 @@ def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:
     }
 
 
-def _parse_generated_json(text: str) -> object:
+def _parse_generated_json(text: str, *, schema_name: str) -> object:
     stripped = text.strip()
     try:
         return json.loads(stripped)
     except json.JSONDecodeError:
+        recovered = _recover_non_json_response(text=stripped, schema_name=schema_name)
+        if recovered is not None:
+            return recovered
         try:
             return ast.literal_eval(stripped)
         except (ValueError, SyntaxError) as error:
             raise ValueError(f"Model did not return valid structured output: {text}") from error
+
+
+def _recover_non_json_response(*, text: str, schema_name: str) -> object | None:
+    if schema_name == "vote_list":
+        token_matches = re.findall(r"\b[YyNn]\b", text)
+        if token_matches:
+            return [token.upper() for token in token_matches]
+    return None
+
+
+def _set_generation_temperature(*, model_object: Any, temperature: float) -> None:
+    generation_config = getattr(model_object, "generation_config", None)
+    if generation_config is None:
+        return
+    generation_config.temperature = temperature
 
 
 def _resolve_safety_margin_tokens(context_policy: dict[str, object]) -> int:
@@ -383,6 +437,23 @@ def _resolve_safety_margin_tokens(context_policy: dict[str, object]) -> int:
     if isinstance(raw_value, str):
         return int(raw_value)
     raise ValueError(f"Unsupported safety_margin_tokens value: {raw_value!r}")
+
+
+def _resolve_generation_timeout_seconds(
+    context_policy: dict[str, object],
+) -> float | None:
+    raw_value = context_policy.get("generation_timeout_seconds")
+    if raw_value is None:
+        return None
+    if isinstance(raw_value, int | float):
+        timeout = float(raw_value)
+    elif isinstance(raw_value, str):
+        timeout = float(raw_value)
+    else:
+        raise ValueError(f"Unsupported generation_timeout_seconds value: {raw_value!r}")
+    if timeout <= 0:
+        raise ValueError("generation_timeout_seconds must be positive.")
+    return timeout
 
 
 def _response_hit_generation_limit(
@@ -522,6 +593,11 @@ def _require_cuda(torch: Any) -> None:
         raise RuntimeError(
             "hf-transformers local inference requires CUDA; CPU fallback is disabled."
         )
+
+
+def _generator_kwarg_rejected(error: ValueError) -> bool:
+    message = str(error)
+    return "model_kwargs" in message and "generator" in message
 
 
 @lru_cache(maxsize=1)

@@ -80,6 +80,31 @@ uv run lcm run algo1 \
   --resume
 ```
 
+Exact single-condition HF smoke run:
+
+```bash
+uv run lcm run smoke \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --algorithm algo1 \
+  --model Qwen/Qwen3.5-9B \
+  --pair-name sg2_sg3 \
+  --condition-bits 00000 \
+  --decoding greedy \
+  --replication 0 \
+  --output-root /workspace/results/hf-smoke-qwen-sg2-sg3
+```
+
+This is the recommended paid-run gate for Qwen because `algo1 / sg2_sg3 / 00000 / greedy`
+was the first condition that exposed the runtime bottleneck during remote execution.
+
+Do not launch the full DOE until this exact smoke run:
+
+- loads the model successfully
+- writes `manifest.json`, `runtime.json`, `raw_response.json`, `raw_row.json`, and
+  `summary.json`
+- completes without hanging on the initial `edge_list` generation stage
+- produces a populated `summary.json`
+
 Config-driven planning preview through the legacy `generate` surface:
 
 ```bash
@@ -100,6 +125,13 @@ The run layout is resumable. Each condition writes:
 - `error.json` on failure
 
 Completed runs are not recomputed when `--resume` is used.
+
+For paid runs, the recommended order is:
+
+1. `bootstrap_gpu_host.sh`
+2. `lcm run validate-config`
+3. `lcm run smoke` for the exact target model / pair / condition
+4. `lcm run paper-batch --resume` only after the smoke run succeeds
 
 ## Live Monitoring
 
