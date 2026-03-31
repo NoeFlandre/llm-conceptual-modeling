@@ -154,8 +154,9 @@ def algo3_prompt_config(prompt_factors: dict[str, bool | int]) -> Method3PromptC
 
 
 class RecordingChatClient:
-    def __init__(self, inner: Any) -> None:
+    def __init__(self, inner: Any, *, persist_path: Path | None = None) -> None:
         self._inner = inner
+        self._persist_path = persist_path
         self.records: list[dict[str, object]] = []
 
     def complete_json(
@@ -177,6 +178,11 @@ class RecordingChatClient:
                 "response": response,
             }
         )
+        if self._persist_path is not None:
+            write_text(
+                self._persist_path,
+                json.dumps(self.records, indent=2, sort_keys=True),
+            )
         return response
 
 

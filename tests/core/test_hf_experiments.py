@@ -1118,6 +1118,63 @@ def test_run_algo2_configured_prompt_applies_cove_verification_to_final_edges() 
     assert result["raw_row"]["Result"] == "[]"
 
 
+def test_run_algo2_writes_intermediate_stage_artifacts(tmp_path: Path) -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    spec = HFRunSpec(
+        algorithm="algo2",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model=config.models.embedding_model,
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="000000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+            "use_relaxed_convergence": False,
+        },
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=None,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=23,
+    )
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
+            {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
+        ]
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    _run_algo2(spec, hf_runtime=runtime, run_dir=run_dir)
+
+    label_stage = json.loads((run_dir / "stages" / "algo2_label_expansion.json").read_text())
+    edge_stage = json.loads((run_dir / "stages" / "algo2_edge_generation.json").read_text())
+    raw_trace = json.loads((run_dir / "raw_response.json").read_text())
+
+    assert label_stage["expanded_labels"] == ["theta", "iota", "kappa", "lambda", "mu"]
+    assert label_stage["iteration_count"] == 2
+    assert edge_stage["verified_edges"] == [["alpha", "theta"]]
+    assert raw_trace[-1]["schema_name"] == "vote_list"
+
+
 def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(
     tmp_path: Path,
 ) -> None:

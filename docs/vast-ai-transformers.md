@@ -10,7 +10,7 @@ This workflow is for the new local-`transformers` experiment family that runs on
   - `Qwen/Qwen3.5-9B`
   - `allenai/Olmo-3-7B-Instruct`
 - embedding model:
-  - `Qwen/Qwen3-Embedding-8B`
+  - `Qwen/Qwen3-Embedding-0.6B`
 - decoding algorithms:
   - greedy
   - beam search with `num_beams` in `{2, 6}`

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable, cast
 
 import pandas as pd
 
@@ -234,6 +234,7 @@ def run_paper_batch(
                 spec=spec,
                 runtime_factory=runtime_factory,
                 dry_run=dry_run,
+                run_dir=run_dir,
             )
         except Exception as error:
             _write_json(
@@ -332,6 +333,7 @@ def _execute_run(
     spec: HFRunSpec,
     runtime_factory: RuntimeFactory,
     dry_run: bool,
+    run_dir: Path | None = None,
 ) -> RuntimeResult:
     if dry_run:
         return {
@@ -344,17 +346,23 @@ def _execute_run(
             },
             "raw_response": "[]",
         }
-    return runtime_factory(spec)
+    try:
+        runtime_callable = cast(Any, runtime_factory)
+        return runtime_callable(spec, run_dir=run_dir)
+    except TypeError as error:
+        if "run_dir" not in str(error):
+            raise
+        return runtime_factory(spec)
 
 
 def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -> RuntimeFactory:
-    def runtime(spec: HFRunSpec) -> RuntimeResult:
+    def runtime(spec: HFRunSpec, *, run_dir: Path | None = None) -> RuntimeResult:
         if spec.algorithm == "algo1":
-            return _run_algo1(spec, hf_runtime=hf_runtime)
+            return _run_algo1(spec, hf_runtime=hf_runtime, run_dir=run_dir)
         if spec.algorithm == "algo2":
-            return _run_algo2(spec, hf_runtime=hf_runtime)
+            return _run_algo2(spec, hf_runtime=hf_runtime, run_dir=run_dir)
         if spec.algorithm == "algo3":
-            return _run_algo3(spec, hf_runtime=hf_runtime)
+            return _run_algo3(spec, hf_runtime=hf_runtime, run_dir=run_dir)
         raise ValueError(f"Unsupported algorithm: {spec.algorithm}")
 
     return runtime
@@ -364,6 +372,7 @@ def _run_algo1(
     spec: HFRunSpec,
     *,
     hf_runtime: HFTransformersRuntimeFactory,
+    run_dir: Path | None = None,
 ) -> RuntimeResult:
     subgraph1 = _coerce_edges(spec.input_payload["subgraph1"])
     subgraph2 = _coerce_edges(spec.input_payload["subgraph2"])
@@ -376,7 +385,10 @@ def _run_algo1(
         context_policy=spec.context_policy,
         seed=spec.seed,
     )
-    recorder = _RecordingChatClient(chat_client)
+    recorder = _RecordingChatClient(
+        chat_client,
+        persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
+    )
     if spec.prompt_bundle is None:
         result = execute_method1(
             subgraph1=subgraph1,
@@ -426,6 +438,7 @@ def _run_algo2(
     spec: HFRunSpec,
     *,
     hf_runtime: HFTransformersRuntimeFactory,
+    run_dir: Path | None = None,
 ) -> RuntimeResult:
     subgraph1 = _coerce_edges(spec.input_payload["subgraph1"])
     subgraph2 = _coerce_edges(spec.input_payload["subgraph2"])
@@ -438,7 +451,10 @@ def _run_algo2(
         context_policy=spec.context_policy,
         seed=spec.seed,
     )
-    recorder = _RecordingChatClient(chat_client)
+    recorder = _RecordingChatClient(
+        chat_client,
+        persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
+    )
     embedding_client = hf_runtime.build_embedding_client(model=spec.embedding_model)
     source_labels = _collect_nodes(subgraph1)
     target_labels = _collect_nodes(subgraph2)
@@ -493,6 +509,24 @@ def _run_algo2(
             convergence_threshold=threshold,
             thesaurus=thesaurus,
         )
+    if run_dir is not None:
+        stages_dir = run_dir / "stages"
+        stages_dir.mkdir(parents=True, exist_ok=True)
+        _write_json(
+            stages_dir / "algo2_label_expansion.json",
+            {
+                "expanded_labels": result.expanded_labels,
+                "final_similarity": result.final_similarity,
+                "iteration_count": result.iteration_count,
+            },
+        )
+        _write_json(
+            stages_dir / "algo2_edge_generation.json",
+            {
+                "raw_edges": [list(edge) for edge in result.raw_edges],
+                "verified_edges": [list(edge) for edge in result.normalized_edges],
+            },
+        )
     raw_row = {
         **spec.raw_context,
         "Result": repr(result.normalized_edges),
@@ -511,6 +545,7 @@ def _run_algo3(
     spec: HFRunSpec,
     *,
     hf_runtime: HFTransformersRuntimeFactory,
+    run_dir: Path | None = None,
 ) -> RuntimeResult:
     source_graph = _coerce_edges(spec.input_payload["source_graph"])
     target_graph = _coerce_edges(spec.input_payload["target_graph"])
@@ -528,7 +563,10 @@ def _run_algo3(
         context_policy=spec.context_policy,
         seed=spec.seed,
     )
-    recorder = _RecordingChatClient(chat_client)
+    recorder = _RecordingChatClient(
+        chat_client,
+        persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
+    )
     if spec.prompt_bundle is None:
         result = execute_method3(
             source_labels=source_labels,

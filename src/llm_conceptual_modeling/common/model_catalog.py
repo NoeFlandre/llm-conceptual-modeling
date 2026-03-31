@@ -99,10 +99,10 @@ PAPER_EMBEDDING_MODELS: tuple[ModelCatalogEntry, ...] = (
 
 HF_EMBEDDING_MODELS: tuple[ModelCatalogEntry, ...] = (
     ModelCatalogEntry(
-        alias="paper:hf-qwen3-embedding-8b",
+        alias="paper:hf-qwen3-embedding-0.6b",
         provider="hf-transformers",
-        model="Qwen/Qwen3-Embedding-8B",
-        paper_label="Qwen3-Embedding-8B",
+        model="Qwen/Qwen3-Embedding-0.6B",
+        paper_label="Qwen3-Embedding-0.6B",
         role="embedding",
     ),
 )

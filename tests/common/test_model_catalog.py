@@ -82,8 +82,8 @@ def test_resolve_model_alias_maps_hf_transformers_embedding_model() -> None:
     assert (
         resolve_model_alias(
             provider="hf-transformers",
-            model="paper:hf-qwen3-embedding-8b",
+            model="paper:hf-qwen3-embedding-0.6b",
             role="embedding",
         )
-        == "Qwen/Qwen3-Embedding-8B"
+        == "Qwen/Qwen3-Embedding-0.6B"
     )

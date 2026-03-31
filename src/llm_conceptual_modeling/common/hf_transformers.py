@@ -17,7 +17,10 @@ _SUPPORTED_CHAT_MODELS = {
     _QWEN_CHAT_MODEL,
     "allenai/Olmo-3-7B-Instruct",
 }
-_SUPPORTED_EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-8B"
+_SUPPORTED_EMBEDDING_MODELS = {
+    "Qwen/Qwen3-Embedding-8B",
+    "Qwen/Qwen3-Embedding-0.6B",
+}
 
 
 def supports_explicit_thinking_disable(model: str) -> bool:
@@ -317,7 +320,7 @@ class HFTransformersRuntimeFactory:
         return bundle
 
     def _load_embedding_bundle(self, model: str) -> tuple[Any, Any, RuntimeProfile]:
-        if model != _SUPPORTED_EMBEDDING_MODEL:
+        if model not in _SUPPORTED_EMBEDDING_MODELS:
             raise ValueError(f"Unsupported hf-transformers embedding model: {model}")
         cached = self._embedding_cache.get(model)
         if cached is not None:

@@ -132,9 +132,9 @@ def test_cli_generate_algo2_hf_transformers_includes_local_runtime_contract(caps
         "Qwen/Qwen3.5-9B",
         "allenai/Olmo-3-7B-Instruct",
     ]
-    assert payload["embedding_models"] == ["Qwen/Qwen3-Embedding-8B"]
+    assert payload["embedding_models"] == ["Qwen/Qwen3-Embedding-0.6B"]
     assert payload["supported_decoding_algorithms"] == ["greedy", "beam", "contrastive"]
-    assert method_contract["embedding_model"] == "Qwen/Qwen3-Embedding-8B"
+    assert method_contract["embedding_model"] == "Qwen/Qwen3-Embedding-0.6B"
 
 
 def test_cli_generate_hf_transformers_reads_source_of_truth_config(

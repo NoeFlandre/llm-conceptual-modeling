@@ -45,7 +45,7 @@ def build_generation_stub_payload(
                 "Qwen/Qwen3.5-9B",
                 "allenai/Olmo-3-7B-Instruct",
             ]
-            payload["embedding_models"] = ["Qwen/Qwen3-Embedding-8B"]
+            payload["embedding_models"] = ["Qwen/Qwen3-Embedding-0.6B"]
             payload["supported_decoding_algorithms"] = ["greedy", "beam", "contrastive"]
         if algorithm == "algo2":
             method_contract = cast(dict[str, Any], payload["method_contract"])
