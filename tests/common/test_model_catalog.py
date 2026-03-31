@@ -57,3 +57,33 @@ def test_list_paper_model_catalog_includes_all_paper_chat_models() -> None:
         "GPT-4o",
         "GPT-5",
     ]
+
+
+def test_resolve_model_alias_maps_hf_transformers_chat_models() -> None:
+    assert (
+        resolve_model_alias(
+            provider="hf-transformers",
+            model="paper:hf-ministral-3-8b-instruct-2512",
+            role="chat",
+        )
+        == "mistralai/Ministral-3-8B-Instruct-2512"
+    )
+    assert (
+        resolve_model_alias(
+            provider="hf-transformers",
+            model="paper:hf-qwen3.5-9b",
+            role="chat",
+        )
+        == "Qwen/Qwen3.5-9B"
+    )
+
+
+def test_resolve_model_alias_maps_hf_transformers_embedding_model() -> None:
+    assert (
+        resolve_model_alias(
+            provider="hf-transformers",
+            model="paper:hf-qwen3-embedding-8b",
+            role="embedding",
+        )
+        == "Qwen/Qwen3-Embedding-8B"
+    )

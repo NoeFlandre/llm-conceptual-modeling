@@ -107,3 +107,30 @@ def test_cli_generate_algo1_exposes_paper_method_contract(capsys) -> None:
     assert method_contract["uses_chain_of_verification"] is True
     assert method_contract["verification_output"] == "Y/N list aligned to candidate pairs"
     assert method_contract["allows_new_nodes"] is True
+
+
+def test_cli_generate_algo2_hf_transformers_includes_local_runtime_contract(capsys) -> None:
+    exit_code = main(
+        [
+            "generate",
+            "algo2",
+            "--provider",
+            "hf-transformers",
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    payload = json.loads(captured.out)
+    method_contract = payload["method_contract"]
+
+    assert exit_code == 0
+    assert payload["provider"] == "hf-transformers"
+    assert payload["chat_models"] == [
+        "mistralai/Ministral-3-8B-Instruct-2512",
+        "Qwen/Qwen3.5-9B",
+        "allenai/Olmo-3-7B-Instruct",
+    ]
+    assert payload["embedding_models"] == ["Qwen/Qwen3-Embedding-8B"]
+    assert payload["supported_decoding_algorithms"] == ["greedy", "beam", "contrastive"]
+    assert method_contract["embedding_model"] == "Qwen/Qwen3-Embedding-8B"

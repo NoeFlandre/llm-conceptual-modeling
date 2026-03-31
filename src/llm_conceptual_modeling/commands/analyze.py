@@ -9,6 +9,7 @@ from llm_conceptual_modeling.analysis.figures_bundle import write_figures_bundle
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.hypothesis_bundle import write_hypothesis_testing_bundle
 from llm_conceptual_modeling.analysis.output_validity_bundle import write_output_validity_bundle
+from llm_conceptual_modeling.analysis.plots import write_revision_plots
 from llm_conceptual_modeling.analysis.replication_budget import write_replication_budget_analysis
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.stability_bundle import write_stability_bundle
@@ -50,6 +51,12 @@ def handle_analyze(args: Namespace) -> int:
             )
             return 0
         if args.analysis_target == "replication-budget":
+            if args.ci_profile == "strict":
+                args.relative_half_width_target = 0.05
+                args.z_score = 1.96
+            elif args.ci_profile == "relaxed":
+                args.relative_half_width_target = 0.1
+                args.z_score = 1.645
             write_replication_budget_analysis(
                 args.input,
                 args.output,
@@ -122,6 +129,12 @@ def handle_analyze(args: Namespace) -> int:
             return 0
         if args.analysis_target == "baseline-bundle":
             write_baseline_comparison_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
+            )
+            return 0
+        if args.analysis_target == "plots":
+            write_revision_plots(
                 results_root=args.results_root,
                 output_dir=args.output_dir,
             )

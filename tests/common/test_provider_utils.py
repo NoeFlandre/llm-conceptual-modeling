@@ -57,3 +57,9 @@ def test_build_embedding_client_uses_openrouter_client(monkeypatch) -> None:
 
     assert isinstance(client, FakeOpenRouterEmbeddingClient)
     assert captured == {"api_key": "router-key", "model": "text-embedding-3-large"}
+
+
+def test_resolve_provider_api_key_supports_hf_transformers(monkeypatch) -> None:
+    monkeypatch.setenv("HF_TOKEN", "hf-token")
+
+    assert resolve_provider_api_key("hf-transformers") == "hf-token"

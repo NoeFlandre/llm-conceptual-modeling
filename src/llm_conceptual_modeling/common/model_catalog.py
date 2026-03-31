@@ -63,6 +63,30 @@ PAPER_CHAT_MODELS: tuple[ModelCatalogEntry, ...] = (
     ),
 )
 
+HF_CHAT_MODELS: tuple[ModelCatalogEntry, ...] = (
+    ModelCatalogEntry(
+        alias="paper:hf-ministral-3-8b-instruct-2512",
+        provider="hf-transformers",
+        model="mistralai/Ministral-3-8B-Instruct-2512",
+        paper_label="Ministral-3-8B-Instruct-2512",
+        role="chat",
+    ),
+    ModelCatalogEntry(
+        alias="paper:hf-qwen3.5-9b",
+        provider="hf-transformers",
+        model="Qwen/Qwen3.5-9B",
+        paper_label="Qwen3.5-9B",
+        role="chat",
+    ),
+    ModelCatalogEntry(
+        alias="paper:hf-olmo-3-7b-instruct",
+        provider="hf-transformers",
+        model="allenai/Olmo-3-7B-Instruct",
+        paper_label="OLMo-3-7B-Instruct",
+        role="chat",
+    ),
+)
+
 PAPER_EMBEDDING_MODELS: tuple[ModelCatalogEntry, ...] = (
     ModelCatalogEntry(
         alias="paper:text-embedding-3-large",
@@ -73,9 +97,19 @@ PAPER_EMBEDDING_MODELS: tuple[ModelCatalogEntry, ...] = (
     ),
 )
 
+HF_EMBEDDING_MODELS: tuple[ModelCatalogEntry, ...] = (
+    ModelCatalogEntry(
+        alias="paper:hf-qwen3-embedding-8b",
+        provider="hf-transformers",
+        model="Qwen/Qwen3-Embedding-8B",
+        paper_label="Qwen3-Embedding-8B",
+        role="embedding",
+    ),
+)
+
 _ALIASES_BY_ROLE: dict[ModelRole, dict[str, ModelCatalogEntry]] = {
-    "chat": {entry.alias: entry for entry in PAPER_CHAT_MODELS},
-    "embedding": {entry.alias: entry for entry in PAPER_EMBEDDING_MODELS},
+    "chat": {entry.alias: entry for entry in PAPER_CHAT_MODELS + HF_CHAT_MODELS},
+    "embedding": {entry.alias: entry for entry in PAPER_EMBEDDING_MODELS + HF_EMBEDDING_MODELS},
 }
 
 

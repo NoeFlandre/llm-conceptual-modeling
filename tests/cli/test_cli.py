@@ -158,6 +158,41 @@ def test_cli_baseline_algo1_output_is_evaluable(tmp_path) -> None:
     assert {"accuracy", "recall", "precision", "f1"}.issubset(actual.columns)
 
 
+def test_cli_baseline_algo1_accepts_wordnet_and_edit_distance_strategies(tmp_path) -> None:
+    wordnet_output_path = tmp_path / "algorithm1_wordnet_baseline.csv"
+    edit_distance_output_path = tmp_path / "algorithm1_edit_distance_baseline.csv"
+
+    wordnet_exit_code = main(
+        [
+            "baseline",
+            "algo1",
+            "--pair",
+            "sg1_sg2",
+            "--strategy",
+            "wordnet-ontology-match",
+            "--output",
+            str(wordnet_output_path),
+        ]
+    )
+    edit_distance_exit_code = main(
+        [
+            "baseline",
+            "algo1",
+            "--pair",
+            "sg1_sg2",
+            "--strategy",
+            "edit-distance",
+            "--output",
+            str(edit_distance_output_path),
+        ]
+    )
+
+    assert wordnet_exit_code == 0
+    assert edit_distance_exit_code == 0
+    assert wordnet_output_path.exists()
+    assert edit_distance_output_path.exists()
+
+
 def test_cli_baseline_algo2_output_is_evaluable(tmp_path) -> None:
     raw_output_path = tmp_path / "algorithm2_baseline_sg1_sg2.csv"
     evaluated_output_path = tmp_path / "metrics.csv"
@@ -477,6 +512,169 @@ def test_cli_analyze_figures_bundle_writes_distributional_summaries(tmp_path) ->
 
     overview = pd.read_csv(output_dir / "bundle_overview.csv")
     assert {"ci95_low", "ci95_high", "median", "q1", "q3"}.issubset(overview.columns)
+
+
+def test_cli_analyze_replication_budget_supports_strict_ci_profile(tmp_path) -> None:
+    input_path = tmp_path / "stability.csv"
+    output_path = tmp_path / "budget.csv"
+    _write_flat(
+        input_path,
+        [
+            "metric,n,mean,sample_std",
+            "accuracy,5,100,12",
+        ],
+    )
+
+    exit_code = main(
+        [
+            "analyze",
+            "replication-budget",
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_path),
+            "--ci-profile",
+            "strict",
+        ]
+    )
+
+    actual = pd.read_csv(output_path)
+
+    assert exit_code == 0
+    assert actual.iloc[0]["z_score"] == 1.96
+    assert actual.iloc[0]["relative_half_width_target"] == 0.05
+    assert actual.iloc[0]["required_total_runs"] == 23
+
+
+def test_cli_analyze_replication_budget_supports_relaxed_ci_profile(tmp_path) -> None:
+    input_path = tmp_path / "stability.csv"
+    output_path = tmp_path / "budget.csv"
+    _write_flat(
+        input_path,
+        [
+            "metric,n,mean,sample_std",
+            "accuracy,5,100,12",
+        ],
+    )
+
+    exit_code = main(
+        [
+            "analyze",
+            "replication-budget",
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_path),
+            "--ci-profile",
+            "relaxed",
+        ]
+    )
+
+    actual = pd.read_csv(output_path)
+
+    assert exit_code == 0
+    assert actual.iloc[0]["z_score"] == 1.645
+    assert actual.iloc[0]["relative_half_width_target"] == 0.1
+    assert actual.iloc[0]["required_total_runs"] == 5
+
+
+def test_cli_analyze_plots_writes_revision_plot_family(tmp_path) -> None:
+    results_root = tmp_path / "tracker"
+    (results_root / "figure_exports").mkdir(parents=True)
+    (results_root / "hypothesis_testing").mkdir(parents=True)
+    (results_root / "output_variability").mkdir(parents=True)
+    _write_flat(
+        results_root / "figure_exports" / "bundle_overview.csv",
+        [
+            "algorithm,model,metric,mean,ci95_low,ci95_high,q1,q3",
+            "algo1,gpt-5,accuracy,0.9,0.88,0.92,0.89,0.91",
+            "algo3,gpt-5,Recall,0.1,0.02,0.18,0.0,0.15",
+        ],
+    )
+    _write_flat(
+        results_root / "hypothesis_testing" / "bundle_overview.csv",
+        [
+            "algorithm,factor,metric,mean_difference_average,significant_share",
+            "algo1,Explanation,precision,0.02,0.5",
+            "algo2,Convergence,accuracy,0.03,0.83",
+        ],
+    )
+    _write_flat(
+        results_root / "output_variability" / "bundle_overview.csv",
+        [
+            "algorithm,mean_pairwise_jaccard,breadth_expansion_ratio",
+            "algo1,0.998,1.0",
+            "algo3,0.077,4.13",
+        ],
+    )
+    output_dir = tmp_path / "plots"
+
+    exit_code = main(
+        [
+            "analyze",
+            "plots",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "distribution_metrics.png").exists()
+    assert (output_dir / "factor_effect_summary.png").exists()
+    assert (output_dir / "raw_output_variability.png").exists()
+
+
+def test_cli_run_paper_batch_writes_batch_summary(tmp_path) -> None:
+    output_root = tmp_path / "runs"
+
+    exit_code = main(
+        [
+            "run",
+            "paper-batch",
+            "--provider",
+            "hf-transformers",
+            "--model",
+            "mistralai/Ministral-3-8B-Instruct-2512",
+            "--embedding-model",
+            "Qwen/Qwen3-Embedding-8B",
+            "--output-root",
+            str(output_root),
+            "--replications",
+            "1",
+            "--dry-run",
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_root / "batch_summary.csv").exists()
+
+
+def test_cli_run_algo1_dry_run_limits_batch_to_requested_algorithm(tmp_path) -> None:
+    output_root = tmp_path / "runs"
+
+    exit_code = main(
+        [
+            "run",
+            "algo1",
+            "--provider",
+            "hf-transformers",
+            "--model",
+            "mistralai/Ministral-3-8B-Instruct-2512",
+            "--embedding-model",
+            "Qwen/Qwen3-Embedding-8B",
+            "--output-root",
+            str(output_root),
+            "--replications",
+            "1",
+            "--dry-run",
+        ]
+    )
+
+    assert exit_code == 0
+    summary = pd.read_csv(output_root / "batch_summary.csv")
+    assert summary["algorithm"].unique().tolist() == ["algo1"]
 
 
 def _write_flat(path, lines: list[str]) -> None:

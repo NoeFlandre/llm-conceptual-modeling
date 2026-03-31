@@ -20,6 +20,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     analyze_parser = subparsers.add_parser("analyze")
     analyze_subparsers = analyze_parser.add_subparsers(dest="analysis_target", required=True)
+    run_parser = subparsers.add_parser("run")
+    run_subparsers = run_parser.add_subparsers(dest="run_target", required=True)
     baseline_parser = subparsers.add_parser("baseline")
     baseline_subparsers = baseline_parser.add_subparsers(dest="algorithm", required=True)
     eval_parser = subparsers.add_parser("eval")
@@ -95,6 +97,7 @@ def build_parser() -> argparse.ArgumentParser:
     for algorithm in ("algo1", "algo2", "algo3"):
         generate_algorithm_parser = generate_subparsers.add_parser(algorithm)
         generate_algorithm_parser.add_argument("--fixture-only", action="store_true")
+        generate_algorithm_parser.add_argument("--provider", default="mistral")
         generate_algorithm_parser.add_argument("--json", action="store_true")
 
     summary_parser = analyze_subparsers.add_parser("summary")
@@ -121,6 +124,11 @@ def build_parser() -> argparse.ArgumentParser:
     replication_budget_parser = analyze_subparsers.add_parser("replication-budget")
     replication_budget_parser.add_argument("--input", action="append", required=True)
     replication_budget_parser.add_argument("--output", required=True)
+    replication_budget_parser.add_argument(
+        "--ci-profile",
+        choices=["custom", "strict", "relaxed"],
+        default="custom",
+    )
     replication_budget_parser.add_argument("--relative-half-width-target", type=float, default=0.05)
     replication_budget_parser.add_argument("--z-score", type=float, default=1.96)
 
@@ -185,6 +193,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     baseline_bundle_parser.add_argument("--output-dir", required=True)
 
+    plots_parser = analyze_subparsers.add_parser("plots")
+    plots_parser.add_argument("--results-root", required=True)
+    plots_parser.add_argument("--output-dir", required=True)
+
+    paper_batch_parser = run_subparsers.add_parser("paper-batch")
+    paper_batch_parser.add_argument("--provider", required=True)
+    paper_batch_parser.add_argument("--model", action="append", required=True)
+    paper_batch_parser.add_argument("--embedding-model", required=True)
+    paper_batch_parser.add_argument("--output-root", required=True)
+    paper_batch_parser.add_argument("--replications", type=int, default=5)
+    paper_batch_parser.add_argument("--resume", action="store_true")
+    paper_batch_parser.add_argument("--dry-run", action="store_true")
+
+    for algorithm in ("algo1", "algo2", "algo3"):
+        algorithm_run_parser = run_subparsers.add_parser(algorithm)
+        algorithm_run_parser.add_argument("--provider", required=True)
+        algorithm_run_parser.add_argument("--model", action="append", required=True)
+        algorithm_run_parser.add_argument("--embedding-model", required=True)
+        algorithm_run_parser.add_argument("--output-root", required=True)
+        algorithm_run_parser.add_argument("--replications", type=int, default=5)
+        algorithm_run_parser.add_argument("--resume", action="store_true")
+        algorithm_run_parser.add_argument("--dry-run", action="store_true")
+
     return parser
 
 
@@ -220,6 +251,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         from llm_conceptual_modeling.commands.generate import handle_generate
 
         return handle_generate(args)
+    if args.command == "run":
+        from llm_conceptual_modeling.commands.run import handle_run
+
+        return handle_run(args)
 
     parser.error("unsupported command")
     return 2

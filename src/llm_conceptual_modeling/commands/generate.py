@@ -11,6 +11,7 @@ def handle_generate(args: Namespace) -> int:
         build_generation_stub_payload(
             args.algorithm,
             fixture_only=args.fixture_only,
+            provider=args.provider,
         )
     )
     return 0

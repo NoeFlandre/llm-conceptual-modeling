@@ -10,12 +10,15 @@ def resolve_provider_api_key(provider: str) -> str:
         "anthropic": "ANTHROPIC_API_KEY",
         "mistral": "MISTRAL_API_KEY",
         "openrouter": "OPENROUTER_API_KEY",
+        "hf-transformers": "HF_TOKEN",
     }
     if provider not in environment_variables:
         raise ValueError(f"Unsupported provider: {provider}")
 
     environment_variable = environment_variables[provider]
     api_key = os.environ.get(environment_variable)
+    if provider == "hf-transformers" and not api_key:
+        api_key = os.environ.get("HUGGING_FACE_HUB_TOKEN")
     if api_key:
         return api_key
 

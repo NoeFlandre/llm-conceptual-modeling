@@ -190,6 +190,32 @@ uv run lcm verify legacy-parity --json
 uv run lcm verify all --json
 ```
 
+Run the new local-`transformers` GPU batch:
+
+```bash
+uv run lcm run paper-batch \
+  --provider hf-transformers \
+  --model mistralai/Ministral-3-8B-Instruct-2512 \
+  --model Qwen/Qwen3.5-9B \
+  --model allenai/Olmo-3-7B-Instruct \
+  --embedding-model Qwen/Qwen3-Embedding-8B \
+  --output-root /tmp/hf-paper-batch \
+  --replications 5 \
+  --resume
+
+uv run lcm analyze plots \
+  --results-root /tmp/hf-paper-batch \
+  --output-dir /tmp/hf-paper-batch/plots
+```
+
+Remote GPU workflow:
+
+- bootstrap and CUDA verification: [docs/vast-ai-transformers.md](docs/vast-ai-transformers.md)
+- helper scripts:
+  - `scripts/vast/bootstrap_gpu_host.sh`
+  - `scripts/vast/sync_repo_to_vast.sh`
+  - `scripts/vast/fetch_results_from_vast.sh`
+
 ## Repository Structure
 
 - `src/llm_conceptual_modeling/`
