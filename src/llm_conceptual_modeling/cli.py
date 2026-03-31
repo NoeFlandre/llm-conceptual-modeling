@@ -202,6 +202,10 @@ def build_parser() -> argparse.ArgumentParser:
     validate_config_parser.add_argument("--config", required=True)
     validate_config_parser.add_argument("--output-dir", required=True)
 
+    status_parser = run_subparsers.add_parser("status")
+    status_parser.add_argument("--results-root", required=True)
+    status_parser.add_argument("--json", action="store_true")
+
     paper_batch_parser = run_subparsers.add_parser("paper-batch")
     paper_batch_parser.add_argument("--provider", default="hf-transformers")
     paper_batch_parser.add_argument("--model", action="append")

@@ -7,6 +7,7 @@ import pytest
 from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
+from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.hf_experiments import (
     HFRunSpec,
     _build_prompt_bundle,
@@ -277,6 +278,113 @@ def test_run_paper_batch_writes_batch_summary_csv(tmp_path: Path) -> None:
     assert {"algorithm", "model", "decoding_algorithm", "replication", "status"}.issubset(
         summary.columns
     )
+
+
+def test_run_paper_batch_writes_live_batch_status_file(tmp_path: Path) -> None:
+    output_root = tmp_path / "runs"
+
+    def runtime_factory(spec):
+        status_path = output_root / "batch_status.json"
+        assert status_path.exists()
+        status = json.loads(status_path.read_text(encoding="utf-8"))
+        assert status["total_runs"] == 1680
+        assert status["running_count"] == 1
+        assert status["current_run"]["algorithm"] == spec.algorithm
+        if spec.algorithm == "algo3":
+            row = {
+                **spec.raw_context,
+                "Results": "[]",
+                "Source Graph": "[]",
+                "Target Graph": "[]",
+                "Mother Graph": "[]",
+                "Recall": 0.0,
+            }
+        else:
+            row = {
+                **spec.raw_context,
+                "Result": "[]",
+                "graph": "[]",
+                "subgraph1": "[]",
+                "subgraph2": "[]",
+            }
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=runtime_factory,
+    )
+
+    status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+
+    assert status["total_runs"] == 1680
+    assert status["finished_count"] == 1680
+    assert status["failed_count"] == 0
+    assert status["pending_count"] == 0
+    assert status["running_count"] == 0
+    assert status["current_run"] is None
+    assert status["last_completed_run"] is not None
+    assert status["percent_complete"] == 100.0
+
+
+def test_collect_batch_status_reconstructs_health_from_run_tree(tmp_path: Path) -> None:
+    output_root = tmp_path / "results"
+    finished_dir = (
+        output_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    )
+    failed_dir = (
+        output_root / "runs" / "algo2" / "model" / "greedy" / "sg1_sg2" / "000000" / "rep_00"
+    )
+    running_dir = (
+        output_root
+        / "runs"
+        / "algo3"
+        / "model"
+        / "greedy"
+        / "subgraph_1_to_subgraph_3"
+        / "0000"
+        / "rep_00"
+    )
+    pending_dir = (
+        output_root / "runs" / "algo1" / "model" / "greedy" / "sg2_sg3" / "00000" / "rep_00"
+    )
+    for directory in [finished_dir, failed_dir, running_dir, pending_dir]:
+        directory.mkdir(parents=True, exist_ok=True)
+    (finished_dir / "state.json").write_text('{"status": "finished"}', encoding="utf-8")
+    (finished_dir / "summary.json").write_text('{"status": "finished"}', encoding="utf-8")
+    (failed_dir / "state.json").write_text('{"status": "failed"}', encoding="utf-8")
+    (failed_dir / "error.json").write_text('{"message": "boom"}', encoding="utf-8")
+    (running_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (output_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "total_runs": 4,
+                "current_run": {"algorithm": "algo3", "pair_name": "subgraph_1_to_subgraph_3"},
+                "last_completed_run": {"algorithm": "algo1", "pair_name": "sg1_sg2"},
+                "started_at": "2026-03-31T00:00:00+00:00",
+                "updated_at": "2026-03-31T00:01:00+00:00",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["total_runs"] == 4
+    assert status["finished_count"] == 1
+    assert status["failed_count"] == 1
+    assert status["running_count"] == 1
+    assert status["pending_count"] == 1
+    assert status["failure_count"] == 1
+    assert status["percent_complete"] == 25.0
+    assert status["current_run"]["algorithm"] == "algo3"
+    assert status["last_completed_run"]["algorithm"] == "algo1"
 
 
 def test_run_paper_batch_writes_error_artifact_and_marks_failed_state(tmp_path: Path) -> None:

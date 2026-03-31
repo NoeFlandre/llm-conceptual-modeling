@@ -29,6 +29,15 @@ from llm_conceptual_modeling.common.hf_transformers import (
     build_runtime_factory,
 )
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
+from llm_conceptual_modeling.hf_batch.monitoring import (
+    current_run_payload as _current_run_payload,
+)
+from llm_conceptual_modeling.hf_batch.monitoring import (
+    status_timestamp_now as _status_timestamp_now,
+)
+from llm_conceptual_modeling.hf_batch.monitoring import (
+    write_status_snapshot as _write_status_snapshot,
+)
 from llm_conceptual_modeling.hf_batch.outputs import write_aggregated_outputs
 from llm_conceptual_modeling.hf_batch_planning import plan_paper_batch_specs
 from llm_conceptual_modeling.hf_batch_prompts import (
@@ -149,6 +158,24 @@ def run_paper_batch(
         runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
 
     summary_rows: list[dict[str, object]] = []
+    total_runs = len(planned_specs)
+    started_at = _status_timestamp_now()
+    last_completed_run: dict[str, object] | None = None
+    status_snapshot: dict[str, object] = {
+        "total_runs": total_runs,
+        "finished_count": 0,
+        "failed_count": 0,
+        "running_count": 0,
+        "pending_count": total_runs,
+        "failure_count": 0,
+        "failures": [],
+        "percent_complete": 0.0,
+        "current_run": None,
+        "last_completed_run": None,
+        "started_at": started_at,
+        "updated_at": started_at,
+    }
+    _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
     for spec in planned_specs:
         run_dir = (
@@ -168,10 +195,39 @@ def run_paper_batch(
         if resume and _is_finished_run_directory(run_dir):
             cached = json.loads(summary_path.read_text(encoding="utf-8"))
             summary_rows.append(cached)
+            last_completed_run = _current_run_payload(
+                algorithm=spec.algorithm,
+                model=spec.model,
+                decoding_algorithm=spec.decoding.algorithm,
+                pair_name=spec.pair_name,
+                condition_bits=spec.condition_bits,
+                replication=spec.replication,
+            )
+            status_snapshot["finished_count"] = int(status_snapshot["finished_count"]) + 1
+            status_snapshot["pending_count"] = int(status_snapshot["pending_count"]) - 1
+            status_snapshot["last_completed_run"] = last_completed_run
+            status_snapshot["percent_complete"] = round(
+                (int(status_snapshot["finished_count"]) / total_runs) * 100.0,
+                2,
+            )
+            status_snapshot["updated_at"] = _status_timestamp_now()
+            _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
             continue
 
         _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
         _write_json(run_dir / "state.json", {"status": "running"})
+        current_run = _current_run_payload(
+            algorithm=spec.algorithm,
+            model=spec.model,
+            decoding_algorithm=spec.decoding.algorithm,
+            pair_name=spec.pair_name,
+            condition_bits=spec.condition_bits,
+            replication=spec.replication,
+        )
+        status_snapshot["current_run"] = current_run
+        status_snapshot["running_count"] = 1
+        status_snapshot["updated_at"] = _status_timestamp_now()
+        _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
         try:
             runtime_result = _execute_run(
@@ -189,6 +245,22 @@ def run_paper_batch(
                 },
             )
             _write_json(run_dir / "state.json", {"status": "failed"})
+            status_snapshot["running_count"] = 0
+            status_snapshot["current_run"] = None
+            status_snapshot["failed_count"] = int(status_snapshot["failed_count"]) + 1
+            status_snapshot["pending_count"] = int(status_snapshot["pending_count"]) - 1
+            failures = list(status_snapshot["failures"])
+            failures.append(
+                {
+                    "run_dir": str(run_dir),
+                    "message": str(error),
+                    "type": type(error).__name__,
+                }
+            )
+            status_snapshot["failures"] = failures
+            status_snapshot["failure_count"] = len(failures)
+            status_snapshot["updated_at"] = _status_timestamp_now()
+            _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
             raise
 
         raw_row = runtime_result["raw_row"]
@@ -214,6 +286,18 @@ def run_paper_batch(
         }
         _write_json(summary_path, summary)
         summary_rows.append(summary)
+        last_completed_run = current_run
+        status_snapshot["running_count"] = 0
+        status_snapshot["current_run"] = None
+        status_snapshot["last_completed_run"] = last_completed_run
+        status_snapshot["finished_count"] = int(status_snapshot["finished_count"]) + 1
+        status_snapshot["pending_count"] = int(status_snapshot["pending_count"]) - 1
+        status_snapshot["percent_complete"] = round(
+            (int(status_snapshot["finished_count"]) / total_runs) * 100.0,
+            2,
+        )
+        status_snapshot["updated_at"] = _status_timestamp_now()
+        _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
     summary_frame = pd.DataFrame.from_records(summary_rows)
     summary_frame.to_csv(output_root_path / "batch_summary.csv", index=False)

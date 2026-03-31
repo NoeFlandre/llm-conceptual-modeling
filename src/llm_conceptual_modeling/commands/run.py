@@ -1,5 +1,7 @@
+import json
 from argparse import Namespace
 
+from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.hf_experiments import run_paper_batch
 from llm_conceptual_modeling.hf_run_config import (
     load_hf_run_config,
@@ -11,6 +13,19 @@ def handle_run(args: Namespace) -> int:
     if args.run_target == "validate-config":
         config = load_hf_run_config(args.config)
         write_resolved_run_preview(config=config, output_dir=args.output_dir)
+        return 0
+    if args.run_target == "status":
+        status = collect_batch_status(args.results_root)
+        if args.json:
+            print(json.dumps(status, indent=2, sort_keys=True))
+        else:
+            print(
+                "total={total_runs} finished={finished_count} failed={failed_count} "
+                "running={running_count} pending={pending_count} "
+                "complete={percent_complete}%".format(
+                    **status
+                )
+            )
         return 0
 
     config = load_hf_run_config(args.config) if getattr(args, "config", None) else None

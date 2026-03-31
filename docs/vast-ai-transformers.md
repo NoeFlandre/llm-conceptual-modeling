@@ -101,6 +101,39 @@ The run layout is resumable. Each condition writes:
 
 Completed runs are not recomputed when `--resume` is used.
 
+## Live Monitoring
+
+While the batch is running, the root results directory is updated with:
+
+- `batch_status.json`
+
+This file records:
+
+- `total_runs`
+- `finished_count`
+- `failed_count`
+- `running_count`
+- `pending_count`
+- `percent_complete`
+- `current_run`
+- `last_completed_run`
+- failure summaries
+
+You can inspect it directly:
+
+```bash
+cat /workspace/results/hf-paper-batch/batch_status.json
+```
+
+Or use the CLI health view, which reconstructs status from the run tree and does not rely only on
+the mutable status file:
+
+```bash
+uv run lcm run status \
+  --results-root /workspace/results/hf-paper-batch \
+  --json
+```
+
 ## Outputs
 
 For each algorithm / model / decoding condition, the runner writes:

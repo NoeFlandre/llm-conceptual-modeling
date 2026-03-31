@@ -208,6 +208,10 @@ uv run lcm run paper-batch \
 uv run lcm analyze plots \
   --results-root /workspace/results/hf-paper-batch \
   --output-dir /workspace/results/hf-paper-batch/plots
+
+uv run lcm run status \
+  --results-root /workspace/results/hf-paper-batch \
+  --json
 ```
 
 The YAML file is the execution source of truth for:

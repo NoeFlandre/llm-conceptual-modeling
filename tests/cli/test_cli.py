@@ -736,6 +736,40 @@ algorithms:
     assert (output_dir / "prompt_preview" / "algo1" / "base.txt").exists()
 
 
+def test_cli_run_status_reports_batch_health_as_json(tmp_path, capsys) -> None:
+    results_root = tmp_path / "results"
+    run_dir = (
+        results_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    )
+    run_dir.mkdir(
+        parents=True, exist_ok=True
+    )
+    (run_dir / "state.json").write_text(
+        '{"status": "finished"}',
+        encoding="utf-8",
+    )
+    (run_dir / "summary.json").write_text(
+        '{"status": "finished"}',
+        encoding="utf-8",
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "status",
+            "--results-root",
+            str(results_root),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert '"finished_count": 1' in captured.out
+    assert '"failed_count": 0' in captured.out
+
+
 def _write_flat(path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
