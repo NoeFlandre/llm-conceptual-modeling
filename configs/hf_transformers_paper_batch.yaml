@@ -1,0 +1,274 @@
+run:
+  provider: hf-transformers
+  output_root: /workspace/results/hf-paper-batch
+  replications: 5
+
+runtime:
+  seed: 20260331
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  context_policy:
+    prompt_truncation: forbid
+    safety_margin_tokens: 64
+  max_new_tokens_by_schema:
+    edge_list: 256
+    vote_list: 64
+    label_list: 128
+    children_by_label: 384
+
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+    - Qwen/Qwen3.5-9B
+    - allenai/Olmo-3-7B-Instruct
+  embedding_model: Qwen/Qwen3-Embedding-8B
+
+decoding:
+  greedy:
+    enabled: true
+  beam:
+    enabled: true
+    num_beams: [2, 6]
+  contrastive:
+    enabled: true
+    penalty_alpha: [0.2, 0.8]
+    top_k: 4
+
+inputs:
+  graph_source: default
+
+shared_fragments:
+  assistant_role: >-
+    You are a helpful assistant who understands Knowledge Maps.
+  edge_output_contract: >-
+    Return only JSON with an "edges" array containing objects with "source" and "target" fields.
+    Do not add any explanation or prose.
+  vote_output_contract: >-
+    Return only JSON with a "votes" array aligned with the candidate pairs. Each vote must be
+    either "Y" or "N".
+  label_output_contract: >-
+    Return only JSON with a "labels" array of candidate node labels. Do not add any explanation
+    or prose.
+  children_output_contract: >-
+    Return only JSON with a "children_by_label" object mapping each source label to a list of
+    proposed child labels. Do not add any explanation or prose.
+
+algorithms:
+  algo1:
+    pair_names: [sg1_sg2, sg2_sg3, sg3_sg1]
+    base_fragments:
+      - assistant_role
+    factors:
+      explanation:
+        column: Explanation
+        levels: [-1, 1]
+        runtime_field: include_explanation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo1_explanation]
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo1_example]
+      counterexample:
+        column: Counterexample
+        levels: [-1, 1]
+        runtime_field: include_counterexample
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo1_counterexample]
+      array_repr:
+        column: Array/List(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_array_representation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      adjacency_repr:
+        column: Tag/Adjacency(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_adjacency_notation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+    fragment_definitions:
+      algo1_explanation: >-
+        A knowledge map is a network consisting of nodes and directed edges. Nodes represent
+        interpretable concepts, and edges represent direct causal relationships between concepts.
+      algo1_example: >-
+        Example: if one map contains ('capacity to hire', 'bad employees') and another contains
+        ('work motivation', 'productivity'), valid cross-map suggestions may introduce a bridging
+        concept such as 'quality of managers' when that concept plausibly connects the two maps.
+      algo1_counterexample: >-
+        Counterexample: avoid unrelated additions such as linking 'moon' to 'bad employees'.
+      algo1_task: >-
+        You will receive two knowledge maps. Suggest plausible cross-map causal links. You may use
+        new intermediate nodes when they are necessary. Do not repeat existing within-map edges and
+        do not add links between two nodes that already belong to the same input map.
+      algo1_cove_task: >-
+        Review the candidate pairs and vote whether each pair is a plausible causal relation in the
+        current task setting.
+    prompt_templates:
+      direct_edge: >-
+        {algo1_task} Knowledge map 1: {formatted_subgraph1} Knowledge map 2: {formatted_subgraph2}
+        {edge_output_contract}
+      cove_verification: >-
+        {algo1_cove_task} Candidate pairs: {candidate_edges} {vote_output_contract}
+
+  algo2:
+    pair_names: [sg1_sg2, sg2_sg3, sg3_sg1]
+    base_fragments:
+      - assistant_role
+    factors:
+      explanation:
+        column: Explanation
+        levels: [-1, 1]
+        runtime_field: include_explanation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo2_explanation]
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo2_example]
+      counterexample:
+        column: Counterexample
+        levels: [-1, 1]
+        runtime_field: include_counterexample
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo2_counterexample]
+      array_repr:
+        column: Array/List(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_array_representation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      adjacency_repr:
+        column: Tag/Adjacency(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_adjacency_notation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      convergence:
+        column: Convergence
+        levels: [-1, 1]
+        runtime_field: use_relaxed_convergence
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: [algo2_strict_convergence]
+        high_fragments: [algo2_relaxed_convergence]
+    fragment_definitions:
+      algo2_explanation: >-
+        A knowledge map is a network of interpretable concepts linked by directed causal edges.
+        The goal is to expand the concept vocabulary and then propose cross-map edges.
+      algo2_example: >-
+        Example: if the two maps discuss hiring and productivity, reasonable expanded labels may
+        include concepts such as 'quality of managers' or 'employee satisfaction' before proposing
+        new cross-map edges.
+      algo2_counterexample: >-
+        Counterexample: avoid unrelated concepts such as 'moon' or 'swimming' when they do not
+        connect causally to the input maps.
+      algo2_strict_convergence: >-
+        Use a conservative expansion style and avoid speculative labels unless they are strongly
+        motivated by the existing map content.
+      algo2_relaxed_convergence: >-
+        Use a broader expansion style and allow additional plausible bridge labels before the
+        similarity-based convergence check stops the search.
+      algo2_label_task: >-
+        You will receive two knowledge maps and a current set of seed labels. Propose additional
+        candidate labels that could help connect the two maps conceptually.
+      algo2_edge_task: >-
+        You will receive the two knowledge maps and a set of expanded labels. Suggest plausible
+        cross-map causal edges using the original and expanded labels.
+    prompt_templates:
+      label_expansion: >-
+        {algo2_label_task} Knowledge map 1: {formatted_subgraph1} Knowledge map 2:
+        {formatted_subgraph2} Current seed labels: {seed_labels} {label_output_contract}
+      edge_suggestion: >-
+        {algo2_edge_task} Knowledge map 1: {formatted_subgraph1} Knowledge map 2:
+        {formatted_subgraph2} Expanded label context: {expanded_label_context}
+        {edge_output_contract}
+
+  algo3:
+    pair_names:
+      - subgraph_1_to_subgraph_3
+      - subgraph_2_to_subgraph_1
+      - subgraph_2_to_subgraph_3
+    base_fragments:
+      - assistant_role
+    factors:
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo3_example]
+      counterexample:
+        column: Counter-Example
+        levels: [-1, 1]
+        runtime_field: include_counterexample
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: [algo3_counterexample]
+      number_of_words:
+        column: Number of Words
+        levels: [-1, 1]
+        runtime_field: child_count
+        low_runtime_value: 3
+        high_runtime_value: 5
+        low_fragments: [algo3_three_children]
+        high_fragments: [algo3_five_children]
+      depth:
+        column: Depth
+        levels: [-1, 1]
+        runtime_field: max_depth
+        low_runtime_value: 1
+        high_runtime_value: 2
+        low_fragments: [algo3_depth_one]
+        high_fragments: [algo3_depth_two]
+    fragment_definitions:
+      algo3_example: >-
+        Example: when expanding from a source concept such as 'stress', plausible children could
+        include more specific drivers such as 'financial stress' or 'work overload' if they remain
+        conceptually relevant to the target map.
+      algo3_counterexample: >-
+        Counterexample: avoid children that are semantically unrelated to the source label.
+      algo3_three_children: >-
+        Keep the branching factor low and propose only a small set of high-confidence children.
+      algo3_five_children: >-
+        Use the larger branching factor configured for this condition and propose the full number
+        of candidate children requested by the runtime.
+      algo3_depth_one: >-
+        The runtime will stop after one expansion step.
+      algo3_depth_two: >-
+        The runtime will allow a second expansion step before stopping.
+      algo3_task: >-
+        Expand each source label into child concepts that could help bridge toward the target map.
+        Keep the children short, domain-relevant, and semantically coherent with the parent label.
+    prompt_templates:
+      tree_expansion: >-
+        {algo3_task} Current source labels: {source_labels} Requested children per source:
+        {child_count} {children_output_contract}

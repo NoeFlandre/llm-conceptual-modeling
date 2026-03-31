@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import json
+import random
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
@@ -28,8 +29,8 @@ class DecodingConfig:
     temperature: float = 0.0
 
     def validate(self) -> None:
-        if self.temperature != 0.0:
-            raise ValueError("HF local inference must use temperature=0.0.")
+        if self.temperature < 0.0:
+            raise ValueError("HF local inference temperature must be non-negative.")
         if self.algorithm == "greedy":
             if self.num_beams is not None or self.penalty_alpha is not None:
                 raise ValueError("Greedy decoding cannot set beam or contrastive parameters.")
@@ -99,6 +100,8 @@ class HFTransformersChatClient:
         device: str,
         thinking_mode_supported: bool = False,
         max_new_tokens_by_schema: dict[str, int] | None = None,
+        context_policy: dict[str, object] | None = None,
+        seed: int = 0,
     ) -> None:
         decoding_config.validate()
         self._model = model
@@ -106,7 +109,9 @@ class HFTransformersChatClient:
         self._tokenizer = tokenizer
         self._model_object = model_object
         self._device = device
+        self._seed = seed
         self.thinking_mode_supported = thinking_mode_supported
+        self._context_policy = context_policy or {}
         self._max_new_tokens_by_schema = max_new_tokens_by_schema or {
             "edge_list": 256,
             "vote_list": 64,
@@ -127,6 +132,7 @@ class HFTransformersChatClient:
             tokenizer=self._tokenizer,
             prompt=prompt,
             max_new_tokens=max_new_tokens,
+            safety_margin_tokens=_resolve_safety_margin_tokens(self._context_policy),
         )
 
         encoded_inputs = _encode_chat_prompt(
@@ -140,7 +146,7 @@ class HFTransformersChatClient:
         generation_kwargs = {
             **encoded_inputs,
             "max_new_tokens": max_new_tokens,
-            "temperature": 0.0,
+            "temperature": self._decoding_config.temperature,
             "pad_token_id": _resolve_pad_token_id(self._tokenizer),
             "eos_token_id": getattr(self._tokenizer, "eos_token_id", None),
             "use_cache": True,
@@ -148,6 +154,12 @@ class HFTransformersChatClient:
         }
 
         torch = _torch()
+        torch.manual_seed(self._seed)
+        random.seed(self._seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(self._seed)
+        generator = torch.Generator(device=self._device).manual_seed(self._seed)
+        generation_kwargs["generator"] = generator
         with torch.inference_mode():
             generated_ids = self._model_object.generate(**generation_kwargs)
         completion_ids = generated_ids[0][input_length:]
@@ -198,6 +210,9 @@ class HFTransformersRuntimeFactory:
         *,
         model: str,
         decoding_config: DecodingConfig,
+        max_new_tokens_by_schema: dict[str, int] | None = None,
+        context_policy: dict[str, object] | None = None,
+        seed: int = 0,
     ) -> HFTransformersChatClient:
         tokenizer, model_object, profile = self._load_chat_bundle(model)
         return HFTransformersChatClient(
@@ -207,6 +222,9 @@ class HFTransformersRuntimeFactory:
             model_object=model_object,
             device=profile.device,
             thinking_mode_supported=profile.supports_thinking_toggle,
+            max_new_tokens_by_schema=max_new_tokens_by_schema,
+            context_policy=context_policy,
+            seed=seed,
         )
 
     def build_embedding_client(self, *, model: str) -> HFTransformersEmbeddingClient:
@@ -301,6 +319,17 @@ def _parse_generated_json(text: str) -> object:
             return ast.literal_eval(stripped)
         except (ValueError, SyntaxError) as error:
             raise ValueError(f"Model did not return valid structured output: {text}") from error
+
+
+def _resolve_safety_margin_tokens(context_policy: dict[str, object]) -> int:
+    raw_value = context_policy.get("safety_margin_tokens", 64)
+    if isinstance(raw_value, int):
+        return raw_value
+    if isinstance(raw_value, float):
+        return int(raw_value)
+    if isinstance(raw_value, str):
+        return int(raw_value)
+    raise ValueError(f"Unsupported safety_margin_tokens value: {raw_value!r}")
 
 
 def _encode_chat_prompt(

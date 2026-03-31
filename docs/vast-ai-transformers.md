@@ -15,7 +15,7 @@ This workflow is for the new local-`transformers` experiment family that runs on
   - greedy
   - beam search with `num_beams` in `{2, 6}`
   - contrastive search with `penalty_alpha` in `{0.2, 0.8}` and `top_k = 4`
-- temperature is fixed at `0.0`
+- temperature defaults to `0.0` in the checked-in YAML config
 - quantization is disabled
 - CPU fallback is disabled
 
@@ -34,19 +34,33 @@ The script:
 - reinstalls `torch` from the CUDA wheel index
 - fails immediately if CUDA is unavailable
 
+## Preflight Review
+
+Validate the checked-in source-of-truth config and inspect the resolved preview before starting a
+paid run:
+
+```bash
+uv run lcm run validate-config \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --output-dir /workspace/results/hf-paper-batch-preview
+```
+
+This writes:
+
+- `resolved_run_config.yaml`
+- `resolved_run_plan.json`
+- `prompt_preview/...`
+
+The YAML controls the actual run settings, including models, decoding parameters, temperature,
+seed, prompt fragments, DOE factor fragments, and the output root.
+
 ## Run Commands
 
 Full batch:
 
 ```bash
 uv run lcm run paper-batch \
-  --provider hf-transformers \
-  --model mistralai/Ministral-3-8B-Instruct-2512 \
-  --model Qwen/Qwen3.5-9B \
-  --model allenai/Olmo-3-7B-Instruct \
-  --embedding-model Qwen/Qwen3-Embedding-8B \
-  --output-root /workspace/results/hf-paper-batch \
-  --replications 5 \
+  --config configs/hf_transformers_paper_batch.yaml \
   --resume
 ```
 
@@ -54,11 +68,7 @@ Single-algorithm smoke run:
 
 ```bash
 uv run lcm run algo1 \
-  --provider hf-transformers \
-  --model mistralai/Ministral-3-8B-Instruct-2512 \
-  --embedding-model Qwen/Qwen3-Embedding-8B \
-  --output-root /workspace/results/hf-algo1-smoke \
-  --replications 1 \
+  --config configs/hf_transformers_paper_batch.yaml \
   --resume
 ```
 
@@ -126,6 +136,8 @@ scripts/vast/fetch_results_from_vast.sh \
 
 ## Notes
 
-- Prompt truncation is not allowed. The local runtime checks prompt length against the tokenizer limit before generation.
-- The runtime uses per-schema `max_new_tokens` defaults to avoid reserving a larger decode budget than needed.
+- Prompt truncation is not allowed. The local runtime checks prompt length against the tokenizer
+  limit before generation and uses the YAML-configured safety margin plus per-schema token budget.
+- The runtime derives the smallest required context window for each prompt rather than reserving a
+  larger fixed window than necessary.
 - Qwen thinking is explicitly disabled through the chat template path. The other selected models do not advertise an equivalent public toggle in the implementation, so they run without a separate thinking-control flag.

@@ -190,23 +190,33 @@ uv run lcm verify legacy-parity --json
 uv run lcm verify all --json
 ```
 
+Validate and preview the checked-in HF run configuration before renting a GPU:
+
+```bash
+uv run lcm run validate-config \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --output-dir /tmp/hf-paper-batch-preview
+```
+
 Run the new local-`transformers` GPU batch:
 
 ```bash
 uv run lcm run paper-batch \
-  --provider hf-transformers \
-  --model mistralai/Ministral-3-8B-Instruct-2512 \
-  --model Qwen/Qwen3.5-9B \
-  --model allenai/Olmo-3-7B-Instruct \
-  --embedding-model Qwen/Qwen3-Embedding-8B \
-  --output-root /tmp/hf-paper-batch \
-  --replications 5 \
+  --config configs/hf_transformers_paper_batch.yaml \
   --resume
 
 uv run lcm analyze plots \
-  --results-root /tmp/hf-paper-batch \
-  --output-dir /tmp/hf-paper-batch/plots
+  --results-root /workspace/results/hf-paper-batch \
+  --output-dir /workspace/results/hf-paper-batch/plots
 ```
+
+The YAML file is the execution source of truth for:
+
+- chat models and embedding model
+- decoding algorithms and their parameters
+- temperature, seed, per-schema token budgets, and context-window safety margin
+- algorithm prompt fragments and DOE-controlled optional prompt elements
+- output root and replication count
 
 Remote GPU workflow:
 

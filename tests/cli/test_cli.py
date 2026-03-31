@@ -677,6 +677,63 @@ def test_cli_run_algo1_dry_run_limits_batch_to_requested_algorithm(tmp_path) -> 
     assert summary["algorithm"].unique().tolist() == ["algo1"]
 
 
+def test_cli_run_validate_config_writes_resolved_preview(tmp_path) -> None:
+    config_path = tmp_path / "run.yaml"
+    config_path.write_text(
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 5
+runtime:
+  seed: 7
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    edge_list: 256
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  greedy:
+    enabled: true
+inputs:
+  graph_source: default
+shared_fragments:
+  assistant_role: "You are a helpful assistant."
+algorithms:
+  algo1:
+    base_fragments: [assistant_role]
+    factors: {}
+    fragment_definitions: {}
+    prompt_templates:
+      body: "Task body."
+""",
+        encoding="utf-8",
+    )
+    output_dir = tmp_path / "preview"
+
+    exit_code = main(
+        [
+            "run",
+            "validate-config",
+            "--config",
+            str(config_path),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "resolved_run_config.yaml").exists()
+    assert (output_dir / "resolved_run_plan.json").exists()
+    assert (output_dir / "prompt_preview" / "algo1" / "base.txt").exists()
+
+
 def _write_flat(path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

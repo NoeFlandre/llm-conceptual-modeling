@@ -15,11 +15,10 @@ class _Tokenizer:
         return list(range(len(text.split())))
 
 
-def test_decoding_config_rejects_non_zero_temperature() -> None:
+def test_decoding_config_accepts_non_zero_temperature_when_configured() -> None:
     config = DecodingConfig(algorithm="greedy", temperature=0.1)
 
-    with pytest.raises(ValueError, match="temperature=0.0"):
-        config.validate()
+    config.validate()
 
 
 def test_derive_context_window_rejects_prompt_that_would_overflow() -> None:
