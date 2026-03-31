@@ -991,6 +991,7 @@ def _build_configured_specs_for_pairs(
             algorithm_name=algorithm_name,
             algorithm_config=algorithm_config,
             active_high_factors=active_high_factors,
+            prompt_factors=runtime_fields,
         )
         prompt_factors = runtime_fields
         raw_context = _build_raw_context(
@@ -1044,35 +1045,13 @@ def _build_prompt_bundle(
     algorithm_name: str,
     algorithm_config: Any,
     active_high_factors: list[str],
+    prompt_factors: dict[str, bool | int],
 ) -> dict[str, str]:
     if algorithm_name == "algo1":
-        return {
-            "direct_edge": algorithm_config.assemble_prompt(
-                active_high_factors,
-                template_name="direct_edge",
-            ),
-            "cove_verification": algorithm_config.assemble_prompt(
-                active_high_factors,
-                template_name="cove_verification",
-            ),
-        }
+        return _build_algo1_prompt_bundle(algorithm_config, prompt_factors=prompt_factors)
     if algorithm_name == "algo2":
-        return {
-            "label_expansion": algorithm_config.assemble_prompt(
-                active_high_factors,
-                template_name="label_expansion",
-            ),
-            "edge_suggestion": algorithm_config.assemble_prompt(
-                active_high_factors,
-                template_name="edge_suggestion",
-            ),
-        }
-    return {
-        "tree_expansion": algorithm_config.assemble_prompt(
-            active_high_factors,
-            template_name="tree_expansion",
-        )
-    }
+        return _build_algo2_prompt_bundle(algorithm_config, prompt_factors=prompt_factors)
+    return _build_algo3_prompt_bundle(algorithm_config, prompt_factors=prompt_factors)
 
 
 def _build_raw_context(
@@ -1102,6 +1081,160 @@ def _build_raw_context(
         context["Source Subgraph Name"] = payload["source_name"]
         context["Target Subgraph Name"] = payload["target_name"]
     return context
+
+
+def _build_algo1_prompt_bundle(
+    algorithm_config: Any,
+    *,
+    prompt_factors: dict[str, bool | int],
+) -> dict[str, str]:
+    definitions = algorithm_config.fragment_definitions
+    if "system_message" not in definitions:
+        return {
+            "direct_edge": algorithm_config.assemble_prompt(
+                [],
+                template_name="direct_edge",
+            ),
+            "cove_verification": algorithm_config.assemble_prompt(
+                [],
+                template_name="cove_verification",
+            ),
+        }
+    variant = _resolve_representation_variant(prompt_factors)
+    explanation_sections: list[str] = []
+    if bool(prompt_factors["include_explanation"]):
+        explanation_sections = [
+            definitions["explanation_fixed"],
+            definitions[f"explanation_variable_{variant}"],
+        ]
+    example_section = ""
+    if bool(prompt_factors["include_example"]):
+        example_section = definitions[f"example_variable_{variant}"]
+    counterexample_section = ""
+    if bool(prompt_factors["include_counterexample"]):
+        counterexample_section = definitions[f"counter_example_variable_{variant}"]
+    direct_edge_prompt = _join_prompt_sections(
+        definitions["system_message"],
+        *explanation_sections,
+        example_section,
+        counterexample_section,
+        f"{definitions['task_fixed_sub_1']} {{formatted_subgraph1}}",
+        f"{definitions['task_fixed_sub_2']} {{formatted_subgraph2}}",
+        definitions["task_fixed_sub_3"],
+        definitions["conclusion_fixed"],
+    )
+    return {
+        "direct_edge": direct_edge_prompt,
+        "cove_verification": definitions["cove_verification_template"],
+    }
+
+
+def _build_algo2_prompt_bundle(
+    algorithm_config: Any,
+    *,
+    prompt_factors: dict[str, bool | int],
+) -> dict[str, str]:
+    definitions = algorithm_config.fragment_definitions
+    if "system_message" not in definitions:
+        return {
+            "label_expansion": algorithm_config.assemble_prompt(
+                [],
+                template_name="label_expansion",
+            ),
+            "edge_suggestion": algorithm_config.assemble_prompt(
+                [],
+                template_name="edge_suggestion",
+            ),
+        }
+    variant = _resolve_representation_variant(prompt_factors)
+    explanation_sections: list[str] = []
+    if bool(prompt_factors["include_explanation"]):
+        explanation_sections = [
+            definitions["explanation_fixed"],
+            definitions[f"explanation_variable_{variant}"],
+        ]
+    example_section = ""
+    if bool(prompt_factors["include_example"]):
+        example_section = definitions[f"example_variable_{variant}"]
+    counterexample_section = ""
+    if bool(prompt_factors["include_counterexample"]):
+        counterexample_section = definitions[f"counter_example_variable_{variant}"]
+    label_expansion_prompt = _join_prompt_sections(
+        definitions["system_message"],
+        *explanation_sections,
+        example_section,
+        counterexample_section,
+        f"{definitions['task_fixed_sub_1']} {{formatted_subgraph1}}",
+        f"{definitions['task_fixed_sub_2']} {{formatted_subgraph2}}",
+        definitions["task_fixed_sub_3"],
+        definitions["conclusion_fixed"],
+    )
+    edge_suggestion_prompt = _join_prompt_sections(
+        f"{definitions['edge_task_fixed_sub_1']} {{formatted_subgraph1}}",
+        f"{definitions['edge_task_fixed_sub_2']} {{formatted_subgraph2}}",
+        f"{definitions['edge_task_fixed_sub_3']} {{expanded_label_context}}.",
+        definitions["edge_conclusion_fixed"],
+    )
+    return {
+        "label_expansion": label_expansion_prompt,
+        "edge_suggestion": edge_suggestion_prompt,
+    }
+
+
+def _build_algo3_prompt_bundle(
+    algorithm_config: Any,
+    *,
+    prompt_factors: dict[str, bool | int],
+) -> dict[str, str]:
+    definitions = algorithm_config.fragment_definitions
+    if "system_message" not in definitions:
+        return {
+            "tree_expansion": algorithm_config.assemble_prompt(
+                [],
+                template_name="tree_expansion",
+            )
+        }
+    child_count = int(prompt_factors["child_count"])
+    if child_count == 3:
+        example_key = "example_3words"
+        counterexample_key = "counter_example_3words"
+    elif child_count == 5:
+        example_key = "example_5words"
+        counterexample_key = "counter_example_5words"
+    else:
+        raise ValueError(f"Unsupported ALGO3 child_count: {child_count}")
+    example_section = ""
+    if bool(prompt_factors["include_example"]):
+        example_section = definitions[example_key]
+    counterexample_section = ""
+    if bool(prompt_factors["include_counterexample"]):
+        counterexample_section = definitions[counterexample_key]
+    tree_expansion_prompt = _join_prompt_sections(
+        definitions["system_message"],
+        definitions["explanation_variable"],
+        f"{definitions['input_variable']} {{source_labels}}",
+        definitions["task"].format(child_count, child_count),
+        example_section,
+        counterexample_section,
+        definitions["conclusion"],
+    )
+    return {"tree_expansion": tree_expansion_prompt}
+
+
+def _resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> str:
+    use_adjacency_notation = bool(prompt_factors["use_adjacency_notation"])
+    use_array_representation = bool(prompt_factors["use_array_representation"])
+    if use_adjacency_notation and use_array_representation:
+        return "matrix"
+    if use_adjacency_notation and not use_array_representation:
+        return "markup"
+    if not use_adjacency_notation and use_array_representation:
+        return "edges"
+    return "RDF"
+
+
+def _join_prompt_sections(*sections: str) -> str:
+    return " ".join(section.strip() for section in sections if section.strip())
 
 
 def _generate_edges_from_prompt(chat_client: Any, prompt: str) -> list[Edge]:

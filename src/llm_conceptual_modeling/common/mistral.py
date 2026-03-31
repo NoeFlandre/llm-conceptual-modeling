@@ -405,20 +405,23 @@ def _format_knowledge_map_as_adjacency(
     )
 
     if use_array_representation:
-        return str(
-            {
-                "nodes": ordered_nodes,
-                "adjacency_matrix": adjacency_matrix,
-            }
+        return (
+            f"the list of nodes {ordered_nodes} and the associated adjacency matrix "
+            f"{adjacency_matrix}"
         )
 
-    node_tags = "".join(f"<node>{node}</node>" for node in ordered_nodes)
-    return (
-        "<knowledge-map>"
-        f"<nodes>{node_tags}</nodes>"
-        f"<adjacency-matrix>{adjacency_matrix}</adjacency-matrix>"
-        "</knowledge-map>"
-    )
+    node_sections: list[str] = []
+    for source_node in ordered_nodes:
+        target_sections: list[str] = []
+        for target_node in ordered_nodes:
+            is_connected = (source_node, target_node) in edges
+            target_sections.append(
+                f"<TARGET ID= '{target_node}' isConnected={str(is_connected)}/>"
+            )
+        joined_targets = "".join(target_sections)
+        node_sections.append(f"<NODE ID= '{source_node}'>{joined_targets}</NODE>")
+    joined_nodes = "".join(node_sections)
+    return f"<NODES>{joined_nodes}</NODES>"
 
 
 def _format_knowledge_map_as_edge_list(
@@ -427,16 +430,13 @@ def _format_knowledge_map_as_edge_list(
     use_array_representation: bool,
 ) -> str:
     if use_array_representation:
-        return str(edges)
+        return f"the following list of edges: {edges}"
 
     edge_tags: list[str] = []
-
     for source, target in edges:
-        edge_tag = f"<edge source='{source}' target='{target}' />"
-        edge_tags.append(edge_tag)
-
+        edge_tags.append(f"<H>{source}<T>{target}")
     joined_edge_tags = "".join(edge_tags)
-    return f"<knowledge-map>{joined_edge_tags}</knowledge-map>"
+    return f"the following RDF representation: <S>{joined_edge_tags}<E>"
 
 
 def _collect_ordered_nodes(edges: list[Edge]) -> list[str]:

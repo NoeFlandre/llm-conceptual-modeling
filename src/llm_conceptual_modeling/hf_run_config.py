@@ -240,11 +240,16 @@ def write_resolved_run_preview(*, config: HFRunConfig, output_dir: str | Path) -
     for algorithm_name, algorithm_config in config.algorithms.items():
         algorithm_dir = prompt_root / algorithm_name
         algorithm_dir.mkdir(parents=True, exist_ok=True)
-        preview_text = algorithm_config.assemble_prompt(
-            [],
-            template_name=_default_preview_template_name(algorithm_config),
+        preview_bundle = _build_preview_bundle(
+            algorithm_name=algorithm_name,
+            algorithm_config=algorithm_config,
         )
-        (algorithm_dir / "base.txt").write_text(preview_text, encoding="utf-8")
+        preview_names = list(preview_bundle.keys())
+        if preview_names:
+            first_preview = preview_bundle[preview_names[0]]
+            (algorithm_dir / "base.txt").write_text(first_preview, encoding="utf-8")
+        for preview_name, preview_text in preview_bundle.items():
+            (algorithm_dir / f"{preview_name}.txt").write_text(preview_text, encoding="utf-8")
 
 
 def _load_factor_config(payload: object) -> FactorConfig:
@@ -387,3 +392,34 @@ def _default_preview_template_name(config: AlgorithmPromptConfig) -> str:
     if "body" in config.prompt_templates:
         return "body"
     return next(iter(config.prompt_templates))
+
+
+def _build_preview_bundle(
+    *,
+    algorithm_name: str,
+    algorithm_config: AlgorithmPromptConfig,
+) -> dict[str, str]:
+    prompt_factors: dict[str, bool | int] = {}
+    active_high_factors: list[str] = []
+    for factor_name, factor in algorithm_config.factors.items():
+        if factor.runtime_field is None or factor.low_runtime_value is None:
+            continue
+        prompt_factors[factor.runtime_field] = factor.low_runtime_value
+        if factor.high_runtime_value == factor.low_runtime_value:
+            active_high_factors.append(factor_name)
+
+    try:
+        from llm_conceptual_modeling.hf_experiments import _build_prompt_bundle
+
+        return _build_prompt_bundle(
+            algorithm_name=algorithm_name,
+            algorithm_config=algorithm_config,
+            active_high_factors=active_high_factors,
+            prompt_factors=prompt_factors,
+        )
+    except (ImportError, KeyError, ValueError):
+        preview_text = algorithm_config.assemble_prompt(
+            [],
+            template_name=_default_preview_template_name(algorithm_config),
+        )
+        return {"base": preview_text}

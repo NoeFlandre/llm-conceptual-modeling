@@ -2,6 +2,7 @@ import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
+    _response_hit_generation_limit,
     derive_context_window,
 )
 
@@ -31,3 +32,19 @@ def test_derive_context_window_rejects_prompt_that_would_overflow() -> None:
             max_new_tokens=4,
             safety_margin_tokens=4,
         )
+
+
+def test_response_hit_generation_limit_detects_possible_output_truncation() -> None:
+    assert _response_hit_generation_limit(
+        completion_ids=[11, 12, 13, 14],
+        max_new_tokens=4,
+        eos_token_id=99,
+    )
+
+
+def test_response_hit_generation_limit_accepts_clean_eos_termination() -> None:
+    assert not _response_hit_generation_limit(
+        completion_ids=[11, 12, 13, 99],
+        max_new_tokens=4,
+        eos_token_id=99,
+    )

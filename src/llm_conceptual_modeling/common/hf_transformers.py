@@ -128,13 +128,7 @@ class HFTransformersChatClient:
     ) -> dict[str, object]:
         _ = schema
         max_new_tokens = self._max_new_tokens_by_schema.get(schema_name, 256)
-        _ = derive_context_window(
-            tokenizer=self._tokenizer,
-            prompt=prompt,
-            max_new_tokens=max_new_tokens,
-            safety_margin_tokens=_resolve_safety_margin_tokens(self._context_policy),
-        )
-
+        safety_margin_tokens = _resolve_safety_margin_tokens(self._context_policy)
         encoded_inputs = _encode_chat_prompt(
             tokenizer=self._tokenizer,
             prompt=prompt,
@@ -143,29 +137,58 @@ class HFTransformersChatClient:
             disable_thinking=self.thinking_mode_supported,
         )
         input_length = int(encoded_inputs["input_ids"].shape[-1])
-        generation_kwargs = {
-            **encoded_inputs,
-            "max_new_tokens": max_new_tokens,
-            "temperature": self._decoding_config.temperature,
-            "pad_token_id": _resolve_pad_token_id(self._tokenizer),
-            "eos_token_id": getattr(self._tokenizer, "eos_token_id", None),
-            "use_cache": True,
-            **_decoding_kwargs(self._decoding_config),
-        }
+        eos_token_id = getattr(self._tokenizer, "eos_token_id", None)
 
-        torch = _torch()
-        torch.manual_seed(self._seed)
-        random.seed(self._seed)
-        if torch.cuda.is_available():
-            torch.cuda.manual_seed_all(self._seed)
-        generator = torch.Generator(device=self._device).manual_seed(self._seed)
-        generation_kwargs["generator"] = generator
-        with torch.inference_mode():
-            generated_ids = self._model_object.generate(**generation_kwargs)
-        completion_ids = generated_ids[0][input_length:]
-        text = self._tokenizer.decode(completion_ids, skip_special_tokens=True)
-        parsed_content = _parse_generated_json(text)
-        return normalize_structured_response(parsed_content, schema_name=schema_name)
+        while True:
+            _ = derive_context_window(
+                tokenizer=self._tokenizer,
+                prompt=prompt,
+                max_new_tokens=max_new_tokens,
+                safety_margin_tokens=safety_margin_tokens,
+            )
+            generation_kwargs = {
+                **encoded_inputs,
+                "max_new_tokens": max_new_tokens,
+                "temperature": self._decoding_config.temperature,
+                "pad_token_id": _resolve_pad_token_id(self._tokenizer),
+                "eos_token_id": eos_token_id,
+                "use_cache": True,
+                **_decoding_kwargs(self._decoding_config),
+            }
+
+            torch = _torch()
+            torch.manual_seed(self._seed)
+            random.seed(self._seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(self._seed)
+            generator = torch.Generator(device=self._device).manual_seed(self._seed)
+            generation_kwargs["generator"] = generator
+            with torch.inference_mode():
+                generated_ids = self._model_object.generate(**generation_kwargs)
+            completion_ids = generated_ids[0][input_length:]
+            if _response_hit_generation_limit(
+                completion_ids=completion_ids,
+                max_new_tokens=max_new_tokens,
+                eos_token_id=eos_token_id,
+            ):
+                next_max_new_tokens = max_new_tokens * 2
+                try:
+                    _ = derive_context_window(
+                        tokenizer=self._tokenizer,
+                        prompt=prompt,
+                        max_new_tokens=next_max_new_tokens,
+                        safety_margin_tokens=safety_margin_tokens,
+                    )
+                except ValueError as error:
+                    raise ValueError(
+                        "Model output reached max_new_tokens before EOS; refusing a possibly "
+                        "truncated response."
+                    ) from error
+                max_new_tokens = next_max_new_tokens
+                continue
+            text = self._tokenizer.decode(completion_ids, skip_special_tokens=True)
+            parsed_content = _parse_generated_json(text)
+            return normalize_structured_response(parsed_content, schema_name=schema_name)
 
 
 class HFTransformersEmbeddingClient:
@@ -330,6 +353,30 @@ def _resolve_safety_margin_tokens(context_policy: dict[str, object]) -> int:
     if isinstance(raw_value, str):
         return int(raw_value)
     raise ValueError(f"Unsupported safety_margin_tokens value: {raw_value!r}")
+
+
+def _response_hit_generation_limit(
+    *,
+    completion_ids: Any,
+    max_new_tokens: int,
+    eos_token_id: int | list[int] | None,
+) -> bool:
+    completion_length = len(completion_ids)
+    if completion_length < max_new_tokens:
+        return False
+    if completion_length == 0:
+        return False
+    if eos_token_id is None:
+        return True
+    eos_ids = _normalize_eos_ids(eos_token_id)
+    last_token_id = int(completion_ids[-1])
+    return last_token_id not in eos_ids
+
+
+def _normalize_eos_ids(eos_token_id: int | list[int]) -> set[int]:
+    if isinstance(eos_token_id, list):
+        return {int(token_id) for token_id in eos_token_id}
+    return {int(eos_token_id)}
 
 
 def _encode_chat_prompt(
