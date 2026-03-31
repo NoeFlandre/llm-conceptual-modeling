@@ -5,9 +5,13 @@ import pandas as pd
 import pytest
 
 from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
+from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
 from llm_conceptual_modeling.hf_experiments import (
+    HFRunSpec,
     _build_prompt_bundle,
+    _run_algo2,
+    _run_algo3,
     plan_paper_batch,
     run_paper_batch,
 )
@@ -470,11 +474,12 @@ def test_checked_in_config_algo2_prompt_matches_paper_markup_variant() -> None:
         "'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be incorrect since "
         "they have no relationship with the nodes in the input. "
         "You will get two inputs: Knowledge map 1: {formatted_subgraph1} Knowledge map 2: "
-        "{formatted_subgraph2} Your task is to recommend 5 more nodes in relation to those "
-        "already in the two knowledge maps. Do not suggest nodes that are already in the maps. "
-        "Return the recommended nodes as a list of nodes in the format ['A', 'B', 'C', 'D', "
-        "'E']. Your output must only be the list of proposed nodes. Do not repeat any "
-        "instructions I have given you and do not add unnecessary words or phrases."
+        "{formatted_subgraph2} Current label context: {seed_labels}. Your task is to recommend 5 "
+        "more nodes in relation to those already in the two knowledge maps. Do not suggest nodes "
+        "that are already in the maps. Return the recommended nodes as a list of nodes in the "
+        "format ['A', 'B', 'C', 'D', 'E']. Your output must only be the list of proposed nodes. "
+        "Do not repeat any instructions I have given you and do not add unnecessary words or "
+        "phrases."
     )
 
     assert label_prompt == expected_prompt
@@ -597,3 +602,233 @@ def test_knowledge_map_formatting_matches_paper_representations() -> None:
         "the following RDF representation: <S><H>capacity to hire<T>bad employees"
         "<H>bad employees<T>good reputation<H>good reputation<T>capacity to hire<E>"
     )
+
+
+class _StubChatClient:
+    def __init__(self, responses: list[dict[str, object]]) -> None:
+        self._responses = list(responses)
+
+    def complete_json(self, *, prompt: str, schema_name: str, schema: dict[str, object]):
+        _ = schema
+        response = self._responses.pop(0)
+        response["_prompt"] = prompt
+        response["_schema_name"] = schema_name
+        return response
+
+
+class _StubEmbeddingClient:
+    def embed_texts(self, texts: list[str]) -> dict[str, list[float]]:
+        vectors: dict[str, list[float]] = {}
+        for text in texts:
+            if text == "alpha":
+                vectors[text] = [1.0, 0.0]
+            elif text == "beta":
+                vectors[text] = [0.0, 1.0]
+            else:
+                vectors[text] = [1.0, 0.0]
+        return vectors
+
+
+class _StubRuntimeFactory:
+    def __init__(
+        self,
+        *,
+        chat_responses: list[dict[str, object]],
+    ) -> None:
+        self._chat_client = _StubChatClient(chat_responses)
+
+    def build_chat_client(self, **kwargs):
+        _ = kwargs
+        return self._chat_client
+
+    def build_embedding_client(self, **kwargs):
+        _ = kwargs
+        return _StubEmbeddingClient()
+
+
+def _runtime_profile() -> RuntimeProfile:
+    return RuntimeProfile(
+        device="cuda",
+        dtype="bfloat16",
+        quantization="none",
+        supports_thinking_toggle=False,
+        context_limit=4096,
+    )
+
+
+def test_run_algo3_configured_prompt_accepts_literal_dictionary_braces() -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo3 = config.algorithms["algo3"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo3",
+        algorithm_config=algo3,
+        active_high_factors=["example", "counterexample", "number_of_words"],
+        prompt_factors={
+            "include_example": True,
+            "include_counterexample": True,
+            "child_count": 5,
+            "max_depth": 1,
+        },
+    )
+    spec = HFRunSpec(
+        algorithm="algo3",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="1110",
+        condition_label="greedy",
+        prompt_factors={
+            "include_example": True,
+            "include_counterexample": True,
+            "child_count": 5,
+            "max_depth": 1,
+        },
+        raw_context={"pair_name": "subgraph_1_to_subgraph_3", "Repetition": 0},
+        input_payload={
+            "source_graph": [("alpha", "beta")],
+            "target_graph": [("gamma", "delta")],
+            "mother_graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=prompt_bundle,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=7,
+    )
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"children_by_label": {"alpha": ["alpha1", "alpha2", "alpha3", "alpha4", "alpha5"]}},
+            {"children_by_label": {"beta": ["beta1", "beta2", "beta3", "beta4", "beta5"]}},
+        ]
+    )
+
+    result = _run_algo3(spec, hf_runtime=runtime)
+    raw_response = json.loads(result["raw_response"])
+
+    assert "dictionary format { 'A' : ['B' , 'C', 'D']" in raw_response[0]["prompt"]
+    assert "{source_labels}" not in raw_response[0]["prompt"]
+
+
+def test_run_algo2_configured_prompt_uses_evolving_label_context_across_iterations() -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo2 = config.algorithms["algo2"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo2",
+        algorithm_config=algo2,
+        active_high_factors=[],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+            "use_relaxed_convergence": False,
+        },
+    )
+    spec = HFRunSpec(
+        algorithm="algo2",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="000000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+            "use_relaxed_convergence": False,
+        },
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=prompt_bundle,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=11,
+    )
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
+            {"labels": ["theta", "iota", "kappa", "lambda", "mu"]},
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+        ]
+    )
+
+    result = _run_algo2(spec, hf_runtime=runtime)
+    raw_response = json.loads(result["raw_response"])
+
+    assert "theta" in raw_response[1]["prompt"]
+    assert raw_response[0]["prompt"] != raw_response[1]["prompt"]
+
+
+def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "runs"
+
+    def runtime_factory(spec):
+        if spec.algorithm == "algo3":
+            row = {
+                **spec.raw_context,
+                "Results": "[]",
+                "Source Graph": "[]",
+                "Target Graph": "[]",
+                "Mother Graph": "[]",
+                "Recall": 0.0,
+            }
+        else:
+            base_value = 0.0 if spec.decoding.algorithm == "greedy" else 1.0
+            row = {
+                **spec.raw_context,
+                "Result": "[('a', 'b')]",
+                "graph": "[('a', 'b')]",
+                "subgraph1": "[('a', 'b')]",
+                "subgraph2": "[('c', 'd')]",
+            }
+            if spec.algorithm == "algo1":
+                row["Result"] = "[('a', 'c')]" if base_value else "[]"
+            if spec.algorithm == "algo2":
+                row["Result"] = "[('a', 'c')]" if base_value else "[]"
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=2,
+        algorithms=("algo1",),
+        runtime_factory=runtime_factory,
+    )
+
+    factorial_path = (
+        output_root
+        / "aggregated"
+        / "algo1"
+        / "mistralai__Ministral-3-8B-Instruct-2512"
+        / "combined"
+        / "factorial.csv"
+    )
+    actual = pd.read_csv(factorial_path)
+
+    assert "Decoding Algorithm" in actual["Feature"].tolist()
+    assert "Error" in actual["Feature"].tolist()

@@ -406,6 +406,8 @@ algorithms:
         You will get two inputs: Knowledge map 1:
       task_fixed_sub_2: >-
         Knowledge map 2:
+      iterative_context_fragment: >-
+        Current label context: {seed_labels}.
       task_fixed_sub_3: >-
         Your task is to recommend 5 more nodes in relation to those already in the two knowledge
         maps. Do not suggest nodes that are already in the maps. Return the recommended nodes as a

@@ -214,9 +214,13 @@ The YAML file is the execution source of truth for:
 
 - chat models and embedding model
 - decoding algorithms and their parameters
-- temperature, seed, per-schema token budgets, and context-window safety margin
+- temperature, seed, per-schema initial generation budgets, and context-window safety margin
 - algorithm prompt fragments and DOE-controlled optional prompt elements
 - output root and replication count
+
+The HF batch writes both per-decoding-condition outputs and combined model-level outputs under
+`aggregated/<algorithm>/<model>/combined/`. The combined surface is the one that now carries the
+decoding-factor DOE analysis and the explicit residual `Error` row in `factorial.csv`.
 
 Remote GPU workflow:
 

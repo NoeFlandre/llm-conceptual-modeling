@@ -44,6 +44,15 @@ class MultiMetricFactorialSpec:
 
 
 @dataclass(frozen=True)
+class GeneralizedFactorialSpec:
+    factor_columns: list[str]
+    metric_columns: list[str]
+    output_columns: list[str]
+    replication_column: str | None = None
+    include_pairwise_interactions: bool = True
+
+
+@dataclass(frozen=True)
 class ExperimentManifest:
     """YAML manifest capturing all experiment configuration for reproducibility.
 

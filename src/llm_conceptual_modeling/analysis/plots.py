@@ -29,7 +29,10 @@ def write_revision_plots(*, results_root: PathLike, output_dir: PathLike) -> Non
 
 def _build_aggregated_distribution_frame(results_root: Path) -> pd.DataFrame:
     records: list[dict[str, object]] = []
-    for evaluated_path in results_root.glob("aggregated/*/*/*/evaluated.csv"):
+    evaluated_paths = list(results_root.glob("aggregated/*/*/combined/evaluated.csv"))
+    if not evaluated_paths:
+        evaluated_paths = list(results_root.glob("aggregated/*/*/*/evaluated.csv"))
+    for evaluated_path in evaluated_paths:
         algorithm, model, _condition = _path_triplet(evaluated_path)
         frame = pd.read_csv(evaluated_path)
         metric_columns = [
@@ -37,63 +40,45 @@ def _build_aggregated_distribution_frame(results_root: Path) -> pd.DataFrame:
         ]
         for metric in metric_columns:
             series = frame[metric]
-            if series.empty:
-                continue
-            mean = float(series.mean())
-            margin = 0.0 if len(series) <= 1 else float(1.96 * series.sem())
-            records.append(
-                {
-                    "algorithm": algorithm,
-                    "model": model,
-                    "metric": metric,
-                    "mean": mean,
-                    "ci95_low": mean - margin,
-                    "ci95_high": mean + margin,
-                    "q1": float(series.quantile(0.25)),
-                    "q3": float(series.quantile(0.75)),
-                }
-            )
+            for value in series.tolist():
+                records.append(
+                    {
+                        "algorithm": algorithm,
+                        "model": model,
+                        "metric": metric,
+                        "value": float(value),
+                    }
+                )
     return pd.DataFrame.from_records(records)
 
 
 def _build_aggregated_factor_effect_frame(results_root: Path) -> pd.DataFrame:
     records: list[dict[str, object]] = []
-    for evaluated_path in results_root.glob("aggregated/*/*/*/evaluated.csv"):
-        algorithm, model, condition_label = _path_triplet(evaluated_path)
+    factorial_paths = list(results_root.glob("aggregated/*/*/combined/factorial.csv"))
+    if not factorial_paths:
+        factorial_paths = list(results_root.glob("aggregated/*/*/*/factorial.csv"))
+    for factorial_path in factorial_paths:
+        algorithm, model, _condition = _path_triplet(factorial_path)
         if algorithm not in {"algo1", "algo2"}:
             continue
-        frame = pd.read_csv(evaluated_path)
-        factor_columns = [
-            column
-            for column in (
-                "Explanation",
-                "Example",
-                "Counterexample",
-                "Array/List(1/-1)",
-                "Tag/Adjacency(1/-1)",
-            "Convergence",
-        )
-        if column in frame
-        ]
+        frame = pd.read_csv(factorial_path)
+        feature_column = "Feature" if "Feature" in frame.columns else "feature"
         metric_columns = [
-            column for column in ("accuracy", "precision", "recall") if column in frame
+            column for column in ("accuracy", "precision", "recall") if column in frame.columns
         ]
-        for factor in factor_columns:
-            low_frame = frame[frame[factor] == -1]
-            high_frame = frame[frame[factor] == 1]
-            if low_frame.empty or high_frame.empty:
-                continue
+        filtered = frame[
+            ~frame[feature_column].isin(["Error", "Repetition"])
+            & ~frame[feature_column].astype(str).str.contains("_AND_", regex=False)
+        ]
+        for _, row in filtered.iterrows():
             for metric in metric_columns:
                 records.append(
                     {
                         "algorithm": algorithm,
                         "model": model,
-                        "condition_label": condition_label,
-                        "factor": factor,
+                        "factor": row[feature_column],
                         "metric": metric,
-                        "mean_difference_average": float(
-                            high_frame[metric].mean() - low_frame[metric].mean()
-                        ),
+                        "effect_share": float(row[metric]),
                     }
                 )
     if not records:
@@ -102,23 +87,18 @@ def _build_aggregated_factor_effect_frame(results_root: Path) -> pd.DataFrame:
                 "algorithm",
                 "factor",
                 "metric",
-                "mean_difference_average",
-                "significant_share",
+                "effect_share",
             ]
         )
-    frame = pd.DataFrame.from_records(records)
-    grouped = (
-        frame.groupby(["algorithm", "factor", "metric"], dropna=False)["mean_difference_average"]
-        .mean()
-        .reset_index()
-    )
-    grouped["significant_share"] = 1.0
-    return grouped
+    return pd.DataFrame.from_records(records)
 
 
 def _build_aggregated_variability_frame(results_root: Path) -> pd.DataFrame:
     records: list[dict[str, object]] = []
-    for variability_path in results_root.glob("aggregated/*/*/*/output_variability.csv"):
+    variability_paths = list(results_root.glob("aggregated/*/*/combined/output_variability.csv"))
+    if not variability_paths:
+        variability_paths = list(results_root.glob("aggregated/*/*/*/output_variability.csv"))
+    for variability_path in variability_paths:
         algorithm, model, _condition = _path_triplet(variability_path)
         frame = pd.read_csv(variability_path)
         if frame.empty:
@@ -141,19 +121,55 @@ def _build_aggregated_variability_frame(results_root: Path) -> pd.DataFrame:
 
 def _write_distribution_plot(frame: pd.DataFrame, output_path: Path) -> None:
     plt = _load_pyplot()
-    fig, ax = plt.subplots(figsize=(9, 4.8))
+    fig, ax = plt.subplots(figsize=(10, 5.2))
+    if frame.empty:
+        ax.set_title("Main metric distributions by algorithm and model")
+        fig.tight_layout()
+        fig.savefig(output_path)
+        plt.close(fig)
+        return
+    if "value" not in frame.columns:
+        labels = [
+            f"{cast(str, row['algorithm'])}\n{cast(str, row['model'])}\n{cast(str, row['metric'])}"
+            for _, row in frame.iterrows()
+        ]
+        means = frame["mean"].tolist()
+        yerr_low = frame["mean"] - frame["ci95_low"]
+        yerr_high = frame["ci95_high"] - frame["mean"]
+        ax.errorbar(range(len(means)), means, yerr=[yerr_low, yerr_high], fmt="o", capsize=4)
+        ax.set_xticks(range(len(labels)))
+        ax.set_xticklabels(labels, rotation=45, ha="right")
+        ax.set_ylabel("Metric value")
+        ax.set_title("Main metric distributions by algorithm and model")
+        fig.tight_layout()
+        fig.savefig(output_path)
+        plt.close(fig)
+        return
+    grouped = list(frame.groupby(["algorithm", "model", "metric"], dropna=False))
     labels = [
-        f"{cast(str, row['algorithm'])}\n{cast(str, row['model'])}\n{cast(str, row['metric'])}"
-        for _, row in frame.iterrows()
+        f"{cast(tuple[object, object, object], keys)[0]}\n"
+        f"{cast(tuple[object, object, object], keys)[1]}\n"
+        f"{cast(tuple[object, object, object], keys)[2]}"
+        for keys, _group in grouped
     ]
-    means = frame["mean"].tolist()
-    yerr_low = frame["mean"] - frame["ci95_low"]
-    yerr_high = frame["ci95_high"] - frame["mean"]
-    ax.errorbar(range(len(means)), means, yerr=[yerr_low, yerr_high], fmt="o", capsize=4)
-    ax.set_xticks(range(len(labels)))
+    values = [group["value"].tolist() for _keys, group in grouped]
+    positions = list(range(1, len(values) + 1))
+    ax.boxplot(values, positions=positions, widths=0.6, patch_artist=True)
+    means: list[float] = []
+    yerr_low: list[float] = []
+    yerr_high: list[float] = []
+    for _keys, group in grouped:
+        series = group["value"]
+        mean = float(series.mean())
+        margin = 0.0 if len(series) <= 1 else float(1.96 * series.sem())
+        means.append(mean)
+        yerr_low.append(margin)
+        yerr_high.append(margin)
+    ax.errorbar(positions, means, yerr=[yerr_low, yerr_high], fmt="o", color="black", capsize=4)
+    ax.set_xticks(positions)
     ax.set_xticklabels(labels, rotation=45, ha="right")
     ax.set_ylabel("Metric value")
-    ax.set_title("Main metric distributions with mean and 95% CI")
+    ax.set_title("Main metric distributions by algorithm and model")
     fig.tight_layout()
     fig.savefig(output_path)
     plt.close(fig)
@@ -161,18 +177,37 @@ def _write_distribution_plot(frame: pd.DataFrame, output_path: Path) -> None:
 
 def _write_factor_effect_plot(frame: pd.DataFrame, output_path: Path) -> None:
     plt = _load_pyplot()
-    fig, ax = plt.subplots(figsize=(8, 4.8))
-    labels = [
-        f"{cast(str, row['algorithm'])}:{cast(str, row['factor'])}\n{cast(str, row['metric'])}"
-        for _, row in frame.iterrows()
-    ]
-    values = frame["mean_difference_average"].tolist()
-    colors = ["#1f77b4" if value >= 0 else "#d62728" for value in values]
-    ax.bar(range(len(values)), values, color=colors)
-    ax.set_xticks(range(len(labels)))
-    ax.set_xticklabels(labels, rotation=45, ha="right")
-    ax.set_ylabel("High minus low level mean")
-    ax.set_title("Factor-effect summary")
+    if frame.empty:
+        fig, ax = plt.subplots(figsize=(9, 5.2))
+        ax.set_title("Factor-effect heatmap")
+        fig.tight_layout()
+        fig.savefig(output_path)
+        plt.close(fig)
+        return
+    figure_data = frame.copy()
+    if (
+        "effect_share" not in figure_data.columns
+        and "mean_difference_average" in figure_data.columns
+    ):
+        figure_data["effect_share"] = figure_data["mean_difference_average"]
+    figure_data["column_label"] = (
+        figure_data["algorithm"].astype(str) + ":" + figure_data["metric"].astype(str)
+    )
+    pivot = figure_data.pivot_table(
+        index="factor",
+        columns="column_label",
+        values="effect_share",
+        aggfunc="mean",
+        fill_value=0.0,
+    )
+    fig, ax = plt.subplots(figsize=(9, 5.2))
+    image = ax.imshow(pivot.to_numpy(), cmap="Blues", aspect="auto")
+    ax.set_xticks(range(len(pivot.columns)))
+    ax.set_xticklabels(pivot.columns, rotation=45, ha="right")
+    ax.set_yticks(range(len(pivot.index)))
+    ax.set_yticklabels(pivot.index)
+    ax.set_title("Factor-effect heatmap")
+    fig.colorbar(image, ax=ax, label="Effect share (%)")
     fig.tight_layout()
     fig.savefig(output_path)
     plt.close(fig)
@@ -180,26 +215,33 @@ def _write_factor_effect_plot(frame: pd.DataFrame, output_path: Path) -> None:
 
 def _write_variability_plot(frame: pd.DataFrame, output_path: Path) -> None:
     plt = _load_pyplot()
-    fig, ax = plt.subplots(figsize=(7.5, 4.8))
-    ax.scatter(
-        frame["mean_pairwise_jaccard"],
-        frame["breadth_expansion_ratio"],
-        s=80,
-    )
-    for _, row in frame.iterrows():
-        algorithm = cast(str, row["algorithm"])
-        model = cast(str | None, row.get("model"))
-        label = algorithm if not model else f"{algorithm}:{model}"
-        ax.annotate(
-            label,
-            (
-                cast(float, row["mean_pairwise_jaccard"]),
-                cast(float, row["breadth_expansion_ratio"]),
-            ),
+    if frame.empty:
+        fig, ax = plt.subplots(figsize=(10.5, 4.8))
+        ax.set_title("Raw-output variability by algorithm and model")
+        fig.tight_layout()
+        fig.savefig(output_path)
+        plt.close(fig)
+        return
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.8), sharex=True)
+    labels = [
+        (
+            f"{cast(str, row['algorithm'])}\n{cast(str, row['model'])}"
+            if "model" in frame.columns
+            else cast(str, row["algorithm"])
         )
-    ax.set_xlabel("Mean pairwise Jaccard")
-    ax.set_ylabel("Breadth-expansion ratio")
-    ax.set_title("Raw-output variability by algorithm")
+        for _, row in frame.iterrows()
+    ]
+    positions = range(len(labels))
+    axes[0].bar(positions, frame["mean_pairwise_jaccard"].tolist(), color="#1f77b4")
+    axes[0].set_title("Pairwise Jaccard")
+    axes[0].set_ylabel("Mean overlap")
+    axes[1].bar(positions, frame["breadth_expansion_ratio"].tolist(), color="#d62728")
+    axes[1].set_title("Breadth-expansion ratio")
+    axes[1].set_ylabel("Union / mean edge count")
+    for axis in axes:
+        axis.set_xticks(list(positions))
+        axis.set_xticklabels(labels, rotation=45, ha="right")
+    fig.suptitle("Raw-output variability by algorithm and model")
     fig.tight_layout()
     fig.savefig(output_path)
     plt.close(fig)

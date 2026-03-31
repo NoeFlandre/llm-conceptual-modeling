@@ -43,6 +43,7 @@ from llm_conceptual_modeling.analysis.replication_budget import write_replicatio
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.variability import write_output_variability_analysis
 from llm_conceptual_modeling.common.evaluation_core import evaluate_connection_results_file
+from llm_conceptual_modeling.common.factorial_core import run_generalized_factorial_analysis
 from llm_conceptual_modeling.common.graph_data import load_algo2_thesaurus, load_default_graph
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
@@ -52,6 +53,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
     build_runtime_factory,
 )
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
+from llm_conceptual_modeling.common.types import GeneralizedFactorialSpec
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
 
 Edge = tuple[str, str]
@@ -323,15 +325,17 @@ def _run_algo1(
             subgraph2=subgraph2,
             generate_edges=lambda *, subgraph1, subgraph2: _generate_edges_from_prompt(
                 recorder,
-                prompt_bundle["direct_edge"].format(
+                _render_prompt(
+                    prompt_bundle["direct_edge"],
                     formatted_subgraph1=formatted_subgraph1,
                     formatted_subgraph2=formatted_subgraph2,
                 ),
             ),
             verify_edges=lambda candidate_edges: _verify_edges_from_prompt(
                 recorder,
-                prompt_bundle["cove_verification"].format_map(
-                    {"candidate_edges": repr(candidate_edges)}
+                _render_prompt(
+                    prompt_bundle["cove_verification"],
+                    candidate_edges=repr(candidate_edges),
                 ),
                 candidate_edges,
             ),
@@ -392,7 +396,8 @@ def _run_algo2(
             existing_edges=list(subgraph1) + list(subgraph2),
             propose_labels=lambda current_labels: _propose_labels_from_prompt(
                 recorder,
-                prompt_bundle["label_expansion"].format(
+                _render_prompt(
+                    prompt_bundle["label_expansion"],
                     formatted_subgraph1=formatted_subgraph1,
                     formatted_subgraph2=formatted_subgraph2,
                     seed_labels=", ".join(current_labels),
@@ -400,7 +405,8 @@ def _run_algo2(
             ),
             suggest_edges=lambda expanded_label_context: _generate_edges_from_prompt(
                 recorder,
-                prompt_bundle["edge_suggestion"].format(
+                _render_prompt(
+                    prompt_bundle["edge_suggestion"],
                     formatted_subgraph1=formatted_subgraph1,
                     formatted_subgraph2=formatted_subgraph2,
                     expanded_label_context=", ".join(expanded_label_context),
@@ -466,7 +472,8 @@ def _run_algo3(
         ) -> dict[str, list[str]]:
             return _propose_children_from_prompt(
                 recorder,
-                prompt_bundle["tree_expansion"].format(
+                _render_prompt(
+                    prompt_bundle["tree_expansion"],
                     source_labels=repr(labels),
                     child_count=child_count,
                 ),
@@ -593,6 +600,131 @@ def _write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) ->
                     "Number of Words",
                     "Example",
                     "Counter-Example",
+                ],
+                result_column="Results",
+            )
+
+        write_replication_budget_analysis(
+            [stability_path],
+            strict_budget_path,
+            relative_half_width_target=0.05,
+            z_score=1.96,
+        )
+        write_replication_budget_analysis(
+            [stability_path],
+            relaxed_budget_path,
+            relative_half_width_target=0.10,
+            z_score=1.645,
+        )
+    _write_combined_model_outputs(aggregated_root=aggregated_root, summary_frame=summary_frame)
+
+
+def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.DataFrame) -> None:
+    for group_key, group_frame in summary_frame.groupby(["algorithm", "model"], dropna=False):
+        algorithm, model = cast(tuple[object, object], group_key)
+        combo_root = aggregated_root / str(algorithm) / _slugify_model(str(model)) / "combined"
+        combo_root.mkdir(parents=True, exist_ok=True)
+        raw_rows = [
+            json.loads(Path(path).read_text(encoding="utf-8"))
+            for path in group_frame["raw_row_path"].tolist()
+        ]
+        raw_frame = pd.DataFrame.from_records(raw_rows)
+        raw_frame = _add_decoding_factor_columns(raw_frame)
+        raw_path = combo_root / "raw.csv"
+        raw_frame.to_csv(raw_path, index=False)
+
+        evaluated_path = combo_root / "evaluated.csv"
+        factorial_path = combo_root / "factorial.csv"
+        variability_path = combo_root / "output_variability.csv"
+        stability_path = combo_root / "condition_stability.csv"
+        strict_budget_path = combo_root / "replication_budget_strict.csv"
+        relaxed_budget_path = combo_root / "replication_budget_relaxed.csv"
+
+        if algorithm in {"algo1", "algo2"}:
+            evaluate_connection_results_file(raw_path, evaluated_path)
+            evaluated_frame = pd.read_csv(evaluated_path)
+            evaluated_frame = _add_decoding_factor_columns(evaluated_frame)
+            evaluated_frame.to_csv(evaluated_path, index=False)
+            _write_combined_factorial(
+                algorithm=str(algorithm),
+                evaluated_path=evaluated_path,
+                output_path=factorial_path,
+            )
+            stability_group_by = [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ]
+            if algorithm == "algo2":
+                stability_group_by.insert(5, "Convergence")
+            write_grouped_metric_stability(
+                [evaluated_path],
+                stability_path,
+                group_by=stability_group_by,
+                metrics=["accuracy", "recall", "precision"],
+            )
+            variability_group_by = [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ]
+            if algorithm == "algo2":
+                variability_group_by.append("Convergence")
+            write_output_variability_analysis(
+                [raw_path],
+                variability_path,
+                group_by=variability_group_by,
+                result_column="Result",
+            )
+        else:
+            evaluate_algo3_results(raw_path, evaluated_path)
+            evaluated_frame = pd.read_csv(evaluated_path)
+            evaluated_frame = _add_decoding_factor_columns(evaluated_frame)
+            evaluated_frame.to_csv(evaluated_path, index=False)
+            _write_combined_factorial(
+                algorithm=str(algorithm),
+                evaluated_path=evaluated_path,
+                output_path=factorial_path,
+            )
+            write_grouped_metric_stability(
+                [evaluated_path],
+                stability_path,
+                group_by=[
+                    "pair_name",
+                    "Depth",
+                    "Number of Words",
+                    "Example",
+                    "Counter-Example",
+                    "Decoding Algorithm",
+                    "Beam Width Level",
+                    "Contrastive Penalty Level",
+                ],
+                metrics=["Recall"],
+            )
+            write_output_variability_analysis(
+                [raw_path],
+                variability_path,
+                group_by=[
+                    "pair_name",
+                    "Depth",
+                    "Number of Words",
+                    "Example",
+                    "Counter-Example",
+                    "Decoding Algorithm",
+                    "Beam Width Level",
+                    "Contrastive Penalty Level",
                 ],
                 result_column="Results",
             )
@@ -1166,6 +1298,7 @@ def _build_algo2_prompt_bundle(
         counterexample_section,
         f"{definitions['task_fixed_sub_1']} {{formatted_subgraph1}}",
         f"{definitions['task_fixed_sub_2']} {{formatted_subgraph2}}",
+        definitions.get("iterative_context_fragment", ""),
         definitions["task_fixed_sub_3"],
         definitions["conclusion_fixed"],
     )
@@ -1235,6 +1368,13 @@ def _resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> st
 
 def _join_prompt_sections(*sections: str) -> str:
     return " ".join(section.strip() for section in sections if section.strip())
+
+
+def _render_prompt(template: str, **values: object) -> str:
+    rendered = template
+    for key, value in values.items():
+        rendered = rendered.replace(f"{{{key}}}", str(value))
+    return rendered
 
 
 def _generate_edges_from_prompt(chat_client: Any, prompt: str) -> list[Edge]:
@@ -1379,8 +1519,94 @@ def _runtime_details(profile: RuntimeProfile) -> dict[str, object]:
         "dtype": profile.dtype,
         "quantization": profile.quantization,
         "thinking_mode_supported": profile.supports_thinking_toggle,
+        "thinking_mode_control": (
+            "explicit-disable"
+            if profile.supports_thinking_toggle
+            else "not-supported-by-model"
+        ),
         "context_limit": profile.context_limit,
     }
+
+
+def _add_decoding_factor_columns(frame: pd.DataFrame) -> pd.DataFrame:
+    if "decoding_algorithm" not in frame.columns:
+        return frame
+    augmented = frame.copy()
+    augmented["Decoding Algorithm"] = augmented["decoding_algorithm"].astype(str)
+    augmented["Beam Width Level"] = augmented.apply(_beam_width_level, axis=1)
+    augmented["Contrastive Penalty Level"] = augmented.apply(_contrastive_penalty_level, axis=1)
+    return augmented
+
+
+def _beam_width_level(row: pd.Series) -> int:
+    if str(row["decoding_algorithm"]) != "beam":
+        return 0
+    condition = str(row.get("decoding_condition", ""))
+    return 1 if condition.endswith("_6") else -1
+
+
+def _contrastive_penalty_level(row: pd.Series) -> int:
+    if str(row["decoding_algorithm"]) != "contrastive":
+        return 0
+    condition = str(row.get("decoding_condition", ""))
+    return 1 if condition.endswith("_0.8") else -1
+
+
+def _write_combined_factorial(
+    *,
+    algorithm: str,
+    evaluated_path: Path,
+    output_path: Path,
+) -> None:
+    if algorithm == "algo1":
+        factor_columns = [
+            "Explanation",
+            "Example",
+            "Counterexample",
+            "Array/List(1/-1)",
+            "Tag/Adjacency(1/-1)",
+            "Decoding Algorithm",
+            "Beam Width Level",
+            "Contrastive Penalty Level",
+        ]
+        metric_columns = ["accuracy", "recall", "precision"]
+        output_columns = ["accuracy", "recall", "precision", "Feature"]
+    elif algorithm == "algo2":
+        factor_columns = [
+            "Explanation",
+            "Example",
+            "Counterexample",
+            "Array/List(1/-1)",
+            "Tag/Adjacency(1/-1)",
+            "Convergence",
+            "Decoding Algorithm",
+            "Beam Width Level",
+            "Contrastive Penalty Level",
+        ]
+        metric_columns = ["accuracy", "recall", "precision"]
+        output_columns = ["accuracy", "recall", "precision", "Feature"]
+    else:
+        factor_columns = [
+            "Example",
+            "Counter-Example",
+            "Number of Words",
+            "Depth",
+            "Decoding Algorithm",
+            "Beam Width Level",
+            "Contrastive Penalty Level",
+        ]
+        metric_columns = ["Recall"]
+        output_columns = ["Recall", "Feature"]
+    run_generalized_factorial_analysis(
+        [evaluated_path],
+        output_path,
+        GeneralizedFactorialSpec(
+            factor_columns=factor_columns,
+            metric_columns=metric_columns,
+            output_columns=output_columns,
+            replication_column="Repetition",
+        ),
+    )
 
 
 def _resolve_hf_token() -> str | None:

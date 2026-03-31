@@ -1,10 +1,15 @@
 import csv
 import itertools
 
+import numpy as np
 import pandas as pd
 
 from llm_conceptual_modeling.common.csv_schema import assert_required_columns
-from llm_conceptual_modeling.common.types import MultiMetricFactorialSpec, PathLike
+from llm_conceptual_modeling.common.types import (
+    GeneralizedFactorialSpec,
+    MultiMetricFactorialSpec,
+    PathLike,
+)
 
 
 def run_multi_metric_factorial_analysis(
@@ -134,3 +139,126 @@ def _read_metric_csv(
 def _remove_evaluating_suffix(value: str) -> str:
     position = value.find("_evaluating")
     return value[:position] if position != -1 else value
+
+
+def run_generalized_factorial_analysis(
+    input_csv_paths: list[PathLike] | tuple[PathLike, ...],
+    output_path: PathLike,
+    spec: GeneralizedFactorialSpec,
+) -> None:
+    frame = pd.concat(
+        [pd.read_csv(path, sep=",", encoding="utf-8") for path in input_csv_paths],
+        ignore_index=True,
+    )
+    required_columns = list(spec.factor_columns) + list(spec.metric_columns)
+    if spec.replication_column is not None:
+        required_columns.append(spec.replication_column)
+    assert_required_columns(frame, required_columns, label="generalized factorial columns")
+    working = frame[required_columns].copy()
+    working.dropna(subset=spec.metric_columns, inplace=True)
+
+    term_builders: list[tuple[str, list[str]]] = []
+    term_frames: dict[str, pd.DataFrame] = {}
+    binary_terms: list[tuple[str, str]] = []
+    for factor_column in spec.factor_columns:
+        encoded = _encode_factor_column(working, factor_column)
+        term_frames[factor_column] = encoded
+        term_builders.append((factor_column, list(encoded.columns)))
+        if len(encoded.columns) == 1 and _is_binary_series(working[factor_column]):
+            binary_terms.append((factor_column, encoded.columns[0]))
+
+    if spec.replication_column is not None:
+        encoded = _encode_factor_column(working, spec.replication_column)
+        term_frames[spec.replication_column] = encoded
+        term_builders.append((spec.replication_column, list(encoded.columns)))
+
+    if spec.include_pairwise_interactions:
+        for (left_name, _left_column), (right_name, _right_column) in itertools.combinations(
+            binary_terms, 2
+        ):
+            interaction_name = f"{left_name}_AND_{right_name}"
+            interaction_values = (
+                working[left_name].astype(float) * working[right_name].astype(float)
+            )
+            interaction_frame = pd.DataFrame(
+                {interaction_name: interaction_values}
+            )
+            term_frames[interaction_name] = interaction_frame
+            term_builders.append((interaction_name, [interaction_name]))
+
+    intercept = pd.DataFrame({"Intercept": np.ones(len(working), dtype=float)})
+    design_frames = [intercept]
+    for term_name, _column_names in term_builders:
+        design_frames.append(term_frames[term_name])
+    full_design = pd.concat(design_frames, axis=1)
+    full_matrix = full_design.to_numpy(dtype=float)
+
+    rows: list[list[object]] = []
+    for term_name, column_names in term_builders:
+        metric_values: list[float] = []
+        for metric_name in spec.metric_columns:
+            metric_series = working[metric_name].astype(float)
+            total_ss = float(((metric_series - metric_series.mean()) ** 2).sum())
+            if total_ss == 0.0:
+                metric_values.append(0.0)
+                continue
+            response = metric_series.to_numpy(dtype=float)
+            full_sse = _fit_sse(full_matrix, response)
+            reduced_design = full_design.drop(columns=column_names)
+            reduced_sse = _fit_sse(reduced_design.to_numpy(dtype=float), response)
+            ss_effect = max(0.0, reduced_sse - full_sse)
+            metric_values.append((ss_effect / total_ss) * 100)
+        rows.append([*metric_values, term_name])
+
+    if spec.replication_column is not None:
+        error_values: list[float] = []
+        for metric_name in spec.metric_columns:
+            metric_series = working[metric_name].astype(float)
+            total_ss = float(((metric_series - metric_series.mean()) ** 2).sum())
+            if total_ss == 0.0:
+                error_values.append(0.0)
+                continue
+            response = metric_series.to_numpy(dtype=float)
+            full_sse = _fit_sse(full_matrix, response)
+            error_values.append((full_sse / total_ss) * 100)
+        rows.append([*error_values, "Error"])
+
+    with open(str(output_path), "w", newline="") as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(spec.output_columns)
+        for row in rows:
+            writer.writerow(row)
+
+
+def _encode_factor_column(frame: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    series = frame[column_name]
+    if _is_binary_series(series) or _is_sparse_level_series(series):
+        return pd.DataFrame({column_name: series.astype(float)})
+    encoded = pd.get_dummies(series.astype(str), prefix=column_name)
+    if encoded.shape[1] <= 1:
+        return pd.DataFrame({column_name: np.zeros(len(series), dtype=float)})
+    baseline_column = sorted(encoded.columns)[0]
+    return encoded.drop(columns=[baseline_column]).astype(float)
+
+
+def _fit_sse(design_matrix: np.ndarray, response: np.ndarray) -> float:
+    coefficients, *_ = np.linalg.lstsq(design_matrix, response, rcond=None)
+    fitted = design_matrix @ coefficients
+    residuals = response - fitted
+    return float(np.square(residuals).sum())
+
+
+def _is_binary_series(series: pd.Series) -> bool:
+    try:
+        unique_values = {float(value) for value in series.dropna().unique()}
+    except (TypeError, ValueError):
+        return False
+    return unique_values.issubset({-1.0, 1.0}) and bool(unique_values)
+
+
+def _is_sparse_level_series(series: pd.Series) -> bool:
+    try:
+        unique_values = {float(value) for value in series.dropna().unique()}
+    except (TypeError, ValueError):
+        return False
+    return unique_values.issubset({-1.0, 0.0, 1.0}) and bool(unique_values)

@@ -52,7 +52,9 @@ This writes:
 - `prompt_preview/...`
 
 The YAML controls the actual run settings, including models, decoding parameters, temperature,
-seed, prompt fragments, DOE factor fragments, and the output root.
+seed, prompt fragments, DOE factor fragments, and the output root. The
+`max_new_tokens_by_schema` values are starting budgets, not hard caps: the runtime can grow them
+when needed, but it will fail loudly instead of returning a truncated output.
 
 ## Run Commands
 
@@ -96,6 +98,20 @@ For each algorithm / model / decoding condition, the runner writes:
 - `aggregated/.../replication_budget_relaxed.csv`
 - `aggregated/.../output_variability.csv`
 
+For each algorithm / model pair, the runner also writes a combined DOE surface under
+`aggregated/<algorithm>/<model>/combined/`, including:
+
+- `raw.csv`
+- `evaluated.csv`
+- `factorial.csv`
+- `condition_stability.csv`
+- `replication_budget_strict.csv`
+- `replication_budget_relaxed.csv`
+- `output_variability.csv`
+
+The combined `factorial.csv` is the one that includes decoding as an explicit factor and an
+explicit residual `Error` row.
+
 The strict report uses the 95% CI / 5% relative half-width rule.
 The relaxed report uses the 90% CI / 10% relative half-width rule.
 Neither report launches additional runs automatically.
@@ -136,8 +152,10 @@ scripts/vast/fetch_results_from_vast.sh \
 
 ## Notes
 
-- Prompt truncation is not allowed. The local runtime checks prompt length against the tokenizer
-  limit before generation and uses the YAML-configured safety margin plus per-schema token budget.
+- Prompt truncation is not allowed. The local runtime checks the actual chat-templated tokenized
+  input against the tokenizer limit before generation and uses the YAML-configured safety margin.
 - The runtime derives the smallest required context window for each prompt rather than reserving a
   larger fixed window than necessary.
-- Qwen thinking is explicitly disabled through the chat template path. The other selected models do not advertise an equivalent public toggle in the implementation, so they run without a separate thinking-control flag.
+- Qwen thinking is explicitly disabled through the chat template path. The other selected models
+  do not advertise an equivalent public toggle in the implementation, so manifests/runtime records
+  mark them as `not-supported-by-model` rather than pretending they were explicitly disabled.

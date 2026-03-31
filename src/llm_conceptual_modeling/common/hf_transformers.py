@@ -70,7 +70,22 @@ def derive_context_window(
     safety_margin_tokens: int = 64,
 ) -> int:
     prompt_token_count = len(tokenizer.encode(prompt, add_special_tokens=False))
-    required_window = prompt_token_count + max_new_tokens + safety_margin_tokens
+    return derive_context_window_from_input_length(
+        tokenizer=tokenizer,
+        input_token_count=prompt_token_count,
+        max_new_tokens=max_new_tokens,
+        safety_margin_tokens=safety_margin_tokens,
+    )
+
+
+def derive_context_window_from_input_length(
+    *,
+    tokenizer: Any,
+    input_token_count: int,
+    max_new_tokens: int,
+    safety_margin_tokens: int = 64,
+) -> int:
+    required_window = input_token_count + max_new_tokens + safety_margin_tokens
     max_model_length = _resolve_context_limit(tokenizer)
     if max_model_length is not None and required_window > max_model_length:
         raise ValueError(
@@ -140,9 +155,9 @@ class HFTransformersChatClient:
         eos_token_id = getattr(self._tokenizer, "eos_token_id", None)
 
         while True:
-            _ = derive_context_window(
+            _ = derive_context_window_from_input_length(
                 tokenizer=self._tokenizer,
-                prompt=prompt,
+                input_token_count=input_length,
                 max_new_tokens=max_new_tokens,
                 safety_margin_tokens=safety_margin_tokens,
             )
@@ -171,23 +186,31 @@ class HFTransformersChatClient:
                 max_new_tokens=max_new_tokens,
                 eos_token_id=eos_token_id,
             ):
-                next_max_new_tokens = max_new_tokens * 2
-                try:
-                    _ = derive_context_window(
-                        tokenizer=self._tokenizer,
-                        prompt=prompt,
-                        max_new_tokens=next_max_new_tokens,
-                        safety_margin_tokens=safety_margin_tokens,
-                    )
-                except ValueError as error:
-                    raise ValueError(
-                        "Model output reached max_new_tokens before EOS; refusing a possibly "
-                        "truncated response."
-                    ) from error
+                next_max_new_tokens = _next_max_new_tokens(
+                    tokenizer=self._tokenizer,
+                    input_token_count=input_length,
+                    current_max_new_tokens=max_new_tokens,
+                    safety_margin_tokens=safety_margin_tokens,
+                )
                 max_new_tokens = next_max_new_tokens
                 continue
             text = self._tokenizer.decode(completion_ids, skip_special_tokens=True)
-            parsed_content = _parse_generated_json(text)
+            try:
+                parsed_content = _parse_generated_json(text)
+            except ValueError as error:
+                if _response_hit_generation_limit(
+                    completion_ids=completion_ids,
+                    max_new_tokens=max_new_tokens,
+                    eos_token_id=eos_token_id,
+                ):
+                    max_new_tokens = _next_max_new_tokens(
+                        tokenizer=self._tokenizer,
+                        input_token_count=input_length,
+                        current_max_new_tokens=max_new_tokens,
+                        safety_margin_tokens=safety_margin_tokens,
+                    )
+                    continue
+                raise error
             return normalize_structured_response(parsed_content, schema_name=schema_name)
 
 
@@ -371,6 +394,25 @@ def _response_hit_generation_limit(
     eos_ids = _normalize_eos_ids(eos_token_id)
     last_token_id = int(completion_ids[-1])
     return last_token_id not in eos_ids
+
+
+def _next_max_new_tokens(
+    *,
+    tokenizer: Any,
+    input_token_count: int,
+    current_max_new_tokens: int,
+    safety_margin_tokens: int,
+) -> int:
+    max_model_length = _resolve_context_limit(tokenizer)
+    if max_model_length is None:
+        return current_max_new_tokens * 2
+    available_completion_budget = max_model_length - input_token_count - safety_margin_tokens
+    if available_completion_budget <= current_max_new_tokens:
+        raise ValueError(
+            "Model output reached max_new_tokens before EOS; refusing a possibly truncated "
+            "response."
+        )
+    return min(current_max_new_tokens * 2, available_completion_budget)
 
 
 def _normalize_eos_ids(eos_token_id: int | list[int]) -> set[int]:
