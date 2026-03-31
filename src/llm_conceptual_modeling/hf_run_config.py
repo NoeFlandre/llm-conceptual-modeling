@@ -3,9 +3,11 @@ from __future__ import annotations
 import json
 from collections.abc import Mapping
 from dataclasses import asdict, dataclass
+from itertools import product
 from pathlib import Path
 from typing import cast
 
+import pandas as pd
 import yaml
 
 from llm_conceptual_modeling.common.hf_transformers import (
@@ -258,6 +260,12 @@ def write_resolved_run_preview(*, config: HFRunConfig, output_dir: str | Path) -
             (algorithm_dir / "base.txt").write_text(first_preview, encoding="utf-8")
         for preview_name, preview_text in preview_bundle.items():
             (algorithm_dir / f"{preview_name}.txt").write_text(preview_text, encoding="utf-8")
+        _write_condition_prompt_previews(
+            algorithm_name=algorithm_name,
+            algorithm_config=algorithm_config,
+            output_dir=algorithm_dir / "conditions",
+        )
+    _write_condition_matrix(config=config, output_dir=output_dir_path)
 
 
 def _load_factor_config(payload: object) -> FactorConfig:
@@ -444,6 +452,99 @@ def _build_preview_bundle(
     except (ImportError, KeyError, ValueError):
         preview_text = algorithm_config.assemble_prompt(
             [],
+            template_name=_default_preview_template_name(algorithm_config),
+        )
+        return {"base": preview_text}
+
+
+def _write_condition_prompt_previews(
+    *,
+    algorithm_name: str,
+    algorithm_config: AlgorithmPromptConfig,
+    output_dir: Path,
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for condition_bits, active_high_factors, prompt_factors in _iter_factor_conditions(
+        algorithm_config
+    ):
+        preview_bundle = _build_preview_bundle_for_condition(
+            algorithm_name=algorithm_name,
+            algorithm_config=algorithm_config,
+            active_high_factors=active_high_factors,
+            prompt_factors=prompt_factors,
+        )
+        condition_dir = output_dir / condition_bits
+        condition_dir.mkdir(parents=True, exist_ok=True)
+        for preview_name, preview_text in preview_bundle.items():
+            (condition_dir / f"{preview_name}.txt").write_text(preview_text, encoding="utf-8")
+        (condition_dir / "runtime_fields.json").write_text(
+            json.dumps(prompt_factors, indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+
+
+def _write_condition_matrix(*, config: HFRunConfig, output_dir: Path) -> None:
+    from llm_conceptual_modeling.hf_experiments import plan_paper_batch
+
+    planned_specs = plan_paper_batch(
+        models=config.models.chat_models,
+        embedding_model=config.models.embedding_model,
+        replications=config.run.replications,
+        config=config,
+    )
+    rows = [
+        {
+            "algorithm": spec.algorithm,
+            "model": spec.model,
+            "decoding_condition": spec.condition_label,
+            "replication": spec.replication,
+            "pair_name": spec.pair_name,
+            "condition_bits": spec.condition_bits,
+        }
+        for spec in planned_specs
+    ]
+    frame = pd.DataFrame.from_records(rows)
+    frame.to_csv(output_dir / "condition_matrix.csv", index=False)
+
+
+def _iter_factor_conditions(
+    algorithm_config: AlgorithmPromptConfig,
+) -> list[tuple[str, list[str], dict[str, bool | int]]]:
+    factor_names = list(algorithm_config.factors.keys())
+    if not factor_names:
+        return [("base", [], {})]
+    conditions: list[tuple[str, list[str], dict[str, bool | int]]] = []
+    for levels in product((False, True), repeat=len(factor_names)):
+        active_high_factors = [
+            factor_name
+            for factor_name, is_high in zip(factor_names, levels, strict=True)
+            if is_high
+        ]
+        condition_bits = "".join("1" if is_high else "0" for is_high in levels)
+        prompt_factors = algorithm_config.resolve_runtime_fields(active_high_factors)
+        conditions.append((condition_bits, active_high_factors, prompt_factors))
+    return conditions
+
+
+def _build_preview_bundle_for_condition(
+    *,
+    algorithm_name: str,
+    algorithm_config: AlgorithmPromptConfig,
+    active_high_factors: list[str],
+    prompt_factors: dict[str, bool | int],
+) -> dict[str, str]:
+    try:
+        from llm_conceptual_modeling.hf_experiments import _build_prompt_bundle
+
+        return _build_prompt_bundle(
+            algorithm_name=algorithm_name,
+            algorithm_config=algorithm_config,
+            active_high_factors=active_high_factors,
+            prompt_factors=prompt_factors,
+        )
+    except (ImportError, KeyError, ValueError):
+        preview_text = algorithm_config.assemble_prompt(
+            active_high_factors,
             template_name=_default_preview_template_name(algorithm_config),
         )
         return {"base": preview_text}

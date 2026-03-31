@@ -377,7 +377,14 @@ def _run_algo2(
                     expanded_label_context=", ".join(expanded_label_context),
                 ),
             ),
-            verify_edges=build_cove_verifier(recorder),
+            verify_edges=lambda candidate_edges: _verify_edges_from_prompt(
+                recorder,
+                _render_prompt(
+                    prompt_bundle["cove_verification"],
+                    candidate_edges=repr(candidate_edges),
+                ),
+                candidate_edges,
+            ),
             embedding_client=embedding_client,
             convergence_threshold=threshold,
             thesaurus=thesaurus,

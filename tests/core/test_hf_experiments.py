@@ -809,6 +809,29 @@ def test_run_algo2_configured_prompt_uses_evolving_label_context_across_iteratio
     assert raw_response[0]["prompt"] != raw_response[1]["prompt"]
 
 
+def test_checked_in_config_algo2_prompt_bundle_exposes_cove_verification_template() -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo2 = config.algorithms["algo2"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo2",
+        algorithm_config=algo2,
+        active_high_factors=[],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": True,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+            "use_relaxed_convergence": False,
+        },
+    )
+
+    assert sorted(prompt_bundle) == ["cove_verification", "edge_suggestion", "label_expansion"]
+
+
 def test_run_algo2_configured_prompt_applies_cove_verification_to_final_edges() -> None:
     config = load_hf_run_config(
         "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
@@ -870,9 +893,12 @@ def test_run_algo2_configured_prompt_applies_cove_verification_to_final_edges() 
     raw_response = json.loads(result["raw_response"])
 
     assert raw_response[-1]["schema_name"] == "vote_list"
-    assert "causal relationship exists between the source and target concepts" in raw_response[-1][
-        "prompt"
-    ]
+    assert raw_response[-1]["prompt"] == (
+        "Return whether a causal relationship exists between the source and target concepts for "
+        "each pair in a list. For example, given [('smoking', 'cancer'), ('ice cream sales', "
+        "'shark attacks')], return ['Y', 'N'] with no other text. Candidate pairs: "
+        "[('alpha', 'theta')]"
+    )
     assert result["raw_row"]["Result"] == "[]"
 
 

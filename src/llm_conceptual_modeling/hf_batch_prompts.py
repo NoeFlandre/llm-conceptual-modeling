@@ -28,27 +28,33 @@ def _build_algo1_prompt_bundle(
 ) -> dict[str, str]:
     definitions = algorithm_config.fragment_definitions
     if "system_message" not in definitions:
+        direct_edge_template = _select_template_name(
+            algorithm_config,
+            preferred="direct_edge",
+        )
+        cove_template = _select_template_name(
+            algorithm_config,
+            preferred="cove_verification",
+        )
         return {
-            "direct_edge": algorithm_config.assemble_prompt([], template_name="direct_edge"),
-            "cove_verification": algorithm_config.assemble_prompt(
-                [], template_name="cove_verification"
-            ),
+            "direct_edge": algorithm_config.assemble_prompt([], template_name=direct_edge_template),
+            "cove_verification": algorithm_config.assemble_prompt([], template_name=cove_template),
         }
     variant = _resolve_representation_variant(prompt_factors)
     explanation_sections: list[str] = []
-    if bool(prompt_factors["include_explanation"]):
+    if bool(prompt_factors.get("include_explanation", False)):
         explanation_sections = [
             definitions["explanation_fixed"],
             definitions[f"explanation_variable_{variant}"],
         ]
     example_section = (
         definitions[f"example_variable_{variant}"]
-        if bool(prompt_factors["include_example"])
+        if bool(prompt_factors.get("include_example", False))
         else ""
     )
     counterexample_section = (
         definitions[f"counter_example_variable_{variant}"]
-        if bool(prompt_factors["include_counterexample"])
+        if bool(prompt_factors.get("include_counterexample", False))
         else ""
     )
     direct_edge_prompt = _join_prompt_sections(
@@ -74,31 +80,47 @@ def _build_algo2_prompt_bundle(
 ) -> dict[str, str]:
     definitions = algorithm_config.fragment_definitions
     if "system_message" not in definitions:
+        label_template = _select_template_name(
+            algorithm_config,
+            preferred="label_expansion",
+        )
+        edge_template = _select_template_name(
+            algorithm_config,
+            preferred="edge_suggestion",
+        )
+        cove_template = _select_template_name(
+            algorithm_config,
+            preferred="cove_verification",
+        )
         return {
             "label_expansion": algorithm_config.assemble_prompt(
                 [],
-                template_name="label_expansion",
+                template_name=label_template,
             ),
             "edge_suggestion": algorithm_config.assemble_prompt(
                 [],
-                template_name="edge_suggestion",
+                template_name=edge_template,
+            ),
+            "cove_verification": algorithm_config.assemble_prompt(
+                [],
+                template_name=cove_template,
             ),
         }
     variant = _resolve_representation_variant(prompt_factors)
     explanation_sections: list[str] = []
-    if bool(prompt_factors["include_explanation"]):
+    if bool(prompt_factors.get("include_explanation", False)):
         explanation_sections = [
             definitions["explanation_fixed"],
             definitions[f"explanation_variable_{variant}"],
         ]
     example_section = (
         definitions[f"example_variable_{variant}"]
-        if bool(prompt_factors["include_example"])
+        if bool(prompt_factors.get("include_example", False))
         else ""
     )
     counterexample_section = (
         definitions[f"counter_example_variable_{variant}"]
-        if bool(prompt_factors["include_counterexample"])
+        if bool(prompt_factors.get("include_counterexample", False))
         else ""
     )
     label_expansion_prompt = _join_prompt_sections(
@@ -125,6 +147,7 @@ def _build_algo2_prompt_bundle(
     return {
         "label_expansion": label_expansion_prompt,
         "edge_suggestion": edge_suggestion_prompt,
+        "cove_verification": definitions["cove_verification_template"],
     }
 
 
@@ -135,10 +158,14 @@ def _build_algo3_prompt_bundle(
 ) -> dict[str, str]:
     definitions = algorithm_config.fragment_definitions
     if "system_message" not in definitions:
+        tree_template = _select_template_name(
+            algorithm_config,
+            preferred="tree_expansion",
+        )
         return {
-            "tree_expansion": algorithm_config.assemble_prompt([], template_name="tree_expansion")
+            "tree_expansion": algorithm_config.assemble_prompt([], template_name=tree_template)
         }
-    child_count = int(prompt_factors["child_count"])
+    child_count = int(prompt_factors.get("child_count", 3))
     if child_count == 3:
         example_key = "example_3words"
         counterexample_key = "counter_example_3words"
@@ -147,9 +174,13 @@ def _build_algo3_prompt_bundle(
         counterexample_key = "counter_example_5words"
     else:
         raise ValueError(f"Unsupported ALGO3 child_count: {child_count}")
-    example_section = definitions[example_key] if bool(prompt_factors["include_example"]) else ""
+    example_section = (
+        definitions[example_key] if bool(prompt_factors.get("include_example", False)) else ""
+    )
     counterexample_section = (
-        definitions[counterexample_key] if bool(prompt_factors["include_counterexample"]) else ""
+        definitions[counterexample_key]
+        if bool(prompt_factors.get("include_counterexample", False))
+        else ""
     )
     tree_expansion_prompt = _join_prompt_sections(
         definitions["system_message"],
@@ -168,8 +199,8 @@ def resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> str
 
 
 def _resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> str:
-    use_adjacency_notation = bool(prompt_factors["use_adjacency_notation"])
-    use_array_representation = bool(prompt_factors["use_array_representation"])
+    use_adjacency_notation = bool(prompt_factors.get("use_adjacency_notation", False))
+    use_array_representation = bool(prompt_factors.get("use_array_representation", False))
     if use_adjacency_notation and use_array_representation:
         return "matrix"
     if use_adjacency_notation and not use_array_representation:
@@ -185,6 +216,14 @@ def join_prompt_sections(*sections: str) -> str:
 
 def _join_prompt_sections(*sections: str) -> str:
     return " ".join(section.strip() for section in sections if section.strip())
+
+
+def _select_template_name(algorithm_config: Any, *, preferred: str) -> str:
+    if preferred in algorithm_config.prompt_templates:
+        return preferred
+    if "body" in algorithm_config.prompt_templates:
+        return "body"
+    return next(iter(algorithm_config.prompt_templates))
 
 
 def render_prompt(template: str, **values: object) -> str:

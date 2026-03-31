@@ -428,9 +428,14 @@ algorithms:
       edge_conclusion_fixed: >-
         Your output must only be the list of proposed edges. Do not repeat any instructions I have
         given you and do not add unnecessary words or phrases.
+      cove_verification_template: >-
+        Return whether a causal relationship exists between the source and target concepts for each
+        pair in a list. For example, given [('smoking', 'cancer'), ('ice cream sales', 'shark
+        attacks')], return ['Y', 'N'] with no other text. Candidate pairs: {candidate_edges}
     prompt_templates:
       label_expansion: ""
       edge_suggestion: ""
+      cove_verification: ""
 
   algo3:
     pair_names:
