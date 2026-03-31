@@ -31,8 +31,11 @@ The script:
 
 - installs `uv` if needed
 - runs `uv sync`
-- reinstalls `torch` from the CUDA wheel index
+- installs `wheel`
+- pins `torch` to the CUDA 12.1 wheel line used by the validated remote snapshot
+- pins `triton`
 - fails immediately if CUDA is unavailable
+- prints the effective `torch` / CUDA / `transformers` / `triton` snapshot
 
 ## Preflight Review
 
@@ -50,6 +53,24 @@ This writes:
 - `resolved_run_config.yaml`
 - `resolved_run_plan.json`
 - `prompt_preview/...`
+
+Then run the exact-condition smoke gate before the full DOE. This is the command that decides
+whether the rented machine is actually ready:
+
+```bash
+uv run lcm run smoke \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --algorithm algo1 \
+  --model Qwen/Qwen3.5-9B \
+  --pair-name sg2_sg3 \
+  --condition-bits 00000 \
+  --decoding greedy \
+  --replication 0 \
+  --output-root /workspace/results/hf-smoke-qwen-sg2-sg3
+```
+
+If that smoke run does not complete cleanly, stop and fix the environment before launching the full
+batch. Do not spend more GPU time debugging inside `paper-batch`.
 
 The YAML controls the actual run settings, including models, decoding parameters, temperature,
 seed, per-model thinking-mode declarations, prompt fragments, DOE factor fragments, and the output
