@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Any, Callable, cast
 
@@ -99,6 +100,11 @@ from llm_conceptual_modeling.hf_batch_utils import (
     write_text as _write_text,
 )
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
+from llm_conceptual_modeling.hf_spec_codec import serialize_spec
+from llm_conceptual_modeling.hf_subprocess import (
+    build_hf_download_environment,
+    run_monitored_command,
+)
 
 
 def plan_paper_batch(
@@ -140,6 +146,7 @@ def run_paper_batch(
     output_root_path = Path(output_root)
     output_root_path.mkdir(parents=True, exist_ok=True)
 
+    use_monitored_hf_subprocess = runtime_factory is None and not dry_run
     hf_runtime = None if runtime_factory is not None else build_runtime_factory(
         hf_token=_resolve_hf_token()
     )
@@ -155,7 +162,7 @@ def run_paper_batch(
         config=config,
         runtime_profile_provider=profile_provider,
     )
-    if runtime_factory is None:
+    if runtime_factory is None and not use_monitored_hf_subprocess:
         if hf_runtime is None:
             raise ValueError("Missing HF runtime for non-dry local execution.")
         runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
@@ -233,12 +240,17 @@ def run_paper_batch(
         _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
         try:
-            runtime_result = _execute_run(
-                spec=spec,
-                runtime_factory=runtime_factory,
-                dry_run=dry_run,
-                run_dir=run_dir,
-            )
+            if use_monitored_hf_subprocess:
+                runtime_result = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+            else:
+                if runtime_factory is None:
+                    raise ValueError("Missing runtime_factory for in-process execution.")
+                runtime_result = _execute_run(
+                    spec=spec,
+                    runtime_factory=runtime_factory,
+                    dry_run=dry_run,
+                    run_dir=run_dir,
+                )
         except Exception as error:
             _write_json(
                 run_dir / "error.json",
@@ -361,13 +373,7 @@ def run_single_spec(
     output_root_path = Path(output_root)
     output_root_path.mkdir(parents=True, exist_ok=True)
 
-    hf_runtime = None if runtime_factory is not None else build_runtime_factory(
-        hf_token=_resolve_hf_token()
-    )
-    if runtime_factory is None:
-        if hf_runtime is None:
-            raise ValueError("Missing HF runtime for non-dry local execution.")
-        runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
+    use_monitored_hf_subprocess = runtime_factory is None and not dry_run
 
     run_dir = (
         output_root_path
@@ -388,12 +394,30 @@ def run_single_spec(
 
     _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
     _write_json(run_dir / "state.json", {"status": "running"})
-    runtime_result = _execute_run(
-        spec=spec,
-        runtime_factory=runtime_factory,
-        dry_run=dry_run,
-        run_dir=run_dir,
-    )
+    try:
+        if use_monitored_hf_subprocess:
+            runtime_result = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+        else:
+            if runtime_factory is None:
+                hf_runtime = build_runtime_factory(hf_token=_resolve_hf_token())
+                runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
+            runtime_result = _execute_run(
+                spec=spec,
+                runtime_factory=runtime_factory,
+                dry_run=dry_run,
+                run_dir=run_dir,
+            )
+    except Exception as error:
+        _write_json(
+            run_dir / "error.json",
+            {
+                "type": type(error).__name__,
+                "message": str(error),
+                "status": "failed",
+            },
+        )
+        _write_json(run_dir / "state.json", {"status": "failed"})
+        raise
     raw_row = runtime_result["raw_row"]
     _write_json(raw_row_path, raw_row)
     _write_json(run_dir / "state.json", {"status": "finished"})
@@ -466,6 +490,77 @@ def _execute_run(
         if "run_dir" not in str(error):
             raise
         return runtime_factory(spec)
+
+
+def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
+    spec_json_path = run_dir / "worker_spec.json"
+    result_json_path = run_dir / "worker_result.json"
+    _write_json(spec_json_path, serialize_spec(spec))
+    if result_json_path.exists():
+        result_json_path.unlink()
+
+    startup_timeout_seconds = _resolve_startup_timeout_seconds(spec.context_policy)
+    stage_timeout_seconds = _resolve_stage_timeout_seconds(spec.context_policy)
+    completed = run_monitored_command(
+        command=_build_worker_command(
+            spec_json_path=spec_json_path,
+            result_json_path=result_json_path,
+            run_dir=run_dir,
+        ),
+        run_dir=run_dir,
+        startup_timeout_seconds=startup_timeout_seconds,
+        stage_timeout_seconds=stage_timeout_seconds,
+        env=build_hf_download_environment(),
+    )
+    if not result_json_path.exists():
+        raise RuntimeError(
+            "HF worker subprocess exited without writing a result artifact. "
+            f"stdout={completed.stdout!r} stderr={completed.stderr!r}"
+        )
+    worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
+    if not worker_payload.get("ok"):
+        error = worker_payload["error"]
+        raise RuntimeError(f"{error['type']}: {error['message']}")
+    return cast(RuntimeResult, worker_payload["runtime_result"])
+
+
+def _build_worker_command(
+    *,
+    spec_json_path: Path,
+    result_json_path: Path,
+    run_dir: Path,
+) -> list[str]:
+    return [
+        sys.executable,
+        "-m",
+        "llm_conceptual_modeling.hf_worker",
+        "--spec-json",
+        str(spec_json_path),
+        "--result-json",
+        str(result_json_path),
+        "--run-dir",
+        str(run_dir),
+    ]
+
+
+def _resolve_startup_timeout_seconds(context_policy: dict[str, object] | None) -> float:
+    if context_policy is None:
+        return 900.0
+    raw_value = context_policy.get("startup_timeout_seconds", 900)
+    return _coerce_timeout_seconds(raw_value)
+
+
+def _resolve_stage_timeout_seconds(context_policy: dict[str, object] | None) -> float:
+    if context_policy is None:
+        return 180.0
+    raw_value = context_policy.get("generation_timeout_seconds", 180)
+    return _coerce_timeout_seconds(raw_value)
+
+
+def _coerce_timeout_seconds(raw_value: object) -> float:
+    if isinstance(raw_value, (int, float, str)):
+        return float(raw_value)
+    raise TypeError(f"Timeout value must be numeric, got {type(raw_value).__name__}")
 
 
 def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -> RuntimeFactory:

@@ -11,6 +11,8 @@ from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.hf_experiments import (
     HFRunSpec,
     _build_prompt_bundle,
+    _resolve_stage_timeout_seconds,
+    _resolve_startup_timeout_seconds,
     _run_algo1,
     _run_algo2,
     _run_algo3,
@@ -19,6 +21,7 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
 )
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
+from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
 
 
 def test_plan_paper_batch_covers_full_factorial_surface() -> None:
@@ -29,6 +32,24 @@ def test_plan_paper_batch_covers_full_factorial_surface() -> None:
     )
 
     assert len(specs) == 1680
+
+
+def test_timeout_resolution_accepts_numeric_like_values() -> None:
+    context_policy = {
+        "startup_timeout_seconds": "120",
+        "generation_timeout_seconds": 45,
+    }
+
+    assert _resolve_startup_timeout_seconds(context_policy) == 120.0
+    assert _resolve_stage_timeout_seconds(context_policy) == 45.0
+
+
+def test_timeout_resolution_rejects_invalid_values() -> None:
+    with pytest.raises(TypeError, match="Timeout value must be numeric"):
+        _resolve_startup_timeout_seconds({"startup_timeout_seconds": object()})
+
+    with pytest.raises(TypeError, match="Timeout value must be numeric"):
+        _resolve_stage_timeout_seconds({"generation_timeout_seconds": object()})
 
 
 def test_run_paper_batch_writes_resumable_state_and_manifest(tmp_path: Path) -> None:
@@ -1412,6 +1433,66 @@ def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
     assert (run_dir / "raw_row.json").exists()
     assert (run_dir / "summary.json").exists()
     assert summary["pair_name"] == "sg2_sg3"
+
+
+def test_run_single_spec_marks_failed_when_monitored_worker_times_out(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"generation_timeout_seconds": 0.1},
+    )
+
+    def fail_monitored_run(*, spec, run_dir):
+        _ = (spec, run_dir)
+        raise MonitoredCommandTimeout("stage", 0.1)
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments._run_local_hf_spec_subprocess",
+        fail_monitored_run,
+    )
+
+    with pytest.raises(MonitoredCommandTimeout):
+        run_single_spec(
+            spec=spec,
+            output_root=tmp_path / "smoke",
+            runtime_factory=None,
+            dry_run=False,
+            resume=False,
+        )
+
+    run_dir = (
+        tmp_path
+        / "smoke"
+        / "runs"
+        / "algo1"
+        / "Qwen__Qwen3.5-9B"
+        / "greedy"
+        / "sg2_sg3"
+        / "00000"
+        / "rep_00"
+    )
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    error = json.loads((run_dir / "error.json").read_text(encoding="utf-8"))
+
+    assert state["status"] == "failed"
+    assert error["type"] == "MonitoredCommandTimeout"
 
 
 def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(
