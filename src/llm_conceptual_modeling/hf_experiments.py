@@ -165,7 +165,7 @@ def run_paper_batch(
         summary_path = run_dir / "summary.json"
         raw_row_path = run_dir / "raw_row.json"
 
-        if resume and summary_path.exists() and raw_row_path.exists():
+        if resume and _is_finished_run_directory(run_dir):
             cached = json.loads(summary_path.read_text(encoding="utf-8"))
             summary_rows.append(cached)
             continue
@@ -221,6 +221,26 @@ def run_paper_batch(
         return
 
     write_aggregated_outputs(output_root_path, summary_frame)
+
+
+def _is_finished_run_directory(run_dir: Path) -> bool:
+    state_path = run_dir / "state.json"
+    summary_path = run_dir / "summary.json"
+    required_paths = [
+        run_dir / "manifest.json",
+        state_path,
+        run_dir / "runtime.json",
+        run_dir / "raw_response.json",
+        run_dir / "raw_row.json",
+        summary_path,
+    ]
+    if not all(path.exists() for path in required_paths):
+        return False
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    if state.get("status") != "finished":
+        return False
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    return summary.get("status") == "finished"
 
 
 def _execute_run(

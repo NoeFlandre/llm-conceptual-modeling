@@ -129,6 +129,114 @@ def test_run_paper_batch_resumes_without_recomputing_finished_runs(tmp_path: Pat
     assert call_count["count"] == first_count
 
 
+def test_run_paper_batch_resume_recomputes_partially_finished_run(tmp_path: Path) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    def runtime_factory(spec):
+        call_count["count"] += 1
+        if spec.algorithm == "algo3":
+            row = {
+                **spec.raw_context,
+                "Results": "[]",
+                "Source Graph": "[]",
+                "Target Graph": "[]",
+                "Mother Graph": "[]",
+                "Recall": 0.0,
+            }
+        else:
+            row = {
+                **spec.raw_context,
+                "Result": "[]",
+                "graph": "[]",
+                "subgraph1": "[]",
+                "subgraph2": "[]",
+            }
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=runtime_factory,
+    )
+    first_count = call_count["count"]
+
+    runtime_paths = sorted(output_root.rglob("runtime.json"))
+    assert runtime_paths
+    runtime_paths[0].unlink()
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    assert call_count["count"] == first_count + 1
+
+
+def test_run_paper_batch_resume_does_not_skip_failed_state(tmp_path: Path) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    def runtime_factory(spec):
+        call_count["count"] += 1
+        if spec.algorithm == "algo3":
+            row = {
+                **spec.raw_context,
+                "Results": "[]",
+                "Source Graph": "[]",
+                "Target Graph": "[]",
+                "Mother Graph": "[]",
+                "Recall": 0.0,
+            }
+        else:
+            row = {
+                **spec.raw_context,
+                "Result": "[]",
+                "graph": "[]",
+                "subgraph1": "[]",
+                "subgraph2": "[]",
+            }
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=runtime_factory,
+    )
+    first_count = call_count["count"]
+
+    state_paths = sorted(output_root.rglob("state.json"))
+    assert state_paths
+    state_paths[0].write_text('{"status": "failed"}', encoding="utf-8")
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    assert call_count["count"] == first_count + 1
+
+
 def test_run_paper_batch_writes_batch_summary_csv(tmp_path: Path) -> None:
     output_root = tmp_path / "runs"
 
