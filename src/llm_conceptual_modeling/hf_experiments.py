@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import defaultdict
 from pathlib import Path
 from typing import Any, Callable, cast
 
@@ -144,6 +143,42 @@ from llm_conceptual_modeling.hf_execution_runtime import (
     run_local_hf_spec_subprocess as _execution_run_local_hf_spec_subprocess,
 )
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
+from llm_conceptual_modeling.hf_resume_state import (
+    build_seeded_resume_snapshot as _resume_build_seeded_resume_snapshot,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    classify_failure_payload as _resume_classify_failure_payload,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    collect_resume_history as _resume_collect_resume_history,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    is_finished_run_directory as _resume_is_finished_run_directory,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    load_deferred_failed_summary as _resume_load_deferred_failed_summary,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    load_valid_finished_summary as _resume_load_valid_finished_summary,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    order_planned_specs_for_resume as _resume_order_planned_specs_for_resume,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    resolve_resume_pass_mode as _resume_resolve_resume_pass_mode,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    resolve_retry_timeout_failures_on_resume as _resume_resolve_retry_timeout_failures_on_resume,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    resume_priority_key as _resume_resume_priority_key,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    status_failures as _resume_status_failures,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    status_int as _resume_status_int,
+)
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
 from llm_conceptual_modeling.hf_subprocess import (
@@ -427,70 +462,29 @@ def _build_seeded_resume_snapshot(
     planned_specs: list[HFRunSpec],
     started_at: str,
 ) -> tuple[dict[str, object], list[dict[str, object]], set[Path], set[Path]]:
-    summary_rows: list[dict[str, object]] = []
-    seeded_finished_run_dirs: set[Path] = set()
-    seeded_failed_run_dirs: set[Path] = set()
-    failures: list[dict[str, object]] = []
-    last_completed_run: dict[str, object] | None = None
-
-    previous_status = _read_artifact_json(output_root / "batch_status.json")
-
-    for spec in planned_specs:
-        run_dir = _run_dir_for_spec(output_root=output_root, spec=spec)
-        _normalize_stale_running_run(run_dir)
-
-        cached = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
-        if cached is not None:
-            summary_rows.append(cached)
-            seeded_finished_run_dirs.add(run_dir)
-            last_completed_run = _current_run_payload(
-                algorithm=spec.algorithm,
-                model=spec.model,
-                decoding_algorithm=spec.decoding.algorithm,
-                pair_name=spec.pair_name,
-                condition_bits=spec.condition_bits,
-                replication=spec.replication,
-            )
-            continue
-
-        deferred_failure = _load_deferred_failed_summary(
-            run_dir=run_dir,
-            algorithm=spec.algorithm,
-            context_policy=spec.context_policy,
-        )
-        if deferred_failure is not None:
-            failures.append(deferred_failure)
-            seeded_failed_run_dirs.add(run_dir)
-
-    finished_count = len(seeded_finished_run_dirs)
-    failed_count = len(seeded_failed_run_dirs)
-    total_runs = len(planned_specs)
-    pending_count = max(total_runs - finished_count - failed_count, 0)
-    percent_complete = round((finished_count / total_runs) * 100.0, 2) if total_runs else 0.0
-
-    status_snapshot: dict[str, object] = {
-        "total_runs": total_runs,
-        "finished_count": finished_count,
-        "failed_count": failed_count,
-        "running_count": 0,
-        "pending_count": pending_count,
-        "failure_count": len(failures),
-        "failures": failures,
-        "percent_complete": percent_complete,
-        "current_run": None,
-        "last_completed_run": last_completed_run or previous_status.get("last_completed_run"),
-        "started_at": previous_status.get("started_at", started_at),
-        "updated_at": _status_timestamp_now(),
-    }
-    return status_snapshot, summary_rows, seeded_finished_run_dirs, seeded_failed_run_dirs
+    return _resume_build_seeded_resume_snapshot(
+        output_root=output_root,
+        planned_specs=planned_specs,
+        started_at=started_at,
+        run_dir_for_spec_fn=lambda current_output_root, spec: _run_dir_for_spec(
+            output_root=current_output_root,
+            spec=spec,
+        ),
+        current_run_payload_fn=_current_run_payload,
+        status_timestamp_now_fn=_status_timestamp_now,
+        validate_structural_runtime_result_fn=_validate_structural_runtime_result,
+        normalize_stale_running_run_fn=_normalize_stale_running_run,
+        read_artifact_json_fn=_read_artifact_json,
+        write_json_fn=_write_json,
+    )
 
 
 def _status_int(status_snapshot: dict[str, object], key: str) -> int:
-    return int(cast(int | float | str, status_snapshot[key]))
+    return _resume_status_int(status_snapshot, key)
 
 
 def _status_failures(status_snapshot: dict[str, object]) -> list[dict[str, object]]:
-    return list(cast(list[dict[str, object]], status_snapshot["failures"]))
+    return _resume_status_failures(status_snapshot)
 
 
 def select_run_spec(
@@ -646,23 +640,7 @@ def run_single_spec(
 
 
 def _is_finished_run_directory(run_dir: Path) -> bool:
-    state_path = run_dir / "state.json"
-    summary_path = run_dir / "summary.json"
-    required_paths = [
-        run_dir / "manifest.json",
-        state_path,
-        run_dir / "runtime.json",
-        run_dir / "raw_response.json",
-        run_dir / "raw_row.json",
-        summary_path,
-    ]
-    if not all(path.exists() for path in required_paths):
-        return False
-    state = json.loads(state_path.read_text(encoding="utf-8"))
-    if state.get("status") != "finished":
-        return False
-    summary = json.loads(summary_path.read_text(encoding="utf-8"))
-    return summary.get("status") == "finished"
+    return _resume_is_finished_run_directory(run_dir)
 
 
 def _load_valid_finished_summary(
@@ -670,29 +648,12 @@ def _load_valid_finished_summary(
     run_dir: Path,
     algorithm: str,
 ) -> dict[str, object] | None:
-    if not _is_finished_run_directory(run_dir):
-        return None
-
-    summary_path = run_dir / "summary.json"
-    raw_row_path = run_dir / "raw_row.json"
-    try:
-        raw_row = json.loads(raw_row_path.read_text(encoding="utf-8"))
-        _validate_structural_runtime_result(algorithm=algorithm, raw_row=raw_row)
-    except Exception as error:
-        _write_json(
-            run_dir / "error.json",
-            {
-                "type": type(error).__name__,
-                "message": str(error),
-                "status": "failed",
-            },
-        )
-        _write_json(run_dir / "state.json", {"status": "failed"})
-        if summary_path.exists():
-            summary_path.unlink()
-        return None
-
-    return json.loads(summary_path.read_text(encoding="utf-8"))
+    return _resume_load_valid_finished_summary(
+        run_dir=run_dir,
+        algorithm=algorithm,
+        validate_structural_runtime_result_fn=_validate_structural_runtime_result,
+        write_json_fn=_write_json,
+    )
 
 
 def _load_deferred_failed_summary(
@@ -701,23 +662,12 @@ def _load_deferred_failed_summary(
     algorithm: str,
     context_policy: dict[str, object] | None,
 ) -> dict[str, object] | None:
-    _ = algorithm
-    state = _read_artifact_json(run_dir / "state.json")
-    if state.get("status") != "failed":
-        return None
-    error = _read_artifact_json(run_dir / "error.json")
-    failure_kind = _classify_failure_payload(error)
-    if failure_kind != "timeout":
-        return None
-    if _resolve_retry_timeout_failures_on_resume(context_policy):
-        return None
-    return {
-        "run_dir": str(run_dir),
-        "message": str(error.get("message", "Deferred timeout failure during resume.")),
-        "type": str(error.get("type", "RuntimeError")),
-        "failure_kind": failure_kind,
-        "deferred_on_resume": True,
-    }
+    return _resume_load_deferred_failed_summary(
+        run_dir=run_dir,
+        algorithm=algorithm,
+        context_policy=context_policy,
+        read_artifact_json_fn=_read_artifact_json,
+    )
 
 
 def _smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
@@ -769,56 +719,15 @@ def _execute_run(
 def _resolve_retry_timeout_failures_on_resume(
     context_policy: dict[str, object] | None,
 ) -> bool:
-    mode = _resolve_resume_pass_mode(context_policy)
-    if mode == "retry-timeouts":
-        return True
-    if context_policy is None:
-        return False
-    raw_value = context_policy.get("retry_timeout_failures_on_resume", False)
-    if isinstance(raw_value, bool):
-        return raw_value
-    raise TypeError(
-        "retry_timeout_failures_on_resume value must be boolean, "
-        f"got {type(raw_value).__name__}"
-    )
+    return _resume_resolve_retry_timeout_failures_on_resume(context_policy)
 
 
 def _resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
-    if context_policy is None:
-        return "throughput"
-    raw_value = context_policy.get("resume_pass_mode", "throughput")
-    if not isinstance(raw_value, str):
-        raise TypeError(
-            "resume_pass_mode value must be string, "
-            f"got {type(raw_value).__name__}"
-        )
-    normalized = raw_value.strip().lower()
-    if normalized not in {"throughput", "retry-timeouts"}:
-        raise ValueError(
-            "resume_pass_mode must be one of {'throughput', 'retry-timeouts'}, "
-            f"got {raw_value!r}"
-        )
-    return normalized
+    return _resume_resolve_resume_pass_mode(context_policy)
 
 
 def _classify_failure_payload(error: dict[str, object]) -> str:
-    error_type = str(error.get("type", ""))
-    message = str(error.get("message", ""))
-    if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
-        return "timeout"
-    if error_type == "StaleRunState":
-        return "stale"
-    if error_type in {"ValueError", "RuntimeError"} and (
-        "Model did not return valid structured output:" in message
-        or "Invalid edge item shape:" in message
-        or "Unsupported structured response shape for schema" in message
-        or "Structured edge_list response must contain a list of edges" in message
-        or "Structured edge_list flat string response must contain an even number of items"
-        in message
-        or "Structurally invalid algo" in message
-    ):
-        return "structural"
-    return "other"
+    return _resume_classify_failure_payload(error)
 
 
 def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -> RuntimeFactory:
@@ -933,46 +842,23 @@ def _order_planned_specs_for_resume(
     output_root: Path,
     resume: bool,
 ) -> list[HFRunSpec]:
-    if not resume or not planned_specs:
-        return planned_specs
-    history = _collect_resume_history(output_root)
-    return sorted(
-        planned_specs,
-        key=lambda spec: _resume_priority_key(
+    return _resume_order_planned_specs_for_resume(
+        planned_specs=planned_specs,
+        output_root=output_root,
+        resume=resume,
+        run_dir_for_spec_fn=lambda current_output_root, spec: _run_dir_for_spec(
+            output_root=current_output_root,
             spec=spec,
-            run_dir=_run_dir_for_spec(output_root=output_root, spec=spec),
-            history=history,
         ),
+        read_artifact_json_fn=_read_artifact_json,
     )
 
 
 def _collect_resume_history(output_root: Path) -> dict[str, dict[object, dict[str, int]]]:
-    by_pair: dict[object, dict[str, int]] = defaultdict(
-        lambda: {"finished": 0, "timeout": 0, "structural": 0, "other": 0}
+    return _resume_collect_resume_history(
+        output_root=output_root,
+        read_artifact_json_fn=_read_artifact_json,
     )
-    by_pair_condition: dict[object, dict[str, int]] = defaultdict(
-        lambda: {"finished": 0, "timeout": 0, "structural": 0, "other": 0}
-    )
-    runs_root = output_root / "runs"
-    if not runs_root.exists():
-        return {"by_pair": dict(by_pair), "by_pair_condition": dict(by_pair_condition)}
-    for run_dir in runs_root.glob("*/*/*/*/*/rep_*"):
-        pair_name = run_dir.parent.parent.name
-        condition_bits = run_dir.parent.name
-        pair_key = pair_name
-        pair_condition_key = (pair_name, condition_bits)
-        state = _read_artifact_json(run_dir / "state.json")
-        if state.get("status") == "finished":
-            by_pair[pair_key]["finished"] += 1
-            by_pair_condition[pair_condition_key]["finished"] += 1
-            continue
-        if state.get("status") != "failed":
-            continue
-        failure_kind = _classify_failure_payload(_read_artifact_json(run_dir / "error.json"))
-        bucket = failure_kind if failure_kind in {"timeout", "structural"} else "other"
-        by_pair[pair_key][bucket] += 1
-        by_pair_condition[pair_condition_key][bucket] += 1
-    return {"by_pair": dict(by_pair), "by_pair_condition": dict(by_pair_condition)}
 
 
 def _resume_priority_key(
@@ -981,42 +867,11 @@ def _resume_priority_key(
     run_dir: Path,
     history: dict[str, dict[object, dict[str, int]]],
 ) -> tuple[float, float, float, str, str, int]:
-    context_policy = spec.context_policy
-    pass_mode = _resolve_resume_pass_mode(context_policy)
-    state = _read_artifact_json(run_dir / "state.json")
-    failure_kind = "pending"
-    if state.get("status") == "failed":
-        failure_kind = _classify_failure_payload(_read_artifact_json(run_dir / "error.json"))
-
-    if pass_mode == "retry-timeouts":
-        base_bucket_map = {"timeout": 0.0, "structural": 1.0, "pending": 2.0, "other": 3.0}
-    else:
-        base_bucket_map = {"pending": 0.0, "structural": 1.0, "other": 2.0, "timeout": 3.0}
-
-    pair_stats = history["by_pair"].get(spec.pair_name, {})
-    condition_stats = history["by_pair_condition"].get((spec.pair_name, spec.condition_bits), {})
-
-    pair_finished = int(pair_stats.get("finished", 0))
-    pair_failures = int(pair_stats.get("timeout", 0)) + int(pair_stats.get("other", 0))
-    pair_total = pair_finished + pair_failures + int(pair_stats.get("structural", 0))
-    pair_timeout_rate = int(pair_stats.get("timeout", 0)) / pair_total if pair_total else 0.0
-
-    condition_finished = int(condition_stats.get("finished", 0))
-    condition_failures = (
-        int(condition_stats.get("timeout", 0))
-        + int(condition_stats.get("structural", 0))
-        + int(condition_stats.get("other", 0))
-    )
-    condition_total = condition_finished + condition_failures
-    condition_failure_rate = condition_failures / condition_total if condition_total else 0.0
-
-    return (
-        base_bucket_map.get(failure_kind, 4.0),
-        pair_timeout_rate,
-        condition_failure_rate,
-        spec.pair_name,
-        spec.condition_bits,
-        spec.replication,
+    return _resume_resume_priority_key(
+        spec=spec,
+        run_dir=run_dir,
+        history=history,
+        read_artifact_json_fn=_read_artifact_json,
     )
 
 
