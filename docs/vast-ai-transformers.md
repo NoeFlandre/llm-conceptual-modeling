@@ -74,6 +74,8 @@ This wrapper:
 - runs `lcm run validate-config`
 - optionally runs the smoke gate when smoke environment variables are set
 - launches `paper-batch --resume` under `nohup`
+- can also start the local periodic result pull loop when `LOCAL_RESULTS_DIR` and
+  `LOCAL_RESULTS_SYNC_INTERVAL_SECONDS` are both set
 
 Useful runtime overrides for the wrapper:
 
@@ -84,6 +86,13 @@ export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME=false
 export BATCH_WORKER_PROCESS_MODE=ephemeral
 export BATCH_MAX_REQUESTS_PER_WORKER_PROCESS=32
 ```
+
+Shell glue layout:
+
+- `scripts/vast/common.sh`: shared SSH/rsync/value-validation helpers
+- `scripts/vast/fetch_results_from_vast.sh`: one-shot result pull
+- `scripts/vast/watch_results_from_vast.sh`: repeated local sync loop
+- `scripts/vast/prepare_and_resume_hf_batch.sh`: top-level orchestration wrapper
 
 Persistent-worker guidance:
 

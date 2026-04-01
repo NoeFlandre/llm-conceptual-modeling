@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/common.sh"
+
 if [ "$#" -lt 6 ] || [ "$#" -gt 7 ]; then
   cat >&2 <<'USAGE'
 usage: prepare_and_resume_hf_batch.sh SSH_TARGET SSH_PORT LOCAL_REPO_DIR REMOTE_REPO_DIR CONFIG_RELATIVE_PATH REMOTE_RESULTS_DIR [LOCAL_RESULTS_DIR]
@@ -51,8 +54,8 @@ LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-}"
 LOCAL_RESULTS_SYNC_LOG_PATH="${LOCAL_RESULTS_SYNC_LOG_PATH:-}"
 LOCAL_RESULTS_SYNC_PID_PATH="${LOCAL_RESULTS_SYNC_PID_PATH:-}"
 
-SSH_CMD=(ssh -i "$SSH_KEY_PATH" -p "$SSH_PORT")
-RSYNC_SSH="ssh -i $SSH_KEY_PATH -p $SSH_PORT"
+SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))
+RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"
 
 echo "[1/6] Sync repository"
 rsync -avz \
@@ -65,7 +68,7 @@ rsync -avz \
   --exclude 'data/analysis_artifacts' \
   "$LOCAL_REPO_DIR"/ "$SSH_TARGET:$REMOTE_REPO_DIR"/
 
-if [ -n "$LOCAL_RESULTS_DIR" ]; then
+if vast_has_value "$LOCAL_RESULTS_DIR"; then
   echo "[2/6] Seed remote results root from local copy"
   mkdir -p "$LOCAL_RESULTS_DIR"
   rsync -avz -e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/
@@ -73,7 +76,7 @@ else
   echo "[2/6] No local results seed provided; skipping"
 fi
 
-if [ -n "$LOCAL_RESULTS_DIR" ] && [ -n "$LOCAL_RESULTS_SYNC_INTERVAL_SECONDS" ]; then
+if vast_has_value "$LOCAL_RESULTS_DIR" && vast_has_value "$LOCAL_RESULTS_SYNC_INTERVAL_SECONDS"; then
   echo "[sync] Launch local result autosync"
   if [ -z "$LOCAL_RESULTS_SYNC_LOG_PATH" ]; then
     LOCAL_RESULTS_SYNC_LOG_PATH="$LOCAL_RESULTS_DIR/results-sync.log"
@@ -144,7 +147,11 @@ PY
   .venv/bin/lcm run validate-config --config '$REMOTE_EFFECTIVE_CONFIG_PATH' --output-dir '$REMOTE_PREVIEW_DIR'
 "
 
-if [ -n "${SMOKE_ALGORITHM:-}" ] && [ -n "${SMOKE_MODEL:-}" ] && [ -n "${SMOKE_PAIR_NAME:-}" ] && [ -n "${SMOKE_CONDITION_BITS:-}" ] && [ -n "${SMOKE_DECODING:-}" ]; then
+if vast_has_value "${SMOKE_ALGORITHM:-}" \
+  && vast_has_value "${SMOKE_MODEL:-}" \
+  && vast_has_value "${SMOKE_PAIR_NAME:-}" \
+  && vast_has_value "${SMOKE_CONDITION_BITS:-}" \
+  && vast_has_value "${SMOKE_DECODING:-}"; then
   echo "[5/6] Run smoke gate"
   "${SSH_CMD[@]}" "$SSH_TARGET" "
     set -euo pipefail

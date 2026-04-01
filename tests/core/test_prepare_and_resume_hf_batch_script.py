@@ -5,6 +5,7 @@ def test_prepare_and_resume_script_bootstraps_and_launches_resumable_batch() -> 
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
+    assert 'source "$SCRIPT_DIR/common.sh"' in script_text
     assert "bootstrap_gpu_host.sh" in script_text
     assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text
     assert ".venv/bin/lcm doctor --json" in script_text
@@ -21,9 +22,11 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
         'rsync -avz -e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/'
     )
 
-    assert 'if [ -n "$LOCAL_RESULTS_DIR" ]; then' in script_text
+    assert 'SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))' in script_text
+    assert 'RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"' in script_text
+    assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
     assert seed_rsync in script_text
-    assert 'if [ -n "${SMOKE_ALGORITHM:-}" ]' in script_text
+    assert 'if vast_has_value "${SMOKE_ALGORITHM:-}"' in script_text
     assert ".venv/bin/lcm run smoke" in script_text
     assert "BATCH_GENERATION_TIMEOUT_SECONDS" in script_text
     assert "BATCH_RESUME_PASS_MODE" in script_text
@@ -42,3 +45,13 @@ def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
     assert "LOCAL_RESULTS_SYNC_PID_PATH" in script_text
     assert "scripts/vast/watch_results_from_vast.sh" in script_text
     assert "nohup bash" in script_text
+
+
+def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
+    script_path = Path("scripts/vast/common.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert "vast_ssh_command()" in script_text
+    assert "vast_rsync_ssh_command()" in script_text
+    assert "vast_has_value()" in script_text
+    assert "vast_require_positive_integer()" in script_text
