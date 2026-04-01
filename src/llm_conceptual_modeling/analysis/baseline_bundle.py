@@ -4,6 +4,7 @@ import ast
 import re
 from functools import lru_cache
 from pathlib import Path
+from typing import Iterable, cast
 
 import pandas as pd
 
@@ -485,10 +486,14 @@ def _write_advantage_summary(grouped_frames: list[pd.DataFrame], summary_path: P
         return
 
     combined_frame = pd.concat(grouped_frames, ignore_index=True)
-    for (algorithm, baseline_strategy, metric), metric_frame in combined_frame.groupby(
-        ["algorithm", "baseline_strategy", "metric"],
-        dropna=False,
-    ):
+    metric_groups = cast(
+        Iterable[tuple[tuple[object, object, object], pd.DataFrame]],
+        combined_frame.groupby(
+            ["algorithm", "baseline_strategy", "metric"],
+            dropna=False,
+        ),
+    )
+    for (algorithm, baseline_strategy, metric), metric_frame in metric_groups:
         beating_frame = metric_frame[metric_frame["mean_delta"] > 0]
         best_frame = metric_frame.sort_values("mean_delta", ascending=False)
         worst_frame = metric_frame.sort_values("mean_delta", ascending=True)

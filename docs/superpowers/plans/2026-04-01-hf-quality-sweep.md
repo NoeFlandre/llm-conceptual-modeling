@@ -87,7 +87,7 @@ git commit -m "Extract HF execution runtime helpers"
 ### Task 3: Extract Resume Ordering And Seeded Run Accounting
 
 **Files:**
-- Create: `src/llm_conceptual_modeling/hf_resume_policy.py`
+- Create: `src/llm_conceptual_modeling/hf_resume_state.py`
 - Modify: `src/llm_conceptual_modeling/hf_experiments.py`
 - Test: `tests/core/test_hf_experiments.py`
 
@@ -115,8 +115,8 @@ Expected: PASS
 Run:
 
 ```bash
-uv run ruff check src/llm_conceptual_modeling/hf_resume_policy.py src/llm_conceptual_modeling/hf_experiments.py tests/core/test_hf_experiments.py
-uv run ty check src/llm_conceptual_modeling/hf_resume_policy.py src/llm_conceptual_modeling/hf_experiments.py
+uv run ruff check src/llm_conceptual_modeling/hf_resume_state.py src/llm_conceptual_modeling/hf_experiments.py tests/core/test_hf_experiments.py
+uv run ty check src/llm_conceptual_modeling/hf_resume_state.py src/llm_conceptual_modeling/hf_experiments.py
 ```
 
 Expected: PASS
@@ -126,8 +126,8 @@ Expected: PASS
 Run:
 
 ```bash
-git add src/llm_conceptual_modeling/hf_resume_policy.py src/llm_conceptual_modeling/hf_experiments.py tests/core/test_hf_experiments.py
-git commit -m "Extract HF resume policy helpers"
+git add src/llm_conceptual_modeling/hf_resume_state.py src/llm_conceptual_modeling/hf_experiments.py tests/core/test_hf_experiments.py
+git commit -m "Extract HF resume state helpers"
 ```
 
 ### Task 4: Clean Vast Sync/Launch Glue
