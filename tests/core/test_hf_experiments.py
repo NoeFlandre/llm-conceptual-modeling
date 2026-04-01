@@ -379,6 +379,354 @@ def test_run_paper_batch_resume_retries_legacy_invalid_finished_run(
     assert raw_row["Result"] == "[('alpha', 'gamma')]"
 
 
+def test_run_paper_batch_resume_skips_timeout_failed_run_by_default(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={},
+    )
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "manifest.json").write_text("{}", encoding="utf-8")
+    (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 40.0 seconds.",
+                "status": "failed",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [spec],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_count["count"] += 1
+        assert actual_spec == spec
+        return {
+            "raw_row": _valid_edge_result_row(actual_spec.raw_context),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+    assert call_count["count"] == 0
+    assert state["status"] == "failed"
+    assert batch_status["failed_count"] == 1
+    assert batch_status["finished_count"] == 0
+
+
+def test_run_paper_batch_resume_can_retry_timeout_failed_run_when_enabled(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"retry_timeout_failures_on_resume": True},
+    )
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "manifest.json").write_text("{}", encoding="utf-8")
+    (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 40.0 seconds.",
+                "status": "failed",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [spec],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_count["count"] += 1
+        assert actual_spec == spec
+        return {
+            "raw_row": _valid_edge_result_row(actual_spec.raw_context),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+    assert call_count["count"] == 1
+    assert state["status"] == "finished"
+    assert batch_status["failed_count"] == 0
+    assert batch_status["finished_count"] == 1
+
+
+def test_run_paper_batch_resume_prioritizes_low_timeout_risk_pairs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_order: list[str] = []
+
+    specs = [
+        HFRunSpec(
+            algorithm="algo1",
+            model="allenai/Olmo-3-7B-Instruct",
+            embedding_model="Qwen/Qwen3-Embedding-0.6B",
+            decoding=DecodingConfig(algorithm="greedy"),
+            replication=0,
+            pair_name=pair_name,
+            condition_bits="00000",
+            condition_label="greedy",
+            prompt_factors={},
+            raw_context={"pair_name": pair_name, "Repetition": 0},
+            input_payload={
+                "subgraph1": [("alpha", "beta")],
+                "subgraph2": [("gamma", "delta")],
+                "graph": [("alpha", "gamma")],
+            },
+            runtime_profile=_runtime_profile(),
+            context_policy={"resume_pass_mode": "throughput"},
+        )
+        for pair_name in ("sg2_sg3", "sg3_sg1", "sg1_sg2")
+    ]
+
+    hot_run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg2_sg3"
+        / "11111"
+        / "rep_00"
+    )
+    hot_run_dir.mkdir(parents=True, exist_ok=True)
+    (hot_run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (hot_run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 40.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_order.append(actual_spec.pair_name)
+        return {
+            "raw_row": _valid_edge_result_row(actual_spec.raw_context),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    assert call_order == ["sg1_sg2", "sg3_sg1", "sg2_sg3"]
+
+
+def test_run_paper_batch_resume_retry_timeouts_mode_prioritizes_timeout_failures(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_order: list[str] = []
+
+    timeout_spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"resume_pass_mode": "retry-timeouts"},
+    )
+    pending_spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"resume_pass_mode": "retry-timeouts"},
+    )
+
+    timeout_run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg2_sg3"
+        / "00000"
+        / "rep_00"
+    )
+    timeout_run_dir.mkdir(parents=True, exist_ok=True)
+    (timeout_run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (timeout_run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 40.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [pending_spec, timeout_spec],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_order.append(actual_spec.pair_name)
+        return {
+            "raw_row": _valid_edge_result_row(actual_spec.raw_context),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    assert call_order == ["sg2_sg3", "sg1_sg2"]
+
+
 def test_run_paper_batch_monitored_mode_does_not_use_gpu_loading_profile_provider(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -641,16 +989,152 @@ def test_run_paper_batch_writes_live_batch_status_file(
         runtime_factory=runtime_factory,
     )
 
-    status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
 
-    assert status["total_runs"] == 1680
-    assert status["finished_count"] == 1680
-    assert status["failed_count"] == 0
-    assert status["pending_count"] == 0
-    assert status["running_count"] == 0
-    assert status["current_run"] is None
-    assert status["last_completed_run"] is not None
-    assert status["percent_complete"] == 100.0
+def test_run_paper_batch_resume_seeds_live_status_from_seeded_root(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+
+    finished_spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"resume_pass_mode": "throughput"},
+    )
+    deferred_timeout_spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00001",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"resume_pass_mode": "throughput"},
+    )
+    pending_spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00010",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"resume_pass_mode": "throughput"},
+    )
+    planned_specs = [finished_spec, deferred_timeout_spec, pending_spec]
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch",
+        lambda **_: planned_specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    finished_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+    finished_dir.mkdir(parents=True, exist_ok=True)
+    (finished_dir / "state.json").write_text('{"status": "finished"}', encoding="utf-8")
+    (finished_dir / "manifest.json").write_text("{}", encoding="utf-8")
+    (finished_dir / "runtime.json").write_text(
+        json.dumps({"thinking_mode_supported": False}),
+        encoding="utf-8",
+    )
+    (finished_dir / "raw_response.json").write_text("{}", encoding="utf-8")
+    (finished_dir / "summary.json").write_text('{"status": "finished"}', encoding="utf-8")
+    (finished_dir / "raw_row.json").write_text(
+        json.dumps(_valid_edge_result_row({"pair_name": "sg1_sg2", "Repetition": 0})),
+        encoding="utf-8",
+    )
+
+    failed_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+        / "00001"
+        / "rep_00"
+    )
+    failed_dir.mkdir(parents=True, exist_ok=True)
+    (failed_dir / "state.json").write_text('{"status": "failed"}', encoding="utf-8")
+    (failed_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 20.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    def runtime_factory(spec):
+        status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+        assert spec.condition_bits == "00010"
+        assert status["total_runs"] == 3
+        assert status["finished_count"] == 1
+        assert status["failed_count"] == 1
+        assert status["running_count"] == 1
+        assert status["pending_count"] == 0
+        assert status["current_run"]["condition_bits"] == "00010"
+        return {
+            "raw_row": _valid_edge_result_row(spec.raw_context),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    assert (output_root / "batch_status.json").exists()
 
 
 def test_collect_batch_status_reconstructs_health_from_run_tree(tmp_path: Path) -> None:
@@ -1765,6 +2249,55 @@ def test_run_algo1_writes_active_stage_tracking(tmp_path: Path) -> None:
     assert active_stage["pair_name"] == "sg2_sg3"
     assert active_stage["metrics"]["duration_seconds"] == 0.25
     assert active_stage["metrics"]["tokens_per_second"] == 12.0
+
+
+def test_run_algo1_summary_includes_trace_metrics() -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model=config.models.embedding_model,
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=None,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=31,
+    )
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
+        ]
+    )
+
+    result = _run_algo1(spec, hf_runtime=runtime)
+    summary = result["summary"]
+
+    assert summary["response_trace_count"] == 2
+    assert summary["avg_duration_seconds"] == 0.25
+    assert summary["avg_tokens_per_second"] == 12.0
+    assert summary["total_completion_tokens"] == 6
 
 
 def test_run_algo1_records_generation_metrics_in_raw_trace(tmp_path: Path) -> None:

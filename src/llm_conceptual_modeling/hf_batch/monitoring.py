@@ -122,6 +122,10 @@ def _collect_active_run_details(run_dir: Path) -> dict[str, object]:
     active_stage_path = run_dir / "active_stage.json"
     if active_stage_path.exists():
         stage_age_seconds = round(time.time() - active_stage_path.stat().st_mtime, 3)
+    else:
+        worker_state_path = run_dir / "worker_state.json"
+        if worker_state_path.exists() and worker_state.get("status") == "running":
+            stage_age_seconds = round(time.time() - worker_state_path.stat().st_mtime, 3)
     return {
         "active_stage": active_stage or None,
         "active_stage_age_seconds": stage_age_seconds,

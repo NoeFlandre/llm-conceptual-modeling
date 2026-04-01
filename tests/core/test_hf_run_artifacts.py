@@ -1,6 +1,9 @@
 import json
+import os
+import time
 from pathlib import Path
 
+from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     clear_retry_artifacts,
     normalize_stale_running_run,
@@ -43,3 +46,35 @@ def test_clear_retry_artifacts_preserves_stage_cache_files(tmp_path: Path) -> No
 
     assert not volatile_path.exists()
     assert stage_cache_path.exists()
+
+
+def test_collect_batch_status_uses_worker_state_age_when_stage_file_is_missing(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "results"
+    run_dir = output_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (run_dir / "worker_state.json").write_text(
+        json.dumps(
+            {
+                "status": "running",
+                "worker_pid": 1234,
+                "updated_at": "2026-03-31T00:01:00+00:00",
+            }
+        ),
+        encoding="utf-8",
+    )
+    old_time = time.time() - 5
+    os.utime(run_dir / "worker_state.json", (old_time, old_time))
+    (output_root / "batch_status.json").write_text(
+        json.dumps({"total_runs": 1, "current_run": {"algorithm": "algo1"}}),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["running_count"] == 1
+    assert status["active_stage"] is None
+    assert isinstance(status["active_stage_age_seconds"], float)
+    assert status["active_stage_age_seconds"] >= 0.0

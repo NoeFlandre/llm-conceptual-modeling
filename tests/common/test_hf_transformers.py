@@ -417,15 +417,16 @@ def test_runtime_factory_uses_mistral3_loader_for_ministral_models(
 
     class _AutoTokenizer:
         @staticmethod
-        def from_pretrained(model: str, token: str | None = None):
+        def from_pretrained(model: str, token: str | None = None, **kwargs):
             calls.append(("auto-tokenizer", model))
-            _ = token
+            _ = (token, kwargs)
             return _Tokenizer(model_max_length=2048)
 
     class _MistralCommonBackend:
         @staticmethod
-        def from_pretrained(model: str, token: str | None = None):
+        def from_pretrained(model: str, token: str | None = None, **kwargs):
             calls.append(("mistral-tokenizer", model))
+            assert kwargs["trust_remote_code"] is True
             _ = token
             return _Tokenizer(model_max_length=2048)
 
@@ -440,6 +441,7 @@ def test_runtime_factory_uses_mistral3_loader_for_ministral_models(
             calls.append(("model", model))
             assert kwargs["device_map"] == "auto"
             assert kwargs["quantization_config"] == ("fp8-config", True)
+            assert kwargs["trust_remote_code"] is True
             return _Model()
 
     class _FineGrainedFP8Config:
@@ -483,4 +485,156 @@ def test_runtime_factory_uses_mistral3_loader_for_ministral_models(
     assert calls == [
         ("mistral-tokenizer", "mistralai/Ministral-3-8B-Instruct-2512"),
         ("model", "mistralai/Ministral-3-8B-Instruct-2512"),
+    ]
+
+
+def test_runtime_factory_trusts_remote_code_for_qwen_chat_models(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    tokenizer_calls: list[dict[str, object]] = []
+    model_calls: list[dict[str, object]] = []
+
+    class _AutoTokenizer:
+        @staticmethod
+        def from_pretrained(model: str, **kwargs):
+            tokenizer_calls.append({"model": model, **kwargs})
+            return _Tokenizer(model_max_length=2048)
+
+    class _AutoModelForCausalLM:
+        @staticmethod
+        def from_pretrained(model: str, **kwargs):
+            model_calls.append({"model": model, **kwargs})
+            return _Model()
+
+    class _Transformers:
+        AutoTokenizer = _AutoTokenizer
+        AutoModelForCausalLM = _AutoModelForCausalLM
+
+    class _Cuda:
+        @staticmethod
+        def is_available() -> bool:
+            return True
+
+        @staticmethod
+        def is_bf16_supported() -> bool:
+            return True
+
+    class _Torch:
+        class backends:
+            class cuda:
+                class matmul:
+                    allow_tf32 = False
+
+        cuda = _Cuda()
+        bfloat16 = "bfloat16"
+        float16 = "float16"
+        float32 = "float32"
+
+    monkeypatch.setattr(hf_transformers, "_transformers", lambda: _Transformers)
+    monkeypatch.setattr(hf_transformers, "_torch", lambda: _Torch)
+
+    factory = HFTransformersRuntimeFactory(hf_token="hf-token")
+
+    _ = factory.profile_for_chat_model("Qwen/Qwen3.5-9B")
+
+    assert tokenizer_calls == [
+        {
+            "model": "Qwen/Qwen3.5-9B",
+            "token": "hf-token",
+            "trust_remote_code": True,
+        }
+    ]
+    assert model_calls == [
+        {
+            "model": "Qwen/Qwen3.5-9B",
+            "token": "hf-token",
+            "dtype": "bfloat16",
+            "attn_implementation": "sdpa",
+            "trust_remote_code": True,
+        }
+    ]
+
+
+def test_runtime_factory_trusts_remote_code_for_ministral_loaders(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    tokenizer_calls: list[dict[str, object]] = []
+    model_calls: list[dict[str, object]] = []
+
+    class _MistralCommonBackend:
+        @staticmethod
+        def from_pretrained(model: str, **kwargs):
+            tokenizer_calls.append({"model": model, **kwargs})
+            return _Tokenizer(model_max_length=2048)
+
+    class _AutoTokenizer:
+        @staticmethod
+        def from_pretrained(*args, **kwargs):
+            raise AssertionError("AutoTokenizer should not be used for Ministral 3.")
+
+    class _AutoModelForCausalLM:
+        @staticmethod
+        def from_pretrained(*args, **kwargs):
+            raise AssertionError("AutoModelForCausalLM should not be used for Ministral 3.")
+
+    class _Mistral3ForConditionalGeneration:
+        @staticmethod
+        def from_pretrained(model: str, **kwargs):
+            model_calls.append({"model": model, **kwargs})
+            return _Model()
+
+    class _FineGrainedFP8Config:
+        def __new__(cls, *, dequantize: bool):
+            return ("fp8-config", dequantize)
+
+    class _Transformers:
+        AutoTokenizer = _AutoTokenizer
+        AutoModelForCausalLM = _AutoModelForCausalLM
+        FineGrainedFP8Config = _FineGrainedFP8Config
+        MistralCommonBackend = _MistralCommonBackend
+        Mistral3ForConditionalGeneration = _Mistral3ForConditionalGeneration
+
+    class _Cuda:
+        @staticmethod
+        def is_available() -> bool:
+            return True
+
+        @staticmethod
+        def is_bf16_supported() -> bool:
+            return True
+
+    class _Torch:
+        class backends:
+            class cuda:
+                class matmul:
+                    allow_tf32 = False
+
+        cuda = _Cuda()
+        bfloat16 = "bfloat16"
+        float16 = "float16"
+        float32 = "float32"
+
+    monkeypatch.setattr(hf_transformers, "_transformers", lambda: _Transformers)
+    monkeypatch.setattr(hf_transformers, "_torch", lambda: _Torch)
+
+    factory = HFTransformersRuntimeFactory(hf_token="hf-token")
+
+    _ = factory.profile_for_chat_model("mistralai/Ministral-3-8B-Instruct-2512")
+
+    assert tokenizer_calls == [
+        {
+            "model": "mistralai/Ministral-3-8B-Instruct-2512",
+            "token": "hf-token",
+            "trust_remote_code": True,
+        }
+    ]
+    assert model_calls == [
+        {
+            "model": "mistralai/Ministral-3-8B-Instruct-2512",
+            "token": "hf-token",
+            "device_map": "auto",
+            "dtype": "bfloat16",
+            "quantization_config": ("fp8-config", True),
+            "trust_remote_code": True,
+        }
     ]

@@ -46,6 +46,59 @@ stack, but a prebuilt image avoids spending paid time re-downloading and re-reso
 The checked-in starting point is:
 
 - `docker/vast-gpu.Dockerfile`
+- `scripts/vast/prepare_and_resume_hf_batch.sh`
+
+## Fresh-Instance One-Command Flow
+
+For a brand-new rented GPU, or when moving the resumable batch onto a larger GPU, prefer the
+single local wrapper instead of retyping the bootstrap / validate / launch sequence by hand:
+
+```bash
+scripts/vast/prepare_and_resume_hf_batch.sh \
+  root@61.228.57.170 \
+  31291 \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  /workspace/llm-conceptual-modeling \
+  configs/hf_transformers_paper_batch.yaml \
+  /workspace/results/hf-paper-batch-algo1-olmo-current \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-olmo-current
+```
+
+This wrapper:
+
+- syncs the local repository to the remote workspace
+- optionally seeds the remote results root from a local copy so `--resume` can continue on a fresh
+  machine
+- runs the pinned bootstrap script
+- runs `lcm doctor`
+- runs `lcm run validate-config`
+- optionally runs the smoke gate when smoke environment variables are set
+- launches `paper-batch --resume` under `nohup`
+
+Useful runtime overrides for the wrapper:
+
+```bash
+export BATCH_GENERATION_TIMEOUT_SECONDS=40
+export BATCH_RESUME_PASS_MODE=throughput
+export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME=false
+```
+
+Pass guidance:
+
+- `throughput`: default. Defer prior timeout failures, retry structurally recoverable failures, and
+  prioritize lower-risk pending cells first.
+- `retry-timeouts`: explicit second pass. Retry prior timeout failures first, then continue with the
+  remaining queue.
+
+Optional smoke gate variables for the wrapper:
+
+```bash
+export SMOKE_ALGORITHM=algo1
+export SMOKE_MODEL=allenai/Olmo-3-7B-Instruct
+export SMOKE_PAIR_NAME=sg1_sg2
+export SMOKE_CONDITION_BITS=00000
+export SMOKE_DECODING=greedy
+```
 
 ## Preflight Review
 

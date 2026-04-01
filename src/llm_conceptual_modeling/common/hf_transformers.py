@@ -24,6 +24,7 @@ _SUPPORTED_EMBEDDING_MODELS = {
     "Qwen/Qwen3-Embedding-8B",
     "Qwen/Qwen3-Embedding-0.6B",
 }
+_TRUSTED_REMOTE_CODE_CHAT_MODELS = set(_SUPPORTED_CHAT_MODELS)
 
 
 def supports_explicit_thinking_disable(model: str) -> bool:
@@ -374,9 +375,18 @@ def build_runtime_factory(*, hf_token: str | None = None) -> HFTransformersRunti
 
 
 def _load_chat_tokenizer(*, transformers: Any, model: str, hf_token: str | None) -> Any:
+    remote_code_kwargs = _trusted_remote_code_kwargs(model)
     if model == _MINISTRAL_CHAT_MODEL and hasattr(transformers, "MistralCommonBackend"):
-        return transformers.MistralCommonBackend.from_pretrained(model, token=hf_token)
-    return transformers.AutoTokenizer.from_pretrained(model, token=hf_token)
+        return transformers.MistralCommonBackend.from_pretrained(
+            model,
+            token=hf_token,
+            **remote_code_kwargs,
+        )
+    return transformers.AutoTokenizer.from_pretrained(
+        model,
+        token=hf_token,
+        **remote_code_kwargs,
+    )
 
 
 def _load_chat_model(
@@ -386,6 +396,7 @@ def _load_chat_model(
     hf_token: str | None,
     torch_dtype: Any,
 ) -> Any:
+    remote_code_kwargs = _trusted_remote_code_kwargs(model)
     if model == _MINISTRAL_CHAT_MODEL and hasattr(
         transformers, "Mistral3ForConditionalGeneration"
     ):
@@ -396,13 +407,21 @@ def _load_chat_model(
             device_map="auto",
             dtype=torch_dtype,
             quantization_config=fp8_config,
+            **remote_code_kwargs,
         )
     return transformers.AutoModelForCausalLM.from_pretrained(
         model,
         token=hf_token,
         dtype=torch_dtype,
         attn_implementation="sdpa",
+        **remote_code_kwargs,
     )
+
+
+def _trusted_remote_code_kwargs(model: str) -> dict[str, object]:
+    if model in _TRUSTED_REMOTE_CODE_CHAT_MODELS:
+        return {"trust_remote_code": True}
+    return {}
 
 
 def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:

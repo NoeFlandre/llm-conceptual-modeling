@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import Any, Callable, cast
 
@@ -181,42 +182,74 @@ def run_paper_batch(
         runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
 
     summary_rows: list[dict[str, object]] = []
+    seeded_finished_run_dirs: set[Path] = set()
+    seeded_failed_run_dirs: set[Path] = set()
+    planned_specs = _order_planned_specs_for_resume(
+        planned_specs=planned_specs,
+        output_root=output_root_path,
+        resume=resume,
+    )
     total_runs = len(planned_specs)
     started_at = _status_timestamp_now()
     last_completed_run: dict[str, object] | None = None
-    status_snapshot: dict[str, object] = {
-        "total_runs": total_runs,
-        "finished_count": 0,
-        "failed_count": 0,
-        "running_count": 0,
-        "pending_count": total_runs,
-        "failure_count": 0,
-        "failures": [],
-        "percent_complete": 0.0,
-        "current_run": None,
-        "last_completed_run": None,
-        "started_at": started_at,
-        "updated_at": started_at,
-    }
+    status_snapshot: dict[str, object]
+    if resume:
+        (
+            status_snapshot,
+            summary_rows,
+            seeded_finished_run_dirs,
+            seeded_failed_run_dirs,
+        ) = _build_seeded_resume_snapshot(
+            output_root=output_root_path,
+            planned_specs=planned_specs,
+            started_at=started_at,
+        )
+        last_completed_run = cast(dict[str, object] | None, status_snapshot["last_completed_run"])
+    else:
+        status_snapshot = {
+            "total_runs": total_runs,
+            "finished_count": 0,
+            "failed_count": 0,
+            "running_count": 0,
+            "pending_count": total_runs,
+            "failure_count": 0,
+            "failures": [],
+            "percent_complete": 0.0,
+            "current_run": None,
+            "last_completed_run": None,
+            "started_at": started_at,
+            "updated_at": started_at,
+        }
     _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
     for spec in planned_specs:
-        run_dir = (
-            output_root_path
-            / "runs"
-            / spec.algorithm
-            / _slugify_model(spec.model)
-            / spec.condition_label
-            / spec.pair_name
-            / spec.condition_bits
-            / f"rep_{spec.replication:02d}"
-        )
+        run_dir = _run_dir_for_spec(output_root=output_root_path, spec=spec)
         run_dir.mkdir(parents=True, exist_ok=True)
         summary_path = run_dir / "summary.json"
         raw_row_path = run_dir / "raw_row.json"
 
+        if resume and run_dir in seeded_finished_run_dirs:
+            continue
+        if resume and run_dir in seeded_failed_run_dirs:
+            continue
+
         if resume:
             _normalize_stale_running_run(run_dir)
+            deferred_failure = _load_deferred_failed_summary(
+                run_dir=run_dir,
+                algorithm=spec.algorithm,
+                context_policy=spec.context_policy,
+            )
+            if deferred_failure is not None:
+                status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
+                status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
+                failures = _status_failures(status_snapshot)
+                failures.append(deferred_failure)
+                status_snapshot["failures"] = failures
+                status_snapshot["failure_count"] = len(failures)
+                status_snapshot["updated_at"] = _status_timestamp_now()
+                _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+                continue
         cached = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
         if resume and cached is not None:
             summary_rows.append(cached)
@@ -228,11 +261,11 @@ def run_paper_batch(
                 condition_bits=spec.condition_bits,
                 replication=spec.replication,
             )
-            status_snapshot["finished_count"] = int(status_snapshot["finished_count"]) + 1
-            status_snapshot["pending_count"] = int(status_snapshot["pending_count"]) - 1
+            status_snapshot["finished_count"] = _status_int(status_snapshot, "finished_count") + 1
+            status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
             status_snapshot["last_completed_run"] = last_completed_run
             status_snapshot["percent_complete"] = round(
-                (int(status_snapshot["finished_count"]) / total_runs) * 100.0,
+                (_status_int(status_snapshot, "finished_count") / total_runs) * 100.0,
                 2,
             )
             status_snapshot["updated_at"] = _status_timestamp_now()
@@ -284,9 +317,9 @@ def run_paper_batch(
             _write_json(run_dir / "state.json", {"status": "failed"})
             status_snapshot["running_count"] = 0
             status_snapshot["current_run"] = None
-            status_snapshot["failed_count"] = int(status_snapshot["failed_count"]) + 1
-            status_snapshot["pending_count"] = int(status_snapshot["pending_count"]) - 1
-            failures = list(status_snapshot["failures"])
+            status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
+            status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
+            failures = _status_failures(status_snapshot)
             failures.append(
                 {
                     "run_dir": str(run_dir),
@@ -329,10 +362,10 @@ def run_paper_batch(
         status_snapshot["running_count"] = 0
         status_snapshot["current_run"] = None
         status_snapshot["last_completed_run"] = last_completed_run
-        status_snapshot["finished_count"] = int(status_snapshot["finished_count"]) + 1
-        status_snapshot["pending_count"] = int(status_snapshot["pending_count"]) - 1
+        status_snapshot["finished_count"] = _status_int(status_snapshot, "finished_count") + 1
+        status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
         status_snapshot["percent_complete"] = round(
-            (int(status_snapshot["finished_count"]) / total_runs) * 100.0,
+            (_status_int(status_snapshot, "finished_count") / total_runs) * 100.0,
             2,
         )
         status_snapshot["updated_at"] = _status_timestamp_now()
@@ -346,6 +379,78 @@ def run_paper_batch(
         return
 
     write_aggregated_outputs(output_root_path, summary_frame)
+
+
+def _build_seeded_resume_snapshot(
+    *,
+    output_root: Path,
+    planned_specs: list[HFRunSpec],
+    started_at: str,
+) -> tuple[dict[str, object], list[dict[str, object]], set[Path], set[Path]]:
+    summary_rows: list[dict[str, object]] = []
+    seeded_finished_run_dirs: set[Path] = set()
+    seeded_failed_run_dirs: set[Path] = set()
+    failures: list[dict[str, object]] = []
+    last_completed_run: dict[str, object] | None = None
+
+    previous_status = _read_artifact_json(output_root / "batch_status.json")
+
+    for spec in planned_specs:
+        run_dir = _run_dir_for_spec(output_root=output_root, spec=spec)
+        _normalize_stale_running_run(run_dir)
+
+        cached = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
+        if cached is not None:
+            summary_rows.append(cached)
+            seeded_finished_run_dirs.add(run_dir)
+            last_completed_run = _current_run_payload(
+                algorithm=spec.algorithm,
+                model=spec.model,
+                decoding_algorithm=spec.decoding.algorithm,
+                pair_name=spec.pair_name,
+                condition_bits=spec.condition_bits,
+                replication=spec.replication,
+            )
+            continue
+
+        deferred_failure = _load_deferred_failed_summary(
+            run_dir=run_dir,
+            algorithm=spec.algorithm,
+            context_policy=spec.context_policy,
+        )
+        if deferred_failure is not None:
+            failures.append(deferred_failure)
+            seeded_failed_run_dirs.add(run_dir)
+
+    finished_count = len(seeded_finished_run_dirs)
+    failed_count = len(seeded_failed_run_dirs)
+    total_runs = len(planned_specs)
+    pending_count = max(total_runs - finished_count - failed_count, 0)
+    percent_complete = round((finished_count / total_runs) * 100.0, 2) if total_runs else 0.0
+
+    status_snapshot: dict[str, object] = {
+        "total_runs": total_runs,
+        "finished_count": finished_count,
+        "failed_count": failed_count,
+        "running_count": 0,
+        "pending_count": pending_count,
+        "failure_count": len(failures),
+        "failures": failures,
+        "percent_complete": percent_complete,
+        "current_run": None,
+        "last_completed_run": last_completed_run or previous_status.get("last_completed_run"),
+        "started_at": previous_status.get("started_at", started_at),
+        "updated_at": _status_timestamp_now(),
+    }
+    return status_snapshot, summary_rows, seeded_finished_run_dirs, seeded_failed_run_dirs
+
+
+def _status_int(status_snapshot: dict[str, object], key: str) -> int:
+    return int(cast(int | float | str, status_snapshot[key]))
+
+
+def _status_failures(status_snapshot: dict[str, object]) -> list[dict[str, object]]:
+    return list(cast(list[dict[str, object]], status_snapshot["failures"]))
 
 
 def select_run_spec(
@@ -398,16 +503,7 @@ def run_single_spec(
 
     use_monitored_hf_subprocess = runtime_factory is None and not dry_run
 
-    run_dir = (
-        output_root_path
-        / "runs"
-        / spec.algorithm
-        / _slugify_model(spec.model)
-        / spec.condition_label
-        / spec.pair_name
-        / spec.condition_bits
-        / f"rep_{spec.replication:02d}"
-    )
+    run_dir = _run_dir_for_spec(output_root=output_root_path, spec=spec)
     run_dir.mkdir(parents=True, exist_ok=True)
     summary_path = run_dir / "summary.json"
     raw_row_path = run_dir / "raw_row.json"
@@ -550,6 +646,31 @@ def _load_valid_finished_summary(
     return json.loads(summary_path.read_text(encoding="utf-8"))
 
 
+def _load_deferred_failed_summary(
+    *,
+    run_dir: Path,
+    algorithm: str,
+    context_policy: dict[str, object] | None,
+) -> dict[str, object] | None:
+    _ = algorithm
+    state = _read_artifact_json(run_dir / "state.json")
+    if state.get("status") != "failed":
+        return None
+    error = _read_artifact_json(run_dir / "error.json")
+    failure_kind = _classify_failure_payload(error)
+    if failure_kind != "timeout":
+        return None
+    if _resolve_retry_timeout_failures_on_resume(context_policy):
+        return None
+    return {
+        "run_dir": str(run_dir),
+        "message": str(error.get("message", "Deferred timeout failure during resume.")),
+        "type": str(error.get("type", "RuntimeError")),
+        "failure_kind": failure_kind,
+        "deferred_on_resume": True,
+    }
+
+
 def _smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
     return {
         "algorithm": spec.algorithm,
@@ -677,6 +798,41 @@ def _resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int
     raise TypeError(f"Retry attempts value must be numeric, got {type(raw_value).__name__}")
 
 
+def _resolve_retry_timeout_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    mode = _resolve_resume_pass_mode(context_policy)
+    if mode == "retry-timeouts":
+        return True
+    if context_policy is None:
+        return False
+    raw_value = context_policy.get("retry_timeout_failures_on_resume", False)
+    if isinstance(raw_value, bool):
+        return raw_value
+    raise TypeError(
+        "retry_timeout_failures_on_resume value must be boolean, "
+        f"got {type(raw_value).__name__}"
+    )
+
+
+def _resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
+    if context_policy is None:
+        return "throughput"
+    raw_value = context_policy.get("resume_pass_mode", "throughput")
+    if not isinstance(raw_value, str):
+        raise TypeError(
+            "resume_pass_mode value must be string, "
+            f"got {type(raw_value).__name__}"
+        )
+    normalized = raw_value.strip().lower()
+    if normalized not in {"throughput", "retry-timeouts"}:
+        raise ValueError(
+            "resume_pass_mode must be one of {'throughput', 'retry-timeouts'}, "
+            f"got {raw_value!r}"
+        )
+    return normalized
+
+
 def _is_retryable_worker_error(error: dict[str, str]) -> bool:
     if error.get("type") != "ValueError":
         return False
@@ -690,6 +846,26 @@ def _is_retryable_worker_error(error: dict[str, str]) -> bool:
         "Structurally invalid algo",
     )
     return any(marker in message for marker in retry_markers)
+
+
+def _classify_failure_payload(error: dict[str, object]) -> str:
+    error_type = str(error.get("type", ""))
+    message = str(error.get("message", ""))
+    if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
+        return "timeout"
+    if error_type == "StaleRunState":
+        return "stale"
+    if error_type in {"ValueError", "RuntimeError"} and (
+        "Model did not return valid structured output:" in message
+        or "Invalid edge item shape:" in message
+        or "Unsupported structured response shape for schema" in message
+        or "Structured edge_list response must contain a list of edges" in message
+        or "Structured edge_list flat string response must contain an even number of items"
+        in message
+        or "Structurally invalid algo" in message
+    ):
+        return "structural"
+    return "other"
 
 
 def _coerce_timeout_seconds(raw_value: object) -> float:
@@ -709,6 +885,112 @@ def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -
         raise ValueError(f"Unsupported algorithm: {spec.algorithm}")
 
     return runtime
+
+
+def _run_dir_for_spec(*, output_root: Path, spec: HFRunSpec) -> Path:
+    return (
+        output_root
+        / "runs"
+        / spec.algorithm
+        / _slugify_model(spec.model)
+        / spec.condition_label
+        / spec.pair_name
+        / spec.condition_bits
+        / f"rep_{spec.replication:02d}"
+    )
+
+
+def _order_planned_specs_for_resume(
+    *,
+    planned_specs: list[HFRunSpec],
+    output_root: Path,
+    resume: bool,
+) -> list[HFRunSpec]:
+    if not resume or not planned_specs:
+        return planned_specs
+    history = _collect_resume_history(output_root)
+    return sorted(
+        planned_specs,
+        key=lambda spec: _resume_priority_key(
+            spec=spec,
+            run_dir=_run_dir_for_spec(output_root=output_root, spec=spec),
+            history=history,
+        ),
+    )
+
+
+def _collect_resume_history(output_root: Path) -> dict[str, dict[object, dict[str, int]]]:
+    by_pair: dict[object, dict[str, int]] = defaultdict(
+        lambda: {"finished": 0, "timeout": 0, "structural": 0, "other": 0}
+    )
+    by_pair_condition: dict[object, dict[str, int]] = defaultdict(
+        lambda: {"finished": 0, "timeout": 0, "structural": 0, "other": 0}
+    )
+    runs_root = output_root / "runs"
+    if not runs_root.exists():
+        return {"by_pair": dict(by_pair), "by_pair_condition": dict(by_pair_condition)}
+    for run_dir in runs_root.glob("*/*/*/*/*/rep_*"):
+        pair_name = run_dir.parent.parent.name
+        condition_bits = run_dir.parent.name
+        pair_key = pair_name
+        pair_condition_key = (pair_name, condition_bits)
+        state = _read_artifact_json(run_dir / "state.json")
+        if state.get("status") == "finished":
+            by_pair[pair_key]["finished"] += 1
+            by_pair_condition[pair_condition_key]["finished"] += 1
+            continue
+        if state.get("status") != "failed":
+            continue
+        failure_kind = _classify_failure_payload(_read_artifact_json(run_dir / "error.json"))
+        bucket = failure_kind if failure_kind in {"timeout", "structural"} else "other"
+        by_pair[pair_key][bucket] += 1
+        by_pair_condition[pair_condition_key][bucket] += 1
+    return {"by_pair": dict(by_pair), "by_pair_condition": dict(by_pair_condition)}
+
+
+def _resume_priority_key(
+    *,
+    spec: HFRunSpec,
+    run_dir: Path,
+    history: dict[str, dict[object, dict[str, int]]],
+) -> tuple[float, float, float, str, str, int]:
+    context_policy = spec.context_policy
+    pass_mode = _resolve_resume_pass_mode(context_policy)
+    state = _read_artifact_json(run_dir / "state.json")
+    failure_kind = "pending"
+    if state.get("status") == "failed":
+        failure_kind = _classify_failure_payload(_read_artifact_json(run_dir / "error.json"))
+
+    if pass_mode == "retry-timeouts":
+        base_bucket_map = {"timeout": 0.0, "structural": 1.0, "pending": 2.0, "other": 3.0}
+    else:
+        base_bucket_map = {"pending": 0.0, "structural": 1.0, "other": 2.0, "timeout": 3.0}
+
+    pair_stats = history["by_pair"].get(spec.pair_name, {})
+    condition_stats = history["by_pair_condition"].get((spec.pair_name, spec.condition_bits), {})
+
+    pair_finished = int(pair_stats.get("finished", 0))
+    pair_failures = int(pair_stats.get("timeout", 0)) + int(pair_stats.get("other", 0))
+    pair_total = pair_finished + pair_failures + int(pair_stats.get("structural", 0))
+    pair_timeout_rate = int(pair_stats.get("timeout", 0)) / pair_total if pair_total else 0.0
+
+    condition_finished = int(condition_stats.get("finished", 0))
+    condition_failures = (
+        int(condition_stats.get("timeout", 0))
+        + int(condition_stats.get("structural", 0))
+        + int(condition_stats.get("other", 0))
+    )
+    condition_total = condition_finished + condition_failures
+    condition_failure_rate = condition_failures / condition_total if condition_total else 0.0
+
+    return (
+        base_bucket_map.get(failure_kind, 4.0),
+        pair_timeout_rate,
+        condition_failure_rate,
+        spec.pair_name,
+        spec.condition_bits,
+        spec.replication,
+    )
 
 
 def _run_algo1(
@@ -800,6 +1082,7 @@ def _run_algo1(
         "summary": {
             "candidate_edge_count": len(result.candidate_edges),
             "verified_edge_count": len(result.verified_edges),
+            **_trace_metric_summary(recorder.records),
             **_connection_metric_summary(raw_row),
         },
     }
@@ -921,6 +1204,7 @@ def _run_algo2(
         "summary": {
             "candidate_edge_count": len(result.raw_edges),
             "verified_edge_count": len(result.normalized_edges),
+            **_trace_metric_summary(recorder.records),
             **_connection_metric_summary(raw_row),
         },
     }
@@ -1012,6 +1296,7 @@ def _run_algo3(
         "summary": {
             "result_edge_count": len(result_edges),
             "recall": float(raw_row["Recall"]),
+            **_trace_metric_summary(recorder.records),
         },
     }
 
@@ -1042,6 +1327,44 @@ def _connection_metric_summary(raw_row: dict[str, object]) -> dict[str, float]:
         "recall": recall,
         "f1": f1,
     }
+
+
+def _trace_metric_summary(records: list[dict[str, object]]) -> dict[str, float | int]:
+    durations: list[float] = []
+    tokens_per_second: list[float] = []
+    completion_tokens: list[int] = []
+    prompt_tokens: list[int] = []
+    for record in records:
+        raw_metrics = record.get("metrics")
+        if not isinstance(raw_metrics, dict):
+            continue
+        metrics = cast(dict[str, object], raw_metrics)
+        duration = metrics.get("duration_seconds")
+        if isinstance(duration, (int, float)):
+            durations.append(float(duration))
+        tps = metrics.get("tokens_per_second")
+        if isinstance(tps, (int, float)):
+            tokens_per_second.append(float(tps))
+        completion = metrics.get("completion_token_count")
+        if isinstance(completion, int):
+            completion_tokens.append(completion)
+        prompt = metrics.get("prompt_token_count")
+        if isinstance(prompt, int):
+            prompt_tokens.append(prompt)
+    if not durations and not tokens_per_second and not completion_tokens and not prompt_tokens:
+        return {}
+    summary: dict[str, float | int] = {"response_trace_count": len(records)}
+    if durations:
+        summary["avg_duration_seconds"] = sum(durations) / len(durations)
+        summary["max_duration_seconds"] = max(durations)
+    if tokens_per_second:
+        summary["avg_tokens_per_second"] = sum(tokens_per_second) / len(tokens_per_second)
+        summary["max_tokens_per_second"] = max(tokens_per_second)
+    if completion_tokens:
+        summary["total_completion_tokens"] = sum(completion_tokens)
+    if prompt_tokens:
+        summary["total_prompt_tokens"] = sum(prompt_tokens)
+    return summary
 
 
 def _summary_from_raw_row(algorithm: str, raw_row: dict[str, object]) -> dict[str, object]:
