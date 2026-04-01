@@ -31,3 +31,14 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "BATCH_WORKER_PROCESS_MODE" in script_text
     assert "BATCH_MAX_REQUESTS_PER_WORKER_PROCESS" in script_text
     assert "runtime_config.yaml" in script_text
+
+
+def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
+    script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS" in script_text
+    assert "LOCAL_RESULTS_SYNC_LOG_PATH" in script_text
+    assert "LOCAL_RESULTS_SYNC_PID_PATH" in script_text
+    assert "scripts/vast/watch_results_from_vast.sh" in script_text
+    assert "nohup bash" in script_text

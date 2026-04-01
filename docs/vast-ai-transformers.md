@@ -366,6 +366,19 @@ scripts/vast/fetch_results_from_vast.sh \
   /local/path/hf-paper-batch
 ```
 
+Keep local results synced automatically while a batch is running:
+
+```bash
+SSH_PORT=31255 \
+SYNC_INTERVAL_SECONDS=60 \
+scripts/vast/watch_results_from_vast.sh \
+  root@61.228.57.170:/workspace/results/hf-paper-batch \
+  /local/path/hf-paper-batch
+```
+
+`prepare_and_resume_hf_batch.sh` can also start that local autosync loop automatically when both
+`LOCAL_RESULTS_DIR` and `LOCAL_RESULTS_SYNC_INTERVAL_SECONDS` are set.
+
 ## Notes
 
 - Prompt truncation is not allowed. The local runtime checks the actual chat-templated tokenized
