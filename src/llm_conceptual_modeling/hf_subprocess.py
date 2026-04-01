@@ -24,6 +24,7 @@ def build_hf_download_environment(base: Mapping[str, str] | None = None) -> dict
     env = dict(base or os.environ)
     env.setdefault("HF_HUB_DISABLE_XET", "1")
     env.setdefault("HF_HUB_ENABLE_HF_TRANSFER", "0")
+    env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
     return env
 
 

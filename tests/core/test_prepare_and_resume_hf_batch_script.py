@@ -28,4 +28,6 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "BATCH_GENERATION_TIMEOUT_SECONDS" in script_text
     assert "BATCH_RESUME_PASS_MODE" in script_text
     assert "BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME" in script_text
+    assert "BATCH_WORKER_PROCESS_MODE" in script_text
+    assert "BATCH_MAX_REQUESTS_PER_WORKER_PROCESS" in script_text
     assert "runtime_config.yaml" in script_text

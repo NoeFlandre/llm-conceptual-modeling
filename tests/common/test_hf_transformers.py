@@ -278,7 +278,39 @@ def test_contrastive_decoding_kwargs_do_not_pass_temperature() -> None:
         DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4)
     )
 
-    assert kwargs == {"do_sample": False, "penalty_alpha": 0.2, "top_k": 4}
+    assert kwargs == {
+        "custom_generate": "transformers-community/contrastive-search",
+        "do_sample": False,
+        "penalty_alpha": 0.2,
+        "top_k": 4,
+        "trust_remote_code": True,
+    }
+
+
+def test_complete_json_passes_trusted_remote_code_for_contrastive_generation() -> None:
+    tokenizer = _ChatTemplateTokenizer(model_max_length=128)
+    model = _CapturingModel()
+    client = HFTransformersChatClient(
+        model="allenai/Olmo-3-7B-Instruct",
+        decoding_config=DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=False,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+        seed=7,
+    )
+
+    client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert model.calls
+    assert model.calls[-1]["custom_generate"] == "transformers-community/contrastive-search"
+    assert model.calls[-1]["trust_remote_code"] is True
 
 
 def test_parse_generated_json_recovers_flat_quoted_edge_list_with_trailing_garbage() -> None:

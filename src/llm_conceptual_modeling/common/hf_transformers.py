@@ -430,9 +430,11 @@ def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:
     if config.algorithm == "beam":
         return {"do_sample": False, "num_beams": config.num_beams}
     return {
+        "custom_generate": "transformers-community/contrastive-search",
         "do_sample": False,
         "penalty_alpha": config.penalty_alpha,
         "top_k": config.top_k,
+        "trust_remote_code": True,
     }
 
 

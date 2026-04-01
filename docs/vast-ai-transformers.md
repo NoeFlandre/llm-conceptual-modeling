@@ -81,7 +81,17 @@ Useful runtime overrides for the wrapper:
 export BATCH_GENERATION_TIMEOUT_SECONDS=40
 export BATCH_RESUME_PASS_MODE=throughput
 export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME=false
+export BATCH_WORKER_PROCESS_MODE=ephemeral
+export BATCH_MAX_REQUESTS_PER_WORKER_PROCESS=32
 ```
+
+Persistent-worker guidance:
+
+- `BATCH_WORKER_PROCESS_MODE=ephemeral`: current default, safest behavior, one worker process per run
+- `BATCH_WORKER_PROCESS_MODE=persistent`: experimental throughput mode, one loaded worker reused per
+  host/model
+- `BATCH_MAX_REQUESTS_PER_WORKER_PROCESS`: optional recycling budget for persistent mode so one
+  process does not live forever
 
 Pass guidance:
 

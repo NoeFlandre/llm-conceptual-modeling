@@ -8,6 +8,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     RuntimeProfile,
     build_default_decoding_grid,
+    supports_explicit_thinking_disable,
 )
 from llm_conceptual_modeling.hf_batch_prompts import build_prompt_bundle
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
@@ -30,7 +31,7 @@ def plan_paper_batch_specs(
             algorithms=algorithms,
             runtime_profile_provider=runtime_profile_provider,
         )
-    profile_provider = runtime_profile_provider or _default_runtime_profile_provider
+    profile_provider = runtime_profile_provider or default_runtime_profile_provider
     selected_algorithms = set(algorithms or ("algo1", "algo2", "algo3"))
     specs: list[HFRunSpec] = []
     for model in models:
@@ -70,12 +71,12 @@ def plan_paper_batch_specs(
     return specs
 
 
-def _default_runtime_profile_provider(_model: str) -> RuntimeProfile:
+def default_runtime_profile_provider(model: str) -> RuntimeProfile:
     return RuntimeProfile(
         device="cuda",
         dtype="bfloat16",
         quantization="none",
-        supports_thinking_toggle=False,
+        supports_thinking_toggle=supports_explicit_thinking_disable(model),
         context_limit=None,
     )
 
@@ -284,7 +285,7 @@ def _plan_paper_batch_from_config(
     algorithms: tuple[str, ...] | None,
     runtime_profile_provider: Callable[[str], RuntimeProfile] | None,
 ) -> list[HFRunSpec]:
-    profile_provider = runtime_profile_provider or _default_runtime_profile_provider
+    profile_provider = runtime_profile_provider or default_runtime_profile_provider
     selected_algorithms = set(algorithms or tuple(config.algorithms.keys()))
     specs: list[HFRunSpec] = []
     for model in config.models.chat_models:
@@ -477,7 +478,11 @@ def _build_configured_specs_for_pairs(
                     decoding=decoding,
                     payload=payload,
                 ),
-                input_payload={key: value for key, value in payload.items() if not key.endswith("_name")},
+                input_payload={
+                    key: value
+                    for key, value in payload.items()
+                    if not key.endswith("_name")
+                },
                 runtime_profile=runtime_profile,
                 prompt_bundle=prompt_bundle,
                 max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,

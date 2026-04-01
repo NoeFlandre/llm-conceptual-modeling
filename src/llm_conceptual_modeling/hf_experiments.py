@@ -57,7 +57,10 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     write_smoke_verdict as _write_smoke_verdict,
 )
-from llm_conceptual_modeling.hf_batch_planning import plan_paper_batch_specs
+from llm_conceptual_modeling.hf_batch_planning import (
+    default_runtime_profile_provider,
+    plan_paper_batch_specs,
+)
 from llm_conceptual_modeling.hf_batch_prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
 )
@@ -113,6 +116,7 @@ from llm_conceptual_modeling.hf_batch_utils import (
 from llm_conceptual_modeling.hf_batch_utils import (
     write_text as _write_text,
 )
+from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
 from llm_conceptual_modeling.hf_subprocess import (
@@ -165,7 +169,7 @@ def run_paper_batch(
     if runtime_factory is None and not use_monitored_hf_subprocess:
         hf_runtime = build_runtime_factory(hf_token=_resolve_hf_token())
     if dry_run or use_monitored_hf_subprocess:
-        profile_provider = None
+        profile_provider = default_runtime_profile_provider
     else:
         profile_provider = hf_runtime.profile_for_chat_model if hf_runtime else None
     planned_specs = plan_paper_batch(
@@ -182,6 +186,7 @@ def run_paper_batch(
         runtime_factory = _runtime_factory_from_hf_runtime(hf_runtime)
 
     summary_rows: list[dict[str, object]] = []
+    persistent_sessions: dict[str, PersistentHFWorkerSession] = {}
     seeded_finished_run_dirs: set[Path] = set()
     seeded_failed_run_dirs: set[Path] = set()
     planned_specs = _order_planned_specs_for_resume(
@@ -290,7 +295,12 @@ def run_paper_batch(
 
         try:
             if use_monitored_hf_subprocess:
-                runtime_result = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+                runtime_result = _run_local_hf_spec(
+                    spec=spec,
+                    run_dir=run_dir,
+                    output_root=output_root_path,
+                    persistent_sessions=persistent_sessions,
+                )
             else:
                 if runtime_factory is None:
                     raise ValueError("Missing runtime_factory for in-process execution.")
@@ -370,6 +380,9 @@ def run_paper_batch(
         )
         status_snapshot["updated_at"] = _status_timestamp_now()
         _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+
+    for session in persistent_sessions.values():
+        session.close()
 
     summary_frame = pd.DataFrame.from_records(summary_rows)
     summary_frame.to_csv(output_root_path / "batch_summary.csv", index=False)
@@ -500,6 +513,7 @@ def run_single_spec(
 ) -> dict[str, object]:
     output_root_path = Path(output_root)
     output_root_path.mkdir(parents=True, exist_ok=True)
+    persistent_sessions: dict[str, PersistentHFWorkerSession] = {}
 
     use_monitored_hf_subprocess = runtime_factory is None and not dry_run
 
@@ -526,7 +540,12 @@ def run_single_spec(
     _write_json(run_dir / "state.json", {"status": "running"})
     try:
         if use_monitored_hf_subprocess:
-            runtime_result = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+            runtime_result = _run_local_hf_spec(
+                spec=spec,
+                run_dir=run_dir,
+                output_root=output_root_path,
+                persistent_sessions=persistent_sessions,
+            )
         else:
             if runtime_factory is None:
                 hf_runtime = build_runtime_factory(hf_token=_resolve_hf_token())
@@ -562,6 +581,9 @@ def run_single_spec(
             worker_loaded_model=_worker_loaded_model(run_dir),
         )
         raise
+    finally:
+        for session in persistent_sessions.values():
+            session.close()
     raw_row = runtime_result["raw_row"]
     _write_json(raw_row_path, raw_row)
     _write_json(run_dir / "state.json", {"status": "finished"})
@@ -753,6 +775,29 @@ def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> RuntimeR
     raise RuntimeError("HF worker retry loop exhausted without a terminal result.")
 
 
+def _run_local_hf_spec(
+    *,
+    spec: HFRunSpec,
+    run_dir: Path,
+    output_root: Path,
+    persistent_sessions: dict[str, PersistentHFWorkerSession],
+) -> RuntimeResult:
+    if _resolve_worker_process_mode(spec.context_policy) != "persistent":
+        return _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+    session = persistent_sessions.get(spec.model)
+    if session is None:
+        queue_dir = output_root / "worker-queues" / _slugify_model(spec.model)
+        session = PersistentHFWorkerSession(
+            queue_dir=queue_dir,
+            worker_python=sys.executable,
+            max_requests_per_process=_resolve_max_requests_per_worker_process(
+                spec.context_policy
+            ),
+        )
+        persistent_sessions[spec.model] = session
+    return session.run_spec(spec=spec, run_dir=run_dir)
+
+
 def _build_worker_command(
     *,
     spec_json_path: Path,
@@ -796,6 +841,43 @@ def _resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int
         attempts = int(float(raw_value))
         return max(1, attempts)
     raise TypeError(f"Retry attempts value must be numeric, got {type(raw_value).__name__}")
+
+
+def _resolve_worker_process_mode(context_policy: dict[str, object] | None) -> str:
+    if context_policy is None:
+        return "ephemeral"
+    raw_value = context_policy.get("worker_process_mode", "ephemeral")
+    if not isinstance(raw_value, str):
+        raise ValueError(
+            "worker_process_mode value must be string, "
+            f"received {raw_value!r} ({type(raw_value).__name__})."
+        )
+    mode = raw_value.strip().lower()
+    if mode not in {"ephemeral", "persistent"}:
+        raise ValueError(
+            "worker_process_mode must be one of {'ephemeral', 'persistent'}, "
+            f"received {raw_value!r}."
+        )
+    return mode
+
+
+def _resolve_max_requests_per_worker_process(
+    context_policy: dict[str, object] | None,
+) -> int | None:
+    if context_policy is None:
+        return None
+    raw_value = context_policy.get("max_requests_per_worker_process")
+    if raw_value is None:
+        return None
+    if isinstance(raw_value, bool) or not isinstance(raw_value, int | float | str):
+        raise TypeError(
+            "max_requests_per_worker_process value must be numeric, "
+            f"got {type(raw_value).__name__}"
+        )
+    max_requests = int(float(raw_value))
+    if max_requests <= 0:
+        raise ValueError("max_requests_per_worker_process must be positive.")
+    return max_requests
 
 
 def _resolve_retry_timeout_failures_on_resume(

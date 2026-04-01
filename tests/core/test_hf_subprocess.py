@@ -85,3 +85,4 @@ def test_build_hf_download_environment_disables_xet_by_default() -> None:
 
     assert env["HF_HUB_DISABLE_XET"] == "1"
     assert env["HF_HUB_ENABLE_HF_TRANSFER"] == "0"
+    assert env["PYTORCH_CUDA_ALLOC_CONF"] == "expandable_segments:True"

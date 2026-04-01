@@ -8,6 +8,7 @@ from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
+from llm_conceptual_modeling.hf_batch_types import RuntimeResult
 from llm_conceptual_modeling.hf_experiments import (
     HFRunSpec,
     _build_prompt_bundle,
@@ -804,7 +805,79 @@ def test_run_paper_batch_monitored_mode_does_not_use_gpu_loading_profile_provide
         dry_run=False,
     )
 
-    assert recorded_provider["provider"] is None
+    assert recorded_provider["provider"] is not None
+
+
+def test_run_paper_batch_monitored_mode_uses_non_loading_qwen_profile(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    recorded_supports_toggle: dict[str, bool] = {}
+
+    def fake_plan_specs(
+        *,
+        models,
+        embedding_model,
+        replications,
+        algorithms,
+        config,
+        runtime_profile_provider,
+    ):
+        _ = (embedding_model, replications, algorithms, config)
+        assert runtime_profile_provider is not None
+        runtime_profile = runtime_profile_provider(models[0])
+        recorded_supports_toggle["value"] = runtime_profile.supports_thinking_toggle
+        return [
+            HFRunSpec(
+                algorithm="algo1",
+                model=models[0],
+                embedding_model="Qwen/Qwen3-Embedding-0.6B",
+                decoding=DecodingConfig(algorithm="greedy"),
+                replication=0,
+                pair_name="sg1_sg2",
+                condition_bits="00000",
+                condition_label="greedy",
+                prompt_factors={},
+                raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+                input_payload={
+                    "subgraph1": [("alpha", "beta")],
+                    "subgraph2": [("gamma", "delta")],
+                    "graph": [("alpha", "gamma")],
+                },
+                runtime_profile=runtime_profile,
+            )
+        ]
+
+    def fake_run_local_hf_spec_subprocess(*, spec, run_dir):
+        _ = (spec, run_dir)
+        return {
+            "raw_row": _valid_edge_result_row({"pair_name": "sg1_sg2", "Repetition": 0}),
+            "runtime": {"thinking_mode_supported": spec.runtime_profile.supports_thinking_toggle},
+            "raw_response": "{}",
+        }
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        fake_plan_specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments._run_local_hf_spec_subprocess",
+        fake_run_local_hf_spec_subprocess,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["Qwen/Qwen3.5-9B"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+    )
+
+    assert recorded_supports_toggle["value"] is True
 
 
 def test_run_single_spec_monitored_mode_does_not_build_in_process_runtime(
@@ -861,6 +934,186 @@ def test_run_single_spec_monitored_mode_does_not_build_in_process_runtime(
     )
 
     assert summary["status"] == "finished"
+
+
+def test_run_paper_batch_persistent_mode_reuses_one_session_per_model(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    session_inits: list[tuple[Path, str, int | None]] = []
+    served_pairs: list[str] = []
+
+    def make_spec(pair_name: str) -> HFRunSpec:
+        return HFRunSpec(
+            algorithm="algo1",
+            model="allenai/Olmo-3-7B-Instruct",
+            embedding_model="Qwen/Qwen3-Embedding-0.6B",
+            decoding=DecodingConfig(algorithm="greedy"),
+            replication=0,
+            pair_name=pair_name,
+            condition_bits="00000",
+            condition_label="greedy",
+            prompt_factors={},
+            raw_context={
+                "pair_name": pair_name,
+                "Repetition": 0,
+                "Explanation": -1,
+                "Example": -1,
+                "Counterexample": -1,
+                "Array/List(1/-1)": -1,
+                "Tag/Adjacency(1/-1)": -1,
+            },
+            input_payload={
+                "subgraph1": [("alpha", "beta")],
+                "subgraph2": [("gamma", "delta")],
+                "graph": [("alpha", "gamma")],
+            },
+            runtime_profile=_runtime_profile(),
+            context_policy={
+                "generation_timeout_seconds": 20,
+                "worker_process_mode": "persistent",
+                "max_requests_per_worker_process": 7,
+            },
+        )
+
+    class FakeSession:
+        def __init__(
+            self,
+            *,
+            queue_dir: Path,
+            worker_python: str,
+            env=None,
+            max_requests_per_process: int | None = None,
+        ) -> None:
+            _ = env
+            session_inits.append((queue_dir, worker_python, max_requests_per_process))
+
+        def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
+            _ = run_dir
+            served_pairs.append(spec.pair_name)
+            return {
+                "raw_row": _valid_edge_result_row(
+                    {
+                        "pair_name": spec.pair_name,
+                        "Repetition": 0,
+                        "Explanation": -1,
+                        "Example": -1,
+                        "Counterexample": -1,
+                        "Array/List(1/-1)": -1,
+                        "Tag/Adjacency(1/-1)": -1,
+                    }
+                ),
+                "runtime": {"thinking_mode_supported": False},
+                "raw_response": "{}",
+            }
+
+        def close(self) -> None:
+            return None
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **kwargs: [make_spec("sg1_sg2"), make_spec("sg2_sg3")],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.PersistentHFWorkerSession",
+        FakeSession,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+    )
+
+    assert len(session_inits) == 1
+    assert session_inits[0][2] == 7
+    assert served_pairs == ["sg1_sg2", "sg2_sg3"]
+
+
+def test_run_single_spec_persistent_mode_uses_session(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={
+            "pair_name": "sg1_sg2",
+            "Repetition": 0,
+            "Explanation": -1,
+            "Example": -1,
+            "Counterexample": -1,
+            "Array/List(1/-1)": -1,
+            "Tag/Adjacency(1/-1)": -1,
+        },
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={
+            "generation_timeout_seconds": 20,
+            "worker_process_mode": "persistent",
+        },
+    )
+    session_inits: list[tuple[Path, str, int | None]] = []
+    served_pairs: list[str] = []
+
+    class FakeSession:
+        def __init__(
+            self,
+            *,
+            queue_dir: Path,
+            worker_python: str,
+            env=None,
+            max_requests_per_process: int | None = None,
+        ) -> None:
+            _ = env
+            session_inits.append((queue_dir, worker_python, max_requests_per_process))
+
+        def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
+            _ = run_dir
+            served_pairs.append(spec.pair_name)
+            return {
+                "raw_row": _valid_edge_result_row(spec.raw_context),
+                "runtime": {"thinking_mode_supported": False},
+                "raw_response": "{}",
+            }
+
+        def close(self) -> None:
+            return None
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.PersistentHFWorkerSession",
+        FakeSession,
+    )
+
+    summary = run_single_spec(
+        spec=spec,
+        output_root=tmp_path / "smoke",
+        runtime_factory=None,
+        dry_run=False,
+        resume=False,
+    )
+
+    assert summary["status"] == "finished"
+    assert len(session_inits) == 1
+    assert session_inits[0][2] is None
+    assert served_pairs == ["sg1_sg2"]
 
 
 def test_run_paper_batch_writes_batch_summary_csv(

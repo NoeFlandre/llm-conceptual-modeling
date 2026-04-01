@@ -45,6 +45,8 @@ SMOKE_OUTPUT_ROOT="${SMOKE_OUTPUT_ROOT:-$REMOTE_RESULTS_DIR/smoke}"
 BATCH_GENERATION_TIMEOUT_SECONDS="${BATCH_GENERATION_TIMEOUT_SECONDS:-}"
 BATCH_RESUME_PASS_MODE="${BATCH_RESUME_PASS_MODE:-}"
 BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME="${BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME:-}"
+BATCH_WORKER_PROCESS_MODE="${BATCH_WORKER_PROCESS_MODE:-}"
+BATCH_MAX_REQUESTS_PER_WORKER_PROCESS="${BATCH_MAX_REQUESTS_PER_WORKER_PROCESS:-}"
 
 SSH_CMD=(ssh -i "$SSH_KEY_PATH" -p "$SSH_PORT")
 RSYNC_SSH="ssh -i $SSH_KEY_PATH -p $SSH_PORT"
@@ -79,6 +81,8 @@ echo "[4/6] Run doctor + config preview"
   export BATCH_GENERATION_TIMEOUT_SECONDS='$BATCH_GENERATION_TIMEOUT_SECONDS'
   export BATCH_RESUME_PASS_MODE='$BATCH_RESUME_PASS_MODE'
   export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME='$BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME'
+  export BATCH_WORKER_PROCESS_MODE='$BATCH_WORKER_PROCESS_MODE'
+  export BATCH_MAX_REQUESTS_PER_WORKER_PROCESS='$BATCH_MAX_REQUESTS_PER_WORKER_PROCESS'
   python3 - <<'PY'
 from pathlib import Path
 import os
@@ -100,6 +104,14 @@ if resume_pass_mode:
 retry_timeout = os.environ.get('BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME', '').strip().lower()
 if retry_timeout:
     context_policy['retry_timeout_failures_on_resume'] = retry_timeout in {'1', 'true', 'yes', 'on'}
+
+worker_process_mode = os.environ.get('BATCH_WORKER_PROCESS_MODE', '').strip()
+if worker_process_mode:
+    context_policy['worker_process_mode'] = worker_process_mode
+
+max_requests = os.environ.get('BATCH_MAX_REQUESTS_PER_WORKER_PROCESS', '').strip()
+if max_requests:
+    context_policy['max_requests_per_worker_process'] = int(float(max_requests))
 
 payload['runtime']['context_policy'] = context_policy
 target_path.parent.mkdir(parents=True, exist_ok=True)

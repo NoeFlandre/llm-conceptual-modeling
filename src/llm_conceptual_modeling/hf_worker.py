@@ -3,10 +3,13 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import time
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 from llm_conceptual_modeling.common.hf_transformers import (
+    _torch,
     build_runtime_factory,
 )
 from llm_conceptual_modeling.hf_batch_utils import resolve_hf_token
@@ -21,23 +24,65 @@ def _update_worker_state(path: Path, updates: dict[str, object]) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--spec-json", required=True)
-    parser.add_argument("--result-json", required=True)
-    parser.add_argument("--run-dir", required=True)
-    args = parser.parse_args(argv)
-
-    spec = deserialize_spec(json.loads(Path(args.spec_json).read_text(encoding="utf-8")))
-    run_dir = Path(args.run_dir)
-    result_path = Path(args.result_json)
+def serve_request_queue(
+    *,
+    queue_dir: Path,
+    max_requests: int | None = None,
+    idle_sleep_seconds: float = 0.1,
+) -> int:
     hf_runtime = build_runtime_factory(hf_token=resolve_hf_token())
+    served_count = 0
+    while max_requests is None or served_count < max_requests:
+        request_path = _claim_next_request(queue_dir)
+        if request_path is None:
+            if max_requests is None:
+                time.sleep(idle_sleep_seconds)
+                continue
+            break
+        request_payload = json.loads(request_path.read_text(encoding="utf-8"))
+        spec_json_path = Path(str(request_payload["spec_json"]))
+        result_json_path = Path(str(request_payload["result_json"]))
+        run_dir = Path(str(request_payload["run_dir"]))
+        _execute_request(
+            spec_json_path=spec_json_path,
+            result_json_path=result_json_path,
+            run_dir=run_dir,
+            hf_runtime=hf_runtime,
+            requests_served_by_process=served_count + 1,
+        )
+        _release_runtime_cache()
+        request_path.unlink(missing_ok=True)
+        served_count += 1
+    return served_count
+
+
+def _claim_next_request(queue_dir: Path) -> Path | None:
+    for request_path in sorted(queue_dir.glob("*.request.json")):
+        claimed_path = request_path.with_suffix("").with_suffix(".claimed.json")
+        try:
+            request_path.rename(claimed_path)
+        except FileNotFoundError:
+            continue
+        return claimed_path
+    return None
+
+
+def _execute_request(
+    *,
+    spec_json_path: Path,
+    result_json_path: Path,
+    run_dir: Path,
+    hf_runtime: Any,
+    requests_served_by_process: int = 1,
+) -> int:
+    spec = deserialize_spec(json.loads(spec_json_path.read_text(encoding="utf-8")))
     _update_worker_state(
         run_dir / "worker_state.json",
         {
             "worker_pid": os.getpid(),
             "model_loaded": True,
             "model_loaded_at": datetime.now(UTC).isoformat(),
+            "requests_served_by_process": requests_served_by_process,
             "updated_at": datetime.now(UTC).isoformat(),
         },
     )
@@ -53,7 +98,7 @@ def main(argv: list[str] | None = None) -> int:
         else:
             raise ValueError(f"Unsupported algorithm: {spec.algorithm}")
     except Exception as error:
-        result_path.write_text(
+        result_json_path.write_text(
             json.dumps(
                 {
                     "ok": False,
@@ -69,11 +114,47 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 1
 
-    result_path.write_text(
+    result_json_path.write_text(
         json.dumps({"ok": True, "runtime_result": result}, indent=2, sort_keys=True),
         encoding="utf-8",
     )
     return 0
+
+
+def _release_runtime_cache() -> None:
+    try:
+        torch = _torch()
+    except Exception:
+        return
+    if not torch.cuda.is_available():
+        return
+    torch.cuda.empty_cache()
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--spec-json")
+    parser.add_argument("--result-json")
+    parser.add_argument("--run-dir")
+    parser.add_argument("--queue-dir")
+    parser.add_argument("--max-requests", type=int)
+    args = parser.parse_args(argv)
+
+    if args.queue_dir:
+        return serve_request_queue(
+            queue_dir=Path(args.queue_dir),
+            max_requests=args.max_requests,
+        )
+    if not args.spec_json or not args.result_json or not args.run_dir:
+        raise SystemExit("--spec-json, --result-json, and --run-dir are required")
+
+    hf_runtime = build_runtime_factory(hf_token=resolve_hf_token())
+    return _execute_request(
+        spec_json_path=Path(args.spec_json),
+        result_json_path=Path(args.result_json),
+        run_dir=Path(args.run_dir),
+        hf_runtime=hf_runtime,
+    )
 
 
 if __name__ == "__main__":
