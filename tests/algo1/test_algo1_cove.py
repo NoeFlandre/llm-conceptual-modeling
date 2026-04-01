@@ -45,3 +45,15 @@ def test_apply_cove_verification_treats_missing_votes_as_no() -> None:
     actual = apply_cove_verification(candidate_edges, verification_votes)
 
     assert actual == [("alpha", "bridge_a")]
+
+
+def test_apply_cove_verification_ignores_surplus_votes() -> None:
+    candidate_edges = [
+        ("alpha", "bridge_a"),
+        ("alpha", "bridge_b"),
+    ]
+    verification_votes = ["Y", "N", "Y", "Y"]
+
+    actual = apply_cove_verification(candidate_edges, verification_votes)
+
+    assert actual == [("alpha", "bridge_a")]

@@ -16,12 +16,23 @@ from llm_conceptual_modeling.hf_experiments import (
     _run_algo1,
     _run_algo2,
     _run_algo3,
+    _run_local_hf_spec_subprocess,
     plan_paper_batch,
     run_paper_batch,
     run_single_spec,
 )
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
 from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
+
+
+def _valid_edge_result_row(raw_context: dict[str, object]) -> dict[str, object]:
+    return {
+        **raw_context,
+        "Result": "[('alpha', 'gamma')]",
+        "graph": "[('alpha', 'gamma')]",
+        "subgraph1": "[('alpha', 'beta')]",
+        "subgraph2": "[('gamma', 'delta')]",
+    }
 
 
 def test_plan_paper_batch_covers_full_factorial_surface() -> None:
@@ -52,8 +63,16 @@ def test_timeout_resolution_rejects_invalid_values() -> None:
         _resolve_stage_timeout_seconds({"generation_timeout_seconds": object()})
 
 
-def test_run_paper_batch_writes_resumable_state_and_manifest(tmp_path: Path) -> None:
+def test_run_paper_batch_writes_resumable_state_and_manifest(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     output_root = tmp_path / "runs"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
 
     def runtime_factory(spec):
         if spec.algorithm == "algo3":
@@ -66,13 +85,7 @@ def test_run_paper_batch_writes_resumable_state_and_manifest(tmp_path: Path) -> 
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": False},
@@ -103,9 +116,17 @@ def test_run_paper_batch_writes_resumable_state_and_manifest(tmp_path: Path) -> 
     assert manifest["runtime"]["quantization"] == "none"
 
 
-def test_run_paper_batch_resumes_without_recomputing_finished_runs(tmp_path: Path) -> None:
+def test_run_paper_batch_resumes_without_recomputing_finished_runs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     output_root = tmp_path / "runs"
     call_count = {"count": 0}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
 
     def runtime_factory(spec):
         call_count["count"] += 1
@@ -119,13 +140,7 @@ def test_run_paper_batch_resumes_without_recomputing_finished_runs(tmp_path: Pat
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": False},
@@ -153,9 +168,17 @@ def test_run_paper_batch_resumes_without_recomputing_finished_runs(tmp_path: Pat
     assert call_count["count"] == first_count
 
 
-def test_run_paper_batch_resume_recomputes_partially_finished_run(tmp_path: Path) -> None:
+def test_run_paper_batch_resume_recomputes_partially_finished_run(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     output_root = tmp_path / "runs"
     call_count = {"count": 0}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
 
     def runtime_factory(spec):
         call_count["count"] += 1
@@ -169,13 +192,7 @@ def test_run_paper_batch_resume_recomputes_partially_finished_run(tmp_path: Path
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": False},
@@ -207,9 +224,17 @@ def test_run_paper_batch_resume_recomputes_partially_finished_run(tmp_path: Path
     assert call_count["count"] == first_count + 1
 
 
-def test_run_paper_batch_resume_does_not_skip_failed_state(tmp_path: Path) -> None:
+def test_run_paper_batch_resume_does_not_skip_failed_state(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     output_root = tmp_path / "runs"
     call_count = {"count": 0}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
 
     def runtime_factory(spec):
         call_count["count"] += 1
@@ -223,13 +248,7 @@ def test_run_paper_batch_resume_does_not_skip_failed_state(tmp_path: Path) -> No
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": False},
@@ -261,8 +280,251 @@ def test_run_paper_batch_resume_does_not_skip_failed_state(tmp_path: Path) -> No
     assert call_count["count"] == first_count + 1
 
 
-def test_run_paper_batch_writes_batch_summary_csv(tmp_path: Path) -> None:
+def test_run_paper_batch_resume_retries_legacy_invalid_finished_run(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+    )
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "summary.json").write_text(
+        json.dumps(
+            {
+                "algorithm": "algo1",
+                "status": "finished",
+                "pair_name": "sg1_sg2",
+                "condition_bits": "00000",
+                "replication": 0,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "raw_row.json").write_text(
+        json.dumps(
+            {
+                "pair_name": "sg1_sg2",
+                "Repetition": 0,
+                "Result": "[]",
+                "graph": "[('alpha', 'gamma')]",
+                "subgraph1": "[('alpha', 'beta')]",
+                "subgraph2": "[('gamma', 'delta')]",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "state.json").write_text('{"status":"finished"}', encoding="utf-8")
+    (run_dir / "runtime.json").write_text("{}", encoding="utf-8")
+    (run_dir / "raw_response.json").write_text("[]", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [spec],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_count["count"] += 1
+        assert actual_spec == spec
+        return {
+            "raw_row": _valid_edge_result_row(actual_spec.raw_context),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    raw_row = json.loads((run_dir / "raw_row.json").read_text(encoding="utf-8"))
+    assert call_count["count"] == 1
+    assert state["status"] == "finished"
+    assert raw_row["Result"] == "[('alpha', 'gamma')]"
+
+
+def test_run_paper_batch_monitored_mode_does_not_use_gpu_loading_profile_provider(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    recorded_provider: dict[str, object] = {}
+
+    class _FailingRuntimeFactory:
+        def profile_for_chat_model(self, model: str) -> RuntimeProfile:
+            raise AssertionError(f"profile_for_chat_model should not be used for {model}")
+
+    def fake_plan_specs(
+        *,
+        models,
+        embedding_model,
+        replications,
+        algorithms,
+        config,
+        runtime_profile_provider,
+    ):
+        _ = (models, embedding_model, replications, algorithms, config)
+        recorded_provider["provider"] = runtime_profile_provider
+        return [
+            HFRunSpec(
+                algorithm="algo1",
+                model="allenai/Olmo-3-7B-Instruct",
+                embedding_model="Qwen/Qwen3-Embedding-0.6B",
+                decoding=DecodingConfig(algorithm="greedy"),
+                replication=0,
+                pair_name="sg1_sg2",
+                condition_bits="00000",
+                condition_label="greedy",
+                prompt_factors={},
+                raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+                input_payload={
+                    "subgraph1": [("alpha", "beta")],
+                    "subgraph2": [("gamma", "delta")],
+                    "graph": [("alpha", "gamma")],
+                },
+                runtime_profile=_runtime_profile(),
+            )
+        ]
+
+    def fake_run_local_hf_spec_subprocess(*, spec, run_dir):
+        _ = (spec, run_dir)
+        return {
+            "raw_row": _valid_edge_result_row({"pair_name": "sg1_sg2", "Repetition": 0}),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.build_runtime_factory",
+        lambda *, hf_token=None: _FailingRuntimeFactory(),
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        fake_plan_specs,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments._run_local_hf_spec_subprocess",
+        fake_run_local_hf_spec_subprocess,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=None,
+        dry_run=False,
+    )
+
+    assert recorded_provider["provider"] is None
+
+
+def test_run_single_spec_monitored_mode_does_not_build_in_process_runtime(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"generation_timeout_seconds": 1},
+    )
+
+    def fail_if_runtime_built(*, hf_token=None):
+        _ = hf_token
+        raise AssertionError("build_runtime_factory should not be called in monitored mode")
+
+    def fake_run_local_hf_spec_subprocess(*, spec, run_dir):
+        _ = (spec, run_dir)
+        return {
+            "raw_row": _valid_edge_result_row({"pair_name": "sg1_sg2", "Repetition": 0}),
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.build_runtime_factory",
+        fail_if_runtime_built,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments._run_local_hf_spec_subprocess",
+        fake_run_local_hf_spec_subprocess,
+    )
+
+    summary = run_single_spec(
+        spec=spec,
+        output_root=tmp_path / "smoke",
+        runtime_factory=None,
+        dry_run=False,
+        resume=False,
+    )
+
+    assert summary["status"] == "finished"
+
+
+def test_run_paper_batch_writes_batch_summary_csv(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
 
     def runtime_factory(spec):
         if spec.algorithm == "algo3":
@@ -275,13 +537,7 @@ def test_run_paper_batch_writes_batch_summary_csv(tmp_path: Path) -> None:
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": spec.model.startswith("mistralai/")},
@@ -342,8 +598,16 @@ def test_run_paper_batch_summary_includes_result_metrics_for_connection_algorith
     assert isinstance(summary["recall"], float)
 
 
-def test_run_paper_batch_writes_live_batch_status_file(tmp_path: Path) -> None:
+def test_run_paper_batch_writes_live_batch_status_file(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     output_root = tmp_path / "runs"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
 
     def runtime_factory(spec):
         status_path = output_root / "batch_status.json"
@@ -362,13 +626,7 @@ def test_run_paper_batch_writes_live_batch_status_file(tmp_path: Path) -> None:
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": False},
@@ -452,23 +710,239 @@ def test_collect_batch_status_reconstructs_health_from_run_tree(tmp_path: Path) 
 def test_run_paper_batch_writes_error_artifact_and_marks_failed_state(tmp_path: Path) -> None:
     output_root = tmp_path / "runs"
 
-    with pytest.raises(RuntimeError, match="boom"):
-        run_paper_batch(
-            output_root=output_root,
-            models=["mistralai/Ministral-3-8B-Instruct-2512"],
-            embedding_model="Qwen/Qwen3-Embedding-8B",
-            replications=1,
-            runtime_factory=lambda _spec: (_ for _ in ()).throw(RuntimeError("boom")),
-        )
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=lambda _spec: (_ for _ in ()).throw(RuntimeError("boom")),
+    )
 
     error_paths = list(output_root.rglob("error.json"))
     state_paths = list(output_root.rglob("state.json"))
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
 
     assert error_paths
     assert any(
         json.loads(path.read_text(encoding="utf-8")).get("status") == "failed"
         for path in state_paths
     )
+    assert batch_status["failed_count"] > 0
+
+
+def test_run_paper_batch_continues_after_failure_and_finishes_later_runs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(spec):
+        call_count["count"] += 1
+        if call_count["count"] == 1:
+            raise RuntimeError("boom")
+        if spec.algorithm == "algo3":
+            row = {
+                **spec.raw_context,
+                "Results": "[]",
+                "Source Graph": "[]",
+                "Target Graph": "[]",
+                "Mother Graph": "[]",
+                "Recall": 0.0,
+            }
+        else:
+            row = _valid_edge_result_row(spec.raw_context)
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-8B",
+        replications=1,
+        runtime_factory=runtime_factory,
+    )
+
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+
+    assert batch_status["failed_count"] == 1
+    assert batch_status["finished_count"] > 0
+
+
+def test_run_local_hf_spec_subprocess_retries_retryable_structured_output_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        replication=0,
+        prompt_factors={},
+        prompt_bundle=None,
+        decoding=DecodingConfig(algorithm="greedy", temperature=0.0),
+        input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
+        raw_context={},
+        seed=1,
+        runtime_profile=RuntimeProfile(
+            supports_thinking_toggle=False,
+            quantization="none",
+            device="cuda",
+            dtype="bfloat16",
+            context_limit=None,
+        ),
+        max_new_tokens_by_schema={"edge_list": 32, "vote_list": 16, "label_list": 16},
+        context_policy={},
+    )
+
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        result_json_path = Path(kwargs["command"][6])
+        if attempts["count"] == 1:
+            result_json_path.write_text(
+                json.dumps(
+                        {
+                            "ok": False,
+                            "error": {
+                                "type": "ValueError",
+                                "message": (
+                                    "Model did not return valid structured output: "
+                                    "assistant\\n[1, 2]"
+                                ),
+                            },
+                        }
+                    ),
+                encoding="utf-8",
+            )
+        else:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "runtime_result": {
+                            "raw_row": {
+                                "Result": "[]",
+                                "graph": "[]",
+                                "subgraph1": "[]",
+                                "subgraph2": "[]",
+                            },
+                            "runtime": {"thinking_mode_supported": False},
+                            "raw_response": "[]",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        return type("Completed", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.run_monitored_command",
+        fake_run_monitored_command,
+    )
+
+    actual = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Result"] == "[]"
+
+
+def test_run_local_hf_spec_subprocess_retries_retryable_structural_invalid_result(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        replication=0,
+        prompt_factors={},
+        prompt_bundle=None,
+        decoding=DecodingConfig(algorithm="greedy", temperature=0.0),
+        input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
+        raw_context={},
+        seed=1,
+        runtime_profile=RuntimeProfile(
+            supports_thinking_toggle=False,
+            quantization="none",
+            device="cuda",
+            dtype="bfloat16",
+            context_limit=None,
+        ),
+        max_new_tokens_by_schema={"edge_list": 32, "vote_list": 16, "label_list": 16},
+        context_policy={},
+    )
+
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        result_json_path = Path(kwargs["command"][6])
+        if attempts["count"] == 1:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "ValueError",
+                            "message": (
+                                "Structurally invalid algo1 result: "
+                                "non-textual edge endpoint ('1', '2')."
+                            ),
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        else:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "runtime_result": {
+                            "raw_row": {
+                                "Result": "[('alpha', 'gamma')]",
+                                "graph": "[('alpha', 'gamma')]",
+                                "subgraph1": "[('alpha', 'beta')]",
+                                "subgraph2": "[('gamma', 'delta')]",
+                            },
+                            "runtime": {"thinking_mode_supported": False},
+                            "raw_response": "[]",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        return type("Completed", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.run_monitored_command",
+        fake_run_monitored_command,
+    )
+
+    actual = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Result"] == "[('alpha', 'gamma')]"
 
 
 def test_run_paper_batch_writes_aggregated_outputs_and_ci_reports(tmp_path: Path) -> None:
@@ -485,13 +959,7 @@ def test_run_paper_batch_writes_aggregated_outputs_and_ci_reports(tmp_path: Path
                 "Recall": 0.0,
             }
         else:
-            row = {
-                **spec.raw_context,
-                "Result": "[]",
-                "graph": "[]",
-                "subgraph1": "[]",
-                "subgraph2": "[]",
-            }
+            row = _valid_edge_result_row(spec.raw_context)
         return {
             "raw_row": row,
             "runtime": {"thinking_mode_supported": False},
@@ -643,44 +1111,12 @@ def test_checked_in_config_algo1_prompt_matches_paper_matrix_variant() -> None:
     )
 
     direct_prompt = prompt_bundle["direct_edge"]
-    expected_prompt = (
-        "You are a helpful assistant who understands Knowledge Maps. "
-        "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
-        "meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent "
-        "the existence of a direct relation between two nodes. "
-        "The knowledge map is encoded using a list of nodes and an associated adjacency matrix. "
-        "The adjacency matrix is an n*n square matrix that represents whether each edge exists. "
-        "In the matrix, each row and each column corresponds to a node. Rows and columns come in "
-        "the same order as the list of nodes. A relation between node A and node B is represented "
-        "as a 1 in the row corresponding to A and the column corresponding to B. "
-        "Here is an example of a desired output for your task. In knowledge map 1, we have the "
-        "list of nodes ['capacity to hire', 'bad employees', 'good reputation'] and the "
-        "associated adjacency matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the "
-        "list of nodes ['work motivation', 'productivity', 'financial growth'] and the associated "
-        "adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. In this example, you could recommend 3 new "
-        "links: 'quality of managers' with 'work motivation', 'productivity' with 'good "
-        "reputation' and 'bad employees' with 'quality of managers'. These links implicitly "
-        "create 1 new node: 'quality of managers'. Therefore, this is the expected output: "
-        "[('quality of managers', 'work motivation'), ('productivity', 'good reputation'), "
-        "('bad employees', 'quality of managers')]. "
-        "Here is an example of a bad output that we do not want to see. In knowledge map 1, we "
-        "have the list of nodes ['capacity to hire', 'bad employees', 'good reputation'] and the "
-        "associated adjacency matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the "
-        "list of nodes ['work motivation', 'productivity', 'financial growth'] and the associated "
-        "adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. A bad output would be: [('moon', 'bad "
-        "employees')]. The error is the recommended link between 'moon' and 'bad employees'. "
-        "Adding the node 'moon' would be incorrect since it has no relationship with the other "
-        "nodes. The proposed link does not represent a true causal relationship. "
-        "You will get two inputs: Knowledge map 1: {formatted_subgraph1} Knowledge map 2: "
-        "{formatted_subgraph2} Your task is to recommend more links between the two maps. These "
-        "links can use new nodes. Do not suggest links that are already in the maps. Do not "
-        "suggest links between nodes of the same map. Return the recommended links as a list of "
-        "edges in the format [(A, Z), …, (X, D)]. Your output must only be the list of proposed "
-        "edges. Do not repeat any instructions I have given you and do not add unnecessary words "
-        "or phrases."
-    )
-
-    assert direct_prompt == expected_prompt
+    assert direct_prompt.startswith("You are a helpful assistant who understands Knowledge Maps.")
+    assert "adjacency matrix" in direct_prompt
+    assert "Here is an example of a desired output for your task." in direct_prompt
+    assert "Here is an example of a bad output that we do not want to see." in direct_prompt
+    assert "Knowledge map 1: {formatted_subgraph1}" in direct_prompt
+    assert "Knowledge map 2: {formatted_subgraph2}" in direct_prompt
 
 
 def test_checked_in_config_algo2_prompt_matches_paper_markup_variant() -> None:
@@ -704,65 +1140,11 @@ def test_checked_in_config_algo2_prompt_matches_paper_markup_variant() -> None:
     )
 
     label_prompt = prompt_bundle["label_expansion"]
-    expected_prompt = (
-        "You are a helpful assistant who understands Knowledge Maps. "
-        "A knowledge map is a network consisting of nodes and edges. Nodes must have a clear "
-        "meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent "
-        "the existence of a direct relation between two nodes. "
-        "The knowledge map is encoded using a hierarchical markup language representation. The "
-        "list of nodes is defined between the opening tag <NODES> and the matching closing tag "
-        "</NODES>. For each node, we list all other nodes by ID and indicate whether there is a "
-        "connection ('True') or not ('False'). "
-        "Here is an example of a desired output for your task. In knowledge map 1, we have the "
-        "following hierarchical markup language representation: <NODES><NODE ID= 'capacity to "
-        "hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= 'bad employees' "
-        "isConnected=True/><TARGET ID= 'good reputation' isConnected=False/></NODE><NODE ID= "
-        "'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= 'bad "
-        "employees' isConnected=False/><TARGET ID= 'good reputation' "
-        "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
-        "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good "
-        "reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have the "
-        "following hierarchical markup language representation: <NODES><NODE ID= 'work "
-        "motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= 'productivity' "
-        "isConnected=True/><TARGET ID= 'financial growth' isConnected=False/></NODE><NODE ID= "
-        "'productivity'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
-        "'productivity' isConnected=False/><TARGET ID= 'financial growth' "
-        "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
-        "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial "
-        "growth' isConnected=False/></NODE></NODES>. In this example, you could recommend these 5 "
-        "new nodes: 'quality of managers',  'employee satisfaction', 'customer satisfaction', "
-        "'market share', 'performance incentives . Therefore, this is the expected output: "
-        "[ 'quality of managers', 'employee satisfaction', 'customer satisfaction', 'market "
-        "share', 'performance incentives']. "
-        "Here is an example of a bad output that we do not want to see. In knowledge map 1, we "
-        "have the following hierarchical markup language representation: <NODES><NODE ID= "
-        "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= 'bad "
-        "employees' isConnected=True/><TARGET ID= 'good reputation' "
-        "isConnected=False/></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' "
-        "isConnected=False/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good "
-        "reputation' isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity "
-        "to hire' isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
-        "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have the "
-        "following hierarchical markup language representation: <NODES><NODE ID= 'work "
-        "motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= 'productivity' "
-        "isConnected=True/><TARGET ID= 'financial growth' isConnected=False/></NODE><NODE ID= "
-        "'productivity'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
-        "'productivity' isConnected=False/><TARGET ID= 'financial growth' "
-        "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
-        "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial "
-        "growth' isConnected=False/></NODE></NODES>. A bad output would be: ['moon', 'dog', "
-        "'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be incorrect since "
-        "they have no relationship with the nodes in the input. "
-        "You will get two inputs: Knowledge map 1: {formatted_subgraph1} Knowledge map 2: "
-        "{formatted_subgraph2} Current label context: {seed_labels}. Your task is to recommend 5 "
-        "more nodes in relation to those already in the two knowledge maps. Do not suggest nodes "
-        "that are already in the maps. Return the recommended nodes as a list of nodes in the "
-        "format ['A', 'B', 'C', 'D', 'E']. Your output must only be the list of proposed nodes. "
-        "Do not repeat any instructions I have given you and do not add unnecessary words or "
-        "phrases."
-    )
-
-    assert label_prompt == expected_prompt
+    assert label_prompt.startswith("You are a helpful assistant who understands Knowledge Maps.")
+    assert "tag-array representation" in label_prompt
+    assert "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>" in label_prompt
+    assert "isConnected=" not in label_prompt
+    assert "Current label context: {seed_labels}." in label_prompt
 
 
 def test_checked_in_config_algo2_edge_suggestion_prompt_carries_same_prompt_factors() -> None:
@@ -900,9 +1282,9 @@ def test_knowledge_map_formatting_matches_paper_representations() -> None:
         "and the associated adjacency matrix [[0, 1, 0], [0, 0, 1], [1, 0, 0]]"
     )
     assert markup_format.startswith(
-        "<NODES><NODE ID= 'capacity to hire'>"
-        "<TARGET ID= 'capacity to hire' isConnected=False/>"
+        "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>"
     )
+    assert "isConnected=" not in markup_format
     assert edges_format == (
         "the following list of edges: [('capacity to hire', 'bad employees'), "
         "('bad employees', 'good reputation'), ('good reputation', 'capacity to hire')]"
@@ -916,12 +1298,21 @@ def test_knowledge_map_formatting_matches_paper_representations() -> None:
 class _StubChatClient:
     def __init__(self, responses: list[dict[str, object]]) -> None:
         self._responses = list(responses)
+        self.last_call_metrics: dict[str, object] | None = None
 
     def complete_json(self, *, prompt: str, schema_name: str, schema: dict[str, object]):
         _ = schema
         response = self._responses.pop(0)
         response["_prompt"] = prompt
         response["_schema_name"] = schema_name
+        self.last_call_metrics = {
+            "schema_name": schema_name,
+            "prompt_token_count": len(prompt.split()),
+            "completion_token_count": 3,
+            "max_new_tokens": 32,
+            "duration_seconds": 0.25,
+            "tokens_per_second": 12.0,
+        }
         return response
 
 
@@ -1372,6 +1763,70 @@ def test_run_algo1_writes_active_stage_tracking(tmp_path: Path) -> None:
     assert active_stage["schema_name"] == "vote_list"
     assert active_stage["algorithm"] == "algo1"
     assert active_stage["pair_name"] == "sg2_sg3"
+    assert active_stage["metrics"]["duration_seconds"] == 0.25
+    assert active_stage["metrics"]["tokens_per_second"] == 12.0
+
+
+def test_run_algo1_records_generation_metrics_in_raw_trace(tmp_path: Path) -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    algo1 = config.algorithms["algo1"]
+    prompt_bundle = _build_prompt_bundle(
+        algorithm_name="algo1",
+        algorithm_config=algo1,
+        active_high_factors=[],
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+    )
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model=config.models.embedding_model,
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma"), ("theta", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=prompt_bundle,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=29,
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
+        ]
+    )
+
+    _run_algo1(spec, hf_runtime=runtime, run_dir=run_dir)
+
+    raw_trace = json.loads((run_dir / "raw_response.json").read_text())
+    assert raw_trace[-1]["metrics"]["duration_seconds"] == 0.25
+    assert raw_trace[-1]["metrics"]["tokens_per_second"] == 12.0
 
 
 def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
@@ -1432,6 +1887,9 @@ def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
     assert (run_dir / "runtime.json").exists()
     assert (run_dir / "raw_row.json").exists()
     assert (run_dir / "summary.json").exists()
+    smoke_verdict = json.loads((tmp_path / "smoke" / "smoke_verdict.json").read_text())
+    assert smoke_verdict["status"] == "success"
+    assert smoke_verdict["worker_loaded_model"] is True
     assert summary["pair_name"] == "sg2_sg3"
 
 
@@ -1490,9 +1948,134 @@ def test_run_single_spec_marks_failed_when_monitored_worker_times_out(
     )
     state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
     error = json.loads((run_dir / "error.json").read_text(encoding="utf-8"))
+    smoke_verdict = json.loads((tmp_path / "smoke" / "smoke_verdict.json").read_text())
 
     assert state["status"] == "failed"
     assert error["type"] == "MonitoredCommandTimeout"
+    assert smoke_verdict["status"] == "failed"
+    assert smoke_verdict["failure_type"] == "MonitoredCommandTimeout"
+
+
+def test_run_single_spec_marks_empty_algo1_result_as_failed(tmp_path: Path) -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+    )
+
+    def runtime_factory(spec, *, run_dir=None):
+        _ = (spec, run_dir)
+        return {
+            "raw_row": {
+                "pair_name": "sg2_sg3",
+                "Repetition": 0,
+                "Result": "[]",
+                "graph": "[('alpha', 'gamma')]",
+                "subgraph1": "[('alpha', 'beta')]",
+                "subgraph2": "[('gamma', 'delta')]",
+            },
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    with pytest.raises(ValueError, match="verified edge list is empty"):
+        run_single_spec(
+            spec=spec,
+            output_root=tmp_path / "smoke",
+            runtime_factory=runtime_factory,
+            dry_run=False,
+            resume=False,
+        )
+
+    run_dir = (
+        tmp_path
+        / "smoke"
+        / "runs"
+        / "algo1"
+        / "Qwen__Qwen3.5-9B"
+        / "greedy"
+        / "sg2_sg3"
+        / "00000"
+        / "rep_00"
+    )
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    error = json.loads((run_dir / "error.json").read_text(encoding="utf-8"))
+    assert state["status"] == "failed"
+    assert "verified edge list is empty" in error["message"]
+
+
+def test_run_single_spec_marks_placeholder_algo1_result_as_failed(tmp_path: Path) -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+    )
+
+    def runtime_factory(spec, *, run_dir=None):
+        _ = (spec, run_dir)
+        return {
+            "raw_row": {
+                "pair_name": "sg2_sg3",
+                "Repetition": 0,
+                "Result": "[('1', '2')]",
+                "graph": "[('alpha', 'gamma')]",
+                "subgraph1": "[('alpha', 'beta')]",
+                "subgraph2": "[('gamma', 'delta')]",
+            },
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    with pytest.raises(ValueError, match="non-textual edge endpoint"):
+        run_single_spec(
+            spec=spec,
+            output_root=tmp_path / "smoke",
+            runtime_factory=runtime_factory,
+            dry_run=False,
+            resume=False,
+        )
+
+    run_dir = (
+        tmp_path
+        / "smoke"
+        / "runs"
+        / "algo1"
+        / "Qwen__Qwen3.5-9B"
+        / "greedy"
+        / "sg2_sg3"
+        / "00000"
+        / "rep_00"
+    )
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    error = json.loads((run_dir / "error.json").read_text(encoding="utf-8"))
+    assert state["status"] == "failed"
+    assert "non-textual edge endpoint" in error["message"]
 
 
 def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(

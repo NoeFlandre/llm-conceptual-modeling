@@ -21,6 +21,7 @@ from llm_conceptual_modeling.algo3.generation import (
     build_generation_manifest as build_algo3_manifest,
 )
 from llm_conceptual_modeling.common.types import VerificationResult
+from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.verification_cases import (
     FIXTURES_ROOT,
     build_legacy_parity_cases,
@@ -28,15 +29,37 @@ from llm_conceptual_modeling.verification_cases import (
 )
 
 
-def build_doctor_report() -> dict[str, object]:
+def build_doctor_report(
+    *,
+    results_root: str | None = None,
+    smoke_root: str | None = None,
+) -> dict[str, object]:
     fixtures_present = FIXTURES_ROOT.exists()
     package_import = True
+    checks: dict[str, object] = {
+        "fixtures_present": fixtures_present,
+        "package_import": package_import,
+    }
+    if results_root is not None:
+        results_root_path = Path(results_root)
+        results_root_path.mkdir(parents=True, exist_ok=True)
+        checks["results_root_writable"] = results_root_path.exists()
+        checks["batch_status"] = collect_batch_status(results_root_path)
+    if smoke_root is not None:
+        smoke_root_path = Path(smoke_root)
+        smoke_verdict_path = smoke_root_path / "smoke_verdict.json"
+        checks["smoke_verdict_present"] = smoke_verdict_path.exists()
+        if smoke_verdict_path.exists():
+            checks["smoke_verdict"] = json.loads(smoke_verdict_path.read_text(encoding="utf-8"))
+    bootstrap_snapshot_path = Path.cwd() / ".bootstrap-runtime.json"
+    if bootstrap_snapshot_path.exists():
+        checks["bootstrap_snapshot"] = json.loads(
+            bootstrap_snapshot_path.read_text(encoding="utf-8")
+        )
+    status = "ok" if fixtures_present and package_import else "error"
     return {
-        "status": "ok" if fixtures_present and package_import else "error",
-        "checks": {
-            "fixtures_present": fixtures_present,
-            "package_import": package_import,
-        },
+        "status": status,
+        "checks": checks,
     }
 
 

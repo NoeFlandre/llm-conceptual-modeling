@@ -1,19 +1,44 @@
 import json
+from functools import lru_cache
 from pathlib import Path
 
 import pandas as pd
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-DATA_ROOT = REPO_ROOT / "data" / "inputs"
-CATEGORIES_CSV = DATA_ROOT / "Giabbanelli & Macewan (categories).csv"
-EDGES_CSV = DATA_ROOT / "Giabbanelli & Macewan (edges).csv"
-ALGO2_THESAURUS_JSON = DATA_ROOT / "algo2_thesaurus.json"
+from llm_conceptual_modeling.paths import default_inputs_root
+
+
+def _inputs_root() -> Path:
+    return Path(default_inputs_root())
+
+
+def categories_csv_path() -> Path:
+    return _inputs_root() / "Giabbanelli & Macewan (categories).csv"
+
+
+def edges_csv_path() -> Path:
+    return _inputs_root() / "Giabbanelli & Macewan (edges).csv"
+
+
+def algo2_thesaurus_json_path() -> Path:
+    return _inputs_root() / "algo2_thesaurus.json"
+
+
+def wordnet_label_lexicon_json_path() -> Path:
+    return _inputs_root() / "wordnet_label_lexicon.json"
 
 
 def load_algo2_thesaurus() -> dict[str, dict[str, list[str]]]:
-    raw_text = ALGO2_THESAURUS_JSON.read_text()
+    raw_text = algo2_thesaurus_json_path().read_text()
     parsed_thesaurus = json.loads(raw_text)
     return parsed_thesaurus
+
+
+@lru_cache(maxsize=1)
+def load_wordnet_label_lexicon() -> dict[str, list[str]]:
+    raw_text = wordnet_label_lexicon_json_path().read_text()
+    parsed_lexicon = json.loads(raw_text)
+    return {str(key): list(value) for key, value in parsed_lexicon.items()}
+
 
 def load_default_graph() -> tuple[
     list[tuple[str, str]],
@@ -21,8 +46,8 @@ def load_default_graph() -> tuple[
     list[tuple[str, str]],
     list[tuple[str, str]],
 ]:
-    categories = pd.read_csv(CATEGORIES_CSV, header=None)
-    edges_frame = pd.read_csv(EDGES_CSV, header=None)
+    categories = pd.read_csv(categories_csv_path(), header=None)
+    edges_frame = pd.read_csv(edges_csv_path(), header=None)
     category_map = dict(zip(categories.iloc[:, 0], categories.iloc[:, 1], strict=True))
     edges = [(row[0], row[1]) for _, row in edges_frame.iterrows() if row[2] != 0]
 

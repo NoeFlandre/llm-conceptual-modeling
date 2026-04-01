@@ -24,13 +24,18 @@ def handle_run(args: Namespace) -> int:
         if args.json:
             print(json.dumps(status, indent=2, sort_keys=True))
         else:
-            print(
-                "total={total_runs} finished={finished_count} failed={failed_count} "
-                "running={running_count} pending={pending_count} "
-                "complete={percent_complete}%".format(
-                    **status
-                )
-            )
+            print(f"total={status['total_runs']}")
+            print(f"finished={status['finished_count']}")
+            print(f"failed={status['failed_count']}")
+            print(f"running={status['running_count']}")
+            print(f"pending={status['pending_count']}")
+            print(f"complete={status['percent_complete']}%")
+            if status.get("worker_pid") is not None:
+                print(f"worker_pid={status['worker_pid']}")
+            if status.get("worker_status") is not None:
+                print(f"worker_status={status['worker_status']}")
+            if status.get("active_stage_age_seconds") is not None:
+                print(f"active_stage_age_seconds={status['active_stage_age_seconds']}")
         return 0
     if args.run_target == "smoke":
         config = load_hf_run_config(args.config)

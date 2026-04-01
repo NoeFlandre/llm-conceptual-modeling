@@ -1,7 +1,7 @@
 from llm_conceptual_modeling.common.graph_data import (
-    ALGO2_THESAURUS_JSON,
-    CATEGORIES_CSV,
-    EDGES_CSV,
+    algo2_thesaurus_json_path,
+    categories_csv_path,
+    edges_csv_path,
     load_algo2_thesaurus,
 )
 from llm_conceptual_modeling.common.types import GenerationManifest
@@ -27,7 +27,7 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
         "convergence_threshold_levels": [0.01, 0.02],
         "uses_domain_thesaurus": True,
         "uses_chain_of_verification": True,
-        "thesaurus_path": str(ALGO2_THESAURUS_JSON),
+        "thesaurus_path": str(algo2_thesaurus_json_path()),
         "synonym_entry_count": len(synonym_map),
         "antonym_entry_count": len(antonym_map),
     }
@@ -39,9 +39,9 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
         fixture_only=fixture_only,
         next_step="provide_fixture_dataset" if fixture_only else "implement_provider_adapter",
         input_data={
-            "categories_csv": str(CATEGORIES_CSV),
-            "edges_csv": str(EDGES_CSV),
-            "thesaurus_json": str(ALGO2_THESAURUS_JSON),
+            "categories_csv": str(categories_csv_path()),
+            "edges_csv": str(edges_csv_path()),
+            "thesaurus_json": str(algo2_thesaurus_json_path()),
         },
         condition_count=64,
         replications=5,

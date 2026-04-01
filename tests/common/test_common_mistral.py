@@ -151,6 +151,59 @@ def test_normalize_structured_response_rejects_null_edge_endpoints() -> None:
         )
 
 
+def test_normalize_structured_response_pairs_flat_edge_string_list() -> None:
+    actual = _normalize_structured_response(
+        ["Prevalence of walking trails", "Physical well-being", "Appetite", "Stress"],
+        schema_name="edge_list",
+    )
+
+    assert actual == {
+        "edges": [
+            {
+                "source": "Prevalence of walking trails",
+                "target": "Physical well-being",
+            },
+            {"source": "Appetite", "target": "Stress"},
+        ]
+    }
+
+
+def test_normalize_structured_response_pairs_flat_edge_scalar_list() -> None:
+    actual = _normalize_structured_response(
+        [1, 2, "Appetite", "Stress"],
+        schema_name="edge_list",
+    )
+
+    assert actual == {
+        "edges": [
+            {"source": "1", "target": "2"},
+            {"source": "Appetite", "target": "Stress"},
+        ]
+    }
+
+
+def test_normalize_structured_response_accepts_tuple_edge_payload() -> None:
+    actual = _normalize_structured_response(
+        (("alpha", "beta"), ("gamma", "delta")),
+        schema_name="edge_list",
+    )
+
+    assert actual == {
+        "edges": [
+            {"source": "alpha", "target": "beta"},
+            {"source": "gamma", "target": "delta"},
+        ]
+    }
+
+
+def test_normalize_structured_response_rejects_odd_flat_edge_string_list() -> None:
+    with pytest.raises(ValueError, match="even number of items"):
+        _normalize_structured_response(
+            ["Prevalence of walking trails", "Physical well-being", "Appetite"],
+            schema_name="edge_list",
+        )
+
+
 def test_mistral_chat_client_normalizes_list_edge_response() -> None:
     class FakeChat:
         def complete(self, **kwargs: object) -> SimpleNamespace:
@@ -378,8 +431,8 @@ class TestBuildNotationSection:
             use_adjacency_notation=True,
             use_array_representation=False,
         )
-        assert "adjacency matrix" in result
-        assert "tags" in result.lower()
+        assert "tag-array representation" in result
+        assert "<ARRAY><NODES>" in result
 
     def test_returns_adjacency_matrix_with_arrays_when_both_flags_set(self) -> None:
         result = _build_notation_section(
@@ -433,8 +486,7 @@ class TestFormatKnowledgeMapAsEdgeList:
             edges,
             use_array_representation=False,
         )
-        assert "<knowledge-map>" in result
-        assert "<edge source='alpha' target='beta' />" in result
+        assert result == "the following RDF representation: <S><H>alpha<T>beta<E>"
 
     def test_returns_python_list_when_use_array_representation(self) -> None:
         edges: list[Edge] = [("alpha", "beta")]
@@ -447,27 +499,28 @@ class TestFormatKnowledgeMapAsEdgeList:
 
 
 class TestFormatKnowledgeMapAsAdjacency:
-    def test_returns_xml_tags_by_default(self) -> None:
-        edges: list[Edge] = [("alpha", "beta")]
+    def test_returns_compact_tag_array_by_default(self) -> None:
+        edges: list[Edge] = [("alpha", "beta"), ("beta", "gamma")]
         result = _format_knowledge_map_as_adjacency(
             edges,
             use_array_representation=False,
         )
-        assert "<knowledge-map>" in result
-        assert "<nodes>" in result
-        assert "<adjacency-matrix>" in result
+        assert result.startswith("<ARRAY><NODES><NODE ID= 'alpha'><TARGETS>")
+        assert "<TARGET ID= 'beta'/>" in result
+        assert "<TARGET ID= 'gamma'/>" in result
+        assert "isConnected=" not in result
+        assert result.count("<TARGET ID=") == 2
 
-    def test_returns_dict_with_nodes_and_matrix_when_use_array_representation(self) -> None:
+    def test_returns_nodes_and_matrix_when_use_array_representation(self) -> None:
         edges: list[Edge] = [("a", "b")]
         result = _format_knowledge_map_as_adjacency(
             edges,
             use_array_representation=True,
         )
-        # Result is a string representation of a dict
-        assert "nodes" in result
-        assert "adjacency_matrix" in result
-        assert "a" in result
-        assert "b" in result
+        assert (
+            result
+            == "the list of nodes ['a', 'b'] and the associated adjacency matrix [[0, 1], [0, 0]]"
+        )
 
 
 class TestFormatKnowledgeMap:
@@ -480,7 +533,7 @@ class TestFormatKnowledgeMap:
             use_array_representation = False
 
         result = _format_knowledge_map(edges, prompt_config=AdjConfig())
-        assert "<adjacency-matrix>" in result
+        assert result.startswith("<ARRAY><NODES>")
 
     def test_routes_to_edge_list_when_not_using_adjacency_notation(self) -> None:
         edges: list[Edge] = [("x", "y")]
@@ -490,4 +543,4 @@ class TestFormatKnowledgeMap:
             use_array_representation = False
 
         result = _format_knowledge_map(edges, prompt_config=EdgeListConfig())
-        assert "<edge source='x' target='y' />" in result
+        assert result == "the following RDF representation: <S><H>x<T>y<E>"

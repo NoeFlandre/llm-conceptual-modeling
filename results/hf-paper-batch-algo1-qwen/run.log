@@ -1,0 +1,134 @@
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 24070.61it/s]
+The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6050.30it/s]
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 27458.62it/s]
+The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 8188.29it/s]
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12020). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/.venv/bin/lcm", line 10, in <module>
+    sys.exit(run())
+             ^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 275, in run
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 268, in main
+    return handle_run(args)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/commands/run.py", line 43, in handle_run
+    run_paper_batch(
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 149, in run_paper_batch
+    planned_specs = plan_paper_batch(
+                    ^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 112, in plan_paper_batch
+    return plan_paper_batch_specs(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_batch_planning.py", line 28, in plan_paper_batch_specs
+    return _plan_paper_batch_from_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_batch_planning.py", line 291, in _plan_paper_batch_from_config
+    runtime_profile = profile_provider(model)
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/common/hf_transformers.py", line 287, in profile_for_chat_model
+    _, _, profile = self._load_chat_bundle(model)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/common/hf_transformers.py", line 299, in _load_chat_bundle
+    _require_cuda(torch)
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/common/hf_transformers.py", line 571, in _require_cuda
+    raise RuntimeError(
+RuntimeError: hf-transformers local inference requires CUDA; CPU fallback is disabled.
+Current Triton version 3.1.0 is below the recommended 3.3.0 version. Errors may occur and these issues will not be fixed. Please consider upgrading Triton.
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/.venv/bin/lcm", line 10, in <module>
+    sys.exit(run())
+             ^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 275, in run
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 268, in main
+    return handle_run(args)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/commands/run.py", line 43, in handle_run
+    run_paper_batch(
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 149, in run_paper_batch
+    planned_specs = plan_paper_batch(
+                    ^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 112, in plan_paper_batch
+    return plan_paper_batch_specs(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_batch_planning.py", line 28, in plan_paper_batch_specs
+    return _plan_paper_batch_from_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_batch_planning.py", line 291, in _plan_paper_batch_from_config
+    runtime_profile = profile_provider(model)
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/common/hf_transformers.py", line 287, in profile_for_chat_model
+    _, _, profile = self._load_chat_bundle(model)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/common/hf_transformers.py", line 309, in _load_chat_bundle
+    model_object = _load_chat_model(
+                   ^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/common/hf_transformers.py", line 377, in _load_chat_model
+    return transformers.AutoModelForCausalLM.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 378, in from_pretrained
+    model_class = _get_model_class(config, cls._model_mapping)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 180, in _get_model_class
+    supported_models = model_mapping[type(config)]
+                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 581, in __getitem__
+    return self._load_attr_from_module(model_type, model_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 595, in _load_attr_from_module
+    return getattribute_from_module(self._modules[module_name], attr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 507, in getattribute_from_module
+    if hasattr(module, attr):
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 60, in <module>
+    from fla.modules import FusedRMSNormGated
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/__init__.py", line 3, in <module>
+    from fla.layers import (
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/layers/__init__.py", line 3, in <module>
+    from .abc import ABCAttention
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/layers/abc.py", line 12, in <module>
+    from fla.layers.utils import get_layer_cache, update_layer_cache
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/layers/utils.py", line 9, in <module>
+    from fla.ops.utils.index import prepare_cu_seqlens_from_mask, prepare_lens_from_mask
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/ops/__init__.py", line 8, in <module>
+    from .gated_delta_rule import chunk_gated_delta_rule, chunk_gdn, fused_recurrent_gated_delta_rule, fused_recurrent_gdn
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/ops/gated_delta_rule/__init__.py", line 1, in <module>
+    from .chunk import chunk_gated_delta_rule, chunk_gdn
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/ops/gated_delta_rule/chunk.py", line 11, in <module>
+    from fla.ops.cp.chunk_delta_h import (
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/fla/ops/cp/chunk_delta_h.py", line 267, in <module>
+    @triton.autotune(
+     ^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/triton/runtime/autotuner.py", line 321, in decorator
+    return Autotuner(fn, fn.arg_names, configs, key, reset_to_zero, restore_value, pre_hook=pre_hook,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/.venv/lib/python3.12/site-packages/triton/runtime/autotuner.py", line 41, in __init__
+    self.key_idx = [arg_names.index(k) for k in key]
+                    ^^^^^^^^^^^^^^^^^^
+ValueError: 'BT' is not in list

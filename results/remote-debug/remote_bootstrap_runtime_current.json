@@ -1,0 +1,10 @@
+{
+  "python_version": "3.12.3",
+  "cuda_device": "NVIDIA GeForce RTX 3090",
+  "bf16": true,
+  "torch_version": "2.5.1+cu121",
+  "cuda_version": "12.1",
+  "transformers_version": "5.4.0",
+  "triton_version": "3.1.0",
+  "timestamp": "2026-03-31T20:42:38.202312+00:00"
+}

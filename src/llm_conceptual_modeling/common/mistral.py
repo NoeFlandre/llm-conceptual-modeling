@@ -348,7 +348,9 @@ def _build_notation_section(
             )
 
         return (
-            "The knowledge map is encoded using tags for nodes and an associated adjacency matrix."
+            "The knowledge map is encoded using a tag-array representation. The map is wrapped "
+            "in <ARRAY><NODES>...</NODES></ARRAY>. Each <NODE> stores its ID and only the "
+            "outgoing targets that are directly connected to it."
         )
 
     if use_array_representation:
@@ -410,18 +412,20 @@ def _format_knowledge_map_as_adjacency(
             f"{adjacency_matrix}"
         )
 
+    edge_targets_by_source: dict[str, list[str]] = {node: [] for node in ordered_nodes}
+    for source_node, target_node in edges:
+        edge_targets_by_source[source_node].append(target_node)
+
     node_sections: list[str] = []
     for source_node in ordered_nodes:
-        target_sections: list[str] = []
-        for target_node in ordered_nodes:
-            is_connected = (source_node, target_node) in edges
-            target_sections.append(
-                f"<TARGET ID= '{target_node}' isConnected={str(is_connected)}/>"
-            )
-        joined_targets = "".join(target_sections)
-        node_sections.append(f"<NODE ID= '{source_node}'>{joined_targets}</NODE>")
+        target_sections = "".join(
+            f"<TARGET ID= '{target_node}'/>" for target_node in edge_targets_by_source[source_node]
+        )
+        node_sections.append(
+            f"<NODE ID= '{source_node}'><TARGETS>{target_sections}</TARGETS></NODE>"
+        )
     joined_nodes = "".join(node_sections)
-    return f"<NODES>{joined_nodes}</NODES>"
+    return f"<ARRAY><NODES>{joined_nodes}</NODES></ARRAY>"
 
 
 def _format_knowledge_map_as_edge_list(

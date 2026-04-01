@@ -23,7 +23,7 @@ def apply_cove_verification(
     for candidate_edge, verification_vote in zip_longest(
         candidate_edges,
         verification_votes,
-        fillvalue="N",
+        fillvalue=None,
     ):
         if candidate_edge is None:
             break

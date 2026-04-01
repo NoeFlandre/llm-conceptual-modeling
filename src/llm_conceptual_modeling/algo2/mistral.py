@@ -100,10 +100,9 @@ def _build_notation_section(prompt_config: Method2PromptConfig) -> str:
 
     if prompt_config.use_adjacency_notation:
         return (
-            "The knowledge map is encoded using a hierarchical markup language representation. "
-            "The list of nodes is defined between the opening tag <NODES> and the matching "
-            "closing tag </NODES>. For each node, we list all other nodes by ID and indicate "
-            "whether there is a connection ('True') or not ('False')."
+            "The knowledge map is encoded using a tag-array representation. The map is wrapped "
+            "in <ARRAY><NODES>...</NODES></ARRAY>. Each <NODE> stores its ID and only the "
+            "outgoing targets that are directly connected to it."
         )
 
     if prompt_config.use_array_representation:
@@ -134,26 +133,19 @@ def _build_example_section(prompt_config: Method2PromptConfig) -> str:
     if prompt_config.use_adjacency_notation:
         return (
             "Here is an example of a desired output for your task. In knowledge map 1, we have "
-            "the following hierarchical markup language representation: <NODES><NODE ID= "
-            "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
-            "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
-            "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
-            "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
-            "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
-            "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
-            "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
-            "the following hierarchical markup language representation: <NODES><NODE ID= 'work "
-            "motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
-            "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
-            "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
-            "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
-            "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
-            "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
-            "'financial growth' isConnected=False/></NODE></NODES>. In this example, you could "
-            "recommend these 5 new nodes: 'quality of managers', 'employee satisfaction', "
-            "'customer satisfaction', 'market share', 'performance incentives'. Therefore, this "
-            "is the expected output: ['quality of managers', 'employee satisfaction', "
-            "'customer satisfaction', 'market share', 'performance incentives']."
+            "the following tag-array representation: <ARRAY><NODES><NODE ID= 'capacity to hire'>"
+            "<TARGETS><TARGET ID= 'bad employees'/></TARGETS></NODE><NODE ID= 'bad employees'>"
+            "<TARGETS><TARGET ID= 'good reputation'/></TARGETS></NODE><NODE ID= 'good reputation'>"
+            "<TARGETS><TARGET ID= 'capacity to hire'/></TARGETS></NODE></NODES></ARRAY>. In "
+            "knowledge map 2, we have the following tag-array representation: <ARRAY><NODES>"
+            "<NODE ID= 'work motivation'><TARGETS><TARGET ID= 'productivity'/></TARGETS></NODE>"
+            "<NODE ID= 'productivity'><TARGETS><TARGET ID= 'financial growth'/></TARGETS></NODE>"
+            "<NODE ID= 'financial growth'><TARGETS></TARGETS></NODE></NODES></ARRAY>. In this "
+            "example, you could recommend these 5 new nodes: 'quality of managers', "
+            "'employee satisfaction', 'customer satisfaction', 'market share', "
+            "'performance incentives'. Therefore, this is the expected output: "
+            "['quality of managers', 'employee satisfaction', 'customer satisfaction', "
+            "'market share', 'performance incentives']."
         )
 
     if prompt_config.use_array_representation:
@@ -197,24 +189,17 @@ def _build_counterexample_section(prompt_config: Method2PromptConfig) -> str:
     if prompt_config.use_adjacency_notation:
         return (
             "Here is an example of a bad output that we do not want to see. In knowledge map 1, "
-            "we have the following hierarchical markup language representation: <NODES><NODE ID= "
-            "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
-            "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
-            "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
-            "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
-            "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
-            "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
-            "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
-            "the following hierarchical markup language representation: <NODES><NODE ID= 'work "
-            "motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
-            "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
-            "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
-            "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
-            "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
-            "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
-            "'financial growth' isConnected=False/></NODE></NODES>. A bad output would be: "
-            "['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes "
-            "would be incorrect since they have no relationship with the nodes in the input."
+            "we have the following tag-array representation: <ARRAY><NODES><NODE ID= "
+            "'capacity to hire'><TARGETS><TARGET ID= 'bad employees'/></TARGETS></NODE><NODE "
+            "ID= 'bad employees'><TARGETS><TARGET ID= 'good reputation'/></TARGETS></NODE><NODE "
+            "ID= 'good reputation'><TARGETS><TARGET ID= 'capacity to hire'/></TARGETS></NODE>"
+            "</NODES></ARRAY>. In knowledge map 2, we have the following tag-array "
+            "representation: <ARRAY><NODES><NODE ID= 'work motivation'><TARGETS><TARGET ID= "
+            "'productivity'/></TARGETS></NODE><NODE ID= 'productivity'><TARGETS><TARGET ID= "
+            "'financial growth'/></TARGETS></NODE><NODE ID= 'financial growth'><TARGETS>"
+            "</TARGETS></NODE></NODES></ARRAY>. A bad output would be: ['moon', 'dog', "
+            "'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be "
+            "incorrect since they have no relationship with the nodes in the input."
         )
 
     if prompt_config.use_array_representation:

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import time
+from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -16,6 +19,7 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     running_count = 0
     pending_count = 0
     failures: list[dict[str, object]] = []
+    running_run_dirs: list[Path] = []
 
     for run_dir in run_dirs:
         state = _read_json(run_dir / "state.json")
@@ -36,6 +40,7 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
             continue
         if status == "running":
             running_count += 1
+            running_run_dirs.append(run_dir)
             continue
         pending_count += 1
 
@@ -47,6 +52,10 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     status_file = _read_json(output_root_path / "batch_status.json")
     pending_count = max(total_runs - finished_count - failed_count - running_count, pending_count)
     percent_complete = round((finished_count / total_runs) * 100.0, 2) if total_runs else 0.0
+    active_run = _collect_active_run_details(running_run_dirs[0]) if running_run_dirs else {}
+    failure_type_counts = dict(
+        Counter(str(failure.get("type")) for failure in failures if failure.get("type"))
+    )
 
     return {
         "total_runs": total_runs,
@@ -61,6 +70,13 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
         "last_completed_run": status_file.get("last_completed_run"),
         "started_at": status_file.get("started_at"),
         "updated_at": status_file.get("updated_at"),
+        "active_stage": active_run.get("active_stage"),
+        "active_stage_age_seconds": active_run.get("active_stage_age_seconds"),
+        "worker_pid": active_run.get("worker_pid"),
+        "worker_status": active_run.get("worker_status"),
+        "worker_loaded_model": active_run.get("worker_loaded_model"),
+        "gpu_processes": _query_gpu_processes(),
+        "failure_types": failure_type_counts,
     }
 
 
@@ -97,6 +113,59 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _collect_active_run_details(run_dir: Path) -> dict[str, object]:
+    active_stage = _read_json(run_dir / "active_stage.json")
+    worker_state = _read_json(run_dir / "worker_state.json")
+    stage_age_seconds: float | None = None
+    active_stage_path = run_dir / "active_stage.json"
+    if active_stage_path.exists():
+        stage_age_seconds = round(time.time() - active_stage_path.stat().st_mtime, 3)
+    return {
+        "active_stage": active_stage or None,
+        "active_stage_age_seconds": stage_age_seconds,
+        "worker_pid": worker_state.get("worker_pid") or worker_state.get("pid"),
+        "worker_status": worker_state.get("status"),
+        "worker_loaded_model": worker_state.get("model_loaded", False),
+    }
+
+
+def _query_gpu_processes() -> list[dict[str, object]]:
+    try:
+        completed = subprocess.run(
+            [
+                "nvidia-smi",
+                "--query-compute-apps=pid,used_gpu_memory",
+                "--format=csv,noheader,nounits",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return []
+    processes: list[dict[str, object]] = []
+    for line in completed.stdout.splitlines():
+        parts = [part.strip() for part in line.split(",")]
+        if len(parts) != 2 or not parts[0]:
+            continue
+        try:
+            pid = int(parts[0])
+        except ValueError:
+            continue
+        used_gpu_memory_mib: int | None
+        try:
+            used_gpu_memory_mib = int(parts[1])
+        except ValueError:
+            used_gpu_memory_mib = None
+        processes.append(
+            {
+                "pid": pid,
+                "used_gpu_memory_mib": used_gpu_memory_mib,
+            }
+        )
+    return processes
 
 
 def status_timestamp_now() -> str:

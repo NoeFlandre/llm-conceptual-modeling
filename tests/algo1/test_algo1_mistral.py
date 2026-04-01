@@ -50,7 +50,7 @@ def test_build_direct_edge_prompt_can_include_all_paper_factors() -> None:
     assert "adjacency matrix" in actual
     assert "Here is an example of a desired output for your task." in actual
     assert "Here is an example of a bad output that we do not want to see." in actual
-    assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in actual
+    assert "Knowledge map 1: the list of nodes ['alpha', 'beta', 'gamma']" in actual
     assert "[[0, 1, 0], [0, 0, 1], [0, 0, 0]]" in actual
     assert "expected output: [('quality of managers', 'work motivation')" in actual
 
@@ -75,9 +75,32 @@ def test_build_direct_edge_prompt_can_use_edge_list_without_optional_sections() 
     assert "Here is an example of a bad output that we do not want to see." not in actual
     assert "adjacency matrix" not in actual
     expected_map_text = (
-        "Knowledge map 1: <knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
+        "Knowledge map 1: the following RDF representation: <S><H>alpha<T>beta<E>"
     )
     assert expected_map_text in actual
+
+
+def test_build_direct_edge_prompt_uses_compact_tag_array_when_requested() -> None:
+    prompt_config = Method1PromptConfig(
+        use_adjacency_notation=True,
+        use_array_representation=False,
+        include_explanation=True,
+        include_example=False,
+        include_counterexample=False,
+    )
+
+    actual = build_direct_edge_prompt(
+        subgraph1=[("alpha", "beta"), ("beta", "gamma")],
+        subgraph2=[("delta", "epsilon")],
+        prompt_config=prompt_config,
+    )
+
+    assert "tag-array representation" in actual
+    assert (
+        "<ARRAY><NODES><NODE ID= 'alpha'><TARGETS><TARGET ID= 'beta'/></TARGETS></NODE>"
+        in actual
+    )
+    assert "isConnected=" not in actual
 
 
 def test_mistral_chat_client_calls_sdk_complete_with_expected_payload() -> None:

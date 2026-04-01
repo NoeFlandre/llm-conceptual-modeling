@@ -1,0 +1,20 @@
+{
+  "error_path": "/workspace/results/hf-smoke-olmo-sg1-sg2-00001-live/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00001/rep_00/error.json",
+  "failure_message": null,
+  "failure_type": null,
+  "run_dir": "/workspace/results/hf-smoke-olmo-sg1-sg2-00001-live/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00001/rep_00",
+  "runtime_snapshot_path": "/workspace/llm-conceptual-modeling/.bootstrap-runtime.json",
+  "spec": {
+    "algorithm": "algo1",
+    "condition_bits": "00001",
+    "decoding_algorithm": "greedy",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg1_sg2",
+    "replication": 0
+  },
+  "status": "success",
+  "summary_path": "/workspace/results/hf-smoke-olmo-sg1-sg2-00001-live/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00001/rep_00/summary.json",
+  "updated_at": "2026-03-31T20:46:10.013508+00:00",
+  "worker_loaded_model": true
+}

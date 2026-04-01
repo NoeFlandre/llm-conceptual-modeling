@@ -30,12 +30,22 @@ scripts/vast/bootstrap_gpu_host.sh /path/to/llm-conceptual-modeling
 The script:
 
 - installs `uv` if needed
+- short-circuits entirely if the existing `.venv` already matches the validated runtime
 - runs `uv sync`
 - installs `wheel`
 - pins `torch` to the CUDA 12.1 wheel line used by the validated remote snapshot
-- pins `triton`
+- pins `triton` without re-resolving `torch`
+- disables the Xet/HF transfer path that caused remote download stalls
 - fails immediately if CUDA is unavailable
-- prints the effective `torch` / CUDA / `transformers` / `triton` snapshot
+- writes and prints the effective `torch` / CUDA / `transformers` / `triton` snapshot to
+  `.bootstrap-runtime.json`
+
+For repeated rentals, the best practice is to freeze this exact validated runtime into a GPU-ready
+container image or Vast template. The bootstrap script remains the source of truth for the pinned
+stack, but a prebuilt image avoids spending paid time re-downloading and re-resolving dependencies.
+The checked-in starting point is:
+
+- `docker/vast-gpu.Dockerfile`
 
 ## Preflight Review
 
@@ -71,6 +81,21 @@ uv run lcm run smoke \
 
 If that smoke run does not complete cleanly, stop and fix the environment before launching the full
 batch. Do not spend more GPU time debugging inside `paper-batch`.
+
+Each smoke run now writes one definitive verdict file:
+
+- `smoke_verdict.json`
+
+This file records:
+
+- `status`
+- `failure_type`
+- `failure_message`
+- `worker_loaded_model`
+- `runtime_snapshot_path`
+- the exact spec identity for the smoke condition
+
+If `smoke_verdict.json` is not `success`, stop immediately and return to local fixes.
 
 The YAML controls the actual run settings, including models, decoding parameters, temperature,
 seed, per-model thinking-mode declarations, prompt fragments, DOE factor fragments, and the output
@@ -139,20 +164,35 @@ The run layout is resumable. Each condition writes:
 
 - `manifest.json`
 - `state.json`
+- `worker_state.json`
 - `runtime.json`
 - `raw_response.json`
 - `raw_row.json`
 - `summary.json`
 - `error.json` on failure
 
+For ALGO1 and ALGO2, reusable stage caches are written under `stages/` so retries can resume from
+completed earlier stages instead of regenerating the full call chain.
+
 Completed runs are not recomputed when `--resume` is used.
 
 For paid runs, the recommended order is:
 
 1. `bootstrap_gpu_host.sh`
+2. `lcm doctor --json --results-root ... --smoke-root ...`
 2. `lcm run validate-config`
 3. `lcm run smoke` for the exact target model / pair / condition
 4. `lcm run paper-batch --resume` only after the smoke run succeeds
+
+Stop conditions:
+
+- bootstrap does not produce `.bootstrap-runtime.json`
+- `doctor` shows a missing smoke verdict or a non-success smoke verdict
+- smoke does not write `summary.json`
+- smoke reports `worker_loaded_model=false` on failure, which means the environment is still not
+  ready
+- `paper-batch` shows more than one GPU-heavy process for the same run, which indicates parent and
+  worker duplication
 
 ## Live Monitoring
 
@@ -171,6 +211,9 @@ This file records:
 - `current_run`
 - `last_completed_run`
 - failure summaries
+- active stage details
+- worker lifecycle details
+- visible GPU compute processes
 
 You can inspect it directly:
 
@@ -185,6 +228,15 @@ the mutable status file:
 uv run lcm run status \
   --results-root /workspace/results/hf-paper-batch \
   --json
+```
+
+For a quick remote preflight before the paid run, use:
+
+```bash
+uv run lcm doctor \
+  --json \
+  --results-root /workspace/results/hf-paper-batch \
+  --smoke-root /workspace/results/hf-smoke-qwen-sg2-sg3
 ```
 
 ## Outputs

@@ -52,7 +52,7 @@ def test_build_label_expansion_prompt_can_include_all_paper_factors() -> None:
     assert "adjacency matrix" in actual
     assert "Here is an example of a desired output for your task." in actual
     assert "Here is an example of a bad output that we do not want to see." in actual
-    assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in actual
+    assert "Knowledge map 1: the list of nodes ['alpha', 'beta', 'gamma']" in actual
     assert "[[0, 1, 0], [0, 0, 1], [0, 0, 0]]" in actual
 
 
@@ -78,7 +78,7 @@ def test_build_label_expansion_prompt_can_use_tag_edge_list_without_optional_sec
     assert "Here is an example of a bad output that we do not want to see." not in actual
     assert "adjacency matrix" not in actual
     expected_map_text = (
-        "Knowledge map 1: <knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
+        "Knowledge map 1: the following RDF representation: <S><H>alpha<T>beta<E>"
     )
     assert expected_map_text in actual
 
@@ -113,7 +113,7 @@ def test_build_edge_suggestion_prompt_can_include_all_paper_factors() -> None:
     assert "adjacency matrix" in actual
     assert "Here is an example of a desired output for your task." in actual
     assert "Here is an example of a bad output that we do not want to see." in actual
-    assert "Knowledge map 1: {'nodes': ['alpha', 'beta', 'gamma']" in actual
+    assert "Knowledge map 1: the list of nodes ['alpha', 'beta', 'gamma']" in actual
     assert "recommend more links between the two maps" in actual
 
 
@@ -138,7 +138,7 @@ def test_build_edge_suggestion_prompt_can_use_tag_edge_list_without_optional_sec
     assert "Here is an example of a desired output for your task." not in actual
     assert "Here is an example of a bad output that we do not want to see." not in actual
     expected_map_text = (
-        "Knowledge map 1: <knowledge-map><edge source='alpha' target='beta' /></knowledge-map>"
+        "Knowledge map 1: the following RDF representation: <S><H>alpha<T>beta<E>"
     )
     assert expected_map_text in actual
 
@@ -155,57 +155,14 @@ def test_build_prompt_prefix_reuses_shared_sections_for_both_prompt_builders() -
 
     actual = _build_prompt_prefix(prompt_config)
 
-    assert actual == [
-        "You are a helpful assistant who understands Knowledge Maps.",
-        "A knowledge map is a network consisting of nodes and edges. "
-        "Nodes must have a clear meaning, such that we can interpret having "
-        "'more' or 'less' of a node. Edges represent the existence of a direct "
-        "relation between two nodes.",
-        "The knowledge map is encoded using a hierarchical markup language representation. "
-        "The list of nodes is defined between the opening tag <NODES> and the matching "
-        "closing tag </NODES>. For each node, we list all other nodes by ID and indicate "
-        "whether there is a connection ('True') or not ('False').",
-        "Here is an example of a desired output for your task. In knowledge map 1, we have "
-        "the following hierarchical markup language representation: <NODES><NODE ID= "
-        "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
-        "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
-        "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
-        "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
-        "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
-        "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
-        "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
-        "the following hierarchical markup language representation: <NODES><NODE ID= "
-        "'work motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
-        "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
-        "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
-        "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
-        "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
-        "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
-        "'financial growth' isConnected=False/></NODE></NODES>. In this example, you could "
-        "recommend these 5 new nodes: 'quality of managers', 'employee satisfaction', "
-        "'customer satisfaction', 'market share', 'performance incentives'. Therefore, this "
-        "is the expected output: ['quality of managers', 'employee satisfaction', "
-        "'customer satisfaction', 'market share', 'performance incentives'].",
-        "Here is an example of a bad output that we do not want to see. In knowledge map 1, "
-        "we have the following hierarchical markup language representation: <NODES><NODE ID= "
-        "'capacity to hire'><TARGET ID= 'capacity to hire' isConnected=False/><TARGET ID= "
-        "'bad employees' isConnected=True/><TARGET ID= 'good reputation' isConnected=False/"
-        "></NODE><NODE ID= 'bad employees'><TARGET ID= 'capacity to hire' isConnected=False/"
-        "><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= 'good reputation' "
-        "isConnected=True/></NODE><NODE ID= 'good reputation'><TARGET ID= 'capacity to hire' "
-        "isConnected=True/><TARGET ID= 'bad employees' isConnected=False/><TARGET ID= "
-        "'good reputation' isConnected=False/></NODE></NODES>. In knowledge map 2, we have "
-        "the following hierarchical markup language representation: <NODES><NODE ID= "
-        "'work motivation'><TARGET ID= 'work motivation' isConnected=False/><TARGET ID= "
-        "'productivity' isConnected=True/><TARGET ID= 'financial growth' isConnected=False/"
-        "></NODE><NODE ID= 'productivity'><TARGET ID= 'work motivation' isConnected=False/"
-        "><TARGET ID= 'productivity' isConnected=False/><TARGET ID= 'financial growth' "
-        "isConnected=True/></NODE><NODE ID= 'financial growth'><TARGET ID= 'work motivation' "
-        "isConnected=False/><TARGET ID= 'productivity' isConnected=False/><TARGET ID= "
-        "'financial growth' isConnected=False/></NODE></NODES>. A bad output would be: "
-        "['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes "
-        "would be incorrect since they have no relationship with the nodes in the input.",
-    ]
+    assert actual[0] == "You are a helpful assistant who understands Knowledge Maps."
+    assert "A knowledge map is a network consisting of nodes and edges." in actual[1]
+    assert "tag-array representation" in actual[2]
+    assert "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>" in actual[3]
+    assert "isConnected=" not in actual[3]
+    assert "<TARGET ID= 'bad employees'/>" in actual[3]
+    assert "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>" in actual[4]
+    assert "isConnected=" not in actual[4]
 
 
 def test_extract_label_list_from_chat_content_supports_json_schema_payload() -> None:

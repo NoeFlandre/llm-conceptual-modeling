@@ -58,8 +58,26 @@ class Method1PromptConfig:
 # ---------------------------------------------------------------------------
 
 
-def _build_example_section() -> str:
+def _build_example_section(prompt_config: Method1PromptConfig) -> str:
     """algo1-specific example: edge linking between two knowledge maps."""
+    if prompt_config.use_adjacency_notation and not prompt_config.use_array_representation:
+        return (
+            "Here is an example of a desired output for your task. "
+            "In knowledge map 1, we have the following tag-array representation: "
+            "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS><TARGET ID= 'bad employees'/>"
+            "</TARGETS></NODE><NODE ID= 'bad employees'><TARGETS><TARGET ID= 'good reputation'/>"
+            "</TARGETS></NODE><NODE ID= 'good reputation'><TARGETS><TARGET ID= 'capacity to hire'/>"
+            "</TARGETS></NODE></NODES></ARRAY>. In knowledge map 2, we have the following "
+            "tag-array representation: <ARRAY><NODES><NODE ID= 'work motivation'><TARGETS>"
+            "<TARGET ID= 'productivity'/></TARGETS></NODE><NODE ID= 'productivity'><TARGETS>"
+            "<TARGET ID= 'financial growth'/></TARGETS></NODE><NODE ID= 'financial growth'>"
+            "<TARGETS></TARGETS></NODE></NODES></ARRAY>. In this example, you could recommend "
+            "3 new links: 'quality of managers' with 'work motivation', 'productivity' with "
+            "'good reputation' and 'bad employees' with 'quality of managers'. These links "
+            "implicitly create 1 new node: 'quality of managers'. Therefore, this is the "
+            "expected output: [('quality of managers', 'work motivation'), ('productivity', "
+            "'good reputation'), ('bad employees', 'quality of managers')]."
+        )
     return (
         "Here is an example of a desired output for your task. "
         "In knowledge map 1, we have the list of nodes ['capacity to hire', "
@@ -75,8 +93,25 @@ def _build_example_section() -> str:
     )
 
 
-def _build_counterexample_section() -> str:
+def _build_counterexample_section(prompt_config: Method1PromptConfig) -> str:
     """algo1-specific counterexample: edge linking between two knowledge maps."""
+    if prompt_config.use_adjacency_notation and not prompt_config.use_array_representation:
+        return (
+            "Here is an example of a bad output that we do not want to see. "
+            "In knowledge map 1, we have the following tag-array representation: "
+            "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS><TARGET ID= 'bad employees'/>"
+            "</TARGETS></NODE><NODE ID= 'bad employees'><TARGETS><TARGET ID= 'good reputation'/>"
+            "</TARGETS></NODE><NODE ID= 'good reputation'><TARGETS><TARGET ID= 'capacity to hire'/>"
+            "</TARGETS></NODE></NODES></ARRAY>. In knowledge map 2, we have the following "
+            "tag-array representation: <ARRAY><NODES><NODE ID= 'work motivation'><TARGETS>"
+            "<TARGET ID= 'productivity'/></TARGETS></NODE><NODE ID= 'productivity'><TARGETS>"
+            "<TARGET ID= 'financial growth'/></TARGETS></NODE><NODE ID= 'financial growth'>"
+            "<TARGETS></TARGETS></NODE></NODES></ARRAY>. A bad output would be: [('moon', "
+            "'bad employees')]. The error is the recommended link between 'moon' and "
+            "'bad employees'. Adding the node 'moon' would be incorrect since it has no "
+            "relationship with the other nodes. The proposed link does not represent a true "
+            "causal relationship."
+        )
     return (
         "Here is an example of a bad output that we do not want to see. "
         "A bad output would be: [('moon', 'bad employees')]. "
@@ -123,9 +158,9 @@ def build_direct_edge_prompt(
     )
 
     if resolved.include_example:
-        sections.append(_build_example_section())
+        sections.append(_build_example_section(resolved))
     if resolved.include_counterexample:
-        sections.append(_build_counterexample_section())
+        sections.append(_build_counterexample_section(resolved))
 
     fmt1 = _format_knowledge_map(subgraph1, prompt_config=resolved)
     fmt2 = _format_knowledge_map(subgraph2, prompt_config=resolved)
@@ -177,7 +212,9 @@ def _build_representation_explanation(
 
     if use_adjacency_notation and not use_array_representation:
         return intro + (
-            "The knowledge map is encoded using tags for nodes and an associated adjacency matrix."
+            "The knowledge map is encoded using a tag-array representation. The map is wrapped "
+            "in <ARRAY><NODES>...</NODES></ARRAY>. Each <NODE> stores its ID and only the "
+            "outgoing targets that are directly connected to it."
         )
 
     if not use_adjacency_notation and use_array_representation:

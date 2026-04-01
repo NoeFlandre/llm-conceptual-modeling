@@ -9,3 +9,8 @@ __pycache__/
 runs/
 paper/
 AGENTS.md
+data/results/
+data/analysis_artifacts/
+data/inputs/
+data/results/
+data/analysis_artifacts/

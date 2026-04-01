@@ -87,6 +87,8 @@ def build_parser() -> argparse.ArgumentParser:
     factorial_algo3_parser.add_argument("--output", required=True)
 
     doctor_parser.add_argument("--json", action="store_true")
+    doctor_parser.add_argument("--results-root")
+    doctor_parser.add_argument("--smoke-root")
 
     verify_all_parser = verify_subparsers.add_parser("all")
     verify_all_parser.add_argument("--json", action="store_true")

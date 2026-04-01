@@ -1,0 +1,7 @@
+{
+  "torch_version": "2.5.1+cu121",
+  "cuda_version": "12.1",
+  "cuda_available": true,
+  "transformers_version": "5.4.0",
+  "triton_version": "3.1.0"
+}

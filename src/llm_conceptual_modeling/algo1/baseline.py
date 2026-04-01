@@ -3,8 +3,7 @@ from itertools import product
 import pandas as pd
 
 from llm_conceptual_modeling.common.baseline import (
-    propose_direct_cross_subgraph_edges,
-    propose_random_cross_subgraph_edges,
+    propose_strategy_cross_subgraph_edges,
 )
 from llm_conceptual_modeling.common.graph_data import load_default_graph
 from llm_conceptual_modeling.common.types import PathLike
@@ -26,10 +25,12 @@ def write_baseline_results_file(
         raise ValueError(f"Unsupported pair: {pair_name}")
 
     subgraph1, subgraph2 = pair_lookup[pair_name]
-    if strategy == "direct-cross-graph":
-        baseline_result = propose_direct_cross_subgraph_edges(graph, subgraph1, subgraph2)
-    else:
-        baseline_result = propose_random_cross_subgraph_edges(subgraph1, subgraph2)
+    baseline_result = propose_strategy_cross_subgraph_edges(
+        graph,
+        subgraph1,
+        subgraph2,
+        strategy=strategy,
+    )
 
     rows: list[dict[str, object]] = []
     for repetition in range(5):

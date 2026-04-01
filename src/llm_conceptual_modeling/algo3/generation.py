@@ -1,4 +1,4 @@
-from llm_conceptual_modeling.common.graph_data import CATEGORIES_CSV, EDGES_CSV
+from llm_conceptual_modeling.common.graph_data import categories_csv_path, edges_csv_path
 from llm_conceptual_modeling.common.types import GenerationManifest
 
 
@@ -13,8 +13,8 @@ def build_generation_manifest(*, fixture_only: bool) -> dict[str, object]:
         if fixture_only
         else "provide_model_pair_and_output_root",
         input_data={
-            "categories_csv": str(CATEGORIES_CSV),
-            "edges_csv": str(EDGES_CSV),
+            "categories_csv": str(categories_csv_path()),
+            "edges_csv": str(edges_csv_path()),
         },
         condition_count=16,
         replications=5,

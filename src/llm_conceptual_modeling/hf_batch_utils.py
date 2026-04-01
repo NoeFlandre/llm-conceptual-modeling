@@ -191,6 +191,7 @@ class RecordingChatClient:
                 "prompt": prompt,
                 "schema_name": schema_name,
                 "response": response,
+                "metrics": getattr(self._inner, "last_call_metrics", None),
             }
         )
         if self._persist_path is not None:
@@ -225,6 +226,9 @@ class RecordingChatClient:
         }
         if response is not None:
             payload["response"] = response
+            metrics = getattr(self._inner, "last_call_metrics", None)
+            if metrics is not None:
+                payload["metrics"] = metrics
         write_json(self._active_stage_path, payload)
 
 

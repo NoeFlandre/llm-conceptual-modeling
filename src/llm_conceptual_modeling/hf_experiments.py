@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any, Callable, cast
@@ -43,6 +44,18 @@ from llm_conceptual_modeling.hf_batch.monitoring import (
     write_status_snapshot as _write_status_snapshot,
 )
 from llm_conceptual_modeling.hf_batch.outputs import write_aggregated_outputs
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    clear_retry_artifacts as _clear_retry_artifacts,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    normalize_stale_running_run as _normalize_stale_running_run,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    read_json as _read_artifact_json,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    write_smoke_verdict as _write_smoke_verdict,
+)
 from llm_conceptual_modeling.hf_batch_planning import plan_paper_batch_specs
 from llm_conceptual_modeling.hf_batch_prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
@@ -147,10 +160,10 @@ def run_paper_batch(
     output_root_path.mkdir(parents=True, exist_ok=True)
 
     use_monitored_hf_subprocess = runtime_factory is None and not dry_run
-    hf_runtime = None if runtime_factory is not None else build_runtime_factory(
-        hf_token=_resolve_hf_token()
-    )
-    if dry_run:
+    hf_runtime = None
+    if runtime_factory is None and not use_monitored_hf_subprocess:
+        hf_runtime = build_runtime_factory(hf_token=_resolve_hf_token())
+    if dry_run or use_monitored_hf_subprocess:
         profile_provider = None
     else:
         profile_provider = hf_runtime.profile_for_chat_model if hf_runtime else None
@@ -202,8 +215,10 @@ def run_paper_batch(
         summary_path = run_dir / "summary.json"
         raw_row_path = run_dir / "raw_row.json"
 
-        if resume and _is_finished_run_directory(run_dir):
-            cached = json.loads(summary_path.read_text(encoding="utf-8"))
+        if resume:
+            _normalize_stale_running_run(run_dir)
+        cached = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
+        if resume and cached is not None:
             summary_rows.append(cached)
             last_completed_run = _current_run_payload(
                 algorithm=spec.algorithm,
@@ -224,6 +239,7 @@ def run_paper_batch(
             _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
             continue
 
+        _clear_retry_artifacts(run_dir)
         _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
         _write_json(run_dir / "state.json", {"status": "running"})
         current_run = _current_run_payload(
@@ -251,6 +267,11 @@ def run_paper_batch(
                     dry_run=dry_run,
                     run_dir=run_dir,
                 )
+            if not dry_run:
+                _validate_structural_runtime_result(
+                    algorithm=spec.algorithm,
+                    raw_row=runtime_result["raw_row"],
+                )
         except Exception as error:
             _write_json(
                 run_dir / "error.json",
@@ -277,7 +298,7 @@ def run_paper_batch(
             status_snapshot["failure_count"] = len(failures)
             status_snapshot["updated_at"] = _status_timestamp_now()
             _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
-            raise
+            continue
 
         raw_row = runtime_result["raw_row"]
         _write_json(raw_row_path, raw_row)
@@ -320,6 +341,8 @@ def run_paper_batch(
     summary_frame = pd.DataFrame.from_records(summary_rows)
     summary_frame.to_csv(output_root_path / "batch_summary.csv", index=False)
     if dry_run:
+        return
+    if summary_frame.empty:
         return
 
     write_aggregated_outputs(output_root_path, summary_frame)
@@ -389,9 +412,20 @@ def run_single_spec(
     summary_path = run_dir / "summary.json"
     raw_row_path = run_dir / "raw_row.json"
 
-    if resume and _is_finished_run_directory(run_dir):
-        return json.loads(summary_path.read_text(encoding="utf-8"))
+    if resume:
+        _normalize_stale_running_run(run_dir)
+    cached_summary = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
+    if resume and cached_summary is not None:
+        _write_smoke_verdict(
+            output_root=output_root_path,
+            run_dir=run_dir,
+            spec_identity=_smoke_spec_identity(spec),
+            status="success",
+            worker_loaded_model=True,
+        )
+        return cached_summary
 
+    _clear_retry_artifacts(run_dir)
     _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
     _write_json(run_dir / "state.json", {"status": "running"})
     try:
@@ -407,6 +441,11 @@ def run_single_spec(
                 dry_run=dry_run,
                 run_dir=run_dir,
             )
+        if not dry_run:
+            _validate_structural_runtime_result(
+                algorithm=spec.algorithm,
+                raw_row=runtime_result["raw_row"],
+            )
     except Exception as error:
         _write_json(
             run_dir / "error.json",
@@ -417,6 +456,15 @@ def run_single_spec(
             },
         )
         _write_json(run_dir / "state.json", {"status": "failed"})
+        _write_smoke_verdict(
+            output_root=output_root_path,
+            run_dir=run_dir,
+            spec_identity=_smoke_spec_identity(spec),
+            status="failed",
+            failure_type=type(error).__name__,
+            failure_message=str(error),
+            worker_loaded_model=_worker_loaded_model(run_dir),
+        )
         raise
     raw_row = runtime_result["raw_row"]
     _write_json(raw_row_path, raw_row)
@@ -442,6 +490,13 @@ def run_single_spec(
         **runtime_result.get("summary", {}),
     }
     _write_json(summary_path, summary)
+    _write_smoke_verdict(
+        output_root=output_root_path,
+        run_dir=run_dir,
+        spec_identity=_smoke_spec_identity(spec),
+        status="success",
+        worker_loaded_model=_worker_loaded_model(run_dir) or True,
+    )
     return summary
 
 
@@ -463,6 +518,53 @@ def _is_finished_run_directory(run_dir: Path) -> bool:
         return False
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     return summary.get("status") == "finished"
+
+
+def _load_valid_finished_summary(
+    *,
+    run_dir: Path,
+    algorithm: str,
+) -> dict[str, object] | None:
+    if not _is_finished_run_directory(run_dir):
+        return None
+
+    summary_path = run_dir / "summary.json"
+    raw_row_path = run_dir / "raw_row.json"
+    try:
+        raw_row = json.loads(raw_row_path.read_text(encoding="utf-8"))
+        _validate_structural_runtime_result(algorithm=algorithm, raw_row=raw_row)
+    except Exception as error:
+        _write_json(
+            run_dir / "error.json",
+            {
+                "type": type(error).__name__,
+                "message": str(error),
+                "status": "failed",
+            },
+        )
+        _write_json(run_dir / "state.json", {"status": "failed"})
+        if summary_path.exists():
+            summary_path.unlink()
+        return None
+
+    return json.loads(summary_path.read_text(encoding="utf-8"))
+
+
+def _smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
+    return {
+        "algorithm": spec.algorithm,
+        "model": spec.model,
+        "embedding_model": spec.embedding_model,
+        "decoding_algorithm": spec.decoding.algorithm,
+        "pair_name": spec.pair_name,
+        "condition_bits": spec.condition_bits,
+        "replication": spec.replication,
+    }
+
+
+def _worker_loaded_model(run_dir: Path) -> bool:
+    worker_state = _read_artifact_json(run_dir / "worker_state.json")
+    return bool(worker_state.get("model_loaded")) or (run_dir / "active_stage.json").exists()
 
 
 def _execute_run(
@@ -493,35 +595,41 @@ def _execute_run(
 
 
 def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
-    spec_json_path = run_dir / "worker_spec.json"
-    result_json_path = run_dir / "worker_result.json"
-    _write_json(spec_json_path, serialize_spec(spec))
-    if result_json_path.exists():
-        result_json_path.unlink()
-
     startup_timeout_seconds = _resolve_startup_timeout_seconds(spec.context_policy)
     stage_timeout_seconds = _resolve_stage_timeout_seconds(spec.context_policy)
-    completed = run_monitored_command(
-        command=_build_worker_command(
-            spec_json_path=spec_json_path,
-            result_json_path=result_json_path,
+    retry_attempts = _resolve_run_retry_attempts(spec.context_policy)
+    spec_json_path = run_dir / "worker_spec.json"
+    result_json_path = run_dir / "worker_result.json"
+
+    for attempt in range(1, retry_attempts + 1):
+        _clear_retry_artifacts(run_dir)
+        _write_json(spec_json_path, serialize_spec(spec))
+        completed = run_monitored_command(
+            command=_build_worker_command(
+                spec_json_path=spec_json_path,
+                result_json_path=result_json_path,
+                run_dir=run_dir,
+            ),
             run_dir=run_dir,
-        ),
-        run_dir=run_dir,
-        startup_timeout_seconds=startup_timeout_seconds,
-        stage_timeout_seconds=stage_timeout_seconds,
-        env=build_hf_download_environment(),
-    )
-    if not result_json_path.exists():
-        raise RuntimeError(
-            "HF worker subprocess exited without writing a result artifact. "
-            f"stdout={completed.stdout!r} stderr={completed.stderr!r}"
+            startup_timeout_seconds=startup_timeout_seconds,
+            stage_timeout_seconds=stage_timeout_seconds,
+            env=build_hf_download_environment(),
         )
-    worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
-    if not worker_payload.get("ok"):
-        error = worker_payload["error"]
+        if not result_json_path.exists():
+            raise RuntimeError(
+                "HF worker subprocess exited without writing a result artifact. "
+                f"stdout={completed.stdout!r} stderr={completed.stderr!r}"
+            )
+        worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
+        if worker_payload.get("ok"):
+            return cast(RuntimeResult, worker_payload["runtime_result"])
+
+        error = cast(dict[str, str], worker_payload["error"])
+        if attempt < retry_attempts and _is_retryable_worker_error(error):
+            continue
         raise RuntimeError(f"{error['type']}: {error['message']}")
-    return cast(RuntimeResult, worker_payload["runtime_result"])
+
+    raise RuntimeError("HF worker retry loop exhausted without a terminal result.")
 
 
 def _build_worker_command(
@@ -555,6 +663,33 @@ def _resolve_stage_timeout_seconds(context_policy: dict[str, object] | None) -> 
         return 180.0
     raw_value = context_policy.get("generation_timeout_seconds", 180)
     return _coerce_timeout_seconds(raw_value)
+
+
+def _resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int:
+    if context_policy is None:
+        return 2
+    raw_value = context_policy.get("run_retry_attempts", 2)
+    if isinstance(raw_value, bool):
+        raise TypeError("Retry attempts value must be numeric, got bool")
+    if isinstance(raw_value, (int, float, str)):
+        attempts = int(float(raw_value))
+        return max(1, attempts)
+    raise TypeError(f"Retry attempts value must be numeric, got {type(raw_value).__name__}")
+
+
+def _is_retryable_worker_error(error: dict[str, str]) -> bool:
+    if error.get("type") != "ValueError":
+        return False
+    message = error.get("message", "")
+    retry_markers = (
+        "Model did not return valid structured output:",
+        "Invalid edge item shape:",
+        "Unsupported structured response shape for schema",
+        "Structured edge_list response must contain a list of edges",
+        "Structured edge_list flat string response must contain an even number of items",
+        "Structurally invalid algo",
+    )
+    return any(marker in message for marker in retry_markers)
 
 
 def _coerce_timeout_seconds(raw_value: object) -> float:
@@ -650,6 +785,7 @@ def _run_algo1(
             generate_edges=lambda *, subgraph1, subgraph2: candidate_edges,
             verify_edges=lambda candidate_edges: verified_edges,
         )
+    _validate_algorithm_edge_result("algo1", result.verified_edges)
     raw_row = {
         **spec.raw_context,
         "Result": repr(result.verified_edges),
@@ -924,3 +1060,45 @@ def _summary_from_raw_row(algorithm: str, raw_row: dict[str, object]) -> dict[st
             "recall": float(str(raw_row.get("Recall", 0.0))),
         }
     return {}
+
+
+def _validate_structural_runtime_result(*, algorithm: str, raw_row: dict[str, object]) -> None:
+    if algorithm != "algo1":
+        return
+    result_literal = raw_row.get("Result")
+    if result_literal is None:
+        raise ValueError(f"Structurally invalid {algorithm} result: missing Result field.")
+    result_edges = parse_python_literal(str(result_literal))
+    _validate_algorithm_edge_result(algorithm, result_edges)
+
+
+def _validate_algorithm_edge_result(algorithm: str, result_edges: object) -> None:
+    if not isinstance(result_edges, list):
+        raise ValueError(f"Structurally invalid {algorithm} result: Result is not a list.")
+    if not result_edges:
+        raise ValueError(
+            f"Structurally invalid {algorithm} result: verified edge list is empty."
+        )
+    for edge in result_edges:
+        if not isinstance(edge, (list, tuple)) or len(edge) < 2:
+            raise ValueError(
+                f"Structurally invalid {algorithm} result: invalid edge shape {edge!r}."
+            )
+        source = _normalize_structural_endpoint(edge[0], algorithm=algorithm)
+        target = _normalize_structural_endpoint(edge[1], algorithm=algorithm)
+        if not _looks_like_textual_concept(source) or not _looks_like_textual_concept(target):
+            raise ValueError(
+                "Structurally invalid "
+                f"{algorithm} result: non-textual edge endpoint {edge!r}."
+            )
+
+
+def _normalize_structural_endpoint(value: object, *, algorithm: str) -> str:
+    text = str(value).strip()
+    if not text:
+        raise ValueError(f"Structurally invalid {algorithm} result: empty edge endpoint.")
+    return text
+
+
+def _looks_like_textual_concept(text: str) -> bool:
+    return bool(re.search(r"[A-Za-z]", text))

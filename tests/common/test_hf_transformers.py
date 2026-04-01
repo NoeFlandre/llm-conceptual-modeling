@@ -5,6 +5,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     HFTransformersChatClient,
     HFTransformersRuntimeFactory,
+    _parse_generated_json,
     _response_hit_generation_limit,
     derive_context_window,
 )
@@ -225,6 +226,41 @@ def test_complete_json_passes_generation_timeout_as_max_time() -> None:
     assert model.calls[-1]["max_time"] == 123
 
 
+def test_complete_json_records_generation_metrics(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    tokenizer = _ChatTemplateTokenizer(model_max_length=128)
+    model = _CapturingModel()
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(algorithm="greedy"),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=True,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+        seed=7,
+    )
+    perf_counter_values = iter([10.0, 10.5])
+    monkeypatch.setattr(hf_transformers.time, "perf_counter", lambda: next(perf_counter_values))
+
+    client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert client.last_call_metrics == {
+        "schema_name": "edge_list",
+        "prompt_token_count": 9,
+        "completion_token_count": 1,
+        "max_new_tokens": 4,
+        "duration_seconds": 0.5,
+        "tokens_per_second": 2.0,
+    }
+
+
 def test_greedy_decoding_kwargs_do_not_pass_temperature() -> None:
     kwargs = hf_transformers._decoding_kwargs(DecodingConfig(algorithm="greedy"))
 
@@ -243,6 +279,54 @@ def test_contrastive_decoding_kwargs_do_not_pass_temperature() -> None:
     )
 
     assert kwargs == {"do_sample": False, "penalty_alpha": 0.2, "top_k": 4}
+
+
+def test_parse_generated_json_recovers_flat_quoted_edge_list_with_trailing_garbage() -> None:
+    actual = _parse_generated_json(
+        "['capacity to hire','quality of the sport infrastructure',"
+        "'healthy eating choices','quality','cultural norms','unhealthy foods',"
+        "'unhealthy','unhealthy reputation','unhealthy foods','unhealthy reputation',"
+        "'unhealthy','resil','thinness','resil','thin','Depression','thinness',"
+        "'resil','thin','resil','thin','resil','resil,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],",
+        schema_name="edge_list",
+    )
+
+    assert actual == [
+        "capacity to hire",
+        "quality of the sport infrastructure",
+        "healthy eating choices",
+        "quality",
+        "cultural norms",
+        "unhealthy foods",
+        "unhealthy",
+        "unhealthy reputation",
+        "unhealthy foods",
+        "unhealthy reputation",
+        "unhealthy",
+        "resil",
+        "thinness",
+        "resil",
+        "thin",
+        "Depression",
+        "thinness",
+        "resil",
+        "thin",
+        "resil",
+        "thin",
+        "resil",
+    ]
+
+
+def test_parse_generated_json_rejects_corrupt_quoted_edge_list_with_placeholder_tokens() -> None:
+    with pytest.raises(ValueError, match="Model did not return valid structured output"):
+        _parse_generated_json(
+            "['Quality of the sport infrastructure', 'Quality of the sport infrastructure', "
+            "'Marketing of healthy foods', 'Marketing of healthy foods', "
+            "'Marketing of healthy foods, 'Public support for healthy products', "
+            "'Marketing of unhealthy foods', 'Restrictive covenants', "
+            "'Marketing ratio of unhealthy to healthy foods']",
+            schema_name="edge_list",
+        )
 
 
 def test_chat_client_sets_model_generation_temperature_to_zero() -> None:
@@ -273,6 +357,30 @@ def test_parse_generated_json_recovers_newline_vote_list() -> None:
     parsed = hf_transformers._parse_generated_json("Y\nY\nN\nY", schema_name="vote_list")
 
     assert parsed == ["Y", "Y", "N", "Y"]
+
+
+def test_parse_generated_json_recovers_unquoted_edge_list() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        "[(Aesthetics, Mental well-being), (Appetite, Stress)]",
+        schema_name="edge_list",
+    )
+
+    assert parsed == [
+        ("Aesthetics", "Mental well-being"),
+        ("Appetite", "Stress"),
+    ]
+
+
+def test_parse_generated_json_ignores_assistant_prefix_for_edge_list() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        "assistant\n[(Aesthetics, Mental well-being), (Appetite, Stress)]",
+        schema_name="edge_list",
+    )
+
+    assert parsed == [
+        ("Aesthetics", "Mental well-being"),
+        ("Appetite", "Stress"),
+    ]
 
 
 def test_complete_json_accepts_parseable_vote_list_without_eos() -> None:

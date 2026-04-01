@@ -770,6 +770,44 @@ def test_cli_run_status_reports_batch_health_as_json(tmp_path, capsys) -> None:
     assert '"failed_count": 0' in captured.out
 
 
+def test_cli_run_status_reports_active_worker_fields(monkeypatch, tmp_path, capsys) -> None:
+    results_root = tmp_path / "results"
+    run_dir = (
+        results_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (run_dir / "worker_state.json").write_text(
+        '{"status": "running", "pid": 4242, "model_loaded": true}',
+        encoding="utf-8",
+    )
+    (run_dir / "active_stage.json").write_text(
+        '{"status": "running", "schema_name": "edge_list"}',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch.monitoring._query_gpu_processes",
+        lambda: [{"pid": 4242, "used_gpu_memory_mib": 1234}],
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "status",
+            "--results-root",
+            str(results_root),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "running=1" in captured.out
+    assert "worker_pid=4242" in captured.out
+    assert "worker_status=running" in captured.out
+    assert "active_stage_age_seconds=" in captured.out
+
+
 def test_cli_run_smoke_executes_single_selected_spec(monkeypatch, tmp_path, capsys) -> None:
     config_path = tmp_path / "config.yaml"
     config_path.write_text(

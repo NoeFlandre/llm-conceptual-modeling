@@ -4,6 +4,7 @@ import ast
 import json
 import random
 import re
+import time
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
@@ -136,6 +137,7 @@ class HFTransformersChatClient:
         self._seed = seed
         self.thinking_mode_supported = thinking_mode_supported
         self._context_policy = context_policy or {}
+        self.last_call_metrics: dict[str, object] | None = None
         self._max_new_tokens_by_schema = max_new_tokens_by_schema or {
             "edge_list": 256,
             "vote_list": 64,
@@ -192,6 +194,7 @@ class HFTransformersChatClient:
                 torch.cuda.manual_seed_all(self._seed)
             generator = torch.Generator(device=self._device).manual_seed(self._seed)
             generation_kwargs["generator"] = generator
+            started_at = time.perf_counter()
             with torch.inference_mode():
                 try:
                     generated_ids = self._model_object.generate(**generation_kwargs)
@@ -200,6 +203,7 @@ class HFTransformersChatClient:
                         raise
                     generation_kwargs.pop("generator", None)
                     generated_ids = self._model_object.generate(**generation_kwargs)
+            duration_seconds = time.perf_counter() - started_at
             completion_ids = generated_ids[0][input_length:]
             text = self._tokenizer.decode(completion_ids, skip_special_tokens=True)
             try:
@@ -218,6 +222,20 @@ class HFTransformersChatClient:
                     )
                     continue
                 raise error
+            completion_token_count = len(completion_ids)
+            self.last_call_metrics = {
+                "schema_name": schema_name,
+                "prompt_token_count": input_length,
+                "completion_token_count": completion_token_count,
+                "max_new_tokens": max_new_tokens,
+                "duration_seconds": round(duration_seconds, 6),
+                "tokens_per_second": round(
+                    completion_token_count / duration_seconds,
+                    6,
+                )
+                if duration_seconds > 0
+                else None,
+            }
             return normalize_structured_response(parsed_content, schema_name=schema_name)
 
 
@@ -400,7 +418,7 @@ def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:
 
 
 def _parse_generated_json(text: str, *, schema_name: str) -> object:
-    stripped = text.strip()
+    stripped = _strip_assistant_prefix(text.strip())
     try:
         return json.loads(stripped)
     except json.JSONDecodeError:
@@ -413,12 +431,51 @@ def _parse_generated_json(text: str, *, schema_name: str) -> object:
             raise ValueError(f"Model did not return valid structured output: {text}") from error
 
 
+def _strip_assistant_prefix(text: str) -> str:
+    lowered = text.lower()
+    for prefix in ("assistant\n", "assistant:\n", "assistant: ", "assistant "):
+        if lowered.startswith(prefix):
+            return text[len(prefix) :].strip()
+    return text
+
+
 def _recover_non_json_response(*, text: str, schema_name: str) -> object | None:
+    if schema_name == "edge_list":
+        tuple_matches = re.findall(r"\(([^()]*)\)", text)
+        if tuple_matches:
+            parsed_edges: list[tuple[str, str]] = []
+            for tuple_text in tuple_matches:
+                parts = [part.strip().strip("'\"") for part in tuple_text.split(",", 1)]
+                if len(parts) != 2 or not parts[0] or not parts[1]:
+                    raise ValueError(f"Could not parse tuple content: {tuple_text}")
+                parsed_edges.append((parts[0], parts[1]))
+            return parsed_edges
+        quoted_endpoints = _extract_recoverable_edge_endpoints(text)
+        if quoted_endpoints is not None:
+            return quoted_endpoints
     if schema_name == "vote_list":
         token_matches = re.findall(r"\b[YyNn]\b", text)
         if token_matches:
             return [token.upper() for token in token_matches]
     return None
+
+
+def _extract_recoverable_edge_endpoints(text: str) -> list[str] | None:
+    quoted_items = re.findall(r"""['"]([^'"]+)['"]""", text)
+    if not quoted_items:
+        return None
+    normalized_items = [item.strip() for item in quoted_items]
+    if len(normalized_items) % 2 != 0:
+        return None
+    if not all(_looks_like_edge_endpoint(item) for item in normalized_items):
+        return None
+    return normalized_items
+
+
+def _looks_like_edge_endpoint(text: str) -> bool:
+    if not text:
+        return False
+    return bool(re.search(r"[A-Za-z0-9]", text))
 
 
 def _set_generation_temperature(*, model_object: Any, temperature: float) -> None:

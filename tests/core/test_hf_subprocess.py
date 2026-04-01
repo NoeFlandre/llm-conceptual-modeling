@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -53,6 +54,30 @@ time.sleep(10)
             startup_timeout_seconds=1.0,
             stage_timeout_seconds=0.1,
         )
+
+    worker_state = json.loads((tmp_path / "worker_state.json").read_text(encoding="utf-8"))
+    assert worker_state["status"] == "failed"
+    assert worker_state["failure_phase"] == "stage"
+
+
+def test_run_monitored_command_records_worker_state_on_success(tmp_path: Path) -> None:
+    command = [
+        sys.executable,
+        "-c",
+        "print('ok')",
+    ]
+
+    completed = run_monitored_command(
+        command=command,
+        run_dir=tmp_path,
+        startup_timeout_seconds=1.0,
+        stage_timeout_seconds=1.0,
+    )
+
+    worker_state = json.loads((tmp_path / "worker_state.json").read_text(encoding="utf-8"))
+    assert completed.returncode == 0
+    assert worker_state["status"] == "finished"
+    assert worker_state["pid"] > 0
 
 
 def test_build_hf_download_environment_disables_xet_by_default() -> None:

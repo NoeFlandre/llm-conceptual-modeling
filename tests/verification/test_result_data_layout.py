@@ -1,8 +1,14 @@
 from pathlib import Path
 
+import pytest
+
+from llm_conceptual_modeling.paths import default_results_root
+
 
 def test_imported_result_layout_contains_primary_models() -> None:
-    root = Path("data/results")
+    root = Path(default_results_root())
+    if not root.exists():
+        pytest.skip("Imported result corpus is not present locally.")
 
     expected = {
         "algo1": {
@@ -38,7 +44,9 @@ def test_imported_result_layout_contains_primary_models() -> None:
 
 
 def test_imported_result_layout_contains_raw_and_evaluated_csvs() -> None:
-    root = Path("data/results")
+    root = Path(default_results_root())
+    if not root.exists():
+        pytest.skip("Imported result corpus is not present locally.")
 
     for model_root in (path for path in root.glob("algo1/*") if path.is_dir()):
         assert len(list((model_root / "raw").glob("*.csv"))) == 3
