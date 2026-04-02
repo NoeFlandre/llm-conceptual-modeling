@@ -180,6 +180,8 @@ def load_deferred_failed_summary(
         pass
     elif failure_kind == "oom" and not resolve_retry_oom_failures_on_resume(context_policy):
         pass
+    elif failure_kind == "unsupported":
+        pass
     else:
         return None
     return {
@@ -248,10 +250,16 @@ def classify_failure_payload(error: JsonObject) -> str:
     lowered_message = message.lower()
     if "out of memory" in lowered_message:
         return "oom"
+    if (
+        "contrastive search is not supported with stateful models" in lowered_message
+        or "contrastive search requires `trust_remote_code=true`" in lowered_message
+    ):
+        return "unsupported"
     if error_type == "StaleRunState":
         return "stale"
     if error_type in {"ValueError", "RuntimeError"} and (
         "Model did not return valid structured output:" in message
+        or "Could not parse tuple content:" in message
         or "Invalid edge item shape:" in message
         or "Unsupported structured response shape for schema" in message
         or "Structured edge_list response must contain a list of edges" in message
@@ -295,31 +303,50 @@ def collect_resume_history(
     if read_artifact_json_fn is None:
         read_artifact_json_fn = read_artifact_json
     by_pair: dict[object, dict[str, int]] = defaultdict(
-        lambda: {"finished": 0, "timeout": 0, "structural": 0, "other": 0}
+        lambda: {"finished": 0, "timeout": 0, "structural": 0, "unsupported": 0, "other": 0}
     )
     by_pair_condition: dict[object, dict[str, int]] = defaultdict(
-        lambda: {"finished": 0, "timeout": 0, "structural": 0, "other": 0}
+        lambda: {"finished": 0, "timeout": 0, "structural": 0, "unsupported": 0, "other": 0}
+    )
+    by_family: dict[object, dict[str, int]] = defaultdict(
+        lambda: {"finished": 0, "timeout": 0, "structural": 0, "unsupported": 0, "other": 0}
     )
     runs_root = output_root / "runs"
     if not runs_root.exists():
-        return {"by_pair": dict(by_pair), "by_pair_condition": dict(by_pair_condition)}
+        return {
+            "by_pair": dict(by_pair),
+            "by_pair_condition": dict(by_pair_condition),
+            "by_family": dict(by_family),
+        }
     for run_dir in runs_root.glob("*/*/*/*/*/rep_*"):
+        condition_label = run_dir.parent.parent.parent.name
         pair_name = run_dir.parent.parent.name
         condition_bits = run_dir.parent.name
         pair_key = pair_name
         pair_condition_key = (pair_name, condition_bits)
+        family_key = (pair_name, condition_bits, condition_label)
         state = read_artifact_json_fn(run_dir / "state.json")
         if state.get("status") == "finished":
             by_pair[pair_key]["finished"] += 1
             by_pair_condition[pair_condition_key]["finished"] += 1
+            by_family[family_key]["finished"] += 1
             continue
         if state.get("status") != "failed":
             continue
         failure_kind = classify_failure_payload(read_artifact_json_fn(run_dir / "error.json"))
-        bucket = failure_kind if failure_kind in {"timeout", "structural"} else "other"
+        bucket = (
+            failure_kind
+            if failure_kind in {"timeout", "structural", "unsupported"}
+            else "other"
+        )
         by_pair[pair_key][bucket] += 1
         by_pair_condition[pair_condition_key][bucket] += 1
-    return {"by_pair": dict(by_pair), "by_pair_condition": dict(by_pair_condition)}
+        by_family[family_key][bucket] += 1
+    return {
+        "by_pair": dict(by_pair),
+        "by_pair_condition": dict(by_pair_condition),
+        "by_family": dict(by_family),
+    }
 
 
 def resume_priority_key(
@@ -328,7 +355,7 @@ def resume_priority_key(
     run_dir: Path,
     history: dict[str, dict[object, dict[str, int]]],
     read_artifact_json_fn: Callable[[Path], JsonObject] | None = None,
-) -> tuple[float, float, float, str, str, int]:
+) -> tuple[float, float, float, float, str, str, int]:
     if read_artifact_json_fn is None:
         read_artifact_json_fn = read_artifact_json
     context_policy = spec.context_policy
@@ -339,15 +366,35 @@ def resume_priority_key(
         failure_kind = classify_failure_payload(read_artifact_json_fn(run_dir / "error.json"))
 
     if pass_mode == "retry-timeouts":
-        base_bucket_map = {"timeout": 0.0, "structural": 1.0, "pending": 2.0, "other": 3.0}
+        base_bucket_map = {
+            "timeout": 0.0,
+            "structural": 1.0,
+            "pending": 2.0,
+            "other": 3.0,
+            "unsupported": 4.0,
+        }
     else:
-        base_bucket_map = {"pending": 0.0, "structural": 1.0, "other": 2.0, "timeout": 3.0}
+        base_bucket_map = {
+            "pending": 0.0,
+            "structural": 1.0,
+            "other": 2.0,
+            "timeout": 3.0,
+            "unsupported": 4.0,
+        }
 
     pair_stats = history["by_pair"].get(spec.pair_name, {})
     condition_stats = history["by_pair_condition"].get((spec.pair_name, spec.condition_bits), {})
+    family_stats = history["by_family"].get(
+        (spec.pair_name, spec.condition_bits, spec.condition_label),
+        {},
+    )
 
     pair_finished = int(pair_stats.get("finished", 0))
-    pair_failures = int(pair_stats.get("timeout", 0)) + int(pair_stats.get("other", 0))
+    pair_failures = (
+        int(pair_stats.get("timeout", 0))
+        + int(pair_stats.get("unsupported", 0))
+        + int(pair_stats.get("other", 0))
+    )
     pair_total = pair_finished + pair_failures + int(pair_stats.get("structural", 0))
     pair_timeout_rate = int(pair_stats.get("timeout", 0)) / pair_total if pair_total else 0.0
 
@@ -355,13 +402,25 @@ def resume_priority_key(
     condition_failures = (
         int(condition_stats.get("timeout", 0))
         + int(condition_stats.get("structural", 0))
+        + int(condition_stats.get("unsupported", 0))
         + int(condition_stats.get("other", 0))
     )
     condition_total = condition_finished + condition_failures
     condition_failure_rate = condition_failures / condition_total if condition_total else 0.0
 
+    family_finished = int(family_stats.get("finished", 0))
+    family_failures = (
+        int(family_stats.get("timeout", 0))
+        + int(family_stats.get("structural", 0))
+        + int(family_stats.get("unsupported", 0))
+        + int(family_stats.get("other", 0))
+    )
+    family_total = family_finished + family_failures
+    family_failure_rate = family_failures / family_total if family_total else 0.0
+
     return (
         base_bucket_map.get(failure_kind, 4.0),
+        family_failure_rate,
         pair_timeout_rate,
         condition_failure_rate,
         spec.pair_name,

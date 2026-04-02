@@ -415,6 +415,18 @@ def test_parse_generated_json_ignores_assistant_prefix_for_edge_list() -> None:
     ]
 
 
+def test_parse_generated_json_recovers_valid_tuples_while_skipping_malformed_tuple() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        "[(Aesthetics, Mental well-being), (no node), (Appetite, Stress)]",
+        schema_name="edge_list",
+    )
+
+    assert parsed == [
+        ("Aesthetics", "Mental well-being"),
+        ("Appetite", "Stress"),
+    ]
+
+
 def test_complete_json_accepts_parseable_vote_list_without_eos() -> None:
     tokenizer = _ChatTemplateTokenizer(
         model_max_length=128,

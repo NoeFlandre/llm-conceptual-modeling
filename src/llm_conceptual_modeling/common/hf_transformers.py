@@ -139,6 +139,7 @@ class HFTransformersChatClient:
         self.thinking_mode_supported = thinking_mode_supported
         self._context_policy = context_policy or {}
         self.last_call_metrics: dict[str, object] | None = None
+        self.last_failed_response_text: str | None = None
         self._max_new_tokens_by_schema = max_new_tokens_by_schema or {
             "edge_list": 256,
             "vote_list": 64,
@@ -210,6 +211,7 @@ class HFTransformersChatClient:
             try:
                 parsed_content = _parse_generated_json(text, schema_name=schema_name)
             except ValueError as error:
+                self.last_failed_response_text = text
                 if _response_hit_generation_limit(
                     completion_ids=completion_ids,
                     max_new_tokens=max_new_tokens,
@@ -223,6 +225,7 @@ class HFTransformersChatClient:
                     )
                     continue
                 raise error
+            self.last_failed_response_text = None
             completion_token_count = len(completion_ids)
             self.last_call_metrics = {
                 "schema_name": schema_name,
@@ -468,8 +471,11 @@ def _recover_non_json_response(*, text: str, schema_name: str) -> object | None:
             for tuple_text in tuple_matches:
                 parts = [part.strip().strip("'\"") for part in tuple_text.split(",", 1)]
                 if len(parts) != 2 or not parts[0] or not parts[1]:
-                    raise ValueError(f"Could not parse tuple content: {tuple_text}")
+                    continue
                 parsed_edges.append((parts[0], parts[1]))
+            if parsed_edges:
+                return parsed_edges
+            raise ValueError(f"Could not parse tuple content: {tuple_matches[0]}")
             return parsed_edges
         quoted_endpoints = _extract_recoverable_edge_endpoints(text)
         if quoted_endpoints is not None:

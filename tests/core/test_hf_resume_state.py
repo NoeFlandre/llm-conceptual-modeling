@@ -26,6 +26,8 @@ def _make_spec(
     pair_name: str,
     condition_bits: str,
     replication: int = 0,
+    condition_label: str = "greedy",
+    decoding_algorithm: str = "greedy",
     context_policy: dict[str, object] | None = None,
 ) -> HFRunSpec:
     return HFRunSpec(
@@ -34,11 +36,11 @@ def _make_spec(
         embedding_model="Qwen/Qwen3-Embedding-0.6B",
         pair_name=pair_name,
         condition_bits=condition_bits,
-        condition_label="greedy",
+        condition_label=condition_label,
         replication=replication,
         prompt_factors={},
         prompt_bundle=None,
-        decoding=DecodingConfig(algorithm="greedy", temperature=0.0),
+        decoding=DecodingConfig(algorithm=decoding_algorithm, temperature=0.0),
         input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
         raw_context={"pair_name": pair_name, "Repetition": replication},
         seed=1,
@@ -208,6 +210,27 @@ def test_classify_failure_payload_detects_oom() -> None:
     assert classify_failure_payload(error) == "oom"
 
 
+def test_classify_failure_payload_treats_tuple_parse_errors_as_structural() -> None:
+    error = {
+        "type": "RuntimeError",
+        "message": "ValueError: Could not parse tuple content: no node",
+    }
+
+    assert classify_failure_payload(error) == "structural"
+
+
+def test_classify_failure_payload_detects_unsupported_decoding_failure() -> None:
+    error = {
+        "type": "RuntimeError",
+        "message": (
+            "ValueError: contrastive search is not supported with stateful models, "
+            "such as Qwen3_5ForCausalLM"
+        ),
+    }
+
+    assert classify_failure_payload(error) == "unsupported"
+
+
 def test_order_planned_specs_for_resume_prioritizes_low_timeout_risk_pairs(
     tmp_path: Path,
 ) -> None:
@@ -248,3 +271,109 @@ def test_order_planned_specs_for_resume_prioritizes_low_timeout_risk_pairs(
     )
 
     assert [spec.pair_name for spec in ordered] == ["sg1_sg2", "sg3_sg1", "sg2_sg3"]
+
+
+def test_order_planned_specs_for_resume_deprioritizes_repeated_structural_family(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    structurally_poisoned = _make_spec(
+        pair_name="sg3_sg1",
+        condition_bits="00101",
+        replication=4,
+        condition_label="beam_num_beams_2",
+        decoding_algorithm="beam",
+        context_policy={"resume_pass_mode": "retry-timeouts"},
+    )
+    clean_pending = _make_spec(
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        replication=0,
+        condition_label="beam_num_beams_2",
+        decoding_algorithm="beam",
+        context_policy={"resume_pass_mode": "retry-timeouts"},
+    )
+
+    for replication in range(4):
+        failed_spec = _make_spec(
+            pair_name="sg3_sg1",
+            condition_bits="00101",
+            replication=replication,
+            condition_label="beam_num_beams_2",
+            decoding_algorithm="beam",
+            context_policy={"resume_pass_mode": "retry-timeouts"},
+        )
+        failed_dir = _run_dir(output_root, failed_spec)
+        failed_dir.mkdir(parents=True, exist_ok=True)
+        (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+        (failed_dir / "error.json").write_text(
+            json.dumps(
+                {
+                    "type": "RuntimeError",
+                    "message": "ValueError: Could not parse tuple content: no node",
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[structurally_poisoned, clean_pending],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [clean_pending, structurally_poisoned]
+
+
+def test_order_planned_specs_for_resume_does_not_penalize_clean_decoding_family(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    poisoned_beam_pending = _make_spec(
+        pair_name="sg3_sg1",
+        condition_bits="00101",
+        replication=4,
+        condition_label="beam_num_beams_2",
+        decoding_algorithm="beam",
+        context_policy={"resume_pass_mode": "retry-timeouts"},
+    )
+    clean_greedy_pending = _make_spec(
+        pair_name="sg3_sg1",
+        condition_bits="00101",
+        replication=5,
+        condition_label="greedy",
+        decoding_algorithm="greedy",
+        context_policy={"resume_pass_mode": "retry-timeouts"},
+    )
+
+    for replication in range(4):
+        failed_spec = _make_spec(
+            pair_name="sg3_sg1",
+            condition_bits="00101",
+            replication=replication,
+            condition_label="beam_num_beams_2",
+            decoding_algorithm="beam",
+            context_policy={"resume_pass_mode": "retry-timeouts"},
+        )
+        failed_dir = _run_dir(output_root, failed_spec)
+        failed_dir.mkdir(parents=True, exist_ok=True)
+        (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+        (failed_dir / "error.json").write_text(
+            json.dumps(
+                {
+                    "type": "RuntimeError",
+                    "message": "ValueError: Could not parse tuple content: no node",
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[poisoned_beam_pending, clean_greedy_pending],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [clean_greedy_pending, poisoned_beam_pending]

@@ -181,11 +181,36 @@ class RecordingChatClient:
             schema_name=schema_name,
             prompt=prompt,
         )
-        response = self._inner.complete_json(
-            prompt=prompt,
-            schema_name=schema_name,
-            schema=schema,
-        )
+        try:
+            response = self._inner.complete_json(
+                prompt=prompt,
+                schema_name=schema_name,
+                schema=schema,
+            )
+        except Exception as error:
+            record = {
+                "prompt": prompt,
+                "schema_name": schema_name,
+                "error": str(error),
+                "metrics": getattr(self._inner, "last_call_metrics", None),
+            }
+            raw_text = getattr(self._inner, "last_failed_response_text", None)
+            if raw_text is not None:
+                record["raw_text"] = raw_text
+            self.records.append(record)
+            if self._persist_path is not None:
+                write_text(
+                    self._persist_path,
+                    json.dumps(self.records, indent=2, sort_keys=True),
+                )
+            self._write_active_stage(
+                status="failed",
+                schema_name=schema_name,
+                prompt=prompt,
+                error=str(error),
+                raw_text=raw_text,
+            )
+            raise
         self.records.append(
             {
                 "prompt": prompt,
@@ -214,6 +239,8 @@ class RecordingChatClient:
         schema_name: str,
         prompt: str,
         response: dict[str, object] | None = None,
+        error: str | None = None,
+        raw_text: str | None = None,
     ) -> None:
         if self._active_stage_path is None:
             return
@@ -229,6 +256,10 @@ class RecordingChatClient:
             metrics = getattr(self._inner, "last_call_metrics", None)
             if metrics is not None:
                 payload["metrics"] = metrics
+        if error is not None:
+            payload["error"] = error
+        if raw_text is not None:
+            payload["raw_text"] = raw_text
         write_json(self._active_stage_path, payload)
 
 
