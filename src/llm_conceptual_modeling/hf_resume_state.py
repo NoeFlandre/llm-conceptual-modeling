@@ -180,6 +180,10 @@ def load_deferred_failed_summary(
         pass
     elif failure_kind == "oom" and not resolve_retry_oom_failures_on_resume(context_policy):
         pass
+    elif failure_kind == "infrastructure" and not resolve_retry_infrastructure_failures_on_resume(
+        context_policy
+    ):
+        pass
     elif failure_kind == "unsupported":
         pass
     else:
@@ -224,6 +228,20 @@ def resolve_retry_oom_failures_on_resume(
     )
 
 
+def resolve_retry_infrastructure_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    if context_policy is None:
+        return True
+    raw_value = context_policy.get("retry_infrastructure_failures_on_resume", True)
+    if isinstance(raw_value, bool):
+        return raw_value
+    raise TypeError(
+        "retry_infrastructure_failures_on_resume value must be boolean, "
+        f"got {type(raw_value).__name__}"
+    )
+
+
 def resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
     if context_policy is None:
         return "throughput"
@@ -248,6 +266,12 @@ def classify_failure_payload(error: JsonObject) -> str:
     if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
         return "timeout"
     lowered_message = message.lower()
+    if (
+        "hf-transformers local inference requires cuda" in lowered_message
+        or "cuda initialization:" in lowered_message
+        or "found no nvidia driver" in lowered_message
+    ):
+        return "infrastructure"
     if "out of memory" in lowered_message:
         return "oom"
     if (

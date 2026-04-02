@@ -33,29 +33,34 @@ class PersistentHFWorkerSession:
 
     def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
         run_dir.mkdir(parents=True, exist_ok=True)
-        self._recycle_process_if_budget_exhausted()
-        process = self._ensure_process()
-        request_path, result_json_path = self._enqueue_request(spec=spec, run_dir=run_dir)
         startup_timeout_seconds = _resolve_startup_timeout_seconds(spec.context_policy)
         stage_timeout_seconds = _resolve_stage_timeout_seconds(spec.context_policy)
-        try:
-            result = self._wait_for_result(
-                process=process,
-                request_path=request_path,
-                result_json_path=result_json_path,
-                run_dir=run_dir,
-                startup_timeout_seconds=startup_timeout_seconds,
-                stage_timeout_seconds=stage_timeout_seconds,
-            )
-            self._requests_served_by_process += 1
-            return result
-        except Exception:
-            self._terminate_process(process)
-            self._process = None
-            self._requests_served_by_process = 0
-            raise
-        finally:
-            request_path.unlink(missing_ok=True)
+        retry_attempts = _resolve_run_retry_attempts(spec.context_policy)
+        for attempt in range(1, retry_attempts + 1):
+            self._recycle_process_if_budget_exhausted()
+            process = self._ensure_process()
+            request_path, result_json_path = self._enqueue_request(spec=spec, run_dir=run_dir)
+            try:
+                result = self._wait_for_result(
+                    process=process,
+                    request_path=request_path,
+                    result_json_path=result_json_path,
+                    run_dir=run_dir,
+                    startup_timeout_seconds=startup_timeout_seconds,
+                    stage_timeout_seconds=stage_timeout_seconds,
+                )
+                self._requests_served_by_process += 1
+                return result
+            except Exception as error:
+                self._terminate_process(process)
+                self._process = None
+                self._requests_served_by_process = 0
+                if attempt < retry_attempts and _is_retryable_runtime_error(error):
+                    continue
+                raise
+            finally:
+                request_path.unlink(missing_ok=True)
+        raise RuntimeError("Persistent HF worker retry loop exhausted without a terminal result.")
 
     def close(self) -> None:
         process = self._process
@@ -174,6 +179,24 @@ def _resolve_stage_timeout_seconds(context_policy: dict[str, object] | None) -> 
         return 180.0
     raw_value = context_policy.get("generation_timeout_seconds", 180)
     return _coerce_timeout_seconds(raw_value)
+
+
+def _resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int:
+    if context_policy is None:
+        return 2
+    raw_value = context_policy.get("run_retry_attempts", 2)
+    if isinstance(raw_value, bool):
+        raise TypeError("Retry attempts value must be numeric, got bool")
+    if isinstance(raw_value, int | float | str):
+        attempts = int(float(raw_value))
+        return max(1, attempts)
+    raise TypeError(f"Retry attempts value must be numeric, got {type(raw_value).__name__}")
+
+
+def _is_retryable_runtime_error(error: Exception) -> bool:
+    if isinstance(error, MonitoredCommandTimeout):
+        return False
+    return "BrokenPipeError:" in str(error)
 
 
 def _coerce_timeout_seconds(raw_value: object) -> float:

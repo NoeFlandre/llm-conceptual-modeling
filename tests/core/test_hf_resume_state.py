@@ -231,6 +231,56 @@ def test_classify_failure_payload_detects_unsupported_decoding_failure() -> None
     assert classify_failure_payload(error) == "unsupported"
 
 
+def test_classify_failure_payload_detects_infrastructure_cuda_unavailable() -> None:
+    error = {
+        "type": "RuntimeError",
+        "message": (
+            "RuntimeError: hf-transformers local inference requires CUDA; "
+            "CPU fallback is disabled."
+        ),
+    }
+
+    assert classify_failure_payload(error) == "infrastructure"
+
+
+def test_build_seeded_resume_snapshot_retries_infrastructure_failures_by_default(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    failed_spec = _make_spec(pair_name="sg1_sg2", condition_bits="00001")
+
+    failed_dir = _run_dir(output_root, failed_spec)
+    failed_dir.mkdir(parents=True, exist_ok=True)
+    (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (failed_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "RuntimeError",
+                "message": (
+                    "RuntimeError: hf-transformers local inference requires CUDA; "
+                    "CPU fallback is disabled."
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    snapshot, _summary_rows, _seeded_finished, seeded_failed = build_seeded_resume_snapshot(
+        output_root=output_root,
+        planned_specs=[failed_spec],
+        started_at="2026-04-01T00:00:01+00:00",
+        run_dir_for_spec_fn=_run_dir,
+        current_run_payload_fn=lambda **payload: payload,
+        status_timestamp_now_fn=lambda: "2026-04-01T00:00:02+00:00",
+        validate_structural_runtime_result_fn=lambda **_: None,
+    )
+
+    assert snapshot["finished_count"] == 0
+    assert snapshot["failed_count"] == 0
+    assert snapshot["pending_count"] == 1
+    assert seeded_failed == set()
+
+
 def test_order_planned_specs_for_resume_prioritizes_low_timeout_risk_pairs(
     tmp_path: Path,
 ) -> None:

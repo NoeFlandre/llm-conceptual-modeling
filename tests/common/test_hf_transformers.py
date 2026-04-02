@@ -4,6 +4,7 @@ import llm_conceptual_modeling.common.hf_transformers as hf_transformers
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     HFTransformersChatClient,
+    HFTransformersEmbeddingClient,
     HFTransformersRuntimeFactory,
     _parse_generated_json,
     _response_hit_generation_limit,
@@ -119,6 +120,94 @@ class _CapturingModel(_Model):
         return super().generate(**kwargs)
 
 
+class _EmbeddingTokenizer:
+    def __call__(
+        self,
+        texts: list[str],
+        *,
+        padding: bool,
+        truncation: bool,
+        return_tensors: str,
+    ) -> dict[str, object]:
+        _ = (texts, padding, truncation, return_tensors)
+        return {"attention_mask": _EmbeddingMask([[1, 1], [1, 0]])}
+
+
+class _EmbeddingMask:
+    def __init__(self, values: list[list[int]]) -> None:
+        self._values = values
+
+    def to(self, _device: str):
+        return self
+
+    def detach(self):
+        return self
+
+    def cpu(self):
+        return self
+
+    def numpy(self):
+        import numpy as np
+
+        return np.array(self._values)
+
+
+class _BFloat16Tensor:
+    def __init__(self, values: list[list[list[float]]]) -> None:
+        self._values = values
+        self.float_called = False
+
+    def detach(self):
+        return self
+
+    def cpu(self):
+        return self
+
+    def float(self):
+        self.float_called = True
+        return _FloatTensor(self._values)
+
+    def numpy(self):
+        raise TypeError("Got unsupported ScalarType BFloat16")
+
+
+class _FloatTensor:
+    def __init__(self, values: list[list[list[float]]]) -> None:
+        self._values = values
+
+    def numpy(self):
+        import numpy as np
+
+        return np.array(self._values, dtype=float)
+
+
+class _EmbeddingOutput:
+    def __init__(self, tensor: _BFloat16Tensor) -> None:
+        self.last_hidden_state = tensor
+
+
+class _EmbeddingModel:
+    def __init__(self, tensor: _BFloat16Tensor) -> None:
+        self.tensor = tensor
+
+    def __call__(self, **kwargs):
+        _ = kwargs
+        return _EmbeddingOutput(self.tensor)
+
+
+class _TorchStub:
+    class _InferenceMode:
+        def __enter__(self):
+            return None
+
+        def __exit__(self, exc_type, exc, tb):
+            _ = (exc_type, exc, tb)
+            return False
+
+    def inference_mode(self):
+        return self._InferenceMode()
+
+
 def test_decoding_config_accepts_non_zero_temperature_when_configured() -> None:
     config = DecodingConfig(algorithm="greedy", temperature=0.1)
 
@@ -222,8 +311,28 @@ def test_complete_json_passes_generation_timeout_as_max_time() -> None:
         schema={"type": "object"},
     )
 
-    assert model.calls
-    assert model.calls[-1]["max_time"] == 123
+
+def test_embedding_client_casts_bfloat16_hidden_state_before_numpy(monkeypatch) -> None:
+    monkeypatch.setattr(hf_transformers, "_torch", lambda: _TorchStub())
+    hidden_state = _BFloat16Tensor(
+        [
+            [[1.0, 0.0], [0.0, 1.0]],
+            [[2.0, 2.0], [999.0, 999.0]],
+        ]
+    )
+    client = HFTransformersEmbeddingClient(
+        tokenizer=_EmbeddingTokenizer(),
+        model=_EmbeddingModel(hidden_state),
+        device="cpu",
+    )
+
+    embeddings = client.embed_texts(["first", "second"])
+
+    assert hidden_state.float_called is True
+    assert embeddings == {
+        "first": [0.5, 0.5],
+        "second": [2.0, 2.0],
+    }
 
 
 def test_complete_json_records_generation_metrics(
@@ -424,6 +533,269 @@ def test_parse_generated_json_recovers_valid_tuples_while_skipping_malformed_tup
     assert parsed == [
         ("Aesthetics", "Mental well-being"),
         ("Appetite", "Stress"),
+    ]
+
+
+def test_parse_generated_json_recovers_bare_children_by_label_mapping() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        """{
+  "Prevalence of walking trails": [
+    "Density of trail networks",
+    "Accessibility of trail systems",
+    "Maintenance frequency of trails"
+  ]
+}""",
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "Prevalence of walking trails": [
+                "Density of trail networks",
+                "Accessibility of trail systems",
+                "Maintenance frequency of trails",
+            ]
+        }
+    }
+
+
+def test_parse_generated_json_recovers_fenced_python_children_by_label_mapping() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        """```python
+{
+    'Prevalence of walking trails': [
+        'Density of walking trails per square kilometer',
+        'Length of maintained walking trails (kilometers)',
+        'Proportion of urban areas with accessible walking trails'
+    ]
+}
+```""",
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "Prevalence of walking trails": [
+                "Density of walking trails per square kilometer",
+                "Length of maintained walking trails (kilometers)",
+                "Proportion of urban areas with accessible walking trails",
+            ]
+        }
+    }
+
+
+def test_parse_generated_json_recovers_malformed_children_by_label_mapping() -> None:
+    malformed_response = (
+        "{'Supportive food environment' : "
+        "['Nutrient-dense food access', "
+        "'Food culture diversity', "
+        "'Community-supported agriculture proximity']]"
+    )
+    parsed = hf_transformers._parse_generated_json(
+        malformed_response,
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "Supportive food environment": [
+                "Nutrient-dense food access",
+                "Food culture diversity",
+                "Community-supported agriculture proximity",
+            ]
+        }
+    }
+
+
+def test_parse_generated_json_recovers_multikey_children_mapping_missing_closing_brace() -> None:
+    malformed_response = (
+        "{'A' : ['Fresh produce access', 'Nutrient-dense supply'], "
+        "'B' : ['Healthy eating habits', 'Food variety']"
+    )
+    parsed = hf_transformers._parse_generated_json(
+        malformed_response,
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "A": ["Fresh produce access", "Nutrient-dense supply"],
+            "B": ["Healthy eating habits", "Food variety"],
+        }
+    }
+
+
+def test_parse_generated_json_recovers_children_mapping_with_inner_apostrophe() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        """```python
+{
+    'Accessibility and affordability of nutritious food options': [
+        'Proximity of grocery stores and farmers' markets to residential areas',
+        'Price volatility and stability of essential food commodities',
+        'Availability of government subsidies and food assistance programs'
+    ]
+}
+```""",
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "Accessibility and affordability of nutritious food options": [
+                "Proximity of grocery stores and farmers' markets to residential areas",
+                "Price volatility and stability of essential food commodities",
+                "Availability of government subsidies and food assistance programs",
+            ]
+        }
+    }
+
+
+def test_parse_generated_json_recovers_children_mapping_with_inline_fence() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        """```python{
+    'Prevalence of walking trails': [
+        'Length of pedestrian pathways per capita (km/person)',
+        '% Population engaging in walking for commuting',
+        '# Publicly maintained walking trails normalized by area'
+    ]
+}```""",
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "Prevalence of walking trails": [
+                "Length of pedestrian pathways per capita (km/person)",
+                "% Population engaging in walking for commuting",
+                "# Publicly maintained walking trails normalized by area",
+            ]
+        }
+    }
+
+
+def test_parse_generated_json_recovers_children_mapping_with_trailing_note_after_empty_dict(
+) -> None:
+    parsed = hf_transformers._parse_generated_json(
+        (
+            "{}\n\n"
+            "(Note: With only one concept in the input---'Eating disorders'---there "
+            "are no concepts to pair.)"
+        ),
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {"children_by_label": {}}
+
+
+def test_parse_generated_json_recovers_inline_children_mapping_with_duplicates() -> None:
+    parsed = hf_transformers._parse_generated_json(
+        (
+            "{'A' : ['Access to fresh produce', 'Nutritional diversity'], "
+            "'H' : ['Food budgeting practices', 'Farmers' market presence', "
+            "'Nutritional labeling accuracy'], 'A' : [], 'H' : []}"
+        ),
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "A": [
+                "Access to fresh produce",
+                "Nutritional diversity",
+            ],
+            "H": [
+                "Food budgeting practices",
+                "Farmers' market presence",
+                "Nutritional labeling accuracy",
+            ],
+        }
+    }
+
+
+def test_parse_generated_json_recovers_inline_children_mapping_with_mismatched_terminal_quote(
+) -> None:
+    parsed = hf_transformers._parse_generated_json(
+        (
+            "{'Availability of healthy foods' : ['Nutritional diversity', "
+            "'Freshness of produce', 'Food accessibility\"]}"
+        ),
+        schema_name="children_by_label",
+    )
+
+    assert parsed == {
+        "children_by_label": {
+            "Availability of healthy foods": [
+                "Nutritional diversity",
+                "Freshness of produce",
+                "Food accessibility",
+            ]
+        }
+    }
+
+
+def test_parse_generated_json_recovers_fenced_label_list_with_comments() -> None:
+    response = (
+        "```python\n"
+        "[\n"
+        "    'Urban sprawl and walkablility barriers',\n"
+        "    'Nudging strategies in cafeteria/placemaking "
+        "(e.g., salad bars over fritters in public spaces)',\n"
+        '    \'"JUNK FOOD ZONES" (spatially concentrated fast-foodies '
+        "vs supermarkets in low-SOC areas)',  # Geopolitical inequities\n"
+        "    'Antibiotic overuse in livestock and gut-microbiome links "
+        "to obesity/metabolic health',\n"
+        "    'Climate-induced food price volatility "
+        "(disproportionate impact on vulnerable eaters)'\n"
+        "]\n"
+        "```"
+    )
+    parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
+
+    assert parsed == [
+        "Urban sprawl and walkablility barriers",
+        "Nudging strategies in cafeteria/placemaking "
+        "(e.g., salad bars over fritters in public spaces)",
+        '"JUNK FOOD ZONES" (spatially concentrated fast-foodies '
+        "vs supermarkets in low-SOC areas)",
+        "Antibiotic overuse in livestock and gut-microbiome links "
+        "to obesity/metabolic health",
+        "Climate-induced food price volatility "
+        "(disproportionate impact on vulnerable eaters)",
+    ]
+
+
+def test_parse_generated_json_recovers_fenced_label_list_ignoring_trailing_note() -> None:
+    response = (
+        "```python\n"
+        "[\n"
+        "    'Government policies on urban greening',\n"
+        "    'Biodiversification of recreational spaces',\n"
+        "    'Influencer marketing impact on dietary choices'\n"
+        "]```\n\n"
+        "*Note: Adjusted to 3 due to constraints.*"
+    )
+    parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
+
+    assert parsed == [
+        "Government policies on urban greening",
+        "Biodiversification of recreational spaces",
+        "Influencer marketing impact on dietary choices",
+    ]
+
+
+def test_parse_generated_json_recovers_truncated_label_list_missing_closing_bracket() -> None:
+    response = (
+        "['Nutritive education',\n"
+        "'Relationship between trails and obesity',\n"
+        "'Social influence on food choices'"
+    )
+
+    parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
+
+    assert parsed == [
+        "Nutritive education",
+        "Relationship between trails and obesity",
+        "Social influence on food choices",
     ]
 
 

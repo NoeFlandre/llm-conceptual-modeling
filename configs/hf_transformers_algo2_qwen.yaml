@@ -1,0 +1,248 @@
+run:
+  provider: hf-transformers
+  output_root: /workspace/results/hf-paper-batch-algo2-qwen-current
+  replications: 5
+
+runtime:
+  seed: 20260331
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    allenai/Olmo-3-7B-Instruct: acknowledged-unsupported
+    Qwen/Qwen3.5-9B: disabled
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+    safety_margin_tokens: 64
+    generation_timeout_seconds: 600
+    resume_pass_mode: retry-timeouts
+    retry_timeout_failures_on_resume: true
+    worker_process_mode: persistent
+    max_requests_per_worker_process: 16
+  max_new_tokens_by_schema:
+    edge_list: 256
+    vote_list: 64
+    label_list: 128
+    children_by_label: 384
+
+models:
+  chat_models:
+    - Qwen/Qwen3.5-9B
+  embedding_model: Qwen/Qwen3-Embedding-0.6B
+
+decoding:
+  greedy:
+    enabled: true
+  beam:
+    enabled: true
+    num_beams: [2, 6]
+  contrastive:
+    enabled: true
+    penalty_alpha: [0.2, 0.8]
+    top_k: 4
+
+inputs:
+  graph_source: default
+
+shared_fragments: {}
+
+algorithms:
+  algo2:
+    pair_names: [sg1_sg2, sg2_sg3, sg3_sg1]
+    base_fragments: []
+    factors:
+      explanation:
+        column: Explanation
+        levels: [-1, 1]
+        runtime_field: include_explanation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      counterexample:
+        column: Counterexample
+        levels: [-1, 1]
+        runtime_field: include_counterexample
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      array_repr:
+        column: Array/List(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_array_representation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      adjacency_repr:
+        column: Tag/Adjacency(1/-1)
+        levels: [-1, 1]
+        runtime_field: use_adjacency_notation
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      convergence:
+        column: Convergence
+        levels: [-1, 1]
+        runtime_field: use_relaxed_convergence
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+    fragment_definitions:
+      system_message: >-
+        You are a helpful assistant who understands Knowledge Maps.
+      explanation_fixed: >-
+        A knowledge map is a network consisting of nodes and edges. Nodes must have a clear
+        meaning, such that we can interpret having 'more' or 'less' of a node. Edges represent
+        the existence of a direct relation between two nodes.
+      explanation_variable_matrix: >-
+        The knowledge map is encoded using a list of nodes and an associated adjacency matrix. The
+        adjacency matrix is an n*n square matrix that represents whether each edge exists. In the
+        matrix, each row and each column corresponds to a node. Rows and columns come in the same
+        order as the list of nodes. A relation between node A and node B is represented as a 1 in
+        the row corresponding to A and the column corresponding to B.
+      example_variable_matrix: >-
+        Here is an example of a desired output for your task. In knowledge map 1, we have the
+        list of nodes ['capacity to hire', 'bad employees', 'good reputation'] and the associated
+        adjacency matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the list of nodes
+        ['work motivation', 'productivity', 'financial growth'] and the associated adjacency
+        matrix [[0,1,0],[0,0,1],[0,0,0]]. In this example, you could recommend these 5 new nodes:
+        'quality of managers',  'employee satisfaction', 'customer satisfaction', 'market share',
+        'performance incentives . Therefore, this is the expected output: [ 'quality of managers',
+        'employee satisfaction', 'customer satisfaction', 'market share', 'performance
+        incentives'].
+      counter_example_variable_matrix: >-
+        Here is an example of a bad output that we do not want to see. In knowledge map 1, we
+        have the list of nodes ['capacity to hire', 'bad employees', 'good reputation'] and the
+        associated adjacency matrix [[0,1,0],[0,0,1],[1,0,0]]. In knowledge map 2, we have the
+        list of nodes ['work motivation', 'productivity', 'financial growth'] and the associated
+        adjacency matrix [[0,1,0],[0,0,1],[0,0,0]]. A bad output would be: ['moon', 'dog',
+        'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be incorrect since
+        they have no relationship with the nodes in the input.
+      conclusion_fixed: >-
+        Your output must only be the list of proposed nodes. Do not repeat any instructions I have
+        given you and do not add unnecessary words or phrases.
+      explanation_variable_RDF: >-
+        The knowledge map is encoded using the RDF representation. The RDF representation uses tags
+        denoted by <>.<S> is the start of the map. <E> is the end of the map. In between <S> and
+        <E>, we list all edges of the map. Each edge is represented with two tags: <H> precedes
+        the node, then <T> precedes the target node.
+      explanation_variable_edges: >-
+        The knowledge map is encoded as a list of edges. Each edge is a pair of nodes.
+      explanation_variable_markup: >-
+        The knowledge map is encoded using a tag-array representation. The map is wrapped in
+        <ARRAY><NODES>...</NODES></ARRAY>. Each <NODE> stores its ID and only the outgoing
+        targets that are directly connected to it.
+      example_variable_RDF: >-
+        Here is an example of a desired output for your task. In knowledge map 1, we have the
+        following RDF representation: <S><H>capacity to hire<T>bad employees<H>bad employees<T>good
+        reputation<H>good reputation<T>capacity to hire<E>. In knowledge map 2, we have the
+        following RDF representation: <S><H>work motivation<T>productivity<H>productivity<T>financial
+        growth<E>. In this example, you could recommend these 5 new nodes: 'quality of managers',
+        'employee satisfaction', 'customer satisfaction', 'market share', 'performance
+        incentives'. Therefore, this is the expected output: ['quality of managers', 'employee
+        satisfaction', 'customer satisfaction', 'market share', 'performance incentives'].
+      example_variable_edges: >-
+        Here is an example of a desired output for your task. In knowledge map 1, we have the
+        following list of edges: [('capacity to hire', 'bad employees'), ('bad employees', 'good
+        reputation'), ('good reputation', 'capacity to hire')]. In knowledge map 2, we have the
+        following list of edges: [('work motivation', 'productivity'), ('productivity', 'financial
+        growth')]. In this example, you could recommend these 5 new nodes: 'quality of managers',
+        'employee satisfaction', 'customer satisfaction', 'market share', 'performance
+        incentives'. Therefore, this is the expected output: ['quality of managers', 'employee
+        satisfaction', 'customer satisfaction', 'market share', 'performance incentives'].
+      example_variable_markup: >-
+        Here is an example of a desired output for your task. In knowledge map 1, we have the
+        following tag-array representation: <ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>
+        <TARGET ID= 'bad employees'/></TARGETS></NODE><NODE ID= 'bad employees'><TARGETS><TARGET
+        ID= 'good reputation'/></TARGETS></NODE><NODE ID= 'good reputation'><TARGETS><TARGET ID=
+        'capacity to hire'/></TARGETS></NODE></NODES></ARRAY>. In knowledge map 2, we have the
+        following tag-array representation: <ARRAY><NODES><NODE ID= 'work motivation'><TARGETS>
+        <TARGET ID= 'productivity'/></TARGETS></NODE><NODE ID= 'productivity'><TARGETS><TARGET
+        ID= 'financial growth'/></TARGETS></NODE><NODE ID= 'financial growth'><TARGETS></TARGETS>
+        </NODE></NODES></ARRAY>. In this example, you could recommend these 5 new nodes: 'quality
+        of managers', 'employee satisfaction', 'customer satisfaction', 'market share',
+        'performance incentives'. Therefore, this is the expected output: ['quality of managers',
+        'employee satisfaction', 'customer satisfaction', 'market share', 'performance
+        incentives'].
+      counter_example_variable_RDF: >-
+        Here is an example of a bad output that we do not want to see. In knowledge map 1, we
+        have the following RDF representation: <S><H>capacity to hire<T>bad employees<H>bad
+        employees<T>good reputation<H>good reputation<T>capacity to hire<E>. In knowledge map 2,
+        we have the following RDF representation: <S><H>work motivation<T>productivity<H>productivity<T>financial
+        growth<E>. A bad output would be: ['moon', 'dog', 'thermodynamics', 'swimming', 'red'].
+        Adding the proposed nodes would be incorrect since they have no relationship with the nodes
+        in the input.
+      counter_example_variable_edges: >-
+        Here is an example of a bad output that we do not want to see. In knowledge map 1, we
+        have the following list of edges: [('capacity to hire', 'bad employees'), ('bad
+        employees', 'good reputation'), ('good reputation', 'capacity to hire')]. In knowledge map
+        2, we have the following list of edges: [('work motivation', 'productivity'),
+        ('productivity', 'financial growth')]. A bad output would be: ['moon', 'dog',
+        'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be incorrect since
+        they have no relationship with the nodes in the input.
+      counter_example_variable_markup: >-
+        Here is an example of a bad output that we do not want to see. In knowledge map 1, we
+        have the following tag-array representation: <ARRAY><NODES><NODE ID= 'capacity to hire'>
+        <TARGETS><TARGET ID= 'bad employees'/></TARGETS></NODE><NODE ID= 'bad employees'>
+        <TARGETS><TARGET ID= 'good reputation'/></TARGETS></NODE><NODE ID= 'good reputation'>
+        <TARGETS><TARGET ID= 'capacity to hire'/></TARGETS></NODE></NODES></ARRAY>. In knowledge
+        map 2, we have the following tag-array representation: <ARRAY><NODES><NODE ID= 'work
+        motivation'><TARGETS><TARGET ID= 'productivity'/></TARGETS></NODE><NODE ID=
+        'productivity'><TARGETS><TARGET ID= 'financial growth'/></TARGETS></NODE><NODE ID=
+        'financial growth'><TARGETS></TARGETS></NODE></NODES></ARRAY>. A bad output would be:
+        ['moon', 'dog', 'thermodynamics', 'swimming', 'red']. Adding the proposed nodes would be
+        incorrect since they have no relationship with the nodes in the input.
+      task_fixed_sub_1: >-
+        You will get two inputs: Knowledge map 1:
+      task_fixed_sub_2: >-
+        Knowledge map 2:
+      iterative_context_fragment: >-
+        Current label context: {seed_labels}.
+      task_fixed_sub_3: >-
+        Your task is to recommend 5 more nodes in relation to those already in the two knowledge
+        maps. Do not suggest nodes that are already in the maps. Return the recommended nodes as a
+        list of nodes in the format ['A', 'B', 'C', 'D', 'E'].
+      edge_task_fixed_sub_1: >-
+        You will get two inputs: Knowledge map 1:
+      edge_task_fixed_sub_2: >-
+        Knowledge map 2:
+      edge_task_fixed_sub_3: >-
+        Your task is to recommend more links between the two maps. These links can use new nodes.
+        Do not suggest links that are already in the maps. Do not suggest links between nodes of
+        the same map. Return the recommended links as a list of edges in the format [(A, Z), …,
+        (X, D)]. Available concepts:
+      edge_conclusion_fixed: >-
+        Your output must only be the list of proposed edges. Do not repeat any instructions I have
+        given you and do not add unnecessary words or phrases.
+      cove_verification_template: >-
+        Return whether a causal relationship exists between the source and target concepts for each
+        pair in a list. For example, given [('smoking', 'cancer'), ('ice cream sales', 'shark
+        attacks')], return ['Y', 'N'] with no other text. Candidate pairs: {candidate_edges}
+      convergence_prompt_strict: >-
+        Stop proposing new labels when the list begins to repeat semantically equivalent ideas.
+      convergence_prompt_relaxed: >-
+        Continue proposing labels until you have explored a broader range of plausible bridging
+        concepts, even if some are semantically close.
+      label_selection_prompt: >-
+        Return the list of the best candidate labels from the available concepts. The output must
+        only be a Python list of strings.
+      edge_suggestion_prompt: >-
+        Return the list of bridging edges that use the selected labels to connect the two maps. The
+        output must only be a Python list of edges in the format [('A', 'B'), ('C', 'D')].
+    prompt_templates:
+      label_expansion: ""
+      edge_suggestion: ""
+      cove_verification: ""

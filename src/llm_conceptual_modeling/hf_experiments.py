@@ -187,6 +187,10 @@ from llm_conceptual_modeling.hf_subprocess import (
 )
 
 
+class BatchInfrastructureFailure(RuntimeError):
+    """Abort a batch when the worker host is unhealthy."""
+
+
 def plan_paper_batch(
     *,
     models: list[str],
@@ -289,38 +293,65 @@ def run_paper_batch(
         }
     _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
-    for spec in planned_specs:
-        run_dir = _run_dir_for_spec(output_root=output_root_path, spec=spec)
-        run_dir.mkdir(parents=True, exist_ok=True)
-        summary_path = run_dir / "summary.json"
-        raw_row_path = run_dir / "raw_row.json"
+    try:
+        for spec in planned_specs:
+            run_dir = _run_dir_for_spec(output_root=output_root_path, spec=spec)
+            run_dir.mkdir(parents=True, exist_ok=True)
+            summary_path = run_dir / "summary.json"
+            raw_row_path = run_dir / "raw_row.json"
 
-        if resume and run_dir in seeded_finished_run_dirs:
-            continue
-        if resume and run_dir in seeded_failed_run_dirs:
-            continue
+            if resume and run_dir in seeded_finished_run_dirs:
+                continue
+            if resume and run_dir in seeded_failed_run_dirs:
+                continue
 
-        if resume:
-            _normalize_stale_running_run(run_dir)
-            deferred_failure = _load_deferred_failed_summary(
-                run_dir=run_dir,
-                algorithm=spec.algorithm,
-                context_policy=spec.context_policy,
-            )
-            if deferred_failure is not None:
-                status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
-                status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
-                failures = _status_failures(status_snapshot)
-                failures.append(deferred_failure)
-                status_snapshot["failures"] = failures
-                status_snapshot["failure_count"] = len(failures)
+            if resume:
+                _normalize_stale_running_run(run_dir)
+                deferred_failure = _load_deferred_failed_summary(
+                    run_dir=run_dir,
+                    algorithm=spec.algorithm,
+                    context_policy=spec.context_policy,
+                )
+                if deferred_failure is not None:
+                    failed_count = _status_int(status_snapshot, "failed_count")
+                    pending_count = _status_int(status_snapshot, "pending_count")
+                    status_snapshot["failed_count"] = failed_count + 1
+                    status_snapshot["pending_count"] = pending_count - 1
+                    failures = _status_failures(status_snapshot)
+                    failures.append(deferred_failure)
+                    status_snapshot["failures"] = failures
+                    status_snapshot["failure_count"] = len(failures)
+                    status_snapshot["updated_at"] = _status_timestamp_now()
+                    _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+                    continue
+            cached = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
+            if resume and cached is not None:
+                summary_rows.append(cached)
+                last_completed_run = _current_run_payload(
+                    algorithm=spec.algorithm,
+                    model=spec.model,
+                    decoding_algorithm=spec.decoding.algorithm,
+                    pair_name=spec.pair_name,
+                    condition_bits=spec.condition_bits,
+                    replication=spec.replication,
+                )
+                finished_count = _status_int(status_snapshot, "finished_count")
+                pending_count = _status_int(status_snapshot, "pending_count")
+                status_snapshot["finished_count"] = finished_count + 1
+                status_snapshot["pending_count"] = pending_count - 1
+                status_snapshot["last_completed_run"] = last_completed_run
+                status_snapshot["percent_complete"] = round(
+                    (_status_int(status_snapshot, "finished_count") / total_runs) * 100.0,
+                    2,
+                )
                 status_snapshot["updated_at"] = _status_timestamp_now()
                 _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
                 continue
-        cached = _load_valid_finished_summary(run_dir=run_dir, algorithm=spec.algorithm)
-        if resume and cached is not None:
-            summary_rows.append(cached)
-            last_completed_run = _current_run_payload(
+
+            _clear_retry_artifacts(run_dir)
+            _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
+            _write_json(run_dir / "state.json", {"status": "running"})
+            current_run = _current_run_payload(
                 algorithm=spec.algorithm,
                 model=spec.model,
                 decoding_algorithm=spec.decoding.algorithm,
@@ -328,123 +359,103 @@ def run_paper_batch(
                 condition_bits=spec.condition_bits,
                 replication=spec.replication,
             )
+            status_snapshot["current_run"] = current_run
+            status_snapshot["running_count"] = 1
+            status_snapshot["updated_at"] = _status_timestamp_now()
+            _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+
+            try:
+                if use_monitored_hf_subprocess:
+                    runtime_result = _run_local_hf_spec(
+                        spec=spec,
+                        run_dir=run_dir,
+                        output_root=output_root_path,
+                        persistent_sessions=persistent_sessions,
+                    )
+                else:
+                    if runtime_factory is None:
+                        raise ValueError("Missing runtime_factory for in-process execution.")
+                    runtime_result = _execute_run(
+                        spec=spec,
+                        runtime_factory=runtime_factory,
+                        dry_run=dry_run,
+                        run_dir=run_dir,
+                    )
+                if not dry_run:
+                    _validate_structural_runtime_result(
+                        algorithm=spec.algorithm,
+                        raw_row=runtime_result["raw_row"],
+                    )
+            except Exception as error:
+                failure_payload = {
+                    "type": type(error).__name__,
+                    "message": str(error),
+                    "status": "failed",
+                }
+                _write_json(run_dir / "error.json", failure_payload)
+                _write_json(run_dir / "state.json", {"status": "failed"})
+                status_snapshot["running_count"] = 0
+                status_snapshot["current_run"] = None
+                status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
+                status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
+                failures = _status_failures(status_snapshot)
+                failures.append(
+                    {
+                        "run_dir": str(run_dir),
+                        "message": str(error),
+                        "type": type(error).__name__,
+                    }
+                )
+                status_snapshot["failures"] = failures
+                status_snapshot["failure_count"] = len(failures)
+                status_snapshot["updated_at"] = _status_timestamp_now()
+                _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+                if _classify_failure_payload(failure_payload) == "infrastructure":
+                    raise BatchInfrastructureFailure(
+                        f"Infrastructure failure while executing {run_dir}: {error}"
+                    ) from error
+                continue
+
+            raw_row = runtime_result["raw_row"]
+            _write_json(raw_row_path, raw_row)
+            _write_json(run_dir / "state.json", {"status": "finished"})
+            _write_json(run_dir / "runtime.json", runtime_result["runtime"])
+            _write_text(run_dir / "raw_response.json", runtime_result["raw_response"])
+
+            summary = {
+                "algorithm": spec.algorithm,
+                "model": spec.model,
+                "embedding_model": spec.embedding_model,
+                "decoding_algorithm": spec.decoding.algorithm,
+                "condition_label": spec.condition_label,
+                "pair_name": spec.pair_name,
+                "condition_bits": spec.condition_bits,
+                "replication": spec.replication,
+                "status": "finished",
+                "thinking_mode_supported": runtime_result["runtime"].get(
+                    "thinking_mode_supported", False
+                ),
+                "raw_row_path": str(raw_row_path),
+                **_summary_from_raw_row(spec.algorithm, raw_row),
+                **runtime_result.get("summary", {}),
+            }
+            _write_json(summary_path, summary)
+            summary_rows.append(summary)
+            last_completed_run = current_run
+            status_snapshot["running_count"] = 0
+            status_snapshot["current_run"] = None
+            status_snapshot["last_completed_run"] = last_completed_run
             status_snapshot["finished_count"] = _status_int(status_snapshot, "finished_count") + 1
             status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
-            status_snapshot["last_completed_run"] = last_completed_run
             status_snapshot["percent_complete"] = round(
                 (_status_int(status_snapshot, "finished_count") / total_runs) * 100.0,
                 2,
             )
             status_snapshot["updated_at"] = _status_timestamp_now()
             _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
-            continue
-
-        _clear_retry_artifacts(run_dir)
-        _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
-        _write_json(run_dir / "state.json", {"status": "running"})
-        current_run = _current_run_payload(
-            algorithm=spec.algorithm,
-            model=spec.model,
-            decoding_algorithm=spec.decoding.algorithm,
-            pair_name=spec.pair_name,
-            condition_bits=spec.condition_bits,
-            replication=spec.replication,
-        )
-        status_snapshot["current_run"] = current_run
-        status_snapshot["running_count"] = 1
-        status_snapshot["updated_at"] = _status_timestamp_now()
-        _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
-
-        try:
-            if use_monitored_hf_subprocess:
-                runtime_result = _run_local_hf_spec(
-                    spec=spec,
-                    run_dir=run_dir,
-                    output_root=output_root_path,
-                    persistent_sessions=persistent_sessions,
-                )
-            else:
-                if runtime_factory is None:
-                    raise ValueError("Missing runtime_factory for in-process execution.")
-                runtime_result = _execute_run(
-                    spec=spec,
-                    runtime_factory=runtime_factory,
-                    dry_run=dry_run,
-                    run_dir=run_dir,
-                )
-            if not dry_run:
-                _validate_structural_runtime_result(
-                    algorithm=spec.algorithm,
-                    raw_row=runtime_result["raw_row"],
-                )
-        except Exception as error:
-            _write_json(
-                run_dir / "error.json",
-                {
-                    "type": type(error).__name__,
-                    "message": str(error),
-                    "status": "failed",
-                },
-            )
-            _write_json(run_dir / "state.json", {"status": "failed"})
-            status_snapshot["running_count"] = 0
-            status_snapshot["current_run"] = None
-            status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
-            status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
-            failures = _status_failures(status_snapshot)
-            failures.append(
-                {
-                    "run_dir": str(run_dir),
-                    "message": str(error),
-                    "type": type(error).__name__,
-                }
-            )
-            status_snapshot["failures"] = failures
-            status_snapshot["failure_count"] = len(failures)
-            status_snapshot["updated_at"] = _status_timestamp_now()
-            _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
-            continue
-
-        raw_row = runtime_result["raw_row"]
-        _write_json(raw_row_path, raw_row)
-        _write_json(run_dir / "state.json", {"status": "finished"})
-        _write_json(run_dir / "runtime.json", runtime_result["runtime"])
-        _write_text(run_dir / "raw_response.json", runtime_result["raw_response"])
-
-        summary = {
-            "algorithm": spec.algorithm,
-            "model": spec.model,
-            "embedding_model": spec.embedding_model,
-            "decoding_algorithm": spec.decoding.algorithm,
-            "condition_label": spec.condition_label,
-            "pair_name": spec.pair_name,
-            "condition_bits": spec.condition_bits,
-            "replication": spec.replication,
-            "status": "finished",
-            "thinking_mode_supported": runtime_result["runtime"].get(
-                "thinking_mode_supported", False
-            ),
-            "raw_row_path": str(raw_row_path),
-            **_summary_from_raw_row(spec.algorithm, raw_row),
-            **runtime_result.get("summary", {}),
-        }
-        _write_json(summary_path, summary)
-        summary_rows.append(summary)
-        last_completed_run = current_run
-        status_snapshot["running_count"] = 0
-        status_snapshot["current_run"] = None
-        status_snapshot["last_completed_run"] = last_completed_run
-        status_snapshot["finished_count"] = _status_int(status_snapshot, "finished_count") + 1
-        status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
-        status_snapshot["percent_complete"] = round(
-            (_status_int(status_snapshot, "finished_count") / total_runs) * 100.0,
-            2,
-        )
-        status_snapshot["updated_at"] = _status_timestamp_now()
-        _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
-
-    for session in persistent_sessions.values():
-        session.close()
+    finally:
+        for session in persistent_sessions.values():
+            session.close()
 
     summary_frame = pd.DataFrame.from_records(summary_rows)
     summary_frame.to_csv(output_root_path / "batch_summary.csv", index=False)

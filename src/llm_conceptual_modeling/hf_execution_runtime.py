@@ -181,9 +181,11 @@ def resolve_max_requests_per_worker_process(
 
 
 def is_retryable_worker_error(error: dict[str, str]) -> bool:
+    message = error.get("message", "")
+    if "BrokenPipeError:" in message:
+        return True
     if error.get("type") != "ValueError":
         return False
-    message = error.get("message", "")
     retry_markers = (
         "Model did not return valid structured output:",
         "Invalid edge item shape:",

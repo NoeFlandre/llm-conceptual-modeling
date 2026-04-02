@@ -1,0 +1,140 @@
+run:
+  provider: hf-transformers
+  output_root: /workspace/results/hf-paper-batch-algo3-mistral-current
+  replications: 5
+
+runtime:
+  seed: 20260331
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    allenai/Olmo-3-7B-Instruct: acknowledged-unsupported
+    Qwen/Qwen3.5-9B: disabled
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+    safety_margin_tokens: 64
+    generation_timeout_seconds: 600
+    worker_process_mode: persistent
+    max_requests_per_worker_process: 16
+  max_new_tokens_by_schema:
+    edge_list: 256
+    vote_list: 64
+    label_list: 128
+    children_by_label: 384
+
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-0.6B
+
+decoding:
+  greedy:
+    enabled: true
+  beam:
+    enabled: true
+    num_beams: [2, 6]
+  contrastive:
+    enabled: true
+    penalty_alpha: [0.2, 0.8]
+    top_k: 4
+
+inputs:
+  graph_source: default
+
+shared_fragments: {}
+
+algorithms:
+  algo3:
+    pair_names:
+      - subgraph_1_to_subgraph_3
+      - subgraph_2_to_subgraph_1
+      - subgraph_2_to_subgraph_3
+    base_fragments: []
+    factors:
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      counterexample:
+        column: Counter-Example
+        levels: [-1, 1]
+        runtime_field: include_counterexample
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      number_of_words:
+        column: Number of Words
+        levels: [-1, 1]
+        runtime_field: child_count
+        low_runtime_value: 3
+        high_runtime_value: 5
+        low_fragments: []
+        high_fragments: []
+      depth:
+        column: Depth
+        levels: [-1, 1]
+        runtime_field: max_depth
+        low_runtime_value: 1
+        high_runtime_value: 2
+        low_fragments: []
+        high_fragments: []
+    fragment_definitions:
+      system_message: >-
+        You are a helpful assistant who can creatively suggest relevant ideas.
+      explanation_variable: >-
+        Your input is a set of concept names. All concept names must have a clear meaning, such
+        that we can interpret having 'more' or 'less' of a concept.
+      input_variable: >-
+        Your input is the following list of concept names:
+      task: >-
+        Your task is to recommend {} related concept names for each of the names in the input. Do
+        not suggest names that are in the input. Your output must include the list of the {}
+        proposed names for each of the input names. Do not include any other text. Return your
+        proposed names in a dictionary format {{ 'A' : ['B' , 'C', 'D'], 'E' : ['F' , 'G' , 'H'],
+        …, 'U' : ['V' , 'W' , 'X'] }}.
+      example_3words: >-
+        Here is an example of a desired output for your task. We have the list of concepts
+        ['capacity to hire', 'bad employees', 'good reputation']. In this example, you could
+        recommend these 9 new concepts: 'employment potential', 'hiring capability', 'staffing
+        ability', 'underperformers', 'inefficient staff', 'problematic workers', 'positive image',
+        'favorable standing', 'high regard'. Therefore, this is the expected output: {{ "capacity
+        to hire": ['employment potential', 'hiring capability', 'staffing ability'], "bad
+        employees": ['underperformers', 'inefficient staff', 'problematic workers'], "good
+        reputation": ['positive image', 'favorable standing', 'high regard'] }}.
+      example_5words: >-
+        Here is an example of a desired output for your task. We have the list of concepts
+        ['capacity to hire', 'bad employees', 'good reputation']. In this example, you could
+        recommend these 15 new concepts: 'employment potential', 'hiring capability', 'staffing
+        ability', 'underperformers', 'inefficient staff', 'problematic workers', 'positive image',
+        'favorable standing', 'high regard'. Therefore, this is the expected output: { "capacity
+        to hire": ["employment potential", "hiring capability", "staffing ability", "recruitment
+        capacity", "talent acquisition"], "bad employees": ["underperformers", "inefficient
+        staff", "problematic workers", "low performers", "unproductive staff"], "good
+        reputation": ["positive image", "favorable standing", "high regard", "excellent
+        reputation", "commendable status"] }.
+      counter_example_3words: >-
+        Here is an example of a bad output that we do not want to see. We have the list of nodes
+        ['capacity to hire', 'bad employees', 'good reputation']. A bad output would be: {{
+        "capacity to hire": ['moon', 'dog', 'thermodynamics'], "bad employees": ['swimming',
+        'red', 'happiness'], "good reputation": ['judo', 'canada', 'light'] }}. Adding the
+        proposed concepts would be incorrect since they have no relationship with the concepts in
+        the input.
+      counter_example_5words: >-
+        Here is an example of a bad output that we do not want to see. We have the list of nodes
+        ['capacity to hire', 'bad employees', 'good reputation']. A bad output would be: {
+        "capacity to hire": ['moon', 'dog', 'thermodynamics', 'country', 'pillow'], "bad
+        employees": ['swimming', 'red', 'happiness', 'food', 'shoe'], "good reputation": ['judo',
+        'canada', 'light', 'phone', 'electricity'] }. Adding the proposed concepts would be
+        incorrect since they have no relationship with the concepts in the input.
+      conclusion: >-
+        Your output must only be the list of proposed concepts. Do not repeat any instructions I
+        have given you and do not add unnecessary words or phrases.
+    prompt_templates:
+      tree_expansion: ""

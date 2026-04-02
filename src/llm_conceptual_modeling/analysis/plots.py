@@ -6,6 +6,7 @@ from typing import cast
 import pandas as pd
 
 from llm_conceptual_modeling.common.types import PathLike
+from llm_conceptual_modeling.paths import default_results_root
 
 
 def write_revision_plots(*, results_root: PathLike, output_dir: PathLike) -> None:
@@ -21,10 +22,21 @@ def write_revision_plots(*, results_root: PathLike, output_dir: PathLike) -> Non
         figures = _build_aggregated_distribution_frame(results_root_path)
         hypothesis = _build_aggregated_factor_effect_frame(results_root_path)
         variability = _build_aggregated_variability_frame(results_root_path)
+    main_metric_rows = _build_main_metric_rows(_discover_main_results_root(results_root_path))
 
     _write_distribution_plot(figures, output_dir_path / "distribution_metrics.png")
     _write_factor_effect_plot(hypothesis, output_dir_path / "factor_effect_summary.png")
     _write_variability_plot(variability, output_dir_path / "raw_output_variability.png")
+    _write_main_metric_spread_plot(
+        main_metric_rows,
+        output_dir_path / "main_metric_spread_boxplots.png",
+        plot_style="box",
+    )
+    _write_main_metric_spread_plot(
+        main_metric_rows,
+        output_dir_path / "main_metric_spread_violins.png",
+        plot_style="violin",
+    )
 
 
 def _build_aggregated_distribution_frame(results_root: Path) -> pd.DataFrame:
@@ -116,6 +128,45 @@ def _build_aggregated_variability_frame(results_root: Path) -> pd.DataFrame:
                 else float(frame["breadth_expansion_ratio"].mean()),
             }
         )
+    return pd.DataFrame.from_records(records)
+
+
+def _discover_main_results_root(results_root: Path) -> Path:
+    candidates = [
+        results_root.parent / "results",
+        results_root.parent.parent / "results",
+        Path(default_results_root()),
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return Path(default_results_root())
+
+
+def _build_main_metric_rows(results_root: Path) -> pd.DataFrame:
+    records: list[dict[str, object]] = []
+    metric_map = {
+        "algo1": ("accuracy", "precision", "recall"),
+        "algo2": ("accuracy", "precision", "recall"),
+        "algo3": ("Recall",),
+    }
+    for algorithm, metrics in metric_map.items():
+        for evaluated_path in sorted((results_root / algorithm).glob("*/evaluated/*.csv")):
+            model = _canonical_model_label(evaluated_path.parts[-3])
+            frame = pd.read_csv(evaluated_path)
+            for metric in metrics:
+                if metric not in frame.columns:
+                    continue
+                normalized_metric = metric.lower()
+                for value in frame[metric].dropna().tolist():
+                    records.append(
+                        {
+                            "algorithm": algorithm,
+                            "model": model,
+                            "metric": normalized_metric,
+                            "value": float(value),
+                        }
+                    )
     return pd.DataFrame.from_records(records)
 
 
@@ -245,6 +296,197 @@ def _write_variability_plot(frame: pd.DataFrame, output_path: Path) -> None:
     fig.tight_layout()
     fig.savefig(output_path)
     plt.close(fig)
+
+
+def _write_main_metric_spread_plot(
+    frame: pd.DataFrame,
+    output_path: Path,
+    *,
+    plot_style: str,
+) -> None:
+    plt = _load_pyplot()
+    metric_order = ("accuracy", "precision", "recall")
+    algorithm_order = ("algo1", "algo2", "algo3")
+    if frame.empty:
+        fig, axes = plt.subplots(1, 3, figsize=(11.5, 4.2), sharey=False)
+        for axis, metric in zip(axes, metric_order, strict=False):
+            axis.set_title(metric.capitalize())
+        fig.tight_layout(rect=(0, 0, 1, 0.88))
+        fig.savefig(output_path)
+        plt.close(fig)
+        return
+
+    models = sorted(frame["model"].dropna().astype(str).unique().tolist())
+    color_by_model = _build_model_color_map(models)
+    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.8), sharey=False)
+    width = 0.12
+
+    for axis, metric in zip(axes, metric_order, strict=False):
+        metric_frame = frame[frame["metric"] == metric]
+        algorithms_for_metric = [
+            algorithm
+            for algorithm in algorithm_order
+            if not metric_frame[metric_frame["algorithm"] == algorithm].empty
+        ]
+        base_positions = list(range(1, len(algorithms_for_metric) + 1))
+        for band_index, position in enumerate(base_positions):
+            if band_index % 2 == 0:
+                axis.axvspan(position - 0.45, position + 0.45, color="#f3f4f6", zorder=0)
+        for model_index, model in enumerate(models):
+            offset = (model_index - (len(models) - 1) / 2) * width
+            positions: list[float] = []
+            values: list[list[float]] = []
+            means: list[float] = []
+            margins: list[float] = []
+            for algorithm_index, algorithm in enumerate(algorithms_for_metric):
+                series = metric_frame[
+                    (metric_frame["algorithm"] == algorithm) & (metric_frame["model"] == model)
+                ]["value"]
+                if series.empty:
+                    continue
+                position = base_positions[algorithm_index] + offset
+                positions.append(position)
+                values.append(series.tolist())
+                mean = float(series.mean())
+                margin = 0.0 if len(series) <= 1 else float(1.96 * series.sem())
+                means.append(mean)
+                margins.append(margin)
+            if not values:
+                continue
+            if plot_style == "box":
+                boxplot = axis.boxplot(
+                    values,
+                    positions=positions,
+                    widths=width * 0.9,
+                    patch_artist=True,
+                    manage_ticks=False,
+                    showfliers=False,
+                )
+                for patch in boxplot["boxes"]:
+                    patch.set_facecolor(color_by_model[model])
+                    patch.set_alpha(0.5)
+                for median in boxplot["medians"]:
+                    median.set_color(color_by_model[model])
+            else:
+                violin = axis.violinplot(
+                    values,
+                    positions=positions,
+                    widths=width * 1.1,
+                    showmeans=False,
+                    showmedians=False,
+                    showextrema=False,
+                )
+                for body in violin["bodies"]:
+                    body.set_facecolor(color_by_model[model])
+                    body.set_alpha(0.35)
+                    body.set_edgecolor(color_by_model[model])
+            axis.errorbar(
+                positions,
+                means,
+                yerr=margins,
+                fmt="o",
+                color=color_by_model[model],
+                capsize=3,
+                markersize=3,
+            )
+        axis.set_xticks(base_positions)
+        axis.set_xticklabels([algorithm.upper() for algorithm in algorithms_for_metric])
+        axis.set_title(metric.capitalize())
+        axis.set_ylim(bottom=0.0)
+        axis.grid(axis="y", alpha=0.25)
+        axis.set_xlabel("Algorithm")
+        axis.set_xlim(0.5, len(base_positions) + 0.5)
+
+    axes[0].set_ylabel("Metric value")
+    legend_models = _legend_model_order(models)
+    handles = [
+        plt.Line2D([0], [0], color=color_by_model[model], lw=6, alpha=0.6)
+        for model in legend_models
+    ]
+    fig.legend(
+        handles,
+        legend_models,
+        loc="upper center",
+        bbox_to_anchor=(0.5, 0.98),
+        ncol=3,
+        frameon=False,
+    )
+    fig.tight_layout(rect=(0, 0, 1, 0.80))
+    fig.savefig(output_path, dpi=200)
+    plt.close(fig)
+
+
+def _build_model_color_map(models: list[str]) -> dict[str, tuple[float, float, float, float]]:
+    import matplotlib.cm as cm
+
+    family_bases = {
+        "deepseek": cm.Blues,
+        "gemini": cm.Greens,
+        "gpt": cm.Reds,
+    }
+    grouped: dict[str, list[str]] = {"deepseek": [], "gemini": [], "gpt": []}
+    for model in models:
+        grouped[_model_family(model)].append(model)
+
+    color_by_model: dict[str, tuple[float, float, float, float]] = {}
+    for family, family_models in grouped.items():
+        if not family_models:
+            continue
+        cmap = family_bases[family]
+        ordered_family_models = _ordered_family_models(family_models)
+        if len(ordered_family_models) == 1:
+            shade_points = [0.65]
+        else:
+            start = 0.45
+            stop = 0.85
+            step = (stop - start) / (len(ordered_family_models) - 1)
+            shade_points = [start + step * index for index in range(len(ordered_family_models))]
+        for model, shade in zip(ordered_family_models, shade_points, strict=False):
+            color_by_model[model] = cmap(shade)
+    return color_by_model
+
+
+def _model_family(model: str) -> str:
+    lowered = model.lower()
+    if "deepseek" in lowered:
+        return "deepseek"
+    if "gemini" in lowered:
+        return "gemini"
+    return "gpt"
+
+
+def _canonical_model_label(model: str) -> str:
+    aliases = {
+        "google-gemini-2.5-pro": "gemini-2.5-pro",
+        "openai-gpt-4o": "gpt-4o",
+        "deepseek-chat-v3-0324": "deepseek-v3-chat-0324",
+    }
+    return aliases.get(model, model)
+
+
+def _ordered_family_models(models: list[str]) -> list[str]:
+    return sorted(models, key=_model_release_rank)
+
+
+def _legend_model_order(models: list[str]) -> list[str]:
+    ordered: list[str] = []
+    for family in ("deepseek", "gemini", "gpt"):
+        family_models = [model for model in models if _model_family(model) == family]
+        ordered.extend(_ordered_family_models(family_models))
+    return ordered
+
+
+def _model_release_rank(model: str) -> tuple[int, str]:
+    canonical = _canonical_model_label(model)
+    order = {
+        "deepseek-v3-chat-0324": 0,
+        "deepseek-chat-v3.1": 1,
+        "gemini-2.0-flash-exp": 0,
+        "gemini-2.5-pro": 1,
+        "gpt-4o": 0,
+        "gpt-5": 1,
+    }
+    return (order.get(canonical, 99), canonical)
 
 
 def _path_triplet(path: Path) -> tuple[str, str, str]:

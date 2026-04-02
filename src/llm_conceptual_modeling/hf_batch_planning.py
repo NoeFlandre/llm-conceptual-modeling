@@ -8,6 +8,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     RuntimeProfile,
     build_default_decoding_grid,
+    supports_decoding_config,
     supports_explicit_thinking_disable,
 )
 from llm_conceptual_modeling.hf_batch_prompts import build_prompt_bundle
@@ -37,6 +38,8 @@ def plan_paper_batch_specs(
     for model in models:
         runtime_profile = profile_provider(model)
         for decoding in build_default_decoding_grid():
+            if not supports_decoding_config(model=model, decoding_config=decoding):
+                continue
             for replication in range(replications):
                 if "algo1" in selected_algorithms:
                     specs.extend(
@@ -291,6 +294,8 @@ def _plan_paper_batch_from_config(
     for model in config.models.chat_models:
         runtime_profile = profile_provider(model)
         for decoding in config.decoding:
+            if not supports_decoding_config(model=model, decoding_config=decoding):
+                continue
             for replication in range(config.run.replications):
                 for algorithm_name in selected_algorithms:
                     if algorithm_name == "algo1":

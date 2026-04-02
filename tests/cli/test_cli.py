@@ -624,6 +624,8 @@ def test_cli_analyze_plots_writes_revision_plot_family(tmp_path) -> None:
     assert (output_dir / "distribution_metrics.png").exists()
     assert (output_dir / "factor_effect_summary.png").exists()
     assert (output_dir / "raw_output_variability.png").exists()
+    assert (output_dir / "main_metric_spread_boxplots.png").exists()
+    assert (output_dir / "main_metric_spread_violins.png").exists()
 
 
 def test_cli_run_paper_batch_writes_batch_summary(tmp_path) -> None:

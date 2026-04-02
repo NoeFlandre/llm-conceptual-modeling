@@ -2,6 +2,8 @@ from pathlib import Path
 
 import pytest
 
+from llm_conceptual_modeling.common.hf_transformers import RuntimeProfile
+from llm_conceptual_modeling.hf_batch_planning import plan_paper_batch_specs
 from llm_conceptual_modeling.hf_run_config import (
     load_hf_run_config,
     write_resolved_run_preview,
@@ -369,3 +371,123 @@ algorithms:
         "Qwen/Qwen3.5-9B": "disabled",
         "mistralai/Ministral-3-8B-Instruct-2512": "acknowledged-unsupported",
     }
+
+
+def test_checked_in_algo3_single_model_configs_are_locally_rent_ready(tmp_path: Path) -> None:
+    repo_root = Path("/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling")
+    cases = [
+        (
+            repo_root / "configs" / "hf_transformers_algo3_olmo.yaml",
+            "allenai/Olmo-3-7B-Instruct",
+            "/workspace/results/hf-paper-batch-algo3-olmo-current",
+            {"greedy", "beam", "contrastive"},
+        ),
+        (
+            repo_root / "configs" / "hf_transformers_algo3_qwen.yaml",
+            "Qwen/Qwen3.5-9B",
+            "/workspace/results/hf-paper-batch-algo3-qwen-current",
+            {"greedy", "beam"},
+        ),
+        (
+            repo_root / "configs" / "hf_transformers_algo3_mistral.yaml",
+            "mistralai/Ministral-3-8B-Instruct-2512",
+            "/workspace/results/hf-paper-batch-algo3-mistral-current",
+            {"greedy", "beam", "contrastive"},
+        ),
+    ]
+
+    for config_path, expected_model, expected_output_root, expected_algorithms in cases:
+        config = load_hf_run_config(config_path)
+
+        assert config.run.output_root == expected_output_root
+        assert config.models.chat_models == [expected_model]
+        assert set(config.algorithms) == {"algo3"}
+        assert config.runtime.context_policy["generation_timeout_seconds"] == 600
+        assert config.algorithms["algo3"].pair_names == [
+            "subgraph_1_to_subgraph_3",
+            "subgraph_2_to_subgraph_1",
+            "subgraph_2_to_subgraph_3",
+        ]
+        planned_specs = plan_paper_batch_specs(
+            models=config.models.chat_models,
+            embedding_model=config.models.embedding_model,
+            replications=config.run.replications,
+            algorithms=["algo2"],
+            config=config,
+            runtime_profile_provider=lambda _model: RuntimeProfile(
+                device="cuda",
+                dtype="bfloat16",
+                quantization="none",
+                supports_thinking_toggle=True,
+                context_limit=None,
+            ),
+        )
+        assert {spec.decoding.algorithm for spec in planned_specs} == expected_algorithms
+
+        preview_dir = tmp_path / config_path.stem
+        write_resolved_run_preview(config=config, output_dir=preview_dir)
+
+        assert (preview_dir / "resolved_run_config.yaml").exists()
+        assert (preview_dir / "resolved_run_plan.json").exists()
+        assert (preview_dir / "prompt_preview" / "algo3" / "tree_expansion.txt").exists()
+
+
+def test_checked_in_algo2_single_model_configs_are_locally_rent_ready(tmp_path: Path) -> None:
+    repo_root = Path("/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling")
+    cases = [
+        (
+            repo_root / "configs" / "hf_transformers_algo2_olmo.yaml",
+            "allenai/Olmo-3-7B-Instruct",
+            "/workspace/results/hf-paper-batch-algo2-olmo-current",
+            {"greedy", "beam", "contrastive"},
+        ),
+        (
+            repo_root / "configs" / "hf_transformers_algo2_qwen.yaml",
+            "Qwen/Qwen3.5-9B",
+            "/workspace/results/hf-paper-batch-algo2-qwen-current",
+            {"greedy", "beam"},
+        ),
+        (
+            repo_root / "configs" / "hf_transformers_algo2_mistral.yaml",
+            "mistralai/Ministral-3-8B-Instruct-2512",
+            "/workspace/results/hf-paper-batch-algo2-mistral-current",
+            {"greedy", "beam", "contrastive"},
+        ),
+    ]
+
+    for config_path, expected_model, expected_output_root, expected_algorithms in cases:
+        config = load_hf_run_config(config_path)
+
+        assert config.run.output_root == expected_output_root
+        assert config.models.chat_models == [expected_model]
+        assert set(config.algorithms) == {"algo2"}
+        assert config.runtime.context_policy["generation_timeout_seconds"] == 600
+        assert config.runtime.context_policy["resume_pass_mode"] == "retry-timeouts"
+        assert config.runtime.context_policy["retry_timeout_failures_on_resume"] is True
+        assert config.algorithms["algo2"].pair_names == [
+            "sg1_sg2",
+            "sg2_sg3",
+            "sg3_sg1",
+        ]
+        planned_specs = plan_paper_batch_specs(
+            models=config.models.chat_models,
+            embedding_model=config.models.embedding_model,
+            replications=config.run.replications,
+            algorithms=["algo2"],
+            config=config,
+            runtime_profile_provider=lambda _model: RuntimeProfile(
+                device="cuda",
+                dtype="bfloat16",
+                quantization="none",
+                supports_thinking_toggle=True,
+                context_limit=None,
+            ),
+        )
+        assert {spec.decoding.algorithm for spec in planned_specs} == expected_algorithms
+
+        preview_dir = tmp_path / config_path.stem
+        write_resolved_run_preview(config=config, output_dir=preview_dir)
+
+        assert (preview_dir / "resolved_run_config.yaml").exists()
+        assert (preview_dir / "resolved_run_plan.json").exists()
+        assert (preview_dir / "prompt_preview" / "algo2" / "label_expansion.txt").exists()

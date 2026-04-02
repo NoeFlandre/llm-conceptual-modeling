@@ -2,7 +2,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from llm_conceptual_modeling.analysis.plots import write_revision_plots
+from llm_conceptual_modeling.analysis.plots import (
+    _build_model_color_map,
+    _canonical_model_label,
+    _legend_model_order,
+    write_revision_plots,
+)
 
 
 def test_write_revision_plots_writes_three_expected_plot_files(tmp_path: Path) -> None:
@@ -43,12 +48,47 @@ def test_write_revision_plots_writes_three_expected_plot_files(tmp_path: Path) -
         }
     ).to_csv(variability_root / "bundle_overview.csv", index=False)
 
+    main_results_root = tmp_path / "results"
+    (main_results_root / "algo1" / "gpt-5" / "evaluated").mkdir(parents=True)
+    (main_results_root / "algo2" / "gpt-5" / "evaluated").mkdir(parents=True)
+    (main_results_root / "algo3" / "gpt-5" / "evaluated").mkdir(parents=True)
+    pd.DataFrame(
+        {
+            "accuracy": [0.9, 0.8, 0.85],
+            "precision": [0.4, 0.5, 0.6],
+            "recall": [0.2, 0.3, 0.4],
+        }
+    ).to_csv(
+        main_results_root / "algo1" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+        index=False,
+    )
+    pd.DataFrame(
+        {
+            "accuracy": [0.7, 0.75, 0.72],
+            "precision": [0.45, 0.5, 0.55],
+            "recall": [0.35, 0.4, 0.45],
+        }
+    ).to_csv(
+        main_results_root / "algo2" / "gpt-5" / "evaluated" / "metrics_sg1_sg2.csv",
+        index=False,
+    )
+    pd.DataFrame(
+        {
+            "Recall": [0.0, 0.3, 0.9],
+        }
+    ).to_csv(
+        main_results_root / "algo3" / "gpt-5" / "evaluated" / "method3_results_evaluated_gpt5.csv",
+        index=False,
+    )
+
     output_dir = tmp_path / "plots"
     write_revision_plots(results_root=results_root, output_dir=output_dir)
 
     assert (output_dir / "distribution_metrics.png").exists()
     assert (output_dir / "factor_effect_summary.png").exists()
     assert (output_dir / "raw_output_variability.png").exists()
+    assert (output_dir / "main_metric_spread_boxplots.png").exists()
+    assert (output_dir / "main_metric_spread_violins.png").exists()
 
 
 def test_write_revision_plots_supports_new_aggregated_hf_layout(tmp_path: Path) -> None:
@@ -97,3 +137,56 @@ def test_write_revision_plots_supports_new_aggregated_hf_layout(tmp_path: Path) 
     assert (output_dir / "distribution_metrics.png").exists()
     assert (output_dir / "factor_effect_summary.png").exists()
     assert (output_dir / "raw_output_variability.png").exists()
+
+
+def test_build_model_color_map_groups_models_by_family_shades() -> None:
+    models = [
+        "deepseek-chat-v3.1",
+        "deepseek-v3-chat-0324",
+        "gemini-2.0-flash-exp",
+        "google-gemini-2.5-pro",
+        "gpt-5",
+        "openai-gpt-4o",
+    ]
+
+    colors = _build_model_color_map(models)
+
+    deepseek_a = colors["deepseek-chat-v3.1"]
+    deepseek_b = colors["deepseek-v3-chat-0324"]
+    gemini_a = colors["gemini-2.0-flash-exp"]
+    gemini_b = colors["google-gemini-2.5-pro"]
+    gpt_a = colors["gpt-5"]
+    gpt_b = colors["openai-gpt-4o"]
+
+    assert deepseek_a != deepseek_b
+    assert gemini_a != gemini_b
+    assert gpt_a != gpt_b
+    assert deepseek_a[2] > deepseek_a[1] and deepseek_a[2] > deepseek_a[0]
+    assert gemini_a[1] > gemini_a[0] and gemini_a[1] > gemini_a[2]
+    assert gpt_a[0] > gpt_a[1] and gpt_a[0] > gpt_a[2]
+
+
+def test_canonical_model_label_collapses_known_aliases() -> None:
+    assert _canonical_model_label("google-gemini-2.5-pro") == "gemini-2.5-pro"
+    assert _canonical_model_label("openai-gpt-4o") == "gpt-4o"
+    assert _canonical_model_label("deepseek-chat-v3-0324") == "deepseek-v3-chat-0324"
+
+
+def test_legend_model_order_groups_families_with_latest_second() -> None:
+    models = [
+        "gpt-5",
+        "deepseek-chat-v3.1",
+        "gemini-2.5-pro",
+        "gpt-4o",
+        "deepseek-v3-chat-0324",
+        "gemini-2.0-flash-exp",
+    ]
+
+    assert _legend_model_order(models) == [
+        "deepseek-v3-chat-0324",
+        "deepseek-chat-v3.1",
+        "gemini-2.0-flash-exp",
+        "gemini-2.5-pro",
+        "gpt-4o",
+        "gpt-5",
+    ]

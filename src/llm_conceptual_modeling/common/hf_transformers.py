@@ -31,6 +31,12 @@ def supports_explicit_thinking_disable(model: str) -> bool:
     return model == _QWEN_CHAT_MODEL
 
 
+def supports_decoding_config(*, model: str, decoding_config: "DecodingConfig") -> bool:
+    if model == _QWEN_CHAT_MODEL and decoding_config.algorithm == "contrastive":
+        return False
+    return True
+
+
 @dataclass(frozen=True)
 class DecodingConfig:
     algorithm: str
@@ -130,6 +136,11 @@ class HFTransformersChatClient:
         seed: int = 0,
     ) -> None:
         decoding_config.validate()
+        if not supports_decoding_config(model=model, decoding_config=decoding_config):
+            raise ValueError(
+                f"Decoding algorithm {decoding_config.algorithm!r} is unsupported for model"
+                f" {model}."
+            )
         self._model = model
         self._decoding_config = decoding_config
         self._tokenizer = tokenizer
@@ -267,7 +278,7 @@ class HFTransformersEmbeddingClient:
         torch = _torch()
         with torch.inference_mode():
             outputs = self._model(**encoded)
-        hidden_state = outputs.last_hidden_state.detach().cpu().numpy()
+        hidden_state = outputs.last_hidden_state.detach().cpu().float().numpy()
         attention_mask = encoded["attention_mask"].detach().cpu().numpy()[..., None]
         masked = hidden_state * attention_mask
         pooled = masked.sum(axis=1) / np.clip(attention_mask.sum(axis=1), 1, None)
@@ -442,17 +453,18 @@ def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:
 
 
 def _parse_generated_json(text: str, *, schema_name: str) -> object:
-    stripped = _strip_assistant_prefix(text.strip())
+    stripped = _strip_code_fence(_strip_assistant_prefix(text.strip()))
     try:
-        return json.loads(stripped)
+        parsed = json.loads(stripped)
     except json.JSONDecodeError:
         recovered = _recover_non_json_response(text=stripped, schema_name=schema_name)
         if recovered is not None:
             return recovered
         try:
-            return ast.literal_eval(stripped)
+            parsed = ast.literal_eval(stripped)
         except (ValueError, SyntaxError) as error:
             raise ValueError(f"Model did not return valid structured output: {text}") from error
+    return _normalize_schema_response(parsed, schema_name=schema_name)
 
 
 def _strip_assistant_prefix(text: str) -> str:
@@ -463,7 +475,52 @@ def _strip_assistant_prefix(text: str) -> str:
     return text
 
 
+def _strip_code_fence(text: str) -> str:
+    fenced = re.search(r"```(?P<lang>[A-Za-z0-9_-]*)\s*(?P<body>.*?)```", text, flags=re.DOTALL)
+    if fenced is not None:
+        return fenced.group("body").strip()
+    return text
+
+
+def _normalize_schema_response(parsed: object, *, schema_name: str) -> object:
+    if schema_name == "children_by_label" and _looks_like_children_mapping(parsed):
+        return {"children_by_label": parsed}
+    return parsed
+
+
+def _looks_like_children_mapping(parsed: object) -> bool:
+    if not isinstance(parsed, dict) or "children_by_label" in parsed:
+        return False
+    if not parsed:
+        return False
+    for key, value in parsed.items():
+        if not isinstance(key, str):
+            return False
+        if not isinstance(value, list):
+            return False
+        if not all(isinstance(item, str) for item in value):
+            return False
+    return True
+
+
 def _recover_non_json_response(*, text: str, schema_name: str) -> object | None:
+    if schema_name == "children_by_label":
+        recovered_children = _recover_children_mapping_from_outer_block(text)
+        if recovered_children is not None:
+            return {"children_by_label": recovered_children}
+        recovered_children = _recover_malformed_children_mapping(text)
+        if recovered_children is not None:
+            return {"children_by_label": recovered_children}
+        recovered_children = _recover_inline_children_mapping(text)
+        if recovered_children is not None:
+            return {"children_by_label": recovered_children}
+        recovered_children = _recover_children_mapping_from_lines(text)
+        if recovered_children is not None:
+            return {"children_by_label": recovered_children}
+    if schema_name == "label_list":
+        recovered_labels = _recover_label_list_from_lines(text)
+        if recovered_labels is not None:
+            return recovered_labels
     if schema_name == "edge_list":
         tuple_matches = re.findall(r"\(([^()]*)\)", text)
         if tuple_matches:
@@ -484,6 +541,226 @@ def _recover_non_json_response(*, text: str, schema_name: str) -> object | None:
         token_matches = re.findall(r"\b[YyNn]\b", text)
         if token_matches:
             return [token.upper() for token in token_matches]
+    return None
+
+
+def _recover_malformed_children_mapping(text: str) -> dict[str, list[str]] | None:
+    stripped = text.strip()
+    if not stripped.startswith("{"):
+        return None
+    candidates = [f"{stripped}}}"]
+    if stripped.endswith("]"):
+        candidates.append(f"{stripped[:-1]}}}")
+    for candidate in candidates:
+        try:
+            parsed = ast.literal_eval(candidate)
+        except (ValueError, SyntaxError):
+            continue
+        if _looks_like_children_mapping(parsed):
+            return parsed
+    return None
+
+
+def _recover_children_mapping_from_outer_block(text: str) -> dict[str, list[str]] | None:
+    block = _extract_outer_block(text=text, opener="{", closer="}")
+    if block is None:
+        return None
+    for parser in (json.loads, ast.literal_eval):
+        try:
+            parsed = parser(block)
+        except (json.JSONDecodeError, ValueError, SyntaxError):
+            continue
+        if isinstance(parsed, dict) and not parsed:
+            return {}
+        if _looks_like_children_mapping(parsed):
+            return parsed
+    return None
+
+
+def _recover_inline_children_mapping(text: str) -> dict[str, list[str]] | None:
+    block = _extract_outer_block(text=text, opener="{", closer="}")
+    if block is None:
+        return None
+    mapping: dict[str, list[str]] = {}
+    index = 1
+    length = len(block)
+    while index < length:
+        index = _skip_inline_mapping_separators(block, index)
+        if index >= length or block[index] == "}":
+            break
+        key_result = _scan_lenient_quoted_string(block, index)
+        if key_result is None:
+            return None
+        key, index = key_result
+        index = _skip_inline_mapping_separators(block, index)
+        if index >= length or block[index] != ":":
+            return None
+        index += 1
+        index = _skip_inline_mapping_separators(block, index)
+        if index >= length or block[index] != "[":
+            return None
+        values_result = _scan_lenient_quoted_list(block, index)
+        if values_result is None:
+            return None
+        values, index = values_result
+        existing_values = mapping.get(key)
+        if existing_values and not values:
+            pass
+        else:
+            mapping[key] = values
+        index = _skip_inline_mapping_separators(block, index)
+        if index < length and block[index] == ",":
+            index += 1
+    if not mapping:
+        return None
+    return mapping
+
+
+def _skip_inline_mapping_separators(text: str, index: int) -> int:
+    while index < len(text) and text[index] in {" ", "\t", "\n", "\r"}:
+        index += 1
+    return index
+
+
+def _scan_lenient_quoted_list(text: str, start_index: int) -> tuple[list[str], int] | None:
+    if text[start_index] != "[":
+        return None
+    index = start_index + 1
+    values: list[str] = []
+    while index < len(text):
+        index = _skip_inline_mapping_separators(text, index)
+        if index >= len(text):
+            return None
+        if text[index] == "]":
+            return values, index + 1
+        item_result = _scan_lenient_quoted_string(text, index)
+        if item_result is None:
+            return None
+        item, index = item_result
+        values.append(item)
+        index = _skip_inline_mapping_separators(text, index)
+        if index < len(text) and text[index] == ",":
+            index += 1
+            continue
+        if index < len(text) and text[index] == "]":
+            return values, index + 1
+        return None
+    return None
+
+
+def _scan_lenient_quoted_string(text: str, start_index: int) -> tuple[str, int] | None:
+    if start_index >= len(text) or text[start_index] not in {"'", '"'}:
+        return None
+    opening_quote = text[start_index]
+    delimiter_chars = {",", "]", "}", ":"}
+    index = start_index + 1
+    while index < len(text):
+        current_char = text[index]
+        if current_char in {"'", '"'}:
+            next_index = _skip_inline_mapping_separators(text, index + 1)
+            if next_index >= len(text) or text[next_index] in delimiter_chars:
+                value = text[start_index + 1 : index].strip()
+                return value, index + 1
+            if (
+                current_char == opening_quote
+                and index > start_index + 1
+                and index + 1 < len(text)
+                and text[index - 1].isalnum()
+                and text[index + 1].isalnum()
+            ):
+                index += 1
+                continue
+        index += 1
+    return None
+
+
+def _recover_children_mapping_from_lines(text: str) -> dict[str, list[str]] | None:
+    block = _extract_outer_block(text=text, opener="{", closer="}")
+    if block is None:
+        return None
+    lines = [line.strip() for line in block.splitlines() if line.strip()]
+    if not lines:
+        return None
+    key: str | None = None
+    values: list[str] = []
+    in_children = False
+    for line in lines:
+        if line in {"{", "}"}:
+            continue
+        if key is None:
+            if ":" not in line:
+                return None
+            key = _extract_quoted_line_value(line.split(":", 1)[0])
+            if key is None or "[" not in line:
+                return None
+            in_children = True
+            continue
+        if not in_children:
+            continue
+        if line.startswith("]") or line.startswith("}"):
+            break
+        value = _extract_quoted_line_value(line)
+        if value is None:
+            return None
+        values.append(value)
+    if key is None or not values:
+        return None
+    return {key: values}
+
+
+def _recover_label_list_from_lines(text: str) -> list[str] | None:
+    block = _extract_outer_block(text=text, opener="[", closer="]")
+    if block is None:
+        block = _recover_truncated_list_block(text)
+        if block is None:
+            return None
+    labels: list[str] = []
+    for raw_line in block.splitlines():
+        line = raw_line.strip()
+        if not line or line in {"[", "]"}:
+            continue
+        label = _extract_quoted_line_value(line)
+        if label is None:
+            return None
+        labels.append(label)
+    if not labels:
+        return None
+    return labels
+
+
+def _recover_truncated_list_block(text: str) -> str | None:
+    stripped = text.strip()
+    if not stripped.startswith("[") or stripped.endswith("]"):
+        return None
+    candidate = f"{stripped}]"
+    try:
+        parsed = ast.literal_eval(candidate)
+    except (ValueError, SyntaxError):
+        return None
+    if (
+        not isinstance(parsed, list)
+        or not parsed
+        or not all(isinstance(item, str) for item in parsed)
+    ):
+        return None
+    return candidate
+
+
+def _extract_outer_block(*, text: str, opener: str, closer: str) -> str | None:
+    start = text.find(opener)
+    end = text.rfind(closer)
+    if start == -1 or end == -1 or end <= start:
+        return None
+    return text[start : end + 1]
+
+
+def _extract_quoted_line_value(text: str) -> str | None:
+    stripped = text.strip().rstrip(",")
+    for quote in ("'", '"'):
+        start = stripped.find(quote)
+        end = stripped.rfind(quote)
+        if start != -1 and end > start:
+            return stripped[start + 1 : end].strip()
     return None
 
 

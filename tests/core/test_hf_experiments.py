@@ -1514,6 +1514,77 @@ def test_run_paper_batch_continues_after_failure_and_finishes_later_runs(
     assert batch_status["finished_count"] > 0
 
 
+def test_run_paper_batch_aborts_after_infrastructure_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    first = HFRunSpec(
+        algorithm="algo2",
+        model="mistralai/Ministral-3-8B-Instruct-2512",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="000000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
+        runtime_profile=_runtime_profile(),
+        context_policy={},
+    )
+    second = HFRunSpec(
+        algorithm="algo2",
+        model="mistralai/Ministral-3-8B-Instruct-2512",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="beam", num_beams=2),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="000001",
+        condition_label="beam_num_beams_2",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
+        runtime_profile=_runtime_profile(),
+        context_policy={},
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [first, second],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(spec):
+        call_count["count"] += 1
+        assert spec == first
+        raise RuntimeError(
+            "hf-transformers local inference requires CUDA; CPU fallback is disabled."
+        )
+
+    with pytest.raises(RuntimeError, match="Infrastructure failure"):
+        run_paper_batch(
+            output_root=output_root,
+            models=["mistralai/Ministral-3-8B-Instruct-2512"],
+            embedding_model="Qwen/Qwen3-Embedding-0.6B",
+            replications=1,
+            runtime_factory=runtime_factory,
+        )
+
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+    assert call_count["count"] == 1
+    assert batch_status["failed_count"] == 1
+    assert batch_status["finished_count"] == 0
+    assert batch_status["running_count"] == 0
+    assert batch_status["pending_count"] == 1
+
+
 def test_run_local_hf_spec_subprocess_retries_retryable_structured_output_failure(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -1680,6 +1751,97 @@ def test_run_local_hf_spec_subprocess_retries_retryable_structural_invalid_resul
 
     assert attempts["count"] == 2
     assert actual["raw_row"]["Result"] == "[('alpha', 'gamma')]"
+
+
+def test_run_local_hf_spec_subprocess_retries_broken_pipe_runtime_error(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    spec = HFRunSpec(
+        algorithm="algo3",
+        model="mistralai/Ministral-3-8B-Instruct-2512",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="0000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        replication=0,
+        prompt_factors={},
+        prompt_bundle=None,
+        decoding=DecodingConfig(
+            algorithm="contrastive",
+            penalty_alpha=0.8,
+            top_k=4,
+            temperature=0.0,
+        ),
+        input_payload={"source_graph": [], "target_graph": []},
+        raw_context={},
+        seed=1,
+        runtime_profile=RuntimeProfile(
+            supports_thinking_toggle=False,
+            quantization="none",
+            device="cuda",
+            dtype="bfloat16",
+            context_limit=None,
+        ),
+        max_new_tokens_by_schema={
+            "edge_list": 32,
+            "vote_list": 16,
+            "label_list": 16,
+            "children_by_label": 64,
+        },
+        context_policy={},
+    )
+
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        result_json_path = Path(kwargs["command"][6])
+        if attempts["count"] == 1:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "RuntimeError",
+                            "message": "BrokenPipeError: [Errno 32] Broken pipe",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        else:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "runtime_result": {
+                            "raw_row": {
+                                "Recall": 0.0,
+                                "Source Graph": "[]",
+                                "Target Graph": "[]",
+                                "Mother Graph": "[]",
+                            },
+                            "runtime": {"thinking_mode_supported": False},
+                            "raw_response": "{}",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        return type("Completed", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.run_monitored_command",
+        fake_run_monitored_command,
+    )
+
+    actual = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Recall"] == 0.0
 
 
 def test_run_paper_batch_writes_aggregated_outputs_and_ci_reports(tmp_path: Path) -> None:
