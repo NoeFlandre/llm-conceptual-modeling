@@ -5,6 +5,7 @@ from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, Runti
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_resume_state import (
     build_seeded_resume_snapshot,
+    classify_failure_payload,
     load_valid_finished_summary,
     order_planned_specs_for_resume,
 )
@@ -154,6 +155,57 @@ def test_build_seeded_resume_snapshot_counts_finished_and_deferred_timeout(
     assert len(summary_rows) == 1
     assert seeded_finished == {finished_dir}
     assert seeded_failed == {failed_dir}
+
+
+def test_build_seeded_resume_snapshot_can_defer_oom_failures_when_disabled(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    failed_spec = _make_spec(
+        pair_name="sg1_sg2",
+        condition_bits="00001",
+        context_policy={
+            "resume_pass_mode": "throughput",
+            "retry_oom_failures_on_resume": False,
+        },
+    )
+
+    failed_dir = _run_dir(output_root, failed_spec)
+    failed_dir.mkdir(parents=True, exist_ok=True)
+    (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (failed_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "RuntimeError",
+                "message": "CUDA out of memory while executing generation.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    snapshot, _summary_rows, _seeded_finished, seeded_failed = build_seeded_resume_snapshot(
+        output_root=output_root,
+        planned_specs=[failed_spec],
+        started_at="2026-04-01T00:00:01+00:00",
+        run_dir_for_spec_fn=_run_dir,
+        current_run_payload_fn=lambda **payload: payload,
+        status_timestamp_now_fn=lambda: "2026-04-01T00:00:02+00:00",
+        validate_structural_runtime_result_fn=lambda **_: None,
+    )
+
+    assert snapshot["finished_count"] == 0
+    assert snapshot["failed_count"] == 1
+    assert snapshot["pending_count"] == 0
+    assert seeded_failed == {failed_dir}
+
+
+def test_classify_failure_payload_detects_oom() -> None:
+    error = {
+        "type": "RuntimeError",
+        "message": "CUDA out of memory while executing generation.",
+    }
+
+    assert classify_failure_payload(error) == "oom"
 
 
 def test_order_planned_specs_for_resume_prioritizes_low_timeout_risk_pairs(

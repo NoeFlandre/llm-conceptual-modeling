@@ -101,6 +101,9 @@ Persistent-worker guidance:
   host/model
 - `BATCH_MAX_REQUESTS_PER_WORKER_PROCESS`: optional recycling budget for persistent mode so one
   process does not live forever
+- `BATCH_RETRY_OOM_FAILURES_ON_RESUME=false`: optional targeted pass setting when a host has already
+  shown deterministic CUDA OOM failures and you want to defer them instead of replaying them on the
+  same card
 
 Pass guidance:
 

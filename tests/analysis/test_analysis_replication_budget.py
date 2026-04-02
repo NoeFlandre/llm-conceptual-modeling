@@ -52,3 +52,39 @@ def test_cli_analyze_replication_budget_writes_required_run_counts(tmp_path: Pat
     assert zero_mean_zero_std_row["additional_runs_needed"] == 0
     assert zero_mean_zero_std_row["precision_margin"] == 0.0
     assert zero_mean_zero_std_row["requirement_status"] == "satisfied_zero_mean"
+
+
+def test_cli_analyze_replication_budget_treats_nan_sample_std_as_no_extra_budget(
+    tmp_path: Path,
+) -> None:
+    input_path = tmp_path / "condition_stability.csv"
+    output_path = tmp_path / "replication_budget.csv"
+    pd.DataFrame(
+        {
+            "source_input": ["a.csv"],
+            "Condition": ["A"],
+            "metric": ["accuracy"],
+            "n": [1],
+            "mean": [100.0],
+            "sample_std": [float("nan")],
+        }
+    ).to_csv(input_path, index=False)
+
+    exit_code = main(
+        [
+            "analyze",
+            "replication-budget",
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    assert exit_code == 0
+
+    actual = pd.read_csv(output_path)
+    row = actual.iloc[0]
+    assert row["required_total_runs"] == 1
+    assert row["additional_runs_needed"] == 0
+    assert row["requirement_status"] == "satisfied"

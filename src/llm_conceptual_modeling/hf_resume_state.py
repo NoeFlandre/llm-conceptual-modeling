@@ -176,13 +176,15 @@ def load_deferred_failed_summary(
         return None
     error = read_artifact_json_fn(run_dir / "error.json")
     failure_kind = classify_failure_payload(error)
-    if failure_kind != "timeout":
-        return None
-    if resolve_retry_timeout_failures_on_resume(context_policy):
+    if failure_kind == "timeout" and not resolve_retry_timeout_failures_on_resume(context_policy):
+        pass
+    elif failure_kind == "oom" and not resolve_retry_oom_failures_on_resume(context_policy):
+        pass
+    else:
         return None
     return {
         "run_dir": str(run_dir),
-        "message": str(error.get("message", "Deferred timeout failure during resume.")),
+        "message": str(error.get("message", "Deferred failure during resume.")),
         "type": str(error.get("type", "RuntimeError")),
         "failure_kind": failure_kind,
         "deferred_on_resume": True,
@@ -202,6 +204,20 @@ def resolve_retry_timeout_failures_on_resume(
         return raw_value
     raise TypeError(
         "retry_timeout_failures_on_resume value must be boolean, "
+        f"got {type(raw_value).__name__}"
+    )
+
+
+def resolve_retry_oom_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    if context_policy is None:
+        return True
+    raw_value = context_policy.get("retry_oom_failures_on_resume", True)
+    if isinstance(raw_value, bool):
+        return raw_value
+    raise TypeError(
+        "retry_oom_failures_on_resume value must be boolean, "
         f"got {type(raw_value).__name__}"
     )
 
@@ -229,6 +245,9 @@ def classify_failure_payload(error: JsonObject) -> str:
     message = str(error.get("message", ""))
     if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
         return "timeout"
+    lowered_message = message.lower()
+    if "out of memory" in lowered_message:
+        return "oom"
     if error_type == "StaleRunState":
         return "stale"
     if error_type in {"ValueError", "RuntimeError"} and (

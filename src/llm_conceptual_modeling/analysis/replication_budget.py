@@ -74,6 +74,8 @@ def _required_total_runs(
 ) -> int:
     if observed_runs <= 0:
         raise ValueError("observed_runs must be positive.")
+    if not math.isfinite(sample_std):
+        return observed_runs
     if sample_std < 0:
         raise ValueError("sample_std must be non-negative.")
     if mean == 0 or sample_std == 0:
