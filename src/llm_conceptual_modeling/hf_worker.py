@@ -14,14 +14,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
 )
 from llm_conceptual_modeling.hf_batch_utils import resolve_hf_token
 from llm_conceptual_modeling.hf_spec_codec import deserialize_spec
-
-
-def _update_worker_state(path: Path, updates: dict[str, object]) -> None:
-    payload: dict[str, object] = {}
-    if path.exists():
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    payload.update(updates)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+from llm_conceptual_modeling.hf_worker_state import mark_worker_loading_model
 
 
 def serve_request_queue(
@@ -76,16 +69,11 @@ def _execute_request(
     requests_served_by_process: int = 1,
 ) -> int:
     spec = deserialize_spec(json.loads(spec_json_path.read_text(encoding="utf-8")))
-    _update_worker_state(
+    mark_worker_loading_model(
         run_dir / "worker_state.json",
-        {
-            "status": "running",
-            "phase": "loading_model",
-            "worker_pid": os.getpid(),
-            "model_loaded": False,
-            "requests_served_by_process": requests_served_by_process,
-            "updated_at": datetime.now(UTC).isoformat(),
-        },
+        worker_pid=os.getpid(),
+        requests_served_by_process=requests_served_by_process,
+        timestamp=datetime.now(UTC).isoformat(),
     )
     from llm_conceptual_modeling.hf_experiments import _run_algo1, _run_algo2, _run_algo3
 

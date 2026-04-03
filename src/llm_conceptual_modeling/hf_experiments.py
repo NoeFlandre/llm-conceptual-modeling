@@ -185,6 +185,9 @@ from llm_conceptual_modeling.hf_subprocess import (
     build_hf_download_environment,
     run_monitored_command,
 )
+from llm_conceptual_modeling.hf_worker_state import (
+    mark_worker_ready_for_execution as _worker_state_mark_ready_for_execution,
+)
 
 
 class BatchInfrastructureFailure(RuntimeError):
@@ -701,18 +704,10 @@ def _worker_loaded_model(run_dir: Path) -> bool:
 def _mark_worker_ready_for_execution(run_dir: Path | None) -> None:
     if run_dir is None:
         return
-    worker_state_path = run_dir / "worker_state.json"
-    payload = _read_artifact_json(worker_state_path)
-    payload.update(
-        {
-            "status": "running",
-            "phase": "executing_algorithm",
-            "model_loaded": True,
-            "model_loaded_at": _status_timestamp_now(),
-            "updated_at": _status_timestamp_now(),
-        }
+    _worker_state_mark_ready_for_execution(
+        run_dir / "worker_state.json",
+        timestamp=_status_timestamp_now(),
     )
-    _write_json(worker_state_path, payload)
 
 
 def _execute_run(
