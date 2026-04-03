@@ -149,75 +149,15 @@ class HFRunConfig:
 
 def load_hf_run_config(path: str | Path) -> HFRunConfig:
     raw = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
-    shared_fragments = {
-        str(name): str(text) for name, text in dict(raw.get("shared_fragments", {})).items()
-    }
-    algorithms: dict[str, AlgorithmPromptConfig] = {}
-
-    for algorithm_name, algorithm_payload in dict(raw["algorithms"]).items():
-        fragment_definitions = dict(shared_fragments)
-        fragment_definitions.update(
-            {
-                str(name): str(text)
-                for name, text in dict(algorithm_payload.get("fragment_definitions", {})).items()
-            }
-        )
-        factor_payloads = dict(algorithm_payload.get("factors", {}))
-        factors = {
-            str(name): _load_factor_config(payload)
-            for name, payload in factor_payloads.items()
-        }
-        algorithm_config = AlgorithmPromptConfig(
-            name=str(algorithm_name),
-            base_fragments=[
-                str(name) for name in list(algorithm_payload.get("base_fragments", []))
-            ],
-            factors=factors,
-            fragment_definitions=fragment_definitions,
-            prompt_templates={
-                str(name): str(text)
-                for name, text in dict(algorithm_payload.get("prompt_templates", {})).items()
-            },
-            pair_names=[
-                str(name) for name in list(algorithm_payload.get("pair_names", []))
-            ]
-            or None,
-        )
-        _validate_algorithm_fragments(algorithm_config)
-        algorithms[str(algorithm_name)] = algorithm_config
-
+    shared_fragments = _load_string_map(raw.get("shared_fragments", {}), label="shared fragments")
     config = HFRunConfig(
-        run=RunConfig(
-            provider=str(raw["run"]["provider"]),
-            output_root=str(raw["run"]["output_root"]),
-            replications=int(raw["run"]["replications"]),
-        ),
-        runtime=RuntimeConfig(
-            seed=int(raw["runtime"]["seed"]),
-            temperature=float(raw["runtime"]["temperature"]),
-            quantization=str(raw["runtime"]["quantization"]),
-            device_policy=str(raw["runtime"]["device_policy"]),
-            context_policy=dict(raw["runtime"]["context_policy"]),
-            max_new_tokens_by_schema={
-                str(name): int(value)
-                for name, value in dict(raw["runtime"]["max_new_tokens_by_schema"]).items()
-            },
-            thinking_mode_by_model={
-                str(name): str(value)
-                for name, value in dict(raw["runtime"].get("thinking_mode_by_model", {})).items()
-            },
-        ),
-        models=ModelsConfig(
-            chat_models=[str(model) for model in list(raw["models"]["chat_models"])],
-            embedding_model=str(raw["models"]["embedding_model"]),
-        ),
-        decoding=_load_decoding_configs(
-            raw["decoding"],
-            temperature=float(raw["runtime"]["temperature"]),
-        ),
+        run=_load_run_config(raw),
+        runtime=_load_runtime_config(raw),
+        models=_load_models_config(raw),
+        decoding=_load_decoding_configs(raw["decoding"], temperature=float(raw["runtime"]["temperature"])),
         graph_source=str(raw["inputs"]["graph_source"]),
         shared_fragments=shared_fragments,
-        algorithms=algorithms,
+        algorithms=_load_algorithm_configs(raw, shared_fragments=shared_fragments),
     )
     _validate_top_level_config(config)
     return config
@@ -285,6 +225,16 @@ def _load_factor_config(payload: object) -> FactorConfig:
 
 
 def _load_decoding_configs(raw: object, *, temperature: float) -> list[DecodingConfig]:
+    if isinstance(raw, list):
+        configs = _load_resolved_decoding_configs(raw, temperature=temperature)
+    else:
+        configs = _load_source_decoding_configs(raw, temperature=temperature)
+    for config in configs:
+        config.validate()
+    return configs
+
+
+def _load_source_decoding_configs(raw: object, *, temperature: float) -> list[DecodingConfig]:
     payload = _expect_mapping(raw, label="Decoding payload")
     configs: list[DecodingConfig] = []
     if _expect_mapping(payload.get("greedy", {}), label="Greedy decoding").get("enabled", False):
@@ -321,8 +271,25 @@ def _load_decoding_configs(raw: object, *, temperature: float) -> list[DecodingC
                     temperature=temperature,
                 )
             )
-    for config in configs:
-        config.validate()
+    return configs
+
+
+def _load_resolved_decoding_configs(raw: object, *, temperature: float) -> list[DecodingConfig]:
+    configs: list[DecodingConfig] = []
+    for index, payload in enumerate(_expect_list(raw, label="Resolved decoding payload")):
+        data = _expect_mapping(payload, label=f"Decoding condition {index}")
+        configs.append(
+            DecodingConfig(
+                algorithm=str(data["algorithm"]),
+                num_beams=_coerce_optional_int(data.get("num_beams"), label="Decoding num_beams"),
+                penalty_alpha=_coerce_optional_float(
+                    data.get("penalty_alpha"),
+                    label="Decoding penalty_alpha",
+                ),
+                top_k=_coerce_optional_int(data.get("top_k"), label="Decoding top_k"),
+                temperature=float(data.get("temperature", temperature)),
+            )
+        )
     return configs
 
 
@@ -379,12 +346,126 @@ def _coerce_float(value: object, *, label: str) -> float:
     raise ValueError(f"{label} must be float-like, got {type(value)!r}")
 
 
+def _coerce_optional_int(value: object, *, label: str) -> int | None:
+    if value is None:
+        return None
+    return _coerce_int(value, label=label)
+
+
+def _coerce_optional_float(value: object, *, label: str) -> float | None:
+    if value is None:
+        return None
+    return _coerce_float(value, label=label)
+
+
+def _load_optional_string_list(raw: object) -> list[str] | None:
+    if raw is None:
+        return None
+    return [str(name) for name in _expect_list(raw, label="Optional string list")]
+
+
 def _coerce_runtime_value(value: object) -> bool | int | None:
     if value is None:
         return None
     if isinstance(value, bool):
         return value
     return _coerce_int(value, label="Runtime value")
+
+
+def _load_string_map(raw: object, *, label: str) -> dict[str, str]:
+    return {str(name): str(text) for name, text in _expect_mapping(raw, label=label).items()}
+
+
+def _load_algorithm_configs(
+    raw: Mapping[str, object],
+    *,
+    shared_fragments: dict[str, str],
+) -> dict[str, AlgorithmPromptConfig]:
+    algorithms: dict[str, AlgorithmPromptConfig] = {}
+    for algorithm_name, algorithm_payload in _expect_mapping(raw["algorithms"], label="algorithms").items():
+        algorithm_config = _load_algorithm_config(
+            algorithm_name=str(algorithm_name),
+            algorithm_payload=algorithm_payload,
+            shared_fragments=shared_fragments,
+        )
+        _validate_algorithm_fragments(algorithm_config)
+        algorithms[algorithm_config.name] = algorithm_config
+    return algorithms
+
+
+def _load_algorithm_config(
+    *,
+    algorithm_name: str,
+    algorithm_payload: object,
+    shared_fragments: dict[str, str],
+) -> AlgorithmPromptConfig:
+    payload = _expect_mapping(algorithm_payload, label=f"Algorithm payload for {algorithm_name}")
+    fragment_definitions = dict(shared_fragments)
+    fragment_definitions.update(
+        _load_string_map(
+            payload.get("fragment_definitions", {}),
+            label=f"fragment_definitions for {algorithm_name}",
+        )
+    )
+    factors = {
+        str(name): _load_factor_config(value)
+        for name, value in _expect_mapping(payload.get("factors", {}), label=f"factors for {algorithm_name}").items()
+    }
+    return AlgorithmPromptConfig(
+        name=algorithm_name,
+        base_fragments=[
+            str(name) for name in _expect_list(payload.get("base_fragments", []), label=f"base_fragments for {algorithm_name}")
+        ],
+        factors=factors,
+        fragment_definitions=fragment_definitions,
+        prompt_templates=_load_string_map(
+            payload.get("prompt_templates", {}),
+            label=f"prompt_templates for {algorithm_name}",
+        ),
+        pair_names=_load_optional_string_list(payload.get("pair_names")),
+    )
+
+
+def _load_run_config(raw: Mapping[str, object]) -> RunConfig:
+    run = _expect_mapping(raw["run"], label="run")
+    return RunConfig(
+        provider=str(run["provider"]),
+        output_root=str(run["output_root"]),
+        replications=int(run["replications"]),
+    )
+
+
+def _load_runtime_config(raw: Mapping[str, object]) -> RuntimeConfig:
+    runtime = _expect_mapping(raw["runtime"], label="runtime")
+    return RuntimeConfig(
+        seed=int(runtime["seed"]),
+        temperature=float(runtime["temperature"]),
+        quantization=str(runtime["quantization"]),
+        device_policy=str(runtime["device_policy"]),
+        context_policy=dict(_expect_mapping(runtime["context_policy"], label="context_policy")),
+        max_new_tokens_by_schema={
+            str(name): int(value)
+            for name, value in _expect_mapping(
+                runtime["max_new_tokens_by_schema"],
+                label="max_new_tokens_by_schema",
+            ).items()
+        },
+        thinking_mode_by_model={
+            str(name): str(value)
+            for name, value in _expect_mapping(
+                runtime.get("thinking_mode_by_model", {}),
+                label="thinking_mode_by_model",
+            ).items()
+        },
+    )
+
+
+def _load_models_config(raw: Mapping[str, object]) -> ModelsConfig:
+    models = _expect_mapping(raw["models"], label="models")
+    return ModelsConfig(
+        chat_models=[str(model) for model in _expect_list(models["chat_models"], label="chat_models")],
+        embedding_model=str(models["embedding_model"]),
+    )
 
 
 def _validate_top_level_config(config: HFRunConfig) -> None:

@@ -258,6 +258,12 @@ Interpretation:
 - `finished`
   - no useful resume work remains
 
+Resume inputs are intentionally flexible:
+
+- `resume-sweep` will prefer `preview_resume/resolved_run_config.yaml` when it exists
+- that resolved preview is reloadable by `lcm run resume-preflight`
+- this means the seeded preview artifact is the preferred resume source for a fresh host
+
 ## 8. Main Remote Operational Pattern
 
 Treat rented hosts as disposable execution surfaces.

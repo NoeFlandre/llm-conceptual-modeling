@@ -149,6 +149,11 @@ This writes:
 - `resolved_run_plan.json`
 - `prompt_preview/...`
 
+For resume workflows, the local sweep prefers a seeded
+`preview_resume/resolved_run_config.yaml` when it exists under a result root. That resolved
+preview is reloadable directly by `lcm run resume-preflight`, so a fresh host can resume from the
+local artifact without another config translation step.
+
 Then run the exact-condition smoke gate before the full DOE. This is the command that decides
 whether the rented machine is actually ready:
 

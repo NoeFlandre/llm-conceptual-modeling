@@ -179,6 +179,64 @@ algorithms:
     assert "You are a helpful assistant. Task body." == prompt_preview
 
 
+def test_load_hf_run_config_accepts_resolved_preview_decoding_list(tmp_path: Path) -> None:
+    config_path = tmp_path / "run.yaml"
+    output_dir = tmp_path / "preview"
+    _write_config(
+        config_path,
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 2
+runtime:
+  seed: 13
+  temperature: 1.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    edge_list: 256
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  greedy:
+    enabled: true
+  beam:
+    enabled: true
+    num_beams: [2]
+inputs:
+  graph_source: default
+shared_fragments:
+  assistant_role: "You are a helpful assistant."
+algorithms:
+  algo1:
+    base_fragments: [assistant_role]
+    factors: {}
+    fragment_definitions: {}
+    prompt_templates:
+      body: "Task body."
+""",
+    )
+
+    config = load_hf_run_config(config_path)
+    write_resolved_run_preview(config=config, output_dir=output_dir)
+
+    resolved_config = load_hf_run_config(output_dir / "resolved_run_config.yaml")
+
+    assert [item.algorithm for item in resolved_config.decoding] == ["greedy", "beam"]
+    assert resolved_config.decoding[0].temperature == 1.0
+    assert resolved_config.decoding[1].num_beams == 2
+    assert resolved_config.algorithms["algo1"].assemble_prompt([]) == (
+        "You are a helpful assistant. Task body."
+    )
+
+
 def test_write_resolved_run_preview_writes_all_condition_prompt_variants(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"
