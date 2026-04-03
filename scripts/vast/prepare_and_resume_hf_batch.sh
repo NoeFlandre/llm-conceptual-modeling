@@ -62,14 +62,7 @@ LOCAL_RESULTS_SYNC_STATUS_PATH="${LOCAL_RESULTS_SYNC_STATUS_PATH:-}"
 LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH="${LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH:-}"
 REMOTE_PREVIEW_SCRIPT="${REMOTE_PREVIEW_SCRIPT:-$REMOTE_REPO_DIR/scripts/vast/remote_resume_preview.sh}"
 REMOTE_LAUNCH_SCRIPT="${REMOTE_LAUNCH_SCRIPT:-$REMOTE_REPO_DIR/scripts/vast/remote_resume_launch.sh}"
-
-if [ "$REMOTE_RUNTIME_MODE" = "auto" ]; then
-  if vast_has_value "$REMOTE_DOCKER_IMAGE"; then
-    REMOTE_RUNTIME_MODE="docker"
-  else
-    REMOTE_RUNTIME_MODE="bootstrap"
-  fi
-fi
+REMOTE_RUNTIME_MODE="$(vast_select_remote_runtime_mode "$REMOTE_RUNTIME_MODE" "$REMOTE_DOCKER_IMAGE")"
 
 SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))
 RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"

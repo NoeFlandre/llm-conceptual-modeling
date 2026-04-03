@@ -81,10 +81,11 @@ def test_prepare_and_resume_script_supports_container_first_runtime_mode() -> No
         in script_text
     )
     assert 'REMOTE_DOCKER_PULL="${REMOTE_DOCKER_PULL:-1}"' in script_text
-    assert 'if [ "$REMOTE_RUNTIME_MODE" = "auto" ]; then' in script_text
-    assert 'if vast_has_value "$REMOTE_DOCKER_IMAGE"; then' in script_text
-    assert 'REMOTE_RUNTIME_MODE="docker"' in script_text
-    assert 'REMOTE_RUNTIME_MODE="bootstrap"' in script_text
+    assert (
+        'REMOTE_RUNTIME_MODE="$(vast_select_remote_runtime_mode '
+        '"$REMOTE_RUNTIME_MODE" "$REMOTE_DOCKER_IMAGE")"'
+        in script_text
+    )
     assert 'if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then' in script_text
     assert 'elif [ "$REMOTE_RUNTIME_MODE" = "bootstrap" ]; then' in script_text
     assert "docker image inspect" in script_text
@@ -130,6 +131,7 @@ def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
     assert "vast_rsync_resume_flags()" in script_text
     assert "vast_has_value()" in script_text
     assert "vast_require_positive_integer()" in script_text
+    assert "vast_select_remote_runtime_mode()" in script_text
 
 
 def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:

@@ -18,7 +18,7 @@ Fresh-host flow now starts with a local preflight:
 The wrapper script runs this automatically before any SSH sync or bootstrap so obvious seed problems fail locally instead of wasting rented GPU time.
 The fresh-host wrapper accepts config paths that live either under the checked-in repo or under the seeded local results root, which keeps legacy result-root configs like `results/hf-paper-batch-algo1-qwen/runtime_config.yaml` launchable without manual copying.
 The repository sync step now excludes the top-level `results/` tree plus local-only caches like `.work-venv/` and `.ruff_cache/`, in addition to `data/results/` and `data/analysis_artifacts/`, so the host only receives source and seeded results.
-- The wrapper now supports a container-first runtime mode. If `REMOTE_DOCKER_IMAGE` is set, the wrapper automatically switches to Docker mode unless you explicitly force `REMOTE_RUNTIME_MODE=bootstrap`. In that mode, the synced repo and seeded results are mounted into the container and the remote preview/launch helpers run inside it.
+- The wrapper now supports a container-first runtime mode. If `REMOTE_DOCKER_IMAGE` is set, the wrapper automatically switches to Docker mode unless you explicitly force `REMOTE_RUNTIME_MODE=bootstrap`. The mode choice is centralized in `scripts/vast/common.sh` via `vast_select_remote_runtime_mode()`. In Docker mode, the synced repo and seeded results are mounted into the container and the remote preview/launch helpers run inside it.
 - `fetch_results_from_vast.sh`: one-shot pull of a remote results root back to the local machine
 - `watch_results_from_vast.sh`: repeated local pull loop for periodic result syncing
 - `sync_repo_to_vast.sh`: repository-only sync helper

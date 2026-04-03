@@ -41,3 +41,17 @@ vast_require_positive_integer() {
     return 1
   fi
 }
+
+vast_select_remote_runtime_mode() {
+  local runtime_mode="$1"
+  local docker_image="$2"
+  if [ "$runtime_mode" = "auto" ]; then
+    if vast_has_value "$docker_image"; then
+      printf '%s\n' "docker"
+    else
+      printf '%s\n' "bootstrap"
+    fi
+    return 0
+  fi
+  printf '%s\n' "$runtime_mode"
+}
