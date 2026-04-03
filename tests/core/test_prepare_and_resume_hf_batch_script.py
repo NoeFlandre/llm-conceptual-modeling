@@ -53,17 +53,21 @@ def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
-    assert "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS" in script_text
+    assert 'LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-60}"' in script_text
     assert "LOCAL_RESULTS_SYNC_LOG_PATH" in script_text
     assert "LOCAL_RESULTS_SYNC_PID_PATH" in script_text
+    assert "LOCAL_RESULTS_SYNC_STATUS_PATH" in script_text
+    assert "LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH" in script_text
     assert "scripts/vast/watch_results_from_vast.sh" in script_text
     assert "nohup bash" in script_text
+    assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
 
 
 def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
     script_path = Path("scripts/vast/common.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
+    assert "vast_ssh_transport_flags()" in script_text
     assert "vast_ssh_command()" in script_text
     assert "vast_rsync_ssh_command()" in script_text
     assert "vast_has_value()" in script_text

@@ -411,9 +411,18 @@ When moving a batch to a new host:
 
 This prevents regeneration of already-finished runs.
 
-## 12. Local Result Sync Automations
+## 12. Local Result Sync
 
-We use local `launchd` agents to keep pulling remote results.
+Primary path now:
+
+- use `scripts/vast/prepare_and_resume_hf_batch.sh`
+- if a local results root is provided, it automatically launches and maintains the local result pull loop
+- do not rely on manual watcher startup as the normal path anymore
+
+Legacy path:
+
+- we also used local `launchd` agents to keep pulling remote results
+- they can still exist, but they are no longer the preferred control surface for fresh resumes
 
 Known labels:
 
@@ -445,6 +454,21 @@ Typical plist location:
 Typical local log destination:
 
 - inside the local result tree as `results-sync.log`
+
+Important health artifacts inside the local results tree:
+
+- `results-sync-status.json`
+  - `healthy` means the last pull succeeded
+  - `degraded` means the watcher is retrying after a failed pull
+- `results-sync-last-success.txt`
+  - last confirmed successful local pull timestamp
+- `results-sync.pid`
+  - current watcher pid
+
+Practical implication:
+
+- when a GPU host disappears, check `results-sync-last-success.txt` first
+- do not assume a live watcher process means recent results are already safe locally
 
 ## 13. Common Failure Modes We Have Already Seen
 

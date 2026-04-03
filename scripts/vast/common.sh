@@ -1,20 +1,31 @@
 #!/usr/bin/env bash
 
+VAST_SSH_CONNECT_TIMEOUT_SECONDS="${VAST_SSH_CONNECT_TIMEOUT_SECONDS:-10}"
+VAST_SSH_SERVER_ALIVE_INTERVAL_SECONDS="${VAST_SSH_SERVER_ALIVE_INTERVAL_SECONDS:-30}"
+VAST_SSH_SERVER_ALIVE_COUNT_MAX="${VAST_SSH_SERVER_ALIVE_COUNT_MAX:-6}"
+
 vast_has_value() {
   local value="$1"
   [ -n "$value" ]
 }
 
+vast_ssh_transport_flags() {
+  printf '%s' \
+    "-o ConnectTimeout=${VAST_SSH_CONNECT_TIMEOUT_SECONDS} " \
+    "-o ServerAliveInterval=${VAST_SSH_SERVER_ALIVE_INTERVAL_SECONDS} " \
+    "-o ServerAliveCountMax=${VAST_SSH_SERVER_ALIVE_COUNT_MAX}"
+}
+
 vast_ssh_command() {
   local ssh_port="$1"
   local ssh_key_path="$2"
-  printf 'ssh -i %q -p %q' "$ssh_key_path" "$ssh_port"
+  printf 'ssh %s -i %q -p %q' "$(vast_ssh_transport_flags)" "$ssh_key_path" "$ssh_port"
 }
 
 vast_rsync_ssh_command() {
   local ssh_port="$1"
   local ssh_key_path="$2"
-  printf 'ssh -i %s -p %s' "$ssh_key_path" "$ssh_port"
+  printf 'ssh %s -i %s -p %s' "$(vast_ssh_transport_flags)" "$ssh_key_path" "$ssh_port"
 }
 
 vast_require_positive_integer() {
