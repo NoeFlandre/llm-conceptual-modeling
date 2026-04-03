@@ -410,6 +410,7 @@ When moving a batch to a new host:
 4. resume there
 
 This prevents regeneration of already-finished runs.
+The project sync step should not copy the top-level local `results/` tree, and it should skip local-only caches like `.work-venv/` and `.ruff_cache/`; the fresh-host wrapper excludes them and seeds results separately so the batch resume does not waste time duplicating local state.
 
 ## 12. Local Result Sync
 

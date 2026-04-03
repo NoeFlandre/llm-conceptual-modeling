@@ -81,8 +81,11 @@ rsync -avz \
   -e "$RSYNC_SSH" \
   --exclude '.git' \
   --exclude '.venv' \
+  --exclude '.work-venv' \
+  --exclude '.ruff_cache' \
   --exclude '__pycache__' \
   --exclude '.pytest_cache' \
+  --exclude 'results' \
   --exclude 'data/results' \
   --exclude 'data/analysis_artifacts' \
   "$LOCAL_REPO_DIR"/ "$SSH_TARGET:$REMOTE_REPO_DIR"/
@@ -90,6 +93,7 @@ rsync -avz \
 if vast_has_value "$LOCAL_RESULTS_DIR"; then
   echo "[2/6] Seed remote results root from local copy"
   mkdir -p "$LOCAL_RESULTS_DIR"
+  "${SSH_CMD[@]}" "$SSH_TARGET" "mkdir -p '$REMOTE_RESULTS_DIR'"
   rsync -avz -e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/
 else
   echo "[2/6] No local results seed provided; skipping"

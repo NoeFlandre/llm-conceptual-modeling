@@ -12,8 +12,11 @@ REMOTE_TARGET="$2"
 rsync -avz \
   --exclude '.git' \
   --exclude '.venv' \
+  --exclude '.work-venv' \
+  --exclude '.ruff_cache' \
   --exclude '__pycache__' \
   --exclude '.pytest_cache' \
+  --exclude 'results' \
   --exclude 'data/results' \
   --exclude 'data/analysis_artifacts' \
   "$LOCAL_REPO_DIR"/ "$REMOTE_TARGET"/

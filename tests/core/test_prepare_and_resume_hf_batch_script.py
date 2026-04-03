@@ -26,6 +26,10 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert 'SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))' in script_text
     assert 'RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"' in script_text
     assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
+    assert "--exclude '.work-venv'" in script_text
+    assert "--exclude '.ruff_cache'" in script_text
+    assert "--exclude 'results'" in script_text
+    assert '"${SSH_CMD[@]}" "$SSH_TARGET" "mkdir -p \'$REMOTE_RESULTS_DIR\'"' in script_text
     assert seed_rsync in script_text
     assert 'if vast_has_value "${SMOKE_ALGORITHM:-}"' in script_text
     assert ".venv/bin/lcm run smoke" in script_text
