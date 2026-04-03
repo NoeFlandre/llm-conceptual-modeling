@@ -67,6 +67,19 @@ Important local roots:
 - paper operator note you are reading:
   - `/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/paper/agent-onboarding.md`
 
+Container-first fresh-host note:
+
+- `scripts/vast/prepare_and_resume_hf_batch.sh` now supports two runtime modes:
+  - `REMOTE_RUNTIME_MODE=bootstrap` for the existing host-side `uv sync` flow
+  - `REMOTE_RUNTIME_MODE=docker` for a prebuilt GPU image flow
+- when `REMOTE_RUNTIME_MODE=docker`, the launcher expects `REMOTE_DOCKER_IMAGE` to point at an
+  image that already contains the validated runtime
+- the remote preview and launch steps are shared helper scripts:
+  - `scripts/vast/remote_resume_preview.sh`
+  - `scripts/vast/remote_resume_launch.sh`
+- this means the same local results seed can be used in either mode, and the code path stays
+  modular instead of duplicating the preview/launch logic in the top-level wrapper
+
 ## 3. Core Runtime Files
 
 If you need to understand or patch the HF execution path, read these first:

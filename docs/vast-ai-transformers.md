@@ -48,6 +48,18 @@ The checked-in starting point is:
 - `docker/vast-gpu.Dockerfile`
 - `scripts/vast/prepare_and_resume_hf_batch.sh`
 
+If you already have a prebuilt image, the fresh-host launcher can skip the host-side `uv sync`
+bootstrap entirely by setting:
+
+```bash
+export REMOTE_RUNTIME_MODE=docker
+export REMOTE_DOCKER_IMAGE=<your-prebuilt-image-tag>
+```
+
+In container mode the launcher mounts the synced repo and seeded results into the container, then
+reuses the same remote preview and launch helpers. This is the lowest-friction path once the image
+exists, because the paid host only needs Docker and the image pull.
+
 ## Fresh-Instance One-Command Flow
 
 For a brand-new rented GPU, or when moving the resumable batch onto a larger GPU, prefer the
@@ -69,11 +81,12 @@ This wrapper:
 - syncs the local repository to the remote workspace
 - optionally seeds the remote results root from a local copy so `--resume` can continue on a fresh
   machine
-- runs the pinned bootstrap script
-- runs `lcm doctor`
-- runs `lcm run validate-config`
+- either runs the pinned bootstrap script or starts the prebuilt Docker image, depending on
+  `REMOTE_RUNTIME_MODE`
+- runs the shared remote preview helper, which rewrites the effective config, then runs
+  `lcm doctor` and `lcm run validate-config`
 - optionally runs the smoke gate when smoke environment variables are set
-- launches `paper-batch --resume` under `nohup`
+- launches `paper-batch --resume` under `nohup` either on the host or inside the running container
 - can also start the local periodic result pull loop when `LOCAL_RESULTS_DIR` and
   `LOCAL_RESULTS_SYNC_INTERVAL_SECONDS` are both set
 

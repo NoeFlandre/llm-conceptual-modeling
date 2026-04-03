@@ -5,15 +5,17 @@ def test_prepare_and_resume_script_bootstraps_and_launches_resumable_batch() -> 
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
-    assert 'uv run lcm run resume-preflight' in script_text
+    assert 'uv --directory "$LOCAL_REPO_DIR" run lcm run resume-preflight' in script_text
     assert 'source "$SCRIPT_DIR/common.sh"' in script_text
     assert "bootstrap_gpu_host.sh" in script_text
     assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text
-    assert ".venv/bin/lcm doctor --json" in script_text
-    assert ".venv/bin/lcm run validate-config" in script_text
-    assert ".venv/bin/lcm run paper-batch --config" in script_text
-    assert "--resume" in script_text
-    assert "nohup .venv/bin/lcm run paper-batch" in script_text
+    assert "REMOTE_PREVIEW_SCRIPT" in script_text
+    assert "REMOTE_LAUNCH_SCRIPT" in script_text
+    assert "remote_resume_preview.sh" in script_text
+    assert "remote_resume_launch.sh" in script_text
+    assert "docker run -d" in script_text
+    assert "docker exec" in script_text
+    assert "REMOTE_RUNTIME_MODE" in script_text
 
 
 def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smoke() -> None:
@@ -39,18 +41,15 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     retry_oom_declaration = (
         'BATCH_RETRY_OOM_FAILURES_ON_RESUME="${BATCH_RETRY_OOM_FAILURES_ON_RESUME:-}"'
     )
-    retry_oom_export = (
-        "export BATCH_RETRY_OOM_FAILURES_ON_RESUME='$BATCH_RETRY_OOM_FAILURES_ON_RESUME'"
-    )
-
     assert retry_oom_declaration in script_text
     assert "BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME" in script_text
-    assert retry_oom_export in script_text
     assert "BATCH_RETRY_OOM_FAILURES_ON_RESUME" in script_text
     assert "BATCH_WORKER_PROCESS_MODE" in script_text
     assert "BATCH_MAX_REQUESTS_PER_WORKER_PROCESS" in script_text
     assert "runtime_config.yaml" in script_text
-    assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in script_text
+    assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in (
+        Path("scripts/vast/remote_resume_preview.sh").read_text(encoding="utf-8")
+    )
 
 
 def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
@@ -68,6 +67,48 @@ def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
     assert "scripts/vast/watch_results_from_vast.sh" in script_text
     assert "nohup bash" in script_text
     assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
+
+
+def test_prepare_and_resume_script_supports_container_first_runtime_mode() -> None:
+    script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert 'REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-bootstrap}"' in script_text
+    assert 'REMOTE_DOCKER_IMAGE="${REMOTE_DOCKER_IMAGE:-}"' in script_text
+    assert 'REMOTE_DOCKER_CONTAINER_NAME="${REMOTE_DOCKER_CONTAINER_NAME:-lcm-$(basename "$REMOTE_RESULTS_DIR")}"' in script_text
+    assert 'REMOTE_DOCKER_PULL="${REMOTE_DOCKER_PULL:-1}"' in script_text
+    assert 'if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then' in script_text
+    assert "docker image inspect" in script_text
+    assert "docker run -d" in script_text
+    assert "docker exec" in script_text
+    assert "docker rm -f" in script_text
+    assert "REMOTE_PREVIEW_SCRIPT" in script_text
+    assert "REMOTE_LAUNCH_SCRIPT" in script_text
+
+
+def test_remote_resume_preview_script_writes_and_validates_effective_config() -> None:
+    script_path = Path("scripts/vast/remote_resume_preview.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert "REMOTE_CONFIG_PATH" in script_text
+    assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text
+    assert "REMOTE_PREVIEW_DIR" in script_text
+    assert "python3 - \"$REMOTE_CONFIG_PATH\" \"$REMOTE_EFFECTIVE_CONFIG_PATH\"" in script_text
+    assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in script_text
+    assert ".venv/bin/lcm doctor --json --results-root" in script_text
+    assert ".venv/bin/lcm run validate-config --config" in script_text
+
+
+def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
+    script_path = Path("scripts/vast/remote_resume_launch.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert "REMOTE_RUN_LOG" in script_text
+    assert "REMOTE_PID_PATH" in script_text
+    assert "pkill -f 'llm_conceptual_modeling.hf_worker'" in script_text
+    assert "nohup .venv/bin/lcm run paper-batch --config" in script_text
+    assert "--resume" in script_text
+    assert "pgrep -n -f" in script_text
 
 
 def test_vast_common_script_centralizes_shared_shell_helpers() -> None:

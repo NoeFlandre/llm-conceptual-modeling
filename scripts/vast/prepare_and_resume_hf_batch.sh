@@ -51,11 +51,17 @@ BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME="${BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME
 BATCH_RETRY_OOM_FAILURES_ON_RESUME="${BATCH_RETRY_OOM_FAILURES_ON_RESUME:-}"
 BATCH_WORKER_PROCESS_MODE="${BATCH_WORKER_PROCESS_MODE:-}"
 BATCH_MAX_REQUESTS_PER_WORKER_PROCESS="${BATCH_MAX_REQUESTS_PER_WORKER_PROCESS:-}"
+REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-bootstrap}"
+REMOTE_DOCKER_IMAGE="${REMOTE_DOCKER_IMAGE:-}"
+REMOTE_DOCKER_CONTAINER_NAME="${REMOTE_DOCKER_CONTAINER_NAME:-lcm-$(basename "$REMOTE_RESULTS_DIR")}"
+REMOTE_DOCKER_PULL="${REMOTE_DOCKER_PULL:-1}"
 LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-60}"
 LOCAL_RESULTS_SYNC_LOG_PATH="${LOCAL_RESULTS_SYNC_LOG_PATH:-}"
 LOCAL_RESULTS_SYNC_PID_PATH="${LOCAL_RESULTS_SYNC_PID_PATH:-}"
 LOCAL_RESULTS_SYNC_STATUS_PATH="${LOCAL_RESULTS_SYNC_STATUS_PATH:-}"
 LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH="${LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH:-}"
+REMOTE_PREVIEW_SCRIPT="${REMOTE_PREVIEW_SCRIPT:-$REMOTE_REPO_DIR/scripts/vast/remote_resume_preview.sh}"
+REMOTE_LAUNCH_SCRIPT="${REMOTE_LAUNCH_SCRIPT:-$REMOTE_REPO_DIR/scripts/vast/remote_resume_launch.sh}"
 
 SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))
 RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"
@@ -104,13 +110,13 @@ esac
 
 echo "[0/6] Local resume preflight"
 if vast_has_value "$LOCAL_RESULTS_DIR"; then
-  uv run lcm run resume-preflight \
+  uv --directory "$LOCAL_REPO_DIR" run lcm run resume-preflight \
     --config "$LOCAL_CONFIG_SOURCE_PATH" \
     --repo-root "$LOCAL_REPO_DIR" \
     --results-root "$LOCAL_RESULTS_DIR" \
     --json
 else
-  uv run lcm run resume-preflight \
+  uv --directory "$LOCAL_REPO_DIR" run lcm run resume-preflight \
     --config "$LOCAL_CONFIG_SOURCE_PATH" \
     --repo-root "$LOCAL_REPO_DIR" \
     --allow-empty \
@@ -169,65 +175,42 @@ if vast_has_value "$LOCAL_RESULTS_DIR"; then
 fi
 
 echo "[3/6] Bootstrap remote runtime"
-"${SSH_CMD[@]}" "$SSH_TARGET" "bash '$REMOTE_REPO_DIR/scripts/vast/bootstrap_gpu_host.sh' '$REMOTE_REPO_DIR'"
+if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then
+  if ! vast_has_value "$REMOTE_DOCKER_IMAGE"; then
+    echo "REMOTE_DOCKER_IMAGE must be set when REMOTE_RUNTIME_MODE=docker" >&2
+    exit 1
+  fi
+  "${SSH_CMD[@]}" "$SSH_TARGET" "
+    set -euo pipefail
+    command -v docker >/dev/null 2>&1
+    if ! docker image inspect '$REMOTE_DOCKER_IMAGE' >/dev/null 2>&1; then
+      if [ '$REMOTE_DOCKER_PULL' = '1' ]; then
+        docker pull '$REMOTE_DOCKER_IMAGE'
+      else
+        echo 'Docker image not available: $REMOTE_DOCKER_IMAGE' >&2
+        exit 1
+      fi
+    fi
+    docker rm -f '$REMOTE_DOCKER_CONTAINER_NAME' >/dev/null 2>&1 || true
+    docker run -d \
+      --name '$REMOTE_DOCKER_CONTAINER_NAME' \
+      --gpus all \
+      -v '$REMOTE_REPO_DIR':'$REMOTE_REPO_DIR' \
+      -v '$REMOTE_RESULTS_DIR':'$REMOTE_RESULTS_DIR' \
+      -w '$REMOTE_REPO_DIR' \
+      '$REMOTE_DOCKER_IMAGE' \
+      tail -f /dev/null
+  "
+else
+  "${SSH_CMD[@]}" "$SSH_TARGET" "bash '$REMOTE_REPO_DIR/scripts/vast/bootstrap_gpu_host.sh' '$REMOTE_REPO_DIR'"
+fi
 
 echo "[4/6] Run doctor + config preview"
-"${SSH_CMD[@]}" "$SSH_TARGET" "
-  set -euo pipefail
-  cd '$REMOTE_REPO_DIR'
-  mkdir -p '$REMOTE_RESULTS_DIR'
-  export BATCH_GENERATION_TIMEOUT_SECONDS='$BATCH_GENERATION_TIMEOUT_SECONDS'
-  export BATCH_STARTUP_TIMEOUT_SECONDS='$BATCH_STARTUP_TIMEOUT_SECONDS'
-  export BATCH_RESUME_PASS_MODE='$BATCH_RESUME_PASS_MODE'
-  export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME='$BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME'
-  export BATCH_RETRY_OOM_FAILURES_ON_RESUME='$BATCH_RETRY_OOM_FAILURES_ON_RESUME'
-  export BATCH_WORKER_PROCESS_MODE='$BATCH_WORKER_PROCESS_MODE'
-  export BATCH_MAX_REQUESTS_PER_WORKER_PROCESS='$BATCH_MAX_REQUESTS_PER_WORKER_PROCESS'
-  python3 - <<'PY'
-from pathlib import Path
-import os
-import yaml
-
-source_path = Path('$REMOTE_CONFIG_PATH')
-target_path = Path('$REMOTE_EFFECTIVE_CONFIG_PATH')
-payload = yaml.safe_load(source_path.read_text(encoding='utf-8'))
-context_policy = dict(payload['runtime'].get('context_policy', {}))
-
-timeout_value = os.environ.get('BATCH_GENERATION_TIMEOUT_SECONDS', '').strip()
-if timeout_value:
-    context_policy['generation_timeout_seconds'] = float(timeout_value)
-
-timeout_value = os.environ.get('BATCH_STARTUP_TIMEOUT_SECONDS', '').strip()
-if timeout_value:
-    context_policy['startup_timeout_seconds'] = float(timeout_value)
-
-resume_pass_mode = os.environ.get('BATCH_RESUME_PASS_MODE', '').strip()
-if resume_pass_mode:
-    context_policy['resume_pass_mode'] = resume_pass_mode
-
-retry_timeout = os.environ.get('BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME', '').strip().lower()
-if retry_timeout:
-    context_policy['retry_timeout_failures_on_resume'] = retry_timeout in {'1', 'true', 'yes', 'on'}
-
-retry_oom = os.environ.get('BATCH_RETRY_OOM_FAILURES_ON_RESUME', '').strip().lower()
-if retry_oom:
-    context_policy['retry_oom_failures_on_resume'] = retry_oom in {'1', 'true', 'yes', 'on'}
-
-worker_process_mode = os.environ.get('BATCH_WORKER_PROCESS_MODE', '').strip()
-if worker_process_mode:
-    context_policy['worker_process_mode'] = worker_process_mode
-
-max_requests = os.environ.get('BATCH_MAX_REQUESTS_PER_WORKER_PROCESS', '').strip()
-if max_requests:
-    context_policy['max_requests_per_worker_process'] = int(float(max_requests))
-
-payload['runtime']['context_policy'] = context_policy
-target_path.parent.mkdir(parents=True, exist_ok=True)
-target_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding='utf-8')
-PY
-  .venv/bin/lcm doctor --json --results-root '$REMOTE_RESULTS_DIR'
-  .venv/bin/lcm run validate-config --config '$REMOTE_EFFECTIVE_CONFIG_PATH' --output-dir '$REMOTE_PREVIEW_DIR'
-"
+if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then
+  "${SSH_CMD[@]}" "$SSH_TARGET" "docker exec '$REMOTE_DOCKER_CONTAINER_NAME' bash '$REMOTE_PREVIEW_SCRIPT' '$REMOTE_REPO_DIR' '$REMOTE_RESULTS_DIR' '$REMOTE_CONFIG_PATH' '$REMOTE_EFFECTIVE_CONFIG_PATH' '$REMOTE_PREVIEW_DIR'"
+else
+  "${SSH_CMD[@]}" "$SSH_TARGET" "bash '$REMOTE_PREVIEW_SCRIPT' '$REMOTE_REPO_DIR' '$REMOTE_RESULTS_DIR' '$REMOTE_CONFIG_PATH' '$REMOTE_EFFECTIVE_CONFIG_PATH' '$REMOTE_PREVIEW_DIR'"
+fi
 
 if vast_has_value "${SMOKE_ALGORITHM:-}" \
   && vast_has_value "${SMOKE_MODEL:-}" \
@@ -253,15 +236,8 @@ else
 fi
 
 echo "[6/6] Launch resumable batch"
-"${SSH_CMD[@]}" "$SSH_TARGET" "
-  set -euo pipefail
-  cd '$REMOTE_REPO_DIR'
-  mkdir -p '$REMOTE_RESULTS_DIR'
-  pkill -f '.venv/bin/lcm run paper-batch --config $REMOTE_EFFECTIVE_CONFIG_PATH --resume' || true
-  pkill -f 'llm_conceptual_modeling.hf_worker' || true
-  sleep 2
-  nohup .venv/bin/lcm run paper-batch --config '$REMOTE_EFFECTIVE_CONFIG_PATH' --resume >'$REMOTE_RUN_LOG' 2>&1 </dev/null &
-  sleep 2
-  pgrep -n -f '.venv/bin/lcm run paper-batch --config $REMOTE_EFFECTIVE_CONFIG_PATH --resume' > '$REMOTE_PID_PATH'
-  cat '$REMOTE_PID_PATH'
-"
+if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then
+  "${SSH_CMD[@]}" "$SSH_TARGET" "docker exec '$REMOTE_DOCKER_CONTAINER_NAME' bash '$REMOTE_LAUNCH_SCRIPT' '$REMOTE_REPO_DIR' '$REMOTE_RESULTS_DIR' '$REMOTE_EFFECTIVE_CONFIG_PATH' '$REMOTE_RUN_LOG' '$REMOTE_PID_PATH'"
+else
+  "${SSH_CMD[@]}" "$SSH_TARGET" "bash '$REMOTE_LAUNCH_SCRIPT' '$REMOTE_REPO_DIR' '$REMOTE_RESULTS_DIR' '$REMOTE_EFFECTIVE_CONFIG_PATH' '$REMOTE_RUN_LOG' '$REMOTE_PID_PATH'"
+fi
