@@ -7,7 +7,7 @@ import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
@@ -25,6 +25,7 @@ from llm_conceptual_modeling.hf_worker_policy import (
 from llm_conceptual_modeling.hf_worker_policy import (
     resolve_startup_timeout_seconds as _resolve_startup_timeout_seconds,
 )
+from llm_conceptual_modeling.hf_worker_result import load_runtime_result
 from llm_conceptual_modeling.hf_worker_state import (
     read_worker_state,
     worker_has_started_stage_execution,
@@ -156,12 +157,8 @@ class PersistentHFWorkerSession:
         worker_state_path = run_dir / "worker_state.json"
         while True:
             if result_json_path.exists():
-                worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
                 request_path.unlink(missing_ok=True)
-                if worker_payload.get("ok"):
-                    return cast(RuntimeResult, worker_payload["runtime_result"])
-                error = cast(dict[str, str], worker_payload["error"])
-                raise RuntimeError(f"{error['type']}: {error['message']}")
+                return load_runtime_result(result_json_path)
             if process.poll() is not None:
                 raise RuntimeError("Persistent HF worker exited before writing a result artifact.")
             if active_stage_path.exists():

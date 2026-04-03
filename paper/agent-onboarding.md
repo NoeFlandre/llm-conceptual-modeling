@@ -81,6 +81,9 @@ If you need to understand or patch the HF execution path, read these first:
 - `src/llm_conceptual_modeling/hf_worker_policy.py`
   - shared timeout and retry policy helpers
   - canonical source for startup timeout, stage timeout, and retry-attempt semantics
+- `src/llm_conceptual_modeling/hf_worker_result.py`
+  - shared worker result-artifact loader
+  - canonical source for `worker_result.json` success/failure decoding
 - `src/llm_conceptual_modeling/hf_experiments.py`
   - main HF batch orchestration
   - failure handling

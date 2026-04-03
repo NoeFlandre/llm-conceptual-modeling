@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import json
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Callable, cast
+from typing import Any, Callable
 
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     clear_retry_artifacts as _clear_retry_artifacts,
@@ -25,6 +24,10 @@ from llm_conceptual_modeling.hf_worker_policy import (
     resolve_run_retry_attempts,
     resolve_stage_timeout_seconds,
     resolve_startup_timeout_seconds,
+)
+from llm_conceptual_modeling.hf_worker_result import (
+    load_runtime_result,
+    raise_missing_result_artifact,
 )
 
 
@@ -67,18 +70,22 @@ def run_local_hf_spec_subprocess(
             env=build_hf_download_environment_fn(),
         )
         if not result_json_path.exists():
-            raise RuntimeError(
-                "HF worker subprocess exited without writing a result artifact. "
-                f"stdout={completed.stdout!r} stderr={completed.stderr!r}"
+            raise_missing_result_artifact(
+                context="HF worker subprocess",
+                stdout=completed.stdout,
+                stderr=completed.stderr,
             )
-        worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
-        if worker_payload.get("ok"):
-            return cast(RuntimeResult, worker_payload["runtime_result"])
-
-        error = cast(dict[str, str], worker_payload["error"])
-        if attempt < retry_attempts and is_retryable_worker_error_fn(error):
-            continue
-        raise RuntimeError(f"{error['type']}: {error['message']}")
+        try:
+            return load_runtime_result(result_json_path)
+        except RuntimeError as error:
+            if attempt >= retry_attempts:
+                raise
+            message = str(error)
+            error_type, _separator, error_message = message.partition(": ")
+            error_payload = {"type": error_type, "message": error_message}
+            if is_retryable_worker_error_fn(error_payload):
+                continue
+            raise
 
     raise RuntimeError("HF worker retry loop exhausted without a terminal result.")
 
