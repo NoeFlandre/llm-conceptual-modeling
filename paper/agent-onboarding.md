@@ -223,6 +223,8 @@ Resume retry behavior is governed by `context_policy`:
 - timeout, OOM, and infrastructure failures are classified centrally
 - the retry/defer decision comes from the shared resume policy, not per-algorithm special cases
 - this keeps resume logic modular and makes fresh-host preflight checks easier to reason about
+- the shared helper used by `hf_resume_state.py` and `hf_experiments.py` should stay the single
+  source of truth for that decision table
 
 ## 7. Local Results Trees
 

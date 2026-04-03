@@ -9,6 +9,7 @@ from llm_conceptual_modeling.hf_resume_state import (
     load_deferred_failed_summary,
     load_valid_finished_summary,
     order_planned_specs_for_resume,
+    _should_defer_failure_kind,
 )
 
 
@@ -306,6 +307,24 @@ def test_load_deferred_failed_summary_defers_retryable_timeout_without_algorithm
     assert deferred is not None
     assert deferred["failure_kind"] == "timeout"
     assert deferred["deferred_on_resume"] is True
+
+
+def test_should_defer_failure_kind_uses_shared_resume_policy_table() -> None:
+    assert _should_defer_failure_kind("timeout", None) is True
+    assert _should_defer_failure_kind(
+        "timeout",
+        {"resume_pass_mode": "retry-timeouts"},
+    ) is False
+    assert _should_defer_failure_kind(
+        "oom",
+        {"retry_oom_failures_on_resume": True},
+    ) is False
+    assert _should_defer_failure_kind(
+        "infrastructure",
+        {"retry_infrastructure_failures_on_resume": True},
+    ) is False
+    assert _should_defer_failure_kind("unsupported", None) is True
+    assert _should_defer_failure_kind("other", None) is False
 
 
 def test_order_planned_specs_for_resume_prioritizes_low_timeout_risk_pairs(

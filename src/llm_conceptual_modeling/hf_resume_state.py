@@ -173,17 +173,7 @@ def load_deferred_failed_summary(
         return None
     error = read_artifact_json_fn(run_dir / "error.json")
     failure_kind = classify_failure_payload(error)
-    if failure_kind == "timeout" and not resolve_retry_timeout_failures_on_resume(context_policy):
-        pass
-    elif failure_kind == "oom" and not resolve_retry_oom_failures_on_resume(context_policy):
-        pass
-    elif failure_kind == "infrastructure" and not resolve_retry_infrastructure_failures_on_resume(
-        context_policy
-    ):
-        pass
-    elif failure_kind == "unsupported":
-        pass
-    else:
+    if not _should_defer_failure_kind(failure_kind, context_policy):
         return None
     return {
         "run_dir": str(run_dir),
@@ -257,6 +247,22 @@ def _resolve_context_policy_bool(
     if isinstance(raw_value, bool):
         return raw_value
     raise TypeError(f"{key} value must be boolean, got {type(raw_value).__name__}")
+
+
+def _should_defer_failure_kind(
+    failure_kind: str,
+    context_policy: dict[str, object] | None,
+) -> bool:
+    policy_checks: dict[str, Callable[[dict[str, object] | None], bool]] = {
+        "timeout": resolve_retry_timeout_failures_on_resume,
+        "oom": resolve_retry_oom_failures_on_resume,
+        "infrastructure": resolve_retry_infrastructure_failures_on_resume,
+    }
+    if failure_kind == "unsupported":
+        return True
+    if failure_kind not in policy_checks:
+        return False
+    return not policy_checks[failure_kind](context_policy)
 
 
 def classify_failure_payload(error: JsonObject) -> str:
