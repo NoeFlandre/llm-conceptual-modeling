@@ -70,6 +70,7 @@ def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
     assert "vast_ssh_transport_flags()" in script_text
     assert "vast_ssh_command()" in script_text
     assert "vast_rsync_ssh_command()" in script_text
+    assert "vast_rsync_resume_flags()" in script_text
     assert "vast_has_value()" in script_text
     assert "vast_require_positive_integer()" in script_text
 

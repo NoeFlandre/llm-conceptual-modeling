@@ -29,20 +29,29 @@ write_sync_status() {
   local message="$2"
   local timestamp
   timestamp="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  python3 - <<PY
+  SYNC_STATE="$sync_state" \
+  SYNC_MESSAGE="$message" \
+  STATUS_PATH="$LOCAL_RESULTS_SYNC_STATUS_PATH" \
+  REMOTE_RESULTS_DIR_VALUE="$REMOTE_RESULTS_DIR" \
+  LOCAL_RESULTS_DIR_VALUE="$LOCAL_RESULTS_DIR" \
+  UPDATED_AT_VALUE="$timestamp" \
+  LAST_SUCCESS_AT_VALUE="$LAST_SUCCESS_AT" \
+  CONSECUTIVE_FAILURES_VALUE="$CONSECUTIVE_FAILURES" \
+  python3 - <<'PY'
+from os import environ
 from pathlib import Path
 import json
 
-Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+Path(environ["STATUS_PATH"]).write_text(
     json.dumps(
         {
-            "status": ${sync_state@Q},
-            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
-            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
-            "updated_at": ${timestamp@Q},
-            "last_success_at": ${LAST_SUCCESS_AT@Q},
-            "consecutive_failures": ${CONSECUTIVE_FAILURES},
-            "message": ${message@Q},
+            "status": environ["SYNC_STATE"],
+            "remote_results_dir": environ["REMOTE_RESULTS_DIR_VALUE"],
+            "local_results_dir": environ["LOCAL_RESULTS_DIR_VALUE"],
+            "updated_at": environ["UPDATED_AT_VALUE"],
+            "last_success_at": environ["LAST_SUCCESS_AT_VALUE"],
+            "consecutive_failures": int(environ["CONSECUTIVE_FAILURES_VALUE"]),
+            "message": environ["SYNC_MESSAGE"],
         },
         indent=2,
         sort_keys=True,

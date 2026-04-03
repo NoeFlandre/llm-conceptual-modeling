@@ -28,6 +28,11 @@ vast_rsync_ssh_command() {
   printf 'ssh %s -i %s -p %s' "$(vast_ssh_transport_flags)" "$ssh_key_path" "$ssh_port"
 }
 
+vast_rsync_resume_flags() {
+  local timeout_seconds="$1"
+  printf '%s' "--partial --timeout ${timeout_seconds}"
+}
+
 vast_require_positive_integer() {
   local value="$1"
   local variable_name="$2"
