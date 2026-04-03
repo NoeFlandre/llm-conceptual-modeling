@@ -46,6 +46,7 @@ REMOTE_PID_PATH="${REMOTE_PID_PATH:-$REMOTE_RESULTS_DIR/batch.pid}"
 SMOKE_REPLICATION="${SMOKE_REPLICATION:-0}"
 SMOKE_OUTPUT_ROOT="${SMOKE_OUTPUT_ROOT:-$REMOTE_RESULTS_DIR/smoke}"
 BATCH_GENERATION_TIMEOUT_SECONDS="${BATCH_GENERATION_TIMEOUT_SECONDS:-}"
+BATCH_STARTUP_TIMEOUT_SECONDS="${BATCH_STARTUP_TIMEOUT_SECONDS:-}"
 BATCH_RESUME_PASS_MODE="${BATCH_RESUME_PASS_MODE:-}"
 BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME="${BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME:-}"
 BATCH_RETRY_OOM_FAILURES_ON_RESUME="${BATCH_RETRY_OOM_FAILURES_ON_RESUME:-}"
@@ -106,6 +107,7 @@ echo "[4/6] Run doctor + config preview"
   cd '$REMOTE_REPO_DIR'
   mkdir -p '$REMOTE_RESULTS_DIR'
   export BATCH_GENERATION_TIMEOUT_SECONDS='$BATCH_GENERATION_TIMEOUT_SECONDS'
+  export BATCH_STARTUP_TIMEOUT_SECONDS='$BATCH_STARTUP_TIMEOUT_SECONDS'
   export BATCH_RESUME_PASS_MODE='$BATCH_RESUME_PASS_MODE'
   export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME='$BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME'
   export BATCH_RETRY_OOM_FAILURES_ON_RESUME='$BATCH_RETRY_OOM_FAILURES_ON_RESUME'
@@ -124,6 +126,10 @@ context_policy = dict(payload['runtime'].get('context_policy', {}))
 timeout_value = os.environ.get('BATCH_GENERATION_TIMEOUT_SECONDS', '').strip()
 if timeout_value:
     context_policy['generation_timeout_seconds'] = float(timeout_value)
+
+timeout_value = os.environ.get('BATCH_STARTUP_TIMEOUT_SECONDS', '').strip()
+if timeout_value:
+    context_policy['startup_timeout_seconds'] = float(timeout_value)
 
 resume_pass_mode = os.environ.get('BATCH_RESUME_PASS_MODE', '').strip()
 if resume_pass_mode:

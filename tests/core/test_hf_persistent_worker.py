@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -263,3 +264,67 @@ def test_persistent_session_retries_broken_pipe_once(
     assert attempts["count"] == 2
     assert spawn_pids == [4000, 4001]
     assert terminated_pids == [4000]
+
+
+def test_wait_for_result_does_not_treat_loading_model_as_stage_timeout(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    queue_dir = tmp_path / "queue"
+    session = PersistentHFWorkerSession(queue_dir=queue_dir, worker_python="/tmp/fake-python")
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    request_path = queue_dir / "00000001.request.json"
+    request_path.parent.mkdir(parents=True, exist_ok=True)
+    request_path.write_text("{}", encoding="utf-8")
+    result_json_path = run_dir / "worker_result.json"
+    worker_state_path = run_dir / "worker_state.json"
+    worker_state_path.write_text(
+        json.dumps(
+            {
+                "status": "running",
+                "phase": "loading_model",
+                "worker_pid": 5000,
+                "model_loaded": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    old_time = 1_000.0
+    monkeypatch.setattr("llm_conceptual_modeling.hf_persistent_worker.time.time", lambda: old_time)
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_persistent_worker.time.monotonic",
+        lambda: 10.0,
+    )
+
+    def fake_sleep(_seconds: float) -> None:
+        result_json_path.write_text(
+            json.dumps(
+                {
+                    "ok": True,
+                    "runtime_result": {
+                        "raw_row": {},
+                        "runtime": {},
+                        "raw_response": "{}",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    monkeypatch.setattr("llm_conceptual_modeling.hf_persistent_worker.time.sleep", fake_sleep)
+    old_timestamp = old_time - 30.0
+    worker_state_path.touch()
+    os.utime(worker_state_path, (old_timestamp, old_timestamp))
+
+    result = session._wait_for_result(
+        process=_FakeProcess(5000),
+        request_path=request_path,
+        result_json_path=result_json_path,
+        run_dir=run_dir,
+        startup_timeout_seconds=900.0,
+        stage_timeout_seconds=20.0,
+    )
+
+    assert result["raw_response"] == "{}"

@@ -32,7 +32,7 @@ def normalize_stale_running_run(run_dir: Path) -> dict[str, object] | None:
     if worker_result_path.exists():
         return None
     worker_state = read_json(run_dir / "worker_state.json")
-    worker_pid = worker_state.get("pid")
+    worker_pid = worker_state.get("worker_pid") or worker_state.get("pid")
     if _is_live_worker_pid(worker_pid):
         return None
 

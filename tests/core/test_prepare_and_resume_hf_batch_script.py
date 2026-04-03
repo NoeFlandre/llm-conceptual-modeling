@@ -29,6 +29,7 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert 'if vast_has_value "${SMOKE_ALGORITHM:-}"' in script_text
     assert ".venv/bin/lcm run smoke" in script_text
     assert "BATCH_GENERATION_TIMEOUT_SECONDS" in script_text
+    assert 'BATCH_STARTUP_TIMEOUT_SECONDS="${BATCH_STARTUP_TIMEOUT_SECONDS:-}"' in script_text
     assert "BATCH_RESUME_PASS_MODE" in script_text
     retry_oom_declaration = (
         'BATCH_RETRY_OOM_FAILURES_ON_RESUME="${BATCH_RETRY_OOM_FAILURES_ON_RESUME:-}"'
@@ -44,6 +45,7 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "BATCH_WORKER_PROCESS_MODE" in script_text
     assert "BATCH_MAX_REQUESTS_PER_WORKER_PROCESS" in script_text
     assert "runtime_config.yaml" in script_text
+    assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in script_text
 
 
 def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
@@ -65,3 +67,17 @@ def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
     assert "vast_rsync_ssh_command()" in script_text
     assert "vast_has_value()" in script_text
     assert "vast_require_positive_integer()" in script_text
+
+
+def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:
+    script_path = Path("scripts/vast/quick_resume_from_ssh.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+    usage = (
+        "usage: quick_resume_from_ssh.sh SSH_COMMAND CONFIG_RELATIVE_PATH "
+        "REMOTE_RESULTS_DIR LOCAL_RESULTS_DIR"
+    )
+
+    assert usage in script_text
+    assert "shlex.split" in script_text
+    assert 'exec "$SCRIPT_DIR/prepare_and_resume_hf_batch.sh"' in script_text
+    assert 'REMOTE_REPO_DIR="${REMOTE_REPO_DIR:-/workspace/llm-conceptual-modeling}"' in script_text

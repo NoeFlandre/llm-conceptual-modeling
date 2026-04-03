@@ -2666,6 +2666,59 @@ def test_run_algo1_writes_active_stage_tracking(tmp_path: Path) -> None:
     assert active_stage["metrics"]["tokens_per_second"] == 12.0
 
 
+def test_run_algo1_marks_worker_ready_after_model_load(tmp_path: Path) -> None:
+    config = load_hf_run_config(
+        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
+        "configs/hf_transformers_paper_batch.yaml"
+    )
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model=config.models.embedding_model,
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg2_sg3",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={
+            "use_adjacency_notation": False,
+            "use_array_representation": False,
+            "include_explanation": False,
+            "include_example": False,
+            "include_counterexample": False,
+        },
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        prompt_bundle=None,
+        max_new_tokens_by_schema=config.runtime.max_new_tokens_by_schema,
+        context_policy=config.runtime.context_policy,
+        seed=31,
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "worker_state.json").write_text(
+        json.dumps({"status": "running", "phase": "loading_model", "model_loaded": False}),
+        encoding="utf-8",
+    )
+    runtime = _StubRuntimeFactory(
+        chat_responses=[
+            {"edges": [{"source": "alpha", "target": "theta"}]},
+            {"votes": ["Y"]},
+        ]
+    )
+
+    _run_algo1(spec, hf_runtime=runtime, run_dir=run_dir)
+
+    worker_state = json.loads((run_dir / "worker_state.json").read_text(encoding="utf-8"))
+    assert worker_state["model_loaded"] is True
+    assert worker_state["phase"] == "executing_algorithm"
+
+
 def test_run_algo1_summary_includes_trace_metrics() -> None:
     config = load_hf_run_config(
         "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"

@@ -33,6 +33,22 @@ def test_normalize_stale_running_run_marks_failed_when_worker_is_gone(tmp_path: 
     assert persisted_error["active_stage"]["schema_name"] == "edge_list"
 
 
+def test_normalize_stale_running_run_keeps_live_persistent_worker(tmp_path: Path) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    (run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (run_dir / "worker_state.json").write_text(
+        json.dumps({"status": "running", "worker_pid": os.getpid()}),
+        encoding="utf-8",
+    )
+
+    error = normalize_stale_running_run(run_dir)
+
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    assert error is None
+    assert state["status"] == "running"
+
+
 def test_clear_retry_artifacts_preserves_stage_cache_files(tmp_path: Path) -> None:
     run_dir = tmp_path / "run"
     stage_dir = run_dir / "stages"

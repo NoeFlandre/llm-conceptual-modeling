@@ -698,6 +698,23 @@ def _worker_loaded_model(run_dir: Path) -> bool:
     return bool(worker_state.get("model_loaded")) or (run_dir / "active_stage.json").exists()
 
 
+def _mark_worker_ready_for_execution(run_dir: Path | None) -> None:
+    if run_dir is None:
+        return
+    worker_state_path = run_dir / "worker_state.json"
+    payload = _read_artifact_json(worker_state_path)
+    payload.update(
+        {
+            "status": "running",
+            "phase": "executing_algorithm",
+            "model_loaded": True,
+            "model_loaded_at": _status_timestamp_now(),
+            "updated_at": _status_timestamp_now(),
+        }
+    )
+    _write_json(worker_state_path, payload)
+
+
 def _execute_run(
     *,
     spec: HFRunSpec,
@@ -903,6 +920,7 @@ def _run_algo1(
         context_policy=spec.context_policy,
         seed=spec.seed,
     )
+    _mark_worker_ready_for_execution(run_dir)
     recorder = _RecordingChatClient(
         chat_client,
         persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
@@ -998,6 +1016,8 @@ def _run_algo2(
         context_policy=spec.context_policy,
         seed=spec.seed,
     )
+    embedding_client = hf_runtime.build_embedding_client(model=spec.embedding_model)
+    _mark_worker_ready_for_execution(run_dir)
     recorder = _RecordingChatClient(
         chat_client,
         persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
@@ -1011,7 +1031,6 @@ def _run_algo2(
             "decoding_algorithm": spec.decoding.algorithm,
         },
     )
-    embedding_client = hf_runtime.build_embedding_client(model=spec.embedding_model)
     source_labels = _collect_nodes(subgraph1)
     target_labels = _collect_nodes(subgraph2)
     seed_labels = source_labels + [label for label in target_labels if label not in source_labels]
@@ -1125,6 +1144,7 @@ def _run_algo3(
         context_policy=spec.context_policy,
         seed=spec.seed,
     )
+    _mark_worker_ready_for_execution(run_dir)
     recorder = _RecordingChatClient(
         chat_client,
         persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,

@@ -79,9 +79,10 @@ def _execute_request(
     _update_worker_state(
         run_dir / "worker_state.json",
         {
+            "status": "running",
+            "phase": "loading_model",
             "worker_pid": os.getpid(),
-            "model_loaded": True,
-            "model_loaded_at": datetime.now(UTC).isoformat(),
+            "model_loaded": False,
             "requests_served_by_process": requests_served_by_process,
             "updated_at": datetime.now(UTC).isoformat(),
         },

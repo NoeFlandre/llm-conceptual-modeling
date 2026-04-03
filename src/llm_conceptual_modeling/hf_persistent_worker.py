@@ -99,8 +99,8 @@ class PersistentHFWorkerSession:
                 "--queue-dir",
                 str(self.queue_dir),
             ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
             text=True,
             env=build_hf_download_environment(self.env),
         )
@@ -156,9 +156,13 @@ class PersistentHFWorkerSession:
                 if stage_age_seconds > stage_timeout_seconds:
                     raise MonitoredCommandTimeout("stage", stage_timeout_seconds)
             elif worker_state_path.exists():
+                worker_state = json.loads(worker_state_path.read_text(encoding="utf-8"))
                 heartbeat_age_seconds = time.time() - worker_state_path.stat().st_mtime
-                if heartbeat_age_seconds > stage_timeout_seconds:
-                    raise MonitoredCommandTimeout("stage", stage_timeout_seconds)
+                if _worker_has_started_stage_execution(worker_state):
+                    if heartbeat_age_seconds > stage_timeout_seconds:
+                        raise MonitoredCommandTimeout("stage", stage_timeout_seconds)
+                elif time.monotonic() - started_at > startup_timeout_seconds:
+                    raise MonitoredCommandTimeout("startup", startup_timeout_seconds)
             elif time.monotonic() - started_at > startup_timeout_seconds:
                 raise MonitoredCommandTimeout("startup", startup_timeout_seconds)
             time.sleep(0.05)
@@ -197,6 +201,13 @@ def _is_retryable_runtime_error(error: Exception) -> bool:
     if isinstance(error, MonitoredCommandTimeout):
         return False
     return "BrokenPipeError:" in str(error)
+
+
+def _worker_has_started_stage_execution(worker_state: dict[str, object]) -> bool:
+    if bool(worker_state.get("model_loaded")):
+        return True
+    phase = worker_state.get("phase")
+    return isinstance(phase, str) and phase == "executing_algorithm"
 
 
 def _coerce_timeout_seconds(raw_value: object) -> float:
