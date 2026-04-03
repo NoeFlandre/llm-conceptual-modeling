@@ -57,7 +57,10 @@ def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
-    assert 'LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-60}"' in script_text
+    assert (
+        'LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-60}"'
+        in script_text
+    )
     assert "LOCAL_RESULTS_SYNC_LOG_PATH" in script_text
     assert "LOCAL_RESULTS_SYNC_PID_PATH" in script_text
     assert "LOCAL_RESULTS_SYNC_STATUS_PATH" in script_text
@@ -83,7 +86,7 @@ def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:
     script_path = Path("scripts/vast/quick_resume_from_ssh.sh")
     script_text = script_path.read_text(encoding="utf-8")
     usage = (
-        "usage: quick_resume_from_ssh.sh SSH_COMMAND CONFIG_RELATIVE_PATH "
+        "usage: quick_resume_from_ssh.sh SSH_COMMAND CONFIG_PATH "
         "REMOTE_RESULTS_DIR LOCAL_RESULTS_DIR"
     )
 
@@ -91,3 +94,19 @@ def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:
     assert "shlex.split" in script_text
     assert 'exec "$SCRIPT_DIR/prepare_and_resume_hf_batch.sh"' in script_text
     assert 'REMOTE_REPO_DIR="${REMOTE_REPO_DIR:-/workspace/llm-conceptual-modeling}"' in script_text
+
+
+def test_prepare_and_resume_script_can_use_result_root_configs_when_present() -> None:
+    script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert "CONFIG_PATH" in script_text
+    assert "LOCAL_CONFIG_SOURCE_PATH" in script_text
+    assert 'if [ -f "$LOCAL_REPO_DIR/$config_path" ]; then' in script_text
+    assert (
+        'if vast_has_value "$LOCAL_RESULTS_DIR" && [ -f "$LOCAL_RESULTS_DIR/$config_path" ]'
+        in script_text
+    )
+    assert "REMOTE_CONFIG_SUFFIX" in script_text
+    assert 'REMOTE_CONFIG_PATH="$REMOTE_REPO_DIR/$REMOTE_CONFIG_SUFFIX"' in script_text
+    assert 'REMOTE_CONFIG_PATH="$REMOTE_RESULTS_DIR/$REMOTE_CONFIG_SUFFIX"' in script_text

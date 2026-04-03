@@ -412,7 +412,7 @@ def test_checked_in_algo3_single_model_configs_are_locally_rent_ready(tmp_path: 
             models=config.models.chat_models,
             embedding_model=config.models.embedding_model,
             replications=config.run.replications,
-            algorithms=["algo2"],
+            algorithms=["algo3"],
             config=config,
             runtime_profile_provider=lambda _model: RuntimeProfile(
                 device="cuda",

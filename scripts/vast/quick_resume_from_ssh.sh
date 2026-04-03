@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ "$#" -ne 4 ]; then
   cat >&2 <<'USAGE'
-usage: quick_resume_from_ssh.sh SSH_COMMAND CONFIG_RELATIVE_PATH REMOTE_RESULTS_DIR LOCAL_RESULTS_DIR
+usage: quick_resume_from_ssh.sh SSH_COMMAND CONFIG_PATH REMOTE_RESULTS_DIR LOCAL_RESULTS_DIR
 
 Example:
   scripts/vast/quick_resume_from_ssh.sh \
@@ -18,7 +18,7 @@ USAGE
 fi
 
 SSH_COMMAND="$1"
-CONFIG_RELATIVE_PATH="$2"
+CONFIG_PATH="$2"
 REMOTE_RESULTS_DIR="$3"
 LOCAL_RESULTS_DIR="$4"
 LOCAL_REPO_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -64,6 +64,6 @@ exec "$SCRIPT_DIR/prepare_and_resume_hf_batch.sh" \
   "$SSH_PORT" \
   "$LOCAL_REPO_DIR" \
   "$REMOTE_REPO_DIR" \
-  "$CONFIG_RELATIVE_PATH" \
+  "$CONFIG_PATH" \
   "$REMOTE_RESULTS_DIR" \
   "$LOCAL_RESULTS_DIR"

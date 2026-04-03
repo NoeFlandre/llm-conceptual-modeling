@@ -90,6 +90,9 @@ If you need to understand or patch the HF execution path, read these first:
 - `src/llm_conceptual_modeling/hf_resume_preflight.py`
   - local resume-readiness guardrail for fresh SSH rentals
   - canonical source for checking whether a local result tree is worth resuming before paying for remote bootstrap time
+- `src/llm_conceptual_modeling/hf_resume_sweep.py`
+  - local sweep across all seeded result roots
+  - canonical source for classifying roots as `resume-ready`, `needs-config-fix`, `active`, or `finished`
 - `src/llm_conceptual_modeling/hf_experiments.py`
   - main HF batch orchestration
   - failure handling
@@ -222,6 +225,26 @@ These local trees matter because:
 - they are the source for resume on a fresh host
 - they are the basis for local analysis and paper-support summaries
 
+Before renting more SSH capacity, run a sweep over the local result roots:
+
+```bash
+uv run lcm run resume-sweep \
+  --repo-root /absolute/path/to/llm-conceptual-modeling \
+  --results-root /absolute/path/to/llm-conceptual-modeling/results \
+  --json
+```
+
+Interpretation:
+
+- `resume-ready`
+  - the root still has pending work and is a good candidate for a fresh host
+- `needs-config-fix`
+  - the root has failed work but the current config is not yet ready for a clean replay
+- `active`
+  - the root is already in flight somewhere; do not rent a fresh host for it
+- `finished`
+  - no useful resume work remains
+
 ## 8. Main Remote Operational Pattern
 
 Treat rented hosts as disposable execution surfaces.
@@ -245,6 +268,8 @@ What this is supposed to catch locally:
 - result trees with no resumable work left
 - mismatches where a fresh host would be rented only to discover there is nothing useful to resume
 
+For legacy or embedded result-root configs, the fresh-host wrapper now accepts a config path that resolves under the local results tree as well as under the checked-in repo tree. That matters for roots such as `results/hf-paper-batch-algo1-qwen/runtime_config.yaml`, which do not have a checked-in `configs/` equivalent.
+
 Interpretation:
 
 - `can_resume = true` and `pending_count > 0`
@@ -253,6 +278,12 @@ Interpretation:
   - do not rent/bootstrap yet; fix the local seed first
 - `resume_mode = fresh-root`
   - no seeded local results root was provided; this is a clean start, not a true resume
+
+Practical rule:
+
+- run `resume-sweep` first
+- use `resume-preflight` on the single best `resume-ready` root
+- only rent a host when the sweep says the target is actionable and the preflight says there is actual work to do
 
 Do not depend on remote git state.
 Do not assume a host is trustworthy just because it worked earlier.
@@ -411,6 +442,7 @@ When moving a batch to a new host:
 
 This prevents regeneration of already-finished runs.
 The project sync step should not copy the top-level local `results/` tree, and it should skip local-only caches like `.work-venv/` and `.ruff_cache/`; the fresh-host wrapper excludes them and seeds results separately so the batch resume does not waste time duplicating local state.
+When the resume config lives inside the local result tree instead of `configs/`, pass that path through the fresh-host wrapper directly; it now resolves config sources from either the checked-in repo or the seeded results root.
 
 ## 12. Local Result Sync
 

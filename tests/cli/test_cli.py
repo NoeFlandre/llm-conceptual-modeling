@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 
 from llm_conceptual_modeling.cli import main
@@ -819,6 +821,59 @@ def test_cli_run_resume_preflight_reports_local_resume_readiness(
     assert exit_code == 0
     assert '"pending_count": 12' in captured.out
     assert '"can_resume": true' in captured.out
+
+
+def test_cli_run_resume_sweep_reports_root_classification_as_json(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_resume_sweep_report",
+        lambda *, repo_root, results_root: {
+            "repo_root": str(repo_root),
+            "results_root": str(results_root),
+            "root_count": 2,
+            "ready_count": 1,
+            "needs_config_fix_count": 1,
+            "active_count": 0,
+            "finished_count": 0,
+            "roots": [
+                {
+                    "results_root": str(Path(results_root) / "hf-paper-batch-algo1-olmo-current"),
+                    "classification": "resume-ready",
+                },
+                {
+                    "results_root": str(Path(results_root) / "hf-paper-batch-algo1-qwen"),
+                    "classification": "needs-config-fix",
+                },
+            ],
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "resume-sweep",
+            "--repo-root",
+            str(repo_root),
+            "--results-root",
+            str(results_root),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert '"ready_count": 1' in captured.out
+    assert '"needs_config_fix_count": 1' in captured.out
+    assert '"classification": "resume-ready"' in captured.out
 
 
 def test_cli_run_status_reports_active_worker_fields(monkeypatch, tmp_path, capsys) -> None:

@@ -9,6 +9,7 @@ from llm_conceptual_modeling.hf_experiments import (
     select_run_spec,
 )
 from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
+from llm_conceptual_modeling.hf_resume_sweep import build_resume_sweep_report
 from llm_conceptual_modeling.hf_run_config import (
     load_hf_run_config,
     write_resolved_run_preview,
@@ -38,6 +39,22 @@ def handle_run(args: Namespace) -> int:
             print(f"pending={report['pending_count']}")
             print(f"can_resume={report['can_resume']}")
             print(f"resume_mode={report['resume_mode']}")
+        return 0
+    if args.run_target == "resume-sweep":
+        report = build_resume_sweep_report(
+            repo_root=args.repo_root,
+            results_root=args.results_root,
+        )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"repo_root={report['repo_root']}")
+            print(f"results_root={report['results_root']}")
+            print(f"roots={report['root_count']}")
+            print(f"ready={report['ready_count']}")
+            print(f"needs_config_fix={report['needs_config_fix_count']}")
+            print(f"active={report['active_count']}")
+            print(f"finished={report['finished_count']}")
         return 0
     if args.run_target == "status":
         status = collect_batch_status(args.results_root)

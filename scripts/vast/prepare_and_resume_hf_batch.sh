@@ -6,7 +6,7 @@ source "$SCRIPT_DIR/common.sh"
 
 if [ "$#" -lt 6 ] || [ "$#" -gt 7 ]; then
   cat >&2 <<'USAGE'
-usage: prepare_and_resume_hf_batch.sh SSH_TARGET SSH_PORT LOCAL_REPO_DIR REMOTE_REPO_DIR CONFIG_RELATIVE_PATH REMOTE_RESULTS_DIR [LOCAL_RESULTS_DIR]
+usage: prepare_and_resume_hf_batch.sh SSH_TARGET SSH_PORT LOCAL_REPO_DIR REMOTE_REPO_DIR CONFIG_PATH REMOTE_RESULTS_DIR [LOCAL_RESULTS_DIR]
 
 Example:
   scripts/vast/prepare_and_resume_hf_batch.sh \
@@ -34,11 +34,10 @@ SSH_TARGET="$1"
 SSH_PORT="$2"
 LOCAL_REPO_DIR="$3"
 REMOTE_REPO_DIR="$4"
-CONFIG_RELATIVE_PATH="$5"
+CONFIG_PATH="$5"
 REMOTE_RESULTS_DIR="$6"
 LOCAL_RESULTS_DIR="${7:-}"
 SSH_KEY_PATH="${SSH_KEY_PATH:-$HOME/.ssh/id_rsa}"
-REMOTE_CONFIG_PATH="$REMOTE_REPO_DIR/$CONFIG_RELATIVE_PATH"
 REMOTE_EFFECTIVE_CONFIG_PATH="${REMOTE_EFFECTIVE_CONFIG_PATH:-$REMOTE_RESULTS_DIR/runtime_config.yaml}"
 REMOTE_PREVIEW_DIR="${REMOTE_PREVIEW_DIR:-$REMOTE_RESULTS_DIR/preview}"
 REMOTE_RUN_LOG="${REMOTE_RUN_LOG:-$REMOTE_RESULTS_DIR/run.log}"
@@ -61,16 +60,58 @@ LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH="${LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH:-}"
 SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))
 RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"
 
+resolve_local_config_source() {
+  local config_path="$1"
+  if [ -f "$config_path" ]; then
+    printf '%s\n' "$config_path"
+    return 0
+  fi
+  if [ -f "$LOCAL_REPO_DIR/$config_path" ]; then
+    printf '%s\n' "$LOCAL_REPO_DIR/$config_path"
+    return 0
+  fi
+  if vast_has_value "$LOCAL_RESULTS_DIR" && [ -f "$LOCAL_RESULTS_DIR/$config_path" ]; then
+    printf '%s\n' "$LOCAL_RESULTS_DIR/$config_path"
+    return 0
+  fi
+  return 1
+}
+
+LOCAL_CONFIG_SOURCE_PATH="$(resolve_local_config_source "$CONFIG_PATH" || true)"
+if ! vast_has_value "$LOCAL_CONFIG_SOURCE_PATH"; then
+  echo "Could not resolve config source path: $CONFIG_PATH" >&2
+  exit 1
+fi
+
+case "$LOCAL_CONFIG_SOURCE_PATH" in
+  "$LOCAL_REPO_DIR"/*)
+    REMOTE_CONFIG_SUFFIX="${LOCAL_CONFIG_SOURCE_PATH#$LOCAL_REPO_DIR/}"
+    REMOTE_CONFIG_PATH="$REMOTE_REPO_DIR/$REMOTE_CONFIG_SUFFIX"
+    ;;
+  "$LOCAL_RESULTS_DIR"/*)
+    if ! vast_has_value "$LOCAL_RESULTS_DIR"; then
+      echo "Config source lives under local results, but LOCAL_RESULTS_DIR was not provided." >&2
+      exit 1
+    fi
+    REMOTE_CONFIG_SUFFIX="${LOCAL_CONFIG_SOURCE_PATH#$LOCAL_RESULTS_DIR/}"
+    REMOTE_CONFIG_PATH="$REMOTE_RESULTS_DIR/$REMOTE_CONFIG_SUFFIX"
+    ;;
+  *)
+    echo "Config source must live under the repo root or local results root: $LOCAL_CONFIG_SOURCE_PATH" >&2
+    exit 1
+    ;;
+esac
+
 echo "[0/6] Local resume preflight"
 if vast_has_value "$LOCAL_RESULTS_DIR"; then
   uv run lcm run resume-preflight \
-    --config "$LOCAL_REPO_DIR/$CONFIG_RELATIVE_PATH" \
+    --config "$LOCAL_CONFIG_SOURCE_PATH" \
     --repo-root "$LOCAL_REPO_DIR" \
     --results-root "$LOCAL_RESULTS_DIR" \
     --json
 else
   uv run lcm run resume-preflight \
-    --config "$LOCAL_REPO_DIR/$CONFIG_RELATIVE_PATH" \
+    --config "$LOCAL_CONFIG_SOURCE_PATH" \
     --repo-root "$LOCAL_REPO_DIR" \
     --allow-empty \
     --json
