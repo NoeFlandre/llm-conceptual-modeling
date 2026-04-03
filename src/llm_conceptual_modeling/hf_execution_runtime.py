@@ -18,6 +18,14 @@ from llm_conceptual_modeling.hf_subprocess import (
     build_hf_download_environment,
     run_monitored_command,
 )
+from llm_conceptual_modeling.hf_worker_policy import (
+    coerce_timeout_seconds as _worker_policy_coerce_timeout_seconds,
+)
+from llm_conceptual_modeling.hf_worker_policy import (
+    resolve_run_retry_attempts,
+    resolve_stage_timeout_seconds,
+    resolve_startup_timeout_seconds,
+)
 
 
 def run_local_hf_spec_subprocess(
@@ -116,33 +124,6 @@ def build_worker_command(
         str(run_dir),
     ]
 
-
-def resolve_startup_timeout_seconds(context_policy: dict[str, object] | None) -> float:
-    if context_policy is None:
-        return 900.0
-    raw_value = context_policy.get("startup_timeout_seconds", 900)
-    return coerce_timeout_seconds(raw_value)
-
-
-def resolve_stage_timeout_seconds(context_policy: dict[str, object] | None) -> float:
-    if context_policy is None:
-        return 180.0
-    raw_value = context_policy.get("generation_timeout_seconds", 180)
-    return coerce_timeout_seconds(raw_value)
-
-
-def resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int:
-    if context_policy is None:
-        return 2
-    raw_value = context_policy.get("run_retry_attempts", 2)
-    if isinstance(raw_value, bool):
-        raise TypeError("Retry attempts value must be numeric, got bool")
-    if isinstance(raw_value, int | float | str):
-        attempts = int(float(raw_value))
-        return max(1, attempts)
-    raise TypeError(f"Retry attempts value must be numeric, got {type(raw_value).__name__}")
-
-
 def resolve_worker_process_mode(context_policy: dict[str, object] | None) -> str:
     if context_policy is None:
         return "ephemeral"
@@ -198,6 +179,4 @@ def is_retryable_worker_error(error: dict[str, str]) -> bool:
 
 
 def coerce_timeout_seconds(raw_value: object) -> float:
-    if isinstance(raw_value, int | float | str):
-        return float(raw_value)
-    raise TypeError(f"Timeout value must be numeric, got {type(raw_value).__name__}")
+    return _worker_policy_coerce_timeout_seconds(raw_value)
