@@ -84,6 +84,9 @@ If you need to understand or patch the HF execution path, read these first:
 - `src/llm_conceptual_modeling/hf_worker_result.py`
   - shared worker result-artifact loader
   - canonical source for `worker_result.json` success/failure decoding
+- `src/llm_conceptual_modeling/hf_worker_request.py`
+  - shared persistent-worker queue artifact helper
+  - canonical source for writing and reading `*.request.json`, `worker_spec.json`, and `worker_result.json` paths
 - `src/llm_conceptual_modeling/hf_experiments.py`
   - main HF batch orchestration
   - failure handling
@@ -163,6 +166,7 @@ Practical implication:
 - do not call a run “live” just because a worker file exists
 - do not treat a slow `loading_model` worker as a generation-stage timeout
 - when normalizing stale runs, check `worker_pid` as well as legacy `pid`
+- when changing persistent queue artifact shape, change `hf_worker_request.py` rather than open-coding payload edits in both worker and session code
 
 ## 6. Experiment Status Model
 

@@ -5,8 +5,9 @@ from pathlib import Path
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_experiments import HFRunSpec
-from llm_conceptual_modeling.hf_spec_codec import serialize_spec
+from llm_conceptual_modeling.hf_spec_codec import deserialize_spec, serialize_spec
 from llm_conceptual_modeling.hf_worker import main, serve_request_queue
+from llm_conceptual_modeling.hf_worker_request import enqueue_worker_request, load_worker_request
 
 
 def test_hf_worker_writes_worker_state_before_running(monkeypatch, tmp_path: Path) -> None:
@@ -74,7 +75,8 @@ def test_hf_worker_writes_worker_state_before_running(monkeypatch, tmp_path: Pat
     worker_state = json.loads((run_dir / "worker_state.json").read_text(encoding="utf-8"))
     result_payload = json.loads(result_json.read_text(encoding="utf-8"))
     assert exit_code == 0
-    assert worker_state["model_loaded"] is True
+    assert worker_state["model_loaded"] is False
+    assert worker_state["phase"] == "loading_model"
     assert worker_state["worker_pid"] > 0
     assert result_payload["ok"] is True
 
@@ -184,8 +186,58 @@ def test_persistent_hf_worker_serves_two_requests_with_one_model_load(
     assert served_pairs == ["sg1_sg2", "sg2_sg3"]
     assert json.loads(first_result_json.read_text(encoding="utf-8"))["ok"] is True
     assert json.loads(second_result_json.read_text(encoding="utf-8"))["ok"] is True
-    assert first_worker_state["model_loaded"] is True
-    assert second_worker_state["model_loaded"] is True
+    assert first_worker_state["model_loaded"] is False
+    assert second_worker_state["model_loaded"] is False
+    assert first_worker_state["phase"] == "loading_model"
+    assert second_worker_state["phase"] == "loading_model"
     assert first_worker_state["requests_served_by_process"] == 1
     assert second_worker_state["requests_served_by_process"] == 2
     assert cache_release_calls["count"] == 2
+
+
+def test_worker_request_round_trips_shared_queue_artifacts(tmp_path: Path) -> None:
+    queue_dir = tmp_path / "queue"
+    queue_dir.mkdir()
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=False,
+            context_limit=4096,
+        ),
+    )
+
+    enqueued = enqueue_worker_request(
+        queue_dir=queue_dir,
+        run_dir=run_dir,
+        spec=spec,
+        request_id="00000042",
+    )
+    loaded = load_worker_request(enqueued.request_json_path)
+
+    assert loaded.request_id == "00000042"
+    assert loaded.request_json_path == queue_dir / "00000042.request.json"
+    assert loaded.spec_json_path == run_dir / "worker_spec.json"
+    assert loaded.result_json_path == run_dir / "worker_result.json"
+    assert loaded.run_dir == run_dir
+    spec_payload = json.loads(loaded.spec_json_path.read_text(encoding="utf-8"))
+
+    assert serialize_spec(deserialize_spec(spec_payload)) == spec_payload

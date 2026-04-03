@@ -14,6 +14,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
 )
 from llm_conceptual_modeling.hf_batch_utils import resolve_hf_token
 from llm_conceptual_modeling.hf_spec_codec import deserialize_spec
+from llm_conceptual_modeling.hf_worker_request import load_worker_request
 from llm_conceptual_modeling.hf_worker_state import mark_worker_loading_model
 
 
@@ -32,14 +33,11 @@ def serve_request_queue(
                 time.sleep(idle_sleep_seconds)
                 continue
             break
-        request_payload = json.loads(request_path.read_text(encoding="utf-8"))
-        spec_json_path = Path(str(request_payload["spec_json"]))
-        result_json_path = Path(str(request_payload["result_json"]))
-        run_dir = Path(str(request_payload["run_dir"]))
+        request = load_worker_request(request_path)
         _execute_request(
-            spec_json_path=spec_json_path,
-            result_json_path=result_json_path,
-            run_dir=run_dir,
+            spec_json_path=request.spec_json_path,
+            result_json_path=request.result_json_path,
+            run_dir=request.run_dir,
             hf_runtime=hf_runtime,
             requests_served_by_process=served_count + 1,
         )

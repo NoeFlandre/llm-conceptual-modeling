@@ -1,16 +1,13 @@
 from __future__ import annotations
 
-import json
 import subprocess
 import sys
 import time
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
-from llm_conceptual_modeling.hf_spec_codec import serialize_spec
 from llm_conceptual_modeling.hf_subprocess import (
     MonitoredCommandTimeout,
     _terminate_process,
@@ -25,6 +22,7 @@ from llm_conceptual_modeling.hf_worker_policy import (
 from llm_conceptual_modeling.hf_worker_policy import (
     resolve_startup_timeout_seconds as _resolve_startup_timeout_seconds,
 )
+from llm_conceptual_modeling.hf_worker_request import enqueue_worker_request
 from llm_conceptual_modeling.hf_worker_result import load_runtime_result
 from llm_conceptual_modeling.hf_worker_state import (
     read_worker_state,
@@ -122,25 +120,13 @@ class PersistentHFWorkerSession:
     def _enqueue_request(self, *, spec: HFRunSpec, run_dir: Path) -> tuple[Path, Path]:
         self._next_request_id += 1
         request_id = f"{self._next_request_id:08d}"
-        spec_json_path = run_dir / "worker_spec.json"
-        result_json_path = run_dir / "worker_result.json"
-        request_path = self.queue_dir / f"{request_id}.request.json"
-        spec_json_path.write_text(json.dumps(serialize_spec(spec), indent=2), encoding="utf-8")
-        request_path.write_text(
-            json.dumps(
-                {
-                    "request_id": request_id,
-                    "spec_json": str(spec_json_path),
-                    "result_json": str(result_json_path),
-                    "run_dir": str(run_dir),
-                    "enqueued_at": _timestamp_now(),
-                },
-                indent=2,
-                sort_keys=True,
-            ),
-            encoding="utf-8",
+        request = enqueue_worker_request(
+            queue_dir=self.queue_dir,
+            run_dir=run_dir,
+            spec=spec,
+            request_id=request_id,
         )
-        return request_path, result_json_path
+        return request.request_json_path, request.result_json_path
 
     def _wait_for_result(
         self,
@@ -184,7 +170,3 @@ def _is_retryable_runtime_error(error: Exception) -> bool:
     if isinstance(error, MonitoredCommandTimeout):
         return False
     return "BrokenPipeError:" in str(error)
-
-
-def _timestamp_now() -> str:
-    return datetime.now(UTC).isoformat()

@@ -10,6 +10,7 @@ from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, Runti
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
+from llm_conceptual_modeling.hf_worker_request import load_worker_request
 
 
 class _FakeProcess:
@@ -328,3 +329,24 @@ def test_wait_for_result_does_not_treat_loading_model_as_stage_timeout(
     )
 
     assert result["raw_response"] == "{}"
+
+
+def test_persistent_session_enqueue_request_uses_shared_worker_request_contract(
+    tmp_path: Path,
+) -> None:
+    queue_dir = tmp_path / "queue"
+    session = PersistentHFWorkerSession(queue_dir=queue_dir, worker_python="/tmp/fake-python")
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+
+    request_path, result_json_path = session._enqueue_request(
+        spec=_spec("sg1_sg2"),
+        run_dir=run_dir,
+    )
+    worker_request = load_worker_request(request_path)
+
+    assert worker_request.request_id == "00000001"
+    assert worker_request.request_json_path == request_path
+    assert worker_request.result_json_path == result_json_path
+    assert worker_request.spec_json_path == run_dir / "worker_spec.json"
+    assert worker_request.run_dir == run_dir
