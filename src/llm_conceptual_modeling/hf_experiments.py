@@ -312,7 +312,6 @@ def run_paper_batch(
                 _normalize_stale_running_run(run_dir)
                 deferred_failure = _load_deferred_failed_summary(
                     run_dir=run_dir,
-                    algorithm=spec.algorithm,
                     context_policy=spec.context_policy,
                 )
                 if deferred_failure is not None:
@@ -673,12 +672,10 @@ def _load_valid_finished_summary(
 def _load_deferred_failed_summary(
     *,
     run_dir: Path,
-    algorithm: str,
     context_policy: dict[str, object] | None,
 ) -> dict[str, object] | None:
     return _resume_load_deferred_failed_summary(
         run_dir=run_dir,
-        algorithm=algorithm,
         context_policy=context_policy,
         read_artifact_json_fn=_read_artifact_json,
     )

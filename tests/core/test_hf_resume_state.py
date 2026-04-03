@@ -6,6 +6,7 @@ from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_resume_state import (
     build_seeded_resume_snapshot,
     classify_failure_payload,
+    load_deferred_failed_summary,
     load_valid_finished_summary,
     order_planned_specs_for_resume,
 )
@@ -279,6 +280,32 @@ def test_build_seeded_resume_snapshot_retries_infrastructure_failures_by_default
     assert snapshot["failed_count"] == 0
     assert snapshot["pending_count"] == 1
     assert seeded_failed == set()
+
+
+def test_load_deferred_failed_summary_defers_retryable_timeout_without_algorithm(
+    tmp_path: Path,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 20.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    deferred = load_deferred_failed_summary(
+        run_dir=run_dir,
+        context_policy=None,
+    )
+
+    assert deferred is not None
+    assert deferred["failure_kind"] == "timeout"
+    assert deferred["deferred_on_resume"] is True
 
 
 def test_order_planned_specs_for_resume_prioritizes_low_timeout_risk_pairs(

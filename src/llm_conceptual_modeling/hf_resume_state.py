@@ -67,7 +67,6 @@ def build_seeded_resume_snapshot(
 
         deferred_failure = load_deferred_failed_summary(
             run_dir=run_dir,
-            algorithm=spec.algorithm,
             context_policy=spec.context_policy,
             read_artifact_json_fn=read_artifact_json_fn,
         )
@@ -164,11 +163,9 @@ def load_valid_finished_summary(
 def load_deferred_failed_summary(
     *,
     run_dir: Path,
-    algorithm: str,
     context_policy: dict[str, object] | None,
     read_artifact_json_fn: Callable[[Path], JsonObject] | None = None,
 ) -> JsonObject | None:
-    _ = algorithm
     if read_artifact_json_fn is None:
         read_artifact_json_fn = read_artifact_json
     state = read_artifact_json_fn(run_dir / "state.json")
@@ -203,42 +200,30 @@ def resolve_retry_timeout_failures_on_resume(
     mode = resolve_resume_pass_mode(context_policy)
     if mode == "retry-timeouts":
         return True
-    if context_policy is None:
-        return False
-    raw_value = context_policy.get("retry_timeout_failures_on_resume", False)
-    if isinstance(raw_value, bool):
-        return raw_value
-    raise TypeError(
-        "retry_timeout_failures_on_resume value must be boolean, "
-        f"got {type(raw_value).__name__}"
+    return _resolve_context_policy_bool(
+        context_policy,
+        key="retry_timeout_failures_on_resume",
+        default=False,
     )
 
 
 def resolve_retry_oom_failures_on_resume(
     context_policy: dict[str, object] | None,
 ) -> bool:
-    if context_policy is None:
-        return True
-    raw_value = context_policy.get("retry_oom_failures_on_resume", True)
-    if isinstance(raw_value, bool):
-        return raw_value
-    raise TypeError(
-        "retry_oom_failures_on_resume value must be boolean, "
-        f"got {type(raw_value).__name__}"
+    return _resolve_context_policy_bool(
+        context_policy,
+        key="retry_oom_failures_on_resume",
+        default=True,
     )
 
 
 def resolve_retry_infrastructure_failures_on_resume(
     context_policy: dict[str, object] | None,
 ) -> bool:
-    if context_policy is None:
-        return True
-    raw_value = context_policy.get("retry_infrastructure_failures_on_resume", True)
-    if isinstance(raw_value, bool):
-        return raw_value
-    raise TypeError(
-        "retry_infrastructure_failures_on_resume value must be boolean, "
-        f"got {type(raw_value).__name__}"
+    return _resolve_context_policy_bool(
+        context_policy,
+        key="retry_infrastructure_failures_on_resume",
+        default=True,
     )
 
 
@@ -258,6 +243,20 @@ def resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
             f"got {raw_value!r}"
         )
     return normalized
+
+
+def _resolve_context_policy_bool(
+    context_policy: dict[str, object] | None,
+    *,
+    key: str,
+    default: bool,
+) -> bool:
+    if context_policy is None:
+        return default
+    raw_value = context_policy.get(key, default)
+    if isinstance(raw_value, bool):
+        return raw_value
+    raise TypeError(f"{key} value must be boolean, got {type(raw_value).__name__}")
 
 
 def classify_failure_payload(error: JsonObject) -> str:

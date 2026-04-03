@@ -218,6 +218,12 @@ We often work first on `(1)` and `(2)`, then analyze `(3)` separately.
 Do not silently convert garbage into finished runs. We only add bounded recoveries for malformed
 outputs when the recovered structure is still legitimately the intended schema.
 
+Resume retry behavior is governed by `context_policy`:
+
+- timeout, OOM, and infrastructure failures are classified centrally
+- the retry/defer decision comes from the shared resume policy, not per-algorithm special cases
+- this keeps resume logic modular and makes fresh-host preflight checks easier to reason about
+
 ## 7. Local Results Trees
 
 Current local result directories include:
