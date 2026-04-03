@@ -772,6 +772,55 @@ def test_cli_run_status_reports_batch_health_as_json(tmp_path, capsys) -> None:
     assert '"failed_count": 0' in captured.out
 
 
+def test_cli_run_resume_preflight_reports_local_resume_readiness(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text("run: {}\n", encoding="utf-8")
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.load_hf_run_config",
+        lambda _path: object(),
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_resume_preflight_report",
+        lambda *, config, repo_root, results_root, allow_empty=False: {
+            "config_loaded": config is not None,
+            "repo_root": str(repo_root),
+            "results_root": str(results_root),
+            "pending_count": 12,
+            "can_resume": True,
+            "allow_empty": allow_empty,
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "resume-preflight",
+            "--config",
+            str(config_path),
+            "--repo-root",
+            str(repo_root),
+            "--results-root",
+            str(results_root),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert '"pending_count": 12' in captured.out
+    assert '"can_resume": true' in captured.out
+
+
 def test_cli_run_status_reports_active_worker_fields(monkeypatch, tmp_path, capsys) -> None:
     results_root = tmp_path / "results"
     run_dir = (

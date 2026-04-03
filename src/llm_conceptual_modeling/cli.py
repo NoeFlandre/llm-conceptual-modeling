@@ -204,6 +204,13 @@ def build_parser() -> argparse.ArgumentParser:
     validate_config_parser.add_argument("--config", required=True)
     validate_config_parser.add_argument("--output-dir", required=True)
 
+    resume_preflight_parser = run_subparsers.add_parser("resume-preflight")
+    resume_preflight_parser.add_argument("--config", required=True)
+    resume_preflight_parser.add_argument("--repo-root", required=True)
+    resume_preflight_parser.add_argument("--results-root")
+    resume_preflight_parser.add_argument("--allow-empty", action="store_true")
+    resume_preflight_parser.add_argument("--json", action="store_true")
+
     status_parser = run_subparsers.add_parser("status")
     status_parser.add_argument("--results-root", required=True)
     status_parser.add_argument("--json", action="store_true")

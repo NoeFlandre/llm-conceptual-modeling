@@ -59,6 +59,21 @@ LOCAL_RESULTS_SYNC_PID_PATH="${LOCAL_RESULTS_SYNC_PID_PATH:-}"
 SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))
 RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"
 
+echo "[0/6] Local resume preflight"
+if vast_has_value "$LOCAL_RESULTS_DIR"; then
+  uv run lcm run resume-preflight \
+    --config "$LOCAL_REPO_DIR/$CONFIG_RELATIVE_PATH" \
+    --repo-root "$LOCAL_REPO_DIR" \
+    --results-root "$LOCAL_RESULTS_DIR" \
+    --json
+else
+  uv run lcm run resume-preflight \
+    --config "$LOCAL_REPO_DIR/$CONFIG_RELATIVE_PATH" \
+    --repo-root "$LOCAL_REPO_DIR" \
+    --allow-empty \
+    --json
+fi
+
 echo "[1/6] Sync repository"
 rsync -avz \
   -e "$RSYNC_SSH" \

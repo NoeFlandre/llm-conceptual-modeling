@@ -8,6 +8,7 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
     select_run_spec,
 )
+from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_run_config import (
     load_hf_run_config,
     write_resolved_run_preview,
@@ -18,6 +19,25 @@ def handle_run(args: Namespace) -> int:
     if args.run_target == "validate-config":
         config = load_hf_run_config(args.config)
         write_resolved_run_preview(config=config, output_dir=args.output_dir)
+        return 0
+    if args.run_target == "resume-preflight":
+        config = load_hf_run_config(args.config)
+        report = build_resume_preflight_report(
+            config=config,
+            repo_root=args.repo_root,
+            results_root=args.results_root,
+            allow_empty=args.allow_empty,
+        )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"results_root={report['results_root']}")
+            print(f"total_runs={report['total_runs']}")
+            print(f"finished={report['finished_count']}")
+            print(f"failed={report['failed_count']}")
+            print(f"pending={report['pending_count']}")
+            print(f"can_resume={report['can_resume']}")
+            print(f"resume_mode={report['resume_mode']}")
         return 0
     if args.run_target == "status":
         status = collect_batch_status(args.results_root)

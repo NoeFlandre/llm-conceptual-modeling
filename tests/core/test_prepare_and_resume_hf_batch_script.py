@@ -5,6 +5,7 @@ def test_prepare_and_resume_script_bootstraps_and_launches_resumable_batch() -> 
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
+    assert 'uv run lcm run resume-preflight' in script_text
     assert 'source "$SCRIPT_DIR/common.sh"' in script_text
     assert "bootstrap_gpu_host.sh" in script_text
     assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text

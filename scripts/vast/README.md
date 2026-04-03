@@ -7,6 +7,12 @@ This folder contains the operational shell entrypoints for rented Vast.ai GPU ho
 - `bootstrap_gpu_host.sh`: prepare a fresh remote GPU host with the validated Python/CUDA stack
 - `prepare_and_resume_hf_batch.sh`: one-command local wrapper to sync, bootstrap, validate, smoke, and resume a remote batch
 - `quick_resume_from_ssh.sh`: convenience wrapper that accepts a raw pasted SSH command and forwards it to `prepare_and_resume_hf_batch.sh`
+
+Fresh-host flow now starts with a local preflight:
+
+- `uv run lcm run resume-preflight --config ... --repo-root ... --results-root ... --json`
+
+The wrapper script runs this automatically before any SSH sync or bootstrap so obvious seed problems fail locally instead of wasting rented GPU time.
 - `fetch_results_from_vast.sh`: one-shot pull of a remote results root back to the local machine
 - `watch_results_from_vast.sh`: repeated local pull loop for periodic result syncing
 - `sync_repo_to_vast.sh`: repository-only sync helper

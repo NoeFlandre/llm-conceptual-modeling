@@ -87,6 +87,9 @@ If you need to understand or patch the HF execution path, read these first:
 - `src/llm_conceptual_modeling/hf_worker_request.py`
   - shared persistent-worker queue artifact helper
   - canonical source for writing and reading `*.request.json`, `worker_spec.json`, and `worker_result.json` paths
+- `src/llm_conceptual_modeling/hf_resume_preflight.py`
+  - local resume-readiness guardrail for fresh SSH rentals
+  - canonical source for checking whether a local result tree is worth resuming before paying for remote bootstrap time
 - `src/llm_conceptual_modeling/hf_experiments.py`
   - main HF batch orchestration
   - failure handling
@@ -222,6 +225,34 @@ These local trees matter because:
 ## 8. Main Remote Operational Pattern
 
 Treat rented hosts as disposable execution surfaces.
+
+Before spending remote GPU time, do the local preflight first.
+
+Preferred command:
+
+```bash
+uv run lcm run resume-preflight \
+  --config /absolute/path/to/config.yaml \
+  --repo-root /absolute/path/to/llm-conceptual-modeling \
+  --results-root /absolute/path/to/local/results/root \
+  --json
+```
+
+What this is supposed to catch locally:
+
+- missing or incomplete local results roots
+- missing local `data/inputs` payloads
+- result trees with no resumable work left
+- mismatches where a fresh host would be rented only to discover there is nothing useful to resume
+
+Interpretation:
+
+- `can_resume = true` and `pending_count > 0`
+  - worth syncing to a fresh SSH host
+- `can_resume = false` or command exits nonzero
+  - do not rent/bootstrap yet; fix the local seed first
+- `resume_mode = fresh-root`
+  - no seeded local results root was provided; this is a clean start, not a true resume
 
 Do not depend on remote git state.
 Do not assume a host is trustworthy just because it worked earlier.
