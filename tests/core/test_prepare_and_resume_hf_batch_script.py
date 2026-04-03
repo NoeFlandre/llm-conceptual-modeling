@@ -73,11 +73,20 @@ def test_prepare_and_resume_script_supports_container_first_runtime_mode() -> No
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
 
-    assert 'REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-bootstrap}"' in script_text
+    assert 'REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-auto}"' in script_text
     assert 'REMOTE_DOCKER_IMAGE="${REMOTE_DOCKER_IMAGE:-}"' in script_text
-    assert 'REMOTE_DOCKER_CONTAINER_NAME="${REMOTE_DOCKER_CONTAINER_NAME:-lcm-$(basename "$REMOTE_RESULTS_DIR")}"' in script_text
+    assert (
+        'REMOTE_DOCKER_CONTAINER_NAME="${REMOTE_DOCKER_CONTAINER_NAME:-lcm-$(basename '
+        '"$REMOTE_RESULTS_DIR")}"'
+        in script_text
+    )
     assert 'REMOTE_DOCKER_PULL="${REMOTE_DOCKER_PULL:-1}"' in script_text
+    assert 'if [ "$REMOTE_RUNTIME_MODE" = "auto" ]; then' in script_text
+    assert 'if vast_has_value "$REMOTE_DOCKER_IMAGE"; then' in script_text
+    assert 'REMOTE_RUNTIME_MODE="docker"' in script_text
+    assert 'REMOTE_RUNTIME_MODE="bootstrap"' in script_text
     assert 'if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then' in script_text
+    assert 'elif [ "$REMOTE_RUNTIME_MODE" = "bootstrap" ]; then' in script_text
     assert "docker image inspect" in script_text
     assert "docker run -d" in script_text
     assert "docker exec" in script_text

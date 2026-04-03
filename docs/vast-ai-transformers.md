@@ -48,13 +48,10 @@ The checked-in starting point is:
 - `docker/vast-gpu.Dockerfile`
 - `scripts/vast/prepare_and_resume_hf_batch.sh`
 
-If you already have a prebuilt image, the fresh-host launcher can skip the host-side `uv sync`
-bootstrap entirely by setting:
-
-```bash
-export REMOTE_RUNTIME_MODE=docker
-export REMOTE_DOCKER_IMAGE=<your-prebuilt-image-tag>
-```
+If you already have a prebuilt image, the fresh-host launcher will automatically switch to
+container mode when `REMOTE_DOCKER_IMAGE` is set. You can still force a mode explicitly with
+`REMOTE_RUNTIME_MODE=bootstrap` or `REMOTE_RUNTIME_MODE=docker`, but the default is now
+`auto` so the image tag alone is enough for the common case.
 
 In container mode the launcher mounts the synced repo and seeded results into the container, then
 reuses the same remote preview and launch helpers. This is the lowest-friction path once the image

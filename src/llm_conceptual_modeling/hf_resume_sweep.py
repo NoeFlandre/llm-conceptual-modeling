@@ -41,13 +41,25 @@ def build_resume_sweep_report(
             )
             continue
 
-        config = load_config_fn(config_source)
-        report = preflight_fn(
-            config=config,
-            repo_root=repo_root_path,
-            results_root=candidate_root,
-            allow_empty=True,
-        )
+        try:
+            config = load_config_fn(config_source)
+            report = preflight_fn(
+                config=config,
+                repo_root=repo_root_path,
+                results_root=candidate_root,
+                allow_empty=True,
+            )
+        except Exception as error:
+            root_reports.append(
+                {
+                    "results_root": str(candidate_root),
+                    "config_source": str(config_source),
+                    "classification": "invalid-config",
+                    "can_resume": False,
+                    "error": f"{type(error).__name__}: {error}",
+                }
+            )
+            continue
         classification = _classify_root_report(report)
         root_reports.append(
             {
@@ -76,6 +88,9 @@ def build_resume_sweep_report(
             1 for item in ordered_roots if item["classification"] == "needs-config-fix"
         ),
         "active_count": sum(1 for item in ordered_roots if item["classification"] == "active"),
+        "invalid_config_count": sum(
+            1 for item in ordered_roots if item["classification"] == "invalid-config"
+        ),
         "missing_config_count": sum(
             1 for item in ordered_roots if item["classification"] == "missing-config"
         ),
@@ -127,6 +142,7 @@ def _root_sort_key(report: dict[str, object]) -> tuple[int, str]:
         "active": 2,
         "finished": 3,
         "missing-config": 4,
+        "invalid-config": 5,
     }
     return (
         classification_order.get(str(report.get("classification", "missing-config")), 5),

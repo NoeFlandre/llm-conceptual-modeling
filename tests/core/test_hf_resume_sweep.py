@@ -105,3 +105,66 @@ def test_build_resume_sweep_report_classifies_resume_ready_failure_only_and_acti
     assert report["roots"][0]["results_root"] == str(ready_root)
     assert report["roots"][1]["results_root"] == str(needs_fix_root)
     assert report["roots"][2]["results_root"] == str(active_root)
+
+
+def test_build_resume_sweep_report_marks_invalid_configs_without_aborting(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    bad_root = results_root / "hf-paper-batch-algo1-qwen"
+    good_root = results_root / "hf-paper-batch-algo1-olmo-current"
+
+    for root in (bad_root, good_root):
+        root.mkdir(parents=True, exist_ok=True)
+        (root / "batch_status.json").write_text("{}", encoding="utf-8")
+
+    bad_config = bad_root / "runtime_config.yaml"
+    bad_config.write_text("broken", encoding="utf-8")
+    good_config = good_root / "preview_resume" / "resolved_run_config.yaml"
+    good_config.parent.mkdir(parents=True, exist_ok=True)
+    good_config.write_text("good-config", encoding="utf-8")
+
+    def load_config(path: Path) -> dict[str, str]:
+        if path == bad_config:
+            raise ValueError("broken config")
+        return {"config_path": str(path)}
+
+    def preflight(
+        *,
+        config: object,
+        repo_root: Path,
+        results_root: Path,
+        allow_empty: bool,
+    ) -> dict:
+        _ = repo_root
+        _ = allow_empty
+        return {
+            "repo_root": str(repo_root),
+            "results_root": str(results_root),
+            "total_runs": 10,
+            "finished_count": 8,
+            "failed_count": 0,
+            "pending_count": 2,
+            "can_resume": True,
+            "resume_mode": "resume",
+            "config_path": str(config["config_path"]),  # type: ignore[index]
+        }
+
+    report = build_resume_sweep_report(
+        repo_root=repo_root,
+        results_root=results_root,
+        load_config_fn=load_config,
+        preflight_fn=preflight,
+    )
+
+    assert report["root_count"] == 2
+    assert report["invalid_config_count"] == 1
+    assert [item["classification"] for item in report["roots"]] == [
+        "resume-ready",
+        "invalid-config",
+    ]
+    assert report["roots"][0]["results_root"] == str(good_root)
+    assert report["roots"][1]["results_root"] == str(bad_root)

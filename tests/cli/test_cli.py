@@ -841,6 +841,7 @@ def test_cli_run_resume_sweep_reports_root_classification_as_json(
             "root_count": 2,
             "ready_count": 1,
             "needs_config_fix_count": 1,
+            "invalid_config_count": 1,
             "active_count": 0,
             "finished_count": 0,
             "roots": [
@@ -873,6 +874,7 @@ def test_cli_run_resume_sweep_reports_root_classification_as_json(
     assert exit_code == 0
     assert '"ready_count": 1' in captured.out
     assert '"needs_config_fix_count": 1' in captured.out
+    assert '"invalid_config_count": 1' in captured.out
     assert '"classification": "resume-ready"' in captured.out
 
 

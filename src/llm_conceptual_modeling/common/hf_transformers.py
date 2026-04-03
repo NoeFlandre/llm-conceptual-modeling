@@ -169,6 +169,7 @@ class HFTransformersChatClient:
         _ = schema
         max_new_tokens = self._max_new_tokens_by_schema.get(schema_name, 256)
         safety_margin_tokens = _resolve_safety_margin_tokens(self._context_policy)
+        retried_malformed_output = False
         encoded_inputs = _encode_chat_prompt(
             tokenizer=self._tokenizer,
             prompt=prompt,
@@ -235,6 +236,30 @@ class HFTransformersChatClient:
                         safety_margin_tokens=safety_margin_tokens,
                     )
                     continue
+                if (
+                    not retried_malformed_output
+                    and _looks_retryable_malformed_output(text=text, schema_name=schema_name)
+                ):
+                    retried_malformed_output = True
+                    continue
+                raise error
+            try:
+                normalized_content = normalize_structured_response(
+                    parsed_content,
+                    schema_name=schema_name,
+                )
+            except ValueError as error:
+                self.last_failed_response_text = text
+                if (
+                    not retried_malformed_output
+                    and _looks_retryable_normalization_failure(
+                        parsed_content=parsed_content,
+                        schema_name=schema_name,
+                        error=error,
+                    )
+                ):
+                    retried_malformed_output = True
+                    continue
                 raise error
             self.last_failed_response_text = None
             completion_token_count = len(completion_ids)
@@ -251,7 +276,7 @@ class HFTransformersChatClient:
                 if duration_seconds > 0
                 else None,
             }
-            return normalize_structured_response(parsed_content, schema_name=schema_name)
+            return normalized_content
 
 
 class HFTransformersEmbeddingClient:
@@ -472,6 +497,10 @@ def _strip_assistant_prefix(text: str) -> str:
     for prefix in ("assistant\n", "assistant:\n", "assistant: ", "assistant "):
         if lowered.startswith(prefix):
             return text[len(prefix) :].strip()
+    if lowered.startswith("assistant"):
+        suffix = text[len("assistant") :].strip()
+        if suffix and all(not character.isalnum() for character in suffix):
+            return ""
     return text
 
 
@@ -483,9 +512,67 @@ def _strip_code_fence(text: str) -> str:
 
 
 def _normalize_schema_response(parsed: object, *, schema_name: str) -> object:
+    if schema_name == "label_list":
+        recovered_labels = _normalize_label_list_payload(parsed)
+        if recovered_labels is not None:
+            return recovered_labels
     if schema_name == "children_by_label" and _looks_like_children_mapping(parsed):
         return {"children_by_label": parsed}
     return parsed
+
+
+def _looks_retryable_malformed_output(*, text: str, schema_name: str) -> bool:
+    stripped = _strip_code_fence(_strip_assistant_prefix(text.strip()))
+    if not stripped:
+        return True
+    if schema_name == "edge_list":
+        quoted_items = re.findall(r"""['"]([^'"]+)['"]""", stripped)
+        if quoted_items and len(quoted_items) % 2 == 1:
+            return True
+    return False
+
+
+def _looks_retryable_normalization_failure(
+    *,
+    parsed_content: object,
+    schema_name: str,
+    error: ValueError,
+) -> bool:
+    if schema_name != "edge_list":
+        return False
+    if "even number of items" not in str(error):
+        return False
+    return isinstance(parsed_content, list) and all(
+        isinstance(item, str) for item in parsed_content
+    )
+
+
+def _normalize_label_list_payload(parsed: object) -> list[str] | None:
+    if isinstance(parsed, list) and all(isinstance(item, str) for item in parsed):
+        return parsed
+    if not isinstance(parsed, dict):
+        return None
+    labels = parsed.get("labels")
+    if isinstance(labels, list) and all(isinstance(item, str) for item in labels):
+        if len(labels) == 1:
+            packed_labels = _split_packed_label_string(labels[0])
+            if packed_labels is not None:
+                return packed_labels
+        return labels
+    if isinstance(labels, str):
+        return _split_packed_label_string(labels)
+    return None
+
+
+def _split_packed_label_string(text: str) -> list[str] | None:
+    if "', '" not in text and '", "' not in text:
+        stripped = text.strip().strip("'\"")
+        return [stripped] if stripped else None
+    parts = re.split(r"""['"]\s*,\s*['"]""", text.strip())
+    cleaned_parts = [part.strip().strip("'\"") for part in parts if part.strip().strip("'\"")]
+    if not cleaned_parts:
+        return None
+    return cleaned_parts
 
 
 def _looks_like_children_mapping(parsed: object) -> bool:
@@ -713,7 +800,7 @@ def _recover_label_list_from_lines(text: str) -> list[str] | None:
     if block is None:
         block = _recover_truncated_list_block(text)
         if block is None:
-            return None
+            return _recover_label_list_from_segments(text)
     labels: list[str] = []
     for raw_line in block.splitlines():
         line = raw_line.strip()
@@ -721,10 +808,10 @@ def _recover_label_list_from_lines(text: str) -> list[str] | None:
             continue
         label = _extract_quoted_line_value(line)
         if label is None:
-            return None
+            return _recover_label_list_from_segments(text)
         labels.append(label)
     if not labels:
-        return None
+        return _recover_label_list_from_segments(text)
     return labels
 
 
@@ -744,6 +831,27 @@ def _recover_truncated_list_block(text: str) -> str | None:
     ):
         return None
     return candidate
+
+
+def _recover_label_list_from_segments(text: str) -> list[str] | None:
+    stripped = text.strip()
+    if not stripped.startswith("["):
+        return None
+    body = stripped[1:].strip()
+    if not body:
+        return None
+    segments = [segment.strip() for segment in body.split(",")]
+    labels: list[str] = []
+    for segment in segments:
+        cleaned = segment.strip().strip("[]").strip().strip("'\"")
+        if not cleaned:
+            continue
+        if any(marker in cleaned for marker in ("```", "{", "}", ":", "assistant")):
+            return None
+        labels.append(cleaned)
+    if len(labels) < 2:
+        return labels if len(labels) == 1 else None
+    return labels
 
 
 def _extract_outer_block(*, text: str, opener: str, closer: str) -> str | None:

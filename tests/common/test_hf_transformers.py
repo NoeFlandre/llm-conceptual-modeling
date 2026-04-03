@@ -71,6 +71,19 @@ class _ChatTemplateTokenizer(_Tokenizer):
         return self._decoded_text
 
 
+class _SequentialDecodeTokenizer(_ChatTemplateTokenizer):
+    def __init__(self, decoded_texts: list[str], *, model_max_length: int = 128) -> None:
+        super().__init__(model_max_length=model_max_length, decoded_text=decoded_texts[0])
+        self._decoded_texts = decoded_texts
+        self._decode_calls = 0
+
+    def decode(self, token_ids, skip_special_tokens: bool = True) -> str:
+        _ = (token_ids, skip_special_tokens)
+        index = min(self._decode_calls, len(self._decoded_texts) - 1)
+        self._decode_calls += 1
+        return self._decoded_texts[index]
+
+
 class _Model:
     def __init__(self) -> None:
         self.generation_config = type("GenerationConfig", (), {})()
@@ -310,6 +323,56 @@ def test_complete_json_passes_generation_timeout_as_max_time() -> None:
         schema_name="edge_list",
         schema={"type": "object"},
     )
+
+
+def test_complete_json_retries_once_after_empty_assistant_artifact() -> None:
+    tokenizer = _SequentialDecodeTokenizer([" assistant]", '{"edges": []}'])
+    model = _CapturingModel()
+    client = HFTransformersChatClient(
+        model="allenai/Olmo-3-7B-Instruct",
+        decoding_config=DecodingConfig(algorithm="greedy"),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=False,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+        seed=7,
+    )
+
+    response = client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert response == {"edges": []}
+    assert len(model.calls) == 2
+
+
+def test_complete_json_retries_once_after_odd_flat_edge_string_response() -> None:
+    tokenizer = _SequentialDecodeTokenizer(["['A', 'B', 'C']", '{"edges": []}'])
+    model = _CapturingModel()
+    client = HFTransformersChatClient(
+        model="allenai/Olmo-3-7B-Instruct",
+        decoding_config=DecodingConfig(algorithm="greedy"),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=False,
+        max_new_tokens_by_schema={"edge_list": 8},
+        context_policy={"safety_margin_tokens": 1},
+        seed=7,
+    )
+
+    response = client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert response == {"edges": []}
+    assert len(model.calls) == 2
 
 
 def test_embedding_client_casts_bfloat16_hidden_state_before_numpy(monkeypatch) -> None:
@@ -797,6 +860,52 @@ def test_parse_generated_json_recovers_truncated_label_list_missing_closing_brac
         "Relationship between trails and obesity",
         "Social influence on food choices",
     ]
+
+
+def test_parse_generated_json_normalizes_label_dict_with_packed_single_string() -> None:
+    response = (
+        '{"labels": ["Nutritional education\', \'Obesity prevention\', '
+        '\'Food accessibility\', \'Food policy\', \'Health promotion"]}'
+    )
+
+    parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
+
+    assert parsed == [
+        "Nutritional education",
+        "Obesity prevention",
+        "Food accessibility",
+        "Food policy",
+        "Health promotion",
+    ]
+
+
+def test_parse_generated_json_recovers_comma_separated_label_list_with_inconsistent_quotes(
+) -> None:
+    response = (
+        "[\n"
+        "  'Quality to hire',\n"
+        "'Traillness impact on mental heath', \n"
+        "'Relationship hildreness of food access', 'ealthy foods demand',"
+        "Aesthetics in health"
+    )
+
+    parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
+
+    assert parsed == [
+        "Quality to hire",
+        "Traillness impact on mental heath",
+        "Relationship hildreness of food access",
+        "ealthy foods demand",
+        "Aesthetics in health",
+    ]
+
+
+def test_parse_generated_json_recovers_single_bare_label_list_item() -> None:
+    response = "[\n  (Public support &amp; healthy eating],"
+
+    parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
+
+    assert parsed == ["(Public support &amp; healthy eating"]
 
 
 def test_complete_json_accepts_parseable_vote_list_without_eos() -> None:

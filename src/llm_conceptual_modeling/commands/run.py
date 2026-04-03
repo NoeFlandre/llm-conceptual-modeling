@@ -53,6 +53,7 @@ def handle_run(args: Namespace) -> int:
             print(f"roots={report['root_count']}")
             print(f"ready={report['ready_count']}")
             print(f"needs_config_fix={report['needs_config_fix_count']}")
+            print(f"invalid_config={report['invalid_config_count']}")
             print(f"active={report['active_count']}")
             print(f"finished={report['finished_count']}")
         return 0
