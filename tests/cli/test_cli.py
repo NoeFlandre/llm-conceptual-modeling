@@ -953,6 +953,100 @@ def test_cli_run_status_reports_active_worker_fields(monkeypatch, tmp_path, caps
     assert "active_stage_age_seconds=" in captured.out
 
 
+def test_cli_run_drain_remaining_reports_queue_as_json(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    state_path = tmp_path / "drain-state.json"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_drain_plan",
+        lambda **_kwargs: {
+            "queue": [
+                {
+                    "results_root": str(results_root / "hf-paper-batch-algo2-olmo-current"),
+                    "phase": "safe",
+                    "profile_name": "olmo-safe",
+                }
+            ],
+            "safe_queue_count": 1,
+            "risky_queue_count": 0,
+            "adopted_results_root": str(results_root / "hf-paper-batch-algo2-olmo-current"),
+            "state_file": str(state_path),
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "drain-remaining",
+            "--repo-root",
+            str(repo_root),
+            "--results-root",
+            str(results_root),
+            "--ssh-command",
+            "ssh -p 2222 root@example.com",
+            "--state-file",
+            str(state_path),
+            "--plan-only",
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert '"safe_queue_count": 1' in captured.out
+    assert '"profile_name": "olmo-safe"' in captured.out
+
+
+def test_cli_run_drain_status_reports_saved_state(monkeypatch, tmp_path, capsys) -> None:
+    state_path = tmp_path / "drain-state.json"
+    state_path.write_text(
+        """
+        {
+          "health": "healthy",
+          "current_phase": "safe",
+          "current_results_root": "/tmp/results/hf-paper-batch-algo2-olmo-current",
+          "current_status": {"finished_count": 10, "pending_count": 5, "failed_count": 1}
+        }
+        """,
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.read_drain_state_report",
+        lambda state_file: {
+            "state_file": str(state_file),
+            "health": "healthy",
+            "current_phase": "safe",
+            "current_results_root": "/tmp/results/hf-paper-batch-algo2-olmo-current",
+            "current_status": {"finished_count": 10, "pending_count": 5, "failed_count": 1},
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "drain-status",
+            "--state-file",
+            str(state_path),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert '"health": "healthy"' in captured.out
+    assert '"current_phase": "safe"' in captured.out
+
+
 def test_cli_run_smoke_executes_single_selected_spec(monkeypatch, tmp_path, capsys) -> None:
     config_path = tmp_path / "config.yaml"
     config_path.write_text(

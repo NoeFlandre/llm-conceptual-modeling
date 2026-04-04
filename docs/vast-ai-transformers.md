@@ -105,6 +105,7 @@ Shell glue layout:
 - `scripts/vast/common.sh`: shared SSH/rsync/value-validation helpers
 - `scripts/vast/fetch_results_from_vast.sh`: one-shot result pull
 - `scripts/vast/watch_results_from_vast.sh`: repeated local sync loop
+- `scripts/vast/drain_remaining_from_ssh.sh`: canonical unattended supervisor wrapper for long sequential drains
 - `scripts/vast/remote_runtime_doctor.sh`: remote runtime guardrail for Docker/bootstrap
 - `scripts/vast/prepare_and_resume_hf_batch.sh`: top-level orchestration wrapper
 
@@ -125,6 +126,17 @@ Pass guidance:
   prioritize lower-risk pending cells first.
 - `retry-timeouts`: explicit second pass. Retry prior timeout failures first, then continue with the
   remaining queue.
+
+Unattended long-run guidance:
+
+- prefer `uv run lcm run drain-remaining` for a host that should keep working through many seeded roots
+- the default phase order is `safe` first, then `risky`
+- safe profiles exclude known high-risk decoding branches such as:
+  - OLMo `contrastive_penalty_alpha_0.8`
+  - Mistral `contrastive_penalty_alpha_0.8`
+  - Qwen contrastive in the safe phase
+- risky phase reintroduces excluded decodings only after the safe backlog is drained
+- the supervisor writes a state file that can be read with `uv run lcm run drain-status --state-file ... --json`
 
 Optional smoke gate variables for the wrapper:
 

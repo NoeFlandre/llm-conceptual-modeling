@@ -224,6 +224,28 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser.add_argument("--results-root", required=True)
     status_parser.add_argument("--json", action="store_true")
 
+    drain_remaining_parser = run_subparsers.add_parser("drain-remaining")
+    drain_remaining_parser.add_argument("--repo-root", required=True)
+    drain_remaining_parser.add_argument("--results-root", required=True)
+    drain_remaining_parser.add_argument("--ssh-command", required=True)
+    drain_remaining_parser.add_argument("--state-file", required=True)
+    drain_remaining_parser.add_argument(
+        "--phase",
+        choices=("safe", "risky", "all"),
+        default="all",
+    )
+    drain_remaining_parser.add_argument("--full-coverage", action="store_true")
+    drain_remaining_parser.add_argument("--root-name-contains")
+    drain_remaining_parser.add_argument("--plan-only", action="store_true")
+    drain_remaining_parser.add_argument("--poll-seconds", type=int, default=30)
+    drain_remaining_parser.add_argument("--stale-after-seconds", type=int, default=3600)
+    drain_remaining_parser.add_argument("--quick-resume-script")
+    drain_remaining_parser.add_argument("--json", action="store_true")
+
+    drain_status_parser = run_subparsers.add_parser("drain-status")
+    drain_status_parser.add_argument("--state-file", required=True)
+    drain_status_parser.add_argument("--json", action="store_true")
+
     smoke_parser = run_subparsers.add_parser("smoke")
     smoke_parser.add_argument("--config", required=True)
     smoke_parser.add_argument("--algorithm", choices=("algo1", "algo2", "algo3"), required=True)

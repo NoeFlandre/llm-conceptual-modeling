@@ -165,7 +165,9 @@ def test_remote_runtime_doctor_script_validates_selected_runtime_mode() -> None:
     assert "command -v docker >/dev/null 2>&1" in script_text
     assert "docker image inspect" in script_text
     assert "docker run --rm" in script_text
-    assert ".venv/bin/lcm --help" in script_text
+    assert "command -v curl >/dev/null 2>&1" in script_text
+    assert "command -v bash >/dev/null 2>&1" in script_text
+    assert "command -v nvidia-smi >/dev/null 2>&1" in script_text
 
 
 def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
@@ -265,206 +267,199 @@ def test_prepare_and_resume_script_prefers_local_results_configs_over_repo_paths
     assert script_text.index(results_branch) < script_text.index(repo_branch)
 
 
-def test_drain_olmo_script_sequences_all_olmo_roots_and_uses_result_root_configs() -> None:
-    script_path = Path("scripts/vast/drain_olmo_batches_from_ssh.sh")
-    script_text = script_path.read_text(encoding="utf-8")
+def test_drain_remaining_script_delegates_to_unified_cli() -> None:
+    script_text = Path("scripts/vast/drain_remaining_from_ssh.sh").read_text(encoding="utf-8")
 
-    assert "hf-paper-batch-algo1-olmo-current" in script_text
-    assert "hf-paper-batch-algo2-olmo-current" in script_text
-    assert "hf-paper-batch-algo3-olmo-current" in script_text
-    assert "runtime_config.yaml" in script_text
-    assert 'OLMO_GENERATION_TIMEOUT_SECONDS="${OLMO_GENERATION_TIMEOUT_SECONDS:-60}"' in script_text
-    assert 'BATCH_GENERATION_TIMEOUT_SECONDS="$OLMO_GENERATION_TIMEOUT_SECONDS" \\' in script_text
-    assert (
-        'OLMO_RETRY_STRUCTURAL_FAILURES_ON_RESUME="${OLMO_RETRY_STRUCTURAL_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert (
-        'OLMO_RETRY_TIMEOUT_FAILURES_ON_RESUME="${OLMO_RETRY_TIMEOUT_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert (
-        'OLMO_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME="${OLMO_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert (
-        'OLMO_RETRY_OOM_FAILURES_ON_RESUME="${OLMO_RETRY_OOM_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert "BATCH_RETRY_OOM_FAILURES_ON_RESUME" in script_text
-    assert "BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME" in script_text
-    assert "BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME" in script_text
-    assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
-    assert "root_excluded_decoding_labels()" in script_text
-    assert "BATCH_EXCLUDED_DECODING_LABELS" in script_text
-    assert "pending_count" in script_text
-    assert "running_count" in script_text
-    assert "while true; do" in script_text
+    assert "drain-remaining" in script_text
+    assert "--repo-root" in script_text
+    assert "--results-root" in script_text
+    assert "--ssh-command" in script_text
+    assert "--state-file" in script_text
+    assert "--phase" in script_text
+    assert "--poll-seconds" in script_text
+    assert "--stale-after-seconds" in script_text
+    assert "--quick-resume-script" in script_text
+    assert "DRAIN_PLAN_ONLY" in script_text
+    assert "DRAIN_JSON" in script_text
 
 
-def test_drain_olmo_script_retries_transient_launch_failures(tmp_path: Path) -> None:
+def test_drain_olmo_wrapper_delegates_to_generic_supervisor() -> None:
+    script_text = Path("scripts/vast/drain_olmo_batches_from_ssh.sh").read_text(encoding="utf-8")
+    drain_poll = 'DRAIN_POLL_SECONDS="${DRAIN_POLL_SECONDS:-${OLMO_DRAIN_POLL_SECONDS:-30}}"'
+    quick_resume = (
+        'DRAIN_QUICK_RESUME_SCRIPT="${DRAIN_QUICK_RESUME_SCRIPT:-'
+        '${OLMO_QUICK_RESUME_SCRIPT:-$SCRIPT_DIR/quick_resume_from_ssh.sh}}"'
+    )
+    sync_interval = (
+        'LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-'
+        '${OLMO_LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-30}}"'
+    )
+    sync_timeout = (
+        'LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS="${LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS:-'
+        '${OLMO_LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS:-300}}"'
+    )
+
+    assert 'DRAIN_ROOT_NAME_CONTAINS="${DRAIN_ROOT_NAME_CONTAINS:-olmo}"' in script_text
+    assert 'DRAIN_PHASE="${DRAIN_PHASE:-all}"' in script_text
+    assert drain_poll in script_text
+    assert (
+        'DRAIN_STALE_AFTER_SECONDS="${DRAIN_STALE_AFTER_SECONDS:-${OLMO_RUNNING_ROOT_STALE_SECONDS:-3600}}"'
+        in script_text
+    )
+    assert quick_resume in script_text
+    assert sync_interval in script_text
+    assert sync_timeout in script_text
+    assert 'exec bash "$SCRIPT_DIR/drain_remaining_from_ssh.sh"' in script_text
+
+
+def test_drain_qwen_wrapper_delegates_to_generic_supervisor() -> None:
+    script_text = Path("scripts/vast/drain_qwen_batches_from_ssh.sh").read_text(encoding="utf-8")
+    drain_poll = 'DRAIN_POLL_SECONDS="${DRAIN_POLL_SECONDS:-${QWEN_DRAIN_POLL_SECONDS:-30}}"'
+    quick_resume = (
+        'DRAIN_QUICK_RESUME_SCRIPT="${DRAIN_QUICK_RESUME_SCRIPT:-'
+        '${QWEN_QUICK_RESUME_SCRIPT:-$SCRIPT_DIR/quick_resume_from_ssh.sh}}"'
+    )
+    sync_interval = (
+        'LOCAL_RESULTS_SYNC_INTERVAL_SECONDS="${LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-'
+        '${QWEN_LOCAL_RESULTS_SYNC_INTERVAL_SECONDS:-30}}"'
+    )
+    sync_timeout = (
+        'LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS="${LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS:-'
+        '${QWEN_LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS:-300}}"'
+    )
+
+    assert 'DRAIN_ROOT_NAME_CONTAINS="${DRAIN_ROOT_NAME_CONTAINS:-qwen}"' in script_text
+    assert 'DRAIN_PHASE="${DRAIN_PHASE:-all}"' in script_text
+    assert drain_poll in script_text
+    assert (
+        'DRAIN_STALE_AFTER_SECONDS="${DRAIN_STALE_AFTER_SECONDS:-${QWEN_RUNNING_ROOT_STALE_SECONDS:-3600}}"'
+        in script_text
+    )
+    assert quick_resume in script_text
+    assert sync_interval in script_text
+    assert sync_timeout in script_text
+    assert 'exec bash "$SCRIPT_DIR/drain_remaining_from_ssh.sh"' in script_text
+
+
+def test_drain_remaining_script_passes_expected_cli_arguments(tmp_path: Path) -> None:
     repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-    (repo_root / "configs").mkdir(parents=True)
-    (repo_root / "configs" / "hf_transformers_algo3_olmo.yaml").write_text(
-        Path("configs/hf_transformers_algo3_olmo.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-
+    repo_root.mkdir()
     results_root = tmp_path / "results"
-    olmo_root = results_root / "hf-paper-batch-algo1-olmo-current"
-    olmo_root.mkdir(parents=True)
-    (olmo_root / "runtime_config.yaml").write_text(
-        (Path("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml").read_text(encoding="utf-8")),
-        encoding="utf-8",
-    )
-    (olmo_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 1,
-          "running_count": 0,
-          "pending_count": 0,
-          "updated_at": "2026-04-04T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    helper_script.write_text(
-        """#!/usr/bin/env bash
-set -euo pipefail
-
-state_file="${STUB_STATE_FILE:?}"
-invocations_file="${STUB_INVOCATIONS_FILE:?}"
-local_results_dir="$4"
-count=0
-if [ -f "$state_file" ]; then
-  count="$(cat "$state_file")"
-fi
-count=$((count + 1))
-printf '%s\n' "$count" > "$state_file"
-printf '%s\n' "$count" >> "$invocations_file"
-if [ "$count" = "1" ]; then
-  exit 42
-fi
-(
-  sleep 1
-  cat >"$local_results_dir/batch_status.json" <<'JSON'
-{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}
-JSON
-) &
-exit 0
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "2"
-    env["OLMO_LAUNCH_BACKOFF_SECONDS"] = "0"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-    env["OLMO_DRAIN_MAX_WAIT_SECONDS"] = "30"
-    env["STUB_STATE_FILE"] = str(tmp_path / "state.txt")
-    env["STUB_INVOCATIONS_FILE"] = str(tmp_path / "invocations.txt")
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_olmo_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert (tmp_path / "state.txt").read_text(encoding="utf-8").strip() == "2"
-    assert (tmp_path / "invocations.txt").read_text(encoding="utf-8").splitlines() == ["1", "2"]
-    status = (olmo_root / "batch_status.json").read_text(encoding="utf-8")
-    assert '"finished_count": 1' in status
-    assert '"pending_count": 0' in status
-
-
-def test_drain_olmo_script_forces_frequent_local_sync(tmp_path: Path) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
-    results_root = tmp_path / "results"
-    olmo_root = results_root / "hf-paper-batch-algo1-olmo-current"
-    olmo_root.mkdir(parents=True)
-    (olmo_root / "runtime_config.yaml").write_text(
-        Path("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-    (olmo_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 0,
-          "pending_count": 1,
-          "updated_at": "2026-04-04T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    env_dump = tmp_path / "env_dump.json"
-    helper_script.write_text(
+    results_root.mkdir()
+    uv_stub = tmp_path / "uv"
+    argv_dump = tmp_path / "argv.txt"
+    env_dump = tmp_path / "env.json"
+    uv_stub.write_text(
         f"""#!/usr/bin/env bash
 set -euo pipefail
+printf '%s\n' "$@" > "{argv_dump}"
 python3 - <<'PY'
 from pathlib import Path
 import json
 import os
 
-payload = {{
-    "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS": os.environ.get("LOCAL_RESULTS_SYNC_INTERVAL_SECONDS"),
-    "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS": os.environ.get(
-        "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS"
+Path(r"{env_dump}").write_text(
+    json.dumps(
+        {{
+            "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS": os.environ.get(
+                "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS"
+            ),
+            "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS": os.environ.get(
+                "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS"
+            ),
+        }},
+        indent=2,
+        sort_keys=True,
     ),
-}}
-Path(r"{env_dump}").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    encoding="utf-8",
+)
 PY
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
 """,
         encoding="utf-8",
     )
-    helper_script.chmod(0o755)
+    uv_stub.chmod(0o755)
 
     env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "1"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-    env["STUB_STATE_FILE"] = str(tmp_path / "unused-state.txt")
-    env["STUB_INVOCATIONS_FILE"] = str(tmp_path / "unused-invocations.txt")
+    env["UV_BIN"] = str(uv_stub)
+    env["DRAIN_PLAN_ONLY"] = "1"
+    env["DRAIN_JSON"] = "1"
+    env["DRAIN_PHASE"] = "safe"
+    env["DRAIN_POLL_SECONDS"] = "5"
+    env["DRAIN_STALE_AFTER_SECONDS"] = "120"
+    env["DRAIN_STATE_FILE"] = str(tmp_path / "state.json")
+
+    result = subprocess.run(
+        [
+            "bash",
+            "scripts/vast/drain_remaining_from_ssh.sh",
+            "ssh -p 12345 root@127.0.0.1",
+            str(repo_root),
+            str(results_root),
+            "olmo",
+        ],
+        cwd=Path.cwd(),
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    argv = argv_dump.read_text(encoding="utf-8")
+    assert "run" in argv
+    assert "drain-remaining" in argv
+    assert str(repo_root) in argv
+    assert str(results_root) in argv
+    assert "ssh -p 12345 root@127.0.0.1" in argv
+    assert "--root-name-contains" in argv
+    assert "olmo" in argv
+    assert "--plan-only" in argv
+    assert "--json" in argv
+
+
+def test_drain_olmo_wrapper_sets_filter_and_sync_defaults(tmp_path: Path) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    uv_stub = tmp_path / "uv"
+    argv_dump = tmp_path / "argv.txt"
+    env_dump = tmp_path / "env.json"
+    uv_stub.write_text(
+        f"""#!/usr/bin/env bash
+set -euo pipefail
+printf '%s\n' "$@" > "{argv_dump}"
+python3 - <<'PY'
+from pathlib import Path
+import json
+import os
+
+Path(r"{env_dump}").write_text(
+    json.dumps(
+        {{
+            "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS": os.environ.get(
+                "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS"
+            ),
+            "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS": os.environ.get(
+                "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS"
+            ),
+            "DRAIN_QUICK_RESUME_SCRIPT": os.environ.get("DRAIN_QUICK_RESUME_SCRIPT"),
+        }},
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+PY
+""",
+        encoding="utf-8",
+    )
+    uv_stub.chmod(0o755)
+
+    env = os.environ.copy()
+    env["UV_BIN"] = str(uv_stub)
+    env["DRAIN_PLAN_ONLY"] = "1"
+    env["OLMO_QUICK_RESUME_SCRIPT"] = str(tmp_path / "quick_resume_stub.sh")
 
     result = subprocess.run(
         [
@@ -482,118 +477,26 @@ JSON
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
+    argv = argv_dump.read_text(encoding="utf-8")
     payload = env_dump.read_text(encoding="utf-8")
+    assert "--root-name-contains" in argv
+    assert "olmo" in argv
     assert '"LOCAL_RESULTS_SYNC_INTERVAL_SECONDS": "30"' in payload
     assert '"LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS": "300"' in payload
 
 
-def test_drain_olmo_script_processes_all_olmo_roots_in_order(tmp_path: Path) -> None:
+def test_drain_qwen_wrapper_sets_filter_and_sync_defaults(tmp_path: Path) -> None:
     repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
+    repo_root.mkdir()
     results_root = tmp_path / "results"
-    order = [
-        "hf-paper-batch-algo1-olmo-current",
-        "hf-paper-batch-algo2-olmo-current",
-        "hf-paper-batch-algo3-olmo-current",
-    ]
-    config_text = Path("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml").read_text(
-        encoding="utf-8"
-    )
-    for root_name in order:
-        root_dir = results_root / root_name
-        root_dir.mkdir(parents=True)
-        (root_dir / "runtime_config.yaml").write_text(config_text, encoding="utf-8")
-        (root_dir / "batch_status.json").write_text(
-            """
-            {
-              "total_runs": 1,
-              "finished_count": 0,
-              "failed_count": 0,
-              "running_count": 0,
-              "pending_count": 1,
-              "updated_at": "2026-04-04T00:00:00Z"
-            }
-            """.strip(),
-            encoding="utf-8",
-        )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    seen_order = tmp_path / "seen_order.txt"
-    helper_script.write_text(
+    results_root.mkdir()
+    uv_stub = tmp_path / "uv"
+    argv_dump = tmp_path / "argv.txt"
+    env_dump = tmp_path / "env.json"
+    uv_stub.write_text(
         f"""#!/usr/bin/env bash
 set -euo pipefail
-printf '%s\n' "$(basename "$4")" >> "{seen_order}"
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "1"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-    env["OLMO_DRAIN_MAX_PASSES"] = "1"
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_olmo_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert seen_order.read_text(encoding="utf-8").splitlines() == order
-
-
-def test_drain_olmo_script_uses_safe_decoding_excludes_for_algo1_olmo(tmp_path: Path) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
-    results_root = tmp_path / "results"
-    olmo_root = results_root / "hf-paper-batch-algo1-olmo-current"
-    olmo_root.mkdir(parents=True)
-    (olmo_root / "runtime_config.yaml").write_text(
-        Path("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-    (olmo_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 0,
-          "pending_count": 1,
-          "updated_at": "2026-04-04T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    env_dump = tmp_path / "env_dump.json"
-    helper_script.write_text(
-        f"""#!/usr/bin/env bash
-set -euo pipefail
+printf '%s\n' "$@" > "{argv_dump}"
 python3 - <<'PY'
 from pathlib import Path
 import json
@@ -602,7 +505,13 @@ import os
 Path(r"{env_dump}").write_text(
     json.dumps(
         {{
-            "BATCH_EXCLUDED_DECODING_LABELS": os.environ.get("BATCH_EXCLUDED_DECODING_LABELS"),
+            "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS": os.environ.get(
+                "LOCAL_RESULTS_SYNC_INTERVAL_SECONDS"
+            ),
+            "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS": os.environ.get(
+                "LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS"
+            ),
+            "DRAIN_QUICK_RESUME_SCRIPT": os.environ.get("DRAIN_QUICK_RESUME_SCRIPT"),
         }},
         indent=2,
         sort_keys=True,
@@ -610,377 +519,15 @@ Path(r"{env_dump}").write_text(
     encoding="utf-8",
 )
 PY
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
 """,
         encoding="utf-8",
     )
-    helper_script.chmod(0o755)
+    uv_stub.chmod(0o755)
 
     env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "1"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-    env["OLMO_DRAIN_MAX_PASSES"] = "1"
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_olmo_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    payload = env_dump.read_text(encoding="utf-8")
-    assert '"BATCH_EXCLUDED_DECODING_LABELS": "contrastive_penalty_alpha_0.8"' in payload
-
-
-def test_drain_olmo_script_uses_preview_resume_config_when_runtime_config_missing(
-    tmp_path: Path,
-) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
-    results_root = tmp_path / "results"
-    olmo_root = results_root / "hf-paper-batch-algo2-olmo-current"
-    olmo_root.mkdir(parents=True)
-    preview_resume = olmo_root / "preview_resume"
-    preview_resume.mkdir(parents=True)
-    preview_resume_config = preview_resume / "resolved_run_config.yaml"
-    preview_resume_config.write_text(
-        Path("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-    (olmo_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 0,
-          "pending_count": 1,
-          "updated_at": "2026-04-04T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    seen_config = tmp_path / "seen_config.txt"
-    helper_script.write_text(
-        f"""#!/usr/bin/env bash
-set -euo pipefail
-printf '%s\n' "$2" > "{seen_config}"
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "1"
-    env["OLMO_DRAIN_MAX_PASSES"] = "1"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_olmo_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert seen_config.read_text(encoding="utf-8").strip().endswith(
-        "preview_resume/resolved_run_config.yaml"
-    )
-
-
-def test_drain_olmo_script_falls_back_to_repo_config_when_results_configs_are_missing(
-    tmp_path: Path,
-) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-    (repo_root / "configs").mkdir(parents=True)
-    (repo_root / "configs" / "hf_transformers_algo3_olmo.yaml").write_text(
-        Path("configs/hf_transformers_algo3_olmo.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-
-    results_root = tmp_path / "results"
-    olmo_root = results_root / "hf-paper-batch-algo3-olmo-current"
-    olmo_root.mkdir(parents=True)
-    (olmo_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 0,
-          "pending_count": 1,
-          "updated_at": "2026-04-04T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    seen_config = tmp_path / "seen_repo_config.txt"
-    helper_script.write_text(
-        f"""#!/usr/bin/env bash
-set -euo pipefail
-printf '%s\n' "$2" > "{seen_config}"
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "1"
-    env["OLMO_DRAIN_MAX_PASSES"] = "1"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_olmo_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert seen_config.read_text(encoding="utf-8").strip().endswith(
-        "configs/hf_transformers_algo3_olmo.yaml"
-    )
-
-
-def test_drain_olmo_script_reclaims_stale_running_roots(tmp_path: Path) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
-    results_root = tmp_path / "results"
-    olmo_root = results_root / "hf-paper-batch-algo1-olmo-current"
-    olmo_root.mkdir(parents=True)
-    (olmo_root / "runtime_config.yaml").write_text(
-        Path("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-    (olmo_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 1,
-          "pending_count": 0,
-          "updated_at": "2024-01-01T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    seen_invocations = tmp_path / "seen_stale.txt"
-    helper_script.write_text(
-        f"""#!/usr/bin/env bash
-set -euo pipefail
-printf '%s\n' "$2" > "{seen_invocations}"
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["OLMO_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["OLMO_LAUNCH_ATTEMPTS"] = "1"
-    env["OLMO_DRAIN_POLL_SECONDS"] = "0"
-    env["OLMO_RUNNING_ROOT_STALE_SECONDS"] = "1"
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_olmo_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert seen_invocations.read_text(encoding="utf-8").strip().endswith(
-        "runtime_config.yaml"
-    )
-
-
-def test_drain_qwen_script_sequences_all_qwen_roots_and_uses_result_root_configs() -> None:
-    script_path = Path("scripts/vast/drain_qwen_batches_from_ssh.sh")
-    script_text = script_path.read_text(encoding="utf-8")
-
-    assert "hf-paper-batch-algo1-qwen" in script_text
-    assert "hf-paper-batch-algo2-qwen-current" in script_text
-    assert "hf-paper-batch-algo3-qwen-current" in script_text
-    assert "runtime_config.yaml" in script_text
-    assert 'QWEN_GENERATION_TIMEOUT_SECONDS="${QWEN_GENERATION_TIMEOUT_SECONDS:-60}"' in script_text
-    assert 'BATCH_GENERATION_TIMEOUT_SECONDS="$QWEN_GENERATION_TIMEOUT_SECONDS" \\' in script_text
-    assert (
-        'QWEN_RETRY_STRUCTURAL_FAILURES_ON_RESUME="${QWEN_RETRY_STRUCTURAL_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert (
-        'QWEN_RETRY_TIMEOUT_FAILURES_ON_RESUME="${QWEN_RETRY_TIMEOUT_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert (
-        'QWEN_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME="${QWEN_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert (
-        'QWEN_RETRY_OOM_FAILURES_ON_RESUME="${QWEN_RETRY_OOM_FAILURES_ON_RESUME:-true}"'
-        in script_text
-    )
-    assert "BATCH_RETRY_OOM_FAILURES_ON_RESUME" in script_text
-    assert "BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME" in script_text
-    assert "BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME" in script_text
-    assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
-    assert "root_excluded_decoding_labels()" in script_text
-    assert "BATCH_EXCLUDED_DECODING_LABELS" in script_text
-    assert "pending_count" in script_text
-    assert "running_count" in script_text
-    assert "while true; do" in script_text
-
-
-def test_qwen_drain_keeps_contrastive_enabled(tmp_path: Path) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
-    results_root = tmp_path / "results"
-    qwen_root = results_root / "hf-paper-batch-algo1-qwen"
-    qwen_root.mkdir(parents=True)
-    (qwen_root / "runtime_config.yaml").write_text(
-        Path("results/hf-paper-batch-algo1-qwen/runtime_config.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-    (qwen_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 0,
-          "pending_count": 1,
-          "updated_at": "2026-04-04T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    env_dump = tmp_path / "env_dump.json"
-    helper_script.write_text(
-        f"""#!/usr/bin/env bash
-set -euo pipefail
-python3 - <<'PY'
-from pathlib import Path
-import json
-import os
-
-Path(r"{env_dump}").write_text(
-    json.dumps(
-        {{
-            "BATCH_EXCLUDED_DECODING_LABELS": os.environ.get("BATCH_EXCLUDED_DECODING_LABELS"),
-        }},
-        indent=2,
-        sort_keys=True,
-    ),
-    encoding="utf-8",
-)
-PY
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["QWEN_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["QWEN_LAUNCH_ATTEMPTS"] = "1"
-    env["QWEN_DRAIN_POLL_SECONDS"] = "0"
-    env["QWEN_DRAIN_MAX_PASSES"] = "1"
+    env["UV_BIN"] = str(uv_stub)
+    env["DRAIN_PLAN_ONLY"] = "1"
+    env["QWEN_QUICK_RESUME_SCRIPT"] = str(tmp_path / "quick_resume_stub.sh")
 
     result = subprocess.run(
         [
@@ -998,76 +545,9 @@ JSON
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
+    argv = argv_dump.read_text(encoding="utf-8")
     payload = env_dump.read_text(encoding="utf-8")
-    assert '"BATCH_EXCLUDED_DECODING_LABELS": ""' in payload
-
-
-def test_drain_qwen_script_reclaims_stale_running_roots(tmp_path: Path) -> None:
-    repo_root = tmp_path / "repo"
-    (repo_root / "data" / "inputs").mkdir(parents=True)
-
-    results_root = tmp_path / "results"
-    qwen_root = results_root / "hf-paper-batch-algo1-qwen"
-    qwen_root.mkdir(parents=True)
-    (qwen_root / "runtime_config.yaml").write_text(
-        Path("results/hf-paper-batch-algo1-qwen/runtime_config.yaml").read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-    (qwen_root / "batch_status.json").write_text(
-        """
-        {
-          "total_runs": 1,
-          "finished_count": 0,
-          "failed_count": 0,
-          "running_count": 1,
-          "pending_count": 0,
-          "updated_at": "2024-01-01T00:00:00Z"
-        }
-        """.strip(),
-        encoding="utf-8",
-    )
-
-    helper_script = tmp_path / "quick_resume_stub.sh"
-    seen_invocations = tmp_path / "seen_stale.txt"
-    helper_script.write_text(
-        f"""#!/usr/bin/env bash
-set -euo pipefail
-printf '%s\\n' "$2" > "{seen_invocations}"
-cat >"$4/batch_status.json" <<'JSON'
-{{
-  "total_runs": 1,
-  "finished_count": 1,
-  "failed_count": 0,
-  "running_count": 0,
-  "pending_count": 0,
-  "updated_at": "2026-04-04T00:00:05Z"
-}}
-JSON
-""",
-        encoding="utf-8",
-    )
-    helper_script.chmod(0o755)
-
-    env = os.environ.copy()
-    env["QWEN_QUICK_RESUME_SCRIPT"] = str(helper_script)
-    env["QWEN_LAUNCH_ATTEMPTS"] = "1"
-    env["QWEN_DRAIN_POLL_SECONDS"] = "0"
-    env["QWEN_RUNNING_ROOT_STALE_SECONDS"] = "0"
-
-    result = subprocess.run(
-        [
-            "bash",
-            "scripts/vast/drain_qwen_batches_from_ssh.sh",
-            "ssh -p 12345 root@127.0.0.1",
-            str(repo_root),
-            str(results_root),
-        ],
-        cwd=Path.cwd(),
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert seen_invocations.read_text(encoding="utf-8").strip().endswith("runtime_config.yaml")
+    assert "--root-name-contains" in argv
+    assert "qwen" in argv
+    assert '"LOCAL_RESULTS_SYNC_INTERVAL_SECONDS": "30"' in payload
+    assert '"LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS": "300"' in payload

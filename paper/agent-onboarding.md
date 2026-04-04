@@ -125,8 +125,11 @@ If you need to understand or patch the HF execution path, read these first:
   - local sweep across all seeded result roots
   - canonical source for classifying roots as `resume-ready`, `needs-config-fix`, `active`, or `finished`
 - `src/llm_conceptual_modeling/hf_resume_profile.py`
-  - canonical conservative resume profile for each model family
-  - canonical source for default runtime mode and excluded decoding labels on fresh rentals
+  - canonical conservative and risky resume profiles for each model family
+  - canonical source for runtime mode, timeout/retry defaults, worker policy, and excluded decoding labels on fresh rentals
+- `src/llm_conceptual_modeling/hf_drain_supervisor.py`
+  - canonical unattended multi-root drain planner and supervisor
+  - owns safe-first then risky queue construction, active-root adoption, and supervisor state reporting
 - `src/llm_conceptual_modeling/hf_experiments.py`
   - main HF batch orchestration
   - failure handling
@@ -185,9 +188,9 @@ Decoding families:
 
 Critical compatibility fact:
 
-- `Qwen/Qwen3.5-9B` does not support our current contrastive path in plain `transformers`
-- this is now handled generally in planning/runtime compatibility code
-- unsupported Qwen contrastive combinations should not be scheduled anymore
+- Qwen contrastive should be treated as a risky-phase concern, not a default safe resume path
+- safe unattended drains now exclude Qwen contrastive by profile
+- risky Qwen contrastive work should only be attempted through the supervisor after the safe backlog is drained and never by silently accepting malformed outputs
 
 ## 5.1 Worker Lifecycle Phases
 

@@ -11,10 +11,13 @@ This folder contains the operational shell entrypoints for rented Vast.ai GPU ho
     non-Blackwell NVIDIA hosts
 - `prepare_and_resume_hf_batch.sh`: one-command local wrapper to sync, bootstrap, validate, smoke, and resume a remote batch
 - `quick_resume_from_ssh.sh`: convenience wrapper that accepts a raw pasted SSH command and forwards it to `prepare_and_resume_hf_batch.sh`
-- `drain_olmo_batches_from_ssh.sh`: sequentially drains the local OLMO roots across `algo1`, `algo2`, and `algo3` using their seeded result-tree configs
-- `drain_qwen_batches_from_ssh.sh`: sequentially drains the local Qwen roots across `algo1`, `algo2`, and `algo3` using their seeded result-tree configs
+- `drain_remaining_from_ssh.sh`: canonical unattended drain wrapper for all seeded result roots on one SSH host
+- `drain_olmo_batches_from_ssh.sh`: thin OLMO policy wrapper over `drain_remaining_from_ssh.sh`
+- `drain_qwen_batches_from_ssh.sh`: thin Qwen policy wrapper over `drain_remaining_from_ssh.sh`
 - `remote_runtime_doctor.sh`: remote guardrail that validates the selected runtime path before result seeding and launch
 - `resume-sweep` via `uv run lcm run resume-sweep --repo-root ... --results-root ... --json`: local readiness report across all seeded result roots before renting another host
+- `drain-remaining` via `uv run lcm run drain-remaining --repo-root ... --results-root ... --ssh-command ... --state-file ...`: canonical long-run supervisor that drains all selected roots in safe-first then risky order
+- `drain-status` via `uv run lcm run drain-status --state-file ... --json`: machine-readable state for the unattended supervisor
 - `remote_resume_preview.sh`: remote helper that rewrites the effective runtime config and runs `lcm doctor` plus `lcm run validate-config`
 - `remote_resume_launch.sh`: remote helper that kills stale workers and starts `paper-batch --resume`
 
@@ -64,8 +67,8 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
 - `resume-sweep` now also reports the default runtime mode, safe resume profile, excluded decoding labels, whether the root is actually rent-ready under the conservative default profile, and a single recommended results root to rent next.
 - `resume-preflight` now carries forward the local `batch_status.json` running count, so roots that are already active are conservatively blocked instead of being misreported as rentable.
-- For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
-- For Qwen work, `drain_qwen_batches_from_ssh.sh` follows the same pass-by-pass flow across `algo1`, `algo2`, and `algo3`, while keeping contrastive decoding enabled and using dynamic cache for Qwen contrastive generation.
+- `drain-remaining` is now the canonical long-run control plane. It keeps per-root result trees intact, adopts a matching active root first, drains safe profiles before risky profiles, and writes a machine-readable supervisor state file for unattended monitoring.
+- The per-family drain scripts no longer own orchestration logic. They only set root filters, sync defaults, and quick-resume overrides before delegating to `drain-remaining`.
 - For `algo1-olmo`, the drain script now excludes the known OOM-heavy
   `contrastive_penalty_alpha_0.8` branch during remote preview rewriting, so fresh
   resumes keep the rest of the seeded root but stop burning GPU time on that branch.
@@ -84,6 +87,9 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   - `results-sync-last-success.txt`
   - `results-sync.log`
   - `results-sync.pid`
+- Long unattended drains also write a supervisor state file, typically:
+  - `drain-remaining-state.json`
+  - or `drain-olmo-state.json` / `drain-qwen-state.json` from the thin wrappers
 - The watcher retries after SSH or rsync failures instead of exiting after the first failed pull.
 - When syncing from a custom-port SSH host, pass the port explicitly as the third watcher argument so rsync does not fall back to port 22.
 - Any behavioral change here should be locked by the script tests in `tests/core/`.

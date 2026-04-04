@@ -6,6 +6,11 @@ from llm_conceptual_modeling.common.hf_transformers import (
     build_runtime_factory,
 )
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
+from llm_conceptual_modeling.hf_drain_supervisor import (
+    build_drain_plan,
+    read_drain_state_report,
+    run_drain_supervisor,
+)
 from llm_conceptual_modeling.hf_experiments import (
     run_paper_batch,
     run_single_spec,
@@ -87,6 +92,49 @@ def handle_run(args: Namespace) -> int:
                 print(f"worker_status={status['worker_status']}")
             if status.get("active_stage_age_seconds") is not None:
                 print(f"active_stage_age_seconds={status['active_stage_age_seconds']}")
+        return 0
+    if args.run_target == "drain-remaining":
+        if args.plan_only:
+            report = build_drain_plan(
+                repo_root=args.repo_root,
+                results_root=args.results_root,
+                ssh_command=args.ssh_command,
+                state_file=args.state_file,
+                phase=args.phase,
+                full_coverage=args.full_coverage,
+                root_name_contains=args.root_name_contains,
+            )
+        else:
+            report = run_drain_supervisor(
+                repo_root=args.repo_root,
+                results_root=args.results_root,
+                ssh_command=args.ssh_command,
+                state_file=args.state_file,
+                phase=args.phase,
+                full_coverage=args.full_coverage,
+                root_name_contains=args.root_name_contains,
+                poll_seconds=args.poll_seconds,
+                stale_after_seconds=args.stale_after_seconds,
+                quick_resume_script=args.quick_resume_script,
+            )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"state_file={report['state_file']}")
+            print(f"safe_queue_count={report.get('safe_queue_count', 0)}")
+            print(f"risky_queue_count={report.get('risky_queue_count', 0)}")
+            if report.get("adopted_results_root"):
+                print(f"adopted_results_root={report['adopted_results_root']}")
+        return 0
+    if args.run_target == "drain-status":
+        report = read_drain_state_report(args.state_file)
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"state_file={args.state_file}")
+            print(f"health={report.get('health', 'unknown')}")
+            print(f"current_phase={report.get('current_phase', 'unknown')}")
+            print(f"current_results_root={report.get('current_results_root', 'unknown')}")
         return 0
     if args.run_target == "smoke":
         config = load_hf_run_config(args.config)

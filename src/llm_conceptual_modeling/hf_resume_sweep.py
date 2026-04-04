@@ -77,6 +77,8 @@ def build_resume_sweep_report(
                 "finished_count": report.get("finished_count", 0),
                 "failed_count": report.get("failed_count", 0),
                 "pending_count": report.get("pending_count", 0),
+                "running_count": report.get("running_count", 0),
+                "status_updated_at": report.get("status_updated_at"),
                 "ready_to_rent": classification == "resume-ready",
                 "rent_ready": classification == "resume-ready",
                 "rent_ready_reason": classification,
@@ -84,6 +86,7 @@ def build_resume_sweep_report(
                 "active": classification == "active",
                 "runtime_mode": resume_profile.runtime_mode,
                 "resume_profile": resume_profile.profile_name,
+                "resume_phase": resume_profile.phase,
                 "excluded_decoding_labels": list(resume_profile.excluded_decoding_labels),
             }
         )
