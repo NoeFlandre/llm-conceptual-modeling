@@ -9,7 +9,7 @@ from typing import Any
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_failure_markers import (
-    is_retryable_worker_failure_message,
+    is_retryable_runtime_failure,
 )
 from llm_conceptual_modeling.hf_subprocess import (
     MonitoredCommandTimeout,
@@ -170,6 +170,7 @@ class PersistentHFWorkerSession:
         _terminate_process(process)
 
 def _is_retryable_runtime_error(error: Exception) -> bool:
-    if isinstance(error, MonitoredCommandTimeout):
-        return False
-    return is_retryable_worker_failure_message(str(error))
+    return is_retryable_runtime_failure(
+        error_type=type(error).__name__,
+        message=str(error),
+    )

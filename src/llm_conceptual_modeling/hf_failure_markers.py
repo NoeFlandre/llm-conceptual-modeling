@@ -20,6 +20,7 @@ INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
     "modulenotfounderror",
     "error while finding module specification",
     "no such file or directory",
+    "exited before writing a result artifact",
 )
 
 UNSUPPORTED_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
@@ -44,3 +45,31 @@ def is_retryable_worker_failure_message(message: str) -> bool:
         message,
         RETRYABLE_WORKER_FAILURE_MESSAGE_MARKERS,
     )
+
+
+def classify_failure(*, error_type: str, message: str) -> str:
+    if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
+        return "timeout"
+    if message_contains_any(message, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS):
+        return "infrastructure"
+    if "out of memory" in message.lower():
+        return "oom"
+    if message_contains_any(message, UNSUPPORTED_FAILURE_MESSAGE_MARKERS):
+        return "unsupported"
+    if error_type == "StaleRunState":
+        return "stale"
+    if error_type == "JSONDecodeError":
+        return "structural"
+    if error_type in {"ValueError", "RuntimeError"} and message_contains_any(
+        message,
+        STRUCTURAL_FAILURE_MESSAGE_MARKERS,
+    ):
+        return "structural"
+    return "other"
+
+
+def is_retryable_runtime_failure(*, error_type: str, message: str) -> bool:
+    if "brokenpipeerror:" in message.lower():
+        return True
+    failure_kind = classify_failure(error_type=error_type, message=message)
+    return failure_kind in {"timeout", "oom", "infrastructure", "structural"}

@@ -1,0 +1,39 @@
+from __future__ import annotations
+
+from llm_conceptual_modeling.hf_failure_markers import (
+    classify_failure,
+    is_retryable_runtime_failure,
+)
+
+
+def test_classify_failure_detects_missing_result_artifact_as_infrastructure() -> None:
+    assert (
+        classify_failure(
+            error_type="RuntimeError",
+            message="Persistent HF worker exited before writing a result artifact.",
+        )
+        == "infrastructure"
+    )
+
+
+def test_is_retryable_runtime_failure_retries_stage_timeout() -> None:
+    assert (
+        is_retryable_runtime_failure(
+            error_type="MonitoredCommandTimeout",
+            message="Monitored command exceeded stage timeout of 20.0 seconds.",
+        )
+        is True
+    )
+
+
+def test_is_retryable_runtime_failure_does_not_retry_unsupported_failure() -> None:
+    assert (
+        is_retryable_runtime_failure(
+            error_type="RuntimeError",
+            message=(
+                "ValueError: contrastive search is not supported with stateful models, "
+                "such as Qwen3_5ForCausalLM"
+            ),
+        )
+        is False
+    )

@@ -104,7 +104,7 @@ def test_persistent_session_reuses_one_worker_process_for_two_specs(
     assert spawn_pids == [1000]
 
 
-def test_persistent_session_restarts_after_request_timeout(
+def test_persistent_session_retries_request_timeout_once(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -117,6 +117,8 @@ def test_persistent_session_restarts_after_request_timeout(
         pid = 2000 + len(spawn_pids)
         spawn_pids.append(pid)
         return _FakeProcess(pid)
+
+    attempts = {"count": 0}
 
     def fake_wait(
         self,
@@ -135,7 +137,8 @@ def test_persistent_session_restarts_after_request_timeout(
             startup_timeout_seconds,
             stage_timeout_seconds,
         )
-        if len(spawn_pids) == 1:
+        attempts["count"] += 1
+        if attempts["count"] == 1:
             raise MonitoredCommandTimeout("stage", 20.0)
         return {"raw_row": {}, "runtime": {}, "raw_response": "{}"}
 
@@ -147,15 +150,13 @@ def test_persistent_session_restarts_after_request_timeout(
     monkeypatch.setattr(PersistentHFWorkerSession, "_wait_for_result", fake_wait)
     monkeypatch.setattr(PersistentHFWorkerSession, "_terminate_process", fake_terminate)
 
-    with pytest.raises(MonitoredCommandTimeout):
-        session.run_spec(spec=_spec("sg1_sg2"), run_dir=tmp_path / "run1")
-
-    result = session.run_spec(spec=_spec("sg2_sg3"), run_dir=tmp_path / "run2")
+    result = session.run_spec(spec=_spec("sg1_sg2"), run_dir=tmp_path / "run1")
 
     assert result["raw_response"] == "{}"
     assert spawn_pids == [2000, 2001]
     assert terminated_pids == [2000]
     assert sorted(queue_dir.glob("*.request.json")) == []
+    assert attempts["count"] == 2
 
 
 def test_persistent_session_recycles_worker_after_request_limit(
@@ -328,6 +329,61 @@ def test_persistent_session_retries_retryable_runtime_errors(
     assert attempts["count"] == 2
     assert spawn_pids == [4100, 4101]
     assert terminated_pids == [4100]
+
+
+def test_persistent_session_retries_missing_result_artifact_startup_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    queue_dir = tmp_path / "queue"
+    spawn_pids: list[int] = []
+    terminated_pids: list[int] = []
+    session = PersistentHFWorkerSession(queue_dir=queue_dir, worker_python="/tmp/fake-python")
+
+    def fake_spawn(self) -> _FakeProcess:
+        pid = 4200 + len(spawn_pids)
+        spawn_pids.append(pid)
+        return _FakeProcess(pid)
+
+    attempts = {"count": 0}
+
+    def fake_wait(
+        self,
+        *,
+        process,
+        request_path,
+        result_json_path,
+        run_dir,
+        startup_timeout_seconds,
+        stage_timeout_seconds,
+    ):
+        _ = (
+            process,
+            request_path,
+            result_json_path,
+            run_dir,
+            startup_timeout_seconds,
+            stage_timeout_seconds,
+        )
+        attempts["count"] += 1
+        if attempts["count"] == 1:
+            raise RuntimeError("Persistent HF worker exited before writing a result artifact.")
+        return {"raw_row": {}, "runtime": {}, "raw_response": "{}"}
+
+    def fake_terminate(self, process: _FakeProcess) -> None:
+        terminated_pids.append(process.pid)
+        process.returncode = -15
+
+    monkeypatch.setattr(PersistentHFWorkerSession, "_spawn_worker_process", fake_spawn)
+    monkeypatch.setattr(PersistentHFWorkerSession, "_wait_for_result", fake_wait)
+    monkeypatch.setattr(PersistentHFWorkerSession, "_terminate_process", fake_terminate)
+
+    result = session.run_spec(spec=_spec("sg1_sg2"), run_dir=tmp_path / "run1")
+
+    assert result["raw_response"] == "{}"
+    assert attempts["count"] == 2
+    assert spawn_pids == [4200, 4201]
+    assert terminated_pids == [4200]
 
 
 def test_wait_for_result_does_not_treat_loading_model_as_stage_timeout(

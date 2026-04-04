@@ -394,6 +394,15 @@ def test_classify_failure_payload_detects_infrastructure_cuda_unavailable() -> N
     assert classify_failure_payload(error) == "infrastructure"
 
 
+def test_classify_failure_payload_detects_missing_result_artifact_startup_drift() -> None:
+    error = {
+        "type": "RuntimeError",
+        "message": "Persistent HF worker exited before writing a result artifact.",
+    }
+
+    assert classify_failure_payload(error) == "infrastructure"
+
+
 def test_build_seeded_resume_snapshot_retries_infrastructure_failures_by_default(
     tmp_path: Path,
 ) -> None:

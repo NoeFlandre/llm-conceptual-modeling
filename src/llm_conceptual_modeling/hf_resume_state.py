@@ -7,10 +7,7 @@ from typing import Any, Callable, cast
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_failure_markers import (
-    INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS,
-    STRUCTURAL_FAILURE_MESSAGE_MARKERS,
-    UNSUPPORTED_FAILURE_MESSAGE_MARKERS,
-    message_contains_any,
+    classify_failure,
 )
 
 JsonObject = dict[str, object]
@@ -301,26 +298,10 @@ def _should_retry_qwen_contrastive_failure(*, run_dir: Path, error: JsonObject) 
 
 
 def classify_failure_payload(error: JsonObject) -> str:
-    error_type = str(error.get("type", ""))
-    message = str(error.get("message", ""))
-    if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
-        return "timeout"
-    if message_contains_any(message, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS):
-        return "infrastructure"
-    if "out of memory" in message.lower():
-        return "oom"
-    if message_contains_any(message, UNSUPPORTED_FAILURE_MESSAGE_MARKERS):
-        return "unsupported"
-    if error_type == "StaleRunState":
-        return "stale"
-    if error_type == "JSONDecodeError":
-        return "structural"
-    if error_type in {"ValueError", "RuntimeError"} and message_contains_any(
-        message,
-        STRUCTURAL_FAILURE_MESSAGE_MARKERS,
-    ):
-        return "structural"
-    return "other"
+    return classify_failure(
+        error_type=str(error.get("type", "")),
+        message=str(error.get("message", "")),
+    )
 
 
 def order_planned_specs_for_resume(

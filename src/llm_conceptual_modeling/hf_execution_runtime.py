@@ -12,7 +12,7 @@ from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_batch_utils import slugify_model as _slugify_model
 from llm_conceptual_modeling.hf_batch_utils import write_json as _write_json
 from llm_conceptual_modeling.hf_failure_markers import (
-    is_retryable_worker_failure_message,
+    is_retryable_runtime_failure,
 )
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
@@ -197,13 +197,18 @@ def resolve_max_requests_per_worker_process(
 
 
 def is_retryable_worker_error(error: dict[str, str]) -> bool:
-    message = error.get("message", "")
-    return is_retryable_worker_failure_message(message)
+    return is_retryable_runtime_failure(
+        error_type=error.get("type", ""),
+        message=error.get("message", ""),
+    )
 
 
 def _is_retryable_missing_result_artifact(*, stdout: str | None, stderr: str | None) -> bool:
     combined_output = "\n".join(part for part in (stdout or "", stderr or "") if part)
-    return is_retryable_worker_failure_message(combined_output)
+    return is_retryable_runtime_failure(
+        error_type="RuntimeError",
+        message=combined_output,
+    )
 
 
 def coerce_timeout_seconds(raw_value: object) -> float:

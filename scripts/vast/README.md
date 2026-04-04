@@ -52,6 +52,10 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
 - Persistent worker sessions use the same retry predicate as the subprocess worker path, so
   structural, infrastructure, and OOM-style worker failures recycle the worker instead of
   becoming terminal on the first attempt.
+- That shared retry predicate now also treats startup drift and timeout failures consistently
+  across subprocess and persistent-worker execution. A worker that exits before writing its
+  result artifact is classified as infrastructure failure and retried instead of being stranded
+  as a terminal `other` failure on resume.
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
 - `resume-sweep` now also reports the default runtime mode, safe resume profile, excluded decoding labels, and whether the root is actually rent-ready under the conservative default profile.
 - For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
