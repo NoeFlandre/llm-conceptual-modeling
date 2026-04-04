@@ -774,6 +774,7 @@ def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> RuntimeR
         build_worker_command_fn=_build_worker_command,
         build_hf_download_environment_fn=build_hf_download_environment,
         is_retryable_worker_error_fn=_is_retryable_worker_error,
+        validate_runtime_result_fn=_validate_structural_runtime_result,
     )
 
 

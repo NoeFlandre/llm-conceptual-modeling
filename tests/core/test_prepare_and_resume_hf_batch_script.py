@@ -23,10 +23,6 @@ def test_prepare_and_resume_script_bootstraps_and_launches_resumable_batch() -> 
 def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smoke() -> None:
     script_path = Path("scripts/vast/prepare_and_resume_hf_batch.sh")
     script_text = script_path.read_text(encoding="utf-8")
-    seed_rsync = (
-        'rsync -avz -e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/'
-    )
-
     assert 'SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))' in script_text
     assert 'RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"' in script_text
     assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
@@ -36,7 +32,12 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "--exclude 'runs'" in script_text
     assert "--exclude 'worker-queues'" in script_text
     assert '"${SSH_CMD[@]}" "$SSH_TARGET" "mkdir -p \'$REMOTE_RESULTS_DIR\'"' in script_text
-    assert seed_rsync in script_text
+    assert 'vast_retry_rsync 3 rsync -avz \\' in script_text
+    seed_resume_flags = (
+        '$(vast_rsync_resume_flags "$LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS") \\'
+    )
+    assert seed_resume_flags in script_text
+    assert '-e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/' in script_text
     assert 'if vast_has_value "${SMOKE_ALGORITHM:-}"' in script_text
     assert ".venv/bin/lcm run smoke" in script_text
     assert "BATCH_GENERATION_TIMEOUT_SECONDS" in script_text
@@ -137,7 +138,7 @@ def test_remote_resume_preview_script_writes_and_validates_effective_config() ->
     assert "REMOTE_CONFIG_PATH" in script_text
     assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text
     assert "REMOTE_PREVIEW_DIR" in script_text
-    assert "python3 - \"$REMOTE_CONFIG_PATH\" \"$REMOTE_EFFECTIVE_CONFIG_PATH\"" in script_text
+    assert '.venv/bin/python - "$REMOTE_CONFIG_PATH" "$REMOTE_EFFECTIVE_CONFIG_PATH"' in script_text
     assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in script_text
     assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
     assert "BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME" in script_text

@@ -39,6 +39,10 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
 - Malformed structured outputs that still reach the worker as retryable errors now include empty
   edge endpoints, empty structured fields, and JSON decode failures; those are retried instead of
   being left as permanent failures when the resume policy allows it.
+- The subprocess retry loop now also consumes retry budget on generation-stage
+  `MonitoredCommandTimeout` failures and on retryable post-load structural validation failures,
+  which matters for OLMO `algo1` runs that return malformed edge lists before eventually
+  producing a valid finished result.
 - Persistent worker sessions use the same retry predicate as the subprocess worker path, so
   structural, infrastructure, and OOM-style worker failures recycle the worker instead of
   becoming terminal on the first attempt.

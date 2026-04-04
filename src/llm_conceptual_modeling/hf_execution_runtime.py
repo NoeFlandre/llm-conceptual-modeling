@@ -17,6 +17,7 @@ from llm_conceptual_modeling.hf_failure_markers import (
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
 from llm_conceptual_modeling.hf_subprocess import (
+    MonitoredCommandTimeout,
     build_hf_download_environment,
     run_monitored_command,
 )
@@ -47,6 +48,7 @@ def run_local_hf_spec_subprocess(
     build_worker_command_fn: Callable[..., list[str]] | None = None,
     build_hf_download_environment_fn: Callable[[], dict[str, str]] = build_hf_download_environment,
     is_retryable_worker_error_fn: Callable[[dict[str, str]], bool] | None = None,
+    validate_runtime_result_fn: Callable[[str, dict[str, object]], None] | None = None,
 ) -> RuntimeResult:
     startup_timeout_seconds = resolve_startup_timeout_seconds(spec.context_policy)
     stage_timeout_seconds = resolve_stage_timeout_seconds(spec.context_policy)
@@ -61,17 +63,22 @@ def run_local_hf_spec_subprocess(
     for attempt in range(1, retry_attempts + 1):
         clear_retry_artifacts_fn(run_dir)
         write_json_fn(spec_json_path, serialize_spec_fn(spec))
-        completed = run_monitored_command_fn(
-            command=build_worker_command_fn(
-                spec_json_path=spec_json_path,
-                result_json_path=result_json_path,
+        try:
+            completed = run_monitored_command_fn(
+                command=build_worker_command_fn(
+                    spec_json_path=spec_json_path,
+                    result_json_path=result_json_path,
+                    run_dir=run_dir,
+                ),
                 run_dir=run_dir,
-            ),
-            run_dir=run_dir,
-            startup_timeout_seconds=startup_timeout_seconds,
-            stage_timeout_seconds=stage_timeout_seconds,
-            env=build_hf_download_environment_fn(),
-        )
+                startup_timeout_seconds=startup_timeout_seconds,
+                stage_timeout_seconds=stage_timeout_seconds,
+                env=build_hf_download_environment_fn(),
+            )
+        except MonitoredCommandTimeout:
+            if attempt < retry_attempts:
+                continue
+            raise
         if not result_json_path.exists():
             if attempt < retry_attempts and _is_retryable_missing_result_artifact(
                 stdout=completed.stdout,
@@ -84,7 +91,7 @@ def run_local_hf_spec_subprocess(
                 stderr=completed.stderr,
             )
         try:
-            return load_runtime_result(result_json_path)
+            runtime_result = load_runtime_result(result_json_path)
         except RuntimeError as error:
             if attempt >= retry_attempts:
                 raise
@@ -94,6 +101,21 @@ def run_local_hf_spec_subprocess(
             if is_retryable_worker_error_fn(error_payload):
                 continue
             raise
+        if validate_runtime_result_fn is None:
+            return runtime_result
+        try:
+            validate_runtime_result_fn(
+                algorithm=spec.algorithm,
+                raw_row=runtime_result["raw_row"],
+            )
+        except Exception as error:
+            if attempt >= retry_attempts:
+                raise
+            error_payload = {"type": type(error).__name__, "message": str(error)}
+            if is_retryable_worker_error_fn(error_payload):
+                continue
+            raise
+        return runtime_result
 
     raise RuntimeError("HF worker retry loop exhausted without a terminal result.")
 

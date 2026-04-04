@@ -25,15 +25,22 @@ export BATCH_STARTUP_TIMEOUT_SECONDS="${BATCH_STARTUP_TIMEOUT_SECONDS:-}"
 export BATCH_RESUME_PASS_MODE="${BATCH_RESUME_PASS_MODE:-}"
 export BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME="${BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME:-}"
 export BATCH_RETRY_OOM_FAILURES_ON_RESUME="${BATCH_RETRY_OOM_FAILURES_ON_RESUME:-}"
+export BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME="${BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME:-}"
+export BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME="${BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME:-}"
 export BATCH_WORKER_PROCESS_MODE="${BATCH_WORKER_PROCESS_MODE:-}"
 export BATCH_MAX_REQUESTS_PER_WORKER_PROCESS="${BATCH_MAX_REQUESTS_PER_WORKER_PROCESS:-}"
+export BATCH_EXCLUDED_DECODING_LABELS="${BATCH_EXCLUDED_DECODING_LABELS:-}"
 
-python3 - "$REMOTE_CONFIG_PATH" "$REMOTE_EFFECTIVE_CONFIG_PATH" <<'PY'
+.venv/bin/python - "$REMOTE_CONFIG_PATH" "$REMOTE_EFFECTIVE_CONFIG_PATH" <<'PY'
 from pathlib import Path
 import os
 import sys
 
 import yaml
+
+sys.path.insert(0, str(Path.cwd() / "src"))
+
+from llm_conceptual_modeling.hf_run_config import exclude_decoding_conditions_from_payload
 
 source_path = Path(sys.argv[1])
 target_path = Path(sys.argv[2])
@@ -60,6 +67,14 @@ retry_oom = os.environ.get('BATCH_RETRY_OOM_FAILURES_ON_RESUME', '').strip().low
 if retry_oom:
     context_policy['retry_oom_failures_on_resume'] = retry_oom in {'1', 'true', 'yes', 'on'}
 
+retry_infra = os.environ.get('BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME', '').strip().lower()
+if retry_infra:
+    context_policy['retry_infrastructure_failures_on_resume'] = retry_infra in {'1', 'true', 'yes', 'on'}
+
+retry_structural = os.environ.get('BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME', '').strip().lower()
+if retry_structural:
+    context_policy['retry_structural_failures_on_resume'] = retry_structural in {'1', 'true', 'yes', 'on'}
+
 worker_process_mode = os.environ.get('BATCH_WORKER_PROCESS_MODE', '').strip()
 if worker_process_mode:
     context_policy['worker_process_mode'] = worker_process_mode
@@ -67,6 +82,16 @@ if worker_process_mode:
 max_requests = os.environ.get('BATCH_MAX_REQUESTS_PER_WORKER_PROCESS', '').strip()
 if max_requests:
     context_policy['max_requests_per_worker_process'] = int(float(max_requests))
+
+excluded_labels = {
+    label.strip()
+    for label in os.environ.get('BATCH_EXCLUDED_DECODING_LABELS', '').split(',')
+    if label.strip()
+}
+exclude_decoding_conditions_from_payload(
+    payload,
+    excluded_condition_labels=excluded_labels,
+)
 
 payload['runtime']['context_policy'] = context_policy
 target_path.parent.mkdir(parents=True, exist_ok=True)

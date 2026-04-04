@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_experiments import HFRunSpec
+from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
 
 
 def _runtime_profile() -> RuntimeProfile:
@@ -15,6 +17,28 @@ def _runtime_profile() -> RuntimeProfile:
         quantization="none",
         supports_thinking_toggle=False,
         context_limit=4096,
+    )
+
+
+def _algo1_spec(*, context_policy: dict[str, object] | None = None) -> HFRunSpec:
+    return HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy", temperature=0.0),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy=context_policy or {},
     )
 
 
@@ -140,3 +164,98 @@ def test_run_local_hf_spec_persistent_mode_reuses_existing_session(
     assert second_result["raw_row"]["pair_name"] == "sg1_sg2"
     assert session_calls == [("sg1_sg2", run_dir), ("sg1_sg2", run_dir)]
     assert len(persistent_sessions) == 1
+
+
+def test_run_local_hf_spec_subprocess_retries_retryable_structural_validation_failure(
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.hf_execution_runtime import run_local_hf_spec_subprocess
+
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    spec = _algo1_spec()
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        result_json_path = Path(kwargs["command"][6])
+        result_json_path.write_text(
+            json.dumps(
+                {
+                    "ok": True,
+                    "runtime_result": {
+                        "raw_row": {
+                            "Result": "[('alpha', 'gamma')]",
+                            "graph": "[('alpha', 'gamma')]",
+                            "subgraph1": "[('alpha', 'beta')]",
+                            "subgraph2": "[('gamma', 'delta')]",
+                        },
+                        "runtime": {"thinking_mode_supported": False},
+                        "raw_response": "[]",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        return type("Completed", (), {"stdout": "", "stderr": ""})()
+
+    def fake_validate_runtime_result(*, algorithm: str, raw_row: dict[str, object]) -> None:
+        if attempts["count"] == 1:
+            raise ValueError(
+                "Structurally invalid algo1 result: verified edge list is empty."
+            )
+
+    actual = run_local_hf_spec_subprocess(
+        spec=spec,
+        run_dir=run_dir,
+        run_monitored_command_fn=fake_run_monitored_command,
+        validate_runtime_result_fn=fake_validate_runtime_result,
+    )
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Result"] == "[('alpha', 'gamma')]"
+
+
+def test_run_local_hf_spec_subprocess_retries_monitored_command_timeout(
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.hf_execution_runtime import run_local_hf_spec_subprocess
+
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    spec = _algo1_spec()
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        if attempts["count"] == 1:
+            raise MonitoredCommandTimeout("stage", 180.0)
+        result_json_path = Path(kwargs["command"][6])
+        result_json_path.write_text(
+            json.dumps(
+                {
+                    "ok": True,
+                    "runtime_result": {
+                        "raw_row": {
+                            "Result": "[('alpha', 'gamma')]",
+                            "graph": "[('alpha', 'gamma')]",
+                            "subgraph1": "[('alpha', 'beta')]",
+                            "subgraph2": "[('gamma', 'delta')]",
+                        },
+                        "runtime": {"thinking_mode_supported": False},
+                        "raw_response": "[]",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        return type("Completed", (), {"stdout": "", "stderr": ""})()
+
+    actual = run_local_hf_spec_subprocess(
+        spec=spec,
+        run_dir=run_dir,
+        run_monitored_command_fn=fake_run_monitored_command,
+    )
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Result"] == "[('alpha', 'gamma')]"
