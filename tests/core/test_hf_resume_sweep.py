@@ -170,6 +170,74 @@ def test_build_resume_sweep_report_marks_invalid_configs_without_aborting(
     assert report["roots"][1]["results_root"] == str(bad_root)
 
 
+def test_build_resume_sweep_report_marks_output_root_mismatches_as_invalid(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    matching_root = results_root / "hf-paper-batch-algo2-olmo-current"
+    mismatched_root = results_root / "hf-paper-batch-algo1-qwen-current"
+
+    for root in (matching_root, mismatched_root):
+        root.mkdir(parents=True, exist_ok=True)
+        (root / "batch_status.json").write_text("{}", encoding="utf-8")
+        (root / "runtime_config.yaml").write_text("config", encoding="utf-8")
+
+    class RunConfig:
+        def __init__(self, output_root: str) -> None:
+            self.output_root = output_root
+
+    class Config:
+        def __init__(self, output_root: str) -> None:
+            self.run = RunConfig(output_root)
+
+    def load_config(path: Path) -> object:
+        if path.parent.name == "hf-paper-batch-algo1-qwen-current":
+            return Config("/workspace/results/hf-paper-batch-algo1-qwen")
+        return Config(f"/workspace/results/{path.parent.name}")
+
+    def preflight(
+        *,
+        config: object,
+        repo_root: Path,
+        results_root: Path,
+        allow_empty: bool,
+    ) -> dict:
+        _ = config
+        _ = repo_root
+        _ = results_root
+        _ = allow_empty
+        return {
+            "can_resume": True,
+            "pending_count": 10,
+            "failed_count": 0,
+            "finished_count": 0,
+            "running_count": 0,
+            "resume_mode": "resume",
+        }
+
+    report = build_resume_sweep_report(
+        repo_root=repo_root,
+        results_root=results_root,
+        load_config_fn=load_config,
+        preflight_fn=preflight,
+    )
+
+    classifications = {
+        Path(item["results_root"]).name: item["classification"] for item in report["roots"]
+    }
+    assert classifications["hf-paper-batch-algo2-olmo-current"] == "resume-ready"
+    assert classifications["hf-paper-batch-algo1-qwen-current"] == "invalid-config"
+    invalid_report = next(
+        item
+        for item in report["roots"]
+        if Path(item["results_root"]).name == "hf-paper-batch-algo1-qwen-current"
+    )
+    assert "does not match results root" in str(invalid_report["error"])
+
+
 def test_build_resume_sweep_report_treats_retryable_failed_only_roots_as_ready(
     tmp_path: Path,
 ) -> None:

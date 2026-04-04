@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import gc
 import json
 import random
 import re
@@ -371,11 +372,27 @@ class HFTransformersRuntimeFactory:
         for chat_model in chat_models:
             self._load_chat_bundle(chat_model)
             prefetched_chat_models.append(chat_model)
+            self._release_prefetched_chat_bundle(chat_model)
         self._load_embedding_bundle(embedding_model)
+        self._release_prefetched_embedding_bundle(embedding_model)
         return {
             "chat_models": prefetched_chat_models,
             "embedding_model": embedding_model,
         }
+
+    def _release_prefetched_chat_bundle(self, model: str) -> None:
+        bundle = self._chat_cache.pop(model, None)
+        if bundle is None:
+            return
+        _, model_object, _ = bundle
+        _release_prefetched_model_object(model_object)
+
+    def _release_prefetched_embedding_bundle(self, model: str) -> None:
+        bundle = self._embedding_cache.pop(model, None)
+        if bundle is None:
+            return
+        _, model_object, _ = bundle
+        _release_prefetched_model_object(model_object)
 
     def _load_chat_bundle(self, model: str) -> tuple[Any, Any, RuntimeProfile]:
         if model not in _SUPPORTED_CHAT_MODELS:
@@ -438,6 +455,22 @@ class HFTransformersRuntimeFactory:
 
 def build_runtime_factory(*, hf_token: str | None = None) -> HFTransformersRuntimeFactory:
     return HFTransformersRuntimeFactory(hf_token=hf_token)
+
+
+def _release_prefetched_model_object(model_object: Any) -> None:
+    try:
+        model_object.to("cpu")
+    except Exception:
+        pass
+    del model_object
+    gc.collect()
+    try:
+        torch = _torch()
+    except Exception:
+        return
+    if not torch.cuda.is_available():
+        return
+    torch.cuda.empty_cache()
 
 
 def _load_chat_tokenizer(*, transformers: Any, model: str, hf_token: str | None) -> Any:

@@ -131,3 +131,108 @@ def test_summarize_results_root_failures_separates_retryable_and_terminal_failur
     assert summary["terminal"]["unsupported"] == 1
     assert summary["retryable_total"] == 1
     assert summary["terminal_total"] == 1
+
+
+def test_build_drain_plan_skips_invalid_config_roots(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+
+    valid_root = results_root / "hf-paper-batch-algo2-olmo-current"
+    invalid_root = results_root / "hf-paper-batch-algo1-qwen-current"
+    valid_root.mkdir()
+    invalid_root.mkdir()
+
+    plan = build_drain_plan(
+        repo_root=repo_root,
+        results_root=results_root,
+        ssh_target="root@example.com",
+        ssh_port="2222",
+        sweep_report={
+            "roots": [
+                {
+                    "results_root": str(valid_root),
+                    "config_source": str(valid_root / "runtime_config.yaml"),
+                    "classification": "resume-ready",
+                    "can_resume": True,
+                    "pending_count": 20,
+                    "failed_count": 0,
+                    "finished_count": 0,
+                    "running_count": 0,
+                    "status_updated_at": "2026-04-04T12:00:00Z",
+                },
+                {
+                    "results_root": str(invalid_root),
+                    "config_source": str(invalid_root / "runtime_config.yaml"),
+                    "classification": "invalid-config",
+                    "can_resume": False,
+                    "pending_count": 100,
+                    "failed_count": 5,
+                    "finished_count": 0,
+                    "running_count": 0,
+                    "status_updated_at": "2026-04-04T12:00:00Z",
+                },
+            ]
+        },
+        failure_summary_fn=lambda _root: {
+            "retryable": {"timeout": 0, "oom": 0, "structural": 0, "infrastructure": 0},
+            "terminal": {"unsupported": 0, "semantic": 0, "other": 0},
+        },
+    )
+
+    assert [Path(item["results_root"]).name for item in plan["queue"]] == [
+        "hf-paper-batch-algo2-olmo-current",
+        "hf-paper-batch-algo2-olmo-current",
+    ]
+
+
+def test_build_drain_plan_includes_profile_launch_fields(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+
+    root = results_root / "hf-paper-batch-algo2-olmo-current"
+    root.mkdir()
+
+    plan = build_drain_plan(
+        repo_root=repo_root,
+        results_root=results_root,
+        ssh_target="root@example.com",
+        ssh_port="2222",
+        sweep_report={
+            "roots": [
+                {
+                    "results_root": str(root),
+                    "config_source": str(root / "runtime_config.yaml"),
+                    "classification": "resume-ready",
+                    "can_resume": True,
+                    "pending_count": 20,
+                    "failed_count": 0,
+                    "finished_count": 0,
+                    "running_count": 0,
+                    "status_updated_at": "2026-04-04T12:00:00Z",
+                },
+            ]
+        },
+        failure_summary_fn=lambda _root: {
+            "retryable": {"timeout": 0, "oom": 0, "structural": 0, "infrastructure": 0},
+            "terminal": {"unsupported": 0, "semantic": 0, "other": 0},
+        },
+    )
+
+    safe_item = plan["queue"][0]
+    assert safe_item["excluded_decoding_labels"] == ["contrastive_penalty_alpha_0.8"]
+    assert safe_item["retry_timeout_failures_on_resume"] is True
+    assert safe_item["retry_oom_failures_on_resume"] is True
+    assert safe_item["retry_infrastructure_failures_on_resume"] is True
+    assert safe_item["retry_structural_failures_on_resume"] is True
+    assert safe_item["generation_timeout_seconds"] > 0
+    assert safe_item["startup_timeout_seconds"] > 0
+    assert safe_item["worker_process_mode"] in {"ephemeral", "persistent"}
+    assert safe_item["max_requests_per_worker_process"] > 0

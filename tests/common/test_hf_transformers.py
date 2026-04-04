@@ -525,6 +525,8 @@ def test_runtime_factory_can_prefetch_models() -> None:
     factory = HFTransformersRuntimeFactory(hf_token="token")
     chat_models_seen: list[str] = []
     embedding_models_seen: list[str] = []
+    released_chat_models: list[str] = []
+    released_embedding_models: list[str] = []
     profile = hf_transformers.RuntimeProfile(
         device="cuda",
         dtype="bfloat16",
@@ -543,6 +545,8 @@ def test_runtime_factory_can_prefetch_models() -> None:
 
     factory._load_chat_bundle = fake_load_chat_bundle  # type: ignore[method-assign]
     factory._load_embedding_bundle = fake_load_embedding_bundle  # type: ignore[method-assign]
+    factory._release_prefetched_chat_bundle = released_chat_models.append  # type: ignore[method-assign]
+    factory._release_prefetched_embedding_bundle = released_embedding_models.append  # type: ignore[method-assign]
 
     report = factory.prefetch_models(
         chat_models=["Qwen/Qwen3.5-9B", "allenai/Olmo-3-7B-Instruct"],
@@ -551,6 +555,8 @@ def test_runtime_factory_can_prefetch_models() -> None:
 
     assert chat_models_seen == ["Qwen/Qwen3.5-9B", "allenai/Olmo-3-7B-Instruct"]
     assert embedding_models_seen == ["Qwen/Qwen3-Embedding-0.6B"]
+    assert released_chat_models == ["Qwen/Qwen3.5-9B", "allenai/Olmo-3-7B-Instruct"]
+    assert released_embedding_models == ["Qwen/Qwen3-Embedding-0.6B"]
     assert report["chat_models"] == chat_models_seen
     assert report["embedding_model"] == "Qwen/Qwen3-Embedding-0.6B"
 

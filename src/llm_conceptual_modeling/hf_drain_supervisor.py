@@ -33,6 +33,15 @@ class DrainWorkItem:
     runtime_mode: str
     profile_name: str
     phase: str
+    excluded_decoding_labels: tuple[str, ...]
+    retry_timeout_failures_on_resume: bool
+    retry_oom_failures_on_resume: bool
+    retry_infrastructure_failures_on_resume: bool
+    retry_structural_failures_on_resume: bool
+    generation_timeout_seconds: int
+    startup_timeout_seconds: int
+    worker_process_mode: str
+    max_requests_per_worker_process: int
     launch_priority: int
     pending_count: int
     failed_count: int
@@ -126,6 +135,8 @@ def build_drain_plan(
     adopted_results_root: str | None = None
 
     for root_report in sweep_report.get("roots", []):
+        if str(root_report.get("classification")) in {"invalid-config", "missing-config"}:
+            continue
         results_root_path = Path(str(root_report["results_root"]))
         failure_summary = failure_summary_fn(results_root_path)
         if not _root_has_work(root_report, failure_summary):
@@ -195,7 +206,7 @@ def build_drain_plan(
         risky_queue=ordered_risky_queue,
         phase=selected_phase,
     )
-    queue_payload = [asdict(item) for item in queue]
+    queue_payload = [_work_item_to_payload(item) for item in queue]
     return {
         "repo_root": str(repo_root),
         "results_root": str(results_root),
@@ -395,6 +406,15 @@ def _build_work_item(
         runtime_mode=profile.runtime_mode,
         profile_name=profile.profile_name,
         phase=profile.phase,
+        excluded_decoding_labels=profile.excluded_decoding_labels,
+        retry_timeout_failures_on_resume=profile.retry_timeout_failures_on_resume,
+        retry_oom_failures_on_resume=profile.retry_oom_failures_on_resume,
+        retry_infrastructure_failures_on_resume=profile.retry_infrastructure_failures_on_resume,
+        retry_structural_failures_on_resume=profile.retry_structural_failures_on_resume,
+        generation_timeout_seconds=profile.generation_timeout_seconds,
+        startup_timeout_seconds=profile.startup_timeout_seconds,
+        worker_process_mode=profile.worker_process_mode,
+        max_requests_per_worker_process=profile.max_requests_per_worker_process,
         launch_priority=0 if root_classification == "active" else 1,
         pending_count=int(root_report.get("pending_count", 0)),
         failed_count=int(root_report.get("failed_count", 0)),
@@ -506,6 +526,12 @@ def _failure_summary_payload(
         "retryable_total": int(sum(retryable_counts.values())),
         "terminal_total": int(sum(terminal_counts.values())),
     }
+
+
+def _work_item_to_payload(item: DrainWorkItem) -> JsonDict:
+    payload = asdict(item)
+    payload["excluded_decoding_labels"] = list(item.excluded_decoding_labels)
+    return payload
 
 
 def _resolve_ssh_target_and_port(

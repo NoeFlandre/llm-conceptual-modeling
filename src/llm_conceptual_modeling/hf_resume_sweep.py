@@ -47,6 +47,12 @@ def build_resume_sweep_report(
 
         try:
             config = load_config_fn(config_source)
+            mismatch_error = _build_output_root_mismatch_error(
+                results_root=candidate_root,
+                config=config,
+            )
+            if mismatch_error is not None:
+                raise ValueError(mismatch_error)
             report = preflight_fn(
                 config=config,
                 repo_root=repo_root_path,
@@ -151,6 +157,26 @@ def _classify_root_report(report: dict[str, object]) -> str:
     if int(report.get("failed_count", 0)) > 0:
         return "needs-config-fix"
     return "finished"
+
+
+def _build_output_root_mismatch_error(*, results_root: Path, config: object) -> str | None:
+    configured_output_root = _configured_output_root_name(config)
+    if configured_output_root is None:
+        return None
+    if configured_output_root == results_root.name:
+        return None
+    return (
+        "Configured output root "
+        f"{configured_output_root!r} does not match results root {results_root.name!r}."
+    )
+
+
+def _configured_output_root_name(config: object) -> str | None:
+    run_config = getattr(config, "run", None)
+    output_root = getattr(run_config, "output_root", None)
+    if not output_root:
+        return None
+    return Path(str(output_root)).name
 
 
 def _root_sort_key(report: dict[str, object]) -> tuple[int, str]:
