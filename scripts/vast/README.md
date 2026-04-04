@@ -44,6 +44,11 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   becoming terminal on the first attempt.
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
 - For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
+- For `algo1-olmo`, the drain script now excludes the known OOM-heavy
+  `contrastive_penalty_alpha_0.8` branch during remote preview rewriting, so fresh
+  resumes keep the rest of the seeded root but stop burning GPU time on that branch.
+- The OLMO drain script also forces `retry_oom_failures_on_resume=true` into the remote effective
+  config so stale preview artifacts cannot silently disable OOM replay on a fresh host.
 - For `algo2-olmo`, the safe fresh-host profile is now greedy plus `beam_num_beams=2`; the
   OOM-prone `beam_num_beams=6` and contrastive branches are intentionally excluded from the
   resume profile.

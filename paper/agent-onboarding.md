@@ -81,6 +81,12 @@ Container-first fresh-host note:
 - `configs/hf_transformers_algo2_mistral.yaml` keeps contrastive, but only the safe
   `penalty_alpha=0.2` branch plus beam-2. That preserves contrastive coverage while avoiding the
   known failure branch at `penalty_alpha=0.8`.
+- `scripts/vast/drain_olmo_batches_from_ssh.sh` now applies the same idea to the seeded
+  `hf-paper-batch-algo1-olmo-current` root by excluding only
+  `contrastive_penalty_alpha_0.8` during remote preview rewriting. That keeps the rest of the
+  root resumable without continuing to requeue the known OOM-heavy branch.
+- The same drain script now forces `retry_oom_failures_on_resume=true` during remote preview
+  rewriting so a stale `preview_resume/resolved_run_config.yaml` cannot disable OOM replay.
 - when `REMOTE_RUNTIME_MODE=docker`, the launcher expects `REMOTE_DOCKER_IMAGE` to point at an
   image that already contains the validated runtime
 - the remote preview and launch steps are shared helper scripts:
