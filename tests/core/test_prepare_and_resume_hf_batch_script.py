@@ -180,10 +180,16 @@ def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
     )
     assert gpu_timeout in script_text
     assert "REMOTE_GPU_LIVENESS_POLL_INTERVAL_SECONDS" in script_text
+    assert "REMOTE_PRODUCTIVE_LIVENESS_TIMEOUT_SECONDS" in script_text
+    assert "REMOTE_PRODUCTIVE_LIVENESS_POLL_INTERVAL_SECONDS" in script_text
     assert "pkill -f 'lcm run paper-batch'" in script_text
     assert "pkill -f 'llm_conceptual_modeling.hf_worker'" in script_text
     assert "nohup env -u NVIDIA_VISIBLE_DEVICES -u CUDA_VISIBLE_DEVICES" in script_text
     assert "vast_wait_for_gpu_liveness" in script_text
+    assert "worker_state.json" in script_text
+    assert "batch_status.json" in script_text
+    assert "executing_algorithm" in script_text
+    assert "vast_wait_for_productive_liveness" in script_text
     assert "--resume" in script_text
     assert "pgrep -n -f" in script_text
 

@@ -76,7 +76,7 @@ def test_hf_worker_writes_worker_state_before_running(monkeypatch, tmp_path: Pat
     result_payload = json.loads(result_json.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert worker_state["model_loaded"] is False
-    assert worker_state["phase"] == "loading_model"
+    assert worker_state["phase"] == "prefetching_model"
     assert worker_state["worker_pid"] > 0
     assert result_payload["ok"] is True
 
@@ -188,8 +188,8 @@ def test_persistent_hf_worker_serves_two_requests_with_one_model_load(
     assert json.loads(second_result_json.read_text(encoding="utf-8"))["ok"] is True
     assert first_worker_state["model_loaded"] is False
     assert second_worker_state["model_loaded"] is False
-    assert first_worker_state["phase"] == "loading_model"
-    assert second_worker_state["phase"] == "loading_model"
+    assert first_worker_state["phase"] == "prefetching_model"
+    assert second_worker_state["phase"] == "prefetching_model"
     assert first_worker_state["requests_served_by_process"] == 1
     assert second_worker_state["requests_served_by_process"] == 2
     assert cache_release_calls["count"] == 2

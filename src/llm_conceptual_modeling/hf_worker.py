@@ -15,7 +15,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
 from llm_conceptual_modeling.hf_batch_utils import resolve_hf_token
 from llm_conceptual_modeling.hf_spec_codec import deserialize_spec
 from llm_conceptual_modeling.hf_worker_request import load_worker_request
-from llm_conceptual_modeling.hf_worker_state import mark_worker_loading_model
+from llm_conceptual_modeling.hf_worker_state import mark_worker_prefetching_model
 
 
 def serve_request_queue(
@@ -67,7 +67,7 @@ def _execute_request(
     requests_served_by_process: int = 1,
 ) -> int:
     spec = deserialize_spec(json.loads(spec_json_path.read_text(encoding="utf-8")))
-    mark_worker_loading_model(
+    mark_worker_prefetching_model(
         run_dir / "worker_state.json",
         worker_pid=os.getpid(),
         requests_served_by_process=requests_served_by_process,

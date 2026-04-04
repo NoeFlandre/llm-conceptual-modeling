@@ -4,17 +4,17 @@ import json
 from pathlib import Path
 
 from llm_conceptual_modeling.hf_worker_state import (
-    mark_worker_loading_model,
+    mark_worker_prefetching_model,
     mark_worker_ready_for_execution,
     update_worker_state,
     worker_has_started_stage_execution,
 )
 
 
-def test_mark_worker_loading_model_sets_loading_phase(tmp_path: Path) -> None:
+def test_mark_worker_prefetching_model_sets_prefetch_phase(tmp_path: Path) -> None:
     worker_state_path = tmp_path / "worker_state.json"
 
-    mark_worker_loading_model(
+    mark_worker_prefetching_model(
         worker_state_path,
         worker_pid=1234,
         requests_served_by_process=2,
@@ -24,7 +24,7 @@ def test_mark_worker_loading_model_sets_loading_phase(tmp_path: Path) -> None:
     payload = json.loads(worker_state_path.read_text(encoding="utf-8"))
     assert payload == {
         "model_loaded": False,
-        "phase": "loading_model",
+        "phase": "prefetching_model",
         "requests_served_by_process": 2,
         "status": "running",
         "updated_at": "2026-04-03T00:00:00+00:00",
@@ -38,7 +38,7 @@ def test_mark_worker_ready_for_execution_preserves_existing_fields(tmp_path: Pat
         worker_state_path,
         {
             "status": "running",
-            "phase": "loading_model",
+            "phase": "prefetching_model",
             "worker_pid": 2222,
             "requests_served_by_process": 4,
             "model_loaded": False,
@@ -62,4 +62,4 @@ def test_mark_worker_ready_for_execution_preserves_existing_fields(tmp_path: Pat
 def test_worker_has_started_stage_execution_uses_phase_and_model_flag() -> None:
     assert worker_has_started_stage_execution({"model_loaded": True}) is True
     assert worker_has_started_stage_execution({"phase": "executing_algorithm"}) is True
-    assert worker_has_started_stage_execution({"phase": "loading_model"}) is False
+    assert worker_has_started_stage_execution({"phase": "prefetching_model"}) is False

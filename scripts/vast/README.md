@@ -39,8 +39,13 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
 - Result transfer is intended to be embedded in `prepare_and_resume_hf_batch.sh` whenever a local results root is provided.
 - Fresh-host launch now performs an explicit remote runtime doctor before result seeding so broken Docker/bootstrap environments fail fast instead of consuming paid GPU time during setup.
 - Fresh-host preview now prefetches the configured models before `paper-batch --resume`, so the slow model-download boundary is moved ahead of the live batch launch.
+- Worker state now distinguishes model warmup as `prefetching_model` before it transitions to
+  `executing_algorithm`, which makes startup easier to reason about during resumes.
 - The local watcher status file now carries a stable `watcher_identity` and explicit states (`starting`, `syncing`, `healthy`, `degraded`, `stopped`) so stale watchers from older hosts are easier to detect.
 - The remote runtime is split into small helpers so the preview/config rewrite step and the launch step can be reused in both host-bootstrap and container modes.
+- Remote launch no longer treats “GPU-attached worker exists” as sufficient proof of a healthy
+  resume. The launcher now waits for productive liveness: either the worker reaches
+  `executing_algorithm` or the root records a fresh finished run.
 - The sync watcher is no longer meant to be launched manually as the primary path.
 - Malformed structured outputs that still reach the worker as retryable errors now include empty
   edge endpoints, empty structured fields, and JSON decode failures; those are retried instead of

@@ -17,7 +17,7 @@ def update_worker_state(path: Path, updates: dict[str, object]) -> dict[str, obj
     return payload
 
 
-def mark_worker_loading_model(
+def mark_worker_prefetching_model(
     path: Path,
     *,
     worker_pid: int,
@@ -28,12 +28,27 @@ def mark_worker_loading_model(
         path,
         {
             "status": "running",
-            "phase": "loading_model",
+            "phase": "prefetching_model",
             "worker_pid": worker_pid,
             "model_loaded": False,
             "requests_served_by_process": requests_served_by_process,
             "updated_at": timestamp,
         },
+    )
+
+
+def mark_worker_loading_model(
+    path: Path,
+    *,
+    worker_pid: int,
+    requests_served_by_process: int,
+    timestamp: str,
+) -> dict[str, object]:
+    return mark_worker_prefetching_model(
+        path,
+        worker_pid=worker_pid,
+        requests_served_by_process=requests_served_by_process,
+        timestamp=timestamp,
     )
 
 
