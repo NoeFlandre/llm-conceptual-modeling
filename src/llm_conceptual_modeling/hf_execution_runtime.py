@@ -11,6 +11,11 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_batch_utils import slugify_model as _slugify_model
 from llm_conceptual_modeling.hf_batch_utils import write_json as _write_json
+from llm_conceptual_modeling.hf_failure_markers import (
+    INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS,
+    STRUCTURAL_FAILURE_MESSAGE_MARKERS,
+    message_contains_any,
+)
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
 from llm_conceptual_modeling.hf_subprocess import (
@@ -70,6 +75,11 @@ def run_local_hf_spec_subprocess(
             env=build_hf_download_environment_fn(),
         )
         if not result_json_path.exists():
+            if attempt < retry_attempts and _is_retryable_missing_result_artifact(
+                stdout=completed.stdout,
+                stderr=completed.stderr,
+            ):
+                continue
             raise_missing_result_artifact(
                 context="HF worker subprocess",
                 stdout=completed.stdout,
@@ -105,9 +115,7 @@ def run_local_hf_spec(
         session = PersistentHFWorkerSession(
             queue_dir=queue_dir,
             worker_python=sys.executable,
-            max_requests_per_process=resolve_max_requests_per_worker_process(
-                spec.context_policy
-            ),
+            max_requests_per_process=resolve_max_requests_per_worker_process(spec.context_policy),
         )
         persistent_sessions[spec.model] = session
     return session.run_spec(spec=spec, run_dir=run_dir)
@@ -130,6 +138,7 @@ def build_worker_command(
         "--run-dir",
         str(run_dir),
     ]
+
 
 def resolve_worker_process_mode(context_policy: dict[str, object] | None) -> str:
     if context_policy is None:
@@ -159,8 +168,7 @@ def resolve_max_requests_per_worker_process(
         return None
     if isinstance(raw_value, bool) or not isinstance(raw_value, int | float | str):
         raise TypeError(
-            "max_requests_per_worker_process value must be numeric, "
-            f"got {type(raw_value).__name__}"
+            f"max_requests_per_worker_process value must be numeric, got {type(raw_value).__name__}"
         )
     max_requests = int(float(raw_value))
     if max_requests <= 0:
@@ -172,17 +180,14 @@ def is_retryable_worker_error(error: dict[str, str]) -> bool:
     message = error.get("message", "")
     if "BrokenPipeError:" in message:
         return True
-    if error.get("type") != "ValueError":
-        return False
-    retry_markers = (
-        "Model did not return valid structured output:",
-        "Invalid edge item shape:",
-        "Unsupported structured response shape for schema",
-        "Structured edge_list response must contain a list of edges",
-        "Structured edge_list flat string response must contain an even number of items",
-        "Structurally invalid algo",
-    )
-    return any(marker in message for marker in retry_markers)
+    if message_contains_any(message, STRUCTURAL_FAILURE_MESSAGE_MARKERS):
+        return True
+    return message_contains_any(message, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS)
+
+
+def _is_retryable_missing_result_artifact(*, stdout: str | None, stderr: str | None) -> bool:
+    combined_output = "\n".join(part for part in (stdout or "", stderr or "") if part)
+    return message_contains_any(combined_output, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS)
 
 
 def coerce_timeout_seconds(raw_value: object) -> float:

@@ -6,6 +6,12 @@ from pathlib import Path
 from typing import Any, Callable, cast
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
+from llm_conceptual_modeling.hf_failure_markers import (
+    INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS,
+    STRUCTURAL_FAILURE_MESSAGE_MARKERS,
+    UNSUPPORTED_FAILURE_MESSAGE_MARKERS,
+    message_contains_any,
+)
 
 JsonObject = dict[str, object]
 
@@ -142,7 +148,10 @@ def load_valid_finished_summary(
     raw_row_path = run_dir / "raw_row.json"
     try:
         raw_row = json.loads(raw_row_path.read_text(encoding="utf-8"))
+        original_raw_row = json.loads(json.dumps(raw_row))
         validate_structural_runtime_result_fn(algorithm=algorithm, raw_row=raw_row)
+        if raw_row != original_raw_row:
+            write_json_fn(raw_row_path, raw_row)
     except Exception as error:
         write_json_fn(
             run_dir / "error.json",
@@ -173,6 +182,8 @@ def load_deferred_failed_summary(
         return None
     error = read_artifact_json_fn(run_dir / "error.json")
     failure_kind = classify_failure_payload(error)
+    if _should_retry_qwen_contrastive_failure(run_dir=run_dir, error=error):
+        return None
     if not _should_defer_failure_kind(failure_kind, context_policy):
         return None
     return {
@@ -188,7 +199,7 @@ def resolve_retry_timeout_failures_on_resume(
     context_policy: dict[str, object] | None,
 ) -> bool:
     mode = resolve_resume_pass_mode(context_policy)
-    if mode == "retry-timeouts":
+    if mode in {"retry-timeouts", "retry-all"}:
         return True
     return _resolve_context_policy_bool(
         context_policy,
@@ -200,6 +211,8 @@ def resolve_retry_timeout_failures_on_resume(
 def resolve_retry_oom_failures_on_resume(
     context_policy: dict[str, object] | None,
 ) -> bool:
+    if resolve_resume_pass_mode(context_policy) == "retry-all":
+        return True
     return _resolve_context_policy_bool(
         context_policy,
         key="retry_oom_failures_on_resume",
@@ -210,10 +223,24 @@ def resolve_retry_oom_failures_on_resume(
 def resolve_retry_infrastructure_failures_on_resume(
     context_policy: dict[str, object] | None,
 ) -> bool:
+    if resolve_resume_pass_mode(context_policy) == "retry-all":
+        return True
     return _resolve_context_policy_bool(
         context_policy,
         key="retry_infrastructure_failures_on_resume",
         default=True,
+    )
+
+
+def resolve_retry_structural_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    if resolve_resume_pass_mode(context_policy) == "retry-all":
+        return True
+    return _resolve_context_policy_bool(
+        context_policy,
+        key="retry_structural_failures_on_resume",
+        default=False,
     )
 
 
@@ -222,14 +249,11 @@ def resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
         return "throughput"
     raw_value = context_policy.get("resume_pass_mode", "throughput")
     if not isinstance(raw_value, str):
-        raise TypeError(
-            "resume_pass_mode value must be string, "
-            f"got {type(raw_value).__name__}"
-        )
+        raise TypeError(f"resume_pass_mode value must be string, got {type(raw_value).__name__}")
     normalized = raw_value.strip().lower()
-    if normalized not in {"throughput", "retry-timeouts"}:
+    if normalized not in {"throughput", "retry-timeouts", "retry-all"}:
         raise ValueError(
-            "resume_pass_mode must be one of {'throughput', 'retry-timeouts'}, "
+            "resume_pass_mode must be one of {'throughput', 'retry-timeouts', 'retry-all'}, "
             f"got {raw_value!r}"
         )
     return normalized
@@ -257,12 +281,23 @@ def _should_defer_failure_kind(
         "timeout": resolve_retry_timeout_failures_on_resume,
         "oom": resolve_retry_oom_failures_on_resume,
         "infrastructure": resolve_retry_infrastructure_failures_on_resume,
+        "structural": resolve_retry_structural_failures_on_resume,
     }
-    if failure_kind == "unsupported":
-        return True
     if failure_kind not in policy_checks:
         return False
     return not policy_checks[failure_kind](context_policy)
+
+
+def _should_retry_qwen_contrastive_failure(*, run_dir: Path, error: JsonObject) -> bool:
+    lowered_message = str(error.get("message", "")).lower()
+    if (
+        "contrastive search is not supported with stateful models" not in lowered_message
+        and "contrastive search requires `trust_remote_code=true`" not in lowered_message
+    ):
+        return False
+    if "qwen__qwen3.5-9b" not in str(run_dir).lower():
+        return False
+    return True
 
 
 def classify_failure_payload(error: JsonObject) -> str:
@@ -270,31 +305,19 @@ def classify_failure_payload(error: JsonObject) -> str:
     message = str(error.get("message", ""))
     if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
         return "timeout"
-    lowered_message = message.lower()
-    if (
-        "hf-transformers local inference requires cuda" in lowered_message
-        or "cuda initialization:" in lowered_message
-        or "found no nvidia driver" in lowered_message
-    ):
+    if message_contains_any(message, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS):
         return "infrastructure"
-    if "out of memory" in lowered_message:
+    if "out of memory" in message.lower():
         return "oom"
-    if (
-        "contrastive search is not supported with stateful models" in lowered_message
-        or "contrastive search requires `trust_remote_code=true`" in lowered_message
-    ):
+    if message_contains_any(message, UNSUPPORTED_FAILURE_MESSAGE_MARKERS):
         return "unsupported"
     if error_type == "StaleRunState":
         return "stale"
-    if error_type in {"ValueError", "RuntimeError"} and (
-        "Model did not return valid structured output:" in message
-        or "Could not parse tuple content:" in message
-        or "Invalid edge item shape:" in message
-        or "Unsupported structured response shape for schema" in message
-        or "Structured edge_list response must contain a list of edges" in message
-        or "Structured edge_list flat string response must contain an even number of items"
-        in message
-        or "Structurally invalid algo" in message
+    if error_type == "JSONDecodeError":
+        return "structural"
+    if error_type in {"ValueError", "RuntimeError"} and message_contains_any(
+        message,
+        STRUCTURAL_FAILURE_MESSAGE_MARKERS,
     ):
         return "structural"
     return "other"
@@ -364,9 +387,7 @@ def collect_resume_history(
             continue
         failure_kind = classify_failure_payload(read_artifact_json_fn(run_dir / "error.json"))
         bucket = (
-            failure_kind
-            if failure_kind in {"timeout", "structural", "unsupported"}
-            else "other"
+            failure_kind if failure_kind in {"timeout", "structural", "unsupported"} else "other"
         )
         by_pair[pair_key][bucket] += 1
         by_pair_condition[pair_condition_key][bucket] += 1

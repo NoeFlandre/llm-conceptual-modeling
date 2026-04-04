@@ -1,15 +1,17 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_resume_state import (
+    _should_defer_failure_kind,
     build_seeded_resume_snapshot,
     classify_failure_payload,
     load_deferred_failed_summary,
     load_valid_finished_summary,
     order_planned_specs_for_resume,
-    _should_defer_failure_kind,
 )
 
 
@@ -65,7 +67,7 @@ def _run_dir(output_root: Path, spec: HFRunSpec) -> Path:
     )
 
 
-def test_load_valid_finished_summary_reclassifies_structurally_invalid_run(
+def test_load_valid_finished_summary_sanitizes_structurally_invalid_run(
     tmp_path: Path,
 ) -> None:
     run_dir = tmp_path / "run"
@@ -83,21 +85,18 @@ def test_load_valid_finished_summary_reclassifies_structurally_invalid_run(
         encoding="utf-8",
     )
 
-    def validator(*, algorithm: str, raw_row: dict[str, object]) -> None:
-        _ = algorithm
-        _ = raw_row
-        raise ValueError("Structurally invalid algo1 result: non-textual edge endpoint ('1', '2').")
-
     actual = load_valid_finished_summary(
         run_dir=run_dir,
         algorithm="algo1",
-        validate_structural_runtime_result_fn=validator,
+        validate_structural_runtime_result_fn=lambda **kwargs: kwargs["raw_row"].update(
+            {"Result": "[]"}
+        ),
     )
 
-    assert actual is None
-    assert json.loads((run_dir / "state.json").read_text(encoding="utf-8"))["status"] == "failed"
-    assert (run_dir / "error.json").exists()
-    assert not (run_dir / "summary.json").exists()
+    assert actual is not None
+    assert json.loads((run_dir / "state.json").read_text(encoding="utf-8"))["status"] == "finished"
+    assert not (run_dir / "error.json").exists()
+    assert json.loads((run_dir / "raw_row.json").read_text(encoding="utf-8"))["Result"] == "[]"
 
 
 def test_build_seeded_resume_snapshot_counts_finished_and_deferred_timeout(
@@ -203,6 +202,86 @@ def test_build_seeded_resume_snapshot_can_defer_oom_failures_when_disabled(
     assert seeded_failed == {failed_dir}
 
 
+def test_build_seeded_resume_snapshot_requeues_timeout_failures_when_retry_all_enabled(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    failed_spec = _make_spec(
+        pair_name="sg1_sg2",
+        condition_bits="00001",
+        context_policy={"resume_pass_mode": "retry-all"},
+    )
+
+    failed_dir = _run_dir(output_root, failed_spec)
+    failed_dir.mkdir(parents=True, exist_ok=True)
+    (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (failed_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 20.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    snapshot, _summary_rows, _seeded_finished, seeded_failed = build_seeded_resume_snapshot(
+        output_root=output_root,
+        planned_specs=[failed_spec],
+        started_at="2026-04-01T00:00:01+00:00",
+        run_dir_for_spec_fn=_run_dir,
+        current_run_payload_fn=lambda **payload: payload,
+        status_timestamp_now_fn=lambda: "2026-04-01T00:00:02+00:00",
+        validate_structural_runtime_result_fn=lambda **_: None,
+    )
+
+    assert snapshot["finished_count"] == 0
+    assert snapshot["failed_count"] == 0
+    assert snapshot["pending_count"] == 1
+    assert seeded_failed == set()
+
+
+def test_build_seeded_resume_snapshot_requeues_structural_failures_when_retry_all_enabled(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    failed_spec = _make_spec(
+        pair_name="sg1_sg2",
+        condition_bits="00001",
+        context_policy={"resume_pass_mode": "retry-all"},
+    )
+
+    failed_dir = _run_dir(output_root, failed_spec)
+    failed_dir.mkdir(parents=True, exist_ok=True)
+    (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (failed_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "ValueError",
+                "message": (
+                    "ValueError: Structurally invalid algo1 result: verified edge list is empty."
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    snapshot, _summary_rows, _seeded_finished, seeded_failed = build_seeded_resume_snapshot(
+        output_root=output_root,
+        planned_specs=[failed_spec],
+        started_at="2026-04-01T00:00:01+00:00",
+        run_dir_for_spec_fn=_run_dir,
+        current_run_payload_fn=lambda **payload: payload,
+        status_timestamp_now_fn=lambda: "2026-04-01T00:00:02+00:00",
+        validate_structural_runtime_result_fn=lambda **_: None,
+    )
+
+    assert snapshot["finished_count"] == 0
+    assert snapshot["failed_count"] == 0
+    assert snapshot["pending_count"] == 1
+    assert seeded_failed == set()
+
+
 def test_classify_failure_payload_detects_oom() -> None:
     error = {
         "type": "RuntimeError",
@@ -212,6 +291,39 @@ def test_classify_failure_payload_detects_oom() -> None:
     assert classify_failure_payload(error) == "oom"
 
 
+@pytest.mark.parametrize(
+    ("error", "expected_kind"),
+    [
+        (
+            {
+                "type": "RuntimeError",
+                "message": "ValueError: Structured response returned an empty edge target",
+            },
+            "structural",
+        ),
+        (
+            {
+                "type": "JSONDecodeError",
+                "message": "Expecting value: line 1 column 1 (char 0)",
+            },
+            "structural",
+        ),
+        (
+            {
+                "type": "RuntimeError",
+                "message": "ModuleNotFoundError: No module named 'llm_conceptual_modeling'",
+            },
+            "infrastructure",
+        ),
+    ],
+)
+def test_classify_failure_payload_detects_retryable_structural_and_infrastructure_variants(
+    error: dict[str, str],
+    expected_kind: str,
+) -> None:
+    assert classify_failure_payload(error) == expected_kind
+
+
 def test_classify_failure_payload_treats_tuple_parse_errors_as_structural() -> None:
     error = {
         "type": "RuntimeError",
@@ -219,6 +331,15 @@ def test_classify_failure_payload_treats_tuple_parse_errors_as_structural() -> N
     }
 
     assert classify_failure_payload(error) == "structural"
+
+
+def test_should_defer_failure_kind_retries_all_failures_when_retry_all_enabled() -> None:
+    context_policy = {"resume_pass_mode": "retry-all"}
+
+    assert _should_defer_failure_kind("timeout", context_policy) is False
+    assert _should_defer_failure_kind("oom", context_policy) is False
+    assert _should_defer_failure_kind("infrastructure", context_policy) is False
+    assert _should_defer_failure_kind("structural", context_policy) is False
 
 
 def test_classify_failure_payload_detects_unsupported_decoding_failure() -> None:
@@ -233,12 +354,40 @@ def test_classify_failure_payload_detects_unsupported_decoding_failure() -> None
     assert classify_failure_payload(error) == "unsupported"
 
 
+def test_load_deferred_failed_summary_retries_qwen_contrastive_stateful_failure(
+    tmp_path: Path,
+) -> None:
+    run_dir = tmp_path / "runs" / "algo1" / "Qwen__Qwen3.5-9B" / "contrastive_penalty_alpha_0.8"
+    run_dir = run_dir / "sg1_sg2" / "01110" / "rep_02"
+    run_dir.mkdir(parents=True)
+    (run_dir / "state.json").write_text('{"status": "failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "RuntimeError",
+                "message": (
+                    "ValueError: contrastive search is not supported with stateful models, "
+                    "such as Qwen3_5ForCausalLM"
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert (
+        load_deferred_failed_summary(
+            run_dir=run_dir,
+            context_policy={"resume_pass_mode": "throughput"},
+        )
+        is None
+    )
+
+
 def test_classify_failure_payload_detects_infrastructure_cuda_unavailable() -> None:
     error = {
         "type": "RuntimeError",
         "message": (
-            "RuntimeError: hf-transformers local inference requires CUDA; "
-            "CPU fallback is disabled."
+            "RuntimeError: hf-transformers local inference requires CUDA; CPU fallback is disabled."
         ),
     }
 
@@ -309,21 +458,57 @@ def test_load_deferred_failed_summary_defers_retryable_timeout_without_algorithm
     assert deferred["deferred_on_resume"] is True
 
 
+def test_load_deferred_failed_summary_retries_structural_failures_when_enabled(
+    tmp_path: Path,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "ValueError",
+                "message": (
+                    "ValueError: Structured edge_list flat string response must contain "
+                    "an even number of items"
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    deferred = load_deferred_failed_summary(
+        run_dir=run_dir,
+        context_policy={"retry_structural_failures_on_resume": True},
+    )
+
+    assert deferred is None
+
+
 def test_should_defer_failure_kind_uses_shared_resume_policy_table() -> None:
     assert _should_defer_failure_kind("timeout", None) is True
-    assert _should_defer_failure_kind(
-        "timeout",
-        {"resume_pass_mode": "retry-timeouts"},
-    ) is False
-    assert _should_defer_failure_kind(
-        "oom",
-        {"retry_oom_failures_on_resume": True},
-    ) is False
-    assert _should_defer_failure_kind(
-        "infrastructure",
-        {"retry_infrastructure_failures_on_resume": True},
-    ) is False
-    assert _should_defer_failure_kind("unsupported", None) is True
+    assert (
+        _should_defer_failure_kind(
+            "timeout",
+            {"resume_pass_mode": "retry-timeouts"},
+        )
+        is False
+    )
+    assert (
+        _should_defer_failure_kind(
+            "oom",
+            {"retry_oom_failures_on_resume": True},
+        )
+        is False
+    )
+    assert (
+        _should_defer_failure_kind(
+            "infrastructure",
+            {"retry_infrastructure_failures_on_resume": True},
+        )
+        is False
+    )
+    assert _should_defer_failure_kind("unsupported", None) is False
     assert _should_defer_failure_kind("other", None) is False
 
 

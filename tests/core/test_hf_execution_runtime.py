@@ -33,6 +33,31 @@ def test_resolve_max_requests_per_worker_process_rejects_non_positive() -> None:
         resolve_max_requests_per_worker_process({"max_requests_per_worker_process": 0})
 
 
+@pytest.mark.parametrize(
+    "error",
+    [
+        {
+            "type": "RuntimeError",
+            "message": "ValueError: Structured response returned an empty edge target",
+        },
+        {
+            "type": "RuntimeError",
+            "message": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        },
+        {
+            "type": "RuntimeError",
+            "message": "ModuleNotFoundError: No module named 'llm_conceptual_modeling'",
+        },
+    ],
+)
+def test_is_retryable_worker_error_recognizes_structural_and_infrastructure_wrappers(
+    error: dict[str, str],
+) -> None:
+    from llm_conceptual_modeling.hf_execution_runtime import is_retryable_worker_error
+
+    assert is_retryable_worker_error(error)
+
+
 def test_run_local_hf_spec_persistent_mode_reuses_existing_session(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,

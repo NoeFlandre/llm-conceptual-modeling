@@ -1624,17 +1624,16 @@ def test_run_local_hf_spec_subprocess_retries_retryable_structured_output_failur
         if attempts["count"] == 1:
             result_json_path.write_text(
                 json.dumps(
-                        {
-                            "ok": False,
-                            "error": {
-                                "type": "ValueError",
-                                "message": (
-                                    "Model did not return valid structured output: "
-                                    "assistant\\n[1, 2]"
-                                ),
-                            },
-                        }
-                    ),
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "ValueError",
+                            "message": (
+                                "Model did not return valid structured output: assistant\\n[1, 2]"
+                            ),
+                        },
+                    }
+                ),
                 encoding="utf-8",
             )
         else:
@@ -1667,6 +1666,169 @@ def test_run_local_hf_spec_subprocess_retries_retryable_structured_output_failur
 
     assert attempts["count"] == 2
     assert actual["raw_row"]["Result"] == "[]"
+
+
+def test_run_local_hf_spec_subprocess_retries_retryable_wrapped_structural_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        replication=0,
+        prompt_factors={},
+        prompt_bundle=None,
+        decoding=DecodingConfig(algorithm="greedy", temperature=0.0),
+        input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
+        raw_context={},
+        seed=1,
+        runtime_profile=RuntimeProfile(
+            supports_thinking_toggle=False,
+            quantization="none",
+            device="cuda",
+            dtype="bfloat16",
+            context_limit=None,
+        ),
+        max_new_tokens_by_schema={"edge_list": 32, "vote_list": 16, "label_list": 16},
+        context_policy={},
+    )
+
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        result_json_path = Path(kwargs["command"][6])
+        if attempts["count"] == 1:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "RuntimeError",
+                            "message": (
+                                "ValueError: Structured response returned an empty edge target"
+                            ),
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        else:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "runtime_result": {
+                            "raw_row": {
+                                "Result": "[('alpha', 'gamma')]",
+                                "graph": "[('alpha', 'gamma')]",
+                                "subgraph1": "[('alpha', 'beta')]",
+                                "subgraph2": "[('gamma', 'delta')]",
+                            },
+                            "runtime": {"thinking_mode_supported": False},
+                            "raw_response": "[]",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        return type("Completed", (), {"stdout": "", "stderr": ""})()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.run_monitored_command",
+        fake_run_monitored_command,
+    )
+
+    actual = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Result"] == "[('alpha', 'gamma')]"
+
+
+def test_run_local_hf_spec_subprocess_retries_retryable_missing_artifact_infrastructure_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        replication=0,
+        prompt_factors={},
+        prompt_bundle=None,
+        decoding=DecodingConfig(algorithm="greedy", temperature=0.0),
+        input_payload={"graph": [], "subgraph1": [], "subgraph2": []},
+        raw_context={},
+        seed=1,
+        runtime_profile=RuntimeProfile(
+            supports_thinking_toggle=False,
+            quantization="none",
+            device="cuda",
+            dtype="bfloat16",
+            context_limit=None,
+        ),
+        max_new_tokens_by_schema={"edge_list": 32, "vote_list": 16, "label_list": 16},
+        context_policy={},
+    )
+
+    attempts = {"count": 0}
+
+    def fake_run_monitored_command(**kwargs):
+        attempts["count"] += 1
+        result_json_path = Path(kwargs["command"][6])
+        if attempts["count"] == 2:
+            result_json_path.write_text(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "runtime_result": {
+                            "raw_row": {
+                                "Result": "[('alpha', 'gamma')]",
+                                "graph": "[('alpha', 'gamma')]",
+                                "subgraph1": "[('alpha', 'beta')]",
+                                "subgraph2": "[('gamma', 'delta')]",
+                            },
+                            "runtime": {"thinking_mode_supported": False},
+                            "raw_response": "[]",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+        return type(
+            "Completed",
+            (),
+            {
+                "stdout": "",
+                "stderr": (
+                    "/workspace/llm-conceptual-modeling/.venv/bin/python: "
+                    "Error while finding module specification for "
+                    "'llm_conceptual_modeling.hf_worker' "
+                    "(ModuleNotFoundError: No module named 'llm_conceptual_modeling')"
+                ),
+            },
+        )()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.run_monitored_command",
+        fake_run_monitored_command,
+    )
+
+    actual = _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+
+    assert attempts["count"] == 2
+    assert actual["raw_row"]["Result"] == "[('alpha', 'gamma')]"
 
 
 def test_run_local_hf_spec_subprocess_retries_retryable_structural_invalid_result(
@@ -2116,9 +2278,9 @@ def test_checked_in_config_algo3_prompt_matches_paper_and_excludes_depth_text() 
         'reputation", "commendable status"] }. '
         "Here is an example of a bad output that we do not want to see. We have the list of "
         "nodes ['capacity to hire', 'bad employees', 'good reputation']. A bad output would be: "
-        '{ "capacity to hire": [\'moon\', \'dog\', \'thermodynamics\', \'country\', \'pillow\'], '
-        '"bad employees": [\'swimming\', \'red\', \'happiness\', \'food\', \'shoe\'], '
-        '"good reputation": [\'judo\', \'canada\', \'light\', \'phone\', \'electricity\'] }. '
+        "{ \"capacity to hire\": ['moon', 'dog', 'thermodynamics', 'country', 'pillow'], "
+        "\"bad employees\": ['swimming', 'red', 'happiness', 'food', 'shoe'], "
+        "\"good reputation\": ['judo', 'canada', 'light', 'phone', 'electricity'] }. "
         "Adding the proposed concepts would be incorrect since they have no relationship with the "
         "concepts in the input. "
         "Your output must only be the list of proposed concepts. Do not repeat any instructions I "
@@ -2180,9 +2342,7 @@ def test_knowledge_map_formatting_matches_paper_representations() -> None:
         "the list of nodes ['capacity to hire', 'bad employees', 'good reputation'] "
         "and the associated adjacency matrix [[0, 1, 0], [0, 0, 1], [1, 0, 0]]"
     )
-    assert markup_format.startswith(
-        "<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>"
-    )
+    assert markup_format.startswith("<ARRAY><NODES><NODE ID= 'capacity to hire'><TARGETS>")
     assert "isConnected=" not in markup_format
     assert edges_format == (
         "the following list of edges: [('capacity to hire', 'bad employees'), "
@@ -2957,7 +3117,7 @@ def test_run_single_spec_marks_failed_when_monitored_worker_times_out(
     assert smoke_verdict["failure_type"] == "MonitoredCommandTimeout"
 
 
-def test_run_single_spec_marks_empty_algo1_result_as_failed(tmp_path: Path) -> None:
+def test_run_single_spec_accepts_empty_algo1_result(tmp_path: Path) -> None:
     spec = HFRunSpec(
         algorithm="algo1",
         model="Qwen/Qwen3.5-9B",
@@ -2992,14 +3152,13 @@ def test_run_single_spec_marks_empty_algo1_result_as_failed(tmp_path: Path) -> N
             "raw_response": "{}",
         }
 
-    with pytest.raises(ValueError, match="verified edge list is empty"):
-        run_single_spec(
-            spec=spec,
-            output_root=tmp_path / "smoke",
-            runtime_factory=runtime_factory,
-            dry_run=False,
-            resume=False,
-        )
+    summary = run_single_spec(
+        spec=spec,
+        output_root=tmp_path / "smoke",
+        runtime_factory=runtime_factory,
+        dry_run=False,
+        resume=False,
+    )
 
     run_dir = (
         tmp_path
@@ -3013,12 +3172,17 @@ def test_run_single_spec_marks_empty_algo1_result_as_failed(tmp_path: Path) -> N
         / "rep_00"
     )
     state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
-    error = json.loads((run_dir / "error.json").read_text(encoding="utf-8"))
-    assert state["status"] == "failed"
-    assert "verified edge list is empty" in error["message"]
+    summary_artifact = json.loads((run_dir / "summary.json").read_text(encoding="utf-8"))
+    assert state["status"] == "finished"
+    assert summary["status"] == "finished"
+    assert summary["verified_edge_count"] == 0
+    assert summary_artifact["verified_edge_count"] == 0
+    assert not (run_dir / "error.json").exists()
 
 
-def test_run_single_spec_marks_placeholder_algo1_result_as_failed(tmp_path: Path) -> None:
+def test_run_single_spec_filters_non_textual_algo1_edges_to_empty_result(
+    tmp_path: Path,
+) -> None:
     spec = HFRunSpec(
         algorithm="algo1",
         model="Qwen/Qwen3.5-9B",
@@ -3053,14 +3217,13 @@ def test_run_single_spec_marks_placeholder_algo1_result_as_failed(tmp_path: Path
             "raw_response": "{}",
         }
 
-    with pytest.raises(ValueError, match="non-textual edge endpoint"):
-        run_single_spec(
-            spec=spec,
-            output_root=tmp_path / "smoke",
-            runtime_factory=runtime_factory,
-            dry_run=False,
-            resume=False,
-        )
+    summary = run_single_spec(
+        spec=spec,
+        output_root=tmp_path / "smoke",
+        runtime_factory=runtime_factory,
+        dry_run=False,
+        resume=False,
+    )
 
     run_dir = (
         tmp_path
@@ -3074,9 +3237,12 @@ def test_run_single_spec_marks_placeholder_algo1_result_as_failed(tmp_path: Path
         / "rep_00"
     )
     state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
-    error = json.loads((run_dir / "error.json").read_text(encoding="utf-8"))
-    assert state["status"] == "failed"
-    assert "non-textual edge endpoint" in error["message"]
+    raw_row = json.loads((run_dir / "raw_row.json").read_text(encoding="utf-8"))
+    assert state["status"] == "finished"
+    assert summary["status"] == "finished"
+    assert summary["verified_edge_count"] == 0
+    assert raw_row["Result"] == "[]"
+    assert not (run_dir / "error.json").exists()
 
 
 def test_run_paper_batch_writes_combined_factorial_with_decoding_and_error_rows(

@@ -72,6 +72,15 @@ Container-first fresh-host note:
 - `scripts/vast/prepare_and_resume_hf_batch.sh` now supports two runtime modes:
   - `REMOTE_RUNTIME_MODE=bootstrap` for the existing host-side `uv sync` flow
   - `REMOTE_RUNTIME_MODE=docker` for a prebuilt GPU image flow
+- `scripts/vast/bootstrap_gpu_host.sh` now retries transient package-download failures during
+  `uv sync` and the subsequent `uv pip install` steps so a temporary PyPI timeout does not abort
+  an otherwise healthy fresh-host resume
+- `configs/hf_transformers_algo2_olmo.yaml` is intentionally conservative for the next fresh-host
+  resume: greedy plus `beam_num_beams=2` only. The OOM-heavy `beam_num_beams=6` branch and the
+  contrastive branch are excluded from this resume profile.
+- `configs/hf_transformers_algo2_mistral.yaml` keeps contrastive, but only the safe
+  `penalty_alpha=0.2` branch plus beam-2. That preserves contrastive coverage while avoiding the
+  known failure branch at `penalty_alpha=0.8`.
 - when `REMOTE_RUNTIME_MODE=docker`, the launcher expects `REMOTE_DOCKER_IMAGE` to point at an
   image that already contains the validated runtime
 - the remote preview and launch steps are shared helper scripts:
@@ -217,6 +226,10 @@ Important conceptual distinction:
 We often work first on `(1)` and `(2)`, then analyze `(3)` separately.
 Do not silently convert garbage into finished runs. We only add bounded recoveries for malformed
 outputs when the recovered structure is still legitimately the intended schema.
+For `algo1`, an empty verified edge list is a valid finished outcome, not a structural failure;
+it should be preserved as `Result = []` and allowed to resume cleanly. Non-textual edge
+endpoints are filtered out at the resume boundary instead of failing the whole run, so we do
+not accept garbage but we also do not lose progress to numeric-only hallucinations.
 
 Resume retry behavior is governed by `context_policy`:
 
@@ -540,8 +553,10 @@ Observed repeatedly in `algo1` and `algo2`:
 
 Current fix:
 
-- compatibility gate in planning/runtime
-- unsupported Qwen contrastive combinations should be filtered out generally
+- the Qwen contrastive path now clears the upstream `GenerationMixin` stateful guard only for
+  contrastive generation calls
+- failed Qwen contrastive runs are retried on resume instead of being deferred permanently
+- the rest of the Qwen resume profile stays conservative so we only spend GPU time on retryable work
 
 ### 13.2 Broken persistent worker transport
 
@@ -574,6 +589,9 @@ Current parser hardening in `hf_transformers.py` covers bounded versions of:
 - malformed comma-separated label lists with inconsistent quoting
 - single bare list-item recovery for the exact OLMo shape we observed
 - one-shot retry for retryable malformed outputs instead of instant failure
+- retryable worker errors now also cover empty structured edge endpoints, empty structured fields,
+  and JSON decode failures so borderline garbage is retried instead of being parked as a terminal
+  failure
 
 Do not broaden this casually.
 Every recovery should stay bounded and test-backed.
@@ -597,6 +615,8 @@ Current behavior in resume/orchestration:
 
 - infrastructure-class failures should abort the batch instead of wasting thousands of runs on a dead host
 - those failures should be retryable on a healthy replacement host
+- missing worker artifacts caused by launch drift are retried when they match known infrastructure
+  signatures such as missing `llm_conceptual_modeling` imports or a missing remote `.venv/bin/python`
 
 ## 14. Known User-Facing Tasks We Commonly Do
 
