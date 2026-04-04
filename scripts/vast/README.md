@@ -53,6 +53,9 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   resumes keep the rest of the seeded root but stop burning GPU time on that branch.
 - The OLMO drain script also forces `retry_oom_failures_on_resume=true` into the remote effective
   config so stale preview artifacts cannot silently disable OOM replay on a fresh host.
+- The same drain wrapper now also forces timeout and infrastructure retries on resume, so
+  unattended `algo1 -> algo2 -> algo3` passes keep consuming deferred retryable work instead of
+  stopping after the first timeout-heavy phase.
 - For `algo2-olmo`, the safe fresh-host profile is now greedy plus `beam_num_beams=2`; the
   OOM-prone `beam_num_beams=6` and contrastive branches are intentionally excluded from the
   resume profile.

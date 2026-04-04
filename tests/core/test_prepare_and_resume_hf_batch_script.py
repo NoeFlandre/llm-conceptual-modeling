@@ -252,11 +252,21 @@ def test_drain_olmo_script_sequences_all_olmo_roots_and_uses_result_root_configs
         in script_text
     )
     assert (
+        'OLMO_RETRY_TIMEOUT_FAILURES_ON_RESUME="${OLMO_RETRY_TIMEOUT_FAILURES_ON_RESUME:-true}"'
+        in script_text
+    )
+    assert (
+        'OLMO_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME="${OLMO_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME:-true}"'
+        in script_text
+    )
+    assert (
         'OLMO_RETRY_OOM_FAILURES_ON_RESUME="${OLMO_RETRY_OOM_FAILURES_ON_RESUME:-true}"'
         in script_text
     )
     assert "BATCH_RETRY_OOM_FAILURES_ON_RESUME" in script_text
     assert "BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME" in script_text
+    assert "BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME" in script_text
+    assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
     assert "root_excluded_decoding_labels()" in script_text
     assert "BATCH_EXCLUDED_DECODING_LABELS" in script_text
     assert "pending_count" in script_text
