@@ -12,9 +12,7 @@ from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_batch_utils import slugify_model as _slugify_model
 from llm_conceptual_modeling.hf_batch_utils import write_json as _write_json
 from llm_conceptual_modeling.hf_failure_markers import (
-    INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS,
-    STRUCTURAL_FAILURE_MESSAGE_MARKERS,
-    message_contains_any,
+    is_retryable_worker_failure_message,
 )
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_spec_codec import serialize_spec
@@ -178,16 +176,12 @@ def resolve_max_requests_per_worker_process(
 
 def is_retryable_worker_error(error: dict[str, str]) -> bool:
     message = error.get("message", "")
-    if "BrokenPipeError:" in message:
-        return True
-    if message_contains_any(message, STRUCTURAL_FAILURE_MESSAGE_MARKERS):
-        return True
-    return message_contains_any(message, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS)
+    return is_retryable_worker_failure_message(message)
 
 
 def _is_retryable_missing_result_artifact(*, stdout: str | None, stderr: str | None) -> bool:
     combined_output = "\n".join(part for part in (stdout or "", stderr or "") if part)
-    return message_contains_any(combined_output, INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS)
+    return is_retryable_worker_failure_message(combined_output)
 
 
 def coerce_timeout_seconds(raw_value: object) -> float:

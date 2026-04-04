@@ -267,6 +267,69 @@ def test_persistent_session_retries_broken_pipe_once(
     assert terminated_pids == [4000]
 
 
+@pytest.mark.parametrize(
+    "error_message",
+    [
+        "RuntimeError: ValueError: Structured response returned an empty edge target",
+        "RuntimeError: OutOfMemoryError: CUDA out of memory. Tried to allocate 374.00 MiB.",
+    ],
+)
+def test_persistent_session_retries_retryable_runtime_errors(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    error_message: str,
+) -> None:
+    queue_dir = tmp_path / "queue"
+    spawn_pids: list[int] = []
+    terminated_pids: list[int] = []
+    session = PersistentHFWorkerSession(queue_dir=queue_dir, worker_python="/tmp/fake-python")
+
+    def fake_spawn(self) -> _FakeProcess:
+        pid = 4100 + len(spawn_pids)
+        spawn_pids.append(pid)
+        return _FakeProcess(pid)
+
+    attempts = {"count": 0}
+
+    def fake_wait(
+        self,
+        *,
+        process,
+        request_path,
+        result_json_path,
+        run_dir,
+        startup_timeout_seconds,
+        stage_timeout_seconds,
+    ):
+        _ = (
+            process,
+            request_path,
+            result_json_path,
+            run_dir,
+            startup_timeout_seconds,
+            stage_timeout_seconds,
+        )
+        attempts["count"] += 1
+        if attempts["count"] == 1:
+            raise RuntimeError(error_message)
+        return {"raw_row": {}, "runtime": {}, "raw_response": "{}"}
+
+    def fake_terminate(self, process: _FakeProcess) -> None:
+        terminated_pids.append(process.pid)
+        process.returncode = -15
+
+    monkeypatch.setattr(PersistentHFWorkerSession, "_spawn_worker_process", fake_spawn)
+    monkeypatch.setattr(PersistentHFWorkerSession, "_wait_for_result", fake_wait)
+    monkeypatch.setattr(PersistentHFWorkerSession, "_terminate_process", fake_terminate)
+
+    result = session.run_spec(spec=_spec("sg1_sg2"), run_dir=tmp_path / "run1")
+
+    assert result["raw_response"] == "{}"
+    assert attempts["count"] == 2
+    assert spawn_pids == [4100, 4101]
+    assert terminated_pids == [4100]
+
+
 def test_wait_for_result_does_not_treat_loading_model_as_stage_timeout(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

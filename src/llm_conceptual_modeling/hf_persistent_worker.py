@@ -8,6 +8,9 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
+from llm_conceptual_modeling.hf_failure_markers import (
+    is_retryable_worker_failure_message,
+)
 from llm_conceptual_modeling.hf_subprocess import (
     MonitoredCommandTimeout,
     _terminate_process,
@@ -169,4 +172,4 @@ class PersistentHFWorkerSession:
 def _is_retryable_runtime_error(error: Exception) -> bool:
     if isinstance(error, MonitoredCommandTimeout):
         return False
-    return "BrokenPipeError:" in str(error)
+    return is_retryable_worker_failure_message(str(error))

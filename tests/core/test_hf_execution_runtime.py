@@ -42,6 +42,12 @@ def test_resolve_max_requests_per_worker_process_rejects_non_positive() -> None:
         },
         {
             "type": "RuntimeError",
+            "message": (
+                "OutOfMemoryError: CUDA out of memory. Tried to allocate 374.00 MiB."
+            ),
+        },
+        {
+            "type": "RuntimeError",
             "message": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
         },
         {

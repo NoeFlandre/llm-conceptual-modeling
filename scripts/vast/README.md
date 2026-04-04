@@ -39,6 +39,9 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
 - Malformed structured outputs that still reach the worker as retryable errors now include empty
   edge endpoints, empty structured fields, and JSON decode failures; those are retried instead of
   being left as permanent failures when the resume policy allows it.
+- Persistent worker sessions use the same retry predicate as the subprocess worker path, so
+  structural, infrastructure, and OOM-style worker failures recycle the worker instead of
+  becoming terminal on the first attempt.
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
 - For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
 - For `algo2-olmo`, the safe fresh-host profile is now greedy plus `beam_num_beams=2`; the

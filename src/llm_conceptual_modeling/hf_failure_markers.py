@@ -27,7 +27,20 @@ UNSUPPORTED_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
     "contrastive search requires `trust_remote_code=true`",
 )
 
+RETRYABLE_WORKER_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
+    *STRUCTURAL_FAILURE_MESSAGE_MARKERS,
+    *INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS,
+    "out of memory",
+)
+
 
 def message_contains_any(message: str, markers: tuple[str, ...]) -> bool:
     lowered_message = message.lower()
     return any(marker in lowered_message for marker in markers)
+
+
+def is_retryable_worker_failure_message(message: str) -> bool:
+    return "brokenpipeerror:" in message.lower() or message_contains_any(
+        message,
+        RETRYABLE_WORKER_FAILURE_MESSAGE_MARKERS,
+    )
