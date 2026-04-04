@@ -133,6 +133,16 @@ class _CapturingModel(_Model):
         return super().generate(**kwargs)
 
 
+class _StatefulContrastiveModel(_CapturingModel):
+    def __init__(self) -> None:
+        super().__init__()
+        self._is_stateful = True
+
+    def generate(self, **kwargs):
+        assert self._is_stateful is False
+        return super().generate(**kwargs)
+
+
 class _EmbeddingTokenizer:
     def __call__(
         self,
@@ -459,16 +469,16 @@ def test_contrastive_decoding_kwargs_do_not_pass_temperature() -> None:
     }
 
 
-def test_complete_json_passes_trusted_remote_code_for_contrastive_generation() -> None:
+def test_complete_json_disables_qwen_contrastive_stateful_guard() -> None:
     tokenizer = _ChatTemplateTokenizer(model_max_length=128)
-    model = _CapturingModel()
+    model = _StatefulContrastiveModel()
     client = HFTransformersChatClient(
-        model="allenai/Olmo-3-7B-Instruct",
+        model="Qwen/Qwen3.5-9B",
         decoding_config=DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4),
         tokenizer=tokenizer,
         model_object=model,
         device="cpu",
-        thinking_mode_supported=False,
+        thinking_mode_supported=True,
         max_new_tokens_by_schema={"edge_list": 4},
         context_policy={"safety_margin_tokens": 1},
         seed=7,
@@ -483,6 +493,32 @@ def test_complete_json_passes_trusted_remote_code_for_contrastive_generation() -
     assert model.calls
     assert model.calls[-1]["custom_generate"] == "transformers-community/contrastive-search"
     assert model.calls[-1]["trust_remote_code"] is True
+    assert model._is_stateful is True
+
+
+def test_complete_json_sets_dynamic_cache_for_qwen_contrastive_cache() -> None:
+    tokenizer = _ChatTemplateTokenizer(model_max_length=128)
+    model = _CapturingModel()
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4),
+        tokenizer=tokenizer,
+        model_object=model,
+        device="cpu",
+        thinking_mode_supported=True,
+        max_new_tokens_by_schema={"edge_list": 4},
+        context_policy={"safety_margin_tokens": 1},
+        seed=7,
+    )
+
+    client.complete_json(
+        prompt="one two",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert model.calls
+    assert model.calls[-1]["cache_implementation"] == "dynamic"
 
 
 def test_parse_generated_json_recovers_flat_quoted_edge_list_with_trailing_garbage() -> None:

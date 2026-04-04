@@ -848,3 +848,198 @@ JSON
     assert seen_invocations.read_text(encoding="utf-8").strip().endswith(
         "runtime_config.yaml"
     )
+
+
+def test_drain_qwen_script_sequences_all_qwen_roots_and_uses_result_root_configs() -> None:
+    script_path = Path("scripts/vast/drain_qwen_batches_from_ssh.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert "hf-paper-batch-algo1-qwen" in script_text
+    assert "hf-paper-batch-algo2-qwen-current" in script_text
+    assert "hf-paper-batch-algo3-qwen-current" in script_text
+    assert "runtime_config.yaml" in script_text
+    assert 'QWEN_GENERATION_TIMEOUT_SECONDS="${QWEN_GENERATION_TIMEOUT_SECONDS:-60}"' in script_text
+    assert 'BATCH_GENERATION_TIMEOUT_SECONDS="$QWEN_GENERATION_TIMEOUT_SECONDS" \\' in script_text
+    assert (
+        'QWEN_RETRY_STRUCTURAL_FAILURES_ON_RESUME="${QWEN_RETRY_STRUCTURAL_FAILURES_ON_RESUME:-true}"'
+        in script_text
+    )
+    assert (
+        'QWEN_RETRY_TIMEOUT_FAILURES_ON_RESUME="${QWEN_RETRY_TIMEOUT_FAILURES_ON_RESUME:-true}"'
+        in script_text
+    )
+    assert (
+        'QWEN_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME="${QWEN_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME:-true}"'
+        in script_text
+    )
+    assert (
+        'QWEN_RETRY_OOM_FAILURES_ON_RESUME="${QWEN_RETRY_OOM_FAILURES_ON_RESUME:-true}"'
+        in script_text
+    )
+    assert "BATCH_RETRY_OOM_FAILURES_ON_RESUME" in script_text
+    assert "BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME" in script_text
+    assert "BATCH_RETRY_TIMEOUT_FAILURES_ON_RESUME" in script_text
+    assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
+    assert "root_excluded_decoding_labels()" in script_text
+    assert "BATCH_EXCLUDED_DECODING_LABELS" in script_text
+    assert "pending_count" in script_text
+    assert "running_count" in script_text
+    assert "while true; do" in script_text
+
+
+def test_qwen_drain_keeps_contrastive_enabled(tmp_path: Path) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    qwen_root = results_root / "hf-paper-batch-algo1-qwen"
+    qwen_root.mkdir(parents=True)
+    (qwen_root / "runtime_config.yaml").write_text(
+        Path("results/hf-paper-batch-algo1-qwen/runtime_config.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (qwen_root / "batch_status.json").write_text(
+        """
+        {
+          "total_runs": 1,
+          "finished_count": 0,
+          "failed_count": 0,
+          "running_count": 0,
+          "pending_count": 1,
+          "updated_at": "2026-04-04T00:00:00Z"
+        }
+        """.strip(),
+        encoding="utf-8",
+    )
+
+    helper_script = tmp_path / "quick_resume_stub.sh"
+    env_dump = tmp_path / "env_dump.json"
+    helper_script.write_text(
+        f"""#!/usr/bin/env bash
+set -euo pipefail
+python3 - <<'PY'
+from pathlib import Path
+import json
+import os
+
+Path(r"{env_dump}").write_text(
+    json.dumps(
+        {{
+            "BATCH_EXCLUDED_DECODING_LABELS": os.environ.get("BATCH_EXCLUDED_DECODING_LABELS"),
+        }},
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+PY
+cat >"$4/batch_status.json" <<'JSON'
+{{
+  "total_runs": 1,
+  "finished_count": 1,
+  "failed_count": 0,
+  "running_count": 0,
+  "pending_count": 0,
+  "updated_at": "2026-04-04T00:00:05Z"
+}}
+JSON
+""",
+        encoding="utf-8",
+    )
+    helper_script.chmod(0o755)
+
+    env = os.environ.copy()
+    env["QWEN_QUICK_RESUME_SCRIPT"] = str(helper_script)
+    env["QWEN_LAUNCH_ATTEMPTS"] = "1"
+    env["QWEN_DRAIN_POLL_SECONDS"] = "0"
+    env["QWEN_DRAIN_MAX_PASSES"] = "1"
+
+    result = subprocess.run(
+        [
+            "bash",
+            "scripts/vast/drain_qwen_batches_from_ssh.sh",
+            "ssh -p 12345 root@127.0.0.1",
+            str(repo_root),
+            str(results_root),
+        ],
+        cwd=Path.cwd(),
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    payload = env_dump.read_text(encoding="utf-8")
+    assert '"BATCH_EXCLUDED_DECODING_LABELS": ""' in payload
+
+
+def test_drain_qwen_script_reclaims_stale_running_roots(tmp_path: Path) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    qwen_root = results_root / "hf-paper-batch-algo1-qwen"
+    qwen_root.mkdir(parents=True)
+    (qwen_root / "runtime_config.yaml").write_text(
+        Path("results/hf-paper-batch-algo1-qwen/runtime_config.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (qwen_root / "batch_status.json").write_text(
+        """
+        {
+          "total_runs": 1,
+          "finished_count": 0,
+          "failed_count": 0,
+          "running_count": 1,
+          "pending_count": 0,
+          "updated_at": "2024-01-01T00:00:00Z"
+        }
+        """.strip(),
+        encoding="utf-8",
+    )
+
+    helper_script = tmp_path / "quick_resume_stub.sh"
+    seen_invocations = tmp_path / "seen_stale.txt"
+    helper_script.write_text(
+        f"""#!/usr/bin/env bash
+set -euo pipefail
+printf '%s\\n' "$2" > "{seen_invocations}"
+cat >"$4/batch_status.json" <<'JSON'
+{{
+  "total_runs": 1,
+  "finished_count": 1,
+  "failed_count": 0,
+  "running_count": 0,
+  "pending_count": 0,
+  "updated_at": "2026-04-04T00:00:05Z"
+}}
+JSON
+""",
+        encoding="utf-8",
+    )
+    helper_script.chmod(0o755)
+
+    env = os.environ.copy()
+    env["QWEN_QUICK_RESUME_SCRIPT"] = str(helper_script)
+    env["QWEN_LAUNCH_ATTEMPTS"] = "1"
+    env["QWEN_DRAIN_POLL_SECONDS"] = "0"
+    env["QWEN_RUNNING_ROOT_STALE_SECONDS"] = "0"
+
+    result = subprocess.run(
+        [
+            "bash",
+            "scripts/vast/drain_qwen_batches_from_ssh.sh",
+            "ssh -p 12345 root@127.0.0.1",
+            str(repo_root),
+            str(results_root),
+        ],
+        cwd=Path.cwd(),
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert seen_invocations.read_text(encoding="utf-8").strip().endswith("runtime_config.yaml")

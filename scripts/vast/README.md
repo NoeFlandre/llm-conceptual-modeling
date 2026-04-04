@@ -12,6 +12,7 @@ This folder contains the operational shell entrypoints for rented Vast.ai GPU ho
 - `prepare_and_resume_hf_batch.sh`: one-command local wrapper to sync, bootstrap, validate, smoke, and resume a remote batch
 - `quick_resume_from_ssh.sh`: convenience wrapper that accepts a raw pasted SSH command and forwards it to `prepare_and_resume_hf_batch.sh`
 - `drain_olmo_batches_from_ssh.sh`: sequentially drains the local OLMO roots across `algo1`, `algo2`, and `algo3` using their seeded result-tree configs
+- `drain_qwen_batches_from_ssh.sh`: sequentially drains the local Qwen roots across `algo1`, `algo2`, and `algo3` using their seeded result-tree configs
 - `resume-sweep` via `uv run lcm run resume-sweep --repo-root ... --results-root ... --json`: local readiness report across all seeded result roots before renting another host
 - `remote_resume_preview.sh`: remote helper that rewrites the effective runtime config and runs `lcm doctor` plus `lcm run validate-config`
 - `remote_resume_launch.sh`: remote helper that kills stale workers and starts `paper-batch --resume`
@@ -48,6 +49,7 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   becoming terminal on the first attempt.
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
 - For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
+- For Qwen work, `drain_qwen_batches_from_ssh.sh` follows the same pass-by-pass flow across `algo1`, `algo2`, and `algo3`, while keeping contrastive decoding enabled and using dynamic cache for Qwen contrastive generation.
 - For `algo1-olmo`, the drain script now excludes the known OOM-heavy
   `contrastive_penalty_alpha_0.8` branch during remote preview rewriting, so fresh
   resumes keep the rest of the seeded root but stop burning GPU time on that branch.

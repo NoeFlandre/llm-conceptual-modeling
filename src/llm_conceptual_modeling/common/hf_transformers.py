@@ -5,6 +5,7 @@ import json
 import random
 import re
 import time
+from contextlib import contextmanager
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
@@ -32,8 +33,6 @@ def supports_explicit_thinking_disable(model: str) -> bool:
 
 
 def supports_decoding_config(*, model: str, decoding_config: "DecodingConfig") -> bool:
-    if model == _QWEN_CHAT_MODEL and decoding_config.algorithm == "contrastive":
-        return False
     return True
 
 
@@ -195,6 +194,8 @@ class HFTransformersChatClient:
                 "use_cache": True,
                 **_decoding_kwargs(self._decoding_config),
             }
+            if self._model == _QWEN_CHAT_MODEL and self._decoding_config.algorithm == "contrastive":
+                generation_kwargs["cache_implementation"] = "dynamic"
             generation_timeout_seconds = _resolve_generation_timeout_seconds(
                 self._context_policy
             )
@@ -211,12 +212,22 @@ class HFTransformersChatClient:
             started_at = time.perf_counter()
             with torch.inference_mode():
                 try:
-                    generated_ids = self._model_object.generate(**generation_kwargs)
+                    with _temporarily_disable_stateful_guard(
+                        model=self._model,
+                        model_object=self._model_object,
+                        decoding_config=self._decoding_config,
+                    ):
+                        generated_ids = self._model_object.generate(**generation_kwargs)
                 except ValueError as error:
                     if not _generator_kwarg_rejected(error):
                         raise
                     generation_kwargs.pop("generator", None)
-                    generated_ids = self._model_object.generate(**generation_kwargs)
+                    with _temporarily_disable_stateful_guard(
+                        model=self._model,
+                        model_object=self._model_object,
+                        decoding_config=self._decoding_config,
+                    ):
+                        generated_ids = self._model_object.generate(**generation_kwargs)
             duration_seconds = time.perf_counter() - started_at
             completion_ids = generated_ids[0][input_length:]
             text = self._tokenizer.decode(completion_ids, skip_special_tokens=True)
@@ -475,6 +486,29 @@ def _decoding_kwargs(config: DecodingConfig) -> dict[str, object]:
         "top_k": config.top_k,
         "trust_remote_code": True,
     }
+
+
+@contextmanager
+def _temporarily_disable_stateful_guard(
+    *,
+    model: str,
+    model_object: Any,
+    decoding_config: DecodingConfig,
+):
+    if model != _QWEN_CHAT_MODEL or decoding_config.algorithm != "contrastive":
+        yield
+        return
+
+    original_stateful = getattr(model_object, "_is_stateful", None)
+    if original_stateful is not True:
+        yield
+        return
+
+    model_object._is_stateful = False
+    try:
+        yield
+    finally:
+        model_object._is_stateful = original_stateful
 
 
 def _parse_generated_json(text: str, *, schema_name: str) -> object:
