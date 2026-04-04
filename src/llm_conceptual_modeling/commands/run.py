@@ -1,7 +1,10 @@
 import json
 from argparse import Namespace
 
-from llm_conceptual_modeling.common.hf_transformers import DecodingConfig
+from llm_conceptual_modeling.common.hf_transformers import (
+    DecodingConfig,
+    build_runtime_factory,
+)
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
 from llm_conceptual_modeling.hf_experiments import (
     run_paper_batch,
@@ -11,6 +14,7 @@ from llm_conceptual_modeling.hf_experiments import (
 from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume_sweep import build_resume_sweep_report
 from llm_conceptual_modeling.hf_run_config import (
+    HFRunConfig,
     load_hf_run_config,
     write_resolved_run_preview,
 )
@@ -56,6 +60,15 @@ def handle_run(args: Namespace) -> int:
             print(f"invalid_config={report['invalid_config_count']}")
             print(f"active={report['active_count']}")
             print(f"finished={report['finished_count']}")
+        return 0
+    if args.run_target == "prefetch-runtime":
+        config = load_hf_run_config(args.config)
+        report = prefetch_runtime_for_config(config=config)
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"chat_models={','.join(report['chat_models'])}")
+            print(f"embedding_model={report['embedding_model']}")
         return 0
     if args.run_target == "status":
         status = collect_batch_status(args.results_root)
@@ -134,4 +147,12 @@ def _decoding_from_args(args: Namespace) -> DecodingConfig:
         penalty_alpha=args.penalty_alpha,
         top_k=args.top_k,
         temperature=0.0,
+    )
+
+
+def prefetch_runtime_for_config(*, config: HFRunConfig) -> dict[str, object]:
+    runtime_factory = build_runtime_factory()
+    return runtime_factory.prefetch_models(
+        chat_models=config.models.chat_models,
+        embedding_model=config.models.embedding_model,
     )

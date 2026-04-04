@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/common.sh"
 
 if [ "$#" -ne 4 ]; then
   cat >&2 <<'USAGE'
@@ -10,7 +11,7 @@ usage: quick_resume_from_ssh.sh SSH_COMMAND CONFIG_PATH REMOTE_RESULTS_DIR LOCAL
 Example:
   scripts/vast/quick_resume_from_ssh.sh \
     "ssh -p 35895 root@1.193.139.231 -L 8080:localhost:8080" \
-    configs/hf_transformers_algo1_olmo.yaml \
+    results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml \
     /workspace/results/hf-paper-batch-algo1-olmo-current \
     /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-olmo-current
 USAGE
@@ -24,37 +25,7 @@ LOCAL_RESULTS_DIR="$4"
 LOCAL_REPO_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 REMOTE_REPO_DIR="${REMOTE_REPO_DIR:-/workspace/llm-conceptual-modeling}"
 
-PARSED_SSH="$(
-SSH_COMMAND="$SSH_COMMAND" python3 - <<'PY'
-import os
-import shlex
-
-tokens = shlex.split(os.environ["SSH_COMMAND"])
-target = None
-port = None
-index = 0
-while index < len(tokens):
-    token = tokens[index]
-    if token == "ssh":
-        index += 1
-        continue
-    if token == "-p" and index + 1 < len(tokens):
-        port = tokens[index + 1]
-        index += 2
-        continue
-    if token.startswith("-"):
-        index += 1
-        continue
-    target = token
-    break
-
-if not target or not port:
-    raise SystemExit("Could not parse SSH target and port from SSH_COMMAND")
-
-print(target)
-print(port)
-PY
-)"
+PARSED_SSH="$(vast_parse_ssh_command "$SSH_COMMAND")"
 
 SSH_TARGET="$(printf '%s\n' "$PARSED_SSH" | sed -n '1p')"
 SSH_PORT="$(printf '%s\n' "$PARSED_SSH" | sed -n '2p')"

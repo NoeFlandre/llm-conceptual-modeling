@@ -100,3 +100,4 @@ PY
 
 .venv/bin/lcm doctor --json --results-root "$REMOTE_RESULTS_DIR"
 .venv/bin/lcm run validate-config --config "$REMOTE_EFFECTIVE_CONFIG_PATH" --output-dir "$REMOTE_PREVIEW_DIR"
+.venv/bin/lcm run prefetch-runtime --config "$REMOTE_EFFECTIVE_CONFIG_PATH" --json

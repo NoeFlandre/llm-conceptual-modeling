@@ -13,6 +13,7 @@ This folder contains the operational shell entrypoints for rented Vast.ai GPU ho
 - `quick_resume_from_ssh.sh`: convenience wrapper that accepts a raw pasted SSH command and forwards it to `prepare_and_resume_hf_batch.sh`
 - `drain_olmo_batches_from_ssh.sh`: sequentially drains the local OLMO roots across `algo1`, `algo2`, and `algo3` using their seeded result-tree configs
 - `drain_qwen_batches_from_ssh.sh`: sequentially drains the local Qwen roots across `algo1`, `algo2`, and `algo3` using their seeded result-tree configs
+- `remote_runtime_doctor.sh`: remote guardrail that validates the selected runtime path before result seeding and launch
 - `resume-sweep` via `uv run lcm run resume-sweep --repo-root ... --results-root ... --json`: local readiness report across all seeded result roots before renting another host
 - `remote_resume_preview.sh`: remote helper that rewrites the effective runtime config and runs `lcm doctor` plus `lcm run validate-config`
 - `remote_resume_launch.sh`: remote helper that kills stale workers and starts `paper-batch --resume`
@@ -26,7 +27,8 @@ The fresh-host wrapper accepts config paths that live either under the checked-i
 The repository sync step now excludes the top-level `results/` tree plus local-only caches like `.work-venv/` and `.ruff_cache/`, in addition to `data/results/` and `data/analysis_artifacts/`, so the host only receives source and seeded results.
 - The wrapper now supports a container-first runtime mode. If `REMOTE_DOCKER_IMAGE` is set, the wrapper automatically switches to Docker mode unless you explicitly force `REMOTE_RUNTIME_MODE=bootstrap`. The mode choice is centralized in `scripts/vast/common.sh` via `vast_select_remote_runtime_mode()`. In Docker mode, the synced repo and seeded results are mounted into the container and the remote preview/launch helpers run inside it.
 - `fetch_results_from_vast.sh`: one-shot pull of a remote results root back to the local machine
-- `watch_results_from_vast.sh`: repeated local pull loop for periodic result syncing
+- `watch_results_from_vast.sh`: repeated local pull loop for periodic result syncing; accepts an optional SSH port argument for nonstandard Vast instances
+- `lcm run prefetch-runtime --config ... --json`: preloads the configured chat and embedding model bundles with the same runtime stack used for generation
 - `sync_repo_to_vast.sh`: repository-only sync helper
 - `common.sh`: shared shell helpers for SSH, rsync, and small argument-validation utilities
 
@@ -35,6 +37,9 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
 - These scripts are intentionally thin orchestration glue around the Python CLI.
 - Shared shell behavior lives in `common.sh` to avoid diverging SSH/rsync conventions.
 - Result transfer is intended to be embedded in `prepare_and_resume_hf_batch.sh` whenever a local results root is provided.
+- Fresh-host launch now performs an explicit remote runtime doctor before result seeding so broken Docker/bootstrap environments fail fast instead of consuming paid GPU time during setup.
+- Fresh-host preview now prefetches the configured models before `paper-batch --resume`, so the slow model-download boundary is moved ahead of the live batch launch.
+- The local watcher status file now carries a stable `watcher_identity` and explicit states (`starting`, `syncing`, `healthy`, `degraded`, `stopped`) so stale watchers from older hosts are easier to detect.
 - The remote runtime is split into small helpers so the preview/config rewrite step and the launch step can be reused in both host-bootstrap and container modes.
 - The sync watcher is no longer meant to be launched manually as the primary path.
 - Malformed structured outputs that still reach the worker as retryable errors now include empty
@@ -48,6 +53,7 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   structural, infrastructure, and OOM-style worker failures recycle the worker instead of
   becoming terminal on the first attempt.
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
+- `resume-sweep` now also reports the default runtime mode, safe resume profile, excluded decoding labels, and whether the root is actually rent-ready under the conservative default profile.
 - For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
 - For Qwen work, `drain_qwen_batches_from_ssh.sh` follows the same pass-by-pass flow across `algo1`, `algo2`, and `algo3`, while keeping contrastive decoding enabled and using dynamic cache for Qwen contrastive generation.
 - For `algo1-olmo`, the drain script now excludes the known OOM-heavy
@@ -69,4 +75,5 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   - `results-sync.log`
   - `results-sync.pid`
 - The watcher retries after SSH or rsync failures instead of exiting after the first failed pull.
+- When syncing from a custom-port SSH host, pass the port explicitly as the third watcher argument so rsync does not fall back to port 22.
 - Any behavioral change here should be locked by the script tests in `tests/core/`.

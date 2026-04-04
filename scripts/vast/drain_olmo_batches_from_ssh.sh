@@ -41,39 +41,7 @@ OLMO_ROOTS=(
 OLMO_DRAIN_POLL_SECONDS="${OLMO_DRAIN_POLL_SECONDS:-30}"
 OLMO_DRAIN_MAX_WAIT_SECONDS="${OLMO_DRAIN_MAX_WAIT_SECONDS:-0}"
 
-read_ssh_target() {
-  SSH_COMMAND="$SSH_COMMAND" python3 - <<'PY'
-import os
-import shlex
-
-tokens = shlex.split(os.environ["SSH_COMMAND"])
-target = None
-port = None
-index = 0
-while index < len(tokens):
-    token = tokens[index]
-    if token == "ssh":
-        index += 1
-        continue
-    if token == "-p" and index + 1 < len(tokens):
-        port = tokens[index + 1]
-        index += 2
-        continue
-    if token.startswith("-"):
-        index += 1
-        continue
-    target = token
-    break
-
-if not target or not port:
-    raise SystemExit("Could not parse SSH target and port from SSH_COMMAND")
-
-print(target)
-print(port)
-PY
-}
-
-PARSED_SSH="$(read_ssh_target)"
+PARSED_SSH="$(vast_parse_ssh_command "$SSH_COMMAND")"
 SSH_TARGET="$(printf '%s\n' "$PARSED_SSH" | sed -n '1p')"
 SSH_PORT="$(printf '%s\n' "$PARSED_SSH" | sed -n '2p')"
 
@@ -173,16 +141,18 @@ root_config_source() {
 
 root_excluded_decoding_labels() {
   local root_name="$1"
-  case "$root_name" in
-    hf-paper-batch-algo1-olmo-current)
-      printf '%s\n' "contrastive_penalty_alpha_0.8"
-      return 0
-      ;;
-    *)
-      printf '%s\n' ""
-      return 0
-      ;;
-  esac
+  python3 - <<'PY' "$LOCAL_REPO_DIR" "$root_name"
+from pathlib import Path
+import sys
+
+repo_root = Path(sys.argv[1])
+sys.path.insert(0, str(repo_root / "src"))
+
+from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
+
+profile = resolve_resume_profile(sys.argv[2])
+print(",".join(profile.excluded_decoding_labels))
+PY
 }
 
 read_root_status() {

@@ -361,6 +361,22 @@ class HFTransformersRuntimeFactory:
         _, _, profile = self._load_chat_bundle(model)
         return profile
 
+    def prefetch_models(
+        self,
+        *,
+        chat_models: list[str],
+        embedding_model: str,
+    ) -> dict[str, object]:
+        prefetched_chat_models: list[str] = []
+        for chat_model in chat_models:
+            self._load_chat_bundle(chat_model)
+            prefetched_chat_models.append(chat_model)
+        self._load_embedding_bundle(embedding_model)
+        return {
+            "chat_models": prefetched_chat_models,
+            "embedding_model": embedding_model,
+        }
+
     def _load_chat_bundle(self, model: str) -> tuple[Any, Any, RuntimeProfile]:
         if model not in _SUPPORTED_CHAT_MODELS:
             raise ValueError(f"Unsupported hf-transformers chat model: {model}")

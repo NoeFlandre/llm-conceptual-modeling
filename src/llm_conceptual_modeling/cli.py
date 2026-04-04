@@ -216,6 +216,10 @@ def build_parser() -> argparse.ArgumentParser:
     resume_sweep_parser.add_argument("--results-root", required=True)
     resume_sweep_parser.add_argument("--json", action="store_true")
 
+    prefetch_runtime_parser = run_subparsers.add_parser("prefetch-runtime")
+    prefetch_runtime_parser.add_argument("--config", required=True)
+    prefetch_runtime_parser.add_argument("--json", action="store_true")
+
     status_parser = run_subparsers.add_parser("status")
     status_parser.add_argument("--results-root", required=True)
     status_parser.add_argument("--json", action="store_true")

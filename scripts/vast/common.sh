@@ -1,19 +1,58 @@
 #!/usr/bin/env bash
 
-VAST_SSH_CONNECT_TIMEOUT_SECONDS="${VAST_SSH_CONNECT_TIMEOUT_SECONDS:-10}"
+VAST_SSH_CONNECT_TIMEOUT_SECONDS="${VAST_SSH_CONNECT_TIMEOUT_SECONDS:-60}"
 VAST_SSH_SERVER_ALIVE_INTERVAL_SECONDS="${VAST_SSH_SERVER_ALIVE_INTERVAL_SECONDS:-30}"
 VAST_SSH_SERVER_ALIVE_COUNT_MAX="${VAST_SSH_SERVER_ALIVE_COUNT_MAX:-6}"
+VAST_SSH_CONTROL_PATH="${VAST_SSH_CONTROL_PATH:-$HOME/.ssh/lcm-vast-%C}"
+VAST_SSH_CONTROL_PERSIST_SECONDS="${VAST_SSH_CONTROL_PERSIST_SECONDS:-600}"
 
 vast_has_value() {
   local value="$1"
   [ -n "$value" ]
 }
 
+vast_parse_ssh_command() {
+  local ssh_command="$1"
+  SSH_COMMAND="$ssh_command" python3 - <<'PY'
+import os
+import shlex
+
+tokens = shlex.split(os.environ["SSH_COMMAND"])
+target = None
+port = None
+index = 0
+while index < len(tokens):
+    token = tokens[index]
+    if token == "ssh":
+        index += 1
+        continue
+    if token == "-p" and index + 1 < len(tokens):
+        port = tokens[index + 1]
+        index += 2
+        continue
+    if token.startswith("-"):
+        index += 1
+        continue
+    target = token
+    break
+
+if not target or not port:
+    raise SystemExit("Could not parse SSH target and port from SSH_COMMAND")
+
+print(target)
+print(port)
+PY
+}
+
 vast_ssh_transport_flags() {
   printf '%s' \
     "-o ConnectTimeout=${VAST_SSH_CONNECT_TIMEOUT_SECONDS} " \
     "-o ServerAliveInterval=${VAST_SSH_SERVER_ALIVE_INTERVAL_SECONDS} " \
-    "-o ServerAliveCountMax=${VAST_SSH_SERVER_ALIVE_COUNT_MAX}"
+    "-o ServerAliveCountMax=${VAST_SSH_SERVER_ALIVE_COUNT_MAX} " \
+    "-o ControlMaster=auto " \
+    "-o ControlPersist=${VAST_SSH_CONTROL_PERSIST_SECONDS} " \
+    "-o ControlPath=${VAST_SSH_CONTROL_PATH} " \
+    "-o StrictHostKeyChecking=accept-new"
 }
 
 vast_ssh_command() {
@@ -31,6 +70,25 @@ vast_rsync_ssh_command() {
 vast_rsync_resume_flags() {
   local timeout_seconds="$1"
   printf '%s' "--partial --timeout ${timeout_seconds}"
+}
+
+vast_retry_rsync() {
+  local attempts="$1"
+  shift
+  local attempt=1
+  local status=0
+
+  while true; do
+    if "$@"; then
+      return 0
+    fi
+    status=$?
+    if [ "$attempt" -ge "$attempts" ]; then
+      return "$status"
+    fi
+    sleep 5
+    attempt=$((attempt + 1))
+  done
 }
 
 vast_require_positive_integer() {
@@ -54,4 +112,11 @@ vast_select_remote_runtime_mode() {
     return 0
   fi
   printf '%s\n' "$runtime_mode"
+}
+
+vast_watcher_identity() {
+  local ssh_target="$1"
+  local ssh_port="$2"
+  local remote_results_dir="$3"
+  printf '%s\n' "${ssh_target}:${ssh_port}:${remote_results_dir}"
 }

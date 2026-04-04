@@ -521,6 +521,40 @@ def test_complete_json_sets_dynamic_cache_for_qwen_contrastive_cache() -> None:
     assert model.calls[-1]["cache_implementation"] == "dynamic"
 
 
+def test_runtime_factory_can_prefetch_models() -> None:
+    factory = HFTransformersRuntimeFactory(hf_token="token")
+    chat_models_seen: list[str] = []
+    embedding_models_seen: list[str] = []
+    profile = hf_transformers.RuntimeProfile(
+        device="cuda",
+        dtype="bfloat16",
+        quantization="none",
+        supports_thinking_toggle=False,
+        context_limit=None,
+    )
+
+    def fake_load_chat_bundle(model: str):
+        chat_models_seen.append(model)
+        return (_Tokenizer(), _Model(), profile)
+
+    def fake_load_embedding_bundle(model: str):
+        embedding_models_seen.append(model)
+        return (_EmbeddingTokenizer(), _EmbeddingModel(_BFloat16Tensor([[[1.0]]])), profile)
+
+    factory._load_chat_bundle = fake_load_chat_bundle  # type: ignore[method-assign]
+    factory._load_embedding_bundle = fake_load_embedding_bundle  # type: ignore[method-assign]
+
+    report = factory.prefetch_models(
+        chat_models=["Qwen/Qwen3.5-9B", "allenai/Olmo-3-7B-Instruct"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+    )
+
+    assert chat_models_seen == ["Qwen/Qwen3.5-9B", "allenai/Olmo-3-7B-Instruct"]
+    assert embedding_models_seen == ["Qwen/Qwen3-Embedding-0.6B"]
+    assert report["chat_models"] == chat_models_seen
+    assert report["embedding_model"] == "Qwen/Qwen3-Embedding-0.6B"
+
+
 def test_parse_generated_json_recovers_flat_quoted_edge_list_with_trailing_garbage() -> None:
     actual = _parse_generated_json(
         "['capacity to hire','quality of the sport infrastructure',"

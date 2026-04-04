@@ -72,6 +72,8 @@ Container-first fresh-host note:
 - `scripts/vast/prepare_and_resume_hf_batch.sh` now supports two runtime modes:
   - `REMOTE_RUNTIME_MODE=bootstrap` for the existing host-side `uv sync` flow
   - `REMOTE_RUNTIME_MODE=docker` for a prebuilt GPU image flow
+- fresh-host launch now runs `scripts/vast/remote_runtime_doctor.sh` before result seeding so a
+  broken Docker/bootstrap path fails early
 - `scripts/vast/bootstrap_gpu_host.sh` now retries transient package-download failures during
   `uv sync` and the subsequent `uv pip install` steps so a temporary PyPI timeout does not abort
   an otherwise healthy fresh-host resume
@@ -90,6 +92,7 @@ Container-first fresh-host note:
 - when `REMOTE_RUNTIME_MODE=docker`, the launcher expects `REMOTE_DOCKER_IMAGE` to point at an
   image that already contains the validated runtime
 - the remote preview and launch steps are shared helper scripts:
+  - `scripts/vast/remote_runtime_doctor.sh`
   - `scripts/vast/remote_resume_preview.sh`
   - `scripts/vast/remote_resume_launch.sh`
 - this means the same local results seed can be used in either mode, and the code path stays
@@ -121,6 +124,9 @@ If you need to understand or patch the HF execution path, read these first:
 - `src/llm_conceptual_modeling/hf_resume_sweep.py`
   - local sweep across all seeded result roots
   - canonical source for classifying roots as `resume-ready`, `needs-config-fix`, `active`, or `finished`
+- `src/llm_conceptual_modeling/hf_resume_profile.py`
+  - canonical conservative resume profile for each model family
+  - canonical source for default runtime mode and excluded decoding labels on fresh rentals
 - `src/llm_conceptual_modeling/hf_experiments.py`
   - main HF batch orchestration
   - failure handling
@@ -191,6 +197,9 @@ HF runs now use explicit worker lifecycle phases in `worker_state.json`.
   - the worker process is alive
   - model/tokenizer/runtime initialization may still be running
   - this should be treated as startup time, not generation-stage time
+- fresh-host preview now performs model prefetch before launch
+  - the goal is to shift cache/download work into the preview phase instead of discovering it after
+    the batch looks live
 - `executing_algorithm`
   - model resources are loaded
   - the algorithm has started and stage heartbeats are now meaningful

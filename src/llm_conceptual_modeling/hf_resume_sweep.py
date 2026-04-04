@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Callable
 
 from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
+from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
 from llm_conceptual_modeling.hf_run_config import (
     HFRunConfig,
     load_hf_run_config,
@@ -19,6 +20,7 @@ def build_resume_sweep_report(
     results_root: Path,
     load_config_fn: ResumeConfigLoader = load_hf_run_config,
     preflight_fn: ResumePreflightBuilder = build_resume_preflight_report,
+    root_name_contains: str | None = None,
 ) -> dict[str, object]:
     repo_root_path = Path(repo_root)
     results_root_path = Path(results_root)
@@ -29,6 +31,8 @@ def build_resume_sweep_report(
 
     root_reports: list[dict[str, object]] = []
     for candidate_root in _discover_resume_roots(results_root_path):
+        if root_name_contains is not None and root_name_contains not in candidate_root.name:
+            continue
         config_source = resolve_resume_config_source(candidate_root)
         if config_source is None:
             root_reports.append(
@@ -61,6 +65,7 @@ def build_resume_sweep_report(
             )
             continue
         classification = _classify_root_report(report)
+        resume_profile = resolve_resume_profile(candidate_root.name)
         root_reports.append(
             {
                 "results_root": str(candidate_root),
@@ -73,8 +78,13 @@ def build_resume_sweep_report(
                 "failed_count": report.get("failed_count", 0),
                 "pending_count": report.get("pending_count", 0),
                 "ready_to_rent": classification == "resume-ready",
+                "rent_ready": classification == "resume-ready",
+                "rent_ready_reason": classification,
                 "needs_config_fix": classification == "needs-config-fix",
                 "active": classification == "active",
+                "runtime_mode": resume_profile.runtime_mode,
+                "resume_profile": resume_profile.profile_name,
+                "excluded_decoding_labels": list(resume_profile.excluded_decoding_labels),
             }
         )
 
@@ -124,13 +134,11 @@ def _discover_resume_roots(results_root: Path) -> list[Path]:
 
 def _classify_root_report(report: dict[str, object]) -> str:
     running_count = int(report.get("running_count", 0))
-    pending_count = int(report.get("pending_count", 0))
-    failed_count = int(report.get("failed_count", 0))
     if running_count > 0:
         return "active"
-    if pending_count > 0:
+    if bool(report.get("can_resume", False)):
         return "resume-ready"
-    if failed_count > 0:
+    if int(report.get("failed_count", 0)) > 0:
         return "needs-config-fix"
     return "finished"
 

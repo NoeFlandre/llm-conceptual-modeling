@@ -168,3 +168,163 @@ def test_build_resume_sweep_report_marks_invalid_configs_without_aborting(
     ]
     assert report["roots"][0]["results_root"] == str(good_root)
     assert report["roots"][1]["results_root"] == str(bad_root)
+
+
+def test_build_resume_sweep_report_treats_retryable_failed_only_roots_as_ready(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    root = results_root / "hf-paper-batch-algo1-qwen"
+    root.mkdir(parents=True, exist_ok=True)
+    (root / "batch_status.json").write_text("{}", encoding="utf-8")
+    (root / "runtime_config.yaml").write_text("retry-all-config", encoding="utf-8")
+
+    def load_config(path: Path) -> dict[str, str]:
+        return {"config_path": str(path)}
+
+    def preflight(
+        *,
+        config: object,
+        repo_root: Path,
+        results_root: Path,
+        allow_empty: bool,
+    ) -> dict:
+        _ = repo_root
+        _ = allow_empty
+        _ = config
+        return {
+            "repo_root": str(repo_root),
+            "results_root": str(results_root),
+            "total_runs": 10,
+            "finished_count": 8,
+            "failed_count": 2,
+            "pending_count": 0,
+            "can_resume": True,
+            "resume_mode": "resume",
+        }
+
+    report = build_resume_sweep_report(
+        repo_root=repo_root,
+        results_root=results_root,
+        load_config_fn=load_config,
+        preflight_fn=preflight,
+    )
+
+    assert report["ready_count"] == 1
+    assert report["needs_config_fix_count"] == 0
+    assert report["roots"][0]["classification"] == "resume-ready"
+    assert report["roots"][0]["runtime_mode"] == "docker"
+    assert report["roots"][0]["resume_profile"] == "qwen-safe"
+    assert report["roots"][0]["rent_ready"] is True
+
+
+def test_build_resume_sweep_report_can_filter_to_olmo_roots(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    olmo_root = results_root / "hf-paper-batch-algo1-olmo-current"
+    qwen_root = results_root / "hf-paper-batch-algo1-qwen"
+    for root in (olmo_root, qwen_root):
+        root.mkdir(parents=True, exist_ok=True)
+        (root / "batch_status.json").write_text("{}", encoding="utf-8")
+
+    (olmo_root / "runtime_config.yaml").write_text("olmo-config", encoding="utf-8")
+    (qwen_root / "runtime_config.yaml").write_text("qwen-config", encoding="utf-8")
+
+    seen_roots: list[Path] = []
+
+    def load_config(path: Path) -> dict[str, str]:
+        return {"config_path": str(path)}
+
+    def preflight(
+        *,
+        config: object,
+        repo_root: Path,
+        results_root: Path,
+        allow_empty: bool,
+    ) -> dict:
+        _ = repo_root
+        _ = allow_empty
+        seen_roots.append(results_root)
+        return {
+            "repo_root": str(repo_root),
+            "results_root": str(results_root),
+            "total_runs": 10,
+            "finished_count": 8,
+            "failed_count": 0,
+            "pending_count": 2,
+            "can_resume": True,
+            "resume_mode": "resume",
+            "config_path": str(config["config_path"]),  # type: ignore[index]
+        }
+
+    _report = build_resume_sweep_report(
+        repo_root=repo_root,
+        results_root=results_root,
+        load_config_fn=load_config,
+        preflight_fn=preflight,
+        root_name_contains="olmo",
+    )
+
+    assert seen_roots == [olmo_root]
+
+
+def test_build_resume_sweep_report_includes_rent_ready_runtime_and_profile_metadata(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+    results_root = tmp_path / "results"
+    root = results_root / "hf-paper-batch-algo1-olmo-current"
+    root.mkdir(parents=True, exist_ok=True)
+    (root / "batch_status.json").write_text("{}", encoding="utf-8")
+    config_path = root / "preview_resume" / "resolved_run_config.yaml"
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    config_path.write_text("config", encoding="utf-8")
+
+    def load_config(path: Path) -> dict[str, str]:
+        assert path == config_path
+        return {"config_path": str(path)}
+
+    def preflight(
+        *,
+        config: object,
+        repo_root: Path,
+        results_root: Path,
+        allow_empty: bool,
+    ) -> dict:
+        _ = config
+        _ = repo_root
+        _ = allow_empty
+        return {
+            "results_root": str(results_root),
+            "total_runs": 10,
+            "finished_count": 7,
+            "failed_count": 0,
+            "pending_count": 3,
+            "can_resume": True,
+            "resume_mode": "resume",
+        }
+
+    report = build_resume_sweep_report(
+        repo_root=repo_root,
+        results_root=results_root,
+        load_config_fn=load_config,
+        preflight_fn=preflight,
+    )
+
+    root_report = report["roots"][0]
+    assert root_report["runtime_mode"] == "docker"
+    assert root_report["resume_profile"] == "olmo-safe"
+    assert root_report["excluded_decoding_labels"] == ["contrastive_penalty_alpha_0.8"]
+    assert root_report["rent_ready"] is True
+    assert root_report["rent_ready_reason"] == "resume-ready"
+    assert report["root_count"] == 1
+    assert report["ready_count"] == 1
+    assert report["roots"][0]["results_root"] == str(root)

@@ -33,10 +33,11 @@ The script:
 - short-circuits entirely if the existing `.venv` already matches the validated runtime
 - runs `uv sync`
 - installs `wheel`
-- pins `torch` to the CUDA 12.1 wheel line used by the validated remote snapshot
-- pins `triton` without re-resolving `torch`
+- pins `torch` to the CUDA 12.8 wheel line used by the validated remote snapshot
+- pins `triton` to the matching runtime version without re-resolving `torch`
 - disables the Xet/HF transfer path that caused remote download stalls
-- fails immediately if CUDA is unavailable
+- runs a CUDA kernel smoke probe and fails immediately if CUDA is unavailable or the wheel
+  cannot execute on the host GPU
 - writes and prints the effective `torch` / CUDA / `transformers` / `triton` snapshot to
   `.bootstrap-runtime.json`
 
@@ -76,12 +77,14 @@ scripts/vast/prepare_and_resume_hf_batch.sh \
 This wrapper:
 
 - syncs the local repository to the remote workspace
+- runs a remote runtime doctor before result seeding so a broken Docker/bootstrap environment fails
+  before paid GPU time is spent on a bad host
 - optionally seeds the remote results root from a local copy so `--resume` can continue on a fresh
   machine
 - either runs the pinned bootstrap script or starts the prebuilt Docker image, depending on
   `REMOTE_RUNTIME_MODE`
 - runs the shared remote preview helper, which rewrites the effective config, then runs
-  `lcm doctor` and `lcm run validate-config`
+  `lcm doctor`, `lcm run validate-config`, and `lcm run prefetch-runtime`
 - optionally runs the smoke gate when smoke environment variables are set
 - launches `paper-batch --resume` under `nohup` either on the host or inside the running container
 - can also start the local periodic result pull loop when `LOCAL_RESULTS_DIR` and
@@ -102,6 +105,7 @@ Shell glue layout:
 - `scripts/vast/common.sh`: shared SSH/rsync/value-validation helpers
 - `scripts/vast/fetch_results_from_vast.sh`: one-shot result pull
 - `scripts/vast/watch_results_from_vast.sh`: repeated local sync loop
+- `scripts/vast/remote_runtime_doctor.sh`: remote runtime guardrail for Docker/bootstrap
 - `scripts/vast/prepare_and_resume_hf_batch.sh`: top-level orchestration wrapper
 
 Persistent-worker guidance:
@@ -232,6 +236,14 @@ uv run lcm run smoke \
 
 This is the recommended paid-run gate for Qwen because `algo1 / sg2_sg3 / 00000 / greedy`
 was the first condition that exposed the runtime bottleneck during remote execution.
+
+Qwen contrastive is now enabled in the local HF client by temporarily clearing the upstream
+stateful-generation guard only for the contrastive call. That lets the existing Qwen contrastive
+conditions resume instead of being permanently deferred when the old failure payload is seen.
+
+Fresh-host preview now also runs `lcm run prefetch-runtime` on the effective config before launch.
+That moves tokenizer/model cache population into the preview phase so a host is less likely to look
+"live" while it is still only downloading weights.
 
 Do not launch the full DOE until this exact smoke run:
 

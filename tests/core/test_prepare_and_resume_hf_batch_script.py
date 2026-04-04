@@ -13,6 +13,8 @@ def test_prepare_and_resume_script_bootstraps_and_launches_resumable_batch() -> 
     assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text
     assert "REMOTE_PREVIEW_SCRIPT" in script_text
     assert "REMOTE_LAUNCH_SCRIPT" in script_text
+    assert "REMOTE_RUNTIME_DOCTOR_SCRIPT" in script_text
+    assert "remote_runtime_doctor.sh" in script_text
     assert "remote_resume_preview.sh" in script_text
     assert "remote_resume_launch.sh" in script_text
     assert "docker run -d" in script_text
@@ -53,6 +55,7 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "BATCH_RETRY_STRUCTURAL_FAILURES_ON_RESUME" in script_text
     assert "BATCH_WORKER_PROCESS_MODE" in script_text
     assert "BATCH_MAX_REQUESTS_PER_WORKER_PROCESS" in script_text
+    assert "BATCH_EXCLUDED_DECODING_LABELS" in script_text
     assert "runtime_config.yaml" in script_text
     assert "REMOTE_PREVIEW_ENV_PREFIX" in script_text
     assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
@@ -66,8 +69,8 @@ def test_prepare_and_resume_script_retries_rsync_transfers() -> None:
     script_text = script_path.read_text(encoding="utf-8")
 
     assert "vast_retry_rsync" in script_text
-    assert 'vast_retry_rsync 3 rsync -avz -e "$RSYNC_SSH"' in script_text
-    assert 'vast_retry_rsync 3 rsync -avz -e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/' in script_text
+    assert 'vast_retry_rsync 3 rsync -avz \\' in script_text
+    assert '-e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/' in script_text
 
 
 def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
@@ -87,6 +90,8 @@ def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
     assert "LOCAL_RESULTS_SYNC_STATUS_PATH" in script_text
     assert "LOCAL_RESULTS_SYNC_LAST_SUCCESS_PATH" in script_text
     assert "scripts/vast/watch_results_from_vast.sh" in script_text
+    assert 'SSH_PORT="$SSH_PORT" \\' in script_text
+    assert '"$SSH_PORT" \\' in script_text
     assert "nohup bash" in script_text
     assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
     assert 'RSYNC_TIMEOUT_SECONDS="$LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS" \\' in script_text
@@ -97,7 +102,7 @@ def test_prepare_and_resume_script_starts_local_autosync_after_remote_launch() -
     script_text = script_path.read_text(encoding="utf-8")
 
     watcher_branch = 'nohup bash "$LOCAL_REPO_DIR/scripts/vast/watch_results_from_vast.sh"'
-    launch_branch = 'echo "[6/6] Launch resumable batch"'
+    launch_branch = 'Launch resumable batch'
 
     assert script_text.index(launch_branch) < script_text.index(watcher_branch)
 
@@ -125,6 +130,7 @@ def test_prepare_and_resume_script_supports_container_first_runtime_mode() -> No
     assert "docker run -d" in script_text
     assert "docker exec" in script_text
     assert "docker rm -f" in script_text
+    assert "REMOTE_RUNTIME_DOCTOR_SCRIPT" in script_text
     assert "REMOTE_PREVIEW_SCRIPT" in script_text
     assert "REMOTE_LAUNCH_SCRIPT" in script_text
     assert "REMOTE_PREVIEW_ENV_PREFIX" in script_text
@@ -147,6 +153,19 @@ def test_remote_resume_preview_script_writes_and_validates_effective_config() ->
     assert "context_policy['retry_structural_failures_on_resume']" in script_text
     assert ".venv/bin/lcm doctor --json --results-root" in script_text
     assert ".venv/bin/lcm run validate-config --config" in script_text
+    assert ".venv/bin/lcm run prefetch-runtime --config" in script_text
+
+
+def test_remote_runtime_doctor_script_validates_selected_runtime_mode() -> None:
+    script_path = Path("scripts/vast/remote_runtime_doctor.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    assert 'REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-bootstrap}"' in script_text
+    assert 'REMOTE_DOCKER_IMAGE="${REMOTE_DOCKER_IMAGE:-}"' in script_text
+    assert "command -v docker >/dev/null 2>&1" in script_text
+    assert "docker image inspect" in script_text
+    assert "docker run --rm" in script_text
+    assert ".venv/bin/lcm --help" in script_text
 
 
 def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
@@ -192,7 +211,9 @@ def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
     assert "vast_rsync_resume_flags()" in script_text
     assert "vast_has_value()" in script_text
     assert "vast_require_positive_integer()" in script_text
+    assert "vast_parse_ssh_command()" in script_text
     assert "vast_select_remote_runtime_mode()" in script_text
+    assert "vast_watcher_identity()" in script_text
 
 
 def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:
@@ -204,7 +225,8 @@ def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:
     )
 
     assert usage in script_text
-    assert "shlex.split" in script_text
+    assert 'source "$SCRIPT_DIR/common.sh"' in script_text
+    assert 'PARSED_SSH="$(vast_parse_ssh_command "$SSH_COMMAND")"' in script_text
     assert 'exec "$SCRIPT_DIR/prepare_and_resume_hf_batch.sh"' in script_text
     assert 'REMOTE_REPO_DIR="${REMOTE_REPO_DIR:-/workspace/llm-conceptual-modeling}"' in script_text
 
