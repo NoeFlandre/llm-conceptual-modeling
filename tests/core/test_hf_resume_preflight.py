@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -71,3 +72,51 @@ def test_build_resume_preflight_report_counts_pending_work_from_existing_seed(
     assert report["pending_count"] == 1
     assert report["can_resume"] is True
     assert report["resume_mode"] == "resume"
+
+
+def test_build_resume_preflight_report_marks_running_root_as_active(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    (results_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "running_count": 1,
+                "updated_at": "2026-04-04T10:00:00+00:00",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_resume_preflight.plan_paper_batch",
+        lambda **_kwargs: [object(), object(), object()],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_resume_preflight.build_seeded_resume_snapshot",
+        lambda **_kwargs: (
+            {
+                "finished_count": 1,
+                "failed_count": 0,
+                "pending_count": 2,
+            },
+            [],
+            set(),
+            set(),
+        ),
+    )
+
+    report = build_resume_preflight_report(
+        config=_config(results_root),
+        repo_root=repo_root,
+        results_root=results_root,
+    )
+
+    assert report["running_count"] == 1
+    assert report["status_updated_at"] == "2026-04-04T10:00:00+00:00"
+    assert report["can_resume"] is False
+    assert report["resume_mode"] == "active"

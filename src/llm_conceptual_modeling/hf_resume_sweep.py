@@ -89,6 +89,7 @@ def build_resume_sweep_report(
         )
 
     ordered_roots = sorted(root_reports, key=_root_sort_key)
+    recommended_root = _recommend_root_report(ordered_roots)
     return {
         "repo_root": str(repo_root_path),
         "results_root": str(results_root_path),
@@ -105,6 +106,12 @@ def build_resume_sweep_report(
             1 for item in ordered_roots if item["classification"] == "missing-config"
         ),
         "finished_count": sum(1 for item in ordered_roots if item["classification"] == "finished"),
+        "recommended_results_root": (
+            str(recommended_root["results_root"]) if recommended_root is not None else None
+        ),
+        "recommended_reason": (
+            "largest rent-ready backlog" if recommended_root is not None else None
+        ),
         "roots": ordered_roots,
     }
 
@@ -155,4 +162,19 @@ def _root_sort_key(report: dict[str, object]) -> tuple[int, str]:
     return (
         classification_order.get(str(report.get("classification", "missing-config")), 5),
         str(report.get("results_root", "")),
+    )
+
+
+def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, object] | None:
+    rent_ready_roots = [report for report in root_reports if bool(report.get("rent_ready", False))]
+    if not rent_ready_roots:
+        return None
+    return max(
+        rent_ready_roots,
+        key=lambda report: (
+            int(report.get("pending_count", 0)),
+            int(report.get("failed_count", 0)),
+            -int(report.get("finished_count", 0)),
+            str(report.get("results_root", "")),
+        ),
     )

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from llm_conceptual_modeling.hf_batch_planning import default_runtime_profile_provider
@@ -63,9 +64,15 @@ def build_resume_preflight_report(
         report["finished_count"] = 0
         report["failed_count"] = 0
         report["pending_count"] = len(planned_specs)
+        report["running_count"] = 0
         report["can_resume"] = True
         report["resume_mode"] = "fresh-root"
         return report
+
+    batch_status_path = effective_results_root / "batch_status.json"
+    current_status: dict[str, object] = {}
+    if batch_status_path.exists():
+        current_status = json.loads(batch_status_path.read_text(encoding="utf-8"))
 
     status_snapshot, _summary_rows, _seeded_finished, _seeded_failed = build_seeded_resume_snapshot(
         output_root=effective_results_root,
@@ -82,11 +89,14 @@ def build_resume_preflight_report(
     finished_count = status_int(status_snapshot, "finished_count")
     failed_count = status_int(status_snapshot, "failed_count")
     pending_count = status_int(status_snapshot, "pending_count")
+    running_count = int(current_status.get("running_count", 0))
     report["finished_count"] = finished_count
     report["failed_count"] = failed_count
     report["pending_count"] = pending_count
-    report["can_resume"] = pending_count > 0
-    report["resume_mode"] = "resume"
+    report["running_count"] = running_count
+    report["status_updated_at"] = current_status.get("updated_at")
+    report["can_resume"] = pending_count > 0 and running_count == 0
+    report["resume_mode"] = "active" if running_count > 0 else "resume"
 
     if pending_count == 0 and not allow_empty:
         raise RuntimeError(

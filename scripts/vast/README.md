@@ -62,7 +62,8 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   result artifact is classified as infrastructure failure and retried instead of being stranded
   as a terminal `other` failure on resume.
 - `resume-sweep` is the quickest way to tell whether a local root is `resume-ready`, `needs-config-fix`, or already `active` before you rent another SSH instance.
-- `resume-sweep` now also reports the default runtime mode, safe resume profile, excluded decoding labels, and whether the root is actually rent-ready under the conservative default profile.
+- `resume-sweep` now also reports the default runtime mode, safe resume profile, excluded decoding labels, whether the root is actually rent-ready under the conservative default profile, and a single recommended results root to rent next.
+- `resume-preflight` now carries forward the local `batch_status.json` running count, so roots that are already active are conservatively blocked instead of being misreported as rentable.
 - For OLMO work, `drain_olmo_batches_from_ssh.sh` reuses the seeded result-tree `runtime_config.yaml` files and advances each algorithm root pass by pass, waiting for the current root to finish before moving on.
 - For Qwen work, `drain_qwen_batches_from_ssh.sh` follows the same pass-by-pass flow across `algo1`, `algo2`, and `algo3`, while keeping contrastive decoding enabled and using dynamic cache for Qwen contrastive generation.
 - For `algo1-olmo`, the drain script now excludes the known OOM-heavy
