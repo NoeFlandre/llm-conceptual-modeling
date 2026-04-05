@@ -8,7 +8,7 @@ from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
-from llm_conceptual_modeling.hf_batch_types import RuntimeResult
+from llm_conceptual_modeling.hf_batch.types import RuntimeResult
 from llm_conceptual_modeling.hf_experiments import (
     HFRunSpec,
     _build_prompt_bundle,

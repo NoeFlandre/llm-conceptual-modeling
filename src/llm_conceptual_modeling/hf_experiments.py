@@ -78,7 +78,7 @@ from llm_conceptual_modeling.hf_batch_prompts import (
 from llm_conceptual_modeling.hf_batch_prompts import (
     verify_edges_from_prompt as _verify_edges_from_prompt,
 )
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeFactory, RuntimeResult
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeFactory, RuntimeResult
 from llm_conceptual_modeling.hf_batch_utils import (
     RecordingChatClient as _RecordingChatClient,
 )
