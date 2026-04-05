@@ -5,6 +5,13 @@ from pathlib import Path
 from typing import Any
 
 
+def coerce_int(value: object, *, default: int = 0) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 def read_json_dict(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}

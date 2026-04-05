@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from llm_conceptual_modeling.common.json_io import write_json_dict
+from llm_conceptual_modeling.common.io import write_json_dict
 
 
 def read_worker_state(path: Path) -> dict[str, object]:

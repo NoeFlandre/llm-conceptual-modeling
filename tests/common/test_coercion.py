@@ -1,4 +1,4 @@
-from llm_conceptual_modeling.common.coercion import coerce_int
+from llm_conceptual_modeling.common.io import coerce_int
 
 
 def test_coerce_int_returns_default_for_malformed_values() -> None:

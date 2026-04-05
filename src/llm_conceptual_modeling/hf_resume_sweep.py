@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Callable
 
-from llm_conceptual_modeling.common.coercion import coerce_int
+from llm_conceptual_modeling.common.io import coerce_int
 from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
 from llm_conceptual_modeling.hf_run_config import (

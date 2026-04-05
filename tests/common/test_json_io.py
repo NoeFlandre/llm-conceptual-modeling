@@ -2,7 +2,7 @@ from pathlib import Path
 
 import json
 
-from llm_conceptual_modeling.common.json_io import read_json_dict, write_json_dict
+from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
 
 
 def test_read_json_dict_returns_empty_dict_when_path_is_missing(tmp_path: Path) -> None:

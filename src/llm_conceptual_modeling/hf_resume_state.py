@@ -5,8 +5,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Callable, cast
 
-from llm_conceptual_modeling.common.coercion import coerce_int
-from llm_conceptual_modeling.common.json_io import read_json_dict, write_json_dict
+from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_failure_markers import (
     classify_failure,
