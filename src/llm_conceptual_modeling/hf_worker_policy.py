@@ -1,24 +1,30 @@
 from __future__ import annotations
 
+_DEFAULT_STARTUP_TIMEOUT_SECONDS = 900.0
+_DEFAULT_STAGE_TIMEOUT_SECONDS = 180.0
+_DEFAULT_RUN_RETRY_ATTEMPTS = 2
+
 
 def resolve_startup_timeout_seconds(context_policy: dict[str, object] | None) -> float:
-    if context_policy is None:
-        return 900.0
-    raw_value = context_policy.get("startup_timeout_seconds", 900)
-    return coerce_timeout_seconds(raw_value)
+    return _resolve_timeout_seconds(
+        context_policy=context_policy,
+        field_name="startup_timeout_seconds",
+        default_seconds=_DEFAULT_STARTUP_TIMEOUT_SECONDS,
+    )
 
 
 def resolve_stage_timeout_seconds(context_policy: dict[str, object] | None) -> float:
-    if context_policy is None:
-        return 180.0
-    raw_value = context_policy.get("generation_timeout_seconds", 180)
-    return coerce_timeout_seconds(raw_value)
+    return _resolve_timeout_seconds(
+        context_policy=context_policy,
+        field_name="generation_timeout_seconds",
+        default_seconds=_DEFAULT_STAGE_TIMEOUT_SECONDS,
+    )
 
 
 def resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int:
     if context_policy is None:
-        return 2
-    raw_value = context_policy.get("run_retry_attempts", 2)
+        return _DEFAULT_RUN_RETRY_ATTEMPTS
+    raw_value = context_policy.get("run_retry_attempts", _DEFAULT_RUN_RETRY_ATTEMPTS)
     if isinstance(raw_value, bool):
         raise TypeError("Retry attempts value must be numeric, got bool")
     if isinstance(raw_value, int | float | str):
@@ -27,9 +33,21 @@ def resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int:
     raise TypeError(f"Retry attempts value must be numeric, got {type(raw_value).__name__}")
 
 
+def _resolve_timeout_seconds(
+    *,
+    context_policy: dict[str, object] | None,
+    field_name: str,
+    default_seconds: float,
+) -> float:
+    if context_policy is None:
+        return default_seconds
+    raw_value = context_policy.get(field_name, default_seconds)
+    return coerce_timeout_seconds(raw_value)
+
+
 def coerce_timeout_seconds(raw_value: object) -> float:
     if isinstance(raw_value, bool) or not isinstance(raw_value, int | float | str):
-        raise ValueError(f"Unsupported timeout value: {raw_value!r}")
+        raise TypeError(f"Timeout value must be numeric, got {type(raw_value).__name__}")
     seconds = float(raw_value)
     if seconds <= 0:
         raise ValueError("Timeout must be positive.")
