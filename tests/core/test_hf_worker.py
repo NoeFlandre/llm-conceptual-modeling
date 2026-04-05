@@ -241,3 +241,40 @@ def test_worker_request_round_trips_shared_queue_artifacts(tmp_path: Path) -> No
     spec_payload = json.loads(loaded.spec_json_path.read_text(encoding="utf-8"))
 
     assert serialize_spec(deserialize_spec(spec_payload)) == spec_payload
+
+
+def test_deserialize_spec_ignores_malformed_seed_values() -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=False,
+            context_limit=4096,
+        ),
+        base_seed=11,
+        seed=13,
+    )
+    payload = serialize_spec(spec)
+    payload["base_seed"] = "false"
+    payload["seed"] = "false"
+
+    decoded = deserialize_spec(payload)
+
+    assert decoded.base_seed == 0
+    assert decoded.seed == 0

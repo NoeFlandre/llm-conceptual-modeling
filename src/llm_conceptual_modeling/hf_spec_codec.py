@@ -36,6 +36,14 @@ def deserialize_spec(payload: dict[str, Any]) -> HFRunSpec:
             else None
         ),
         context_policy=dict(payload["context_policy"]) if payload.get("context_policy") else None,
-        base_seed=int(payload.get("base_seed", 0)),
-        seed=int(payload.get("seed", 0)),
+        base_seed=_optional_int(payload, "base_seed"),
+        seed=_optional_int(payload, "seed"),
     )
+
+
+def _optional_int(payload: dict[str, Any], key: str) -> int:
+    raw_value = payload.get(key, 0)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return 0
