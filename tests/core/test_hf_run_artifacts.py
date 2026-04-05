@@ -33,6 +33,34 @@ def test_normalize_stale_running_run_marks_failed_when_worker_is_gone(tmp_path: 
     assert persisted_error["active_stage"]["schema_name"] == "edge_list"
 
 
+def test_normalize_stale_running_run_preserves_existing_state_metadata(tmp_path: Path) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    (run_dir / "state.json").write_text(
+        json.dumps(
+            {
+                "status": "running",
+                "replication": 3,
+                "condition_bits": "10101",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "worker_state.json").write_text(
+        json.dumps({"status": "running", "pid": 999999}),
+        encoding="utf-8",
+    )
+
+    normalize_stale_running_run(run_dir)
+
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    assert state == {
+        "status": "failed",
+        "replication": 3,
+        "condition_bits": "10101",
+    }
+
+
 def test_normalize_stale_running_run_keeps_live_persistent_worker(tmp_path: Path) -> None:
     run_dir = tmp_path / "run"
     run_dir.mkdir()

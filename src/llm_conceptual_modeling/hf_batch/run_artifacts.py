@@ -49,7 +49,7 @@ def normalize_stale_running_run(run_dir: Path) -> dict[str, object] | None:
         "updated_at": _timestamp_now(),
     }
     write_json(run_dir / "error.json", error_payload)
-    write_json(run_dir / "state.json", {"status": "failed"})
+    write_json(run_dir / "state.json", {**state, "status": "failed"})
     return error_payload
 
 
