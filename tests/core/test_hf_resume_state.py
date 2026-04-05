@@ -12,6 +12,7 @@ from llm_conceptual_modeling.hf_resume_state import (
     load_deferred_failed_summary,
     load_valid_finished_summary,
     order_planned_specs_for_resume,
+    resume_priority_key,
 )
 
 
@@ -711,3 +712,43 @@ def test_order_planned_specs_for_resume_does_not_penalize_clean_decoding_family(
     )
 
     assert ordered == [clean_greedy_pending, poisoned_beam_pending]
+
+
+def test_resume_priority_key_ignores_malformed_history_counts(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    spec = _make_spec(pair_name="sg2_sg3", condition_bits="00000")
+    run_dir = _run_dir(output_root, spec)
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 20.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    key = resume_priority_key(
+        spec=spec,
+        run_dir=run_dir,
+        history={
+            "by_pair": {
+                "sg2_sg3": {
+                    "finished": "false",
+                    "timeout": "false",
+                    "unsupported": 0,
+                    "other": 0,
+                    "structural": 0,
+                }
+            },
+            "by_pair_condition": {},
+            "by_family": {},
+        },
+    )
+
+    assert key[0] == 3.0
+    assert key[2] == 0.0

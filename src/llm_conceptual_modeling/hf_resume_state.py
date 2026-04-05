@@ -422,31 +422,31 @@ def resume_priority_key(
         {},
     )
 
-    pair_finished = int(pair_stats.get("finished", 0))
+    pair_finished = _history_int(pair_stats, "finished")
     pair_failures = (
-        int(pair_stats.get("timeout", 0))
-        + int(pair_stats.get("unsupported", 0))
-        + int(pair_stats.get("other", 0))
+        _history_int(pair_stats, "timeout")
+        + _history_int(pair_stats, "unsupported")
+        + _history_int(pair_stats, "other")
     )
-    pair_total = pair_finished + pair_failures + int(pair_stats.get("structural", 0))
-    pair_timeout_rate = int(pair_stats.get("timeout", 0)) / pair_total if pair_total else 0.0
+    pair_total = pair_finished + pair_failures + _history_int(pair_stats, "structural")
+    pair_timeout_rate = _history_int(pair_stats, "timeout") / pair_total if pair_total else 0.0
 
-    condition_finished = int(condition_stats.get("finished", 0))
+    condition_finished = _history_int(condition_stats, "finished")
     condition_failures = (
-        int(condition_stats.get("timeout", 0))
-        + int(condition_stats.get("structural", 0))
-        + int(condition_stats.get("unsupported", 0))
-        + int(condition_stats.get("other", 0))
+        _history_int(condition_stats, "timeout")
+        + _history_int(condition_stats, "structural")
+        + _history_int(condition_stats, "unsupported")
+        + _history_int(condition_stats, "other")
     )
     condition_total = condition_finished + condition_failures
     condition_failure_rate = condition_failures / condition_total if condition_total else 0.0
 
-    family_finished = int(family_stats.get("finished", 0))
+    family_finished = _history_int(family_stats, "finished")
     family_failures = (
-        int(family_stats.get("timeout", 0))
-        + int(family_stats.get("structural", 0))
-        + int(family_stats.get("unsupported", 0))
-        + int(family_stats.get("other", 0))
+        _history_int(family_stats, "timeout")
+        + _history_int(family_stats, "structural")
+        + _history_int(family_stats, "unsupported")
+        + _history_int(family_stats, "other")
     )
     family_total = family_finished + family_failures
     family_failure_rate = family_failures / family_total if family_total else 0.0
@@ -466,6 +466,14 @@ def read_artifact_json(path: Path) -> JsonObject:
     if not path.exists():
         return {}
     return cast(JsonObject, json.loads(path.read_text(encoding="utf-8")))
+
+
+def _history_int(history_stats: dict[str, int] | dict[str, object], key: str) -> int:
+    raw_value = history_stats.get(key, 0)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return 0
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
