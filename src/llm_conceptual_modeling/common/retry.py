@@ -43,6 +43,27 @@ T = TypeVar("T")
 logger = logging.getLogger(__name__)
 
 
+def _status_code_from_sdk_error(error: Exception) -> int | None:
+    status_code = getattr(error, "status_code", None)
+    if status_code is not None:
+        return cast(int | None, status_code)
+    raw_response = getattr(error, "raw_response", None)
+    return cast(int | None, getattr(raw_response, "status_code", None))
+
+
+def _retryable_exception_from_wrapped_error(
+    error: Exception,
+    *,
+    retry_http_status_codes: tuple[int, ...],
+) -> tuple[bool, Exception]:
+    inner = getattr(error, "inner", None)
+    if isinstance(inner, HTTPError):
+        return inner.code in retry_http_status_codes, inner
+    if isinstance(inner, (URLError, httpx.HTTPError)):
+        return True, cast(Exception, inner)
+    return False, error
+
+
 def call_with_retry(
     *,
     operation: Callable[[], T],
@@ -71,33 +92,20 @@ def call_with_retry(
             exception = error
         except Exception as error:
             if _permanent_error_type is not None and isinstance(error, _permanent_error_type):
-                inner = getattr(error, "inner", None)
-                if isinstance(inner, (URLError, httpx.HTTPError)):
-                    retryable = True
-                    exception = cast(Exception, inner)
-                else:
-                    retryable = False
-                    exception = error
+                retryable, exception = _retryable_exception_from_wrapped_error(
+                    error,
+                    retry_http_status_codes=retry_http_status_codes,
+                )
             elif isinstance(error, PermanentError):
-                if isinstance(error.inner, (URLError, httpx.HTTPError)):
-                    retryable = True
-                    exception = error.inner
-                else:
-                    retryable = False
-                    exception = error
+                retryable, exception = _retryable_exception_from_wrapped_error(
+                    error,
+                    retry_http_status_codes=retry_http_status_codes,
+                )
             elif _sdk_error_type is not None and isinstance(error, _sdk_error_type):
-                status_code = getattr(error, "status_code", None)
-                if status_code is None:
-                    raw_response = getattr(error, "raw_response", None)
-                    status_code = getattr(raw_response, "status_code", None)
-                retryable = status_code in retry_http_status_codes
+                retryable = _status_code_from_sdk_error(error) in retry_http_status_codes
                 exception = error
             elif isinstance(error, SDKError):
-                status_code = getattr(error, "status_code", None)
-                if status_code is None:
-                    raw_response = getattr(error, "raw_response", None)
-                    status_code = getattr(raw_response, "status_code", None)
-                retryable = status_code in retry_http_status_codes
+                retryable = _status_code_from_sdk_error(error) in retry_http_status_codes
                 exception = error
             else:
                 raise
