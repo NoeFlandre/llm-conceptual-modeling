@@ -4,6 +4,7 @@ from llm_conceptual_modeling.hf_batch_utils import resolve_hf_token
 from llm_conceptual_modeling.hf_batch_utils import runtime_details
 from llm_conceptual_modeling.hf_batch_utils import slugify_model
 from llm_conceptual_modeling.hf_batch_utils import write_json
+from llm_conceptual_modeling.hf_batch_utils import write_text
 
 __all__ = [
     "RecordingChatClient",
@@ -12,4 +13,5 @@ __all__ = [
     "runtime_details",
     "slugify_model",
     "write_json",
+    "write_text",
 ]

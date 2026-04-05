@@ -112,7 +112,7 @@ from llm_conceptual_modeling.hf_batch.utils import (
 from llm_conceptual_modeling.hf_batch.utils import (
     write_json as _write_json,
 )
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     write_text as _write_text,
 )
 from llm_conceptual_modeling.hf_execution_runtime import (

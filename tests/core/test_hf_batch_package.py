@@ -6,6 +6,7 @@ from llm_conceptual_modeling.hf_batch.utils import (
     RecordingChatClient,
     runtime_details,
     slugify_model,
+    write_text,
 )
 
 
@@ -17,5 +18,6 @@ def test_hf_batch_package_exposes_refactored_modules() -> None:
     assert callable(RecordingChatClient)
     assert callable(runtime_details)
     assert callable(slugify_model)
+    assert callable(write_text)
     assert HFRunSpec.__name__ == "HFRunSpec"
     assert RuntimeResult.__name__ == "dict"
