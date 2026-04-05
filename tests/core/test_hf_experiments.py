@@ -14,6 +14,7 @@ from llm_conceptual_modeling.hf_experiments import (
     _build_prompt_bundle,
     _resolve_stage_timeout_seconds,
     _resolve_startup_timeout_seconds,
+    _worker_loaded_model,
     _run_algo1,
     _run_algo2,
     _run_algo3,
@@ -2877,6 +2878,23 @@ def test_run_algo1_marks_worker_ready_after_model_load(tmp_path: Path) -> None:
     worker_state = json.loads((run_dir / "worker_state.json").read_text(encoding="utf-8"))
     assert worker_state["model_loaded"] is True
     assert worker_state["phase"] == "executing_algorithm"
+
+
+def test_worker_loaded_model_requires_boolean_true_or_active_stage(tmp_path: Path) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "worker_state.json").write_text(
+        json.dumps({"status": "running", "model_loaded": "false"}),
+        encoding="utf-8",
+    )
+
+    assert _worker_loaded_model(run_dir) is False
+
+    (run_dir / "active_stage.json").write_text(
+        json.dumps({"status": "running", "schema_name": "edge_list"}),
+        encoding="utf-8",
+    )
+    assert _worker_loaded_model(run_dir) is True
 
 
 def test_run_algo1_summary_includes_trace_metrics() -> None:

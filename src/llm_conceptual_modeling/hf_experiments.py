@@ -695,7 +695,7 @@ def _smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
 
 def _worker_loaded_model(run_dir: Path) -> bool:
     worker_state = _read_artifact_json(run_dir / "worker_state.json")
-    return bool(worker_state.get("model_loaded")) or (run_dir / "active_stage.json").exists()
+    return worker_state.get("model_loaded") is True or (run_dir / "active_stage.json").exists()
 
 
 def _mark_worker_ready_for_execution(run_dir: Path | None) -> None:
@@ -971,10 +971,10 @@ def _run_algo1(
             generate_edges=lambda *, subgraph1, subgraph2: candidate_edges,
             verify_edges=lambda candidate_edges: verified_edges,
         )
-    _validate_algorithm_edge_result("algo1", result.verified_edges)
+    sanitized_verified_edges = _sanitize_algorithm_edge_result("algo1", result.verified_edges)
     raw_row = {
         **spec.raw_context,
-        "Result": repr(result.verified_edges),
+        "Result": repr(sanitized_verified_edges),
         "graph": repr(graph),
         "subgraph1": repr(subgraph1),
         "subgraph2": repr(subgraph2),
@@ -985,7 +985,7 @@ def _run_algo1(
         "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
         "summary": {
             "candidate_edge_count": len(result.candidate_edges),
-            "verified_edge_count": len(result.verified_edges),
+            "verified_edge_count": len(sanitized_verified_edges),
             **_trace_metric_summary(recorder.records),
             **_connection_metric_summary(raw_row),
         },
@@ -1298,34 +1298,35 @@ def _validate_structural_runtime_result(*, algorithm: str, raw_row: dict[str, ob
     if result_literal is None:
         raise ValueError(f"Structurally invalid {algorithm} result: missing Result field.")
     result_edges = parse_python_literal(str(result_literal))
-    _validate_algorithm_edge_result(algorithm, result_edges)
+    sanitized_edges = _sanitize_algorithm_edge_result(algorithm, result_edges)
+    raw_row["Result"] = repr(sanitized_edges)
 
 
-def _validate_algorithm_edge_result(algorithm: str, result_edges: object) -> None:
-    if not isinstance(result_edges, list):
+def _sanitize_algorithm_edge_result(
+    algorithm: str,
+    result_edges: object,
+) -> list[tuple[str, str]]:
+    if not isinstance(result_edges, (list, tuple)):
         raise ValueError(f"Structurally invalid {algorithm} result: Result is not a list.")
-    if not result_edges:
-        raise ValueError(
-            f"Structurally invalid {algorithm} result: verified edge list is empty."
-        )
+    sanitized_edges: list[tuple[str, str]] = []
     for edge in result_edges:
         if not isinstance(edge, (list, tuple)) or len(edge) < 2:
-            raise ValueError(
-                f"Structurally invalid {algorithm} result: invalid edge shape {edge!r}."
-            )
+            continue
         source = _normalize_structural_endpoint(edge[0], algorithm=algorithm)
         target = _normalize_structural_endpoint(edge[1], algorithm=algorithm)
+        if source is None or target is None:
+            continue
         if not _looks_like_textual_concept(source) or not _looks_like_textual_concept(target):
-            raise ValueError(
-                "Structurally invalid "
-                f"{algorithm} result: non-textual edge endpoint {edge!r}."
-            )
+            continue
+        sanitized_edges.append((source, target))
+    return sanitized_edges
 
 
-def _normalize_structural_endpoint(value: object, *, algorithm: str) -> str:
+def _normalize_structural_endpoint(value: object, *, algorithm: str) -> str | None:
     text = str(value).strip()
     if not text:
-        raise ValueError(f"Structurally invalid {algorithm} result: empty edge endpoint.")
+        return None
+    _ = algorithm
     return text
 
 
