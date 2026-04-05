@@ -26,7 +26,7 @@ def test_worker_policy_timeout_resolution_accepts_numeric_values() -> None:
 
 
 def test_worker_policy_rejects_boolean_timeouts() -> None:
-    with pytest.raises(ValueError, match="Unsupported timeout value"):
+    with pytest.raises(TypeError, match="Timeout value must be numeric, got bool"):
         coerce_timeout_seconds(True)
 
 
