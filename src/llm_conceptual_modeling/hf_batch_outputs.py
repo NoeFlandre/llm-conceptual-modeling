@@ -22,7 +22,7 @@ from llm_conceptual_modeling.analysis.variability import write_output_variabilit
 from llm_conceptual_modeling.common.evaluation_core import evaluate_connection_results_file
 from llm_conceptual_modeling.common.factorial_core import run_generalized_factorial_analysis
 from llm_conceptual_modeling.common.types import GeneralizedFactorialSpec
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     add_decoding_factor_columns,
     slugify_model,
 )

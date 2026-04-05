@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_conceptual_modeling.hf_batch_utils import RecordingChatClient
+from llm_conceptual_modeling.hf_batch.utils import RecordingChatClient
 
 
 class _FailingChatClient:

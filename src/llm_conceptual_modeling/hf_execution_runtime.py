@@ -9,8 +9,8 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
     clear_retry_artifacts as _clear_retry_artifacts,
 )
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
-from llm_conceptual_modeling.hf_batch_utils import slugify_model as _slugify_model
-from llm_conceptual_modeling.hf_batch_utils import write_json as _write_json
+from llm_conceptual_modeling.hf_batch.utils import slugify_model as _slugify_model
+from llm_conceptual_modeling.hf_batch.utils import write_json as _write_json
 from llm_conceptual_modeling.hf_failure_markers import (
     is_retryable_runtime_failure,
 )
