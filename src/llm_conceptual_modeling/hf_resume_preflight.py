@@ -89,7 +89,7 @@ def build_resume_preflight_report(
     finished_count = status_int(status_snapshot, "finished_count")
     failed_count = status_int(status_snapshot, "failed_count")
     pending_count = status_int(status_snapshot, "pending_count")
-    running_count = int(current_status.get("running_count", 0))
+    running_count = _status_count(current_status, "running_count")
     report["finished_count"] = finished_count
     report["failed_count"] = failed_count
     report["pending_count"] = pending_count
@@ -104,3 +104,11 @@ def build_resume_preflight_report(
         )
 
     return report
+
+
+def _status_count(status: dict[str, object], key: str) -> int:
+    raw_value = status.get(key, 0)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return 0
