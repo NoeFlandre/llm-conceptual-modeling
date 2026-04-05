@@ -236,3 +236,45 @@ def test_build_drain_plan_includes_profile_launch_fields(
     assert safe_item["startup_timeout_seconds"] > 0
     assert safe_item["worker_process_mode"] in {"ephemeral", "persistent"}
     assert safe_item["max_requests_per_worker_process"] > 0
+
+
+def test_build_drain_plan_ignores_malformed_root_report_counts(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+
+    root = results_root / "hf-paper-batch-algo1-qwen"
+    root.mkdir()
+
+    plan = build_drain_plan(
+        repo_root=repo_root,
+        results_root=results_root,
+        ssh_target="root@example.com",
+        ssh_port="2222",
+        sweep_report={
+            "roots": [
+                {
+                    "results_root": str(root),
+                    "config_source": str(root / "runtime_config.yaml"),
+                    "classification": "needs-config-fix",
+                    "can_resume": False,
+                    "pending_count": 0,
+                    "failed_count": 2,
+                    "finished_count": 10,
+                    "running_count": "false",
+                    "status_updated_at": "2026-04-05T12:00:00Z",
+                },
+            ]
+        },
+        failure_summary_fn=lambda _root: {
+            "retryable": {"timeout": 0, "oom": 0, "structural": 0, "infrastructure": 0},
+            "terminal": {"unsupported": 0, "semantic": 0, "other": 0},
+        },
+    )
+
+    assert plan["safe_queue_count"] == 1
+    assert plan["queue"][0]["running_count"] == 0
+    assert plan["queue"][0]["failed_count"] == 2

@@ -312,10 +312,10 @@ def collect_root_runtime_status(results_root: Path) -> JsonDict:
     batch_status = _read_json_file(results_root / "batch_status.json")
     watcher_status = read_results_sync_status(results_root)
     return {
-        "finished_count": int(batch_status.get("finished_count", 0)),
-        "pending_count": int(batch_status.get("pending_count", 0)),
-        "failed_count": int(batch_status.get("failed_count", 0)),
-        "running_count": int(batch_status.get("running_count", 0)),
+        "finished_count": _report_int(batch_status, "finished_count"),
+        "pending_count": _report_int(batch_status, "pending_count"),
+        "failed_count": _report_int(batch_status, "failed_count"),
+        "running_count": _report_int(batch_status, "running_count"),
         "updated_at": batch_status.get("updated_at"),
         "watcher_status": watcher_status.get("status"),
         "watcher_identity": watcher_status.get("watcher_identity"),
@@ -416,10 +416,10 @@ def _build_work_item(
         worker_process_mode=profile.worker_process_mode,
         max_requests_per_worker_process=profile.max_requests_per_worker_process,
         launch_priority=0 if root_classification == "active" else 1,
-        pending_count=int(root_report.get("pending_count", 0)),
-        failed_count=int(root_report.get("failed_count", 0)),
-        finished_count=int(root_report.get("finished_count", 0)),
-        running_count=int(root_report.get("running_count", 0)),
+        pending_count=_report_int(root_report, "pending_count"),
+        failed_count=_report_int(root_report, "failed_count"),
+        finished_count=_report_int(root_report, "finished_count"),
+        running_count=_report_int(root_report, "running_count"),
         status_updated_at=_optional_str(root_report.get("status_updated_at")),
         retryable_failure_counts=retryable_counts,
         terminal_failure_counts=terminal_counts,
@@ -444,11 +444,11 @@ def _select_queue_for_phase(
 
 
 def _root_has_work(root_report: JsonDict, failure_summary: JsonDict) -> bool:
-    if int(root_report.get("running_count", 0)) > 0:
+    if _report_int(root_report, "running_count") > 0:
         return True
-    if int(root_report.get("pending_count", 0)) > 0:
+    if _report_int(root_report, "pending_count") > 0:
         return True
-    if int(root_report.get("failed_count", 0)) > 0:
+    if _report_int(root_report, "failed_count") > 0:
         return True
     return failure_summary["retryable_total"] > 0 or failure_summary["terminal_total"] > 0
 
@@ -463,7 +463,15 @@ def _needs_risky_phase(
         return False
     if safe_profile.excluded_decoding_labels:
         return True
-    return int(root_report.get("failed_count", 0)) > 0
+    return _report_int(root_report, "failed_count") > 0
+
+
+def _report_int(report: JsonDict, key: str) -> int:
+    raw_value = report.get(key, 0)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return 0
 
 
 def _should_adopt_active_root(
