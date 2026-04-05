@@ -72,12 +72,13 @@ def build_resume_sweep_report(
             continue
         classification = _classify_root_report(report)
         resume_profile = resolve_resume_profile(candidate_root.name)
+        can_resume = _report_bool(report, "can_resume")
         root_reports.append(
             {
                 "results_root": str(candidate_root),
                 "config_source": str(config_source),
                 "classification": classification,
-                "can_resume": bool(report.get("can_resume", False)),
+                "can_resume": can_resume,
                 "resume_mode": report.get("resume_mode"),
                 "total_runs": report.get("total_runs", 0),
                 "finished_count": report.get("finished_count", 0),
@@ -152,7 +153,7 @@ def _classify_root_report(report: dict[str, object]) -> str:
     running_count = int(report.get("running_count", 0))
     if running_count > 0:
         return "active"
-    if bool(report.get("can_resume", False)):
+    if _report_bool(report, "can_resume"):
         return "resume-ready"
     if int(report.get("failed_count", 0)) > 0:
         return "needs-config-fix"
@@ -195,7 +196,7 @@ def _root_sort_key(report: dict[str, object]) -> tuple[int, str]:
 
 
 def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, object] | None:
-    rent_ready_roots = [report for report in root_reports if bool(report.get("rent_ready", False))]
+    rent_ready_roots = [report for report in root_reports if _report_bool(report, "rent_ready")]
     if not rent_ready_roots:
         return None
     return max(
@@ -207,3 +208,7 @@ def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, o
             str(report.get("results_root", "")),
         ),
     )
+
+
+def _report_bool(report: dict[str, object], key: str) -> bool:
+    return report.get(key) is True
