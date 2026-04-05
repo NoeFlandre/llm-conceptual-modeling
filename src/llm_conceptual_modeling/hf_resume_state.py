@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Callable, cast
 
 from llm_conceptual_modeling.common.coercion import coerce_int
-from llm_conceptual_modeling.common.json_io import read_json_dict
+from llm_conceptual_modeling.common.json_io import read_json_dict, write_json_dict
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_failure_markers import (
     classify_failure,
@@ -469,4 +469,4 @@ def read_artifact_json(path: Path) -> JsonObject:
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    write_json_dict(path, payload)

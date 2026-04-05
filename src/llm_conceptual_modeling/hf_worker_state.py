@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from llm_conceptual_modeling.common.json_io import write_json_dict
+
 
 def read_worker_state(path: Path) -> dict[str, object]:
     if not path.exists():
@@ -13,7 +15,7 @@ def read_worker_state(path: Path) -> dict[str, object]:
 def update_worker_state(path: Path, updates: dict[str, object]) -> dict[str, object]:
     payload = read_worker_state(path)
     payload.update(updates)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    write_json_dict(path, payload)
     return payload
 
 

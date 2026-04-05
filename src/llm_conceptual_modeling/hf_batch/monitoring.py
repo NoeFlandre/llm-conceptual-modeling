@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.common.coercion import coerce_int
-from llm_conceptual_modeling.common.json_io import read_json_dict
+from llm_conceptual_modeling.common.json_io import read_json_dict, write_json_dict
 
 
 def collect_batch_status(output_root: str | Path) -> dict[str, object]:
@@ -180,4 +180,4 @@ def status_timestamp_now() -> str:
 def write_status_snapshot(*, output_root: str | Path, status: dict[str, object]) -> None:
     output_root_path = Path(output_root)
     status_path = output_root_path / "batch_status.json"
-    status_path.write_text(json.dumps(status, indent=2, sort_keys=True), encoding="utf-8")
+    write_json_dict(status_path, status)

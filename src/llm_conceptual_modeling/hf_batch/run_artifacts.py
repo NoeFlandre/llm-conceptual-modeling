@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from llm_conceptual_modeling.common.json_io import read_json_dict
+from llm_conceptual_modeling.common.json_io import read_json_dict, write_json_dict
 
 VOLATILE_RUN_FILENAMES = (
     "active_stage.json",
@@ -86,7 +86,7 @@ def read_json(path: Path) -> dict[str, Any]:
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    write_json_dict(path, payload)
 
 
 def _runtime_snapshot_reference() -> str | None:
