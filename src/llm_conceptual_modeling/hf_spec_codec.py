@@ -4,6 +4,7 @@ from dataclasses import asdict
 from typing import Any
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
+from llm_conceptual_modeling.common.coercion import coerce_int
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 
 
@@ -36,14 +37,6 @@ def deserialize_spec(payload: dict[str, Any]) -> HFRunSpec:
             else None
         ),
         context_policy=dict(payload["context_policy"]) if payload.get("context_policy") else None,
-        base_seed=_optional_int(payload, "base_seed"),
-        seed=_optional_int(payload, "seed"),
+        base_seed=coerce_int(payload.get("base_seed", 0)),
+        seed=coerce_int(payload.get("seed", 0)),
     )
-
-
-def _optional_int(payload: dict[str, Any], key: str) -> int:
-    raw_value = payload.get(key, 0)
-    try:
-        return int(raw_value)
-    except (TypeError, ValueError):
-        return 0

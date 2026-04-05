@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Callable
 
+from llm_conceptual_modeling.common.coercion import coerce_int
 from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
 from llm_conceptual_modeling.hf_run_config import (
@@ -80,11 +81,11 @@ def build_resume_sweep_report(
                 "classification": classification,
                 "can_resume": can_resume,
                 "resume_mode": report.get("resume_mode"),
-                "total_runs": _report_int(report, "total_runs"),
-                "finished_count": _report_int(report, "finished_count"),
-                "failed_count": _report_int(report, "failed_count"),
-                "pending_count": _report_int(report, "pending_count"),
-                "running_count": _report_int(report, "running_count"),
+                "total_runs": coerce_int(report.get("total_runs", 0)),
+                "finished_count": coerce_int(report.get("finished_count", 0)),
+                "failed_count": coerce_int(report.get("failed_count", 0)),
+                "pending_count": coerce_int(report.get("pending_count", 0)),
+                "running_count": coerce_int(report.get("running_count", 0)),
                 "status_updated_at": report.get("status_updated_at"),
                 "ready_to_rent": classification == "resume-ready",
                 "rent_ready": classification == "resume-ready",
@@ -150,12 +151,12 @@ def _discover_resume_roots(results_root: Path) -> list[Path]:
 
 
 def _classify_root_report(report: dict[str, object]) -> str:
-    running_count = _report_int(report, "running_count")
+    running_count = coerce_int(report.get("running_count", 0))
     if running_count > 0:
         return "active"
     if _report_bool(report, "can_resume"):
         return "resume-ready"
-    if _report_int(report, "failed_count") > 0:
+    if coerce_int(report.get("failed_count", 0)) > 0:
         return "needs-config-fix"
     return "finished"
 
@@ -202,9 +203,9 @@ def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, o
     return max(
         rent_ready_roots,
         key=lambda report: (
-            _report_int(report, "pending_count"),
-            _report_int(report, "failed_count"),
-            -_report_int(report, "finished_count"),
+            coerce_int(report.get("pending_count", 0)),
+            coerce_int(report.get("failed_count", 0)),
+            -coerce_int(report.get("finished_count", 0)),
             str(report.get("results_root", "")),
         ),
     )
@@ -212,11 +213,3 @@ def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, o
 
 def _report_bool(report: dict[str, object], key: str) -> bool:
     return report.get(key) is True
-
-
-def _report_int(report: dict[str, object], key: str) -> int:
-    raw_value = report.get(key, 0)
-    try:
-        return int(raw_value)
-    except (TypeError, ValueError):
-        return 0
