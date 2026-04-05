@@ -149,3 +149,25 @@ def test_collect_batch_status_requires_boolean_true_for_worker_loaded_model(
     status = collect_batch_status(output_root)
 
     assert status["worker_loaded_model"] is False
+
+
+def test_collect_batch_status_ignores_malformed_total_runs_when_run_tree_is_empty(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "results"
+    output_root.mkdir()
+    (output_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "total_runs": "false",
+                "current_run": {"algorithm": "algo1"},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["total_runs"] == 0
+    assert status["pending_count"] == 0
+    assert status["percent_complete"] == 0.0

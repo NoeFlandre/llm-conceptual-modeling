@@ -47,7 +47,7 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     total_runs = len(run_dirs)
     if total_runs == 0:
         status_file = _read_json(output_root_path / "batch_status.json")
-        total_runs = int(status_file.get("total_runs", 0))
+        total_runs = _status_int(status_file, "total_runs")
 
     status_file = _read_json(output_root_path / "batch_status.json")
     pending_count = max(total_runs - finished_count - failed_count - running_count, pending_count)
@@ -113,6 +113,14 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _status_int(payload: dict[str, Any], key: str) -> int:
+    raw_value = payload.get(key, 0)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return 0
 
 
 def _collect_active_run_details(run_dir: Path) -> dict[str, object]:
