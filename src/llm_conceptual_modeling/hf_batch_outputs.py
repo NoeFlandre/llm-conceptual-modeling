@@ -40,7 +40,12 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
         )
         combo_root.mkdir(parents=True, exist_ok=True)
         raw_rows = [
-            json.loads(Path(path).read_text(encoding="utf-8"))
+            json.loads(
+                _resolve_materialized_artifact_path(
+                    output_root=output_root,
+                    artifact_path=Path(path),
+                ).read_text(encoding="utf-8")
+            )
             for path in group_frame["raw_row_path"].tolist()
         ]
         raw_frame = pd.DataFrame.from_records(raw_rows)
@@ -128,6 +133,12 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
                 ],
                 result_column="Results",
             )
+            _backfill_algo3_summary_artifacts(
+                output_root=output_root,
+                summary_frame=summary_frame,
+                group_frame=group_frame,
+                evaluated_path=evaluated_path,
+            )
 
         write_replication_budget_analysis(
             [stability_path],
@@ -142,6 +153,60 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
             z_score=1.645,
         )
     _write_combined_model_outputs(aggregated_root=aggregated_root, summary_frame=summary_frame)
+    summary_frame.to_csv(output_root / "batch_summary.csv", index=False)
+
+
+def _backfill_algo3_summary_artifacts(
+    *,
+    output_root: Path,
+    summary_frame: pd.DataFrame,
+    group_frame: pd.DataFrame,
+    evaluated_path: Path,
+) -> None:
+    evaluated_frame = pd.read_csv(evaluated_path)
+    if len(evaluated_frame) != len(group_frame):
+        raise ValueError(
+            "Algo3 evaluated frame length does not match the summary frame length "
+            f"for {evaluated_path}."
+        )
+
+    recalls = evaluated_frame["Recall"].tolist()
+    for summary_index, recall_value, raw_row_path in zip(
+        group_frame.index,
+        recalls,
+        group_frame["raw_row_path"].tolist(),
+        strict=True,
+    ):
+        summary_frame.at[summary_index, "recall"] = float(recall_value)
+        raw_row_summary_path = _resolve_materialized_artifact_path(
+            output_root=output_root,
+            artifact_path=Path(str(raw_row_path)),
+        ).with_name("summary.json")
+        if raw_row_summary_path.exists():
+            summary_artifact = json.loads(raw_row_summary_path.read_text(encoding="utf-8"))
+            summary_artifact["recall"] = float(recall_value)
+            raw_row_summary_path.write_text(
+                json.dumps(summary_artifact, indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+
+
+def _resolve_materialized_artifact_path(*, output_root: Path, artifact_path: Path) -> Path:
+    if artifact_path.exists():
+        return artifact_path
+    if not artifact_path.is_absolute():
+        return artifact_path
+    try:
+        relative_path = artifact_path.relative_to(Path("/workspace/results"))
+    except ValueError:
+        return artifact_path
+    candidate_paths = [output_root / relative_path]
+    if relative_path.parts and relative_path.parts[0] == output_root.name:
+        candidate_paths.append(output_root / Path(*relative_path.parts[1:]))
+    for candidate_path in candidate_paths:
+        if candidate_path.exists():
+            return candidate_path
+    return artifact_path
 
 
 def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.DataFrame) -> None:
@@ -150,7 +215,12 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
         combo_root = aggregated_root / str(algorithm) / slugify_model(str(model)) / "combined"
         combo_root.mkdir(parents=True, exist_ok=True)
         raw_rows = [
-            json.loads(Path(path).read_text(encoding="utf-8"))
+            json.loads(
+                _resolve_materialized_artifact_path(
+                    output_root=aggregated_root.parent,
+                    artifact_path=Path(path),
+                ).read_text(encoding="utf-8")
+            )
             for path in group_frame["raw_row_path"].tolist()
         ]
         raw_frame = pd.DataFrame.from_records(raw_rows)
