@@ -1,18 +1,17 @@
 from pathlib import Path
 
-import pytest
-
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     RuntimeProfile,
     supports_decoding_config,
 )
-from llm_conceptual_modeling.hf_batch_planning import plan_paper_batch_specs
+from llm_conceptual_modeling.hf_batch.planning import plan_paper_batch_specs
+from llm_conceptual_modeling.hf_batch.planning import default_runtime_profile_provider
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
 
 
-def test_supports_decoding_config_rejects_qwen_contrastive() -> None:
-    assert not supports_decoding_config(
+def test_supports_decoding_config_allows_qwen_contrastive() -> None:
+    assert supports_decoding_config(
         model="Qwen/Qwen3.5-9B",
         decoding_config=DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4),
     )
@@ -22,7 +21,19 @@ def test_supports_decoding_config_rejects_qwen_contrastive() -> None:
     )
 
 
-def test_plan_paper_batch_specs_skips_qwen_contrastive_runs_from_config(tmp_path: Path) -> None:
+def test_hf_batch_planning_package_exports_runtime_profile_provider() -> None:
+    profile = default_runtime_profile_provider("Qwen/Qwen3.5-9B")
+
+    assert profile == RuntimeProfile(
+        device="cuda",
+        dtype="bfloat16",
+        quantization="none",
+        supports_thinking_toggle=True,
+        context_limit=None,
+    )
+
+
+def test_plan_paper_batch_specs_includes_qwen_contrastive_runs_from_config(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     config_path.write_text(
         """
@@ -137,22 +148,23 @@ algorithms:
     )
 
     assert specs
-    assert {spec.decoding.algorithm for spec in specs} == {"greedy", "beam"}
-    assert all(spec.decoding.algorithm != "contrastive" for spec in specs)
+    assert {spec.decoding.algorithm for spec in specs} == {"greedy", "beam", "contrastive"}
+    assert any(spec.decoding.algorithm == "contrastive" for spec in specs)
 
 
-def test_qwen_contrastive_chat_client_is_rejected() -> None:
+def test_qwen_contrastive_chat_client_is_constructible() -> None:
     from llm_conceptual_modeling.common.hf_transformers import HFTransformersChatClient
 
-    with pytest.raises(ValueError, match="unsupported for model Qwen/Qwen3.5-9B"):
-        HFTransformersChatClient(
-            model="Qwen/Qwen3.5-9B",
-            decoding_config=DecodingConfig(
-                algorithm="contrastive",
-                penalty_alpha=0.2,
-                top_k=4,
-            ),
-            tokenizer=object(),
-            model_object=object(),
-            device="cuda",
-        )
+    client = HFTransformersChatClient(
+        model="Qwen/Qwen3.5-9B",
+        decoding_config=DecodingConfig(
+            algorithm="contrastive",
+            penalty_alpha=0.2,
+            top_k=4,
+        ),
+        tokenizer=object(),
+        model_object=object(),
+        device="cuda",
+    )
+
+    assert client is not None

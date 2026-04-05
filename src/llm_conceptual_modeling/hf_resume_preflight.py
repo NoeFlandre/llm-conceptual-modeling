@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_batch_planning import default_runtime_profile_provider
+from llm_conceptual_modeling.hf_batch.planning import default_runtime_profile_provider
 from llm_conceptual_modeling.hf_experiments import (
     _current_run_payload,
     _run_dir_for_spec,

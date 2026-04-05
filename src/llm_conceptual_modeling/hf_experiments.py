@@ -56,7 +56,7 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     write_smoke_verdict as _write_smoke_verdict,
 )
-from llm_conceptual_modeling.hf_batch_planning import (
+from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch_specs,
 )
