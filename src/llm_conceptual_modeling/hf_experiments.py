@@ -60,22 +60,22 @@ from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch_specs,
 )
-from llm_conceptual_modeling.hf_batch_prompts import (
+from llm_conceptual_modeling.hf_batch.prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
 )
-from llm_conceptual_modeling.hf_batch_prompts import (
+from llm_conceptual_modeling.hf_batch.prompts import (
     generate_edges_from_prompt as _generate_edges_from_prompt,
 )
-from llm_conceptual_modeling.hf_batch_prompts import (
+from llm_conceptual_modeling.hf_batch.prompts import (
     propose_children_from_prompt as _propose_children_from_prompt,
 )
-from llm_conceptual_modeling.hf_batch_prompts import (
+from llm_conceptual_modeling.hf_batch.prompts import (
     propose_labels_from_prompt as _propose_labels_from_prompt,
 )
-from llm_conceptual_modeling.hf_batch_prompts import (
+from llm_conceptual_modeling.hf_batch.prompts import (
     render_prompt as _render_prompt,
 )
-from llm_conceptual_modeling.hf_batch_prompts import (
+from llm_conceptual_modeling.hf_batch.prompts import (
     verify_edges_from_prompt as _verify_edges_from_prompt,
 )
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeFactory, RuntimeResult
