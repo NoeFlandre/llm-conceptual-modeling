@@ -26,13 +26,12 @@ def mark_worker_prefetching_model(
 ) -> dict[str, object]:
     return update_worker_state(
         path,
-        {
-            "status": "running",
+        _running_worker_state_update(timestamp)
+        | {
             "phase": "prefetching_model",
             "worker_pid": worker_pid,
             "model_loaded": False,
             "requests_served_by_process": requests_served_by_process,
-            "updated_at": timestamp,
         },
     )
 
@@ -59,18 +58,24 @@ def mark_worker_ready_for_execution(
 ) -> dict[str, object]:
     return update_worker_state(
         path,
-        {
-            "status": "running",
+        _running_worker_state_update(timestamp)
+        | {
             "phase": "executing_algorithm",
             "model_loaded": True,
             "model_loaded_at": timestamp,
-            "updated_at": timestamp,
         },
     )
 
 
 def worker_has_started_stage_execution(worker_state: dict[str, object]) -> bool:
-    if bool(worker_state.get("model_loaded")):
+    if worker_state.get("model_loaded") is True:
         return True
     phase = worker_state.get("phase")
     return isinstance(phase, str) and phase == "executing_algorithm"
+
+
+def _running_worker_state_update(timestamp: str) -> dict[str, object]:
+    return {
+        "status": "running",
+        "updated_at": timestamp,
+    }

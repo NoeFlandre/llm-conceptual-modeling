@@ -61,5 +61,6 @@ def test_mark_worker_ready_for_execution_preserves_existing_fields(tmp_path: Pat
 
 def test_worker_has_started_stage_execution_uses_phase_and_model_flag() -> None:
     assert worker_has_started_stage_execution({"model_loaded": True}) is True
+    assert worker_has_started_stage_execution({"model_loaded": "false"}) is False
     assert worker_has_started_stage_execution({"phase": "executing_algorithm"}) is True
     assert worker_has_started_stage_execution({"phase": "prefetching_model"}) is False
