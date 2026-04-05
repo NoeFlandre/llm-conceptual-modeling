@@ -122,3 +122,30 @@ def test_collect_batch_status_uses_worker_state_age_when_stage_file_is_missing(
     assert status["active_stage"] is None
     assert isinstance(status["active_stage_age_seconds"], float)
     assert status["active_stage_age_seconds"] >= 0.0
+
+
+def test_collect_batch_status_requires_boolean_true_for_worker_loaded_model(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "results"
+    run_dir = output_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (run_dir / "worker_state.json").write_text(
+        json.dumps(
+            {
+                "status": "running",
+                "worker_pid": 1234,
+                "model_loaded": "false",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_root / "batch_status.json").write_text(
+        json.dumps({"total_runs": 1, "current_run": {"algorithm": "algo1"}}),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["worker_loaded_model"] is False

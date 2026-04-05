@@ -131,7 +131,7 @@ def _collect_active_run_details(run_dir: Path) -> dict[str, object]:
         "active_stage_age_seconds": stage_age_seconds,
         "worker_pid": worker_state.get("worker_pid") or worker_state.get("pid"),
         "worker_status": worker_state.get("status"),
-        "worker_loaded_model": worker_state.get("model_loaded", False),
+        "worker_loaded_model": worker_state.get("model_loaded") is True,
     }
 
 
