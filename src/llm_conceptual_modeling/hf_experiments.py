@@ -79,7 +79,7 @@ from llm_conceptual_modeling.hf_batch.prompts import (
     verify_edges_from_prompt as _verify_edges_from_prompt,
 )
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeFactory, RuntimeResult
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     RecordingChatClient as _RecordingChatClient,
 )
 from llm_conceptual_modeling.hf_batch_utils import (
@@ -100,16 +100,16 @@ from llm_conceptual_modeling.hf_batch_utils import (
 from llm_conceptual_modeling.hf_batch_utils import (
     manifest_for_spec as _manifest_for_spec,
 )
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     resolve_hf_token as _resolve_hf_token,
 )
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     runtime_details as _runtime_details,
 )
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     slugify_model as _slugify_model,
 )
-from llm_conceptual_modeling.hf_batch_utils import (
+from llm_conceptual_modeling.hf_batch.utils import (
     write_json as _write_json,
 )
 from llm_conceptual_modeling.hf_batch_utils import (
