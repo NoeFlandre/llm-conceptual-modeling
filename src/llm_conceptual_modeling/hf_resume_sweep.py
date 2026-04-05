@@ -80,11 +80,11 @@ def build_resume_sweep_report(
                 "classification": classification,
                 "can_resume": can_resume,
                 "resume_mode": report.get("resume_mode"),
-                "total_runs": report.get("total_runs", 0),
-                "finished_count": report.get("finished_count", 0),
-                "failed_count": report.get("failed_count", 0),
-                "pending_count": report.get("pending_count", 0),
-                "running_count": report.get("running_count", 0),
+                "total_runs": _report_int(report, "total_runs"),
+                "finished_count": _report_int(report, "finished_count"),
+                "failed_count": _report_int(report, "failed_count"),
+                "pending_count": _report_int(report, "pending_count"),
+                "running_count": _report_int(report, "running_count"),
                 "status_updated_at": report.get("status_updated_at"),
                 "ready_to_rent": classification == "resume-ready",
                 "rent_ready": classification == "resume-ready",
@@ -150,12 +150,12 @@ def _discover_resume_roots(results_root: Path) -> list[Path]:
 
 
 def _classify_root_report(report: dict[str, object]) -> str:
-    running_count = int(report.get("running_count", 0))
+    running_count = _report_int(report, "running_count")
     if running_count > 0:
         return "active"
     if _report_bool(report, "can_resume"):
         return "resume-ready"
-    if int(report.get("failed_count", 0)) > 0:
+    if _report_int(report, "failed_count") > 0:
         return "needs-config-fix"
     return "finished"
 
@@ -202,9 +202,9 @@ def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, o
     return max(
         rent_ready_roots,
         key=lambda report: (
-            int(report.get("pending_count", 0)),
-            int(report.get("failed_count", 0)),
-            -int(report.get("finished_count", 0)),
+            _report_int(report, "pending_count"),
+            _report_int(report, "failed_count"),
+            -_report_int(report, "finished_count"),
             str(report.get("results_root", "")),
         ),
     )
@@ -212,3 +212,11 @@ def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, o
 
 def _report_bool(report: dict[str, object], key: str) -> bool:
     return report.get(key) is True
+
+
+def _report_int(report: dict[str, object], key: str) -> int:
+    raw_value = report.get(key, 0)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return 0
