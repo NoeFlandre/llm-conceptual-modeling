@@ -99,6 +99,50 @@ def test_load_valid_finished_summary_sanitizes_structurally_invalid_run(
     assert json.loads((run_dir / "raw_row.json").read_text(encoding="utf-8"))["Result"] == "[]"
 
 
+def test_load_valid_finished_summary_preserves_state_metadata_when_validation_fails(
+    tmp_path: Path,
+) -> None:
+    run_dir = tmp_path / "run"
+    run_dir.mkdir(parents=True)
+    (run_dir / "manifest.json").write_text("{}", encoding="utf-8")
+    (run_dir / "state.json").write_text(
+        json.dumps(
+            {
+                "status": "finished",
+                "replication": 2,
+                "condition_bits": "00110",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "runtime.json").write_text("{}", encoding="utf-8")
+    (run_dir / "raw_response.json").write_text("[]", encoding="utf-8")
+    (run_dir / "raw_row.json").write_text(
+        json.dumps({"Result": "[('1', '2')]"}),
+        encoding="utf-8",
+    )
+    (run_dir / "summary.json").write_text(
+        json.dumps({"status": "finished"}),
+        encoding="utf-8",
+    )
+
+    actual = load_valid_finished_summary(
+        run_dir=run_dir,
+        algorithm="algo1",
+        validate_structural_runtime_result_fn=lambda **_kwargs: (_ for _ in ()).throw(
+            ValueError("structural validation failed")
+        ),
+    )
+
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    assert actual is None
+    assert state == {
+        "status": "failed",
+        "replication": 2,
+        "condition_bits": "00110",
+    }
+
+
 def test_build_seeded_resume_snapshot_counts_finished_and_deferred_timeout(
     tmp_path: Path,
 ) -> None:

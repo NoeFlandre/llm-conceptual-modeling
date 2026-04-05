@@ -150,6 +150,8 @@ def load_valid_finished_summary(
         if raw_row != original_raw_row:
             write_json_fn(raw_row_path, raw_row)
     except Exception as error:
+        state_path = run_dir / "state.json"
+        state = read_artifact_json(state_path)
         write_json_fn(
             run_dir / "error.json",
             {
@@ -158,7 +160,7 @@ def load_valid_finished_summary(
                 "status": "failed",
             },
         )
-        write_json_fn(run_dir / "state.json", {"status": "failed"})
+        write_json_fn(state_path, {**state, "status": "failed"})
         if summary_path.exists():
             summary_path.unlink()
         return None
