@@ -5,6 +5,7 @@ import pytest
 from llm_conceptual_modeling.common.hf_transformers import RuntimeProfile
 from llm_conceptual_modeling.hf_batch_planning import plan_paper_batch_specs
 from llm_conceptual_modeling.hf_run_config import (
+    exclude_decoding_conditions_from_payload,
     load_hf_run_config,
     write_resolved_run_preview,
 )
@@ -237,6 +238,101 @@ algorithms:
     )
 
 
+def test_qwen_batch_runtime_config_is_hardened_for_resume() -> None:
+    config = load_hf_run_config("results/hf-paper-batch-algo1-qwen/runtime_config.yaml")
+
+    assert config.run.output_root == "/workspace/results/hf-paper-batch-algo1-qwen"
+    assert [decoding.algorithm for decoding in config.decoding] == ["greedy", "beam", "beam"]
+    assert [decoding.num_beams for decoding in config.decoding] == [None, 2, 6]
+    assert [decoding.penalty_alpha for decoding in config.decoding] == [None, None, None]
+    assert config.runtime.context_policy["generation_timeout_seconds"] == 60.0
+    assert config.runtime.context_policy["resume_pass_mode"] == "retry-timeouts"
+    assert config.runtime.context_policy["retry_timeout_failures_on_resume"] is True
+    assert config.algorithms["algo1"].pair_names == ["sg1_sg2", "sg2_sg3", "sg3_sg1"]
+    assert config.algorithms["algo1"].prompt_templates["direct_edge"] == ""
+
+
+def test_exclude_decoding_conditions_from_payload_removes_named_branch() -> None:
+    payload = {
+        "runtime": {"temperature": 0.0},
+        "decoding": {
+            "greedy": {"enabled": True},
+            "beam": {"enabled": True, "num_beams": [2, 6]},
+            "contrastive": {"enabled": True, "penalty_alpha": [0.2, 0.8], "top_k": 4},
+        },
+    }
+
+    exclude_decoding_conditions_from_payload(
+        payload,
+        excluded_condition_labels={"contrastive_penalty_alpha_0.8"},
+    )
+
+    assert payload["decoding"] == [
+        {
+            "algorithm": "greedy",
+            "num_beams": None,
+            "penalty_alpha": None,
+            "top_k": None,
+            "temperature": 0.0,
+        },
+        {
+            "algorithm": "beam",
+            "num_beams": 2,
+            "penalty_alpha": None,
+            "top_k": None,
+            "temperature": 0.0,
+        },
+        {
+            "algorithm": "beam",
+            "num_beams": 6,
+            "penalty_alpha": None,
+            "top_k": None,
+            "temperature": 0.0,
+        },
+        {
+            "algorithm": "contrastive",
+            "num_beams": None,
+            "penalty_alpha": 0.2,
+            "top_k": 4,
+            "temperature": 0.0,
+        },
+    ]
+
+
+def test_qwen_algo1_only_resume_config_is_hardened_for_retry_all() -> None:
+    config = load_hf_run_config("qwen_algo1_only.yaml")
+
+    assert config.models.chat_models == ["Qwen/Qwen3.5-9B"]
+    assert config.algorithms["algo1"].pair_names == ["sg1_sg2", "sg2_sg3", "sg3_sg1"]
+    assert config.runtime.context_policy["generation_timeout_seconds"] == 600
+    assert config.runtime.context_policy["resume_pass_mode"] == "retry-all"
+    assert config.runtime.context_policy["retry_timeout_failures_on_resume"] is True
+    assert config.runtime.context_policy["retry_oom_failures_on_resume"] is True
+    assert config.runtime.context_policy["retry_infrastructure_failures_on_resume"] is True
+
+
+def test_algo2_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
+    config = load_hf_run_config("configs/hf_transformers_algo2_olmo.yaml")
+
+    assert config.models.chat_models == ["allenai/Olmo-3-7B-Instruct"]
+    assert [decoding.algorithm for decoding in config.decoding] == ["greedy", "beam"]
+    assert [decoding.num_beams for decoding in config.decoding] == [None, 2]
+    assert config.algorithms["algo2"].pair_names == ["sg1_sg2", "sg2_sg3", "sg3_sg1"]
+    assert config.runtime.context_policy["generation_timeout_seconds"] == 60
+    assert config.runtime.context_policy["retry_structural_failures_on_resume"] is True
+    assert config.runtime.context_policy["max_requests_per_worker_process"] == 16
+
+
+def test_algo1_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
+    config = load_hf_run_config("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml")
+
+    assert config.models.chat_models == ["allenai/Olmo-3-7B-Instruct"]
+    assert config.runtime.context_policy["generation_timeout_seconds"] == 180.0
+    assert config.runtime.context_policy["resume_pass_mode"] == "throughput"
+    assert config.runtime.context_policy["retry_structural_failures_on_resume"] is True
+    assert config.runtime.context_policy["max_requests_per_worker_process"] == 25
+
+
 def test_write_resolved_run_preview_writes_all_condition_prompt_variants(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"
@@ -460,7 +556,13 @@ def test_checked_in_algo3_single_model_configs_are_locally_rent_ready(tmp_path: 
         assert config.run.output_root == expected_output_root
         assert config.models.chat_models == [expected_model]
         assert set(config.algorithms) == {"algo3"}
-        assert config.runtime.context_policy["generation_timeout_seconds"] == 600
+        expected_generation_timeout = (
+            60 if expected_model == "allenai/Olmo-3-7B-Instruct" else 600
+        )
+        actual_timeout = config.runtime.context_policy["generation_timeout_seconds"]
+        assert actual_timeout == expected_generation_timeout
+        if expected_model == "allenai/Olmo-3-7B-Instruct":
+            assert config.runtime.context_policy["retry_structural_failures_on_resume"] is True
         assert config.algorithms["algo3"].pair_names == [
             "subgraph_1_to_subgraph_3",
             "subgraph_2_to_subgraph_1",
@@ -497,13 +599,13 @@ def test_checked_in_algo2_single_model_configs_are_locally_rent_ready(tmp_path: 
             repo_root / "configs" / "hf_transformers_algo2_olmo.yaml",
             "allenai/Olmo-3-7B-Instruct",
             "/workspace/results/hf-paper-batch-algo2-olmo-current",
-            {"greedy", "beam", "contrastive"},
+            {"greedy", "beam"},
         ),
         (
             repo_root / "configs" / "hf_transformers_algo2_qwen.yaml",
             "Qwen/Qwen3.5-9B",
             "/workspace/results/hf-paper-batch-algo2-qwen-current",
-            {"greedy", "beam"},
+            {"greedy", "beam", "contrastive"},
         ),
         (
             repo_root / "configs" / "hf_transformers_algo2_mistral.yaml",
@@ -519,14 +621,36 @@ def test_checked_in_algo2_single_model_configs_are_locally_rent_ready(tmp_path: 
         assert config.run.output_root == expected_output_root
         assert config.models.chat_models == [expected_model]
         assert set(config.algorithms) == {"algo2"}
-        assert config.runtime.context_policy["generation_timeout_seconds"] == 600
+        expected_generation_timeout = (
+            60 if expected_model == "allenai/Olmo-3-7B-Instruct" else 600
+        )
+        actual_timeout = config.runtime.context_policy["generation_timeout_seconds"]
+        assert actual_timeout == expected_generation_timeout
         assert config.runtime.context_policy["resume_pass_mode"] == "retry-timeouts"
         assert config.runtime.context_policy["retry_timeout_failures_on_resume"] is True
+        if expected_model == "allenai/Olmo-3-7B-Instruct":
+            assert config.runtime.context_policy["retry_structural_failures_on_resume"] is True
         assert config.algorithms["algo2"].pair_names == [
             "sg1_sg2",
             "sg2_sg3",
             "sg3_sg1",
         ]
+        if config_path.name == "hf_transformers_algo2_mistral.yaml":
+            assert [item.algorithm for item in config.decoding] == [
+                "greedy",
+                "beam",
+                "contrastive",
+            ]
+            assert [item.num_beams for item in config.decoding] == [None, 2, None]
+            assert [item.penalty_alpha for item in config.decoding] == [None, None, 0.2]
+        if config_path.name == "hf_transformers_algo2_qwen.yaml":
+            assert [item.algorithm for item in config.decoding] == [
+                "greedy",
+                "beam",
+                "beam",
+                "contrastive",
+                "contrastive",
+            ]
         planned_specs = plan_paper_batch_specs(
             models=config.models.chat_models,
             embedding_model=config.models.embedding_model,
