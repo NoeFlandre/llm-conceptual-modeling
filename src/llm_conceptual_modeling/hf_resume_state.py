@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Callable, cast
 
 from llm_conceptual_modeling.common.coercion import coerce_int
+from llm_conceptual_modeling.common.json_io import read_json_dict
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 from llm_conceptual_modeling.hf_failure_markers import (
     classify_failure,
@@ -464,9 +465,7 @@ def resume_priority_key(
 
 
 def read_artifact_json(path: Path) -> JsonObject:
-    if not path.exists():
-        return {}
-    return cast(JsonObject, json.loads(path.read_text(encoding="utf-8")))
+    return cast(JsonObject, read_json_dict(path))
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:

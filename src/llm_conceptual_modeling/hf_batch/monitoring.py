@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.common.coercion import coerce_int
+from llm_conceptual_modeling.common.json_io import read_json_dict
 
 
 def collect_batch_status(output_root: str | Path) -> dict[str, object]:
@@ -112,9 +113,7 @@ def _iter_run_directories(runs_root: Path) -> list[Path]:
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_dict(path)
 
 
 def _collect_active_run_details(run_dir: Path) -> dict[str, object]:

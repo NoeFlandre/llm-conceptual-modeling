@@ -6,6 +6,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from llm_conceptual_modeling.common.json_io import read_json_dict
+
 VOLATILE_RUN_FILENAMES = (
     "active_stage.json",
     "error.json",
@@ -80,9 +82,7 @@ def write_smoke_verdict(
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    return read_json_dict(path)
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
