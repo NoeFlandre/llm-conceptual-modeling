@@ -1,6 +1,5 @@
-from pathlib import Path
-
 import json
+from pathlib import Path
 
 from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
 
