@@ -1,4 +1,5 @@
 import json
+from collections.abc import Iterator, Mapping
 from pathlib import Path
 
 import pandas as pd
@@ -14,11 +15,11 @@ from llm_conceptual_modeling.hf_experiments import (
     _build_prompt_bundle,
     _resolve_stage_timeout_seconds,
     _resolve_startup_timeout_seconds,
-    _worker_loaded_model,
     _run_algo1,
     _run_algo2,
     _run_algo3,
     _run_local_hf_spec_subprocess,
+    _worker_loaded_model,
     plan_paper_batch,
     run_paper_batch,
     run_single_spec,
@@ -52,6 +53,29 @@ def test_timeout_resolution_accepts_numeric_like_values() -> None:
         "startup_timeout_seconds": "120",
         "generation_timeout_seconds": 45,
     }
+
+    assert _resolve_startup_timeout_seconds(context_policy) == 120.0
+    assert _resolve_stage_timeout_seconds(context_policy) == 45.0
+
+
+def test_timeout_resolution_accepts_mapping_context_policy() -> None:
+    class ContextPolicy(Mapping[str, object]):
+        def __init__(self) -> None:
+            self._payload = {
+                "startup_timeout_seconds": "120",
+                "generation_timeout_seconds": 45,
+            }
+
+        def __getitem__(self, key: str) -> object:
+            return self._payload[key]
+
+        def __iter__(self) -> Iterator[str]:
+            return iter(self._payload)
+
+        def __len__(self) -> int:
+            return len(self._payload)
+
+    context_policy = ContextPolicy()
 
     assert _resolve_startup_timeout_seconds(context_policy) == 120.0
     assert _resolve_stage_timeout_seconds(context_policy) == 45.0

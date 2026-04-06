@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, Callable, cast
 
@@ -44,18 +45,6 @@ from llm_conceptual_modeling.hf_batch.monitoring import (
     write_status_snapshot as _write_status_snapshot,
 )
 from llm_conceptual_modeling.hf_batch.outputs import write_aggregated_outputs
-from llm_conceptual_modeling.hf_batch.run_artifacts import (
-    clear_retry_artifacts as _clear_retry_artifacts,
-)
-from llm_conceptual_modeling.hf_batch.run_artifacts import (
-    normalize_stale_running_run as _normalize_stale_running_run,
-)
-from llm_conceptual_modeling.hf_batch.run_artifacts import (
-    read_json as _read_artifact_json,
-)
-from llm_conceptual_modeling.hf_batch.run_artifacts import (
-    write_smoke_verdict as _write_smoke_verdict,
-)
 from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch_specs,
@@ -78,9 +67,36 @@ from llm_conceptual_modeling.hf_batch.prompts import (
 from llm_conceptual_modeling.hf_batch.prompts import (
     verify_edges_from_prompt as _verify_edges_from_prompt,
 )
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    clear_retry_artifacts as _clear_retry_artifacts,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    normalize_stale_running_run as _normalize_stale_running_run,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    read_json as _read_artifact_json,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    write_smoke_verdict as _write_smoke_verdict,
+)
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeFactory, RuntimeResult
 from llm_conceptual_modeling.hf_batch.utils import (
     RecordingChatClient as _RecordingChatClient,
+)
+from llm_conceptual_modeling.hf_batch.utils import (
+    resolve_hf_token as _resolve_hf_token,
+)
+from llm_conceptual_modeling.hf_batch.utils import (
+    runtime_details as _runtime_details,
+)
+from llm_conceptual_modeling.hf_batch.utils import (
+    slugify_model as _slugify_model,
+)
+from llm_conceptual_modeling.hf_batch.utils import (
+    write_json as _write_json,
+)
+from llm_conceptual_modeling.hf_batch.utils import (
+    write_text as _write_text,
 )
 from llm_conceptual_modeling.hf_batch_utils import (
     algo1_prompt_config as _algo1_prompt_config,
@@ -99,21 +115,6 @@ from llm_conceptual_modeling.hf_batch_utils import (
 )
 from llm_conceptual_modeling.hf_batch_utils import (
     manifest_for_spec as _manifest_for_spec,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    resolve_hf_token as _resolve_hf_token,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    runtime_details as _runtime_details,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    slugify_model as _slugify_model,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    write_json as _write_json,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    write_text as _write_text,
 )
 from llm_conceptual_modeling.hf_execution_runtime import (
     build_worker_command as _execution_build_worker_command,
@@ -814,24 +815,24 @@ def _build_worker_command(
     )
 
 
-def _resolve_startup_timeout_seconds(context_policy: dict[str, object] | None) -> float:
+def _resolve_startup_timeout_seconds(context_policy: Mapping[str, object] | None) -> float:
     return _execution_resolve_startup_timeout_seconds(context_policy)
 
 
-def _resolve_stage_timeout_seconds(context_policy: dict[str, object] | None) -> float:
+def _resolve_stage_timeout_seconds(context_policy: Mapping[str, object] | None) -> float:
     return _execution_resolve_stage_timeout_seconds(context_policy)
 
 
-def _resolve_run_retry_attempts(context_policy: dict[str, object] | None) -> int:
+def _resolve_run_retry_attempts(context_policy: Mapping[str, object] | None) -> int:
     return _execution_resolve_run_retry_attempts(context_policy)
 
 
-def _resolve_worker_process_mode(context_policy: dict[str, object] | None) -> str:
+def _resolve_worker_process_mode(context_policy: Mapping[str, object] | None) -> str:
     return _execution_resolve_worker_process_mode(context_policy)
 
 
 def _resolve_max_requests_per_worker_process(
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
 ) -> int | None:
     return _execution_resolve_max_requests_per_worker_process(context_policy)
 
