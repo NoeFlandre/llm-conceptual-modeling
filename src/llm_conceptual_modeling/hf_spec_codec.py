@@ -22,7 +22,7 @@ def deserialize_spec(payload: dict[str, Any]) -> HFRunSpec:
         model=str(payload["model"]),
         embedding_model=str(payload["embedding_model"]),
         decoding=DecodingConfig(**payload["decoding"]),
-        replication=int(payload["replication"]),
+        replication=_required_int(payload, field_name="replication"),
         pair_name=str(payload["pair_name"]),
         condition_bits=str(payload["condition_bits"]),
         condition_label=str(payload["condition_label"]),
@@ -39,4 +39,17 @@ def deserialize_spec(payload: dict[str, Any]) -> HFRunSpec:
         context_policy=dict(payload["context_policy"]) if payload.get("context_policy") else None,
         base_seed=coerce_int(payload.get("base_seed", 0)),
         seed=coerce_int(payload.get("seed", 0)),
+    )
+
+
+def _required_int(payload: dict[str, Any], *, field_name: str) -> int:
+    raw_value = payload[field_name]
+    if isinstance(raw_value, bool):
+        raise TypeError(f"Spec field {field_name} must be an integer, got bool")
+    if isinstance(raw_value, int):
+        return raw_value
+    if isinstance(raw_value, str):
+        return int(raw_value)
+    raise TypeError(
+        f"Spec field {field_name} must be an integer, got {type(raw_value).__name__}"
     )

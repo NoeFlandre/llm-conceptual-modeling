@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_experiments import HFRunSpec
 from llm_conceptual_modeling.hf_spec_codec import deserialize_spec, serialize_spec
@@ -278,3 +280,35 @@ def test_deserialize_spec_ignores_malformed_seed_values() -> None:
 
     assert decoded.base_seed == 0
     assert decoded.seed == 0
+
+
+def test_deserialize_spec_rejects_boolean_replication_value() -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=False,
+            context_limit=4096,
+        ),
+    )
+    payload = serialize_spec(spec)
+    payload["replication"] = True
+
+    with pytest.raises(TypeError, match="Spec field replication must be an integer, got bool"):
+        deserialize_spec(payload)
