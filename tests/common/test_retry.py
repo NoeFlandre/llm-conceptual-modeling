@@ -6,6 +6,25 @@ import httpx
 from llm_conceptual_modeling.common.retry import PermanentError, SDKError, call_with_retry
 
 
+def _assert_http_error(
+    operation,
+    *,
+    expected_code: int,
+    delays: list[float],
+) -> None:
+    try:
+        call_with_retry(
+            operation=operation,
+            operation_name="test operation",
+            max_attempts=4,
+            sleep_fn=delays.append,
+        )
+    except HTTPError as error:
+        assert error.code == expected_code
+    else:
+        raise AssertionError("Expected HTTPError to be raised")
+
+
 def test_call_with_retry_retries_transient_urle_error_before_succeeding() -> None:
     calls = {"count": 0}
     delays: list[float] = []
@@ -43,17 +62,7 @@ def test_call_with_retry_does_not_retry_nonretryable_http_error() -> None:
             fp=None,
         )
 
-    try:
-        call_with_retry(
-            operation=operation,
-            operation_name="test operation",
-            max_attempts=4,
-            sleep_fn=delays.append,
-        )
-    except HTTPError as error:
-        assert error.code == 400
-    else:
-        raise AssertionError("Expected HTTPError to be raised")
+    _assert_http_error(operation, expected_code=400, delays=delays)
 
     assert calls["count"] == 1
     assert delays == []
@@ -105,7 +114,7 @@ def test_call_with_retry_retries_sdk_permanent_error_wrapping_transport_failure(
     assert delays == [0.1, 0.2]
 
 
-def test_call_with_retry_does_not_retry_sdk_permanent_error_wrapping_nonretryable_http_error() -> None:
+def test_call_with_retry_does_not_retry_permanent_error_wrapping_http_400() -> None:
     calls = {"count": 0}
     delays: list[float] = []
 
@@ -121,18 +130,7 @@ def test_call_with_retry_does_not_retry_sdk_permanent_error_wrapping_nonretryabl
             )
         )
 
-    try:
-        call_with_retry(
-            operation=operation,
-            operation_name="test operation",
-            max_attempts=4,
-            initial_delay_seconds=0.1,
-            sleep_fn=delays.append,
-        )
-    except HTTPError as error:
-        assert error.code == 400
-    else:
-        raise AssertionError("Expected HTTPError to be raised")
+    _assert_http_error(operation, expected_code=400, delays=delays)
 
     assert calls["count"] == 1
     assert delays == []
