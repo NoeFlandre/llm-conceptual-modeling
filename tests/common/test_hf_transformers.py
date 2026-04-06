@@ -1,3 +1,5 @@
+from collections.abc import Mapping
+
 import pytest
 
 import llm_conceptual_modeling.common.hf_transformers as hf_transformers
@@ -982,6 +984,30 @@ def test_parse_generated_json_recovers_single_bare_label_list_item() -> None:
     parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
 
     assert parsed == ["(Public support &amp; healthy eating"]
+
+
+def test_normalize_label_list_payload_accepts_mapping_payload() -> None:
+    class LabelMapping(Mapping[str, object]):
+        def __init__(self, payload: dict[str, object]) -> None:
+            self._payload = payload
+
+        def __getitem__(self, key: str) -> object:
+            return self._payload[key]
+
+        def __iter__(self):
+            return iter(self._payload)
+
+        def __len__(self) -> int:
+            return len(self._payload)
+
+        def get(self, key: str, default: object | None = None) -> object | None:
+            return self._payload.get(key, default)
+
+    parsed = hf_transformers._normalize_label_list_payload(
+        LabelMapping({"labels": "Nutritional education', 'Food accessibility"})
+    )
+
+    assert parsed == ["Nutritional education", "Food accessibility"]
 
 
 def test_complete_json_accepts_parseable_vote_list_without_eos() -> None:

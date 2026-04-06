@@ -6,10 +6,11 @@ import json
 import random
 import re
 import time
+from collections.abc import Mapping
 from contextlib import contextmanager
 from dataclasses import dataclass
 from functools import lru_cache
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 
@@ -632,16 +633,18 @@ def _looks_retryable_normalization_failure(
 
 def _normalize_label_list_payload(parsed: object) -> list[str] | None:
     if isinstance(parsed, list) and all(isinstance(item, str) for item in parsed):
-        return parsed
-    if not isinstance(parsed, dict):
+        return cast(list[str], parsed)
+    if not isinstance(parsed, Mapping):
         return None
-    labels = parsed.get("labels")
+    parsed_mapping = cast(Mapping[str, object], parsed)
+    labels = parsed_mapping.get("labels")
     if isinstance(labels, list) and all(isinstance(item, str) for item in labels):
+        string_labels = cast(list[str], labels)
         if len(labels) == 1:
-            packed_labels = _split_packed_label_string(labels[0])
+            packed_labels = _split_packed_label_string(string_labels[0])
             if packed_labels is not None:
                 return packed_labels
-        return labels
+        return string_labels
     if isinstance(labels, str):
         return _split_packed_label_string(labels)
     return None
