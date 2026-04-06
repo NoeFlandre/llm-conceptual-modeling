@@ -15,6 +15,18 @@ def test_read_json_dict_loads_json_object_payload(tmp_path: Path) -> None:
     assert read_json_dict(payload_path) == {"status": "finished", "count": 2}
 
 
+def test_read_json_dict_rejects_non_object_payload(tmp_path: Path) -> None:
+    payload_path = tmp_path / "payload.json"
+    payload_path.write_text('["finished", 2]', encoding="utf-8")
+
+    try:
+        read_json_dict(payload_path)
+    except ValueError as error:
+        assert str(error) == "Expected JSON object payload"
+    else:
+        raise AssertionError("Expected ValueError for non-object JSON payload")
+
+
 def test_write_json_dict_persists_sorted_indented_object_payload(tmp_path: Path) -> None:
     payload_path = tmp_path / "payload.json"
 
