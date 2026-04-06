@@ -9,7 +9,7 @@ from typing import Any
 def coerce_int(value: object, *, default: int = 0) -> int:
     try:
         if isinstance(value, bool):
-            return int(value)
+            return default
         if isinstance(value, int):
             return value
         if isinstance(value, str | bytes | bytearray):
