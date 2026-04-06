@@ -108,7 +108,15 @@ def build_resume_preflight_report(
 
 def _status_count(status: dict[str, object], key: str) -> int:
     raw_value = status.get(key, 0)
-    try:
-        return int(raw_value)
-    except (TypeError, ValueError):
+    if isinstance(raw_value, bool):
         return 0
+    if isinstance(raw_value, int):
+        return raw_value
+    if isinstance(raw_value, str):
+        try:
+            return int(raw_value)
+        except ValueError:
+            return 0
+    if isinstance(raw_value, float):
+        return int(raw_value)
+    return 0
