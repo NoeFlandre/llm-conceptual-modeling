@@ -1,5 +1,7 @@
 import json
 from argparse import Namespace
+from collections.abc import Mapping
+from typing import cast
 
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
@@ -72,8 +74,8 @@ def handle_run(args: Namespace) -> int:
         if args.json:
             print(json.dumps(report, indent=2, sort_keys=True))
         else:
-            print(f"chat_models={','.join(report['chat_models'])}")
-            print(f"embedding_model={report['embedding_model']}")
+            for line in _prefetch_runtime_report_lines(report):
+                print(line)
         return 0
     if args.run_target == "status":
         status = collect_batch_status(args.results_root)
@@ -204,3 +206,17 @@ def prefetch_runtime_for_config(*, config: HFRunConfig) -> dict[str, object]:
         chat_models=config.models.chat_models,
         embedding_model=config.models.embedding_model,
     )
+
+
+def _prefetch_runtime_report_lines(report: Mapping[str, object]) -> list[str]:
+    chat_models = report.get("chat_models")
+    if not isinstance(chat_models, list) or not all(isinstance(item, str) for item in chat_models):
+        raise ValueError("Prefetch runtime report chat_models must be a list of strings")
+    chat_model_names = cast(list[str], chat_models)
+    embedding_model = report.get("embedding_model")
+    if not isinstance(embedding_model, str):
+        raise ValueError("Prefetch runtime report embedding_model must be a string")
+    return [
+        f"chat_models={','.join(chat_model_names)}",
+        f"embedding_model={embedding_model}",
+    ]

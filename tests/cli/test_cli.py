@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 from llm_conceptual_modeling.cli import main
 
@@ -913,6 +914,75 @@ def test_cli_run_prefetch_runtime_reports_prefetched_models(
     assert exit_code == 0
     assert '"chat_models": [' in captured.out
     assert '"embedding_model": "Qwen/Qwen3-Embedding-0.6B"' in captured.out
+
+
+def test_cli_run_prefetch_runtime_reports_plain_text_models(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text("run: {}\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.load_hf_run_config",
+        lambda _path: object(),
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.prefetch_runtime_for_config",
+        lambda *, config: {
+            "chat_models": ["Qwen/Qwen3.5-9B", "allenai/Olmo-3-7B-Instruct"],
+            "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "prefetch-runtime",
+            "--config",
+            str(config_path),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "chat_models=Qwen/Qwen3.5-9B,allenai/Olmo-3-7B-Instruct" in captured.out
+    assert "embedding_model=Qwen/Qwen3-Embedding-0.6B" in captured.out
+
+
+def test_cli_run_prefetch_runtime_rejects_non_list_chat_models(
+    monkeypatch,
+    tmp_path,
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text("run: {}\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.load_hf_run_config",
+        lambda _path: object(),
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.prefetch_runtime_for_config",
+        lambda *, config: {
+            "chat_models": "Qwen/Qwen3.5-9B",
+            "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        },
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="Prefetch runtime report chat_models must be a list of strings",
+    ):
+        main(
+            [
+                "run",
+                "prefetch-runtime",
+                "--config",
+                str(config_path),
+            ]
+        )
 
 
 def test_cli_run_status_reports_active_worker_fields(monkeypatch, tmp_path, capsys) -> None:
