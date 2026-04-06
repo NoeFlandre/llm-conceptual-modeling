@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Mapping
 from pathlib import Path
 
 from llm_conceptual_modeling.hf_resume_sweep import build_resume_sweep_report
@@ -336,6 +337,67 @@ def test_build_resume_sweep_report_does_not_treat_string_can_resume_as_truthy(
     assert report["roots"][0]["classification"] == "needs-config-fix"
     assert report["roots"][0]["can_resume"] is False
     assert report["roots"][0]["rent_ready"] is False
+
+
+def test_build_resume_sweep_report_accepts_mapping_preflight_report(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    (repo_root / "data" / "inputs").mkdir(parents=True)
+
+    results_root = tmp_path / "results"
+    root = results_root / "hf-paper-batch-algo1-qwen"
+    root.mkdir(parents=True, exist_ok=True)
+    (root / "batch_status.json").write_text("{}", encoding="utf-8")
+    (root / "runtime_config.yaml").write_text("config", encoding="utf-8")
+
+    def load_config(path: Path) -> dict[str, str]:
+        return {"config_path": str(path)}
+
+    class PreflightReport(Mapping[str, object]):
+        def __init__(self) -> None:
+            self._payload = {
+                "results_root": str(root),
+                "total_runs": 10,
+                "finished_count": 8,
+                "failed_count": 0,
+                "pending_count": 2,
+                "running_count": 0,
+                "can_resume": True,
+                "resume_mode": "resume",
+            }
+
+        def __getitem__(self, key: str) -> object:
+            return self._payload[key]
+
+        def __iter__(self) -> Iterator[str]:
+            return iter(self._payload)
+
+        def __len__(self) -> int:
+            return len(self._payload)
+
+    def preflight(
+        *,
+        config: object,
+        repo_root: Path,
+        results_root: Path,
+        allow_empty: bool,
+    ) -> Mapping[str, object]:
+        _ = config
+        _ = repo_root
+        _ = results_root
+        _ = allow_empty
+        return PreflightReport()
+
+    report = build_resume_sweep_report(
+        repo_root=repo_root,
+        results_root=results_root,
+        load_config_fn=load_config,
+        preflight_fn=preflight,
+    )
+
+    assert report["ready_count"] == 1
+    assert report["roots"][0]["classification"] == "resume-ready"
 
 
 def test_build_resume_sweep_report_ignores_malformed_running_count(

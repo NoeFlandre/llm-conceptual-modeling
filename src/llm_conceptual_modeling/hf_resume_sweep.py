@@ -1,18 +1,56 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Callable
+from typing import Callable, TypedDict
 
 from llm_conceptual_modeling.common.io import coerce_int
 from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
-from llm_conceptual_modeling.hf_run_config import (
-    HFRunConfig,
-    load_hf_run_config,
-)
+from llm_conceptual_modeling.hf_run_config import load_hf_run_config
 
-ResumeConfigLoader = Callable[[Path], HFRunConfig]
-ResumePreflightBuilder = Callable[..., dict[str, object]]
+
+class ResumeRootReport(TypedDict, total=False):
+    results_root: str
+    config_source: str | None
+    classification: str
+    can_resume: bool
+    resume_mode: object
+    total_runs: int
+    finished_count: int
+    failed_count: int
+    pending_count: int
+    running_count: int
+    status_updated_at: object
+    ready_to_rent: bool
+    rent_ready: bool
+    rent_ready_reason: str
+    needs_config_fix: bool
+    active: bool
+    runtime_mode: str
+    resume_profile: str
+    resume_phase: str
+    excluded_decoding_labels: list[str]
+    error: str
+
+
+class ResumeSweepReport(TypedDict):
+    repo_root: str
+    results_root: str
+    root_count: int
+    ready_count: int
+    needs_config_fix_count: int
+    active_count: int
+    invalid_config_count: int
+    missing_config_count: int
+    finished_count: int
+    recommended_results_root: str | None
+    recommended_reason: str | None
+    roots: list[ResumeRootReport]
+
+
+ResumeConfigLoader = Callable[[Path], object]
+ResumePreflightBuilder = Callable[..., Mapping[str, object]]
 
 
 def build_resume_sweep_report(
@@ -22,7 +60,7 @@ def build_resume_sweep_report(
     load_config_fn: ResumeConfigLoader = load_hf_run_config,
     preflight_fn: ResumePreflightBuilder = build_resume_preflight_report,
     root_name_contains: str | None = None,
-) -> dict[str, object]:
+) -> ResumeSweepReport:
     repo_root_path = Path(repo_root)
     results_root_path = Path(results_root)
     if not repo_root_path.exists():
@@ -30,7 +68,7 @@ def build_resume_sweep_report(
     if not results_root_path.exists():
         raise FileNotFoundError(f"Local results root does not exist: {results_root_path}")
 
-    root_reports: list[dict[str, object]] = []
+    root_reports: list[ResumeRootReport] = []
     for candidate_root in _discover_resume_roots(results_root_path):
         if root_name_contains is not None and root_name_contains not in candidate_root.name:
             continue
@@ -150,7 +188,7 @@ def _discover_resume_roots(results_root: Path) -> list[Path]:
     )
 
 
-def _classify_root_report(report: dict[str, object]) -> str:
+def _classify_root_report(report: Mapping[str, object]) -> str:
     running_count = coerce_int(report.get("running_count", 0))
     if running_count > 0:
         return "active"
@@ -181,7 +219,7 @@ def _configured_output_root_name(config: object) -> str | None:
     return Path(str(output_root)).name
 
 
-def _root_sort_key(report: dict[str, object]) -> tuple[int, str]:
+def _root_sort_key(report: ResumeRootReport) -> tuple[int, str]:
     classification_order = {
         "resume-ready": 0,
         "needs-config-fix": 1,
@@ -196,7 +234,7 @@ def _root_sort_key(report: dict[str, object]) -> tuple[int, str]:
     )
 
 
-def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, object] | None:
+def _recommend_root_report(root_reports: list[ResumeRootReport]) -> ResumeRootReport | None:
     rent_ready_roots = [report for report in root_reports if _report_bool(report, "rent_ready")]
     if not rent_ready_roots:
         return None
@@ -211,5 +249,5 @@ def _recommend_root_report(root_reports: list[dict[str, object]]) -> dict[str, o
     )
 
 
-def _report_bool(report: dict[str, object], key: str) -> bool:
+def _report_bool(report: Mapping[str, object], key: str) -> bool:
     return report.get(key) is True
