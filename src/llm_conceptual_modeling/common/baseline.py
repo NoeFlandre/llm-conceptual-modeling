@@ -82,9 +82,9 @@ def propose_random_k_edges(
     volume-matched comparison.
     """
     rng = random.Random(seed)
-    candidates = [_normalize_edge(e) for e in candidate_edges]
+    candidates = sorted({_normalize_edge(e) for e in candidate_edges})
     if k >= len(candidates):
-        return sorted(set(candidates))
+        return candidates
     return sorted(rng.sample(candidates, k))
 
 

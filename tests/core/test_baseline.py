@@ -1,6 +1,7 @@
 from llm_conceptual_modeling.common.baseline import (
     propose_direct_cross_subgraph_edges,
     propose_edit_distance_cross_subgraph_edges,
+    propose_random_k_edges,
     propose_wordnet_cross_subgraph_edges,
 )
 
@@ -76,3 +77,19 @@ def test_propose_edit_distance_cross_subgraph_edges_prefers_lexically_similar_la
     )
 
     assert actual[0] == ("physical activities", "physical activity")
+
+
+def test_propose_random_k_edges_returns_k_unique_normalized_edges() -> None:
+    candidate_edges = [
+        ("a", "b"),
+        ("b", "a"),
+        ("a", "c"),
+        ("c", "a"),
+        ("a", "d"),
+        ("d", "a"),
+    ]
+
+    actual = propose_random_k_edges(candidate_edges, 3, seed=42)
+
+    assert len(actual) == 3
+    assert len(set(actual)) == 3
