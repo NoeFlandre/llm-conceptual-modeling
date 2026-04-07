@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from collections import defaultdict
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, Callable, cast
 
@@ -172,7 +173,7 @@ def load_valid_finished_summary(
 def load_deferred_failed_summary(
     *,
     run_dir: Path,
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
     read_artifact_json_fn: Callable[[Path], JsonObject] | None = None,
 ) -> JsonObject | None:
     if read_artifact_json_fn is None:
@@ -196,7 +197,7 @@ def load_deferred_failed_summary(
 
 
 def resolve_retry_timeout_failures_on_resume(
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
 ) -> bool:
     mode = resolve_resume_pass_mode(context_policy)
     if mode in {"retry-timeouts", "retry-all"}:
@@ -209,7 +210,7 @@ def resolve_retry_timeout_failures_on_resume(
 
 
 def resolve_retry_oom_failures_on_resume(
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
 ) -> bool:
     if resolve_resume_pass_mode(context_policy) == "retry-all":
         return True
@@ -221,7 +222,7 @@ def resolve_retry_oom_failures_on_resume(
 
 
 def resolve_retry_infrastructure_failures_on_resume(
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
 ) -> bool:
     if resolve_resume_pass_mode(context_policy) == "retry-all":
         return True
@@ -233,7 +234,7 @@ def resolve_retry_infrastructure_failures_on_resume(
 
 
 def resolve_retry_structural_failures_on_resume(
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
 ) -> bool:
     if resolve_resume_pass_mode(context_policy) == "retry-all":
         return True
@@ -244,7 +245,7 @@ def resolve_retry_structural_failures_on_resume(
     )
 
 
-def resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
+def resolve_resume_pass_mode(context_policy: Mapping[str, object] | None) -> str:
     if context_policy is None:
         return "throughput"
     raw_value = context_policy.get("resume_pass_mode", "throughput")
@@ -260,7 +261,7 @@ def resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
 
 
 def _resolve_context_policy_bool(
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
     *,
     key: str,
     default: bool,
@@ -275,9 +276,9 @@ def _resolve_context_policy_bool(
 
 def _should_defer_failure_kind(
     failure_kind: str,
-    context_policy: dict[str, object] | None,
+    context_policy: Mapping[str, object] | None,
 ) -> bool:
-    policy_checks: dict[str, Callable[[dict[str, object] | None], bool]] = {
+    policy_checks: dict[str, Callable[[Mapping[str, object] | None], bool]] = {
         "timeout": resolve_retry_timeout_failures_on_resume,
         "oom": resolve_retry_oom_failures_on_resume,
         "infrastructure": resolve_retry_infrastructure_failures_on_resume,
@@ -300,7 +301,7 @@ def _should_retry_qwen_contrastive_failure(*, run_dir: Path, error: JsonObject) 
     return True
 
 
-def classify_failure_payload(error: JsonObject) -> str:
+def classify_failure_payload(error: Mapping[str, object]) -> str:
     return classify_failure(
         error_type=str(error.get("type", "")),
         message=str(error.get("message", "")),

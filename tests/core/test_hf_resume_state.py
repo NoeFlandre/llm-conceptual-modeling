@@ -1,5 +1,7 @@
 import json
+from collections.abc import Iterator, Mapping
 from pathlib import Path
+from typing import cast
 
 import pytest
 
@@ -33,8 +35,11 @@ def _make_spec(
     replication: int = 0,
     condition_label: str = "greedy",
     decoding_algorithm: str = "greedy",
-    context_policy: dict[str, object] | None = None,
+    context_policy: Mapping[str, object] | None = None,
 ) -> HFRunSpec:
+    resolved_context_policy: dict[str, object] = dict(
+        context_policy or {"resume_pass_mode": "throughput"}
+    )
     return HFRunSpec(
         algorithm="algo1",
         model="allenai/Olmo-3-7B-Instruct",
@@ -51,7 +56,7 @@ def _make_spec(
         seed=1,
         runtime_profile=_runtime_profile(),
         max_new_tokens_by_schema={"edge_list": 32, "vote_list": 16, "label_list": 16},
-        context_policy=context_policy or {"resume_pass_mode": "throughput"},
+        context_policy=resolved_context_policy,
     )
 
 
@@ -385,6 +390,20 @@ def test_should_defer_failure_kind_retries_all_failures_when_retry_all_enabled()
     assert _should_defer_failure_kind("oom", context_policy) is False
     assert _should_defer_failure_kind("infrastructure", context_policy) is False
     assert _should_defer_failure_kind("structural", context_policy) is False
+
+
+def test_should_defer_failure_kind_accepts_mapping_context_policy() -> None:
+    class ContextPolicy(Mapping[str, object]):
+        def __getitem__(self, key: str) -> object:
+            return {"resume_pass_mode": "retry-all"}[key]
+
+        def __iter__(self) -> Iterator[str]:
+            return iter({"resume_pass_mode": "retry-all"})
+
+        def __len__(self) -> int:
+            return 1
+
+    assert _should_defer_failure_kind("timeout", ContextPolicy()) is False
 
 
 def test_classify_failure_payload_detects_unsupported_decoding_failure() -> None:
@@ -735,7 +754,9 @@ def test_resume_priority_key_ignores_malformed_history_counts(
     key = resume_priority_key(
         spec=spec,
         run_dir=run_dir,
-        history={
+        history=cast(
+            dict[str, dict[object, dict[str, int]]],
+            {
             "by_pair": {
                 "sg2_sg3": {
                     "finished": "false",
@@ -748,6 +769,7 @@ def test_resume_priority_key_ignores_malformed_history_counts(
             "by_pair_condition": {},
             "by_family": {},
         },
+        ),
     )
 
     assert key[0] == 3.0
