@@ -1,19 +1,13 @@
-Thesaurus = dict[str, dict[str, list[str]]]
+from collections.abc import Mapping
+
+Thesaurus = Mapping[str, Mapping[str, list[str]]]
 Edge = tuple[str, str]
 
 
 def build_term_normalizer(thesaurus: Thesaurus) -> dict[str, str]:
     normalizer: dict[str, str] = {}
-    synonyms = thesaurus["synonyms"]
-    antonyms = thesaurus["antonyms"]
-
-    for base_term, variants in synonyms.items():
-        _register_base_term(normalizer, base_term)
-        _register_variants(normalizer, base_term, variants)
-
-    for base_term, variants in antonyms.items():
-        _register_base_term(normalizer, base_term)
-        _register_variants(normalizer, base_term, variants)
+    _register_term_family(normalizer, thesaurus.get("synonyms", {}))
+    _register_term_family(normalizer, thesaurus.get("antonyms", {}))
 
     return normalizer
 
@@ -38,3 +32,12 @@ def _register_base_term(normalizer: dict[str, str], base_term: str) -> None:
 def _register_variants(normalizer: dict[str, str], base_term: str, variants: list[str]) -> None:
     for variant in variants:
         normalizer[variant] = base_term
+
+
+def _register_term_family(
+    normalizer: dict[str, str],
+    term_family: Mapping[str, list[str]],
+) -> None:
+    for base_term, variants in term_family.items():
+        _register_base_term(normalizer, base_term)
+        _register_variants(normalizer, base_term, variants)

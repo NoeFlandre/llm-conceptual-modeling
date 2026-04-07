@@ -30,3 +30,28 @@ def test_normalize_edge_terms_rewrites_known_variants_and_preserves_unknown_term
         ("Obesity", "Poor body image"),
         ("Untracked term", "Stress"),
     ]
+
+
+def test_build_term_normalizer_treats_missing_sections_as_empty() -> None:
+    normalizer = build_term_normalizer({"synonyms": {}})
+
+    assert normalizer == {}
+
+
+def test_normalize_edge_terms_accepts_thesaurus_without_antonyms() -> None:
+    edges = [("Adiposity", "Body image"), ("Untracked term", "Stress level")]
+
+    actual = normalize_edge_terms(
+        edges,
+        {
+            "synonyms": {
+                "Obesity": ["Adiposity"],
+                "Poor body image": ["Body image"],
+            }
+        },
+    )
+
+    assert actual == [
+        ("Obesity", "Poor body image"),
+        ("Untracked term", "Stress level"),
+    ]
