@@ -66,17 +66,12 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
             evaluated_path,
             factorial_path,
         )
-        write_grouped_metric_stability(
-            [evaluated_path],
-            stability_path,
-            group_by=analysis_spec["stability_group_by"],
-            metrics=analysis_spec["metrics"],
-        )
-        write_output_variability_analysis(
-            [raw_path],
-            variability_path,
-            group_by=analysis_spec["variability_group_by"],
-            result_column=str(analysis_spec["result_column"]),
+        _write_analysis_outputs(
+            raw_path=raw_path,
+            evaluated_path=evaluated_path,
+            stability_path=stability_path,
+            variability_path=variability_path,
+            analysis_spec=analysis_spec,
         )
         if algorithm == "algo3":
             _backfill_algo3_summary_artifacts(
@@ -237,6 +232,28 @@ def _evaluate_and_factorial_aggregate_output(
     run_algo3_factorial_analysis(evaluated_path, factorial_path)
 
 
+def _write_analysis_outputs(
+    *,
+    raw_path: Path,
+    evaluated_path: Path,
+    stability_path: Path,
+    variability_path: Path,
+    analysis_spec: dict[str, object],
+) -> None:
+    write_grouped_metric_stability(
+        [evaluated_path],
+        stability_path,
+        group_by=analysis_spec["stability_group_by"],
+        metrics=analysis_spec["metrics"],
+    )
+    write_output_variability_analysis(
+        [raw_path],
+        variability_path,
+        group_by=analysis_spec["variability_group_by"],
+        result_column=str(analysis_spec["result_column"]),
+    )
+
+
 def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.DataFrame) -> None:
     for group_key, group_frame in summary_frame.groupby(["algorithm", "model"], dropna=False):
         algorithm, model = cast(tuple[object, object], group_key)
@@ -273,17 +290,12 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
             evaluated_path=evaluated_path,
             output_path=factorial_path,
         )
-        write_grouped_metric_stability(
-            [evaluated_path],
-            stability_path,
-            group_by=analysis_spec["stability_group_by"],
-            metrics=analysis_spec["metrics"],
-        )
-        write_output_variability_analysis(
-            [raw_path],
-            variability_path,
-            group_by=analysis_spec["variability_group_by"],
-            result_column=str(analysis_spec["result_column"]),
+        _write_analysis_outputs(
+            raw_path=raw_path,
+            evaluated_path=evaluated_path,
+            stability_path=stability_path,
+            variability_path=variability_path,
+            analysis_spec=analysis_spec,
         )
 
         budget_paths = {

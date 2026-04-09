@@ -12,6 +12,7 @@ from llm_conceptual_modeling.hf_batch_outputs import (
     _combined_factorial_spec,
     _evaluate_and_factorial_aggregate_output,
     _evaluate_combined_raw_output,
+    _write_analysis_outputs,
     write_aggregated_outputs,
 )
 
@@ -435,4 +436,63 @@ def test_evaluate_and_factorial_aggregate_output_dispatches_by_algorithm(
         ("algo2_factorial", (evaluated_path, factorial_path)),
         ("algo3_eval", (raw_path, evaluated_path)),
         ("algo3_factorial", (evaluated_path, factorial_path)),
+    ]
+
+
+def test_write_analysis_outputs_uses_analysis_spec_columns(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    raw_path = tmp_path / "raw.csv"
+    evaluated_path = tmp_path / "evaluated.csv"
+    variability_path = tmp_path / "variability.csv"
+    stability_path = tmp_path / "stability.csv"
+    calls: list[tuple[str, tuple[object, ...], dict[str, object]]] = []
+    analysis_spec = {
+        "stability_group_by": ["pair_name", "Explanation"],
+        "variability_group_by": ["pair_name", "Convergence"],
+        "metrics": ["accuracy", "precision"],
+        "result_column": "Result",
+    }
+
+    def fake_stability(*args, **kwargs) -> None:
+        calls.append(("stability", args, kwargs))
+
+    def fake_variability(*args, **kwargs) -> None:
+        calls.append(("variability", args, kwargs))
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.write_grouped_metric_stability",
+        fake_stability,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.write_output_variability_analysis",
+        fake_variability,
+    )
+
+    _write_analysis_outputs(
+        raw_path=raw_path,
+        evaluated_path=evaluated_path,
+        stability_path=stability_path,
+        variability_path=variability_path,
+        analysis_spec=analysis_spec,
+    )
+
+    assert calls == [
+        (
+            "stability",
+            ([evaluated_path], stability_path),
+            {
+                "group_by": ["pair_name", "Explanation"],
+                "metrics": ["accuracy", "precision"],
+            },
+        ),
+        (
+            "variability",
+            ([raw_path], variability_path),
+            {
+                "group_by": ["pair_name", "Convergence"],
+                "result_column": "Result",
+            },
+        ),
     ]
