@@ -64,6 +64,14 @@ def _retryable_exception_from_wrapped_error(
     return False, error
 
 
+def _retryable_sdk_error(
+    error: Exception,
+    *,
+    retry_http_status_codes: tuple[int, ...],
+) -> bool:
+    return _status_code_from_sdk_error(error) in retry_http_status_codes
+
+
 def call_with_retry(
     *,
     operation: Callable[[], T],
@@ -102,10 +110,16 @@ def call_with_retry(
                     retry_http_status_codes=retry_http_status_codes,
                 )
             elif _sdk_error_type is not None and isinstance(error, _sdk_error_type):
-                retryable = _status_code_from_sdk_error(error) in retry_http_status_codes
+                retryable = _retryable_sdk_error(
+                    error,
+                    retry_http_status_codes=retry_http_status_codes,
+                )
                 exception = error
             elif isinstance(error, SDKError):
-                retryable = _status_code_from_sdk_error(error) in retry_http_status_codes
+                retryable = _retryable_sdk_error(
+                    error,
+                    retry_http_status_codes=retry_http_status_codes,
+                )
                 exception = error
             else:
                 raise

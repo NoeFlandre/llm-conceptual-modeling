@@ -3,7 +3,12 @@ from urllib.error import HTTPError, URLError
 
 import httpx
 
-from llm_conceptual_modeling.common.retry import PermanentError, SDKError, call_with_retry
+from llm_conceptual_modeling.common.retry import (
+    PermanentError,
+    SDKError,
+    _retryable_sdk_error,
+    call_with_retry,
+)
 
 
 def _assert_http_error(
@@ -162,3 +167,28 @@ def test_call_with_retry_retries_sdk_error_429_before_succeeding() -> None:
     assert actual == "ok"
     assert calls["count"] == 3
     assert delays == [0.1, 0.2]
+
+
+def test_retryable_sdk_error_checks_status_code_and_raw_response() -> None:
+    class RateLimitedSDKError(SDKError):
+        def __init__(self, *, status_code=None, raw_response=None) -> None:
+            super().__init__("rate limited")
+            self.status_code = status_code
+            self.raw_response = raw_response
+
+    class RawResponse:
+        def __init__(self, status_code: int) -> None:
+            self.status_code = status_code
+
+    assert _retryable_sdk_error(
+        RateLimitedSDKError(status_code=429),
+        retry_http_status_codes=(429, 500),
+    ) is True
+    assert _retryable_sdk_error(
+        RateLimitedSDKError(raw_response=RawResponse(500)),
+        retry_http_status_codes=(429, 500),
+    ) is True
+    assert _retryable_sdk_error(
+        RateLimitedSDKError(status_code=400),
+        retry_http_status_codes=(429, 500),
+    ) is False
