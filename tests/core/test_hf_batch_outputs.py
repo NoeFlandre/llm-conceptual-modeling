@@ -10,6 +10,7 @@ from llm_conceptual_modeling.hf_batch_outputs import (
     _budget_analysis_specs,
     _combined_analysis_spec,
     _combined_factorial_spec,
+    _evaluate_and_factorial_aggregate_output,
     _evaluate_combined_raw_output,
     write_aggregated_outputs,
 )
@@ -374,4 +375,64 @@ def test_evaluate_combined_raw_output_dispatches_by_algorithm(
     assert calls == [
         ("connection", raw_path, evaluated_path),
         ("algo3", raw_path, evaluated_path),
+    ]
+
+
+def test_evaluate_and_factorial_aggregate_output_dispatches_by_algorithm(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    raw_path = tmp_path / "raw.csv"
+    evaluated_path = tmp_path / "evaluated.csv"
+    factorial_path = tmp_path / "factorial.csv"
+    raw_path.write_text("raw", encoding="utf-8")
+    calls: list[tuple[str, tuple[Path, ...]]] = []
+
+    def fake_connection_evaluator(input_path: Path, output_path: Path) -> None:
+        calls.append(("connection", (input_path, output_path)))
+
+    def fake_algo1_factorial(inputs: list[Path], output_path: Path) -> None:
+        calls.append(("algo1_factorial", (inputs[0], output_path)))
+
+    def fake_algo2_factorial(inputs: list[Path], output_path: Path) -> None:
+        calls.append(("algo2_factorial", (inputs[0], output_path)))
+
+    def fake_algo3_evaluator(input_path: Path, output_path: Path) -> None:
+        calls.append(("algo3_eval", (input_path, output_path)))
+
+    def fake_algo3_factorial(input_path: Path, output_path: Path) -> None:
+        calls.append(("algo3_factorial", (input_path, output_path)))
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.evaluate_connection_results_file",
+        fake_connection_evaluator,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.run_algo1_factorial_analysis",
+        fake_algo1_factorial,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.run_algo2_factorial_analysis",
+        fake_algo2_factorial,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.evaluate_algo3_results",
+        fake_algo3_evaluator,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.run_algo3_factorial_analysis",
+        fake_algo3_factorial,
+    )
+
+    _evaluate_and_factorial_aggregate_output("algo1", raw_path, evaluated_path, factorial_path)
+    _evaluate_and_factorial_aggregate_output("algo2", raw_path, evaluated_path, factorial_path)
+    _evaluate_and_factorial_aggregate_output("algo3", raw_path, evaluated_path, factorial_path)
+
+    assert calls == [
+        ("connection", (raw_path, evaluated_path)),
+        ("algo1_factorial", (evaluated_path, factorial_path)),
+        ("connection", (raw_path, evaluated_path)),
+        ("algo2_factorial", (evaluated_path, factorial_path)),
+        ("algo3_eval", (raw_path, evaluated_path)),
+        ("algo3_factorial", (evaluated_path, factorial_path)),
     ]

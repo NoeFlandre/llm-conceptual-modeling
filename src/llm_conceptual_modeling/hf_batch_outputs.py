@@ -60,39 +60,25 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
         relaxed_budget_path = combo_root / "replication_budget_relaxed.csv"
         analysis_spec = _aggregated_analysis_spec(str(algorithm))
 
-        if algorithm in {"algo1", "algo2"}:
-            evaluate_connection_results_file(raw_path, evaluated_path)
-            if algorithm == "algo1":
-                run_algo1_factorial_analysis([evaluated_path], factorial_path)
-            else:
-                run_algo2_factorial_analysis([evaluated_path], factorial_path)
-            write_grouped_metric_stability(
-                [evaluated_path],
-                stability_path,
-                group_by=analysis_spec["stability_group_by"],
-                metrics=analysis_spec["metrics"],
-            )
-            write_output_variability_analysis(
-                [raw_path],
-                variability_path,
-                group_by=analysis_spec["variability_group_by"],
-                result_column=str(analysis_spec["result_column"]),
-            )
-        else:
-            evaluate_algo3_results(raw_path, evaluated_path)
-            run_algo3_factorial_analysis(evaluated_path, factorial_path)
-            write_grouped_metric_stability(
-                [evaluated_path],
-                stability_path,
-                group_by=analysis_spec["stability_group_by"],
-                metrics=analysis_spec["metrics"],
-            )
-            write_output_variability_analysis(
-                [raw_path],
-                variability_path,
-                group_by=analysis_spec["variability_group_by"],
-                result_column=str(analysis_spec["result_column"]),
-            )
+        _evaluate_and_factorial_aggregate_output(
+            str(algorithm),
+            raw_path,
+            evaluated_path,
+            factorial_path,
+        )
+        write_grouped_metric_stability(
+            [evaluated_path],
+            stability_path,
+            group_by=analysis_spec["stability_group_by"],
+            metrics=analysis_spec["metrics"],
+        )
+        write_output_variability_analysis(
+            [raw_path],
+            variability_path,
+            group_by=analysis_spec["variability_group_by"],
+            result_column=str(analysis_spec["result_column"]),
+        )
+        if algorithm == "algo3":
             _backfill_algo3_summary_artifacts(
                 output_root=output_root,
                 summary_frame=summary_frame,
@@ -231,6 +217,24 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
         "metrics": ["Recall"],
         "result_column": "Results",
     }
+
+
+def _evaluate_and_factorial_aggregate_output(
+    algorithm: str,
+    raw_path: Path,
+    evaluated_path: Path,
+    factorial_path: Path,
+) -> None:
+    if algorithm == "algo1":
+        evaluate_connection_results_file(raw_path, evaluated_path)
+        run_algo1_factorial_analysis([evaluated_path], factorial_path)
+        return
+    if algorithm == "algo2":
+        evaluate_connection_results_file(raw_path, evaluated_path)
+        run_algo2_factorial_analysis([evaluated_path], factorial_path)
+        return
+    evaluate_algo3_results(raw_path, evaluated_path)
+    run_algo3_factorial_analysis(evaluated_path, factorial_path)
 
 
 def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.DataFrame) -> None:
