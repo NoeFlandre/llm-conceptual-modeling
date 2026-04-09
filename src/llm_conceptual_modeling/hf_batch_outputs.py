@@ -260,50 +260,27 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
         relaxed_budget_path = combo_root / "replication_budget_relaxed.csv"
         analysis_spec = _combined_analysis_spec(str(algorithm))
 
-        if algorithm in {"algo1", "algo2"}:
-            evaluate_connection_results_file(raw_path, evaluated_path)
-            evaluated_frame = pd.read_csv(evaluated_path)
-            evaluated_frame = add_decoding_factor_columns(evaluated_frame)
-            evaluated_frame.to_csv(evaluated_path, index=False)
-            _write_combined_factorial(
-                algorithm=str(algorithm),
-                evaluated_path=evaluated_path,
-                output_path=factorial_path,
-            )
-            write_grouped_metric_stability(
-                [evaluated_path],
-                stability_path,
-                group_by=analysis_spec["stability_group_by"],
-                metrics=analysis_spec["metrics"],
-            )
-            write_output_variability_analysis(
-                [raw_path],
-                variability_path,
-                group_by=analysis_spec["variability_group_by"],
-                result_column=str(analysis_spec["result_column"]),
-            )
-        else:
-            evaluate_algo3_results(raw_path, evaluated_path)
-            evaluated_frame = pd.read_csv(evaluated_path)
-            evaluated_frame = add_decoding_factor_columns(evaluated_frame)
-            evaluated_frame.to_csv(evaluated_path, index=False)
-            _write_combined_factorial(
-                algorithm=str(algorithm),
-                evaluated_path=evaluated_path,
-                output_path=factorial_path,
-            )
-            write_grouped_metric_stability(
-                [evaluated_path],
-                stability_path,
-                group_by=analysis_spec["stability_group_by"],
-                metrics=analysis_spec["metrics"],
-            )
-            write_output_variability_analysis(
-                [raw_path],
-                variability_path,
-                group_by=analysis_spec["variability_group_by"],
-                result_column=str(analysis_spec["result_column"]),
-            )
+        _evaluate_combined_raw_output(str(algorithm), raw_path, evaluated_path)
+        evaluated_frame = pd.read_csv(evaluated_path)
+        evaluated_frame = add_decoding_factor_columns(evaluated_frame)
+        evaluated_frame.to_csv(evaluated_path, index=False)
+        _write_combined_factorial(
+            algorithm=str(algorithm),
+            evaluated_path=evaluated_path,
+            output_path=factorial_path,
+        )
+        write_grouped_metric_stability(
+            [evaluated_path],
+            stability_path,
+            group_by=analysis_spec["stability_group_by"],
+            metrics=analysis_spec["metrics"],
+        )
+        write_output_variability_analysis(
+            [raw_path],
+            variability_path,
+            group_by=analysis_spec["variability_group_by"],
+            result_column=str(analysis_spec["result_column"]),
+        )
 
         budget_paths = {
             "strict": strict_budget_path,
@@ -330,6 +307,13 @@ def _write_combined_factorial(
         output_path,
         spec,
     )
+
+
+def _evaluate_combined_raw_output(algorithm: str, raw_path: Path, evaluated_path: Path) -> None:
+    if algorithm in {"algo1", "algo2"}:
+        evaluate_connection_results_file(raw_path, evaluated_path)
+        return
+    evaluate_algo3_results(raw_path, evaluated_path)
 
 
 def _budget_analysis_specs() -> list[dict[str, object]]:
