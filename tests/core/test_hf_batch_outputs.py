@@ -12,6 +12,7 @@ from llm_conceptual_modeling.hf_batch_outputs import (
     _combined_factorial_spec,
     _evaluate_and_factorial_aggregate_output,
     _evaluate_combined_raw_output,
+    _load_raw_rows_frame,
     _write_analysis_outputs,
     _write_replication_budget_outputs,
     write_aggregated_outputs,
@@ -380,6 +381,57 @@ def test_write_replication_budget_outputs_uses_budget_specs(
     assert calls == [
         ([stability_path], budget_paths["strict"], 0.05, 1.96),
         ([stability_path], budget_paths["relaxed"], 0.10, 1.645),
+    ]
+
+
+def test_load_raw_rows_frame_resolves_workspace_paths_and_adds_decoding_columns(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "results" / "hf-paper-batch-algo1-qwen-current"
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "Qwen__Qwen3.5-9B"
+        / "beam_num_beams_6"
+        / "sg1_sg2"
+        / "0000"
+        / "rep_00"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    raw_row_path = run_dir / "raw_row.json"
+    raw_row_path.write_text(
+        json.dumps(
+            {
+                "pair_name": "sg1_sg2",
+                "Result": "[]",
+                "decoding_algorithm": "beam",
+                "decoding_condition": "beam_num_beams_6",
+            }
+        ),
+        encoding="utf-8",
+    )
+    remote_raw_row_path = Path(
+        "/workspace/results/hf-paper-batch-algo1-qwen-current/runs/algo1/Qwen__Qwen3.5-9B/"
+        "beam_num_beams_6/sg1_sg2/0000/rep_00/raw_row.json"
+    )
+
+    frame = _load_raw_rows_frame(
+        output_root=output_root,
+        raw_row_paths=[str(remote_raw_row_path)],
+        add_decoding_factors=True,
+    )
+
+    assert frame.to_dict(orient="records") == [
+        {
+            "pair_name": "sg1_sg2",
+            "Result": "[]",
+            "decoding_algorithm": "beam",
+            "decoding_condition": "beam_num_beams_6",
+            "Decoding Algorithm": "beam",
+            "Beam Width Level": 1,
+            "Contrastive Penalty Level": 0,
+        }
     ]
 
 

@@ -39,16 +39,11 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
             aggregated_root / str(algorithm) / slugify_model(str(model)) / str(condition_label)
         )
         combo_root.mkdir(parents=True, exist_ok=True)
-        raw_rows = [
-            json.loads(
-                _resolve_materialized_artifact_path(
-                    output_root=output_root,
-                    artifact_path=Path(path),
-                ).read_text(encoding="utf-8")
-            )
-            for path in group_frame["raw_row_path"].tolist()
-        ]
-        raw_frame = pd.DataFrame.from_records(raw_rows)
+        raw_frame = _load_raw_rows_frame(
+            output_root=output_root,
+            raw_row_paths=group_frame["raw_row_path"].tolist(),
+            add_decoding_factors=False,
+        )
         raw_path = combo_root / "raw.csv"
         raw_frame.to_csv(raw_path, index=False)
 
@@ -143,6 +138,27 @@ def _resolve_materialized_artifact_path(*, output_root: Path, artifact_path: Pat
         if candidate_path.exists():
             return candidate_path
     return artifact_path
+
+
+def _load_raw_rows_frame(
+    *,
+    output_root: Path,
+    raw_row_paths: list[object],
+    add_decoding_factors: bool,
+) -> pd.DataFrame:
+    raw_rows = [
+        json.loads(
+            _resolve_materialized_artifact_path(
+                output_root=output_root,
+                artifact_path=Path(str(path)),
+            ).read_text(encoding="utf-8")
+        )
+        for path in raw_row_paths
+    ]
+    raw_frame = pd.DataFrame.from_records(raw_rows)
+    if add_decoding_factors:
+        return add_decoding_factor_columns(raw_frame)
+    return raw_frame
 
 
 def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
@@ -255,17 +271,11 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
         algorithm, model = cast(tuple[object, object], group_key)
         combo_root = aggregated_root / str(algorithm) / slugify_model(str(model)) / "combined"
         combo_root.mkdir(parents=True, exist_ok=True)
-        raw_rows = [
-            json.loads(
-                _resolve_materialized_artifact_path(
-                    output_root=aggregated_root.parent,
-                    artifact_path=Path(path),
-                ).read_text(encoding="utf-8")
-            )
-            for path in group_frame["raw_row_path"].tolist()
-        ]
-        raw_frame = pd.DataFrame.from_records(raw_rows)
-        raw_frame = add_decoding_factor_columns(raw_frame)
+        raw_frame = _load_raw_rows_frame(
+            output_root=aggregated_root.parent,
+            raw_row_paths=group_frame["raw_row_path"].tolist(),
+            add_decoding_factors=True,
+        )
         raw_path = combo_root / "raw.csv"
         raw_frame.to_csv(raw_path, index=False)
 
