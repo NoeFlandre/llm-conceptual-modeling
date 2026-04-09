@@ -363,6 +363,14 @@ def _budget_analysis_specs() -> list[dict[str, object]]:
     ]
 
 
+def _decoding_factor_columns() -> list[str]:
+    return [
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+
+
 def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
     if algorithm == "algo1":
         return GeneralizedFactorialSpec(
@@ -372,9 +380,7 @@ def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
                 "Counterexample",
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
+                *_decoding_factor_columns(),
             ],
             metric_columns=["accuracy", "recall", "precision"],
             output_columns=["accuracy", "recall", "precision", "Feature"],
@@ -389,9 +395,7 @@ def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
                 "Convergence",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
+                *_decoding_factor_columns(),
             ],
             metric_columns=["accuracy", "recall", "precision"],
             output_columns=["accuracy", "recall", "precision", "Feature"],
@@ -403,9 +407,7 @@ def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
             "Counter-Example",
             "Number of Words",
             "Depth",
-            "Decoding Algorithm",
-            "Beam Width Level",
-            "Contrastive Penalty Level",
+            *_decoding_factor_columns(),
         ],
         metric_columns=["Recall"],
         output_columns=["Recall", "Feature"],
@@ -423,9 +425,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Counterexample",
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
+                *_decoding_factor_columns(),
             ],
             "variability_group_by": [
                 "pair_name",
@@ -434,9 +434,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Counterexample",
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
+                *_decoding_factor_columns(),
             ],
             "metrics": ["accuracy", "recall", "precision"],
             "result_column": "Result",
@@ -451,9 +449,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Array/List(1/-1)",
                 "Convergence",
                 "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
+                *_decoding_factor_columns(),
             ],
             "variability_group_by": [
                 "pair_name",
@@ -462,9 +458,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Counterexample",
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
+                *_decoding_factor_columns(),
                 "Convergence",
             ],
             "metrics": ["accuracy", "recall", "precision"],
@@ -477,9 +471,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
             "Number of Words",
             "Example",
             "Counter-Example",
-            "Decoding Algorithm",
-            "Beam Width Level",
-            "Contrastive Penalty Level",
+            *_decoding_factor_columns(),
         ],
         "variability_group_by": [
             "pair_name",
@@ -487,9 +479,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
             "Number of Words",
             "Example",
             "Counter-Example",
-            "Decoding Algorithm",
-            "Beam Width Level",
-            "Contrastive Penalty Level",
+            *_decoding_factor_columns(),
         ],
         "metrics": ["Recall"],
         "result_column": "Results",

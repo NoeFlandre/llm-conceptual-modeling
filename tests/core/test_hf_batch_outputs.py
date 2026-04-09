@@ -10,6 +10,7 @@ from llm_conceptual_modeling.hf_batch_outputs import (
     _budget_analysis_specs,
     _combined_analysis_spec,
     _combined_factorial_spec,
+    _decoding_factor_columns,
     _evaluate_and_factorial_aggregate_output,
     _evaluate_combined_raw_output,
     _load_raw_rows_frame,
@@ -345,6 +346,14 @@ def test_budget_analysis_specs_match_expected_targets() -> None:
             "relative_half_width_target": 0.10,
             "z_score": 1.645,
         },
+    ]
+
+
+def test_decoding_factor_columns_match_expected_suffix() -> None:
+    assert _decoding_factor_columns() == [
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
     ]
 
 
