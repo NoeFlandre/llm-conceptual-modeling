@@ -100,18 +100,17 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
                 evaluated_path=evaluated_path,
             )
 
-        write_replication_budget_analysis(
-            [stability_path],
-            strict_budget_path,
-            relative_half_width_target=0.05,
-            z_score=1.96,
-        )
-        write_replication_budget_analysis(
-            [stability_path],
-            relaxed_budget_path,
-            relative_half_width_target=0.10,
-            z_score=1.645,
-        )
+        budget_paths = {
+            "strict": strict_budget_path,
+            "relaxed": relaxed_budget_path,
+        }
+        for budget_spec in _budget_analysis_specs():
+            write_replication_budget_analysis(
+                [stability_path],
+                budget_paths[str(budget_spec["suffix"])],
+                relative_half_width_target=float(budget_spec["relative_half_width_target"]),
+                z_score=float(budget_spec["z_score"]),
+            )
     _write_combined_model_outputs(aggregated_root=aggregated_root, summary_frame=summary_frame)
     summary_frame.to_csv(output_root / "batch_summary.csv", index=False)
 
@@ -306,18 +305,17 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
                 result_column=str(analysis_spec["result_column"]),
             )
 
-        write_replication_budget_analysis(
-            [stability_path],
-            strict_budget_path,
-            relative_half_width_target=0.05,
-            z_score=1.96,
-        )
-        write_replication_budget_analysis(
-            [stability_path],
-            relaxed_budget_path,
-            relative_half_width_target=0.10,
-            z_score=1.645,
-        )
+        budget_paths = {
+            "strict": strict_budget_path,
+            "relaxed": relaxed_budget_path,
+        }
+        for budget_spec in _budget_analysis_specs():
+            write_replication_budget_analysis(
+                [stability_path],
+                budget_paths[str(budget_spec["suffix"])],
+                relative_half_width_target=float(budget_spec["relative_half_width_target"]),
+                z_score=float(budget_spec["z_score"]),
+            )
 
 
 def _write_combined_factorial(
@@ -332,6 +330,21 @@ def _write_combined_factorial(
         output_path,
         spec,
     )
+
+
+def _budget_analysis_specs() -> list[dict[str, object]]:
+    return [
+        {
+            "suffix": "strict",
+            "relative_half_width_target": 0.05,
+            "z_score": 1.96,
+        },
+        {
+            "suffix": "relaxed",
+            "relative_half_width_target": 0.10,
+            "z_score": 1.645,
+        },
+    ]
 
 
 def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:

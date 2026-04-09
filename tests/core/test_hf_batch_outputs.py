@@ -7,6 +7,7 @@ import pandas as pd
 
 from llm_conceptual_modeling.hf_batch_outputs import (
     _aggregated_analysis_spec,
+    _budget_analysis_specs,
     _combined_analysis_spec,
     _combined_factorial_spec,
     write_aggregated_outputs,
@@ -324,3 +325,19 @@ def test_combined_analysis_spec_matches_algorithm_shape() -> None:
     ]
     assert algo3_spec["metrics"] == ["Recall"]
     assert algo3_spec["result_column"] == "Results"
+
+
+def test_budget_analysis_specs_match_expected_targets() -> None:
+    specs = _budget_analysis_specs()
+    assert specs == [
+        {
+            "suffix": "strict",
+            "relative_half_width_target": 0.05,
+            "z_score": 1.96,
+        },
+        {
+            "suffix": "relaxed",
+            "relative_half_width_target": 0.10,
+            "z_score": 1.645,
+        },
+    ]
