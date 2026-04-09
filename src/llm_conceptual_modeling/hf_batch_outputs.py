@@ -81,17 +81,13 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
                 evaluated_path=evaluated_path,
             )
 
-        budget_paths = {
-            "strict": strict_budget_path,
-            "relaxed": relaxed_budget_path,
-        }
-        for budget_spec in _budget_analysis_specs():
-            write_replication_budget_analysis(
-                [stability_path],
-                budget_paths[str(budget_spec["suffix"])],
-                relative_half_width_target=float(budget_spec["relative_half_width_target"]),
-                z_score=float(budget_spec["z_score"]),
-            )
+        _write_replication_budget_outputs(
+            stability_path=stability_path,
+            budget_paths={
+                "strict": strict_budget_path,
+                "relaxed": relaxed_budget_path,
+            },
+        )
     _write_combined_model_outputs(aggregated_root=aggregated_root, summary_frame=summary_frame)
     summary_frame.to_csv(output_root / "batch_summary.csv", index=False)
 
@@ -298,17 +294,13 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
             analysis_spec=analysis_spec,
         )
 
-        budget_paths = {
-            "strict": strict_budget_path,
-            "relaxed": relaxed_budget_path,
-        }
-        for budget_spec in _budget_analysis_specs():
-            write_replication_budget_analysis(
-                [stability_path],
-                budget_paths[str(budget_spec["suffix"])],
-                relative_half_width_target=float(budget_spec["relative_half_width_target"]),
-                z_score=float(budget_spec["z_score"]),
-            )
+        _write_replication_budget_outputs(
+            stability_path=stability_path,
+            budget_paths={
+                "strict": strict_budget_path,
+                "relaxed": relaxed_budget_path,
+            },
+        )
 
 
 def _write_combined_factorial(
@@ -330,6 +322,20 @@ def _evaluate_combined_raw_output(algorithm: str, raw_path: Path, evaluated_path
         evaluate_connection_results_file(raw_path, evaluated_path)
         return
     evaluate_algo3_results(raw_path, evaluated_path)
+
+
+def _write_replication_budget_outputs(
+    *,
+    stability_path: Path,
+    budget_paths: dict[str, Path],
+) -> None:
+    for budget_spec in _budget_analysis_specs():
+        write_replication_budget_analysis(
+            [stability_path],
+            budget_paths[str(budget_spec["suffix"])],
+            relative_half_width_target=float(budget_spec["relative_half_width_target"]),
+            z_score=float(budget_spec["z_score"]),
+        )
 
 
 def _budget_analysis_specs() -> list[dict[str, object]]:

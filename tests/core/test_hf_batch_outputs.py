@@ -13,6 +13,7 @@ from llm_conceptual_modeling.hf_batch_outputs import (
     _evaluate_and_factorial_aggregate_output,
     _evaluate_combined_raw_output,
     _write_analysis_outputs,
+    _write_replication_budget_outputs,
     write_aggregated_outputs,
 )
 
@@ -343,6 +344,42 @@ def test_budget_analysis_specs_match_expected_targets() -> None:
             "relative_half_width_target": 0.10,
             "z_score": 1.645,
         },
+    ]
+
+
+def test_write_replication_budget_outputs_uses_budget_specs(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    stability_path = tmp_path / "condition_stability.csv"
+    budget_paths = {
+        "strict": tmp_path / "replication_budget_strict.csv",
+        "relaxed": tmp_path / "replication_budget_relaxed.csv",
+    }
+    calls: list[tuple[list[Path], Path, float, float]] = []
+
+    def fake_replication_budget(
+        input_paths: list[Path],
+        output_path: Path,
+        *,
+        relative_half_width_target: float,
+        z_score: float,
+    ) -> None:
+        calls.append((input_paths, output_path, relative_half_width_target, z_score))
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.write_replication_budget_analysis",
+        fake_replication_budget,
+    )
+
+    _write_replication_budget_outputs(
+        stability_path=stability_path,
+        budget_paths=budget_paths,
+    )
+
+    assert calls == [
+        ([stability_path], budget_paths["strict"], 0.05, 1.96),
+        ([stability_path], budget_paths["relaxed"], 0.10, 1.645),
     ]
 
 
