@@ -8,6 +8,7 @@ from typing import Iterable, cast
 
 import pandas as pd
 
+from llm_conceptual_modeling.algo3.evaluation import compute_recall_for_row
 from llm_conceptual_modeling.common.baseline import (
     propose_random_k_edges,
     propose_strategy_cross_subgraph_edges,
@@ -151,11 +152,13 @@ def _build_algo12_comparison_frame(
                             model=model,
                             baseline_strategy=baseline_strategy,
                             source_file=eval_file.name,
-                            row_precision=float(row.get("precision", 0)),
+                            llm_accuracy=float(row.get("accuracy", 0)),
+                            llm_precision=float(row.get("precision", 0)),
+                            llm_recall=float(row.get("recall", 0)),
                             k=k,
-                            tp=baseline_counts["tp"],
-                            fp=baseline_counts["fp"],
-                            fn=baseline_counts["fn"],
+                            baseline_tp=baseline_counts["tp"],
+                            baseline_fp=baseline_counts["fp"],
+                            baseline_fn=baseline_counts["fn"],
                             subgraph1_edges=subgraph1_edges,
                             subgraph2_edges=subgraph2_edges,
                         )
@@ -172,33 +175,34 @@ def _build_algo12_metric_rows(
     model: str,
     baseline_strategy: str,
     source_file: str,
-    row_precision: float,
+    llm_accuracy: float,
+    llm_precision: float,
+    llm_recall: float,
     k: int,
-    tp: int,
-    fp: int,
-    fn: int,
+    baseline_tp: int,
+    baseline_fp: int,
+    baseline_fn: int,
     subgraph1_edges: list[tuple[str, str]],
     subgraph2_edges: list[tuple[str, str]],
 ) -> list[dict[str, object]]:
-    sg1_nodes = {node for edge in subgraph1_edges for node in edge}
-    sg2_nodes = {node for edge in subgraph2_edges for node in edge}
-    tn = len(sg1_nodes) * len(sg2_nodes) - (tp + fp + fn)
-
-    llm_tp = int(round(row_precision * k)) if k > 0 else 0
-    llm_fp = k - llm_tp
-    llm_fn = fn
+    baseline_tn = _cross_subgraph_pair_count(subgraph1_edges, subgraph2_edges) - (
+        baseline_tp + baseline_fp + baseline_fn
+    )
 
     rows: list[dict[str, object]] = []
     for metric in _ALGO12_METRICS:
         if metric == "accuracy":
-            llm_metric = _safe_div(llm_tp + tn, llm_tp + llm_fp + llm_fn + tn)
-            baseline_metric = _safe_div(tp + tn, tp + fp + fn + tn)
+            llm_metric = llm_accuracy
+            baseline_metric = _safe_div(
+                baseline_tp + baseline_tn,
+                baseline_tp + baseline_fp + baseline_fn + baseline_tn,
+            )
         elif metric == "precision":
-            llm_metric = _safe_div(llm_tp, llm_tp + llm_fp)
-            baseline_metric = _safe_div(tp, tp + fp)
+            llm_metric = llm_precision
+            baseline_metric = _safe_div(baseline_tp, baseline_tp + baseline_fp)
         else:
-            llm_metric = _safe_div(llm_tp, llm_tp + llm_fn)
-            baseline_metric = _safe_div(tp, tp + fn)
+            llm_metric = llm_recall
+            baseline_metric = _safe_div(baseline_tp, baseline_tp + baseline_fn)
 
         rows.append(
             {
@@ -254,9 +258,11 @@ def _build_algo3_comparison_frame(results_subdir: Path) -> pd.DataFrame:
                             baseline_strategy=baseline_strategy,
                             source_file=eval_file.name,
                             k=k,
+                            llm_recall=float(row.get("Recall", 0)),
                             llm_edges=llm_result_edges,
                             baseline_edges=baseline_edges,
                             ground_truth=ground_truth,
+                            mother_edges=mother_edges,
                             source_edges=source_edges,
                             target_edges=target_edges,
                         )
@@ -273,38 +279,51 @@ def _build_algo3_metric_rows(
     baseline_strategy: str,
     source_file: str,
     k: int,
+    llm_recall: float,
     llm_edges: set[tuple[str, str]],
     baseline_edges: set[tuple[str, str]],
     ground_truth: set[tuple[str, str]],
+    mother_edges: list[tuple[str, str]],
     source_edges: list[tuple[str, str]],
     target_edges: list[tuple[str, str]],
 ) -> list[dict[str, object]]:
     baseline_tp = len(baseline_edges & ground_truth)
     baseline_fp = len(baseline_edges - ground_truth)
     baseline_fn = len(ground_truth - baseline_edges)
+    baseline_tn = _cross_subgraph_pair_count(source_edges, target_edges) - (
+        baseline_tp + baseline_fp + baseline_fn
+    )
 
     llm_tp = len(llm_edges & ground_truth)
     llm_fp = len(llm_edges - ground_truth)
-    llm_fn = baseline_fn
-
-    sg1_nodes = {node for edge in source_edges for node in edge}
-    sg2_nodes = {node for edge in target_edges for node in edge}
-    tn = len(sg1_nodes) * len(sg2_nodes) - (baseline_tp + baseline_fp + baseline_fn)
+    llm_fn = len(ground_truth - llm_edges)
+    llm_tn = _cross_subgraph_pair_count(source_edges, target_edges) - (
+        llm_tp + llm_fp + llm_fn
+    )
+    baseline_recall = compute_recall_for_row(
+        source_edges,
+        target_edges,
+        mother_edges,
+        sorted(baseline_edges),
+    )
 
     rows: list[dict[str, object]] = []
     for metric in _ALGO3_METRICS:
         if metric == "accuracy":
-            llm_metric = _safe_div(llm_tp + tn, llm_tp + llm_fp + llm_fn + tn)
+            llm_metric = _safe_div(
+                llm_tp + llm_tn,
+                llm_tp + llm_fp + llm_fn + llm_tn,
+            )
             baseline_metric = _safe_div(
-                baseline_tp + tn,
-                baseline_tp + baseline_fp + baseline_fn + tn,
+                baseline_tp + baseline_tn,
+                baseline_tp + baseline_fp + baseline_fn + baseline_tn,
             )
         elif metric == "precision":
             llm_metric = _safe_div(llm_tp, llm_tp + llm_fp)
             baseline_metric = _safe_div(baseline_tp, baseline_tp + baseline_fp)
         else:
-            llm_metric = _safe_div(llm_tp, llm_tp + llm_fn)
-            baseline_metric = _safe_div(baseline_tp, baseline_tp + baseline_fn)
+            llm_metric = llm_recall
+            baseline_metric = baseline_recall
 
         rows.append(
             {
@@ -320,6 +339,15 @@ def _build_algo3_metric_rows(
             }
         )
     return rows
+
+
+def _cross_subgraph_pair_count(
+    subgraph1_edges: list[tuple[str, str]],
+    subgraph2_edges: list[tuple[str, str]],
+) -> int:
+    subgraph1_nodes = {node for edge in subgraph1_edges for node in edge}
+    subgraph2_nodes = {node for edge in subgraph2_edges for node in edge}
+    return len(subgraph1_nodes) * len(subgraph2_nodes)
 
 
 def _group_comparison_rows(comparison_rows: list[dict[str, object]]) -> pd.DataFrame:
@@ -347,18 +375,47 @@ def _compute_baseline_counts(
     subgraph2_edges: list[tuple[str, str]],
     ground_truth: set[tuple[str, str]],
 ) -> dict[str, int]:
+    return dict(
+        _compute_baseline_counts_cached(
+            baseline_strategy=baseline_strategy,
+            k=k,
+            mother_edges=tuple(mother_edges),
+            subgraph1_edges=tuple(subgraph1_edges),
+            subgraph2_edges=tuple(subgraph2_edges),
+            ground_truth=tuple(sorted(ground_truth)),
+        )
+    )
+
+
+@lru_cache(maxsize=None)
+def _compute_baseline_counts_cached(
+    *,
+    baseline_strategy: str,
+    k: int,
+    mother_edges: tuple[tuple[str, str], ...],
+    subgraph1_edges: tuple[tuple[str, str], ...],
+    subgraph2_edges: tuple[tuple[str, str], ...],
+    ground_truth: tuple[tuple[str, str], ...],
+) -> tuple[tuple[str, int], ...]:
     baseline_edges = _sample_baseline_edges(
         baseline_strategy=baseline_strategy,
         k=k,
-        mother_edges=mother_edges,
-        subgraph1_edges=subgraph1_edges,
-        subgraph2_edges=subgraph2_edges,
+        mother_edges=list(mother_edges),
+        subgraph1_edges=list(subgraph1_edges),
+        subgraph2_edges=list(subgraph2_edges),
     )
+    proposed_edges = [*subgraph1_edges, *subgraph2_edges, *sorted(baseline_edges)]
+    generated_connections = find_valid_connections(
+        proposed_edges,
+        list(subgraph1_edges),
+        list(subgraph2_edges),
+    )
+    ground_truth_edges = set(ground_truth)
     return {
-        "tp": len(baseline_edges & ground_truth),
-        "fp": len(baseline_edges - ground_truth),
-        "fn": len(ground_truth - baseline_edges),
-    }
+        "tp": len(generated_connections & ground_truth_edges),
+        "fp": len(generated_connections - ground_truth_edges),
+        "fn": len(ground_truth_edges - generated_connections),
+    }.items()
 
 
 def _sample_baseline_edges(
