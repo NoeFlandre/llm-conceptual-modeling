@@ -233,14 +233,14 @@ def _evaluate_and_factorial_aggregate_output(
     factorial_path: Path,
 ) -> None:
     if algorithm == "algo1":
-        evaluate_connection_results_file(raw_path, evaluated_path)
+        _evaluate_raw_output(algorithm, raw_path, evaluated_path)
         run_algo1_factorial_analysis([evaluated_path], factorial_path)
         return
     if algorithm == "algo2":
-        evaluate_connection_results_file(raw_path, evaluated_path)
+        _evaluate_raw_output(algorithm, raw_path, evaluated_path)
         run_algo2_factorial_analysis([evaluated_path], factorial_path)
         return
-    evaluate_algo3_results(raw_path, evaluated_path)
+    _evaluate_raw_output(algorithm, raw_path, evaluated_path)
     run_algo3_factorial_analysis(evaluated_path, factorial_path)
 
 
@@ -327,11 +327,15 @@ def _write_combined_factorial(
     )
 
 
-def _evaluate_combined_raw_output(algorithm: str, raw_path: Path, evaluated_path: Path) -> None:
+def _evaluate_raw_output(algorithm: str, raw_path: Path, evaluated_path: Path) -> None:
     if algorithm in {"algo1", "algo2"}:
         evaluate_connection_results_file(raw_path, evaluated_path)
         return
     evaluate_algo3_results(raw_path, evaluated_path)
+
+
+def _evaluate_combined_raw_output(algorithm: str, raw_path: Path, evaluated_path: Path) -> None:
+    _evaluate_raw_output(algorithm, raw_path, evaluated_path)
 
 
 def _write_replication_budget_outputs(
