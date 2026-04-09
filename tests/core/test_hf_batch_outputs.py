@@ -7,6 +7,7 @@ import pandas as pd
 
 from llm_conceptual_modeling.hf_batch_outputs import (
     _aggregated_analysis_spec,
+    _analysis_value_columns,
     _budget_analysis_specs,
     _combined_analysis_spec,
     _combined_factorial_spec,
@@ -356,6 +357,21 @@ def test_decoding_factor_columns_match_expected_suffix() -> None:
         "Beam Width Level",
         "Contrastive Penalty Level",
     ]
+
+
+def test_analysis_value_columns_match_expected_metrics_and_result_column() -> None:
+    assert _analysis_value_columns("algo1") == {
+        "metrics": ["accuracy", "recall", "precision"],
+        "result_column": "Result",
+    }
+    assert _analysis_value_columns("algo2") == {
+        "metrics": ["accuracy", "recall", "precision"],
+        "result_column": "Result",
+    }
+    assert _analysis_value_columns("algo3") == {
+        "metrics": ["Recall"],
+        "result_column": "Results",
+    }
 
 
 def test_evaluate_raw_output_dispatches_by_algorithm(

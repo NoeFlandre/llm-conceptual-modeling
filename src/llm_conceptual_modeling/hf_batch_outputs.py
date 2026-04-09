@@ -180,8 +180,7 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
             ],
-            "metrics": ["accuracy", "recall", "precision"],
-            "result_column": "Result",
+            **_analysis_value_columns(algorithm),
         }
     if algorithm == "algo2":
         return {
@@ -203,8 +202,7 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Tag/Adjacency(1/-1)",
                 "Convergence",
             ],
-            "metrics": ["accuracy", "recall", "precision"],
-            "result_column": "Result",
+            **_analysis_value_columns(algorithm),
         }
     return {
         "stability_group_by": [
@@ -221,8 +219,7 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
             "Example",
             "Counter-Example",
         ],
-        "metrics": ["Recall"],
-        "result_column": "Results",
+        **_analysis_value_columns(algorithm),
     }
 
 
@@ -375,6 +372,18 @@ def _decoding_factor_columns() -> list[str]:
     ]
 
 
+def _analysis_value_columns(algorithm: str) -> dict[str, object]:
+    if algorithm in {"algo1", "algo2"}:
+        return {
+            "metrics": ["accuracy", "recall", "precision"],
+            "result_column": "Result",
+        }
+    return {
+        "metrics": ["Recall"],
+        "result_column": "Results",
+    }
+
+
 def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
     if algorithm == "algo1":
         return GeneralizedFactorialSpec(
@@ -440,8 +449,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Tag/Adjacency(1/-1)",
                 *_decoding_factor_columns(),
             ],
-            "metrics": ["accuracy", "recall", "precision"],
-            "result_column": "Result",
+            **_analysis_value_columns(algorithm),
         }
     if algorithm == "algo2":
         return {
@@ -465,8 +473,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 *_decoding_factor_columns(),
                 "Convergence",
             ],
-            "metrics": ["accuracy", "recall", "precision"],
-            "result_column": "Result",
+            **_analysis_value_columns(algorithm),
         }
     return {
         "stability_group_by": [
@@ -485,6 +492,5 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
             "Counter-Example",
             *_decoding_factor_columns(),
         ],
-        "metrics": ["Recall"],
-        "result_column": "Results",
+        **_analysis_value_columns(algorithm),
     }
