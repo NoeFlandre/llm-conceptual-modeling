@@ -5,7 +5,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from llm_conceptual_modeling.hf_batch_outputs import write_aggregated_outputs
+from llm_conceptual_modeling.hf_batch_outputs import (
+    _combined_factorial_spec,
+    write_aggregated_outputs,
+)
 
 
 def test_write_aggregated_outputs_backfills_algo3_summary_recall_from_evaluation(
@@ -133,3 +136,47 @@ def test_write_aggregated_outputs_backfills_algo3_summary_recall_from_evaluation
 
     raw_row_after = json.loads(raw_row_path.read_text(encoding="utf-8"))
     assert raw_row_after["Recall"] == 0.0
+
+
+def test_combined_factorial_spec_matches_algorithm_shape() -> None:
+    algo1_spec = _combined_factorial_spec("algo1")
+    assert algo1_spec.metric_columns == ["accuracy", "recall", "precision"]
+    assert algo1_spec.output_columns == ["accuracy", "recall", "precision", "Feature"]
+    assert algo1_spec.factor_columns == [
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+
+    algo2_spec = _combined_factorial_spec("algo2")
+    assert algo2_spec.metric_columns == ["accuracy", "recall", "precision"]
+    assert algo2_spec.output_columns == ["accuracy", "recall", "precision", "Feature"]
+    assert algo2_spec.factor_columns == [
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+        "Convergence",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+
+    algo3_spec = _combined_factorial_spec("algo3")
+    assert algo3_spec.metric_columns == ["Recall"]
+    assert algo3_spec.output_columns == ["Recall", "Feature"]
+    assert algo3_spec.factor_columns == [
+        "Example",
+        "Counter-Example",
+        "Number of Words",
+        "Depth",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]

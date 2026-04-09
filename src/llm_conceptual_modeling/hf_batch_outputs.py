@@ -344,35 +344,50 @@ def _write_combined_factorial(
     evaluated_path: Path,
     output_path: Path,
 ) -> None:
+    spec = _combined_factorial_spec(algorithm)
+    run_generalized_factorial_analysis(
+        [evaluated_path],
+        output_path,
+        spec,
+    )
+
+
+def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
     if algorithm == "algo1":
-        factor_columns = [
-            "Explanation",
-            "Example",
-            "Counterexample",
-            "Array/List(1/-1)",
-            "Tag/Adjacency(1/-1)",
-            "Decoding Algorithm",
-            "Beam Width Level",
-            "Contrastive Penalty Level",
-        ]
-        metric_columns = ["accuracy", "recall", "precision"]
-        output_columns = ["accuracy", "recall", "precision", "Feature"]
-    elif algorithm == "algo2":
-        factor_columns = [
-            "Explanation",
-            "Example",
-            "Counterexample",
-            "Array/List(1/-1)",
-            "Tag/Adjacency(1/-1)",
-            "Convergence",
-            "Decoding Algorithm",
-            "Beam Width Level",
-            "Contrastive Penalty Level",
-        ]
-        metric_columns = ["accuracy", "recall", "precision"]
-        output_columns = ["accuracy", "recall", "precision", "Feature"]
-    else:
-        factor_columns = [
+        return GeneralizedFactorialSpec(
+            factor_columns=[
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ],
+            metric_columns=["accuracy", "recall", "precision"],
+            output_columns=["accuracy", "recall", "precision", "Feature"],
+            replication_column="Repetition",
+        )
+    if algorithm == "algo2":
+        return GeneralizedFactorialSpec(
+            factor_columns=[
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Convergence",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ],
+            metric_columns=["accuracy", "recall", "precision"],
+            output_columns=["accuracy", "recall", "precision", "Feature"],
+            replication_column="Repetition",
+        )
+    return GeneralizedFactorialSpec(
+        factor_columns=[
             "Example",
             "Counter-Example",
             "Number of Words",
@@ -380,16 +395,8 @@ def _write_combined_factorial(
             "Decoding Algorithm",
             "Beam Width Level",
             "Contrastive Penalty Level",
-        ]
-        metric_columns = ["Recall"]
-        output_columns = ["Recall", "Feature"]
-    run_generalized_factorial_analysis(
-        [evaluated_path],
-        output_path,
-        GeneralizedFactorialSpec(
-            factor_columns=factor_columns,
-            metric_columns=metric_columns,
-            output_columns=output_columns,
-            replication_column="Repetition",
-        ),
+        ],
+        metric_columns=["Recall"],
+        output_columns=["Recall", "Feature"],
+        replication_column="Repetition",
     )
