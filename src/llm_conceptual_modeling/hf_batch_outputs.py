@@ -284,7 +284,7 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
         relaxed_budget_path = combo_root / "replication_budget_relaxed.csv"
         analysis_spec = _combined_analysis_spec(str(algorithm))
 
-        _evaluate_combined_raw_output(str(algorithm), raw_path, evaluated_path)
+        _evaluate_raw_output(str(algorithm), raw_path, evaluated_path)
         evaluated_frame = pd.read_csv(evaluated_path)
         evaluated_frame = add_decoding_factor_columns(evaluated_frame)
         evaluated_frame.to_csv(evaluated_path, index=False)
@@ -329,10 +329,6 @@ def _evaluate_raw_output(algorithm: str, raw_path: Path, evaluated_path: Path) -
         evaluate_connection_results_file(raw_path, evaluated_path)
         return
     evaluate_algo3_results(raw_path, evaluated_path)
-
-
-def _evaluate_combined_raw_output(algorithm: str, raw_path: Path, evaluated_path: Path) -> None:
-    _evaluate_raw_output(algorithm, raw_path, evaluated_path)
 
 
 def _write_replication_budget_outputs(

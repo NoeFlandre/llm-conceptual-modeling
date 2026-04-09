@@ -13,7 +13,6 @@ from llm_conceptual_modeling.hf_batch_outputs import (
     _combined_factorial_spec,
     _decoding_factor_columns,
     _evaluate_and_factorial_aggregate_output,
-    _evaluate_combined_raw_output,
     _evaluate_raw_output,
     _load_raw_rows_frame,
     _write_analysis_outputs,
@@ -494,17 +493,59 @@ def test_load_raw_rows_frame_resolves_workspace_paths_and_adds_decoding_columns(
     ]
 
 
-def test_evaluate_combined_raw_output_dispatches_by_algorithm(
+def test_write_combined_model_outputs_dispatches_raw_evaluation_by_algorithm(
     tmp_path: Path,
     monkeypatch,
 ) -> None:
-    raw_path = tmp_path / "raw.csv"
-    evaluated_path = tmp_path / "evaluated.csv"
-    raw_path.write_text("raw", encoding="utf-8")
+    output_root = tmp_path / "results" / "hf-paper-batch-algo1-qwen-current"
+    aggregated_root = output_root / "aggregated"
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "Qwen__Qwen3.5-9B"
+        / "beam_num_beams_2"
+        / "sg1_sg2"
+        / "0000"
+        / "rep_00"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    raw_row_path = run_dir / "raw_row.json"
+    raw_row_path.write_text(
+        json.dumps(
+            {
+                "pair_name": "sg1_sg2",
+                "Result": "[]",
+                "decoding_algorithm": "beam",
+                "decoding_condition": "beam_num_beams_2",
+            }
+        ),
+        encoding="utf-8",
+    )
+    summary_frame = pd.DataFrame.from_records(
+        [
+            {
+                "algorithm": "algo1",
+                "model": "Qwen/Qwen3.5-9B",
+                "condition_label": "beam_num_beams_2",
+                "raw_row_path": str(raw_row_path),
+            }
+        ]
+    )
     calls: list[tuple[str, Path, Path]] = []
 
     def fake_connection_evaluator(input_path: Path, output_path: Path) -> None:
         calls.append(("connection", input_path, output_path))
+        pd.DataFrame.from_records(
+            [
+                {
+                    "pair_name": "sg1_sg2",
+                    "Result": "[]",
+                    "decoding_algorithm": "beam",
+                    "decoding_condition": "beam_num_beams_2",
+                }
+            ]
+        ).to_csv(output_path, index=False)
 
     def fake_algo3_evaluator(input_path: Path, output_path: Path) -> None:
         calls.append(("algo3", input_path, output_path))
@@ -517,13 +558,36 @@ def test_evaluate_combined_raw_output_dispatches_by_algorithm(
         "llm_conceptual_modeling.hf_batch_outputs.evaluate_algo3_results",
         fake_algo3_evaluator,
     )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.run_generalized_factorial_analysis",
+        lambda *args, **kwargs: None,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.write_grouped_metric_stability",
+        lambda *args, **kwargs: None,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.write_output_variability_analysis",
+        lambda *args, **kwargs: None,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch_outputs.write_replication_budget_analysis",
+        lambda *args, **kwargs: None,
+    )
 
-    _evaluate_combined_raw_output("algo1", raw_path, evaluated_path)
-    _evaluate_combined_raw_output("algo3", raw_path, evaluated_path)
+    from llm_conceptual_modeling.hf_batch_outputs import _write_combined_model_outputs
+
+    _write_combined_model_outputs(
+        aggregated_root=aggregated_root,
+        summary_frame=summary_frame,
+    )
 
     assert calls == [
-        ("connection", raw_path, evaluated_path),
-        ("algo3", raw_path, evaluated_path),
+        (
+            "connection",
+            aggregated_root / "algo1" / "Qwen__Qwen3.5-9B" / "combined" / "raw.csv",
+            aggregated_root / "algo1" / "Qwen__Qwen3.5-9B" / "combined" / "evaluated.csv",
+        ),
     ]
 
 
