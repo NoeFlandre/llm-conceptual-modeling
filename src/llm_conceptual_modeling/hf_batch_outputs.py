@@ -259,6 +259,7 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
         stability_path = combo_root / "condition_stability.csv"
         strict_budget_path = combo_root / "replication_budget_strict.csv"
         relaxed_budget_path = combo_root / "replication_budget_relaxed.csv"
+        analysis_spec = _combined_analysis_spec(str(algorithm))
 
         if algorithm in {"algo1", "algo2"}:
             evaluate_connection_results_file(raw_path, evaluated_path)
@@ -270,43 +271,17 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
                 evaluated_path=evaluated_path,
                 output_path=factorial_path,
             )
-            stability_group_by = [
-                "pair_name",
-                "Explanation",
-                "Example",
-                "Counterexample",
-                "Array/List(1/-1)",
-                "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
-            ]
-            if algorithm == "algo2":
-                stability_group_by.insert(5, "Convergence")
             write_grouped_metric_stability(
                 [evaluated_path],
                 stability_path,
-                group_by=stability_group_by,
-                metrics=["accuracy", "recall", "precision"],
+                group_by=analysis_spec["stability_group_by"],
+                metrics=analysis_spec["metrics"],
             )
-            variability_group_by = [
-                "pair_name",
-                "Explanation",
-                "Example",
-                "Counterexample",
-                "Array/List(1/-1)",
-                "Tag/Adjacency(1/-1)",
-                "Decoding Algorithm",
-                "Beam Width Level",
-                "Contrastive Penalty Level",
-            ]
-            if algorithm == "algo2":
-                variability_group_by.append("Convergence")
             write_output_variability_analysis(
                 [raw_path],
                 variability_path,
-                group_by=variability_group_by,
-                result_column="Result",
+                group_by=analysis_spec["variability_group_by"],
+                result_column=str(analysis_spec["result_column"]),
             )
         else:
             evaluate_algo3_results(raw_path, evaluated_path)
@@ -321,32 +296,14 @@ def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.Da
             write_grouped_metric_stability(
                 [evaluated_path],
                 stability_path,
-                group_by=[
-                    "pair_name",
-                    "Depth",
-                    "Number of Words",
-                    "Example",
-                    "Counter-Example",
-                    "Decoding Algorithm",
-                    "Beam Width Level",
-                    "Contrastive Penalty Level",
-                ],
-                metrics=["Recall"],
+                group_by=analysis_spec["stability_group_by"],
+                metrics=analysis_spec["metrics"],
             )
             write_output_variability_analysis(
                 [raw_path],
                 variability_path,
-                group_by=[
-                    "pair_name",
-                    "Depth",
-                    "Number of Words",
-                    "Example",
-                    "Counter-Example",
-                    "Decoding Algorithm",
-                    "Beam Width Level",
-                    "Contrastive Penalty Level",
-                ],
-                result_column="Results",
+                group_by=analysis_spec["variability_group_by"],
+                result_column=str(analysis_spec["result_column"]),
             )
 
         write_replication_budget_analysis(
@@ -425,3 +382,86 @@ def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
         output_columns=["Recall", "Feature"],
         replication_column="Repetition",
     )
+
+
+def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
+    if algorithm == "algo1":
+        return {
+            "stability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ],
+            "variability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ],
+            "metrics": ["accuracy", "recall", "precision"],
+            "result_column": "Result",
+        }
+    if algorithm == "algo2":
+        return {
+            "stability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Convergence",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+            ],
+            "variability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Decoding Algorithm",
+                "Beam Width Level",
+                "Contrastive Penalty Level",
+                "Convergence",
+            ],
+            "metrics": ["accuracy", "recall", "precision"],
+            "result_column": "Result",
+        }
+    return {
+        "stability_group_by": [
+            "pair_name",
+            "Depth",
+            "Number of Words",
+            "Example",
+            "Counter-Example",
+            "Decoding Algorithm",
+            "Beam Width Level",
+            "Contrastive Penalty Level",
+        ],
+        "variability_group_by": [
+            "pair_name",
+            "Depth",
+            "Number of Words",
+            "Example",
+            "Counter-Example",
+            "Decoding Algorithm",
+            "Beam Width Level",
+            "Contrastive Penalty Level",
+        ],
+        "metrics": ["Recall"],
+        "result_column": "Results",
+    }

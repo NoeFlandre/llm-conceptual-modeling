@@ -7,6 +7,7 @@ import pandas as pd
 
 from llm_conceptual_modeling.hf_batch_outputs import (
     _aggregated_analysis_spec,
+    _combined_analysis_spec,
     _combined_factorial_spec,
     write_aggregated_outputs,
 )
@@ -240,6 +241,86 @@ def test_aggregated_analysis_spec_matches_algorithm_shape() -> None:
         "Number of Words",
         "Example",
         "Counter-Example",
+    ]
+    assert algo3_spec["metrics"] == ["Recall"]
+    assert algo3_spec["result_column"] == "Results"
+
+
+def test_combined_analysis_spec_matches_algorithm_shape() -> None:
+    algo1_spec = _combined_analysis_spec("algo1")
+    assert algo1_spec["stability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+    assert algo1_spec["variability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+    assert algo1_spec["metrics"] == ["accuracy", "recall", "precision"]
+    assert algo1_spec["result_column"] == "Result"
+
+    algo2_spec = _combined_analysis_spec("algo2")
+    assert algo2_spec["stability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Convergence",
+        "Tag/Adjacency(1/-1)",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+    assert algo2_spec["variability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+        "Convergence",
+    ]
+    assert algo2_spec["metrics"] == ["accuracy", "recall", "precision"]
+    assert algo2_spec["result_column"] == "Result"
+
+    algo3_spec = _combined_analysis_spec("algo3")
+    assert algo3_spec["stability_group_by"] == [
+        "pair_name",
+        "Depth",
+        "Number of Words",
+        "Example",
+        "Counter-Example",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
+    ]
+    assert algo3_spec["variability_group_by"] == [
+        "pair_name",
+        "Depth",
+        "Number of Words",
+        "Example",
+        "Counter-Example",
+        "Decoding Algorithm",
+        "Beam Width Level",
+        "Contrastive Penalty Level",
     ]
     assert algo3_spec["metrics"] == ["Recall"]
     assert algo3_spec["result_column"] == "Results"
