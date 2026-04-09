@@ -2,6 +2,11 @@ from dataclasses import dataclass
 
 SAFE_PHASE = "safe"
 RISKY_PHASE = "risky"
+_SAFE_EXCLUDED_DECODING_LABELS = {
+    "olmo": ("contrastive_penalty_alpha_0.8",),
+    "qwen": ("contrastive_penalty_alpha_0.2", "contrastive_penalty_alpha_0.8"),
+    "mistral": ("contrastive_penalty_alpha_0.8",),
+}
 
 
 @dataclass(frozen=True)
@@ -36,11 +41,11 @@ def resolve_resume_profile(
     normalized_name = results_root_name.lower()
     normalized_phase = _normalize_phase(phase)
     if "olmo" in normalized_name:
-        return _build_olmo_profile(normalized_phase)
+        return _build_family_profile("olmo", normalized_phase)
     if "qwen" in normalized_name:
-        return _build_qwen_profile(normalized_phase)
+        return _build_family_profile("qwen", normalized_phase)
     if "mistral" in normalized_name:
-        return _build_mistral_profile(normalized_phase)
+        return _build_family_profile("mistral", normalized_phase)
     return _build_profile(
         profile_name=f"default-{normalized_phase}",
         phase=normalized_phase,
@@ -55,48 +60,19 @@ def _normalize_phase(phase: str) -> str:
     return normalized_phase
 
 
-def _build_olmo_profile(phase: str) -> ResumeProfile:
-    if phase == SAFE_PHASE:
-        return _build_profile(
-            profile_name="olmo-safe",
-            phase=phase,
-            excluded_decoding_labels=("contrastive_penalty_alpha_0.8",),
-        )
+def _resume_profile_overrides(family: str, phase: str) -> tuple[str, tuple[str, ...]]:
+    profile_name = f"{family}-{phase}"
+    if phase != SAFE_PHASE:
+        return profile_name, ()
+    return profile_name, _SAFE_EXCLUDED_DECODING_LABELS[family]
+
+
+def _build_family_profile(family: str, phase: str) -> ResumeProfile:
+    profile_name, excluded_decoding_labels = _resume_profile_overrides(family, phase)
     return _build_profile(
-        profile_name="olmo-risky",
+        profile_name=profile_name,
         phase=phase,
-        excluded_decoding_labels=(),
-    )
-
-
-def _build_qwen_profile(phase: str) -> ResumeProfile:
-    if phase == SAFE_PHASE:
-        return _build_profile(
-            profile_name="qwen-safe",
-            phase=phase,
-            excluded_decoding_labels=(
-                "contrastive_penalty_alpha_0.2",
-                "contrastive_penalty_alpha_0.8",
-            ),
-        )
-    return _build_profile(
-        profile_name="qwen-risky",
-        phase=phase,
-        excluded_decoding_labels=(),
-    )
-
-
-def _build_mistral_profile(phase: str) -> ResumeProfile:
-    if phase == SAFE_PHASE:
-        return _build_profile(
-            profile_name="mistral-safe",
-            phase=phase,
-            excluded_decoding_labels=("contrastive_penalty_alpha_0.8",),
-        )
-    return _build_profile(
-        profile_name="mistral-risky",
-        phase=phase,
-        excluded_decoding_labels=(),
+        excluded_decoding_labels=excluded_decoding_labels,
     )
 
 

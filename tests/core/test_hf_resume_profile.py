@@ -1,4 +1,7 @@
-from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
+from llm_conceptual_modeling.hf_resume_profile import (
+    _resume_profile_overrides,
+    resolve_resume_profile,
+)
 
 
 def test_resolve_resume_profile_defaults_to_docker_and_safe_profiles() -> None:
@@ -47,3 +50,19 @@ def test_resolve_resume_profile_supports_explicit_full_coverage_override() -> No
     assert profile.profile_name == "full-coverage"
     assert profile.phase == "risky"
     assert profile.excluded_decoding_labels == ()
+
+
+def test_resume_profile_overrides_capture_family_specific_safe_exclusions() -> None:
+    assert _resume_profile_overrides("olmo", "safe") == (
+        "olmo-safe",
+        ("contrastive_penalty_alpha_0.8",),
+    )
+    assert _resume_profile_overrides("qwen", "safe") == (
+        "qwen-safe",
+        ("contrastive_penalty_alpha_0.2", "contrastive_penalty_alpha_0.8"),
+    )
+    assert _resume_profile_overrides("mistral", "safe") == (
+        "mistral-safe",
+        ("contrastive_penalty_alpha_0.8",),
+    )
+    assert _resume_profile_overrides("qwen", "risky") == ("qwen-risky", ())
