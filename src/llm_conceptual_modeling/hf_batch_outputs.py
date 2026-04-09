@@ -58,53 +58,25 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
         stability_path = combo_root / "condition_stability.csv"
         strict_budget_path = combo_root / "replication_budget_strict.csv"
         relaxed_budget_path = combo_root / "replication_budget_relaxed.csv"
+        analysis_spec = _aggregated_analysis_spec(str(algorithm))
 
         if algorithm in {"algo1", "algo2"}:
             evaluate_connection_results_file(raw_path, evaluated_path)
             if algorithm == "algo1":
                 run_algo1_factorial_analysis([evaluated_path], factorial_path)
-                write_grouped_metric_stability(
-                    [evaluated_path],
-                    stability_path,
-                    group_by=[
-                        "pair_name",
-                        "Explanation",
-                        "Example",
-                        "Counterexample",
-                        "Array/List(1/-1)",
-                        "Tag/Adjacency(1/-1)",
-                    ],
-                    metrics=["accuracy", "recall", "precision"],
-                )
             else:
                 run_algo2_factorial_analysis([evaluated_path], factorial_path)
-                write_grouped_metric_stability(
-                    [evaluated_path],
-                    stability_path,
-                    group_by=[
-                        "pair_name",
-                        "Convergence",
-                        "Explanation",
-                        "Example",
-                        "Counterexample",
-                        "Array/List(1/-1)",
-                        "Tag/Adjacency(1/-1)",
-                    ],
-                    metrics=["accuracy", "recall", "precision"],
-                )
+            write_grouped_metric_stability(
+                [evaluated_path],
+                stability_path,
+                group_by=analysis_spec["stability_group_by"],
+                metrics=analysis_spec["metrics"],
+            )
             write_output_variability_analysis(
                 [raw_path],
                 variability_path,
-                group_by=[
-                    "pair_name",
-                    "Explanation",
-                    "Example",
-                    "Counterexample",
-                    "Array/List(1/-1)",
-                    "Tag/Adjacency(1/-1)",
-                ]
-                + (["Convergence"] if algorithm == "algo2" else []),
-                result_column="Result",
+                group_by=analysis_spec["variability_group_by"],
+                result_column=str(analysis_spec["result_column"]),
             )
         else:
             evaluate_algo3_results(raw_path, evaluated_path)
@@ -112,26 +84,14 @@ def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> 
             write_grouped_metric_stability(
                 [evaluated_path],
                 stability_path,
-                group_by=[
-                    "pair_name",
-                    "Depth",
-                    "Number of Words",
-                    "Example",
-                    "Counter-Example",
-                ],
-                metrics=["Recall"],
+                group_by=analysis_spec["stability_group_by"],
+                metrics=analysis_spec["metrics"],
             )
             write_output_variability_analysis(
                 [raw_path],
                 variability_path,
-                group_by=[
-                    "pair_name",
-                    "Depth",
-                    "Number of Words",
-                    "Example",
-                    "Counter-Example",
-                ],
-                result_column="Results",
+                group_by=analysis_spec["variability_group_by"],
+                result_column=str(analysis_spec["result_column"]),
             )
             _backfill_algo3_summary_artifacts(
                 output_root=output_root,
@@ -207,6 +167,71 @@ def _resolve_materialized_artifact_path(*, output_root: Path, artifact_path: Pat
         if candidate_path.exists():
             return candidate_path
     return artifact_path
+
+
+def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
+    if algorithm == "algo1":
+        return {
+            "stability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+            ],
+            "variability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+            ],
+            "metrics": ["accuracy", "recall", "precision"],
+            "result_column": "Result",
+        }
+    if algorithm == "algo2":
+        return {
+            "stability_group_by": [
+                "pair_name",
+                "Convergence",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+            ],
+            "variability_group_by": [
+                "pair_name",
+                "Explanation",
+                "Example",
+                "Counterexample",
+                "Array/List(1/-1)",
+                "Tag/Adjacency(1/-1)",
+                "Convergence",
+            ],
+            "metrics": ["accuracy", "recall", "precision"],
+            "result_column": "Result",
+        }
+    return {
+        "stability_group_by": [
+            "pair_name",
+            "Depth",
+            "Number of Words",
+            "Example",
+            "Counter-Example",
+        ],
+        "variability_group_by": [
+            "pair_name",
+            "Depth",
+            "Number of Words",
+            "Example",
+            "Counter-Example",
+        ],
+        "metrics": ["Recall"],
+        "result_column": "Results",
+    }
 
 
 def _write_combined_model_outputs(*, aggregated_root: Path, summary_frame: pd.DataFrame) -> None:

@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 from llm_conceptual_modeling.hf_batch_outputs import (
+    _aggregated_analysis_spec,
     _combined_factorial_spec,
     write_aggregated_outputs,
 )
@@ -180,3 +181,65 @@ def test_combined_factorial_spec_matches_algorithm_shape() -> None:
         "Beam Width Level",
         "Contrastive Penalty Level",
     ]
+
+
+def test_aggregated_analysis_spec_matches_algorithm_shape() -> None:
+    algo1_spec = _aggregated_analysis_spec("algo1")
+    assert algo1_spec["stability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+    ]
+    assert algo1_spec["variability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+    ]
+    assert algo1_spec["metrics"] == ["accuracy", "recall", "precision"]
+    assert algo1_spec["result_column"] == "Result"
+
+    algo2_spec = _aggregated_analysis_spec("algo2")
+    assert algo2_spec["stability_group_by"] == [
+        "pair_name",
+        "Convergence",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+    ]
+    assert algo2_spec["variability_group_by"] == [
+        "pair_name",
+        "Explanation",
+        "Example",
+        "Counterexample",
+        "Array/List(1/-1)",
+        "Tag/Adjacency(1/-1)",
+        "Convergence",
+    ]
+    assert algo2_spec["metrics"] == ["accuracy", "recall", "precision"]
+    assert algo2_spec["result_column"] == "Result"
+
+    algo3_spec = _aggregated_analysis_spec("algo3")
+    assert algo3_spec["stability_group_by"] == [
+        "pair_name",
+        "Depth",
+        "Number of Words",
+        "Example",
+        "Counter-Example",
+    ]
+    assert algo3_spec["variability_group_by"] == [
+        "pair_name",
+        "Depth",
+        "Number of Words",
+        "Example",
+        "Counter-Example",
+    ]
+    assert algo3_spec["metrics"] == ["Recall"]
+    assert algo3_spec["result_column"] == "Results"
