@@ -36,10 +36,10 @@ decoding:
     enabled: true
   beam:
     enabled: true
-    num_beams: [2, 6]
+    num_beams: [2]
   contrastive:
     enabled: true
-    penalty_alpha: [0.2, 0.8]
+    penalty_alpha: [0.2]
     top_k: 4
 
 inputs:

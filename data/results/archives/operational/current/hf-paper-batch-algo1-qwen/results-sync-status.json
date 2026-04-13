@@ -1,0 +1,10 @@
+{
+  "consecutive_failures": 3808,
+  "last_success_at": "2026-04-07T00:59:01Z",
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-qwen",
+  "message": "Watcher stopped.",
+  "remote_results_dir": "root@59.7.51.43:/workspace/results/hf-paper-batch-algo1-qwen",
+  "status": "stopped",
+  "updated_at": "2026-04-10T02:02:13Z",
+  "watcher_identity": "root@59.7.51.43:30435:/workspace/results/hf-paper-batch-algo1-qwen"
+}

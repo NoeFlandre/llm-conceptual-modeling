@@ -1,0 +1,447 @@
+{
+  "current_run": null,
+  "failed_count": 85,
+  "failure_count": 85,
+  "failures": [
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg1_sg2/000111/rep_01",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/011101/rep_01",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg1_sg2/100000/rep_04",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/100110/rep_02",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/101001/rep_03",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg1_sg2/110000/rep_02",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/001110/rep_02",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/010011/rep_03",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/010011/rep_04",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/010100/rep_03",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/110101/rep_00",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.20 GiB is allocated by PyTorch, and 615.31 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/000110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 618.19 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/000110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 250.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.16 GiB is allocated by PyTorch, and 651.25 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/000110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 618.19 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/000110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 618.19 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/000110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 606.21 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/001110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.26 GiB is allocated by PyTorch, and 577.12 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/001110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 586.21 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/001111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 217.75 MiB is free. Including non-PyTorch memory, this process has 23.29 GiB memory in use. Of the allocated memory 22.24 GiB is allocated by PyTorch, and 609.67 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/001111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 606.21 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/001111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 217.75 MiB is free. Including non-PyTorch memory, this process has 23.29 GiB memory in use. Of the allocated memory 22.32 GiB is allocated by PyTorch, and 534.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.24 GiB is allocated by PyTorch, and 594.23 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 602.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.24 GiB is allocated by PyTorch, and 595.94 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 602.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 239.75 MiB is free. Including non-PyTorch memory, this process has 23.27 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 597.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 602.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 217.75 MiB is free. Including non-PyTorch memory, this process has 23.29 GiB memory in use. Of the allocated memory 22.27 GiB is allocated by PyTorch, and 586.28 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 602.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 602.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/010111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011000/rep_03",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 259.75 MiB is free. Including non-PyTorch memory, this process has 23.25 GiB memory in use. Of the allocated memory 22.35 GiB is allocated by PyTorch, and 464.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.33 GiB is allocated by PyTorch, and 481.24 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.33 GiB is allocated by PyTorch, and 502.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.34 GiB is allocated by PyTorch, and 469.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.31 GiB is allocated by PyTorch, and 498.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 259.75 MiB is free. Including non-PyTorch memory, this process has 23.25 GiB memory in use. Of the allocated memory 22.35 GiB is allocated by PyTorch, and 462.94 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/011111/rep_01",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.32 GiB is allocated by PyTorch, and 495.51 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011111/rep_02",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 217.75 MiB is free. Including non-PyTorch memory, this process has 23.29 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 470.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.33 GiB is allocated by PyTorch, and 481.24 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/011111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 449.35 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.37 GiB is allocated by PyTorch, and 441.32 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.37 GiB is allocated by PyTorch, and 441.32 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 219.75 MiB is free. Including non-PyTorch memory, this process has 23.29 GiB memory in use. Of the allocated memory 22.23 GiB is allocated by PyTorch, and 619.89 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 615.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.25 GiB is allocated by PyTorch, and 559.97 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.24 GiB is allocated by PyTorch, and 571.38 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.21 GiB is allocated by PyTorch, and 603.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.22 GiB is allocated by PyTorch, and 610.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 254.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.26 GiB is allocated by PyTorch, and 577.69 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 256.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.30 GiB is allocated by PyTorch, and 534.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 432.19 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.37 GiB is allocated by PyTorch, and 438.46 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 427.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.37 GiB is allocated by PyTorch, and 438.46 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.30 GiB is allocated by PyTorch, and 528.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.34 GiB is allocated by PyTorch, and 470.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 260.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.37 GiB is allocated by PyTorch, and 438.46 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.30 GiB is allocated by PyTorch, and 508.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.41 GiB is allocated by PyTorch, and 401.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/110100/rep_03",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.32 GiB is allocated by PyTorch, and 490.94 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.40 GiB is allocated by PyTorch, and 429.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.34 GiB is allocated by PyTorch, and 476.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 449.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.34 GiB is allocated by PyTorch, and 496.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.34 GiB is allocated by PyTorch, and 476.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 435.04 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.38 GiB is allocated by PyTorch, and 447.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 258.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 237.75 MiB is free. Including non-PyTorch memory, this process has 23.28 GiB memory in use. Of the allocated memory 22.31 GiB is allocated by PyTorch, and 522.92 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 417.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/110111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111101/rep_01",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 418.49 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 159.75 MiB is free. Including non-PyTorch memory, this process has 23.35 GiB memory in use. Of the allocated memory 22.40 GiB is allocated by PyTorch, and 505.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 417.92 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 159.75 MiB is free. Including non-PyTorch memory, this process has 23.35 GiB memory in use. Of the allocated memory 22.40 GiB is allocated by PyTorch, and 505.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 416.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 419.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 159.75 MiB is free. Including non-PyTorch memory, this process has 23.35 GiB memory in use. Of the allocated memory 22.40 GiB is allocated by PyTorch, and 505.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 416.21 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 159.75 MiB is free. Including non-PyTorch memory, this process has 23.35 GiB memory in use. Of the allocated memory 22.40 GiB is allocated by PyTorch, and 505.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 262.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 257.75 MiB is free. Including non-PyTorch memory, this process has 23.26 GiB memory in use. Of the allocated memory 22.39 GiB is allocated by PyTorch, and 420.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111111/rep_04",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 2795,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "111111",
+    "decoding_algorithm": "beam",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg3_sg1",
+    "replication": 4
+  },
+  "pending_count": 0,
+  "percent_complete": 97.05,
+  "running_count": 0,
+  "started_at": "2026-04-03T17:03:18.285163+00:00",
+  "total_runs": 2880,
+  "updated_at": "2026-04-04T06:43:21.068420+00:00"
+}

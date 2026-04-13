@@ -15,6 +15,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
 from llm_conceptual_modeling.hf_batch.utils import resolve_hf_token
 from llm_conceptual_modeling.hf_spec_codec import deserialize_spec
 from llm_conceptual_modeling.hf_worker_request import load_worker_request
+from llm_conceptual_modeling.hf_resume_state import is_finished_run_directory
 from llm_conceptual_modeling.hf_worker_state import mark_worker_prefetching_model
 
 
@@ -34,6 +35,9 @@ def serve_request_queue(
                 continue
             break
         request = load_worker_request(request_path)
+        if is_finished_run_directory(request.run_dir):
+            request_path.unlink(missing_ok=True)
+            continue
         _execute_request(
             spec_json_path=request.spec_json_path,
             result_json_path=request.result_json_path,
@@ -48,10 +52,17 @@ def serve_request_queue(
 
 
 def _claim_next_request(queue_dir: Path) -> Path | None:
-    for request_path in sorted(queue_dir.glob("*.request.json")):
-        claimed_path = request_path.with_suffix("").with_suffix(".claimed.json")
+    request_paths = list(sorted(queue_dir.glob("*.request.json")))
+    if not request_paths:
+        request_paths = list(sorted(queue_dir.glob("*.claimed.json")))
+    for request_path in request_paths:
+        if request_path.name.endswith(".claimed.json"):
+            claimed_path = request_path
+        else:
+            claimed_path = request_path.with_suffix("").with_suffix(".claimed.json")
         try:
-            request_path.rename(claimed_path)
+            if request_path != claimed_path:
+                request_path.rename(claimed_path)
         except FileNotFoundError:
             continue
         return claimed_path

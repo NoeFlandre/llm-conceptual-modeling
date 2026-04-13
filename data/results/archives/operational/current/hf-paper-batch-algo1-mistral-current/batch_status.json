@@ -1,0 +1,3037 @@
+{
+  "current_run": {
+    "algorithm": "algo1",
+    "condition_bits": "11011",
+    "decoding_algorithm": "beam",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg1_sg2",
+    "replication": 1
+  },
+  "failed_count": 752,
+  "failure_count": 510,
+  "failures": [
+    {
+      "error_path": "smoke/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/00001/rep_00/error.json",
+      "run_dir": "smoke/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/00001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/00010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/10010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/10010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/11100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/10010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg1_sg2/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg1_sg2/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg1_sg2/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg1_sg2/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/11101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg2_sg3/10010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/01011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_6/sg3_sg1/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/10010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/11100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg1_sg2/00010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/11101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg2_sg3/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/11011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/00011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10011/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00000/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00000/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00000/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00000/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01001/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00111/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11001/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11001/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00110/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00110/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01000/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01000/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01000/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01000/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01000/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01000/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01011/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01011/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01011/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01011/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00101/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00101/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00101/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00101/rep_03"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01101/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01101/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11101/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11101/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11101/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/11101/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10011/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10011/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01100/rep_02/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01100/rep_02"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01100/rep_01/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01100/rep_01"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01100/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/01100/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00010/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/00010/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10010/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg2_sg3/10010/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/00110/rep_04/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/00110/rep_04"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/00110/rep_00/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/00110/rep_00"
+    },
+    {
+      "error_path": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/10011/rep_03/error.json",
+      "run_dir": "runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/beam_num_beams_2/sg3_sg1/10011/rep_03"
+    }
+  ],
+  "finished_count": 1515,
+  "last_completed_run": {
+    "algorithm": "algo1",
+    "condition_bits": "11011",
+    "decoding_algorithm": "beam",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg1_sg2",
+    "replication": 1
+  },
+  "pending_count": 0,
+  "percent_complete": 63.12,
+  "running_count": 2,
+  "started_at": "2026-04-01T15:50:59.343941+00:00",
+  "total_runs": 2269,
+  "updated_at": "2026-04-02T07:00:15.565473+00:00"
+}

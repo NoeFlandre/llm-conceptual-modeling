@@ -15,9 +15,10 @@ runtime:
   context_policy:
     prompt_truncation: forbid
     safety_margin_tokens: 64
-    generation_timeout_seconds: 600
+    generation_timeout_seconds: 60
     resume_pass_mode: retry-timeouts
     retry_timeout_failures_on_resume: true
+    retry_structural_failures_on_resume: true
     worker_process_mode: persistent
     max_requests_per_worker_process: 16
   max_new_tokens_by_schema:
@@ -36,9 +37,9 @@ decoding:
     enabled: true
   beam:
     enabled: true
-    num_beams: [2, 6]
+    num_beams: [2]
   contrastive:
-    enabled: true
+    enabled: false
     penalty_alpha: [0.2, 0.8]
     top_k: 4
 

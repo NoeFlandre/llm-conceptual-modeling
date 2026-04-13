@@ -1,0 +1,877 @@
+{
+  "current_run": null,
+  "failed_count": 171,
+  "failure_count": 171,
+  "failures": [
+    {
+      "message": "ValueError: Model did not return valid structured output: { 'Marketing for sugary snacks targets children more aggressively' : ['Advertising budgets for children's media increase', 'Nutritional labeling requirements for snack foods', 'Parental supervision of children's screen time', 'Government regulations on food marketing to minors', 'Health education programs in schools'] }",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_1_to_subgraph_3/0011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { 'Marketing for sugary snacks targets children more aggressively' : ['Advertising budgets for children's media increase', 'Nutritional labeling requirements for snack foods', 'Parental supervision of children's screen time', 'Government regulations on food marketing to minors', 'Health education programs in schools'] }",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_1_to_subgraph_3/0011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { 'Marketing for sugary snacks targets children more aggressively' : ['Advertising budgets for children's media increase', 'Nutritional labeling requirements for snack foods', 'Parental supervision of children's screen time', 'Government regulations on food marketing to minors', 'Health education programs in schools'] }",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_1_to_subgraph_3/0011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { 'Marketing for sugary snacks targets children more aggressively' : ['Advertising budgets for children's media increase', 'Nutritional labeling requirements for snack foods', 'Parental supervision of children's screen time', 'Government regulations on food marketing to minors', 'Health education programs in schools'] }",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_1_to_subgraph_3/0011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { 'Marketing for sugary snacks targets children more aggressively' : ['Advertising budgets for children's media increase', 'Nutritional labeling requirements for snack foods', 'Parental supervision of children's screen time', 'Government regulations on food marketing to minors', 'Health education programs in schools'] }",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_1_to_subgraph_3/0011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/0111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/0111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/0111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/greedy/subgraph_2_to_subgraph_3/1111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_2/subgraph_2_to_subgraph_3/1111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OSError: Can't load tokenizer for 'Qwen/Qwen3.5-9B'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen3.5-9B' is the correct path to a directory containing all relevant files for a Qwen2Tokenizer tokenizer.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo3-qwen-current/runs/algo3/Qwen__Qwen3.5-9B/beam_num_beams_6/subgraph_2_to_subgraph_3/1111/rep_04",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 549,
+  "last_completed_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0100",
+    "decoding_algorithm": "beam",
+    "model": "Qwen/Qwen3.5-9B",
+    "pair_name": "subgraph_2_to_subgraph_3",
+    "replication": 4
+  },
+  "pending_count": 0,
+  "percent_complete": 76.25,
+  "running_count": 0,
+  "started_at": "2026-04-02T14:35:42.004610+00:00",
+  "total_runs": 720,
+  "updated_at": "2026-04-04T02:02:18.834063+00:00"
+}

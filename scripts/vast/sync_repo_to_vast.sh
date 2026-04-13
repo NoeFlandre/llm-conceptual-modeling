@@ -10,6 +10,7 @@ LOCAL_REPO_DIR="$1"
 REMOTE_TARGET="$2"
 
 rsync -avz \
+  --delete \
   --exclude '.git' \
   --exclude '.venv' \
   --exclude '.work-venv' \
@@ -17,6 +18,8 @@ rsync -avz \
   --exclude '__pycache__' \
   --exclude '.pytest_cache' \
   --exclude 'results' \
+  --exclude 'runs' \
+  --exclude 'worker-queues' \
   --exclude 'data/results' \
   --exclude 'data/analysis_artifacts' \
   "$LOCAL_REPO_DIR"/ "$REMOTE_TARGET"/

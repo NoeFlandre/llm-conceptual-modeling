@@ -1,0 +1,76 @@
+\begin{table}[h]
+\begin{adjustwidth}{-2.25in}{0in}
+\centering
+\caption{Deterministic variance decomposition across all modeled factors for Qwen and Mistral in Algorithm 3. Each cell reports the share of variance for recall. When accounting for the error term changes the displayed share, the table shows \textit{without error vs. with error}.}
+\resizebox{1.15\textwidth}{!}{%
+\begin{tabular}{|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Feature}} & \multicolumn{1}{c|}{\textit{Qwen}} & \multicolumn{1}{c|}{\textit{Mistral}} \\ \hline
+\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{\textbf{recall}} & \multicolumn{1}{c|}{\textbf{recall}} \\ \hline
+Example & 18.57 vs 6.49 & 20.49 vs 4.35 \\
+\hline
+Counterexample & 0.37 vs 0.13 & 0.00 \\
+\hline
+Number of Words & 12.63 vs 4.42 & 0.82 vs 0.17 \\
+\hline
+Depth & 9.84 vs 3.44 & 20.49 vs 4.35 \\
+\hline
+Greedy vs Beam/Contrastive & 0.07 vs 0.02 & 5.12 vs 1.09 \\
+\hline
+Beam vs Contrastive & 7.90 vs 2.76 & 1.02 vs 0.22 \\
+\hline
+Beam Width & 0.39 vs 0.14 & 0.00 \\
+\hline
+Contrastive Penalty & 0.43 vs 0.15 & 2.05 vs 0.43 \\
+\hline
+Example\&Counterexample & 0.37 vs 0.13 & 0.00 \\
+\hline
+Example\&Number of Words & 12.63 vs 4.42 & 0.82 vs 0.17 \\
+\hline
+Example\&Depth & 9.84 vs 3.44 & 20.49 vs 4.35 \\
+\hline
+Example\&Greedy vs Beam/Contrastive & 0.07 vs 0.02 & 5.12 vs 1.09 \\
+\hline
+Example\&Beam vs Contrastive & 7.90 vs 2.76 & 1.02 vs 0.22 \\
+\hline
+Example\&Beam Width & 0.39 vs 0.14 & 0.00 \\
+\hline
+Example\&Contrastive Penalty & 0.43 vs 0.15 & 2.05 vs 0.43 \\
+\hline
+Counterexample\&Number of Words & 0.37 vs 0.13 & 0.00 \\
+\hline
+Counterexample\&Depth & 0.32 vs 0.11 & 0.00 \\
+\hline
+Counterexample\&Greedy vs Beam/Contrastive & 0.77 vs 0.27 & 0.00 \\
+\hline
+Counterexample\&Beam vs Contrastive & 0.61 vs 0.21 & 0.00 \\
+\hline
+Counterexample\&Beam Width & 0.11 vs 0.04 & 0.00 \\
+\hline
+Counterexample\&Contrastive Penalty & 0.43 vs 0.15 & 0.00 \\
+\hline
+Number of Words\&Depth & 5.67 vs 1.98 & 0.82 vs 0.17 \\
+\hline
+Number of Words\&Greedy vs Beam/Contrastive & 0.40 vs 0.14 & 0.20 vs 0.04 \\
+\hline
+Number of Words\&Beam vs Contrastive & 3.86 vs 1.35 & 1.02 vs 0.22 \\
+\hline
+Number of Words\&Beam Width & 0.39 vs 0.14 & 8.20 vs 1.74 \\
+\hline
+Number of Words\&Contrastive Penalty & 0.43 vs 0.15 & 2.05 vs 0.43 \\
+\hline
+Depth\&Greedy vs Beam/Contrastive & 0.15 vs 0.05 & 5.12 vs 1.09 \\
+\hline
+Depth\&Beam vs Contrastive & 4.20 vs 1.47 & 1.02 vs 0.22 \\
+\hline
+Depth\&Beam Width & 0.02 vs 0.01 & 0.00 \\
+\hline
+Depth\&Contrastive Penalty & 0.43 vs 0.15 & 2.05 vs 0.43 \\
+\hline
+\cellcolor[HTML]{FDE9D9}Error term & 65.03 & 78.78 \\
+\hline
+\end{tabular}
+}
+\label{table:algo3_variance_decomposition}
+\end{adjustwidth}
+\end{table}

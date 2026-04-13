@@ -42,6 +42,24 @@ def _algo1_spec(*, context_policy: dict[str, object] | None = None) -> HFRunSpec
     )
 
 
+def _contrastive_spec(*, context_policy: dict[str, object] | None = None) -> HFRunSpec:
+    return HFRunSpec(
+        algorithm="algo3",
+        model="mistralai/Ministral-3-8B-Instruct-2512",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="contrastive", penalty_alpha=0.8, top_k=4),
+        replication=0,
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="1000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        prompt_factors={},
+        raw_context={"pair_name": "subgraph_1_to_subgraph_3", "Repetition": 0},
+        input_payload={"source_graph": [], "target_graph": []},
+        runtime_profile=_runtime_profile(),
+        context_policy=context_policy or {},
+    )
+
+
 def test_resolve_worker_process_mode_defaults_to_ephemeral() -> None:
     from llm_conceptual_modeling.hf_execution_runtime import resolve_worker_process_mode
 
@@ -164,6 +182,177 @@ def test_run_local_hf_spec_persistent_mode_reuses_existing_session(
     assert second_result["raw_row"]["pair_name"] == "sg1_sg2"
     assert session_calls == [("sg1_sg2", run_dir), ("sg1_sg2", run_dir)]
     assert len(persistent_sessions) == 1
+
+
+def test_run_local_hf_spec_uses_persistent_session_for_contrastive_runs_in_persistent_mode(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.hf_execution_runtime import run_local_hf_spec
+
+    spec = _contrastive_spec(
+        context_policy={
+            "worker_process_mode": "persistent",
+            "max_requests_per_worker_process": 9,
+        }
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    output_root = tmp_path / "results"
+    persistent_sessions: dict[str, object] = {}
+    session_calls: list[tuple[str, Path]] = []
+
+    class FakeSession:
+        def __init__(
+            self,
+            *,
+            queue_dir: Path,
+            worker_python: str,
+            max_requests_per_process: int | None = None,
+        ) -> None:
+            assert queue_dir == output_root / "worker-queues" / "mistralai__Ministral-3-8B-Instruct-2512"
+            assert worker_python
+            assert max_requests_per_process == 9
+
+        def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> dict[str, object]:
+            session_calls.append((spec.pair_name, run_dir))
+            return {
+                "raw_row": {"pair_name": spec.pair_name},
+                "runtime": {},
+                "raw_response": "{}",
+            }
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        FakeSession,
+    )
+
+    result = run_local_hf_spec(
+        spec=spec,
+        run_dir=run_dir,
+        output_root=output_root,
+        persistent_sessions=persistent_sessions,
+    )
+
+    assert result["raw_row"]["pair_name"] == "subgraph_1_to_subgraph_3"
+    assert session_calls == [("subgraph_1_to_subgraph_3", run_dir)]
+    assert list(persistent_sessions) == ["mistralai/Ministral-3-8B-Instruct-2512"]
+
+
+def test_run_local_hf_spec_closes_other_model_sessions_before_reusing_persistent_worker(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.hf_execution_runtime import run_local_hf_spec
+
+    spec = _algo1_spec(
+        context_policy={
+            "worker_process_mode": "persistent",
+            "max_requests_per_worker_process": 9,
+        }
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    output_root = tmp_path / "results"
+    closed_sessions: list[str] = []
+
+    class ExistingSession:
+        def close(self) -> None:
+            closed_sessions.append("old-model")
+
+    class FakeSession:
+        def __init__(
+            self,
+            *,
+            queue_dir: Path,
+            worker_python: str,
+            max_requests_per_process: int | None = None,
+        ) -> None:
+            assert queue_dir == output_root / "worker-queues" / "allenai__Olmo-3-7B-Instruct"
+            assert worker_python
+            assert max_requests_per_process == 9
+
+        def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> dict[str, object]:
+            return {
+                "raw_row": {"pair_name": spec.pair_name},
+                "runtime": {},
+                "raw_response": "{}",
+            }
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        FakeSession,
+    )
+    persistent_sessions: dict[str, object] = {
+        "Qwen/Qwen3.5-9B": ExistingSession(),
+    }
+
+    result = run_local_hf_spec(
+        spec=spec,
+        run_dir=run_dir,
+        output_root=output_root,
+        persistent_sessions=persistent_sessions,
+    )
+
+    assert result["raw_row"]["pair_name"] == "sg1_sg2"
+    assert closed_sessions == ["old-model"]
+    assert list(persistent_sessions) == ["allenai/Olmo-3-7B-Instruct"]
+
+
+def test_run_local_hf_spec_keeps_matching_model_session_for_contrastive_persistent_run(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.hf_execution_runtime import run_local_hf_spec
+
+    spec = _contrastive_spec(
+        context_policy={
+            "worker_process_mode": "persistent",
+            "max_requests_per_worker_process": 9,
+        }
+    )
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    output_root = tmp_path / "results"
+    closed_sessions: list[str] = []
+    session_calls: list[tuple[str, Path]] = []
+
+    class ExistingSession:
+        def __init__(self, name: str) -> None:
+            self.name = name
+
+        def close(self) -> None:
+            closed_sessions.append(self.name)
+
+        def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> dict[str, object]:
+            session_calls.append((spec.pair_name, run_dir))
+            return {
+                "raw_row": {"pair_name": spec.pair_name},
+                "runtime": {},
+                "raw_response": "{}",
+            }
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        ExistingSession,
+    )
+
+    persistent_sessions: dict[str, object] = {
+        "Qwen/Qwen3.5-9B": ExistingSession("qwen"),
+        "mistralai/Ministral-3-8B-Instruct-2512": ExistingSession("mistral"),
+    }
+
+    result = run_local_hf_spec(
+        spec=spec,
+        run_dir=run_dir,
+        output_root=output_root,
+        persistent_sessions=persistent_sessions,
+    )
+
+    assert result["raw_row"]["pair_name"] == "subgraph_1_to_subgraph_3"
+    assert session_calls == [("subgraph_1_to_subgraph_3", run_dir)]
+    assert closed_sessions == ["qwen"]
+    assert list(persistent_sessions) == ["mistralai/Ministral-3-8B-Instruct-2512"]
 
 
 def test_run_local_hf_spec_subprocess_retries_retryable_structural_validation_failure(

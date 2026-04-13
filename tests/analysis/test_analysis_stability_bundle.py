@@ -197,6 +197,119 @@ def test_write_stability_bundle_creates_organized_outputs(tmp_path: Path) -> Non
     assert conv_1["varying_condition_share"] == 0.0
 
 
+def test_write_stability_bundle_recomputes_algo3_at_pair_granularity(
+    tmp_path: Path,
+) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir(parents=True)
+    output_dir = tmp_path / "bundle"
+
+    raw_paths = []
+    for model_name in ("gpt-5", "gpt-4o"):
+        raw_path = results_root / model_name / "evaluated" / "method3_results.csv"
+        raw_path.parent.mkdir(parents=True, exist_ok=True)
+        raw_paths.append(raw_path)
+        _write_flat_file(
+            raw_path,
+            [
+                "Repetition,Example,Counter-Example,Number of Words,Depth,"
+                "pair_name,Recall,Results",
+                "0,-1,-1,3,1,subgraph_1_to_subgraph_3,0.10,[]",
+                "1,-1,-1,3,1,subgraph_1_to_subgraph_3,0.20,[]",
+                "0,-1,-1,5,2,subgraph_1_to_subgraph_3,0.30,[]",
+                "1,-1,-1,5,2,subgraph_1_to_subgraph_3,0.40,[]",
+                "0,-1,-1,3,1,subgraph_2_to_subgraph_1,0.50,[]",
+                "1,-1,-1,3,1,subgraph_2_to_subgraph_1,0.60,[]",
+                "0,-1,-1,5,2,subgraph_2_to_subgraph_1,0.70,[]",
+                "1,-1,-1,5,2,subgraph_2_to_subgraph_1,0.80,[]",
+                "0,-1,-1,3,1,subgraph_2_to_subgraph_3,0.90,[]",
+                "1,-1,-1,3,1,subgraph_2_to_subgraph_3,1.00,[]",
+                "0,-1,-1,5,2,subgraph_2_to_subgraph_3,0.15,[]",
+                "1,-1,-1,5,2,subgraph_2_to_subgraph_3,0.25,[]",
+            ],
+        )
+
+    _write_flat_file(
+        results_root / "variability_incidence_by_algorithm.csv",
+        [
+            "algorithm,metric,condition_count,varying_condition_count,varying_condition_share",
+            "algo3,Recall,96,44,0.4583",
+        ],
+    )
+    _write_flat_file(
+        results_root / "overall_metric_stability_by_algorithm.csv",
+        [
+            "algorithm,metric,condition_count,mean_cv,median_cv,max_cv,mean_range_width,max_range_width",
+            "algo3,Recall,96,3.21,3.87,3.87,0.337,1.0",
+        ],
+    )
+    _write_flat_file(
+        results_root / "algo3_condition_stability.csv",
+        [
+            (
+                "source_input,Example,Counter-Example,Number of Words,Depth,metric,"
+                "n,mean,sample_std,min,max,range_width,coefficient_of_variation"
+            ),
+            (
+                f"{raw_paths[0]},-1,-1,3,1,Recall,5,0.30,0.10,0.10,0.50,0.40,0.333"
+            ),
+            (
+                f"{raw_paths[1]},-1,-1,3,1,Recall,5,0.20,0.10,0.10,0.40,0.30,0.500"
+            ),
+        ],
+    )
+    _write_flat_file(
+        results_root / "algo3_depth_stability_by_level.csv",
+        [
+            "Depth,metric,condition_count,mean_cv,median_cv,mean_range_width,max_range_width",
+            "1,Recall,48,3.62,3.87,0.182,1.0",
+            "2,Recall,48,2.95,2.89,0.491,1.0",
+        ],
+    )
+    _write_flat_file(
+        results_root / "algo3_depth_variability_incidence.csv",
+        [
+            "Depth,metric,condition_count,varying_condition_count,varying_condition_share",
+            "1,Recall,48,17,0.354",
+            "2,Recall,48,27,0.562",
+        ],
+    )
+    _write_flat_file(
+        results_root / "algo3_number_of_words_stability_by_level.csv",
+        [
+            (
+                "Number of Words,metric,condition_count,mean_cv,median_cv,"
+                "mean_range_width,max_range_width"
+            ),
+            "3,Recall,48,3.5,3.5,0.18,0.9",
+            "5,Recall,48,3.8,3.9,0.20,1.0",
+        ],
+    )
+
+    write_stability_bundle(results_root=results_root, output_dir=output_dir)
+
+    algo3_condition = pd.read_csv(output_dir / "algo3" / "condition_stability.csv")
+    assert "pair_name" in algo3_condition.columns
+    assert len(algo3_condition) == 12
+    assert set(algo3_condition["pair_name"]) == {
+        "subgraph_1_to_subgraph_3",
+        "subgraph_2_to_subgraph_1",
+        "subgraph_2_to_subgraph_3",
+    }
+    assert set(algo3_condition["n"]) == {2}
+
+    algo3_depth = pd.read_csv(output_dir / "algo3" / "depth_stability_by_level.csv")
+    assert set(algo3_depth["condition_count"]) == {6}
+
+    overall = pd.read_csv(output_dir / "overall_metric_stability_by_algorithm.csv")
+    algo3_overall = overall[overall["algorithm"] == "algo3"].iloc[0]
+    assert algo3_overall["condition_count"] == 12
+
+    var_inc = pd.read_csv(output_dir / "variability_incidence_by_algorithm.csv")
+    algo3_var = var_inc[var_inc["algorithm"] == "algo3"].iloc[0]
+    assert algo3_var["condition_count"] == 12
+
+
 def _write_flat_file(path: Path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

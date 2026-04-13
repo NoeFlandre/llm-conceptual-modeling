@@ -1,0 +1,31 @@
+Recall,Feature
+6.710408322553834,Example
+0.01972125304401961,Counter-Example
+10.901975979107851,Number of Words
+3.9909370555082404,Depth
+0.447459209246759,Decoding Algorithm
+1.293031746704417,Beam Width Level
+0.0,Contrastive Penalty Level
+6.735826058207531e-05,Repetition
+3.792329372640753,Example_AND_Counter-Example
+12.25118251101975,Example_AND_Number of Words
+0.7535568881375083,Example_AND_Depth
+0.06372090870135153,Example_AND_Decoding Algorithm
+0.1861991302036876,Example_AND_Beam Width Level
+0.0,Example_AND_Contrastive Penalty Level
+2.067539078404402,Counter-Example_AND_Number of Words
+1.6011954233365873,Counter-Example_AND_Depth
+1.5022376522047531,Counter-Example_AND_Decoding Algorithm
+4.3896948411509875,Counter-Example_AND_Beam Width Level
+0.0,Counter-Example_AND_Contrastive Penalty Level
+1.8346753262235216,Number of Words_AND_Depth
+0.447459209246759,Number of Words_AND_Decoding Algorithm
+1.2930317467044257,Number of Words_AND_Beam Width Level
+0.0,Number of Words_AND_Contrastive Penalty Level
+2.100056086444512,Depth_AND_Decoding Algorithm
+6.068573701284776,Depth_AND_Beam Width Level
+0.0,Depth_AND_Contrastive Penalty Level
+0.0,Decoding Algorithm_AND_Beam Width Level
+0.0,Decoding Algorithm_AND_Contrastive Penalty Level
+0.0,Beam Width Level_AND_Contrastive Penalty Level
+43.56988822981449,Error

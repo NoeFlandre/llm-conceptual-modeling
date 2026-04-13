@@ -1,0 +1,925 @@
+{
+  "current_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0001",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "subgraph_2_to_subgraph_1",
+    "replication": 0
+  },
+  "failed_count": 128,
+  "failure_count": 128,
+  "failures": [
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Weight bias, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Weight bias, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Insulin resistance],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Unhealthy weight practices],  \n[(Cultural norms around thinness, Poor body image],  \n[(Cultural norms around thinness, Mental well-being],  \n[(Cultural norms around thinness, Blood pressure],  \n[(Cultural norms around thinness, Gastro-esophageal reflux disease],  \n[(Cultural norms around thinness, Depression],  \n[(Cultural norms around thinness, Pro-inflammatory cytokines]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Insulin resistance],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Unhealthy weight practices],  \n[(Cultural norms around thinness, Poor body image],  \n[(Cultural norms around thinness, Mental well-being],  \n[(Cultural norms around thinness, Blood pressure],  \n[(Cultural norms around thinness, Gastro-esophageal reflux disease],  \n[(Cultural norms around thinness, Depression],  \n[(Cultural norms around thinness, Pro-inflammatory cytokines]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Insulin resistance],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Unhealthy weight practices],  \n[(Cultural norms around thinness, Poor body image],  \n[(Cultural norms around thinness, Mental well-being],  \n[(Cultural norms around thinness, Blood pressure],  \n[(Cultural norms around thinness, Gastro-esophageal reflux disease],  \n[(Cultural norms around thinness, Depression],  \n[(Cultural norms around thinness, Pro-inflammatory cytokines]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Insulin resistance],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Unhealthy weight practices],  \n[(Cultural norms around thinness, Poor body image],  \n[(Cultural norms around thinness, Mental well-being],  \n[(Cultural norms around thinness, Blood pressure],  \n[(Cultural norms around thinness, Gastro-esophageal reflux disease],  \n[(Cultural norms around thinness, Depression],  \n[(Cultural norms around thinness, Pro-inflammatory cytokines]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Insulin resistance],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Unhealthy weight practices],  \n[(Cultural norms around thinness, Poor body image],  \n[(Cultural norms around thinness, Mental well-being],  \n[(Cultural norms around thinness, Blood pressure],  \n[(Cultural norms around thinness, Gastro-esophageal reflux disease],  \n[(Cultural norms around thinness, Depression],  \n[(Cultural norms around thinness, Pro-inflammatory cytokines]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Weight bias, Stress, Public health messaging around thinness, Medical perspective that thin is good, Depression, Poor body image, Pressure to be thin, Medications, Balance, Inflammatory molecules by adipose cells, Insulin resistance, Unhealthy weight control, Resilience, Airway resistance, Respiratory muscle fatigue, Pro-inflammatory cytokines,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Weight bias, Stress, Public health messaging around thinness, Medical perspective that thin is good, Depression, Poor body image, Pressure to be thin, Medications, Balance, Inflammatory molecules by adipose cells, Insulin resistance, Unhealthy weight control, Resilience, Airway resistance, Respiratory muscle fatigue, Pro-inflammatory cytokines,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Weight bias, Stress, Public health messaging around thinness, Medical perspective that thin is good, Depression, Poor body image, Pressure to be thin, Medications, Balance, Inflammatory molecules by adipose cells, Insulin resistance, Unhealthy weight control, Resilience, Airway resistance, Respiratory muscle fatigue, Pro-inflammatory cytokines,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Weight bias, Stress, Public health messaging around thinness, Medical perspective that thin is good, Depression, Poor body image, Pressure to be thin, Medications, Balance, Inflammatory molecules by adipose cells, Insulin resistance, Unhealthy weight control, Resilience, Airway resistance, Respiratory muscle fatigue, Pro-inflammatory cytokines,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Weight bias, Stress, Public health messaging around thinness, Medical perspective that thin is good, Depression, Poor body image, Pressure to be thin, Medications, Balance, Inflammatory molecules by adipose cells, Insulin resistance, Unhealthy weight control, Resilience, Airway resistance, Respiratory muscle fatigue, Pro-inflammatory cytokines,]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(7, 18]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [(7, 18]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [('Breath', 'In', 'M', 'Breath', 'A', 'Breath', 'E', 'In', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [('Breath', 'In', 'M', 'Breath', 'A', 'Breath', 'E', 'In', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [('Breath', 'In', 'M', 'Breath', 'A', 'Breath', 'E', 'In', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [('Breath', 'In', 'M', 'Breath', 'A', 'Breath', 'E', 'In', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: [('Breath', 'In', 'M', 'Breath', 'A', 'Breath', 'E', 'In', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000110/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000110/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/000111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/001011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010110/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010110/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/010111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/011010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/011010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/011011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/011011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/011011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/100010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/100010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 180.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-remaining-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/100011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    }
+  ],
+  "finished_count": 113,
+  "last_completed_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0000",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "subgraph_2_to_subgraph_1",
+    "replication": 3
+  },
+  "pending_count": 4768,
+  "percent_complete": 2.26,
+  "running_count": 1,
+  "started_at": "2026-04-07T16:53:38.276995+00:00",
+  "total_runs": 5009,
+  "updated_at": "2026-04-08T03:04:29.601379+00:00"
+}

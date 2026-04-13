@@ -333,6 +333,19 @@ def test_algo1_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
     assert config.runtime.context_policy["max_requests_per_worker_process"] == 25
 
 
+def test_canonical_batch_runtime_config_focuses_on_qwen_and_mistral() -> None:
+    config_path = Path("results/hf-paper-batch-canonical/runtime_config.yaml")
+    config_text = config_path.read_text(encoding="utf-8")
+    config = load_hf_run_config(config_path)
+
+    assert "allenai/Olmo-3-7B-Instruct" not in config_text
+    assert config.models.chat_models == [
+        "mistralai/Ministral-3-8B-Instruct-2512",
+        "Qwen/Qwen3.5-9B",
+    ]
+    assert config.models.embedding_model == "Qwen/Qwen3-Embedding-0.6B"
+
+
 def test_write_resolved_run_preview_writes_all_condition_prompt_variants(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"

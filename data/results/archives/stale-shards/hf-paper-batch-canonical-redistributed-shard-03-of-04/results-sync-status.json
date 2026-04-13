@@ -1,0 +1,18 @@
+{
+  "consecutive_failures": 454,
+  "last_success_at": "2026-04-10T05:50:39Z",
+  "ledger_snapshot": {
+    "expected_total_runs": 25200,
+    "finished_count": 20935,
+    "generated_at": "2026-04-09T10:42:33.918496+00:00",
+    "pending_count": 1436,
+    "retryable_failed_count": 2728,
+    "terminal_failed_count": 101
+  },
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-redistributed-shard-03-of-04",
+  "message": "Watcher stopped.",
+  "remote_results_dir": "root@175.121.93.64:/workspace/results/hf-paper-batch-canonical-redistributed-shard-03-of-04",
+  "status": "stopped",
+  "updated_at": "2026-04-10T14:22:02Z",
+  "watcher_identity": "SSH3"
+}

@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 298, in run_paper_batch
+    runtime_result = _run_local_hf_spec(
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 798, in _run_local_hf_spec
+    return session.run_spec(spec=spec, run_dir=run_dir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_persistent_worker.py", line 42, in run_spec
+    result = self._wait_for_result(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_persistent_worker.py", line 148, in _wait_for_result
+    raise RuntimeError("Persistent HF worker exited before writing a result artifact.")
+RuntimeError: Persistent HF worker exited before writing a result artifact.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/.venv/bin/lcm", line 10, in <module>
+    sys.exit(run())
+             ^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 296, in run
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 289, in main
+    return handle_run(args)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/commands/run.py", line 72, in handle_run
+    run_paper_batch(
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 319, in run_paper_batch
+    _write_json(
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_batch_utils.py", line 267, in write_json
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+  File "/usr/lib/python3.12/pathlib.py", line 1049, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/010110/rep_04/error.json'

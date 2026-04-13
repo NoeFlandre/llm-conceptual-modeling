@@ -11,7 +11,11 @@ def test_fetch_results_script_supports_ssh_key_and_port_overrides() -> None:
     assert 'vast_rsync_resume_flags' in script_text
     assert 'RSYNC_TIMEOUT_SECONDS="${RSYNC_TIMEOUT_SECONDS:-60}"' in script_text
     assert 'SSH_PORT="${3:-${SSH_PORT:-22}}"' in script_text
-    assert 'LOCAL_RESULTS_SYNC_EXCLUDES="${LOCAL_RESULTS_SYNC_EXCLUDES:-}"' in script_text
+    assert (
+        'LOCAL_RESULTS_SYNC_EXCLUDES="${LOCAL_RESULTS_SYNC_EXCLUDES:-ledger.json '
+        'results-sync-status.json results-sync-last-success.txt}"'
+        in script_text
+    )
     assert (
         'vast_require_positive_integer "$RSYNC_TIMEOUT_SECONDS" "RSYNC_TIMEOUT_SECONDS"'
         in script_text
@@ -26,6 +30,16 @@ def test_fetch_results_script_supports_ssh_key_and_port_overrides() -> None:
     assert 'if [ "$rsync_status" -eq 24 ]; then' in script_text
     assert 'file vanished during sync' in script_text
     assert '"$REMOTE_RESULTS_DIR"/ "$LOCAL_RESULTS_DIR"/' in script_text
+
+
+def test_fetch_results_script_protects_local_derived_ledger_artifacts_from_remote_overwrite() -> None:
+    script_text = Path("scripts/vast/fetch_results_from_vast.sh").read_text(encoding="utf-8")
+
+    assert (
+        'LOCAL_RESULTS_SYNC_EXCLUDES="${LOCAL_RESULTS_SYNC_EXCLUDES:-ledger.json '
+        'results-sync-status.json results-sync-last-success.txt}"'
+        in script_text
+    )
 
 
 def test_watch_results_script_retries_fetch_and_writes_health_artifacts() -> None:
@@ -54,7 +68,7 @@ def test_watch_results_script_retries_fetch_and_writes_health_artifacts() -> Non
     assert 'while true; do' in script_text
     assert (
         'if SSH_PORT="$SSH_PORT" "$FETCH_SCRIPT" "$REMOTE_RESULTS_DIR" '
-        '"$LOCAL_RESULTS_DIR" "$SSH_PORT"; then'
+        '"$LOCAL_RESULTS_DIR"; then'
         in script_text
     )
     assert 'CONSECUTIVE_FAILURES=$((CONSECUTIVE_FAILURES + 1))' in script_text

@@ -1,0 +1,1538 @@
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(40805): error: unexpected end of file
+rsync(40805): error: io_read_nonblocking
+rsync(40805): error: io_read_buf
+rsync(40805): error: io_read_int
+rsync(40805): warning: child 40806 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(40841): error: unexpected end of file
+rsync(40841): error: io_read_nonblocking
+rsync(40841): error: io_read_buf
+rsync(40841): error: io_read_int
+rsync(40841): warning: child 40842 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(40994): error: unexpected end of file
+rsync(40994): error: io_read_nonblocking
+rsync(40994): error: io_read_buf
+rsync(40994): error: io_read_int
+rsync(40994): warning: child 40995 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41142): error: unexpected end of file
+rsync(41142): error: io_read_nonblocking
+rsync(41142): error: io_read_buf
+rsync(41142): error: io_read_int
+rsync(41142): warning: child 41143 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41242): error: unexpected end of file
+rsync(41242): error: io_read_nonblocking
+rsync(41242): error: io_read_buf
+rsync(41242): error: io_read_int
+rsync(41242): warning: child 41243 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41284): error: unexpected end of file
+rsync(41284): error: io_read_nonblocking
+rsync(41284): error: io_read_buf
+rsync(41284): error: io_read_int
+rsync(41284): warning: child 41285 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41394): error: unexpected end of file
+rsync(41394): error: io_read_nonblocking
+rsync(41394): error: io_read_buf
+rsync(41394): error: io_read_int
+rsync(41394): warning: child 41395 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41444): error: unexpected end of file
+rsync(41444): error: io_read_nonblocking
+rsync(41444): error: io_read_buf
+rsync(41444): error: io_read_int
+rsync(41444): warning: child 41445 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41562): error: unexpected end of file
+rsync(41562): error: io_read_nonblocking
+rsync(41562): error: io_read_buf
+rsync(41562): error: io_read_int
+rsync(41562): warning: child 41563 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41647): error: unexpected end of file
+rsync(41647): error: io_read_nonblocking
+rsync(41647): error: io_read_buf
+rsync(41647): error: io_read_int
+rsync(41647): warning: child 41648 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41694): error: unexpected end of file
+rsync(41694): error: io_read_nonblocking
+rsync(41694): error: io_read_buf
+rsync(41694): error: io_read_int
+rsync(41694): warning: child 41695 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41817): error: unexpected end of file
+rsync(41817): error: io_read_nonblocking
+rsync(41817): error: io_read_buf
+rsync(41817): error: io_read_int
+rsync(41817): warning: child 41818 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41864): error: unexpected end of file
+rsync(41864): error: io_read_nonblocking
+rsync(41864): error: io_read_buf
+rsync(41864): error: io_read_int
+rsync(41864): warning: child 41865 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(41986): error: unexpected end of file
+rsync(41986): error: io_read_nonblocking
+rsync(41986): error: io_read_buf
+rsync(41986): error: io_read_int
+rsync(41986): warning: child 41987 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(42069): error: unexpected end of file
+rsync(42069): error: io_read_nonblocking
+rsync(42069): error: io_read_buf
+rsync(42069): error: io_read_int
+rsync(42069): warning: child 42070 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(42226): error: unexpected end of file
+rsync(42226): error: io_read_nonblocking
+rsync(42226): error: io_read_buf
+rsync(42226): error: io_read_int
+rsync(42226): warning: child 42227 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(42387): error: unexpected end of file
+rsync(42387): error: io_read_nonblocking
+rsync(42387): error: io_read_buf
+rsync(42387): error: io_read_int
+rsync(42387): warning: child 42388 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Operation timed out
+rsync(42534): error: unexpected end of file
+rsync(42534): error: io_read_nonblocking
+rsync(42534): error: io_read_buf
+rsync(42534): error: io_read_int
+rsync(42534): warning: child 42535 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(42883): error: unexpected end of file
+rsync(42883): error: io_read_nonblocking
+rsync(42883): error: io_read_buf
+rsync(42883): error: io_read_int
+rsync(42883): warning: child 42884 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(42931): error: unexpected end of file
+rsync(42931): error: io_read_nonblocking
+rsync(42931): error: io_read_buf
+rsync(42931): error: io_read_int
+rsync(42931): warning: child 42932 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(42984): error: unexpected end of file
+rsync(42984): error: io_read_nonblocking
+rsync(42984): error: io_read_buf
+rsync(42984): error: io_read_int
+rsync(42984): warning: child 42985 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43022): error: unexpected end of file
+rsync(43022): error: io_read_nonblocking
+rsync(43022): error: io_read_buf
+rsync(43022): error: io_read_int
+rsync(43022): warning: child 43023 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43068): error: unexpected end of file
+rsync(43068): error: io_read_nonblocking
+rsync(43068): error: io_read_buf
+rsync(43068): error: io_read_int
+rsync(43068): warning: child 43069 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43184): error: unexpected end of file
+rsync(43184): error: io_read_nonblocking
+rsync(43184): error: io_read_buf
+rsync(43184): error: io_read_int
+rsync(43184): warning: child 43185 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43314): error: unexpected end of file
+rsync(43314): error: io_read_nonblocking
+rsync(43314): error: io_read_buf
+rsync(43314): error: io_read_int
+rsync(43314): warning: child 43316 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43449): error: unexpected end of file
+rsync(43449): error: io_read_nonblocking
+rsync(43449): error: io_read_buf
+rsync(43449): error: io_read_int
+rsync(43449): warning: child 43450 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43463): error: unexpected end of file
+rsync(43463): error: io_read_nonblocking
+rsync(43463): error: io_read_buf
+rsync(43463): error: io_read_int
+rsync(43463): warning: child 43464 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43571): error: unexpected end of file
+rsync(43571): error: io_read_nonblocking
+rsync(43571): error: io_read_buf
+rsync(43571): error: io_read_int
+rsync(43571): warning: child 43572 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43597): error: unexpected end of file
+rsync(43597): error: io_read_nonblocking
+rsync(43597): error: io_read_buf
+rsync(43597): error: io_read_int
+rsync(43597): warning: child 43598 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43682): error: unexpected end of file
+rsync(43682): error: io_read_nonblocking
+rsync(43682): error: io_read_buf
+rsync(43682): error: io_read_int
+rsync(43682): warning: child 43690 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43739): error: unexpected end of file
+rsync(43739): error: io_read_nonblocking
+rsync(43739): error: io_read_buf
+rsync(43739): error: io_read_int
+rsync(43739): warning: child 43743 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43762): error: unexpected end of file
+rsync(43762): error: io_read_nonblocking
+rsync(43762): error: io_read_buf
+rsync(43762): error: io_read_int
+rsync(43762): warning: child 43763 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43813): error: unexpected end of file
+rsync(43813): error: io_read_nonblocking
+rsync(43813): error: io_read_buf
+rsync(43813): error: io_read_int
+rsync(43813): warning: child 43814 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43868): error: unexpected end of file
+rsync(43868): error: io_read_nonblocking
+rsync(43868): error: io_read_buf
+rsync(43868): error: io_read_int
+rsync(43868): warning: child 43869 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(43959): error: unexpected end of file
+rsync(43959): error: io_read_nonblocking
+rsync(43959): error: io_read_buf
+rsync(43959): error: io_read_int
+rsync(43959): warning: child 43960 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44018): error: unexpected end of file
+rsync(44018): error: io_read_nonblocking
+rsync(44018): error: io_read_buf
+rsync(44018): error: io_read_int
+rsync(44018): warning: child 44019 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44052): error: unexpected end of file
+rsync(44052): error: io_read_nonblocking
+rsync(44052): error: io_read_buf
+rsync(44052): error: io_read_int
+rsync(44052): warning: child 44055 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44175): error: unexpected end of file
+rsync(44175): error: io_read_nonblocking
+rsync(44175): error: io_read_buf
+rsync(44175): error: io_read_int
+rsync(44175): warning: child 44183 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44261): error: unexpected end of file
+rsync(44261): error: io_read_nonblocking
+rsync(44261): error: io_read_buf
+rsync(44261): error: io_read_int
+rsync(44261): warning: child 44263 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44306): error: unexpected end of file
+rsync(44306): error: io_read_nonblocking
+rsync(44306): error: io_read_buf
+rsync(44306): error: io_read_int
+rsync(44306): warning: child 44307 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44382): error: unexpected end of file
+rsync(44382): error: io_read_nonblocking
+rsync(44382): error: io_read_buf
+rsync(44382): error: io_read_int
+rsync(44382): warning: child 44385 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44428): error: unexpected end of file
+rsync(44428): error: io_read_nonblocking
+rsync(44428): error: io_read_buf
+rsync(44428): error: io_read_int
+rsync(44428): warning: child 44429 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44508): error: unexpected end of file
+rsync(44508): error: io_read_nonblocking
+rsync(44508): error: io_read_buf
+rsync(44508): error: io_read_int
+rsync(44508): warning: child 44510 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44596): error: unexpected end of file
+rsync(44596): error: io_read_nonblocking
+rsync(44596): error: io_read_buf
+rsync(44596): error: io_read_int
+rsync(44596): warning: child 44612 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44731): error: unexpected end of file
+rsync(44731): error: io_read_nonblocking
+rsync(44731): error: io_read_buf
+rsync(44731): error: io_read_int
+rsync(44731): warning: child 44733 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44789): error: unexpected end of file
+rsync(44789): error: io_read_nonblocking
+rsync(44789): error: io_read_buf
+rsync(44789): error: io_read_int
+rsync(44789): warning: child 44790 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44870): error: unexpected end of file
+rsync(44870): error: io_read_nonblocking
+rsync(44870): error: io_read_buf
+rsync(44870): error: io_read_int
+rsync(44870): warning: child 44873 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44897): error: unexpected end of file
+rsync(44897): error: io_read_nonblocking
+rsync(44897): error: io_read_buf
+rsync(44897): error: io_read_int
+rsync(44897): warning: child 44899 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(44966): error: unexpected end of file
+rsync(44966): error: io_read_nonblocking
+rsync(44966): error: io_read_buf
+rsync(44966): error: io_read_int
+rsync(44966): warning: child 44974 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45047): error: unexpected end of file
+rsync(45047): error: io_read_nonblocking
+rsync(45047): error: io_read_buf
+rsync(45047): error: io_read_int
+rsync(45047): warning: child 45053 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45133): error: unexpected end of file
+rsync(45133): error: io_read_nonblocking
+rsync(45133): error: io_read_buf
+rsync(45133): error: io_read_int
+rsync(45133): warning: child 45135 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45288): error: unexpected end of file
+rsync(45288): error: io_read_nonblocking
+rsync(45288): error: io_read_buf
+rsync(45288): error: io_read_int
+rsync(45288): warning: child 45289 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45452): error: unexpected end of file
+rsync(45452): error: io_read_nonblocking
+rsync(45452): error: io_read_buf
+rsync(45452): error: io_read_int
+rsync(45452): warning: child 45455 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45545): error: unexpected end of file
+rsync(45545): error: io_read_nonblocking
+rsync(45545): error: io_read_buf
+rsync(45545): error: io_read_int
+rsync(45545): warning: child 45546 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45599): error: unexpected end of file
+rsync(45599): error: io_read_nonblocking
+rsync(45599): error: io_read_buf
+rsync(45599): error: io_read_int
+rsync(45599): warning: child 45600 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45645): error: unexpected end of file
+rsync(45645): error: io_read_nonblocking
+rsync(45645): error: io_read_buf
+rsync(45645): error: io_read_int
+rsync(45645): warning: child 45646 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45697): error: unexpected end of file
+rsync(45697): error: io_read_nonblocking
+rsync(45697): error: io_read_buf
+rsync(45697): error: io_read_int
+rsync(45697): warning: child 45698 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45722): error: unexpected end of file
+rsync(45722): error: io_read_nonblocking
+rsync(45722): error: io_read_buf
+rsync(45722): error: io_read_int
+rsync(45722): warning: child 45723 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45747): error: unexpected end of file
+rsync(45747): error: io_read_nonblocking
+rsync(45747): error: io_read_buf
+rsync(45747): error: io_read_int
+rsync(45747): warning: child 45748 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45800): error: unexpected end of file
+rsync(45800): error: io_read_nonblocking
+rsync(45800): error: io_read_buf
+rsync(45800): error: io_read_int
+rsync(45800): warning: child 45801 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45882): error: unexpected end of file
+rsync(45882): error: io_read_nonblocking
+rsync(45882): error: io_read_buf
+rsync(45882): error: io_read_int
+rsync(45882): warning: child 45883 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45935): error: unexpected end of file
+rsync(45935): error: io_read_nonblocking
+rsync(45935): error: io_read_buf
+rsync(45935): error: io_read_int
+rsync(45935): warning: child 45936 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(45982): error: unexpected end of file
+rsync(45982): error: io_read_nonblocking
+rsync(45982): error: io_read_buf
+rsync(45982): error: io_read_int
+rsync(45982): warning: child 45983 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46041): error: unexpected end of file
+rsync(46041): error: io_read_nonblocking
+rsync(46041): error: io_read_buf
+rsync(46041): error: io_read_int
+rsync(46041): warning: child 46042 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46066): error: unexpected end of file
+rsync(46066): error: io_read_nonblocking
+rsync(46066): error: io_read_buf
+rsync(46066): error: io_read_int
+rsync(46066): warning: child 46067 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46113): error: unexpected end of file
+rsync(46113): error: io_read_nonblocking
+rsync(46113): error: io_read_buf
+rsync(46113): error: io_read_int
+rsync(46113): warning: child 46114 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46152): error: unexpected end of file
+rsync(46152): error: io_read_nonblocking
+rsync(46152): error: io_read_buf
+rsync(46152): error: io_read_int
+rsync(46152): warning: child 46153 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46197): error: unexpected end of file
+rsync(46197): error: io_read_nonblocking
+rsync(46197): error: io_read_buf
+rsync(46197): error: io_read_int
+rsync(46197): warning: child 46198 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46225): error: unexpected end of file
+rsync(46225): error: io_read_nonblocking
+rsync(46225): error: io_read_buf
+rsync(46225): error: io_read_int
+rsync(46225): warning: child 46227 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46294): error: unexpected end of file
+rsync(46294): error: io_read_nonblocking
+rsync(46294): error: io_read_buf
+rsync(46294): error: io_read_int
+rsync(46294): warning: child 46295 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46321): error: unexpected end of file
+rsync(46321): error: io_read_nonblocking
+rsync(46321): error: io_read_buf
+rsync(46321): error: io_read_int
+rsync(46321): warning: child 46322 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46389): error: unexpected end of file
+rsync(46389): error: io_read_nonblocking
+rsync(46389): error: io_read_buf
+rsync(46389): error: io_read_int
+rsync(46389): warning: child 46390 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46443): error: unexpected end of file
+rsync(46443): error: io_read_nonblocking
+rsync(46443): error: io_read_buf
+rsync(46443): error: io_read_int
+rsync(46443): warning: child 46444 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46496): error: unexpected end of file
+rsync(46496): error: io_read_nonblocking
+rsync(46496): error: io_read_buf
+rsync(46496): error: io_read_int
+rsync(46496): warning: child 46497 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46522): error: unexpected end of file
+rsync(46522): error: io_read_nonblocking
+rsync(46522): error: io_read_buf
+rsync(46522): error: io_read_int
+rsync(46522): warning: child 46523 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46586): error: unexpected end of file
+rsync(46586): error: io_read_nonblocking
+rsync(46586): error: io_read_buf
+rsync(46586): error: io_read_int
+rsync(46586): warning: child 46587 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46673): error: unexpected end of file
+rsync(46673): error: io_read_nonblocking
+rsync(46673): error: io_read_buf
+rsync(46673): error: io_read_int
+rsync(46673): warning: child 46674 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46697): error: unexpected end of file
+rsync(46697): error: io_read_nonblocking
+rsync(46697): error: io_read_buf
+rsync(46697): error: io_read_int
+rsync(46697): warning: child 46698 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46735): error: unexpected end of file
+rsync(46735): error: io_read_nonblocking
+rsync(46735): error: io_read_buf
+rsync(46735): error: io_read_int
+rsync(46735): warning: child 46736 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46760): error: unexpected end of file
+rsync(46760): error: io_read_nonblocking
+rsync(46760): error: io_read_buf
+rsync(46760): error: io_read_int
+rsync(46760): warning: child 46762 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46799): error: unexpected end of file
+rsync(46799): error: io_read_nonblocking
+rsync(46799): error: io_read_buf
+rsync(46799): error: io_read_int
+rsync(46799): warning: child 46800 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(46849): error: unexpected end of file
+rsync(46849): error: io_read_nonblocking
+rsync(46849): error: io_read_buf
+rsync(46849): error: io_read_int
+rsync(46849): warning: child 46850 exited with status 255
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh: line 32: from pathlib import Path
+import json
+
+Path(${LOCAL_RESULTS_SYNC_STATUS_PATH@Q}).write_text(
+    json.dumps(
+        {
+            "status": ${sync_state@Q},
+            "remote_results_dir": ${REMOTE_RESULTS_DIR@Q},
+            "local_results_dir": ${LOCAL_RESULTS_DIR@Q},
+            "updated_at": ${timestamp@Q},
+            "last_success_at": ${LAST_SUCCESS_AT@Q},
+            "consecutive_failures": ${CONSECUTIVE_FAILURES},
+            "message": ${message@Q},
+        },
+        indent=2,
+        sort_keys=True,
+    ),
+    encoding="utf-8",
+)
+: bad substitution
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+rsync: unrecognized option `--append-verify'
+usage: rsync [-0468BCDEFHIKLOPRSTWVabcdghiklnopqrtuvxyz] [-e program]
+	[-f filter] [--8-bit-output] [--address=sourceaddr] [--append]
+	[--backup-dir=dir] [--bwlimit=limit] [--cache | --no-cache]
+	[--checksum-seed=NUM] [--chmod=mode] [--compare-dest=dir] [--compress]
+	[--compress-level=NUM] [--contimeout] [--copy-dest=dir]
+	[--copy-unsafe-links] [--del]
+	[--delete-after | --delete-before | --delete-delay | --delete-during]
+	[--delete-excluded] [--delay-updates] [--dirs] [--no-dirs]
+	[--existing] [--exclude=pattern] [--exclude-from=file] [--executability]
+	[--extended-attributes]
+	[--existing] [--files-from=filespec] [--force] [--ignore-errors]
+	[--ignore-existing] [--ignore-non-existing] [--include=pattern]
+	[--include-from=file] [--inplace] [--itemize-changes]
+	[--keep-dirlinks] [--link-dest=dir] [--list-only]
+	[--max-delete=NUM] [--max-size=SIZE] [--min-size=SIZE]
+	[--modify-window=sec] [--no-implied-dirs] [--no-motd] [--numeric-ids]
+	[--out-format=FMT] [--partial] [--partial-dir] [--password-file=pwfile]
+	[--port=portnumber] [--progress] [--protocol=NUM] [--prune-empty-dirs]
+	[--read-batch=file] [--remove-source-files] [--rsync-path=program]
+	[--safe-links] [--size-only] [--sockopts=sockopts] [--specials]
+	[--stats] [--suffix] [--super] [--timeout=seconds]
+	[--only-write-batch=file | --write-batch=file]
+	source ... directory
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(52500): error: unexpected end of file
+rsync(52500): error: io_read_nonblocking
+rsync(52500): error: io_read_buf
+rsync(52500): error: io_read_int
+rsync(52500): warning: child 52503 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(52831): error: unexpected end of file
+rsync(52831): error: io_read_nonblocking
+rsync(52831): error: io_read_buf
+rsync(52831): error: io_read_int
+rsync(52831): warning: child 52832 exited with status 255
+ssh: connect to host 183.88.235.132 port 10150: Network is unreachable
+rsync(53183): error: unexpected end of file
+rsync(53183): error: io_read_nonblocking
+rsync(53183): error: io_read_buf
+rsync(53183): error: io_read_int
+rsync(53183): warning: child 53185 exited with status 255

@@ -775,6 +775,46 @@ def test_cli_run_status_reports_batch_health_as_json(tmp_path, capsys) -> None:
     assert '"failed_count": 0' in captured.out
 
 
+def test_cli_run_refresh_ledger_reports_updated_counts_as_json(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    results_root = tmp_path / "results"
+    ledger_root = results_root / "hf-paper-batch-canonical"
+    ledger_root.mkdir(parents=True, exist_ok=True)
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.refresh_ledger",
+        lambda *, results_root, ledger_root: {
+            "expected_total_runs": 2,
+            "finished_count": 1,
+            "retryable_failed_count": 0,
+            "terminal_failed_count": 0,
+            "pending_count": 1,
+            "records": [],
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "refresh-ledger",
+            "--results-root",
+            str(results_root),
+            "--ledger-root",
+            str(ledger_root),
+            "--json",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert '"finished_count": 1' in captured.out
+    assert '"pending_count": 1' in captured.out
+
+
 def test_cli_run_resume_preflight_reports_local_resume_readiness(
     monkeypatch,
     tmp_path,

@@ -1,0 +1,31 @@
+Recall,Feature
+0.0,Example
+0.0,Counter-Example
+0.0,Number of Words
+0.0,Depth
+0.0,Decoding Algorithm
+0.0,Beam Width Level
+0.0,Contrastive Penalty Level
+0.0,Repetition
+0.0,Example_AND_Counter-Example
+0.0,Example_AND_Number of Words
+0.0,Example_AND_Depth
+0.0,Example_AND_Decoding Algorithm
+0.0,Example_AND_Beam Width Level
+0.0,Example_AND_Contrastive Penalty Level
+0.0,Counter-Example_AND_Number of Words
+0.0,Counter-Example_AND_Depth
+0.0,Counter-Example_AND_Decoding Algorithm
+0.0,Counter-Example_AND_Beam Width Level
+0.0,Counter-Example_AND_Contrastive Penalty Level
+0.0,Number of Words_AND_Depth
+0.0,Number of Words_AND_Decoding Algorithm
+0.0,Number of Words_AND_Beam Width Level
+0.0,Number of Words_AND_Contrastive Penalty Level
+0.0,Depth_AND_Decoding Algorithm
+0.0,Depth_AND_Beam Width Level
+0.0,Depth_AND_Contrastive Penalty Level
+0.0,Decoding Algorithm_AND_Beam Width Level
+0.0,Decoding Algorithm_AND_Contrastive Penalty Level
+0.0,Beam Width Level_AND_Contrastive Penalty Level
+0.0,Error

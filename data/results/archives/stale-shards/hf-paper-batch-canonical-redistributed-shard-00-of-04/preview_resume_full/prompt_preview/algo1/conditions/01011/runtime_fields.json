@@ -1,0 +1,7 @@
+{
+  "include_counterexample": false,
+  "include_example": true,
+  "include_explanation": false,
+  "use_adjacency_notation": true,
+  "use_array_representation": true
+}

@@ -1,0 +1,64 @@
+{
+  "current_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0000",
+    "decoding_algorithm": "contrastive",
+    "model": "Qwen/Qwen3.5-9B",
+    "pair_name": "subgraph_2_to_subgraph_1",
+    "replication": 1
+  },
+  "failed_count": 7,
+  "failure_count": 7,
+  "failures": [
+    {
+      "message": "HfHubHTTPError: Server error '504 Gateway Time-out' for url 'https://huggingface.co/api/models/mistralai/Ministral-3-8B-Instruct-2512/tree/main?recursive=true&expand=false' (Amz CF ID: BMw2UP3Fsvd4e2GDkeQvGlmOwiqeVFAjNn89TR0bquSNwilO3WGxKg==)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg3_sg1/10011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg3_sg1/101111/rep_02",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/111000/rep_04",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-03-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_1_to_subgraph_3/0111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    }
+  ],
+  "finished_count": 502,
+  "last_completed_run": {
+    "algorithm": "algo3",
+    "condition_bits": "1111",
+    "decoding_algorithm": "contrastive",
+    "model": "Qwen/Qwen3.5-9B",
+    "pair_name": "subgraph_1_to_subgraph_3",
+    "replication": 3
+  },
+  "pending_count": 1867,
+  "percent_complete": 21.13,
+  "running_count": 1,
+  "started_at": "2026-04-08T06:14:50.383159+00:00",
+  "total_runs": 2376,
+  "updated_at": "2026-04-08T14:59:25.252149+00:00"
+}

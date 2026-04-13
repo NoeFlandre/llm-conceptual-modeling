@@ -1,0 +1,18 @@
+{
+  "consecutive_failures": 0,
+  "last_success_at": "2026-04-10T01:59:13Z",
+  "ledger_snapshot": {
+    "expected_total_runs": 25200,
+    "finished_count": 22613,
+    "generated_at": "2026-04-10T01:59:06.805805+00:00",
+    "pending_count": 612,
+    "retryable_failed_count": 1897,
+    "terminal_failed_count": 78
+  },
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-unfinished-shard-00-of-04",
+  "message": "Running result sync.",
+  "remote_results_dir": "root@222.235.180.221:/workspace/results/hf-paper-batch-canonical-unfinished-shard-00-of-04",
+  "status": "syncing",
+  "updated_at": "2026-04-10T02:00:14Z",
+  "watcher_identity": "root@222.235.180.221:42280:/workspace/results/hf-paper-batch-canonical-unfinished-shard-00-of-04"
+}

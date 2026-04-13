@@ -1,0 +1,20 @@
+{
+  "error_path": "/workspace/results/hf-paper-batch-algo1-olmo-current/smoke/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00001/rep_00/error.json",
+  "failure_message": "HF worker subprocess exited without writing a result artifact. stdout='' stderr='Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\\n\\nFetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]'",
+  "failure_type": "RuntimeError",
+  "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/smoke/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00001/rep_00",
+  "runtime_snapshot_path": "/workspace/llm-conceptual-modeling/.bootstrap-runtime.json",
+  "spec": {
+    "algorithm": "algo1",
+    "condition_bits": "00001",
+    "decoding_algorithm": "greedy",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg1_sg2",
+    "replication": 0
+  },
+  "status": "failed",
+  "summary_path": "/workspace/results/hf-paper-batch-algo1-olmo-current/smoke/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00001/rep_00/summary.json",
+  "updated_at": "2026-04-01T14:47:09.608553+00:00",
+  "worker_loaded_model": true
+}

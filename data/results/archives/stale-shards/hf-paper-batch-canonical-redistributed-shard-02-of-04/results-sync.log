@@ -1,0 +1,31 @@
+Transfer starting: 652 files
+batch_status.json
+runs/
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/active_stage.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/raw_response.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/raw_row.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/runtime.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/state.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/summary.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/worker_result.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/stages/
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/stages/algo2_edge_generation.json
+runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_04/stages/algo2_label_expansion.json
+runs/algo3/
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/0011/
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/0011/rep_03/
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/0011/rep_03/manifest.json
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/0011/rep_03/state.json
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/0011/rep_03/worker_spec.json
+runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/subgraph_2_to_subgraph_3/0011/rep_03/worker_state.json
+worker-queues/Qwen__Qwen3.5-9B/
+worker-queues/Qwen__Qwen3.5-9B/worker.log
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/00000001.claimed.json
+
+sent 2481 bytes  received 36852 bytes  393330000 bytes/sec
+total size is 3516196  speedup is 89.40

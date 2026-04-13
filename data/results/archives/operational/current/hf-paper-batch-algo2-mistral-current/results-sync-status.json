@@ -1,0 +1,9 @@
+{
+  "consecutive_failures": 16357,
+  "last_success_at": "2026-04-04T04:00:53Z",
+  "local_results_dir": "results/hf-paper-batch-algo2-mistral-current",
+  "message": "Latest sync failed; watcher will retry.",
+  "remote_results_dir": "root@211.72.13.201:/workspace/results/hf-paper-batch-algo2-mistral-current",
+  "status": "degraded",
+  "updated_at": "2026-04-10T02:01:41Z"
+}

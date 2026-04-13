@@ -26,11 +26,11 @@ This repository does not claim runtime equivalence for historical provider behav
 - `data/inputs/`
   Input graph files and auxiliary lexical resources used by the offline workflows.
   The canonical copy is published in the Hugging Face bucket.
-- `results/frontier/`
+- `data/results/frontier/`
   Imported frontier-model experiment outputs grouped by algorithm.
-- `results/open_weights/`
+- `data/results/open_weights/`
   Canonical Qwen/Mistral paper-facing outputs and the variance-decomposition bundle.
-- `results/archives/`
+- `data/results/archives/`
   Preserved OLMO artifacts, stale batch workdirs, and drained shard trees.
 - `data/baselines/`
   Deterministic structural baseline outputs.
@@ -165,7 +165,7 @@ uv run python generate_variance_decomposition.py
 This recomputes the deterministic Qwen/Mistral variance-decomposition bundle from
 the canonical finished-run ledger and writes the maintained artifacts under:
 
-- `results/hf-paper-batch-canonical/variance_decomposition/`
+- `data/results/open_weights/hf-paper-batch-canonical/variance_decomposition/`
 
 That folder contains:
 
@@ -181,10 +181,10 @@ That folder contains:
 Method and artifact details are documented in
 [docs/variance-decomposition.md](docs/variance-decomposition.md).
 
-Local experiment-result hygiene is documented in [results/README.md](results/README.md).
-In short: keep frontier outputs under `results/frontier/`, open-weight paper outputs under
-`results/open_weights/`, archive old operational workdirs under `results/archives/`, and leave the
-top-level `results/` folder free of scratch-only clutter.
+Local experiment-result hygiene is documented in [data/results/README.md](data/results/README.md).
+In short: keep frontier outputs under `data/results/frontier/`, open-weight paper outputs under
+`data/results/open_weights/`, archive old operational workdirs under `data/results/archives/`, and
+leave the top-level `results/` folder free of maintained outputs.
 The source tree itself should also stay free of Finder junk (`.DS_Store`) and other ad hoc
 temporary artifacts; keep scratch work isolated under `tmp/` or a throwaway worktree instead of
 committing it into the repo layout.
@@ -293,19 +293,20 @@ Remote GPU workflow:
 Dedicated last-10 Qwen tail workflow:
 
 - The final Qwen-only `algo1` tail has a dedicated isolated workflow and should not be run through the generic multi-model resume path.
-- The source of truth is the canonical `results/hf-paper-batch-canonical/ledger.json` records surface, not the physical run tree.
+- The source of truth is the canonical `data/results/open_weights/hf-paper-batch-canonical/ledger.json`
+  records surface, not the physical run tree.
 - Use the dedicated local prep commands first:
 
 ```bash
 uv run lcm run prepare-qwen-algo1-tail \
-  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical \
+  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical \
   --tail-results-root /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
   --remote-output-root /workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail \
   --json
 
 uv run lcm run qwen-algo1-tail-preflight \
   --repo-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
-  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical \
+  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical \
   --tail-results-root /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
   --json
 ```
@@ -319,7 +320,7 @@ bash scripts/vast/prepare_and_resume_qwen_algo1_tail.sh \
   PORT \
   /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
   /workspace/llm-conceptual-modeling \
-  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical \
   /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
   /workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail
 ```
@@ -334,7 +335,7 @@ bash scripts/vast/prepare_and_resume_qwen_algo1_tail.sh \
 bash scripts/vast/finalize_qwen_algo1_tail.sh \
   /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
   /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
-  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical
 ```
 
 - The final correctness check is not the whole-study top-line `pending_count`. It is:

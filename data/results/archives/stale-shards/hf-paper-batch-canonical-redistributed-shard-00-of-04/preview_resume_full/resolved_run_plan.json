@@ -1,0 +1,40 @@
+{
+  "algorithm_condition_counts": {
+    "algo1": 32,
+    "algo2": 64,
+    "algo3": 16
+  },
+  "chat_models": [
+    "mistralai/Ministral-3-8B-Instruct-2512",
+    "Qwen/Qwen3.5-9B",
+    "allenai/Olmo-3-7B-Instruct"
+  ],
+  "decoding_conditions": [
+    {
+      "algorithm": "greedy",
+      "num_beams": null,
+      "penalty_alpha": null,
+      "temperature": 0.0,
+      "top_k": null
+    },
+    {
+      "algorithm": "beam",
+      "num_beams": 2,
+      "penalty_alpha": null,
+      "temperature": 0.0,
+      "top_k": null
+    },
+    {
+      "algorithm": "beam",
+      "num_beams": 6,
+      "penalty_alpha": null,
+      "temperature": 0.0,
+      "top_k": null
+    }
+  ],
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "output_root": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-00-of-04",
+  "provider": "hf-transformers",
+  "replications": 5,
+  "seed": 20260331
+}

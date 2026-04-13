@@ -1,0 +1,2 @@
+source_input,pair_name,Depth,Number of Words,Example,Counter-Example,n_outputs,unique_output_count,mean_edge_count,sample_std_edge_count,mean_pairwise_jaccard,min_pairwise_jaccard,exact_match_pair_rate,union_edge_count
+/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo3-mistral-current/aggregated/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/raw.csv,subgraph_1_to_subgraph_3,-1,-1,-1,-1,5,1,24.0,0.0,1.0,1.0,1.0,24

@@ -197,6 +197,224 @@ def test_persistent_hf_worker_serves_two_requests_with_one_model_load(
     assert cache_release_calls["count"] == 2
 
 
+def test_persistent_hf_worker_skips_stale_finished_requests(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    queue_dir = tmp_path / "queue"
+    queue_dir.mkdir()
+    build_calls = {"count": 0}
+    executed_runs: list[str] = []
+
+    def make_spec(pair_name: str) -> HFRunSpec:
+        return HFRunSpec(
+            algorithm="algo1",
+            model="allenai/Olmo-3-7B-Instruct",
+            embedding_model="Qwen/Qwen3-Embedding-0.6B",
+            decoding=DecodingConfig(algorithm="greedy"),
+            replication=0,
+            pair_name=pair_name,
+            condition_bits="00000",
+            condition_label="greedy",
+            prompt_factors={},
+            raw_context={"pair_name": pair_name, "Repetition": 0},
+            input_payload={
+                "subgraph1": [("alpha", "beta")],
+                "subgraph2": [("gamma", "delta")],
+                "graph": [("alpha", "gamma")],
+            },
+            runtime_profile=RuntimeProfile(
+                device="cuda",
+                dtype="bfloat16",
+                quantization="none",
+                supports_thinking_toggle=False,
+                context_limit=4096,
+            ),
+        )
+
+    def write_finished_run(run_dir: Path, result_json: Path) -> None:
+        run_dir.mkdir(parents=True, exist_ok=True)
+        (run_dir / "manifest.json").write_text("{}", encoding="utf-8")
+        (run_dir / "runtime.json").write_text("{}", encoding="utf-8")
+        (run_dir / "raw_response.json").write_text("{}", encoding="utf-8")
+        (run_dir / "raw_row.json").write_text("{}", encoding="utf-8")
+        (run_dir / "state.json").write_text(json.dumps({"status": "finished"}), encoding="utf-8")
+        (run_dir / "summary.json").write_text(
+            json.dumps(
+                {
+                    "status": "finished",
+                    "accuracy": 1.0,
+                    "precision": 1.0,
+                    "recall": 1.0,
+                    "f1": 1.0,
+                }
+            ),
+            encoding="utf-8",
+        )
+        result_json.write_text(
+            json.dumps({"ok": True, "runtime_result": {"raw_row": {"pair_name": "sg1_sg2"}}}),
+            encoding="utf-8",
+        )
+
+    stale_run_dir = tmp_path / "finished_run"
+    stale_result_json = stale_run_dir / "worker_result.json"
+    write_finished_run(stale_run_dir, stale_result_json)
+    queue_request = queue_dir / "0001.request.json"
+    queue_request.write_text(
+        json.dumps(
+            {
+                "spec_json": str(stale_run_dir / "spec.json"),
+                "result_json": str(stale_result_json),
+                "run_dir": str(stale_run_dir),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    active_run_dir = tmp_path / "active_run"
+    active_run_dir.mkdir()
+    active_result_json = active_run_dir / "worker_result.json"
+    active_spec = make_spec("sg2_sg3")
+    (active_run_dir / "spec.json").write_text(
+        json.dumps(serialize_spec(active_spec)),
+        encoding="utf-8",
+    )
+    active_request = queue_dir / "0002.request.json"
+    active_request.write_text(
+        json.dumps(
+            {
+                "spec_json": str(active_run_dir / "spec.json"),
+                "result_json": str(active_result_json),
+                "run_dir": str(active_run_dir),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    def fake_build_runtime_factory(hf_token=None):
+        _ = hf_token
+        build_calls["count"] += 1
+        return object()
+
+    def fake_execute_request(*, spec_json_path, result_json_path, run_dir, hf_runtime, requests_served_by_process=1):
+        _ = spec_json_path, hf_runtime, requests_served_by_process
+        executed_runs.append(run_dir.name)
+        result_json_path.write_text(
+            json.dumps({"ok": True, "runtime_result": {"raw_row": {"pair_name": run_dir.name}}}),
+            encoding="utf-8",
+        )
+        return 0
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_worker.build_runtime_factory",
+        fake_build_runtime_factory,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_worker._execute_request",
+        fake_execute_request,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_worker._release_runtime_cache",
+        lambda: None,
+    )
+
+    served_count = serve_request_queue(queue_dir=queue_dir, max_requests=2, idle_sleep_seconds=0.0)
+
+    assert served_count == 1
+    assert build_calls["count"] == 1
+    assert executed_runs == ["active_run"]
+    assert not queue_request.exists()
+    assert not active_request.exists()
+    assert stale_result_json.exists()
+    assert active_result_json.exists()
+
+
+def test_persistent_hf_worker_recovers_claimed_unfinished_requests(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    queue_dir = tmp_path / "queue"
+    queue_dir.mkdir()
+    build_calls = {"count": 0}
+    executed_runs: list[str] = []
+
+    run_dir = tmp_path / "unfinished_run"
+    run_dir.mkdir()
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=False,
+            context_limit=4096,
+        ),
+    )
+    spec_json = run_dir / "spec.json"
+    result_json = run_dir / "worker_result.json"
+    spec_json.write_text(json.dumps(serialize_spec(spec)), encoding="utf-8")
+    claimed_request = queue_dir / "0001.claimed.json"
+    claimed_request.write_text(
+        json.dumps(
+            {
+                "spec_json": str(spec_json),
+                "result_json": str(result_json),
+                "run_dir": str(run_dir),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    def fake_build_runtime_factory(hf_token=None):
+        _ = hf_token
+        build_calls["count"] += 1
+        return object()
+
+    def fake_execute_request(*, spec_json_path, result_json_path, run_dir, hf_runtime, requests_served_by_process=1):
+        _ = spec_json_path, hf_runtime, requests_served_by_process
+        executed_runs.append(run_dir.name)
+        result_json_path.write_text(
+            json.dumps({"ok": True, "runtime_result": {"raw_row": {"pair_name": run_dir.name}}}),
+            encoding="utf-8",
+        )
+        return 0
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_worker.build_runtime_factory",
+        fake_build_runtime_factory,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_worker._execute_request",
+        fake_execute_request,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_worker._release_runtime_cache",
+        lambda: None,
+    )
+
+    served_count = serve_request_queue(queue_dir=queue_dir, max_requests=1, idle_sleep_seconds=0.0)
+
+    assert served_count == 1
+    assert build_calls["count"] == 1
+    assert executed_runs == ["unfinished_run"]
+    assert not claimed_request.exists()
+    assert result_json.exists()
+
+
 def test_worker_request_round_trips_shared_queue_artifacts(tmp_path: Path) -> None:
     queue_dir = tmp_path / "queue"
     queue_dir.mkdir()

@@ -14,6 +14,7 @@ REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-bootstrap}"
 REMOTE_DOCKER_IMAGE="${REMOTE_DOCKER_IMAGE:-}"
 
 cd "$REMOTE_REPO_DIR"
+export PYTHONPATH="$REMOTE_REPO_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
 
 if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then
   command -v docker >/dev/null 2>&1
@@ -27,8 +28,9 @@ if [ "$REMOTE_RUNTIME_MODE" = "docker" ]; then
 fi
 
 if [ "$REMOTE_RUNTIME_MODE" = "bootstrap" ]; then
-  test -x .venv/bin/lcm
-  .venv/bin/lcm --help >/dev/null
+  command -v bash >/dev/null 2>&1
+  command -v curl >/dev/null 2>&1
+  command -v nvidia-smi >/dev/null 2>&1
   exit 0
 fi
 

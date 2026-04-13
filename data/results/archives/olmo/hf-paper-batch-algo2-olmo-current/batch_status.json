@@ -1,0 +1,1479 @@
+{
+  "current_run": {
+    "algorithm": "algo2",
+    "condition_bits": "111100",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg2_sg3",
+    "replication": 0
+  },
+  "failed_count": 290,
+  "failure_count": 290,
+  "failures": [
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/110111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/110111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/110111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/110111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/110111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Prevalence of walking trails, Cultural norms around thinness]\n['Prevalence of walking trails, Public support for healthy eating, Cultural norms around thinness]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/111011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Prevalence of walking trails, Cultural norms around thinness]\n['Prevalence of walking trails, Public support for healthy eating, Cultural norms around thinness]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/111011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Prevalence of walking trails, Cultural norms around thinness]\n['Prevalence of walking trails, Public support for healthy eating, Cultural norms around thinness]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/111011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Prevalence of walking trails, Cultural norms around thinness]\n['Prevalence of walking trails, Public support for healthy eating, Cultural norms around thinness]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/111011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Prevalence of walking trails, Cultural norms around thinness]\n['Prevalence of walking trails, Public support for healthy eating, Cultural norms around thinness]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg1_sg2/111011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, B, C, D, E",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000110/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000110/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000110/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000110/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000110/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000111/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000111/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/000111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/001011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001110/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/010011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/010011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011110/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011111/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011111/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/011111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/011111/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Depression'], [Depression, Unhealthy choices], [Socio-economic status, Stress'], [Socio-economic status, Unhealthy'], [Weight bias, Socio-economic status'], [Socio-economic status], [Cultural norms around thinness', [Body image], [Cultural norms around thinness'], [Stimulants, Obesity'], [Obesity, Stress'], [Cultural norms around thinness', 'Socio-economic status'], ['Physical well-being', 'Body image'], ['Physical well-being', 'Socio-economic status'], ['Socio-economic status', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Depression', 'Socio-economic status'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Stimulants'], ['Physical pain'], ['Stress', 'Obesity'], ['Asthma-like symptoms'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Asthma'], ['Cultural norms around thinness'], ['Physical well-being'], ['Body image'], ['Cultural norms around thinness', 'Obesity'], ['Cultural norms around thinness', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth', 'Obesity'], ['Asth', 'Depression'], ['Cultural norms around thinness'], ['Sodium retention', 'Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Cultural norms around thinness'], ['Cultural norms', 'Obesity'], ['Depression'], ['Stimulants'], ['Physical activity'], ['Body image'], ['Stress'], ['Cultural norms around thinness'], ['Inflammation', 'Obesity'], ['Asthma'], ['Socio-economic status'], ['Asth'], ['Asth', 'Obesity'], ['Cultural norms around thinness'], ['Sodium'], ['Physical well-being'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Pressure to be thin'], ['Cultural norms around thinness'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Body image'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Cultural norms around thinness'], ['Physical activity'], ['Unhealthy choices'], ['Asthma'], ['Asth'], ['Stimulants'], ['Body image'], ['Cultural norms around thinness'], ['Obesity'], ['Socio-economic status'], ['Cultural norms'], ['Asth'], ['Socio-economic status'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Sodium retention'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms around thinness'], ['Obesity'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Depression'], ['Body image'], ['Physical well-being'], ['Socio-economic status'], ['Obesity'], ['Cultural norms around thinness'], ['Mental health'], ['Asth'], ['Cultural norms around thinness'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Socio-economic status'], ['Asth'], ['Cultural norms'], ['Asth'], ['Body image'], ['Mental'], ['Cultural norms around thinness'], ['Obesity'], ['Cultural norms'], ['Mental health'], ['Body image'], ['Cultural norms around thinness'], ['Mental well-being'], ['Socio-economic status'], ['Cultural norms'], ['Obesity'], ['Depression'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Physical activity'], ['Body image'], ['Cultural norms around thinness'], ['Mental health'], ['Cultural norms'], ['Mental well-being'], ['Sodium retention'], ['Cultural norms'], ['Cultural norms around thinness'], ['Asth'], ['Cultural norms'], ['Obesity'], ['Mental well-being'], ['Body image'], ['Cultural norms'], ['Mental health'], ['Socio-economic status'], ['Cultural norms around thinness'], ['Obesity'], ['Mental']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: A, Inflammatory cytokines",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: <TARGETS><TARGETS>\u2018Respiratory diseases\u2018</TARGETS><TARGETS>\u2018Obesity\u2018</TARGETS><TARGETS>\u2018Cultural norms around thinness\u2018</NODE>\nassistant\nI'map 1\n<TARGETS>\u2018Stress\u2018</TARGETS></NODE>",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory cytokines, Beta blockers, Unhealthy weight control, Stress, Pro-inflammatory cytokines, Adipose storage, Airway resistance, Short sleep duration,  ,]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/110001/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy choices, Inflammatory molecules by adipose cells, Beta blockers, Poor body image, Short sleep duration]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/110111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Physical pain]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/111001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Cultural norms around thinness, Work motivation],  \n[(Cultural norms around thinness, Emotional well-being],  \n[(Cultural norms around thinness, Health equity],  \n[(Cultural norms around thinness, Stress],  \n[(Cultural norms around thinness, Poor body image]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-olmo-current/runs/algo2/allenai__Olmo-3-7B-Instruct/beam_num_beams_2/sg2_sg3/111001/rep_04",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 914,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "111011",
+    "decoding_algorithm": "beam",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg2_sg3",
+    "replication": 4
+  },
+  "pending_count": 716,
+  "percent_complete": 47.6,
+  "running_count": 1,
+  "started_at": "2026-04-02T06:45:53.367143+00:00",
+  "total_runs": 1920,
+  "updated_at": "2026-04-04T16:52:24.556653+00:00"
+}

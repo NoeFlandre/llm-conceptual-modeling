@@ -8,6 +8,12 @@ from llm_conceptual_modeling.common.hf_transformers import (
     build_runtime_factory,
 )
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
+from llm_conceptual_modeling.hf_ledger import refresh_ledger
+from llm_conceptual_modeling.hf_qwen_algo1_tail import (
+    build_qwen_algo1_tail_preflight_report,
+    prepare_qwen_algo1_tail_bundle,
+)
+from llm_conceptual_modeling.hf_shard_manifest import write_unfinished_shard_manifest
 from llm_conceptual_modeling.hf_drain_supervisor import (
     build_drain_plan,
     read_drain_state_report,
@@ -94,6 +100,59 @@ def handle_run(args: Namespace) -> int:
                 print(f"worker_status={status['worker_status']}")
             if status.get("active_stage_age_seconds") is not None:
                 print(f"active_stage_age_seconds={status['active_stage_age_seconds']}")
+        return 0
+    if args.run_target == "refresh-ledger":
+        ledger = refresh_ledger(results_root=args.results_root, ledger_root=args.ledger_root)
+        if args.json:
+            print(json.dumps(ledger, indent=2, sort_keys=True))
+        else:
+            print(f"ledger_root={args.ledger_root}")
+            print(f"expected_total_runs={ledger['expected_total_runs']}")
+            print(f"finished_count={ledger['finished_count']}")
+            print(f"retryable_failed_count={ledger['retryable_failed_count']}")
+            print(f"terminal_failed_count={ledger['terminal_failed_count']}")
+            print(f"pending_count={ledger['pending_count']}")
+        return 0
+    if args.run_target == "write-unfinished-manifest":
+        manifest = write_unfinished_shard_manifest(
+            results_root=args.results_root,
+            ledger_root=args.ledger_root,
+            manifest_path=args.manifest_path,
+        )
+        if args.json:
+            print(json.dumps(manifest, indent=2, sort_keys=True))
+        else:
+            print(f"manifest_path={args.manifest_path}")
+            print(f"identity_count={len(manifest['identities'])}")
+            print(f"active_chat_models={','.join(cast(list[str], manifest['active_chat_models']))}")
+        return 0
+    if args.run_target == "prepare-qwen-algo1-tail":
+        report = prepare_qwen_algo1_tail_bundle(
+            canonical_results_root=args.canonical_results_root,
+            tail_results_root=args.tail_results_root,
+            remote_output_root=args.remote_output_root,
+        )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"tail_results_root={report['tail_results_root']}")
+            print(f"identity_count={report['identity_count']}")
+            print(f"config_path={report['config_path']}")
+            print(f"manifest_path={report['manifest_path']}")
+        return 0
+    if args.run_target == "qwen-algo1-tail-preflight":
+        report = build_qwen_algo1_tail_preflight_report(
+            repo_root=args.repo_root,
+            canonical_results_root=args.canonical_results_root,
+            tail_results_root=args.tail_results_root,
+            watcher_status_path=args.watcher_status_path,
+        )
+        if args.json:
+            print(json.dumps(report, indent=2, sort_keys=True))
+        else:
+            print(f"tail_results_root={report['tail_results_root']}")
+            print(f"tail_pending_count={report['resume_preflight']['pending_count']}")
+            print(f"tail_can_resume={report['resume_preflight']['can_resume']}")
         return 0
     if args.run_target == "drain-remaining":
         if args.plan_only:

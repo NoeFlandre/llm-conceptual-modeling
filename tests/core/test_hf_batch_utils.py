@@ -1,4 +1,5 @@
 import json
+import time
 from pathlib import Path
 
 import pytest
@@ -20,6 +21,26 @@ class _FailingChatClient:
     ) -> dict[str, object]:
         _ = (prompt, schema_name, schema)
         raise ValueError("Could not parse tuple content: no node")
+
+
+class _SlowChatClient:
+    def __init__(self, *, active_stage_path: Path) -> None:
+        self._active_stage_path = active_stage_path
+        self.last_call_metrics = {"duration_seconds": 2.0}
+
+    def complete_json(
+        self,
+        *,
+        prompt: str,
+        schema_name: str,
+        schema: dict[str, object],
+    ) -> dict[str, object]:
+        _ = (prompt, schema_name, schema)
+        before = self._active_stage_path.stat().st_mtime_ns
+        time.sleep(0.05)
+        during = self._active_stage_path.stat().st_mtime_ns
+        assert during > before
+        return {"edges": []}
 
 
 def test_recording_chat_client_persists_failed_raw_response(tmp_path: Path) -> None:
@@ -52,3 +73,23 @@ def test_recording_chat_client_persists_failed_raw_response(tmp_path: Path) -> N
     active_stage = json.loads(active_stage_path.read_text(encoding="utf-8"))
     assert active_stage["status"] == "failed"
     assert active_stage["raw_text"] == "assistant\n[(no node)]"
+
+
+def test_recording_chat_client_heartbeats_active_stage_during_slow_call(tmp_path: Path) -> None:
+    active_stage_path = tmp_path / "active_stage.json"
+    client = RecordingChatClient(
+        _SlowChatClient(active_stage_path=active_stage_path),
+        active_stage_path=active_stage_path,
+        active_stage_context={"pair_name": "sg3_sg1"},
+        heartbeat_interval_seconds=0.01,
+    )
+
+    response = client.complete_json(
+        prompt="prompt text",
+        schema_name="edge_list",
+        schema={"type": "object"},
+    )
+
+    assert response == {"edges": []}
+    active_stage = json.loads(active_stage_path.read_text(encoding="utf-8"))
+    assert active_stage["status"] == "completed"

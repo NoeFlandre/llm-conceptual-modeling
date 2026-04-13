@@ -154,7 +154,10 @@ def load_hf_run_config(path: str | Path) -> HFRunConfig:
         run=_load_run_config(raw),
         runtime=_load_runtime_config(raw),
         models=_load_models_config(raw),
-        decoding=_load_decoding_configs(raw["decoding"], temperature=float(raw["runtime"]["temperature"])),
+        decoding=_load_decoding_configs(
+            raw["decoding"],
+            temperature=float(raw["runtime"]["temperature"]),
+        ),
         graph_source=str(raw["inputs"]["graph_source"]),
         shared_fragments=shared_fragments,
         algorithms=_load_algorithm_configs(raw, shared_fragments=shared_fragments),
@@ -206,6 +209,28 @@ def write_resolved_run_preview(*, config: HFRunConfig, output_dir: str | Path) -
             output_dir=algorithm_dir / "conditions",
         )
     _write_condition_matrix(config=config, output_dir=output_dir_path)
+
+
+def exclude_decoding_conditions_from_payload(
+    payload: dict[str, object],
+    *,
+    excluded_condition_labels: set[str],
+) -> None:
+    if not excluded_condition_labels:
+        return
+    runtime_payload = _expect_mapping(payload.get("runtime"), label="Runtime payload")
+    temperature = _coerce_float(
+        runtime_payload.get("temperature", 0.0),
+        label="Runtime temperature",
+    )
+    decoding_payload = payload.get("decoding")
+    decoded_configs = _load_decoding_configs(decoding_payload, temperature=temperature)
+    filtered_configs = [
+        config
+        for config in decoded_configs
+        if _decoding_condition_label(config) not in excluded_condition_labels
+    ]
+    payload["decoding"] = [asdict(config) for config in filtered_configs]
 
 
 def _load_factor_config(payload: object) -> FactorConfig:
@@ -291,6 +316,14 @@ def _load_resolved_decoding_configs(raw: object, *, temperature: float) -> list[
             )
         )
     return configs
+
+
+def _decoding_condition_label(config: DecodingConfig) -> str:
+    if config.algorithm == "greedy":
+        return "greedy"
+    if config.algorithm == "beam":
+        return f"beam_num_beams_{config.num_beams}"
+    return f"contrastive_penalty_alpha_{config.penalty_alpha}"
 
 
 def _validate_algorithm_fragments(config: AlgorithmPromptConfig) -> None:
@@ -382,7 +415,8 @@ def _load_algorithm_configs(
     shared_fragments: dict[str, str],
 ) -> dict[str, AlgorithmPromptConfig]:
     algorithms: dict[str, AlgorithmPromptConfig] = {}
-    for algorithm_name, algorithm_payload in _expect_mapping(raw["algorithms"], label="algorithms").items():
+    algorithm_mapping = _expect_mapping(raw["algorithms"], label="algorithms")
+    for algorithm_name, algorithm_payload in algorithm_mapping.items():
         algorithm_config = _load_algorithm_config(
             algorithm_name=str(algorithm_name),
             algorithm_payload=algorithm_payload,
@@ -407,15 +441,21 @@ def _load_algorithm_config(
             label=f"fragment_definitions for {algorithm_name}",
         )
     )
+    factors_payload = _expect_mapping(
+        payload.get("factors", {}),
+        label=f"factors for {algorithm_name}",
+    )
     factors = {
         str(name): _load_factor_config(value)
-        for name, value in _expect_mapping(payload.get("factors", {}), label=f"factors for {algorithm_name}").items()
+        for name, value in factors_payload.items()
     }
+    base_fragments = _expect_list(
+        payload.get("base_fragments", []),
+        label=f"base_fragments for {algorithm_name}",
+    )
     return AlgorithmPromptConfig(
         name=algorithm_name,
-        base_fragments=[
-            str(name) for name in _expect_list(payload.get("base_fragments", []), label=f"base_fragments for {algorithm_name}")
-        ],
+        base_fragments=[str(name) for name in base_fragments],
         factors=factors,
         fragment_definitions=fragment_definitions,
         prompt_templates=_load_string_map(
@@ -462,8 +502,9 @@ def _load_runtime_config(raw: Mapping[str, object]) -> RuntimeConfig:
 
 def _load_models_config(raw: Mapping[str, object]) -> ModelsConfig:
     models = _expect_mapping(raw["models"], label="models")
+    chat_models = _expect_list(models["chat_models"], label="chat_models")
     return ModelsConfig(
-        chat_models=[str(model) for model in _expect_list(models["chat_models"], label="chat_models")],
+        chat_models=[str(model) for model in chat_models],
         embedding_model=str(models["embedding_model"]),
     )
 

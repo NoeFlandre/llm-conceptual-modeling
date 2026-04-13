@@ -37,3 +37,26 @@ def test_is_retryable_runtime_failure_does_not_retry_unsupported_failure() -> No
         )
         is False
     )
+
+
+def test_is_retryable_runtime_failure_retries_known_mistral_contrastive_type_error() -> None:
+    assert (
+        is_retryable_runtime_failure(
+            error_type="RuntimeError",
+            message="TypeError: '>' not supported between instances of 'NoneType' and 'int'",
+        )
+        is True
+    )
+
+
+def test_is_retryable_runtime_failure_retries_contrastive_generate_trust_remote_code_error() -> None:
+    assert (
+        is_retryable_runtime_failure(
+            error_type="RuntimeError",
+            message=(
+                "ValueError: Contrastive Search requires `trust_remote_code=True` in your "
+                "`generate` call, since it loads https://hf.co/transformers-community/contrastive-search."
+            ),
+        )
+        is True
+    )

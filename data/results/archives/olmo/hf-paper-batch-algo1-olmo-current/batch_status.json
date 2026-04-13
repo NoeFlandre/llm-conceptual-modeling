@@ -1,0 +1,28 @@
+{
+  "current_run": {
+    "algorithm": "algo1",
+    "condition_bits": "00001",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg3_sg1",
+    "replication": 4
+  },
+  "failed_count": 0,
+  "failure_count": 0,
+  "failures": [],
+  "finished_count": 1060,
+  "last_completed_run": {
+    "algorithm": "algo1",
+    "condition_bits": "11110",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg2_sg3",
+    "replication": 4
+  },
+  "pending_count": 380,
+  "percent_complete": 73.61,
+  "running_count": 1,
+  "started_at": "2026-04-01T14:47:12.429331+00:00",
+  "total_runs": 1440,
+  "updated_at": "2026-04-04T10:06:32.801573+00:00"
+}

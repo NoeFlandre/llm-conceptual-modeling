@@ -1,0 +1,634 @@
+{
+  "current_run": {
+    "algorithm": "algo1",
+    "condition_bits": "01010",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg1_sg2",
+    "replication": 4
+  },
+  "failed_count": 121,
+  "failure_count": 121,
+  "failures": [
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('1', '2').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/10111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing ratio of unhealthy to healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('5', '8').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01101/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10101/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('0', '1').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: new",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: map1",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11101/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11111/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(7, 18]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01101/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Nutritional education', 'Sustainable agriculture', 'Food labeling', 'Organic certification', 'Regulations on packaging', 'Food waste reduction', 'Food safety', 'Fair trade', 'Local sourcing', 'Food access', 'Food diversity', 'Food security', 'Food supply chain', 'Food technology', 'Food standards']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: assistant\n<TARGETS>['Balance']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Quality of the sport', 'Unhealthy eating', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/11111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('1', '2').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/10111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing ratio of unhealthy to healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('5', '8').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01111/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('0', '1').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: new",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: map1",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11111/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(7, 18]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01101/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Nutritional education', 'Sustainable agriculture', 'Food labeling', 'Organic certification', 'Regulations on packaging', 'Food waste reduction', 'Food safety', 'Fair trade', 'Local sourcing', 'Food access', 'Food diversity', 'Food security', 'Food supply chain', 'Food technology', 'Food standards']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: assistant\n<TARGETS>['Balance']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Quality of the sport', 'Unhealthy eating', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/11111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('1', '2').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/10111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing ratio of unhealthy to healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('5', '8').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01101/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10101/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('0', '1').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: new",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: map1",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11101/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11111/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(7, 18]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01101/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Nutritional education', 'Sustainable agriculture', 'Food labeling', 'Organic certification', 'Regulations on packaging', 'Food waste reduction', 'Food safety', 'Fair trade', 'Local sourcing', 'Food access', 'Food diversity', 'Food security', 'Food supply chain', 'Food technology', 'Food standards']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: assistant\n<TARGETS>['Balance']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Quality of the sport', 'Unhealthy eating', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/11111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('1', '2').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/10111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing ratio of unhealthy to healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('5', '8').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/01111/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: verified edge list is empty.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('0', '1').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/10111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: new",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Could not parse tuple content: map1",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/11111/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(7, 18]",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/00011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/01101/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 60.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10001/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Nutritional education', 'Sustainable agriculture', 'Food labeling', 'Organic certification', 'Regulations on packaging', 'Food waste reduction', 'Food safety', 'Fair trade', 'Local sourcing', 'Food access', 'Food diversity', 'Food security', 'Food supply chain', 'Food technology', 'Food standards']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: assistant\n<TARGETS>['Balance']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/10101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [( 'Quality of the sport', 'Unhealthy eating', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg3_sg1/11111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structurally invalid algo1 result: non-textual edge endpoint ('1', '2').",
+      "run_dir": "/workspace/results/hf-paper-batch-algo1-olmo-current/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/00111/rep_04",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 273,
+  "last_completed_run": {
+    "algorithm": "algo1",
+    "condition_bits": "01001",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg1_sg2",
+    "replication": 4
+  },
+  "pending_count": 2006,
+  "percent_complete": 11.38,
+  "running_count": 1,
+  "started_at": "2026-04-01T05:17:18.752899+00:00",
+  "total_runs": 2400,
+  "updated_at": "2026-04-01T08:06:48.010685+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "current_run": null,
+  "failed_count": 0,
+  "failure_count": 0,
+  "failures": [],
+  "finished_count": 115,
+  "last_completed_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0001",
+    "decoding_algorithm": "contrastive",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "subgraph_1_to_subgraph_3",
+    "replication": 4
+  },
+  "pending_count": 10,
+  "percent_complete": 92.0,
+  "running_count": 0,
+  "started_at": "2026-04-06T13:04:18.125099+00:00",
+  "total_runs": 125,
+  "updated_at": "2026-04-12T09:40:42.262325+00:00"
+}

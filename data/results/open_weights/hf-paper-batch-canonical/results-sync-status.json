@@ -1,0 +1,18 @@
+{
+  "consecutive_failures": 299,
+  "last_success_at": "2026-04-12T09:43:29Z",
+  "ledger_snapshot": {
+    "expected_total_runs": 25200,
+    "finished_count": 23277,
+    "generated_at": "2026-04-12T10:41:00.382625+00:00",
+    "pending_count": 430,
+    "retryable_failed_count": 1412,
+    "terminal_failed_count": 81
+  },
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical",
+  "message": "Latest sync or ledger refresh failed; watcher will retry.",
+  "remote_results_dir": "root@14.186.40.25:/workspace/results/hf-paper-batch-canonical",
+  "status": "degraded",
+  "updated_at": "2026-04-13T08:00:24Z",
+  "watcher_identity": ""
+}

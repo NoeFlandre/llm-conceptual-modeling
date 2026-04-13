@@ -224,6 +224,30 @@ def build_parser() -> argparse.ArgumentParser:
     status_parser.add_argument("--results-root", required=True)
     status_parser.add_argument("--json", action="store_true")
 
+    refresh_ledger_parser = run_subparsers.add_parser("refresh-ledger")
+    refresh_ledger_parser.add_argument("--results-root", required=True)
+    refresh_ledger_parser.add_argument("--ledger-root", required=True)
+    refresh_ledger_parser.add_argument("--json", action="store_true")
+
+    unfinished_manifest_parser = run_subparsers.add_parser("write-unfinished-manifest")
+    unfinished_manifest_parser.add_argument("--results-root", required=True)
+    unfinished_manifest_parser.add_argument("--ledger-root", required=True)
+    unfinished_manifest_parser.add_argument("--manifest-path", required=True)
+    unfinished_manifest_parser.add_argument("--json", action="store_true")
+
+    qwen_tail_prepare_parser = run_subparsers.add_parser("prepare-qwen-algo1-tail")
+    qwen_tail_prepare_parser.add_argument("--canonical-results-root", required=True)
+    qwen_tail_prepare_parser.add_argument("--tail-results-root", required=True)
+    qwen_tail_prepare_parser.add_argument("--remote-output-root", required=True)
+    qwen_tail_prepare_parser.add_argument("--json", action="store_true")
+
+    qwen_tail_preflight_parser = run_subparsers.add_parser("qwen-algo1-tail-preflight")
+    qwen_tail_preflight_parser.add_argument("--repo-root", required=True)
+    qwen_tail_preflight_parser.add_argument("--canonical-results-root", required=True)
+    qwen_tail_preflight_parser.add_argument("--tail-results-root", required=True)
+    qwen_tail_preflight_parser.add_argument("--watcher-status-path")
+    qwen_tail_preflight_parser.add_argument("--json", action="store_true")
+
     drain_remaining_parser = run_subparsers.add_parser("drain-remaining")
     drain_remaining_parser.add_argument("--repo-root", required=True)
     drain_remaining_parser.add_argument("--results-root", required=True)

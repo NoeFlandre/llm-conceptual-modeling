@@ -69,6 +69,9 @@ REMOTE_LAUNCH_SCRIPT="${REMOTE_LAUNCH_SCRIPT:-$REMOTE_REPO_DIR/scripts/vast/remo
 REMOTE_RUNTIME_DOCTOR_SCRIPT="${REMOTE_RUNTIME_DOCTOR_SCRIPT:-$REMOTE_REPO_DIR/scripts/vast/remote_runtime_doctor.sh}"
 REMOTE_RUNTIME_MODE="$(vast_select_remote_runtime_mode "$REMOTE_RUNTIME_MODE" "$REMOTE_DOCKER_IMAGE")"
 BATCH_EXCLUDED_DECODING_LABELS="${BATCH_EXCLUDED_DECODING_LABELS:-}"
+REMOTE_PREVIEW_SCRIPT="$(vast_remote_script_path "$REMOTE_PREVIEW_SCRIPT" "$LOCAL_REPO_DIR" "$REMOTE_REPO_DIR")"
+REMOTE_LAUNCH_SCRIPT="$(vast_remote_script_path "$REMOTE_LAUNCH_SCRIPT" "$LOCAL_REPO_DIR" "$REMOTE_REPO_DIR")"
+REMOTE_RUNTIME_DOCTOR_SCRIPT="$(vast_remote_script_path "$REMOTE_RUNTIME_DOCTOR_SCRIPT" "$LOCAL_REPO_DIR" "$REMOTE_REPO_DIR")"
 REMOTE_ROOT_NAME="$(basename "$REMOTE_RESULTS_DIR")"
 if [ -z "$BATCH_EXCLUDED_DECODING_LABELS" ]; then
   BATCH_EXCLUDED_DECODING_LABELS="$(
@@ -148,8 +151,18 @@ else
     --json
 fi
 
+if vast_has_value "$LOCAL_RESULTS_DIR"; then
+  echo "[0.5/6] Build unfinished shard manifest"
+  uv --directory "$LOCAL_REPO_DIR" run lcm run write-unfinished-manifest \
+    --results-root "$LOCAL_RESULTS_DIR" \
+    --ledger-root "$LOCAL_RESULTS_DIR" \
+    --manifest-path "$LOCAL_RESULTS_DIR/shard_manifest.json" \
+    --json
+fi
+
 echo "[1/6] Sync repository"
 vast_retry_rsync 3 rsync -avz \
+  --delete \
   -e "$RSYNC_SSH" \
   --exclude '.git' \
   --exclude '.venv' \

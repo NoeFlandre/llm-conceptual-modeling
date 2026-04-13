@@ -11,6 +11,10 @@ STRUCTURAL_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
     "structured response returned a null",
     "jsondecodeerror",
     "could not parse tuple content:",
+    "unsupported cache type:",
+    "contrastive search requires dynamic cache",
+    "contrastive search requires `trust_remote_code=true`",
+    "'>' not supported between instances of 'nonetype' and 'int'",
 )
 
 INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
@@ -25,7 +29,6 @@ INFRASTRUCTURE_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
 
 UNSUPPORTED_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (
     "contrastive search is not supported with stateful models",
-    "contrastive search requires `trust_remote_code=true`",
 )
 
 RETRYABLE_WORKER_FAILURE_MESSAGE_MARKERS: tuple[str, ...] = (

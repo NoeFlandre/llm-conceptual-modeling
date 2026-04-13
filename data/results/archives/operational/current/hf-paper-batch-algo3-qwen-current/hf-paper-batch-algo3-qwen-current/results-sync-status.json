@@ -1,0 +1,11 @@
+{
+  "consecutive_failures": 5,
+  "last_success_at": "",
+  "ledger_snapshot": null,
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo3-qwen-current",
+  "message": "Latest sync or ledger refresh failed; watcher will retry.",
+  "remote_results_dir": "root@175.155.64.166:/workspace/results/hf-paper-batch-algo3-qwen-current",
+  "status": "degraded",
+  "updated_at": "2026-04-13T08:00:42Z",
+  "watcher_identity": ""
+}

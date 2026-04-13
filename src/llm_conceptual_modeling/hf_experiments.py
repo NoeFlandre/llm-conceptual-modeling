@@ -117,6 +117,9 @@ from llm_conceptual_modeling.hf_batch_utils import (
     manifest_for_spec as _manifest_for_spec,
 )
 from llm_conceptual_modeling.hf_execution_runtime import (
+    _close_incompatible_persistent_sessions as _execution_close_incompatible_persistent_sessions,
+)
+from llm_conceptual_modeling.hf_execution_runtime import (
     build_worker_command as _execution_build_worker_command,
 )
 from llm_conceptual_modeling.hf_execution_runtime import (
@@ -172,6 +175,15 @@ from llm_conceptual_modeling.hf_resume_state import (
     resolve_retry_timeout_failures_on_resume as _resume_resolve_retry_timeout_failures_on_resume,
 )
 from llm_conceptual_modeling.hf_resume_state import (
+    resolve_retry_oom_failures_on_resume as _resume_resolve_retry_oom_failures_on_resume,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    resolve_retry_infrastructure_failures_on_resume as _resume_resolve_retry_infrastructure_failures_on_resume,
+)
+from llm_conceptual_modeling.hf_resume_state import (
+    resolve_retry_structural_failures_on_resume as _resume_resolve_retry_structural_failures_on_resume,
+)
+from llm_conceptual_modeling.hf_resume_state import (
     resume_priority_key as _resume_resume_priority_key,
 )
 from llm_conceptual_modeling.hf_resume_state import (
@@ -214,6 +226,40 @@ def plan_paper_batch(
     )
 
 
+def _filter_planned_specs_for_output_root(
+    *,
+    planned_specs: list[HFRunSpec],
+    output_root: Path,
+) -> list[HFRunSpec]:
+    manifest_path = output_root / "shard_manifest.json"
+    if not manifest_path.exists():
+        return planned_specs
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    allowed_identities = {
+        (
+            str(item["algorithm"]),
+            str(item["model"]),
+            str(item["condition_label"]),
+            str(item["pair_name"]),
+            str(item["condition_bits"]),
+            int(item["replication"]),
+        )
+        for item in manifest.get("identities", [])
+    }
+    return [spec for spec in planned_specs if _spec_identity(spec) in allowed_identities]
+
+
+def _spec_identity(spec: HFRunSpec) -> tuple[str, str, str, str, str, int]:
+    return (
+        spec.algorithm,
+        spec.model,
+        spec.condition_label,
+        spec.pair_name,
+        spec.condition_bits,
+        spec.replication,
+    )
+
+
 def run_paper_batch(
     *,
     output_root: str | Path,
@@ -249,6 +295,10 @@ def run_paper_batch(
         algorithms=algorithms,
         config=config,
         runtime_profile_provider=profile_provider,
+    )
+    planned_specs = _filter_planned_specs_for_output_root(
+        planned_specs=planned_specs,
+        output_root=output_root_path,
     )
     if runtime_factory is None and not use_monitored_hf_subprocess:
         if hf_runtime is None:
@@ -395,25 +445,34 @@ def run_paper_batch(
                     "message": str(error),
                     "status": "failed",
                 }
+                failure_kind = _classify_failure_payload(failure_payload)
+                should_retry_on_resume = _should_keep_failure_pending_on_resume(
+                    resume=resume,
+                    failure_kind=failure_kind,
+                    context_policy=spec.context_policy,
+                )
                 _write_json(run_dir / "error.json", failure_payload)
                 _write_json(run_dir / "state.json", {"status": "failed"})
                 status_snapshot["running_count"] = 0
                 status_snapshot["current_run"] = None
-                status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
-                status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
-                failures = _status_failures(status_snapshot)
-                failures.append(
-                    {
+                if should_retry_on_resume:
+                    status_snapshot["updated_at"] = _status_timestamp_now()
+                    _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+                else:
+                    failures = _status_failures(status_snapshot)
+                    failure_entry = {
                         "run_dir": str(run_dir),
                         "message": str(error),
                         "type": type(error).__name__,
                     }
-                )
-                status_snapshot["failures"] = failures
-                status_snapshot["failure_count"] = len(failures)
-                status_snapshot["updated_at"] = _status_timestamp_now()
-                _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
-                if _classify_failure_payload(failure_payload) == "infrastructure":
+                    status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
+                    status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
+                    failures.append(failure_entry)
+                    status_snapshot["failures"] = failures
+                    status_snapshot["failure_count"] = len(failures)
+                    status_snapshot["updated_at"] = _status_timestamp_now()
+                    _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
+                if failure_kind == "infrastructure":
                     raise BatchInfrastructureFailure(
                         f"Infrastructure failure while executing {run_dir}: {error}"
                     ) from error
@@ -743,12 +802,50 @@ def _resolve_retry_timeout_failures_on_resume(
     return _resume_resolve_retry_timeout_failures_on_resume(context_policy)
 
 
+def _resolve_retry_oom_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    return _resume_resolve_retry_oom_failures_on_resume(context_policy)
+
+
+def _resolve_retry_infrastructure_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    return _resume_resolve_retry_infrastructure_failures_on_resume(context_policy)
+
+
+def _resolve_retry_structural_failures_on_resume(
+    context_policy: dict[str, object] | None,
+) -> bool:
+    return _resume_resolve_retry_structural_failures_on_resume(context_policy)
+
+
 def _resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
     return _resume_resolve_resume_pass_mode(context_policy)
 
 
 def _classify_failure_payload(error: dict[str, object]) -> str:
     return _resume_classify_failure_payload(error)
+
+
+def _should_keep_failure_pending_on_resume(
+    *,
+    resume: bool,
+    failure_kind: str,
+    context_policy: dict[str, object] | None,
+) -> bool:
+    if not resume:
+        return False
+    retry_checks = {
+        "timeout": _resolve_retry_timeout_failures_on_resume,
+        "oom": _resolve_retry_oom_failures_on_resume,
+        "infrastructure": _resolve_retry_infrastructure_failures_on_resume,
+        "structural": _resolve_retry_structural_failures_on_resume,
+    }
+    retry_check = retry_checks.get(failure_kind)
+    if retry_check is None:
+        return False
+    return retry_check(context_policy)
 
 
 def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -> RuntimeFactory:
@@ -786,6 +883,10 @@ def _run_local_hf_spec(
     output_root: Path,
     persistent_sessions: dict[str, PersistentHFWorkerSession],
 ) -> RuntimeResult:
+    _execution_close_incompatible_persistent_sessions(
+        spec=spec,
+        persistent_sessions=persistent_sessions,
+    )
     if _resolve_worker_process_mode(spec.context_policy) != "persistent":
         return _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
     session = persistent_sessions.get(spec.model)

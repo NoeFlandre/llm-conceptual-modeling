@@ -72,6 +72,21 @@ vast_rsync_resume_flags() {
   printf '%s' "--partial --timeout ${timeout_seconds}"
 }
 
+vast_remote_script_path() {
+  local script_path="$1"
+  local local_repo_dir="$2"
+  local remote_repo_dir="$3"
+
+  case "$script_path" in
+    "$local_repo_dir"/*)
+      printf '%s\n' "$remote_repo_dir/${script_path#$local_repo_dir/}"
+      ;;
+    *)
+      printf '%s\n' "$script_path"
+      ;;
+  esac
+}
+
 vast_retry_rsync() {
   local attempts="$1"
   shift

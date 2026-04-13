@@ -1,0 +1,14 @@
++ set -euo pipefail
++ '[' 2 -ne 2 ']'
++++ dirname /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/watch_results_from_vast.sh
+++ cd /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast
+++ pwd
++ SCRIPT_DIR=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast
++ FETCH_SCRIPT=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/fetch_results_from_vast.sh
++ REMOTE_RESULTS_DIR=root@61.228.57.170:/workspace/results/hf-paper-batch-algo1-olmo-current
++ LOCAL_RESULTS_DIR=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-olmo-current
++ SYNC_INTERVAL_SECONDS=30
++ [[ 30 =~ ^[0-9]+$ ]]
++ '[' 30 -le 0 ']'
++ true
++ /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/scripts/vast/fetch_results_from_vast.sh root@61.228.57.170:/workspace/results/hf-paper-batch-algo1-olmo-current /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-olmo-current

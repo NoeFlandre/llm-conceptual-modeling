@@ -1,0 +1,9 @@
+{
+  "consecutive_failures": 60004,
+  "last_success_at": "",
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-qwen-current",
+  "message": "Latest sync failed; watcher will retry.",
+  "remote_results_dir": "root@59.7.51.43:/workspace/results/hf-paper-batch-algo1-qwen",
+  "status": "degraded",
+  "updated_at": "2026-04-09T09:22:16Z"
+}

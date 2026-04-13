@@ -1,0 +1,49 @@
+{
+  "current_run": {
+    "algorithm": "algo2",
+    "condition_bits": "010011",
+    "decoding_algorithm": "contrastive",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg2_sg3",
+    "replication": 1
+  },
+  "failed_count": 4,
+  "failure_count": 4,
+  "failures": [
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Weight bias, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-03-of-04/runs/algo1/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Weight bias, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-03-of-04/runs/algo1/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg2_sg3/11011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [(Culture of eating that promotes healthy, Stress, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-03-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg2_sg3/001110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Ability to engage in physical activity', 'Culture of eating that promotes healthy choices']  \n'Ability to engage in physical activity', 'Culture of eating that promotes healthy choices'  \nReturn to 'Balance', 'Weight bias']<  \nDo not 'Cultural norms around thinness', 'Weight bias']<  \nDo not 'Cultural norms around thinness', 'Cultural norms around thinness'  \nReturn', 'Obesity', 'Weight bias'  \n\nassistant\n('Ability to engage in physical activity', 'Cultural norms around thinness']  \n[Negative body image', 'Weight bias']  \n[Negative body image', 'Cultural norms around thinness']  \n[Negative body image', 'Obesity']  \n[Negative pressure', 'Cultural norms around thinness']  \n[Negative pressure', 'Weight bias']  \n[Negative pressure', 'Cultural norms around thinness']  \n[Negative', 'Obesity']  \n[Negative', 'Cortisol']  \n[Norms', 'Obesity']  \n[Norms', 'Cortisol']  \n[Norms', 'Cultural norms around thinness']  \n[Norms', 'Weight bias']  \n[Norms', 'Cultural norms around thinness']  \n[N', 'Obesity']  \n[N', 'Obesity']  \n[N', 'Obesity']  \n[N', 'Cortisol']  \n[N', 'Weight bias']  \n[N', 'Cultural norms around thinness']  \n[N', 'Cultural norms around thinness']  \n[N', 'Stress']  \n[N', 'Stress']  \n[N', 'Stress']  \n[N', 'Socio-economic status']  \n[N', 'Socio-economic status']  \n[N', 'Depression']  \n[N', 'Depression']  \n[N', 'Weight bias']  \n[N', 'Weight bias']  \n[N', 'Ability to engage in physical activity']  \n[N', 'Socio-economic status']  \n[N', 'Obesity']  \n[N', 'Stress']  \n[N', 'Cortisol']  \n[N', 'Stress']  \n[N', 'Socio-economic status']  \n[N', 'Weight bias']  \n[N', 'Cultural norms around thinness']  \n[N', 'Cultural norms around thinness']  \n['Balance', 'Cultural norms around thinness']  \n['Cortisol']  \n['Socio-economic status']  \n['Weight bias']  \n['Cultural norms']  \n['Cultural norms']  \n['Cortisol']  \n['Weight bias']  \n['Cultural norms']  \n['Obesity']  \n['Socio-economic status']  \n['Obesity']  \n['Stress']  \n['Cultural norms around thinness']  \n['Weight bias']  \n['Cortisol']  \n['Cultural norms around thinness']  \n['Cultural norms']  \n['Depression']  \n['Obesity']  \n['Depression']  \n['Cultural norms']  \n['Obesity']  \n['Cultural norms']  \n['Weight bias']  \n['Cort']  \n['Obesity']  \n['Socio-economic status']  \n['Cultural norms']  \n['Obesity']  \n['Cultural norms']  \n['Weight']  \n['Cultural norms']  \n['Cultural norms']  \n['Weight']  \n['Cultural norms",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-03-of-04/runs/algo1/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg2_sg3/01001/rep_02",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 318,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "010010",
+    "decoding_algorithm": "contrastive",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg2_sg3",
+    "replication": 4
+  },
+  "pending_count": 746,
+  "percent_complete": 29.78,
+  "running_count": 1,
+  "started_at": "2026-04-09T10:19:10.208492+00:00",
+  "total_runs": 1068,
+  "updated_at": "2026-04-10T05:33:14.975567+00:00"
+}

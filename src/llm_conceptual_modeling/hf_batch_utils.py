@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import threading
 from dataclasses import asdict
 from datetime import UTC, datetime
 from hashlib import sha256
@@ -163,11 +164,13 @@ class RecordingChatClient:
         persist_path: Path | None = None,
         active_stage_path: Path | None = None,
         active_stage_context: dict[str, object] | None = None,
+        heartbeat_interval_seconds: float = 5.0,
     ) -> None:
         self._inner = inner
         self._persist_path = persist_path
         self._active_stage_path = active_stage_path
         self._active_stage_context = active_stage_context or {}
+        self._heartbeat_interval_seconds = heartbeat_interval_seconds
         self.records: list[dict[str, object]] = []
 
     def complete_json(
@@ -182,6 +185,12 @@ class RecordingChatClient:
             schema_name=schema_name,
             prompt=prompt,
         )
+        heartbeat_stop = threading.Event()
+        heartbeat_thread = self._start_active_stage_heartbeat(
+            heartbeat_stop=heartbeat_stop,
+            schema_name=schema_name,
+            prompt=prompt,
+        )
         try:
             response = self._inner.complete_json(
                 prompt=prompt,
@@ -189,6 +198,9 @@ class RecordingChatClient:
                 schema=schema,
             )
         except Exception as error:
+            heartbeat_stop.set()
+            if heartbeat_thread is not None:
+                heartbeat_thread.join(timeout=self._heartbeat_interval_seconds)
             record = {
                 "prompt": prompt,
                 "schema_name": schema_name,
@@ -212,6 +224,9 @@ class RecordingChatClient:
                 raw_text=raw_text,
             )
             raise
+        heartbeat_stop.set()
+        if heartbeat_thread is not None:
+            heartbeat_thread.join(timeout=self._heartbeat_interval_seconds)
         self.records.append(
             {
                 "prompt": prompt,
@@ -232,6 +247,28 @@ class RecordingChatClient:
             response=response,
         )
         return response
+
+    def _start_active_stage_heartbeat(
+        self,
+        *,
+        heartbeat_stop: threading.Event,
+        schema_name: str,
+        prompt: str,
+    ) -> threading.Thread | None:
+        if self._active_stage_path is None:
+            return None
+
+        def heartbeat() -> None:
+            while not heartbeat_stop.wait(self._heartbeat_interval_seconds):
+                self._write_active_stage(
+                    status="running",
+                    schema_name=schema_name,
+                    prompt=prompt,
+                )
+
+        thread = threading.Thread(target=heartbeat, daemon=True)
+        thread.start()
+        return thread
 
     def _write_active_stage(
         self,

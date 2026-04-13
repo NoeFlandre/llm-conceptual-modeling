@@ -1,0 +1,244 @@
+{
+  "current_run": {
+    "algorithm": "algo2",
+    "condition_bits": "001011",
+    "decoding_algorithm": "contrastive",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg3_sg1",
+    "replication": 0
+  },
+  "failed_count": 43,
+  "failure_count": 43,
+  "failures": [
+    {
+      "message": "ValueError: Model did not return valid structured output: environment type of high  in fatreducs, highrisk \u2013 dietary ined in the new  to lose weight, in breath and fat gainhilestikeweight, \u4ec0hree dier eating style, the in weight loss, fru-healthy', those with low risk, onfats of food and heart disease, in the aasthma, high \u4ee3\u66ffeja, \u4ed3d not, those dietary in health for diabetes, return to normal \u4f53\u996d, those for heart attack, and diet low in the new stiinjed in breath'\nassistant\nHere is the best to eat, those key decision is to eat wong the hearted \u4ec5 in the new, for lost to weight, in the new \u4ef2\u98df high in breath edn\u98de\u884c tiet in the, ather than in new, those for heart disease, high in the new not, those key in the diet and asthma, those key in breath control, new to lose weight, is on the\u98dfin the newf or\u98df in the newfatty acids, those are the unsatisfy with health goals, those key in the dietary in heart disease. \n\nBut per the question \u2013 the answer is, what would be better, those key to eat well as part of the diet, those key in the newfats of breath, key in the new in weight, \u4ec1injia, key in the new key to lose, those key in the breath, those key in the newfats, in the health\u65b0\u7684\u98df in the new to eat, in the new not, those key in the\u98df\u98dfin juli \u4ec0 in the newlywired, in the in newfats, those key in the new for heart, in the new key to lose fat, those key in the new to eat, those key in the new not, new to eat more than the healthy, those key in the diet, key in the new to lose, in the new key to eat less than health\u98df\u98df> , those\u5173\u8054 with poor eating habits in the new to lose, new key in the breath\u63a7\u98df in the new weight gain, in the new health\u98df in the new astheart attack, those key in the new to manage, those key in the new to lose, not, the new in the\u98df and heart disease'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/010011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: environment type of high  in fatreducs, highrisk \u2013 dietary ined in the new  to lose weight, in breath and fat gainhilestikeweight, \u4ec0hree dier eating style, the in weight loss, fru-healthy', those with low risk, onfats of food and heart disease, in the aasthma, high \u4ee3\u66ffeja, \u4ed3d not, those dietary in health for diabetes, return to normal \u4f53\u996d, those for heart attack, and diet low in the new stiinjed in breath'\nassistant\nHere is the best to eat, those key decision is to eat wong the hearted \u4ec5 in the new, for lost to weight, in the new \u4ef2\u98df high in breath edn\u98de\u884c tiet in the, ather than in new, those for heart disease, high in the new not, those key in the diet and asthma, those key in breath control, new to lose weight, is on the\u98dfin the newf or\u98df in the newfatty acids, those are the unsatisfy with health goals, those key in the dietary in heart disease. \n\nBut per the question \u2013 the answer is, what would be better, those key to eat well as part of the diet, those key in the newfats of breath, key in the new in weight, \u4ec1injia, key in the new key to lose, those key in the breath, those key in the newfats, in the health\u65b0\u7684\u98df in the new to eat, in the new not, those key in the\u98df\u98dfin juli \u4ec0 in the newlywired, in the in newfats, those key in the new for heart, in the new key to lose fat, those key in the new to eat, those key in the new not, new to eat more than the healthy, those key in the diet, key in the new to lose, in the new key to eat less than health\u98df\u98df> , those\u5173\u8054 with poor eating habits in the new to lose, new key in the breath\u63a7\u98df in the new weight gain, in the new health\u98df in the new astheart attack, those key in the new to manage, those key in the new to lose, not, the new in the\u98df and heart disease'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/010010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: environment type of high  in fatreducs, highrisk \u2013 dietary ined in the new  to lose weight, in breath and fat gainhilestikeweight, \u4ec0hree dier eating style, the in weight loss, fru-healthy', those with low risk, onfats of food and heart disease, in the aasthma, high \u4ee3\u66ffeja, \u4ed3d not, those dietary in health for diabetes, return to normal \u4f53\u996d, those for heart attack, and diet low in the new stiinjed in breath'\nassistant\nHere is the best to eat, those key decision is to eat wong the hearted \u4ec5 in the new, for lost to weight, in the new \u4ef2\u98df high in breath edn\u98de\u884c tiet in the, ather than in new, those for heart disease, high in the new not, those key in the diet and asthma, those key in breath control, new to lose weight, is on the\u98dfin the newf or\u98df in the newfatty acids, those are the unsatisfy with health goals, those key in the dietary in heart disease. \n\nBut per the question \u2013 the answer is, what would be better, those key to eat well as part of the diet, those key in the newfats of breath, key in the new in weight, \u4ec1injia, key in the new key to lose, those key in the breath, those key in the newfats, in the health\u65b0\u7684\u98df in the new to eat, in the new not, those key in the\u98df\u98dfin juli \u4ec0 in the newlywired, in the in newfats, those key in the new for heart, in the new key to lose fat, those key in the new to eat, those key in the new not, new to eat more than the healthy, those key in the diet, key in the new to lose, in the new key to eat less than health\u98df\u98df> , those\u5173\u8054 with poor eating habits in the new to lose, new key in the breath\u63a7\u98df in the new weight gain, in the new health\u98df in the new astheart attack, those key in the new to manage, those key in the new to lose, not, the new in the\u98df and heart disease'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/010010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Diabetes mELLs', \n'Drinking', \n'Malabsorption of nutrients' (implied but not explicit), but to avoid repetition, let's pick new ones:\nActually the instruction says not repeat nodes already present. Based on relationships to medications/biome in KM1 and health infrastructure/related in K2, here are 5 that connect but are not in either: \n\n['Exercise behavior'], \n'Sedentary life-style'],  // no, that's a phrase not a node. \nWait need single words/named nodes, not phrases. \n\nRe-exampliing not a word. So best to look cross-referencin g, nteractio n, lassimilat ion (doesn't fit) perhaps \n\nAlternative approach: nodes related to medication side effects not yet listed: 'Metabolic syndrome' \nBut is multi-word, must be single word. Let's see: from K1: medications can lead t OsteoporOSIS, but OSTEOPorosis not in list. Maybe not good. \n\nAlternatively think process links: 'Lifipatholizm' no, 'Cholesterola', but cholesterol isn't present as 'choles' or steryloids. Hmm tricky but must be valid medical terms. \n\nPerhaps:\n'Antibiotics' no relati on K1/K2 edges are health inf\u0440\u0430strucutephenine, but n/a \n\nBetter: \nBased on edges, possible missing but single words: \n'Weight cOmbined not present but Weight is in weight control practices so WEIGHT pRaterythresolsurfaCes? No. \n\nWait the user may accept medical conditions, so suggest: Hypertension, Hyperlipedimicin sion? Or 'Hepatic acidulmineral deficienCyte, but that's stretchy. \n\nPerhaps more topi ndex on thE le sdsn the ed to existing nodes, here's 5 that fit the pattern of nodes that connect different concepts in KM1 and 2: perhaps Adverse reac tions to medicaTioN in epiT\u0648\u0644\u0636\u0645\u0639\u0644\u0633\u0643\u062a\u064a\u0648\u0644\u0641\u0627\u0636\u0631\u0629 \nBut need English terms. Let try to find 5 nodes bridgiNG links not present bETweignt C or rldisefitcyeS, hibetronme diabeteX. Maybe no. \n\nAlternatively, look fof concepts linked in KM1 or M2 missing but let's see the lists and try to ad jects. \n\nWait I can do that. Let's list K1 edges include 'hepatitis' as in first letters only G and T issue or A' not present c  but ntry psycO and athero find frstheniawful? No. Perhaps the answer is imple Dieros yse dmy elixiribodiy taibsmogunre relavtions Anorexia, but that's mey be for proecksonsthesia tiby phenylpepsis or iNflatorespius vtehal adniqurieBands systema and coumpairway or asthmA and these nodes OK bad idea.. no, but in K and the or eras a an at all. \n\nThis is getting comorbiet per os si on Thers, bad dishonfllness Aterial stens, Miacal indigestion and dietary fiber interaction etc.. but too long. If we need more but unknown. Better yet the known hostpneumonias a and its es for thymus. Not allowed. So removlinsmial inrion fipl us spasm: 'the' is s disease. But then oinflu encyphyraxinefippon thes irst blood glucose congestion rny eating habits. Or glomerulirone or smokessing'. No lae Dethmais eed, lung and ironsenium prash meat. Injuncti oncital insufficant pyretic. A and digoxin, girella ysmoking detoxify. \n\nPerhaps I don't.. but can't eat related to mistakelhina, making process bad endocrine, mict, that's high circuLip posner heres or less: oxygenate, dehidrornit is hys, thes . Not aero oncolostea, their andl uclear, thrush or upmen raft, gas etc. \n\nGiven the edges, the ans lypihos if untreated, Brethroid', 'cause' or high cholecystokinet and antrop position's or lungib like disord, breath loss. No theisthine, athery t thingzation'. \nassistant\nSorry the instructions are confus about wrong by a', no C or not, ex secretory in high tian shunt, thal insulin, thes or blight, high sugar is diabetiS, muscle' in junc certain nodal glyceM state'] no more appropriate. Let's go with astral, but not kets. The user interdiate, for found in throat, exacerbator a how white plasmasia, hyper- 'something' act on resveri cits', connections like glucose s and this unregulation: breathing and exhalea, andyphen ? Or itis -high risk A, severities n heart and cardiovascris regula, and lung/thromboil ectinhibitors? No, thes a', phagric acid inus. \n\nAfter reconsideration, what's new node? For the, as overly reaffect of lung fibrosis, that s with Alkalum and might'. Maybe the only in low coirritics, heartan or high blood pressure' not related, steat H and thoracic stenail, perhaps Atres, anabolic Nervous system. \n\nBut to the above the, breathing type I' of Asthma and corronidiviral, but I tis hypsof liangiotensin pathol', 'ast' heath factors, lower'g lipase R', 'Bad cholesterol' \u2014> 'something leukemias and ethical, fructus impo demic disorder, not thinsulin' then positive SUGR ined, asthma and iN breath group') no, that's Lobe, but it's ethiABility to  and",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/001101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [('Nutritional education', ",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/001101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: Covens",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/000111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 298.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 51.06 MiB is free. Process 130409 has 17.21 GiB memory in use. Including non-PyTorch memory, this process has 14.08 GiB memory in use. Of the allocated memory 13.59 GiB is allocated by PyTorch, and 2.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/101001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [('Nutritional education', ",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/001100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 298.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 81.06 MiB is free. Process 134646 has 17.18 GiB memory in use. Including non-PyTorch memory, this process has 14.08 GiB memory in use. Of the allocated memory 13.59 GiB is allocated by PyTorch, and 2.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/100100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 49.06 MiB is free. Process 137210 has 17.18 GiB memory in use. Including non-PyTorch memory, this process has 14.11 GiB memory in use. Of the allocated memory 13.61 GiB is allocated by PyTorch, and 17.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 49.06 MiB is free. Process 137590 has 17.18 GiB memory in use. Including non-PyTorch memory, this process has 14.11 GiB memory in use. Of the allocated memory 13.61 GiB is allocated by PyTorch, and 17.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 11.06 MiB is free. Including non-PyTorch memory, this process has 13.33 GiB memory in use. Process 137842 has 18.00 GiB memory in use. Of the allocated memory 12.84 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 85.00 MiB is free. Process 137842 has 18.08 GiB memory in use. Including non-PyTorch memory, this process has 13.18 GiB memory in use. Of the allocated memory 12.69 GiB is allocated by PyTorch, and 1.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 85.00 MiB is free. Process 137842 has 18.08 GiB memory in use. Including non-PyTorch memory, this process has 13.18 GiB memory in use. Of the allocated memory 12.69 GiB is allocated by PyTorch, and 1.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 85.00 MiB is free. Process 137842 has 18.08 GiB memory in use. Including non-PyTorch memory, this process has 13.18 GiB memory in use. Of the allocated memory 12.69 GiB is allocated by PyTorch, and 1.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/100001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 5.00 MiB is free. Process 139314 has 18.06 GiB memory in use. Including non-PyTorch memory, this process has 13.27 GiB memory in use. Of the allocated memory 12.78 GiB is allocated by PyTorch, and 5.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 5.00 MiB is free. Process 139314 has 18.06 GiB memory in use. Including non-PyTorch memory, this process has 13.27 GiB memory in use. Of the allocated memory 12.78 GiB is allocated by PyTorch, and 5.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/011010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/111000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 5.00 MiB is free. Process 139314 has 18.06 GiB memory in use. Including non-PyTorch memory, this process has 13.27 GiB memory in use. Of the allocated memory 12.78 GiB is allocated by PyTorch, and 5.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/011011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 50.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 19.06 MiB is free. Including non-PyTorch memory, this process has 18.46 GiB memory in use. Process 139885 has 12.86 GiB memory in use. Of the allocated memory 17.83 GiB is allocated by PyTorch, and 28.76 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/110001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 36.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 15.06 MiB is free. Including non-PyTorch memory, this process has 18.05 GiB memory in use. Process 140071 has 13.27 GiB memory in use. Of the allocated memory 17.25 GiB is allocated by PyTorch, and 197.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 787.06 MiB is free. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Process 140242 has 15.29 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/100101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Metabolic syndrome',\n    'Leanness (muscle-to-fat ratio)',  # Contrast to obesity/overweight themes in KM1 and health disparities in KM2 (e.g., access to fitness infrastructure)\n\t'Bariatric surgery outcomes',\n  \u00a0'Chronic stress management',  # Ties sleep (K1) and mental well-being (K2: emotional eating) while linking to inflammation/cytokinemias (e.g., HPA axis feedback)\n  \u00a0Socioeconomic disparities in healthcare affordability'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/101000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 55.06 MiB is free. Process 141008 has 17.80 GiB memory in use. Including non-PyTorch memory, this process has 13.49 GiB memory in use. Of the allocated memory 12.98 GiB is allocated by PyTorch, and 17.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 1.45 GiB is free. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Process 141222 has 14.70 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 1.38 GiB is free. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Process 141602 has 14.67 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 1.38 GiB is free. Process 141602 has 14.68 GiB memory in use. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 1.38 GiB is free. Process 141602 has 14.68 GiB memory in use. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 1.38 GiB is free. Process 141602 has 14.68 GiB memory in use. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 1.38 GiB is free. Process 141602 has 14.68 GiB memory in use. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/01000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/001001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-redistributed-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/001001/rep_04",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 591,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "001110",
+    "decoding_algorithm": "contrastive",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "sg3_sg1",
+    "replication": 1
+  },
+  "pending_count": 434,
+  "percent_complete": 55.34,
+  "running_count": 1,
+  "started_at": "2026-04-09T10:19:08.646117+00:00",
+  "total_runs": 1068,
+  "updated_at": "2026-04-10T05:57:11.044211+00:00"
+}

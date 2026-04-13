@@ -1,0 +1,829 @@
+{
+  "current_run": {
+    "algorithm": "algo2",
+    "condition_bits": "111000",
+    "decoding_algorithm": "beam",
+    "model": "Qwen/Qwen3.5-9B",
+    "pair_name": "sg1_sg2",
+    "replication": 4
+  },
+  "failed_count": 160,
+  "failure_count": 160,
+  "failures": [
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 625.44 MiB is free. Including non-PyTorch memory, this process has 22.93 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 47.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 648.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 645.44 MiB is free. Including non-PyTorch memory, this process has 22.91 GiB memory in use. Of the allocated memory 22.57 GiB is allocated by PyTorch, and 27.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/000111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.69 GiB is allocated by PyTorch, and 43.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/001111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 485.44 MiB is free. Including non-PyTorch memory, this process has 23.06 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 57.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 666.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 505.44 MiB is free. Including non-PyTorch memory, this process has 23.04 GiB memory in use. Of the allocated memory 22.70 GiB is allocated by PyTorch, and 37.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/010111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 37.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/011111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 525.44 MiB is free. Including non-PyTorch memory, this process has 23.02 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 54.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 660.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 545.44 MiB is free. Including non-PyTorch memory, this process has 23.00 GiB memory in use. Of the allocated memory 22.66 GiB is allocated by PyTorch, and 34.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 425.44 MiB is free. Including non-PyTorch memory, this process has 23.12 GiB memory in use. Of the allocated memory 22.78 GiB is allocated by PyTorch, and 30.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 678.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 405.44 MiB is free. Including non-PyTorch memory, this process has 23.14 GiB memory in use. Of the allocated memory 22.79 GiB is allocated by PyTorch, and 44.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/110111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 690.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 665.44 MiB is free. Including non-PyTorch memory, this process has 22.89 GiB memory in use. Of the allocated memory 22.54 GiB is allocated by PyTorch, and 41.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg2_sg3/111111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 740.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 305.44 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 22.88 GiB is allocated by PyTorch, and 48.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/000111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 756.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 45.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/001111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 758.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.99 GiB is allocated by PyTorch, and 33.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/010111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 65.44 MiB is free. Including non-PyTorch memory, this process has 23.47 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 70.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.09 GiB is allocated by PyTorch, and 50.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/011111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 205.44 MiB is free. Including non-PyTorch memory, this process has 23.34 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 58.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 754.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 225.44 MiB is free. Including non-PyTorch memory, this process has 23.32 GiB memory in use. Of the allocated memory 22.97 GiB is allocated by PyTorch, and 38.55 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/100111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 55.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 125.44 MiB is free. Including non-PyTorch memory, this process has 23.41 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 35.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 85.44 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 63.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 770.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 105.44 MiB is free. Including non-PyTorch memory, this process has 23.43 GiB memory in use. Of the allocated memory 23.08 GiB is allocated by PyTorch, and 43.74 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/110111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 5.44 MiB is free. Including non-PyTorch memory, this process has 23.53 GiB memory in use. Of the allocated memory 23.18 GiB is allocated by PyTorch, and 40.81 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-algo2-qwen-current/runs/algo2/Qwen__Qwen3.5-9B/beam_num_beams_6/sg3_sg1/111111/rep_04",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 2718,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "111000",
+    "decoding_algorithm": "greedy",
+    "model": "Qwen/Qwen3.5-9B",
+    "pair_name": "sg1_sg2",
+    "replication": 4
+  },
+  "pending_count": 2,
+  "percent_complete": 94.38,
+  "running_count": 1,
+  "started_at": "2026-04-02T07:03:27.097253+00:00",
+  "total_runs": 2880,
+  "updated_at": "2026-04-03T09:30:36.907018+00:00"
+}

@@ -1,0 +1,7 @@
+source_input,pair_name,Convergence,Explanation,Example,Counterexample,Array/List(1/-1),Tag/Adjacency(1/-1),metric,n,mean,sample_std,min,max,range_width,coefficient_of_variation
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/evaluated.csv,sg2_sg3,-1,1,1,1,-1,1,accuracy,1,0.0,,0.0,0.0,0.0,
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/evaluated.csv,sg2_sg3,1,1,1,1,-1,1,accuracy,1,0.0,,0.0,0.0,0.0,
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/evaluated.csv,sg2_sg3,-1,1,1,1,-1,1,recall,1,0.0,,0.0,0.0,0.0,
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/evaluated.csv,sg2_sg3,1,1,1,1,-1,1,recall,1,0.0,,0.0,0.0,0.0,
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/evaluated.csv,sg2_sg3,-1,1,1,1,-1,1,precision,1,0.0,,0.0,0.0,0.0,
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/evaluated.csv,sg2_sg3,1,1,1,1,-1,1,precision,1,0.0,,0.0,0.0,0.0,

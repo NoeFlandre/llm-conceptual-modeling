@@ -1,0 +1,10 @@
+source_input,pair_name,Explanation,Example,Counterexample,Array/List(1/-1),Tag/Adjacency(1/-1),Decoding Algorithm,Beam Width Level,Contrastive Penalty Level,Convergence,n_outputs,unique_output_count,mean_edge_count,sample_std_edge_count,mean_pairwise_jaccard,min_pairwise_jaccard,exact_match_pair_rate,union_edge_count
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg2_sg3,-1,-1,-1,1,1,contrastive,0,1,-1,4,1,2.0,0.0,1.0,1.0,1.0,2
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg2_sg3,1,1,-1,-1,-1,contrastive,0,1,-1,4,1,1.0,0.0,1.0,1.0,1.0,1
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg2_sg3,1,1,-1,-1,-1,contrastive,0,1,1,4,1,1.0,0.0,1.0,1.0,1.0,1
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg3_sg1,-1,-1,-1,1,1,contrastive,0,1,-1,5,1,0.0,0.0,1.0,1.0,1.0,0
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg3_sg1,-1,-1,-1,1,1,contrastive,0,1,1,5,1,0.0,0.0,1.0,1.0,1.0,0
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg3_sg1,-1,-1,1,-1,1,contrastive,0,1,-1,5,1,1.0,0.0,1.0,1.0,1.0,1
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg3_sg1,-1,-1,1,-1,1,contrastive,0,1,1,5,1,2.0,0.0,1.0,1.0,1.0,2
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg3_sg1,1,-1,1,-1,-1,contrastive,0,1,-1,5,1,2.0,0.0,1.0,1.0,1.0,2
+/workspace/results/hf-paper-batch-canonical/aggregated/algo2/mistralai__Ministral-3-8B-Instruct-2512/combined/raw.csv,sg3_sg1,1,-1,1,-1,-1,contrastive,0,1,1,5,1,2.0,0.0,1.0,1.0,1.0,2

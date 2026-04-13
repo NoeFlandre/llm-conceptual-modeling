@@ -1,0 +1,694 @@
+{
+  "current_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0111",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "subgraph_2_to_subgraph_1",
+    "replication": 3
+  },
+  "failed_count": 133,
+  "failure_count": 133,
+  "failures": [
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Urgent care access for nutrition-related emergencies (obesity, diabetes)',\n    '\"Joy eating\" vs \"guilt-eaten\n    ing\"-mindful culina\n    ture trends in public health messaging\"',\n    'Indigenous food sovereignty and its intersection w/\n    urban nutrition policy (cultural vs mainstream diets)\u2019\n    , 'Algorithmic influence on food purchasing (elevator ads, social media diet cultu\n    ral trends)' ,\n    'Workplace wellness programs: effectiveness in long-term behavior ch\n    ange (gamifi\n    cation, nudge theory)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/000000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Urgent care access for nutrition-related emergencies (obesity, diabetes)',\n    '\"Joy eating\" vs \"guilt-eaten\n    ing\"-mindful culina\n    ture trends in public health messaging\"',\n    'Indigenous food sovereignty and its intersection w/\n    urban nutrition policy (cultural vs mainstream diets)\u2019\n    , 'Algorithmic influence on food purchasing (elevator ads, social media diet cultu\n    ral trends)' ,\n    'Workplace wellness programs: effectiveness in long-term behavior ch\n    ange (gamifi\n    cation, nudge theory)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/000001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Urgent care access for nutrition-related emergencies (obesity, diabetes)',\n    '\"Joy eating\" vs \"guilt-eaten\n    ing\"-mindful culina\n    ture trends in public health messaging\"',\n    'Indigenous food sovereignty and its intersection w/\n    urban nutrition policy (cultural vs mainstream diets)\u2019\n    , 'Algorithmic influence on food purchasing (elevator ads, social media diet cultu\n    ral trends)' ,\n    'Workplace wellness programs: effectiveness in long-term behavior ch\n    ange (gamifi\n    cation, nudge theory)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/000001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/001101/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/010001/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/010001/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "HfHubHTTPError: Server error '504 Gateway Time-out' for url 'https://huggingface.co/api/models/mistralai/Ministral-3-8B-Instruct-2512/tree/main?recursive=true&expand=false' (Amz CF ID: WGg2B08Jn4MB4Qse2LnI_u3G73NKSyQaGcWxjtzNwgh1FzX1ekGS9A==)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/010010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Policy enforcement and penalties for non-complying food producers',\n    'Community engagement in local food policy decision-making (citizen juries, town-halldiscussions) ,\n    'Neurobiological factors influencing cravings (dopamine responses to ultra-processed food, gut-microbiomelinks)',\n    '\"Fast food tax incentives tied to school meal programs (redirection of tax revenue for nutrition education)\"' ,\n    'Climate impact of dietary choices (beyond CO2: deforestation for palm/oil plantations)'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/111000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [Medications, Marketing], [Obesity, Eating disorders], [-, Availability of healthy foods], [-, Quality of the sport infrastruc",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/00000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge source",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge source",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/11001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Insulino-resistance biomarkers (HOMA-IR, FPG/glucosetolerancemeasurements)',\n    'Visceral fat distribution (waist-to-hip ratio, VFA/abdominalCT/MRI)',\n    'Sleep-disordered-breathing (RDI/AHI, oxygendescentsaturationduringREM/NREMcycelesshort-sleepepiso)ds)',\n  \u2009 \u02bbNeutrophil-lymphocyte ratio (N:L, C-reactionproteinCRPrelevanceinobesity-in\ufb02ammation)\u02bc,\n\u2003\u2003'Lactate-threshold/VO\u2093peaktesting(fitnessexercisecapacitiesubmaximalstressresponserelationshiptomitochondrialdysfun)cti'on'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/111000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Insulino-resistance biomarkers (HOMA-IR, FPG/glucosetolerancemeasurements)',\n    'Visceral fat distribution (waist-to-hip ratio, VFA/abdominalCT/MRI)',\n    'Sleep-disordered-breathing (RDI/AHI, oxygendescentsaturationduringREM/NREMcycelesshort-sleepepiso)ds)',\n  \u2009 \u02bbNeutrophil-lymphocyte ratio (N:L, C-reactionproteinCRPrelevanceinobesity-in\ufb02ammation)\u02bc,\n\u2003\u2003'Lactate-threshold/VO\u2093peaktesting(fitnessexercisecapacitiesubmaximalstressresponserelationshiptomitochondrialdysfun)cti'on'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/111000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    'Affordability of nutritious groceries': [\n        'Subsidies or tax incentives for fruits/veggies/leguminous foods (e.g., SNAP benefits in U.S.)',\n        '% households spending >30% income on food (US Dept Ag data: Food Access Research Atlass)',\n    ],\n    **Original Key (expanded nuance):**\n    'Cost-of-healthished-food index per calorie/serv' (vs non-perish/fast food),  # eaproximate metric like EAT-Lancet Healthy Ref Diets (HREI) affordability scores\n    'Regional price disparity: urban-ruralsupermkt gaps for staples (FAO/IFPRI cost-comparison studies)'\n\n    **Derived Adjacen**ccepts (conceptually linked but not synonyms/duplcates of \"cost\" per sc):\n    'Access to farmers markets/small grocers (vs big-box chains, e.g., Walmart/Kroger price diffs by zipcode)',  # spatial + market-structure layer\n    'Nondiscretionary spending on meds/preventive care displacins fresh produce in low-incomehouseholds (OECD Health at AGlow report data)'  # tradeoffs across health expenditures\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { <think>\n\"Okay, let's tackle this problem. The user wants me to come up with 3 related concept names for 'Preva...",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    'Affordability of nutritious groceries': [\n        'Subsidies or tax incentives for fruits/veggies/leguminous foods (e.g., SNAP benefits in U.S.)',\n        '% households spending >30% income on food (US Dept Ag data: Food Access Research Atlass)',\n    ],\n    **Original Key (expanded nuance):**\n    'Cost-of-healthished-food index per calorie/serv' (vs non-perish/fast food),  # eaproximate metric like EAT-Lancet Healthy Ref Diets (HREI) affordability scores\n    'Regional price disparity: urban-ruralsupermkt gaps for staples (FAO/IFPRI cost-comparison studies)'\n\n    **Derived Adjacen**ccepts (conceptually linked but not synonyms/duplcates of \"cost\" per sc):\n    'Access to farmers markets/small grocers (vs big-box chains, e.g., Walmart/Kroger price diffs by zipcode)',  # spatial + market-structure layer\n    'Nondiscretionary spending on meds/preventive care displacins fresh produce in low-incomehouseholds (OECD Health at AGlow report data)'  # tradeoffs across health expenditures\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { <think>\n\"Okay, let's tackle this problem. The user wants me to come up with 3 related concept names for 'Preva...",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n{\n    'Prevalence of walking trails': [\n        'Densely connected walking trail networks per km\u00b2 (traffic analysis)',  # More/closer trails = higher density\n        '% Population within 5-min walk of at-least-1 trail',  # Proximity of trails to residences/communities ('accessibility of green spaces by foot')*\n        Average length/mileage of trails in urban/rusticol settings (km/1M people),  # Longer trails for exploration vs short/loophole trails for commuting\n        Number/square-kilometre of multi-use (e.g., bike/walkscoot trails) vs pedestrian-exclusiveto (segregation vs inclusivity of mobility modes)\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "KeyError: 'children_by_label'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n{\n    'Prevalence of walking trails': [\n        'Densely connected walking trail networks per km\u00b2 (traffic analysis)',  # More/closer trails = higher density\n        '% Population within 5-min walk of at-least-1 trail',  # Proximity of trails to residences/communities ('accessibility of green spaces by foot')*\n        Average length/mileage of trails in urban/rusticol settings (km/1M people),  # Longer trails for exploration vs short/loophole trails for commuting\n        Number/square-kilometre of multi-use (e.g., bike/walkscoot trails) vs pedestrian-exclusiveto (segregation vs inclusivity of mobility modes)\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "KeyError: 'children_by_label'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { <think>\n</think>",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python {\n'Availability of high-performance equipment (state-of-purposeness)': ['\nMaintenance frequency of high-performace equipment',\n'Energy efficiency of equipment utilization (watt-hours per task)',\n'Scalability and adaptability to workload demands']\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { <think>\n</think>",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python {\n'Availability of high-performance equipment (state-of-purposeness)': ['\nMaintenance frequency of high-performace equipment',\n'Energy efficiency of equipment utilization (watt-hours per task)',\n'Scalability and adaptability to workload demands']\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { <think>\n</think>",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    'Body Dysmorphia Severity': ['Muscle Discrepancy Perception Intensification',\t'Bulimic Compensatory Ritual Rigidly Adhered',\n                                'Restrictophobia (Extremeness of Avoidance Behaviors)'],\n    'Anorexia Nervosathinness Obsession Magnitutde'\t: ['Caloric Deprivatio Self-Punishment Correlation',\n                                                    'Social Withdrawal Proportionality (Frequency-Degree)',\n                                                    'Orthoexiacommitment to \"Purity\" in Eating Habituation'],\n\n    'Binge-Eating Frequency Variablitity':\n    ['Emotional Dysregulati Triggers Binge-Onset Latencytime (in minutes/hours)',\n     'Culpric-Foodexclusivity vs. Novelty Seeking (diversity of items bingeconsumed per episode)',\n\n    'Weight Stigma Internalization Intencseffects on Self-Worth': ['Societal Fatphobiabackreflxive Endorsement (e.g.slurs, microaggressions internalizet as self-judgmeant)',\n                                                               '\"Thinspiration\" Consuplmency vs.Anti-Disordercounter-movements(adopting/avoidanctivistcontent)'\t],\n\n    'Food-Related Guilt Shadowng of Pleasure Scale (GSP-Scale)\t': ['Postprandial Regretrituals (purging, over-exercising) as guilt-dissipation mechanisms',\n                                                                 'Conditional Acceptancelove tied to weight/food-compliance (parent/peergroup influence)'\n    ]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Qualityofthesportinfrastructure\": [\"Access to sports facilities\", Maintenance standards of venues\", Safety equipment availability\", Coaching staff certification levels\", Spectator seating capacity\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    'Body Dysmorphia Severity': ['Muscle Discrepancy Perception Intensification',\t'Bulimic Compensatory Ritual Rigidly Adhered',\n                                'Restrictophobia (Extremeness of Avoidance Behaviors)'],\n    'Anorexia Nervosathinness Obsession Magnitutde'\t: ['Caloric Deprivatio Self-Punishment Correlation',\n                                                    'Social Withdrawal Proportionality (Frequency-Degree)',\n                                                    'Orthoexiacommitment to \"Purity\" in Eating Habituation'],\n\n    'Binge-Eating Frequency Variablitity':\n    ['Emotional Dysregulati Triggers Binge-Onset Latencytime (in minutes/hours)',\n     'Culpric-Foodexclusivity vs. Novelty Seeking (diversity of items bingeconsumed per episode)',\n\n    'Weight Stigma Internalization Intencseffects on Self-Worth': ['Societal Fatphobiabackreflxive Endorsement (e.g.slurs, microaggressions internalizet as self-judgmeant)',\n                                                               '\"Thinspiration\" Consuplmency vs.Anti-Disordercounter-movements(adopting/avoidanctivistcontent)'\t],\n\n    'Food-Related Guilt Shadowng of Pleasure Scale (GSP-Scale)\t': ['Postprandial Regretrituals (purging, over-exercising) as guilt-dissipation mechanisms',\n                                                                 'Conditional Acceptancelove tied to weight/food-compliance (parent/peergroup influence)'\n    ]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Qualityofthesportinfrastructure\": [\"Access to sports facilities\", Maintenance standards of venues\", Safety equipment availability\", Coaching staff certification levels\", Spectator seating capacity\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/0111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {\n    'Anorexia Nervosa':\n        ['undereating behaviors', 'extreme caloriaphobias',\n         'severely restricted dietary intake'],\n\n    'Bulimic Tendencies' :\n        ['compensatory purging practices',  //e.g binge-purge cycles\n         'disruptive eating bingecycles',   //episodic overconsumption followed by distress\n         '\"clean eating\" obsessiveness']    //ritualized avoidance of \"contaminated\" foods\n}",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {\\n  \"Prevalence of walking trails\": [\\u201cinvested trail infrastructure\\u201d, \\ue280density of pedestrian pathways\\u2e9e\", \\ud83c\\udfde\\uFE0faccessibiltiy off-pavellon routes\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {\n    'Anorexia Nervosa':\n        ['undereating behaviors', 'extreme caloriaphobias',\n         'severely restricted dietary intake'],\n\n    'Bulimic Tendencies' :\n        ['compensatory purging practices',  //e.g binge-purge cycles\n         'disruptive eating bingecycles',   //episodic overconsumption followed by distress\n         '\"clean eating\" obsessiveness']    //ritualized avoidance of \"contaminated\" foods\n}",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {\\n  \"Prevalence of walking trails\": [\\u201cinvested trail infrastructure\\u201d, \\ue280density of pedestrian pathways\\u2e9e\", \\ud83c\\udfde\\uFE0faccessibiltiy off-pavellon routes\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {\n    'Anorexia Nervosa':\n        ['undereating behaviors', 'extreme caloriaphobias',\n         'severely restricted dietary intake'],\n\n    'Bulimic Tendencies' :\n        ['compensatory purging practices',  //e.g binge-purge cycles\n         'disruptive eating bingecycles',   //episodic overconsumption followed by distress\n         '\"clean eating\" obsessiveness']    //ritualized avoidance of \"contaminated\" foods\n}",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {\\n  \"Prevalence of walking trails\": [\\u201cinvested trail infrastructure\\u201d, \\ue280density of pedestrian pathways\\u2e9e\", \\ud83c\\udfde\\uFE0faccessibiltiy off-pavellon routes\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n{\n    \"Prevalence of walking trails\" : [\n        \"density of pedestrian pathways\",\n        \"% of urban areas accessible on foot without motorized transport\",  # Less = car-centric environments; More = walkability focus\n\t\t\"use frequency per capita (trail visits/annual person)\" ,\n\t\tmileage or kilometerage allocated to non-motorbike/pedestrian routes in city planning budgets\" ,\n        \"proximity of residences/commercially zoned land parcels (<5 min walk) to trailheads\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Prevalence of walking trails\": [\"density per mile\", \"network connectivity\", \"% of parks with trails\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n{\n    \"Prevalence of walking trails\" : [\n        \"density of pedestrian pathways\",\n        \"% of urban areas accessible on foot without motorized transport\",  # Less = car-centric environments; More = walkability focus\n\t\t\"use frequency per capita (trail visits/annual person)\" ,\n\t\tmileage or kilometerage allocated to non-motorbike/pedestrian routes in city planning budgets\" ,\n        \"proximity of residences/commercially zoned land parcels (<5 min walk) to trailheads\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Prevalence of walking trails\": [\"density per mile\", \"network connectivity\", \"% of parks with trails\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    \"Eating disorder\": [\n        \"Body dysmorphia tendencies\",\n        \"Extreme caloriestrictiveness\",\n        binge-pronenetendencymorethanaverage\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Quality\\ufb01 of \\ufb01the sport infrastructure\": [\"stadium accessibility\", \"training facility adequacy\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    \"Eating disorder\": [\n        \"Body dysmorphia tendencies\",\n        \"Extreme caloriestrictiveness\",\n        binge-pronenetendencymorethanaverage\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Quality\\ufb01 of \\ufb01the sport infrastructure\": [\"stadium accessibility\", \"training facility adequacy\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    \"Eating disorder\": [\n        \"Body dysmorphia tendencies\",\n        \"Extreme caloriestrictiveness\",\n        binge-pronenetendencymorethanaverage\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Quality\\ufb01 of \\ufb01the sport infrastructure\": [\"stadium accessibility\", \"training facility adequacy\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Prevalence of walking trails\": [\"density per capita\", \"network connectivity\", maintenance frequency\", user foot traffic\", accessibility ratio\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Prevalence of walking trails\": [\"density per capita\", \"network connectivity\", maintenance frequency\", user foot traffic\", accessibility ratio\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_1_to_subgraph_3/1111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Weight bias: ['Body shyness', 'Muscle dysmorphia']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Weight bias: ['Body shyness', 'Muscle dysmorphia']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Weight bias: ['Body shyness', 'Muscle dysmorphia']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "KeyError: 'children_by_label'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "KeyError: 'children_by_label'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Physical well-being: ['Mental health', '[email protected]_social_well-being']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Physical well-being: ['Mental health', '[email protected]_social_well-being']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Physical well-being: ['Mental health', '[email protected]_social_well-being']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: \"{\\u00a0'Culture\\ufe0f \\ufb01\\u0113ing that promotes healt\\ufc7h choices': [\\u00a0'Nutritional literacy', \\u2018Accessibleto \\ubd80\\ud638 healthy foods', '\\u5b9a\\u671f\\u98df\\u7528\\u8ba1\\u5212' (Mealplanning discipline)' , 'Mindful eatingpracticesthat reduce impulsive snacking']}\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: \"{\\u00a0'Culture\\ufe0f \\ufb01\\u0113ing that promotes healt\\ufc7h choices': [\\u00a0'Nutritional literacy', \\u2018Accessibleto \\ubd80\\ud638 healthy foods', '\\u5b9a\\u671f\\u98df\\u7528\\u8ba1\\u5212' (Mealplanning discipline)' , 'Mindful eatingpracticesthat reduce impulsive snacking']}\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful dining habits, health-conscious food selection\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful dining habits, health-conscious food selection\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful dining habits, health-conscious food selection\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"cultures of eating that promt healthy choicess\": [\"nutritional awareness\", \"mindful dietary habits\", \"wholesome food traditions\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"cultures of eating that promt healthy choicess\": [\"nutritional awareness\", \"mindful dietary habits\", \"wholesome food traditions\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, community wellness initiatives\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, community wellness initiatives\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, community wellness initiatives\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, balanced diet preferences, health-conscious food selection, wellness-oriented culinary practices\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, balanced diet preferences, health-conscious food selection, wellness-oriented culinary practices\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Weight bias: ['Body shyness', 'Muscle dysmorphia']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Weight bias: ['Body shyness', 'Muscle dysmorphia']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Weight bias: ['Body shyness', 'Muscle dysmorphia']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "KeyError: 'children_by_label'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "KeyError: 'children_by_label'",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Physical well-being: ['Mental health', '[email protected]_social_well-being']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Physical well-being: ['Mental health', '[email protected]_social_well-being']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: {Physical well-being: ['Mental health', '[email protected]_social_well-being']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: \"{\\u00a0'Culture\\ufe0f \\ufb01\\u0113ing that promotes healt\\ufc7h choices': [\\u00a0'Nutritional literacy', \\u2018Accessibleto \\ubd80\\ud638 healthy foods', '\\u5b9a\\u671f\\u98df\\u7528\\u8ba1\\u5212' (Mealplanning discipline)' , 'Mindful eatingpracticesthat reduce impulsive snacking']}\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: \"{\\u00a0'Culture\\ufe0f \\ufb01\\u0113ing that promotes healt\\ufc7h choices': [\\u00a0'Nutritional literacy', \\u2018Accessibleto \\ubd80\\ud638 healthy foods', '\\u5b9a\\u671f\\u98df\\u7528\\u8ba1\\u5212' (Mealplanning discipline)' , 'Mindful eatingpracticesthat reduce impulsive snacking']}\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/0111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful dining habits, health-conscious food selection\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful dining habits, health-conscious food selection\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful dining habits, health-conscious food selection\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"cultures of eating that promt healthy choicess\": [\"nutritional awareness\", \"mindful dietary habits\", \"wholesome food traditions\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"cultures of eating that promt healthy choicess\": [\"nutritional awareness\", \"mindful dietary habits\", \"wholesome food traditions\"",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, community wellness initiatives\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, community wellness initiatives\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, community wellness initiatives\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, balanced diet preferences, health-conscious food selection, wellness-oriented culinary practices\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: { \"Culture of eating that promotes healthy choices\": [\"nutritional awareness\", mindful eating habits, balanced diet preferences, health-conscious food selection, wellness-oriented culinary practices\"]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_3/1111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n'Brain-derived neurotrophic factor (BDNF)', 'Neuroinflammasome activation in obesity',\n'Skeletal muscle insulin sensitivity markers (GLUT4 expression, PI3K/Aktsignalediscrepancies)\u2019, 'Circadian misalignments (melatonin/cytokinetranscriptionaldysregulati\nonin adipose-tissueneuronalinterfaces)', '# Gut-liver axis: portalsystemshuttlingendotoxins(trimethylamineN-oxidelipopolysaccharidechallengerelatedtothesecondkno\nwmapfoodavailability)'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/000110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/001110/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [('Marketing of healthy foods', 'Cul",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/11100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge target",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge target",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/00010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n'Brain-derived neurotrophic factor (BDNF)', 'Neuroinflammasome activation in obesity',\n'Skeletal muscle insulin sensitivity markers (GLUT4 expression, PI3K/Aktsignalediscrepancies)\u2019, 'Circadian misalignments (melatonin/cytokinetranscriptionaldysregulati\nonin adipose-tissueneuronalinterfaces)', '# Gut-liver axis: portalsystemshuttlingendotoxins(trimethylamineN-oxidelipopolysaccharidechallengerelatedtothesecondkno\nwmapfoodavailability)'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/000111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```json\n[\n    'Maternal programming (epigenetic transgenerationaleffectsofnutrition/micronutrientienduringpregnancy/fetaldeveloppement)',  # Links obesity/inflammaKMs1+KM2's dietary/environmentalscores\n    'Circadianrhythmdisruption(shiftwork/chronobiologicalstress)andmellatonsinglandulafunction',  # Integrates sleep(shortduration)inKM1withexposurerisksinKM2(e.g.,unhealthymarketingratiosafternoontrafficoffpeaks)\n    'Visceroelasticshearstresseffectorsthrombogenecalculiproteinleakage(NAFLDprognofattyacidtranslocaseCD36/LOXL2pathways)'  # Cross-KM: adiposeCD36\u2192fattyintakestorage(KM1)\u2194hepatoadiposediabdominallipotoxins(linkedtothesecondaryobstructivesleapneacomorbidiesshowninknodetoairwayresistanckeepalveolarhypoventilationinrespiratorymusclfatiguerelateddyspnoiatheoreticalbridgenotexplicitbutplausibletogutmetabolicsyndromenteropathywiactyl-CoAcarnitinetransfereasemaladaptivefatmobilizationalterations)  # KM1+foodenvs: eicosanoidmediatedcross-talkaffectingeitermacrophagephenotypetowardproreolativestatethroughPGE2/TGFFBsignalinginvisceralmesenchymeremodeling\u2192systemiccascaderelevancetomarketingsubstancesthatmodulatenuclearreceptorligandavailabiltiyt(peroxisomeproliferator-activatordeltainteractingdirectlywiPPARgamma/retinoicXrecepotorsaffecintthegastrointestinaltightjunctionpermeabiltityofproinflammatorypolyunsaturatedfattyacidsfromdietarysoucrcesinMK2sportinfrastructureneighboorhoodwalkabilitycorrelatestoaccesstofruitsvegetablesvsultramprocesedsnackshighinsaturofatandTGFbetainducedfibroblasttodifferentiationinsubcutaneoustisstissuemicroenviromentaladaptations)\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/011000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```json\n[\n    'Maternal programming (epigenetic transgenerationaleffectsofnutrition/micronutrientienduringpregnancy/fetaldeveloppement)',  # Links obesity/inflammaKMs1+KM2's dietary/environmentalscores\n    'Circadianrhythmdisruption(shiftwork/chronobiologicalstress)andmellatonsinglandulafunction',  # Integrates sleep(shortduration)inKM1withexposurerisksinKM2(e.g.,unhealthymarketingratiosafternoontrafficoffpeaks)\n    'Visceroelasticshearstresseffectorsthrombogenecalculiproteinleakage(NAFLDprognofattyacidtranslocaseCD36/LOXL2pathways)'  # Cross-KM: adiposeCD36\u2192fattyintakestorage(KM1)\u2194hepatoadiposediabdominallipotoxins(linkedtothesecondaryobstructivesleapneacomorbidiesshowninknodetoairwayresistanckeepalveolarhypoventilationinrespiratorymusclfatiguerelateddyspnoiatheoreticalbridgenotexplicitbutplausibletogutmetabolicsyndromenteropathywiactyl-CoAcarnitinetransfereasemaladaptivefatmobilizationalterations)  # KM1+foodenvs: eicosanoidmediatedcross-talkaffectingeitermacrophagephenotypetowardproreolativestatethroughPGE2/TGFFBsignalinginvisceralmesenchymeremodeling\u2192systemiccascaderelevancetomarketingsubstancesthatmodulatenuclearreceptorligandavailabiltiyt(peroxisomeproliferator-activatordeltainteractingdirectlywiPPARgamma/retinoicXrecepotorsaffecintthegastrointestinaltightjunctionpermeabiltityofproinflammatorypolyunsaturatedfattyacidsfromdietarysoucrcesinMK2sportinfrastructureneighboorhoodwalkabilitycorrelatestoaccesstofruitsvegetablesvsultramprocesedsnackshighinsaturofatandTGFbetainducedfibroblasttodifferentiationinsubcutaneoustisstissuemicroenviromentaladaptations)\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/011000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n  (\n    \"Prevalen\n</think>",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n  (\"Prevalene",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/10100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n  (\"Prevalene",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/10100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge source",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/000110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Narrative exposure therapy for trauma', '\"Thinspiration\" social media influence',\n'Ethnic/racially minoritized experiences of diet culture', 'Food desert/obesogenic environment policies']\n(Note: If you prefer scientific/evidence-based terms, replace with e.g.:\n['Leannore Swayze Syndrome (LSS)-type weight cycli**n**g disorders']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/001000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Narrative exposure therapy for trauma', '\"Thinspiration\" social media influence',\n'Ethnic/racially minoritized experiences of diet culture', 'Food desert/obesogenic environment policies']\n(Note: If you prefer scientific/evidence-based terms, replace with e.g.:\n['Leannore Swayze Syndrome (LSS)-type weight cycli**n**g disorders']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/001001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge source",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/110000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured response returned an empty edge source",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg2_sg3/110001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [Marcinacy of walking trails, Physical activity]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/000000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [Marcinacy of walking trails, Physical activity]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/000000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [Marceting_of_healhy_foods, Healthy_eating], [Public_suppo_rt_and_demand_ _fo_health_products, Healthy_eating], [_Availabi_lity_of_healhy_fo_d,s Supportive_food_environmen_], [Economi_incentives_produce_unhea_ _fo_rod_ucts, Unhealthy_food_cheaper], [Co_ _unhea_hy_oods, Unhealthy_food_cheapr]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/000001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "HfHubHTTPError: Server error '504 Gateway Time-out' for url 'https://huggingface.co/api/models/mistralai/Ministral-3-8B-Instruct-2512/tree/main?recursive=true&expand=false' (Amz CF ID: ze4nqprjXq-4j7mibkWGYxWV1XwMUYioZVe3uxjs_DUHhs_h_sopxg==)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/00001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/000011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Metabolic syndrome',\n\t'Bone density',\n\tLactate threshold',\n'Hyponatremic encephalopathy (water intoxication from overhydratio)\t', # Note: Corrected to avoid repetition with \"sodium\" terms in existing map, focusing on hydration disorder linked to physical exertion/obesity-related risks\n    'Leanness (muscle-to-fat ratio)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/001010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Metabolic syndrome',\n\t'Bone density',\n\tLactate threshold',\n'Hyponatremic encephalopathy (water intoxication from overhydratio)\t', # Note: Corrected to avoid repetition with \"sodium\" terms in existing map, focusing on hydration disorder linked to physical exertion/obesity-related risks\n    'Leanness (muscle-to-fat ratio)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/001011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [Marijuana, Obesity]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/001011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: Hypertension",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/001100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: Hypertension",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/001100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: Hypertension",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/001101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Genetic predisposition', '[email protected]/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].attributeName('data-cfasync')===false)return t[e]}();t.onload=function(){a\u4e00\u6ce2(e)}catch(r){}}(window,document,'cf_chl_opt_1',function(t){\"use strict\";var e=document.createElement(\"script\")\n/* ]]> */', <think>\n\n",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/010010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Genetic predisposition', '[email protected]/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].attributeName('data-cfasync')===false)return t[e]}();t.onload=function(){a\u4e00\u6ce2(e)}catch(r){}}(window,document,'cf_chl_opt_1',function(t){\"use strict\";var e=document.createElement(\"script\")\n/* ]]> */', <think>\n\n",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/010011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```json\n[\n    'Maternal programming (epigenetic transgenerationaleffectsofnutrition/micronutrientienduringpregnancy/fetaldeveloppement)',  # Links obesity/inflammaKMs1+KM2's dietary/environmentalscores\n    'Circadianrhythmdisruption(shiftwork/chronobiologicalstress)andmellatonsinglandulafunction',  # Integrates sleep(shortduration)inKM1withexposurerisksinKM2(e.g.,unhealthymarketingratiosafternoontrafficoffpeaks)\n    'Visceroelasticshearstresseffectorsthrombogenecalculiproteinleakage(NAFLDprognofattyacidtranslocaseCD36/LOXL2pathways)'  # Cross-KM: adiposeCD36\u2192fattyintakestorage(KM1)\u2194hepatoadiposediabdominallipotoxins(linkedtothesecondaryobstructivesleapneacomorbidiesshowninknodetoairwayresistanckeepalveolarhypoventilationinrespiratorymusclfatiguerelateddyspnoiatheoreticalbridgenotexplicitbutplausibletogutmetabolicsyndromenteropathywiactyl-CoAcarnitinetransfereasemaladaptivefatmobilizationalterations)  # KM1+foodenvs: eicosanoidmediatedcross-talkaffectingeitermacrophagephenotypetowardproreolativestatethroughPGE2/TGFFBsignalinginvisceralmesenchymeremodeling\u2192systemiccascaderelevancetomarketingsubstancesthatmodulatenuclearreceptorligandavailabiltiyt(peroxisomeproliferator-activatordeltainteractingdirectlywiPPARgamma/retinoicXrecepotorsaffecintthegastrointestinaltightjunctionpermeabiltityofproinflammatorypolyunsaturatedfattyacidsfromdietarysoucrcesinMK2sportinfrastructureneighboorhoodwalkabilitycorrelatestoaccesstofruitsvegetablesvsultramprocesedsnackshighinsaturofatandTGFbetainducedfibroblasttodifferentiationinsubcutaneoustisstissuemicroenviromentaladaptations)\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/011001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: YN",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/100100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: YN",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/100100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: YN",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg3_sg1/100101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Metabolic syndrome',\n    'Leanness (muscle-to-fat ratio)',  # Contrast to obesity/overweight themes in KM1 and health disparities in KM2 (e.g., access to fitness infrastructure)\n\t'Bariatric surgery outcomes',\n  \u00a0'Chronic stress management',  # Ties sleep (K1) and mental well-being (K2: emotional eating) while linking to inflammation/cytokinemias (e.g., HPA axis feedback)\n  \u00a0Socioeconomic disparities in healthcare affordability'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/101000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Metabolic syndrome',\n    'Leanness (muscle-to-fat ratio)',  # Contrast to obesity/overweight themes in KM1 and health disparities in KM2 (e.g., access to fitness infrastructure)\n\t'Bariatric surgery outcomes',\n  \u00a0'Chronic stress management',  # Ties sleep (K1) and mental well-being (K2: emotional eating) while linking to inflammation/cytokinemias (e.g., HPA axis feedback)\n  \u00a0Socioeconomic disparities in healthcare affordability'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/101000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n    'Metabolic syndrome',\n    'Leanness (muscle-to-fat ratio)',  # Contrast to obesity/overweight themes in KM1 and health disparities in KM2 (e.g., access to fitness infrastructure)\n\t'Bariatric surgery outcomes',\n  \u00a0'Chronic stress management',  # Ties sleep (K1) and mental well-being (K2: emotional eating) while linking to inflammation/cytokinemias (e.g., HPA axis feedback)\n  \u00a0Socioeconomic disparities in healthcare affordability'\n]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg3_sg1/101001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/allenai__Olmo-3-7B-Instruct/greedy/subgraph_2_to_subgraph_1/0010/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/allenai__Olmo-3-7B-Instruct/greedy/subgraph_2_to_subgraph_1/0010/rep_04",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-01-of-04/runs/algo3/allenai__Olmo-3-7B-Instruct/greedy/subgraph_2_to_subgraph_1/0011/rep_03",
+      "type": "MonitoredCommandTimeout"
+    }
+  ],
+  "finished_count": 873,
+  "last_completed_run": {
+    "algorithm": "algo3",
+    "condition_bits": "0110",
+    "decoding_algorithm": "greedy",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "subgraph_2_to_subgraph_1",
+    "replication": 4
+  },
+  "pending_count": 1370,
+  "percent_complete": 36.74,
+  "running_count": 1,
+  "started_at": "2026-04-08T06:14:48.673956+00:00",
+  "total_runs": 2376,
+  "updated_at": "2026-04-08T14:59:55.519897+00:00"
+}

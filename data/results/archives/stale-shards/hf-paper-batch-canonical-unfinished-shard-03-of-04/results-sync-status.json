@@ -1,0 +1,10 @@
+{
+  "consecutive_failures": 1,
+  "last_success_at": "2026-04-10T02:01:05Z",
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-unfinished-shard-03-of-04",
+  "message": "Watcher stopped.",
+  "remote_results_dir": "root@175.121.93.64:/workspace/results/hf-paper-batch-canonical-unfinished-shard-03-of-04",
+  "status": "stopped",
+  "updated_at": "2026-04-10T02:02:13Z",
+  "watcher_identity": "root@175.121.93.64:50911:/workspace/results/hf-paper-batch-canonical-unfinished-shard-03-of-04"
+}

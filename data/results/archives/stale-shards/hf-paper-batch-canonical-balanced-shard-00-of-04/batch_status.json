@@ -1,0 +1,299 @@
+{
+  "current_run": {
+    "algorithm": "algo2",
+    "condition_bits": "011101",
+    "decoding_algorithm": "contrastive",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg1_sg2",
+    "replication": 4
+  },
+  "failed_count": 54,
+  "failure_count": 54,
+  "failures": [
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/00101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/01000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/01001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/01001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/01110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/10001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/10010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/10011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/10011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/10100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/11111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Expecting value: line 1 column 1 (char 0)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111110/rep_04",
+      "type": "JSONDecodeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg1_sg2/111111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/00000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/00001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/00010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/00010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/00011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/000111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/00100/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/001000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/001000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/001001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111010/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.2/sg2_sg3/111011/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "message": "HfHubHTTPError: Server error '504 Gateway Time-out' for url 'https://huggingface.co/api/models/mistralai/Ministral-3-8B-Instruct-2512/tree/main?recursive=true&expand=false' (Amz CF ID: CLDhDwA2ZfVPXeod3vHZP2I1t4dXUYdPI6nA9J8oskM2rtvoBANbxg==)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.2/sg3_sg1/10111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Urgent care access for nutrition-related emergencies (obesity, diabetes)',\n    '\"Joy eating\" vs \"guilt-eaten\n    ing\"-mindful culina\n    ture trends in public health messaging\"',\n    'Indigenous food sovereignty and its intersection w/\n    urban nutrition policy (cultural vs mainstream diets)\u2019\n    , 'Algorithmic influence on food purchasing (elevator ads, social media diet cultu\n    ral trends)' ,\n    'Workplace wellness programs: effectiveness in long-term behavior ch\n    ange (gamifi\n    cation, nudge theory)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/000000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Urgent care access for nutrition-related emergencies (obesity, diabetes)',\n    '\"Joy eating\" vs \"guilt-eaten\n    ing\"-mindful culina\n    ture trends in public health messaging\"',\n    'Indigenous food sovereignty and its intersection w/\n    urban nutrition policy (cultural vs mainstream diets)\u2019\n    , 'Algorithmic influence on food purchasing (elevator ads, social media diet cultu\n    ral trends)' ,\n    'Workplace wellness programs: effectiveness in long-term behavior ch\n    ange (gamifi\n    cation, nudge theory)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/000000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n[\n    'Urgent care access for nutrition-related emergencies (obesity, diabetes)',\n    '\"Joy eating\" vs \"guilt-eaten\n    ing\"-mindful culina\n    ture trends in public health messaging\"',\n    'Indigenous food sovereignty and its intersection w/\n    urban nutrition policy (cultural vs mainstream diets)\u2019\n    , 'Algorithmic influence on food purchasing (elevator ads, social media diet cultu\n    ral trends)' ,\n    'Workplace wellness programs: effectiveness in long-term behavior ch\n    ange (gamifi\n    cation, nudge theory)'\n]\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/sg1_sg2/000001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: [\n  (\n    \"Prevalen\n</think>",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04/runs/algo1/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/sg1_sg2/00101/rep_02",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 539,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "011101",
+    "decoding_algorithm": "contrastive",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg1_sg2",
+    "replication": 0
+  },
+  "pending_count": 1782,
+  "percent_complete": 22.69,
+  "running_count": 1,
+  "started_at": "2026-04-08T06:14:47.068211+00:00",
+  "total_runs": 2375,
+  "updated_at": "2026-04-08T14:58:59.961896+00:00"
+}

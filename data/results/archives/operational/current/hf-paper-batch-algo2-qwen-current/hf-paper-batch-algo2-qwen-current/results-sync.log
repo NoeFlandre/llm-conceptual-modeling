@@ -1,0 +1,48 @@
+ssh: connect to host 175.155.64.166 port 19508: Connection refused
+rsync(4844): error: unexpected end of file
+rsync(4844): error: io_read_nonblocking
+rsync(4844): error: io_read_buf
+rsync(4844): error: io_read_int
+rsync(4844): warning: child 4846 exited with status 255
+ssh: connect to host 175.155.64.166 port 19508: Connection refused
+rsync(5138): error: unexpected end of file
+rsync(5138): error: io_read_nonblocking
+rsync(5138): error: io_read_buf
+rsync(5138): error: io_read_int
+rsync(5138): warning: child 5140 exited with status 255
+ssh: connect to host 175.155.64.166 port 19508: Connection refused
+rsync(5505): error: unexpected end of file
+rsync(5505): error: io_read_nonblocking
+rsync(5505): error: io_read_buf
+rsync(5505): error: io_read_int
+rsync(5505): warning: child 5507 exited with status 255
+ssh: connect to host 175.155.64.166 port 19508: Connection refused
+rsync(5673): error: unexpected end of file
+rsync(5673): error: io_read_nonblocking
+rsync(5673): error: io_read_buf
+rsync(5673): error: io_read_int
+rsync(5673): warning: child 5675 exited with status 255
+ssh: connect to host 175.155.64.166 port 19508: Connection refused
+rsync(5964): error: unexpected end of file
+rsync(5964): error: io_read_nonblocking
+rsync(5964): error: io_read_buf
+rsync(5964): error: io_read_int
+rsync(5964): warning: child 5965 exited with status 255
+Traceback (most recent call last):
+  File "<stdin>", line 33, in <module>
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1275, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors) as f:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo2-qwen-current/results-sync-status.json'
+Traceback (most recent call last):
+  File "<stdin>", line 33, in <module>
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1275, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors) as f:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo2-qwen-current/results-sync-status.json'

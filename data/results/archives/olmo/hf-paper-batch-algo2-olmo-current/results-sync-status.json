@@ -1,0 +1,9 @@
+{
+  "consecutive_failures": 1,
+  "last_success_at": "",
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo2-olmo-current",
+  "message": "Latest sync failed; watcher will retry.",
+  "remote_results_dir": "root@61.228.56.190:/workspace/results/hf-paper-batch-algo2-olmo-current",
+  "status": "degraded",
+  "updated_at": "2026-04-03T08:17:21Z"
+}

@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 369, in run_paper_batch
+    runtime_result = _run_local_hf_spec(
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 791, in _run_local_hf_spec
+    return session.run_spec(spec=spec, run_dir=run_dir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_persistent_worker.py", line 42, in run_spec
+    result = self._wait_for_result(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_persistent_worker.py", line 146, in _wait_for_result
+    raise RuntimeError(f"{error['type']}: {error['message']}")
+RuntimeError: RuntimeError: hf-transformers local inference requires CUDA; CPU fallback is disabled.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/.venv/bin/lcm", line 10, in <module>
+    sys.exit(run())
+             ^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 296, in run
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/cli.py", line 289, in main
+    return handle_run(args)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/commands/run.py", line 72, in handle_run
+    run_paper_batch(
+  File "/workspace/llm-conceptual-modeling/src/llm_conceptual_modeling/hf_experiments.py", line 414, in run_paper_batch
+    raise BatchInfrastructureFailure(
+llm_conceptual_modeling.hf_experiments.BatchInfrastructureFailure: Infrastructure failure while executing /workspace/results/hf-paper-batch-algo2-mistral-current/runs/algo2/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/011111/rep_00: RuntimeError: hf-transformers local inference requires CUDA; CPU fallback is disabled.

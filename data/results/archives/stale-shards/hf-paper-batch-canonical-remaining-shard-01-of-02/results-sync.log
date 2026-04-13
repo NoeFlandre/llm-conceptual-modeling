@@ -1,0 +1,2205 @@
+Transfer starting: 677 files
+batch_status.json
+runs/
+runs/algo1/
+runs/algo1/allenai__Olmo-3-7B-Instruct/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/error.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/error.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/active_stage.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/manifest.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/raw_response.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/raw_row.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/runtime.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/summary.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/worker_result.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/worker_spec.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/stages/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/stages/algo1_edge_generation.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/worker_state.json
+worker-queues/
+worker-queues/allenai__Olmo-3-7B-Instruct/
+worker-queues/allenai__Olmo-3-7B-Instruct/00000001.claimed.json
+worker-queues/allenai__Olmo-3-7B-Instruct/00000023.claimed.json
+worker-queues/allenai__Olmo-3-7B-Instruct/worker.log
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/worker.log
+
+sent 2169 bytes  received 100496 bytes  1026650000 bytes/sec
+total size is 3388372  speedup is 33.00
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13914
+retryable_failed_count=3786
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19117
+duplicate_extra_artifact_count=40065
+Transfer starting: 762 files
+batch_status.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/error.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/manifest.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_spec.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/worker_state.json
+worker-queues/allenai__Olmo-3-7B-Instruct/
+worker-queues/allenai__Olmo-3-7B-Instruct/worker.log
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/00000001.claimed.json
+
+sent 2399 bytes  received 121477 bytes  1238760000 bytes/sec
+total size is 4066393  speedup is 32.83
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13915
+retryable_failed_count=3787
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19117
+duplicate_extra_artifact_count=40074
+Transfer starting: 890 files
+batch_status.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/raw_row.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/runtime.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/summary.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/stages/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/stages/algo1_edge_generation.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/raw_row.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/runtime.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/summary.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/stages/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/stages/algo1_edge_generation.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/raw_row.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/runtime.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/summary.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/stages/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/stages/algo1_edge_generation.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/active_stage.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/raw_response.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/raw_row.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/runtime.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/summary.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_result.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/stages/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/stages/algo1_edge_generation.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/active_stage.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/manifest.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/raw_response.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/raw_row.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/runtime.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/summary.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/worker_result.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/worker_spec.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/stages/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/stages/algo1_edge_generation.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/worker_state.json
+worker-queues/allenai__Olmo-3-7B-Instruct/
+worker-queues/allenai__Olmo-3-7B-Instruct/00000001.claimed.json
+worker-queues/allenai__Olmo-3-7B-Instruct/00000003.claimed.json
+worker-queues/allenai__Olmo-3-7B-Instruct/worker.log
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/
+worker-queues/mistralai__Ministral-3-8B-Instruct-2512/worker.log
+
+sent 3051 bytes  received 168352 bytes  1714030000 bytes/sec
+total size is 4867100  speedup is 28.40
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13916
+retryable_failed_count=3786
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19117
+duplicate_extra_artifact_count=40085
+Transfer starting: 902 files
+batch_status.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/worker_state.json
+worker-queues/allenai__Olmo-3-7B-Instruct/
+worker-queues/allenai__Olmo-3-7B-Instruct/00000005.claimed.json
+worker-queues/allenai__Olmo-3-7B-Instruct/worker.log
+
+sent 1091 bytes  received 37964 bytes  390550000 bytes/sec
+total size is 4949891  speedup is 126.74
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13846
+retryable_failed_count=3851
+terminal_failed_count=1868
+pending_count=5635
+duplicate_logical_run_count=19073
+duplicate_extra_artifact_count=39815
+Transfer starting: 902 files
+./
+batch_status.json
+runtime_config.yaml
+shard_manifest.json
+preview_resume/resolved_run_config.yaml
+preview_resume/resolved_run_plan.json
+runs/
+runs/algo1/
+runs/algo1/allenai__Olmo-3-7B-Instruct/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/error.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_00/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/error.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_02/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/error.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_04/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/raw_row.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/runtime.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/summary.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/stages/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00001/rep_03/stages/algo1_edge_generation.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/raw_row.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/runtime.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/summary.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/stages/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00011/rep_02/stages/algo1_edge_generation.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/active_stage.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/manifest.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/raw_response.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/raw_row.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/runtime.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/summary.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/worker_result.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/worker_spec.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/worker_state.json
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/stages/
+runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/00101/rep_01/stages/algo1_edge_generation.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/active_stage.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/manifest.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/raw_response.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/raw_row.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/runtime.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/summary.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/worker_result.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/worker_spec.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/stages/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg1_sg2/11011/rep_03/stages/algo1_edge_generation.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/active_stage.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/manifest.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/raw_response.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/raw_row.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/runtime.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/summary.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_result.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_spec.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/stages/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00000/rep_04/stages/algo1_edge_generation.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/active_stage.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/manifest.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/raw_response.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/raw_row.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/runtime.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/summary.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/worker_result.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/worker_spec.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/worker_state.json
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/stages/
+runs/algo1/mistralai__Ministral-3-8B-Instruct-2512/greedy/sg2_sg3/00101/rep_03/stages/algo1_edge_generation.json
+runs/algo2/
+runs/algo2/allenai__Olmo-3-7B-Instruct/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_00/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_02/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_04/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/error.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03/worker_state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/active_stage.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/manifest.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/raw_response.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/state.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/worker_result.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/worker_spec.json
+runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00/worker_state.json
+worker-queues/allenai__Olmo-3-7B-Instruct/
+
+sent 14039 bytes  received 453689 bytes  4677280000 bytes/sec
+total size is 4990134  speedup is 10.67
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13916
+retryable_failed_count=3786
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19117
+duplicate_extra_artifact_count=40086
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13916
+retryable_failed_count=3786
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19117
+duplicate_extra_artifact_count=40086
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13916
+retryable_failed_count=3786
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19117
+duplicate_extra_artifact_count=40086
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13916
+retryable_failed_count=3785
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40099
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13917
+retryable_failed_count=3786
+terminal_failed_count=1868
+pending_count=5629
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40120
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13920
+retryable_failed_count=3783
+terminal_failed_count=1868
+pending_count=5629
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40137
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13922
+retryable_failed_count=3781
+terminal_failed_count=1868
+pending_count=5629
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40151
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13922
+retryable_failed_count=3781
+terminal_failed_count=1868
+pending_count=5629
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40160
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13923
+retryable_failed_count=3780
+terminal_failed_count=1868
+pending_count=5629
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40167
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13923
+retryable_failed_count=3778
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40176
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13928
+retryable_failed_count=3773
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40186
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13928
+retryable_failed_count=3773
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40186
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13929
+retryable_failed_count=3772
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40194
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13938
+retryable_failed_count=3764
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19118
+duplicate_extra_artifact_count=40207
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13946
+retryable_failed_count=3755
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40219
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13967
+retryable_failed_count=3734
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40240
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13976
+retryable_failed_count=3726
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40254
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13986
+retryable_failed_count=3715
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40272
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13987
+retryable_failed_count=3715
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40279
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13989
+retryable_failed_count=3711
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40285
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13995
+retryable_failed_count=3705
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40291
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=13998
+retryable_failed_count=3703
+terminal_failed_count=1868
+pending_count=5631
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40293
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14003
+retryable_failed_count=3697
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40299
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14007
+retryable_failed_count=3693
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40303
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14007
+retryable_failed_count=3693
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40303
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14008
+retryable_failed_count=3692
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40304
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14008
+retryable_failed_count=3692
+terminal_failed_count=1868
+pending_count=5632
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40304
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14013
+retryable_failed_count=3689
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40307
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14026
+retryable_failed_count=3676
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40320
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14035
+retryable_failed_count=3667
+terminal_failed_count=1868
+pending_count=5630
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40329
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14041
+retryable_failed_count=3664
+terminal_failed_count=1868
+pending_count=5627
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40332
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14045
+retryable_failed_count=3660
+terminal_failed_count=1868
+pending_count=5627
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40336
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14047
+retryable_failed_count=3659
+terminal_failed_count=1868
+pending_count=5626
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40337
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14050
+retryable_failed_count=3657
+terminal_failed_count=1868
+pending_count=5625
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40339
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14052
+retryable_failed_count=3656
+terminal_failed_count=1868
+pending_count=5624
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40340
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14054
+retryable_failed_count=3655
+terminal_failed_count=1868
+pending_count=5623
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40341
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14059
+retryable_failed_count=3650
+terminal_failed_count=1868
+pending_count=5623
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40346
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14064
+retryable_failed_count=3645
+terminal_failed_count=1868
+pending_count=5623
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40351
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14067
+retryable_failed_count=3643
+terminal_failed_count=1868
+pending_count=5622
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40353
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14069
+retryable_failed_count=3642
+terminal_failed_count=1868
+pending_count=5621
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40354
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14071
+retryable_failed_count=3641
+terminal_failed_count=1868
+pending_count=5620
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40355
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14072
+retryable_failed_count=3640
+terminal_failed_count=1868
+pending_count=5620
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40356
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14074
+retryable_failed_count=3640
+terminal_failed_count=1868
+pending_count=5618
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40357
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14078
+retryable_failed_count=3636
+terminal_failed_count=1868
+pending_count=5618
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40361
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14082
+retryable_failed_count=3633
+terminal_failed_count=1868
+pending_count=5617
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40364
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14084
+retryable_failed_count=3632
+terminal_failed_count=1868
+pending_count=5616
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40365
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14086
+retryable_failed_count=3631
+terminal_failed_count=1868
+pending_count=5615
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40366
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14088
+retryable_failed_count=3630
+terminal_failed_count=1868
+pending_count=5614
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40367
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14091
+retryable_failed_count=3629
+terminal_failed_count=1868
+pending_count=5612
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40368
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14100
+retryable_failed_count=3622
+terminal_failed_count=1868
+pending_count=5610
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40375
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14111
+retryable_failed_count=3612
+terminal_failed_count=1868
+pending_count=5609
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40385
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14121
+retryable_failed_count=3603
+terminal_failed_count=1868
+pending_count=5608
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40394
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14127
+retryable_failed_count=3597
+terminal_failed_count=1868
+pending_count=5608
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40400
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14134
+retryable_failed_count=3594
+terminal_failed_count=1868
+pending_count=5604
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40403
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14139
+retryable_failed_count=3590
+terminal_failed_count=1868
+pending_count=5603
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40407
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14142
+retryable_failed_count=3589
+terminal_failed_count=1868
+pending_count=5601
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40408
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14147
+retryable_failed_count=3587
+terminal_failed_count=1868
+pending_count=5598
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40410
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14152
+retryable_failed_count=3582
+terminal_failed_count=1868
+pending_count=5598
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40415
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14156
+retryable_failed_count=3580
+terminal_failed_count=1868
+pending_count=5596
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40417
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14159
+retryable_failed_count=3579
+terminal_failed_count=1868
+pending_count=5594
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40418
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14163
+retryable_failed_count=3577
+terminal_failed_count=1868
+pending_count=5592
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40420
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14166
+retryable_failed_count=3575
+terminal_failed_count=1868
+pending_count=5591
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40422
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14173
+retryable_failed_count=3569
+terminal_failed_count=1868
+pending_count=5590
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40428
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14182
+retryable_failed_count=3562
+terminal_failed_count=1868
+pending_count=5588
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40435
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14189
+retryable_failed_count=3559
+terminal_failed_count=1868
+pending_count=5584
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40438
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14195
+retryable_failed_count=3554
+terminal_failed_count=1868
+pending_count=5583
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40443
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14197
+retryable_failed_count=3553
+terminal_failed_count=1868
+pending_count=5582
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40445
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14201
+retryable_failed_count=3551
+terminal_failed_count=1868
+pending_count=5580
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40447
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14204
+retryable_failed_count=3550
+terminal_failed_count=1868
+pending_count=5578
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40448
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14208
+retryable_failed_count=3548
+terminal_failed_count=1868
+pending_count=5576
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40450
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14212
+retryable_failed_count=3547
+terminal_failed_count=1868
+pending_count=5573
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40452
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14219
+retryable_failed_count=3546
+terminal_failed_count=1868
+pending_count=5567
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40453
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14224
+retryable_failed_count=3544
+terminal_failed_count=1868
+pending_count=5564
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40456
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14232
+retryable_failed_count=3540
+terminal_failed_count=1868
+pending_count=5560
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40460
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14239
+retryable_failed_count=3535
+terminal_failed_count=1868
+pending_count=5558
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40465
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14242
+retryable_failed_count=3533
+terminal_failed_count=1868
+pending_count=5557
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40467
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14244
+retryable_failed_count=3532
+terminal_failed_count=1868
+pending_count=5556
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40468
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14248
+retryable_failed_count=3530
+terminal_failed_count=1868
+pending_count=5554
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40470
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14252
+retryable_failed_count=3528
+terminal_failed_count=1868
+pending_count=5552
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40472
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14255
+retryable_failed_count=3527
+terminal_failed_count=1868
+pending_count=5550
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40473
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14260
+retryable_failed_count=3525
+terminal_failed_count=1868
+pending_count=5547
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40475
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14268
+retryable_failed_count=3522
+terminal_failed_count=1868
+pending_count=5542
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40478
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14275
+retryable_failed_count=3519
+terminal_failed_count=1868
+pending_count=5538
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40481
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14282
+retryable_failed_count=3518
+terminal_failed_count=1868
+pending_count=5532
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40482
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14288
+retryable_failed_count=3513
+terminal_failed_count=1868
+pending_count=5531
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40487
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14292
+retryable_failed_count=3510
+terminal_failed_count=1868
+pending_count=5530
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40490
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14297
+retryable_failed_count=3507
+terminal_failed_count=1868
+pending_count=5528
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40493
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14301
+retryable_failed_count=3507
+terminal_failed_count=1868
+pending_count=5524
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40494
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14305
+retryable_failed_count=3505
+terminal_failed_count=1868
+pending_count=5522
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40496
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14309
+retryable_failed_count=3502
+terminal_failed_count=1868
+pending_count=5521
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40499
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14312
+retryable_failed_count=3499
+terminal_failed_count=1868
+pending_count=5521
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40502
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14315
+retryable_failed_count=3496
+terminal_failed_count=1868
+pending_count=5521
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40505
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14317
+retryable_failed_count=3495
+terminal_failed_count=1868
+pending_count=5520
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40506
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14320
+retryable_failed_count=3493
+terminal_failed_count=1868
+pending_count=5519
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40508
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14322
+retryable_failed_count=3491
+terminal_failed_count=1868
+pending_count=5519
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40510
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14328
+retryable_failed_count=3487
+terminal_failed_count=1868
+pending_count=5517
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40514
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14335
+retryable_failed_count=3481
+terminal_failed_count=1868
+pending_count=5516
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40520
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14341
+retryable_failed_count=3476
+terminal_failed_count=1868
+pending_count=5515
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40525
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14351
+retryable_failed_count=3467
+terminal_failed_count=1868
+pending_count=5514
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40534
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14359
+retryable_failed_count=3459
+terminal_failed_count=1868
+pending_count=5514
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40542
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14363
+retryable_failed_count=3455
+terminal_failed_count=1868
+pending_count=5514
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40546
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14369
+retryable_failed_count=3450
+terminal_failed_count=1868
+pending_count=5513
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40551
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14381
+retryable_failed_count=3443
+terminal_failed_count=1868
+pending_count=5508
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40558
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14386
+retryable_failed_count=3438
+terminal_failed_count=1868
+pending_count=5508
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40563
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14392
+retryable_failed_count=3432
+terminal_failed_count=1868
+pending_count=5508
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40569
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14396
+retryable_failed_count=3428
+terminal_failed_count=1868
+pending_count=5508
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40573
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14404
+retryable_failed_count=3422
+terminal_failed_count=1868
+pending_count=5506
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40582
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14406
+retryable_failed_count=3421
+terminal_failed_count=1868
+pending_count=5505
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40593
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14410
+retryable_failed_count=3420
+terminal_failed_count=1868
+pending_count=5502
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40606
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14416
+retryable_failed_count=3421
+terminal_failed_count=1871
+pending_count=5492
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40612
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14425
+retryable_failed_count=3421
+terminal_failed_count=1876
+pending_count=5478
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40613
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14425
+retryable_failed_count=3420
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40614
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14425
+retryable_failed_count=3420
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40614
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14425
+retryable_failed_count=3420
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40614
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14427
+retryable_failed_count=3418
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40651
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14427
+retryable_failed_count=3418
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40651
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14427
+retryable_failed_count=3418
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40651
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14427
+retryable_failed_count=3418
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40651
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05
+ledger_root=/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-remaining-shard-01-of-02
+expected_total_runs=25200
+finished_count=14427
+retryable_failed_count=3418
+terminal_failed_count=1876
+pending_count=5479
+duplicate_logical_run_count=19119
+duplicate_extra_artifact_count=40651
+Transfer starting: 902 files
+
+sent 251 bytes  received 20979 bytes  212300000 bytes/sec
+total size is 4990134  speedup is 235.05

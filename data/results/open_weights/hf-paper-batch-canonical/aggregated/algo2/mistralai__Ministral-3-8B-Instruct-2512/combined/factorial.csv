@@ -1,0 +1,48 @@
+accuracy,recall,precision,Feature
+0.0,0.0,0.0,Explanation
+0.0,0.0,0.0,Example
+0.0,0.0,0.0,Counterexample
+0.0,0.0,0.0,Array/List(1/-1)
+0.0,0.0,0.0,Tag/Adjacency(1/-1)
+0.0,0.0,0.0,Convergence
+0.0,0.0,0.0,Decoding Algorithm
+0.0,0.0,0.0,Beam Width Level
+0.0,0.0,0.0,Contrastive Penalty Level
+0.0,0.0,0.0,Repetition
+0.0,0.0,0.0,Explanation_AND_Example
+0.0,0.0,0.0,Explanation_AND_Counterexample
+0.0,0.0,0.0,Explanation_AND_Array/List(1/-1)
+0.0,0.0,0.0,Explanation_AND_Tag/Adjacency(1/-1)
+0.0,0.0,0.0,Explanation_AND_Convergence
+0.0,0.0,0.0,Explanation_AND_Decoding Algorithm
+0.0,0.0,0.0,Explanation_AND_Beam Width Level
+0.0,0.0,0.0,Explanation_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Example_AND_Counterexample
+0.0,0.0,0.0,Example_AND_Array/List(1/-1)
+0.0,0.0,0.0,Example_AND_Tag/Adjacency(1/-1)
+0.0,0.0,0.0,Example_AND_Convergence
+0.0,0.0,0.0,Example_AND_Decoding Algorithm
+0.0,0.0,0.0,Example_AND_Beam Width Level
+0.0,0.0,0.0,Example_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Counterexample_AND_Array/List(1/-1)
+0.0,0.0,0.0,Counterexample_AND_Tag/Adjacency(1/-1)
+0.0,0.0,0.0,Counterexample_AND_Convergence
+0.0,0.0,0.0,Counterexample_AND_Decoding Algorithm
+0.0,0.0,0.0,Counterexample_AND_Beam Width Level
+0.0,0.0,0.0,Counterexample_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Array/List(1/-1)_AND_Tag/Adjacency(1/-1)
+0.0,0.0,0.0,Array/List(1/-1)_AND_Convergence
+0.0,0.0,0.0,Array/List(1/-1)_AND_Decoding Algorithm
+0.0,0.0,0.0,Array/List(1/-1)_AND_Beam Width Level
+0.0,0.0,0.0,Array/List(1/-1)_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Tag/Adjacency(1/-1)_AND_Convergence
+0.0,0.0,0.0,Tag/Adjacency(1/-1)_AND_Decoding Algorithm
+0.0,0.0,0.0,Tag/Adjacency(1/-1)_AND_Beam Width Level
+0.0,0.0,0.0,Tag/Adjacency(1/-1)_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Convergence_AND_Decoding Algorithm
+0.0,0.0,0.0,Convergence_AND_Beam Width Level
+0.0,0.0,0.0,Convergence_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Decoding Algorithm_AND_Beam Width Level
+0.0,0.0,0.0,Decoding Algorithm_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Beam Width Level_AND_Contrastive Penalty Level
+0.0,0.0,0.0,Error

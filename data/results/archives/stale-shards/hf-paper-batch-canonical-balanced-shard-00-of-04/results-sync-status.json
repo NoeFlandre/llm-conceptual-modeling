@@ -1,0 +1,18 @@
+{
+  "consecutive_failures": 0,
+  "last_success_at": "2026-04-09T09:14:47Z",
+  "ledger_snapshot": {
+    "expected_total_runs": 25200,
+    "finished_count": 20965,
+    "generated_at": "2026-04-09T09:22:20.017218+00:00",
+    "pending_count": 1436,
+    "retryable_failed_count": 2714,
+    "terminal_failed_count": 85
+  },
+  "local_results_dir": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical-balanced-shard-00-of-04",
+  "message": "Watcher stopped.",
+  "remote_results_dir": "root@222.235.180.221:/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-04",
+  "status": "stopped",
+  "updated_at": "2026-04-09T09:22:47Z",
+  "watcher_identity": ""
+}

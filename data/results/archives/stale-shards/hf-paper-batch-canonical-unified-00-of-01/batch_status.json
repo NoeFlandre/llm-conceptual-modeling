@@ -1,0 +1,487 @@
+{
+  "current_run": {
+    "algorithm": "algo3",
+    "condition_bits": "1111",
+    "decoding_algorithm": "contrastive",
+    "model": "allenai/Olmo-3-7B-Instruct",
+    "pair_name": "subgraph_2_to_subgraph_1",
+    "replication": 1
+  },
+  "failed_count": 93,
+  "failure_count": 93,
+  "failures": [
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 15.06 MiB is free. Process 129922 has 16.81 GiB memory in use. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 13.85 GiB is allocated by PyTorch, and 61.30 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 5.06 MiB is free. Process 129922 has 16.81 GiB memory in use. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.04 GiB is allocated by PyTorch, and 3.89 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg2_sg3/010010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 69.06 MiB is free. Process 129922 has 19.93 GiB memory in use. Including non-PyTorch memory, this process has 11.35 GiB memory in use. Of the allocated memory 10.86 GiB is allocated by PyTorch, and 1.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/sg3_sg1/001101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 60.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 51.06 MiB is free. Including non-PyTorch memory, this process has 17.21 GiB memory in use. Process 130442 has 14.08 GiB memory in use. Of the allocated memory 16.56 GiB is allocated by PyTorch, and 47.28 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo2/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg3_sg1/101010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 53.06 MiB is free. Process 130587 has 17.49 GiB memory in use. Including non-PyTorch memory, this process has 13.80 GiB memory in use. Of the allocated memory 13.30 GiB is allocated by PyTorch, and 17.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 53.06 MiB is free. Process 130587 has 17.49 GiB memory in use. Including non-PyTorch memory, this process has 13.80 GiB memory in use. Of the allocated memory 13.30 GiB is allocated by PyTorch, and 17.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0010/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0010/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 283.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.32 GiB memory in use. Of the allocated memory 12.83 GiB is allocated by PyTorch, and 5.57 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 53.06 MiB is free. Process 130587 has 17.49 GiB memory in use. Including non-PyTorch memory, this process has 13.80 GiB memory in use. Of the allocated memory 13.30 GiB is allocated by PyTorch, and 17.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 53.06 MiB is free. Process 130587 has 17.49 GiB memory in use. Including non-PyTorch memory, this process has 13.80 GiB memory in use. Of the allocated memory 13.30 GiB is allocated by PyTorch, and 17.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 33.06 MiB is free. Process 130587 has 17.55 GiB memory in use. Including non-PyTorch memory, this process has 13.76 GiB memory in use. Of the allocated memory 13.27 GiB is allocated by PyTorch, and 9.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 31.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.57 GiB memory in use. Of the allocated memory 13.08 GiB is allocated by PyTorch, and 1.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 283.06 MiB is free. Process 130587 has 17.75 GiB memory in use. Including non-PyTorch memory, this process has 13.32 GiB memory in use. Of the allocated memory 12.83 GiB is allocated by PyTorch, and 5.57 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 91.06 MiB is free. Process 130587 has 16.65 GiB memory in use. Including non-PyTorch memory, this process has 14.60 GiB memory in use. Of the allocated memory 14.11 GiB is allocated by PyTorch, and 5.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/0111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 1.89 GiB. GPU 0 has a total capacity of 31.36 GiB of which 499.06 MiB is free. Process 134835 has 15.57 GiB memory in use. Including non-PyTorch memory, this process has 15.29 GiB memory in use. Of the allocated memory 14.78 GiB is allocated by PyTorch, and 17.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 63.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.30 GiB memory in use. Of the allocated memory 8.81 GiB is allocated by PyTorch, and 3.91 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 63.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.30 GiB memory in use. Of the allocated memory 8.81 GiB is allocated by PyTorch, and 3.91 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1000/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 63.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.30 GiB memory in use. Of the allocated memory 8.81 GiB is allocated by PyTorch, and 3.91 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/beam_num_beams_6/subgraph_2_to_subgraph_1/1001/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 63.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.30 GiB memory in use. Of the allocated memory 8.81 GiB is allocated by PyTorch, and 3.91 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/beam_num_beams_6/subgraph_2_to_subgraph_1/1001/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 86.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 63.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.30 GiB memory in use. Of the allocated memory 8.81 GiB is allocated by PyTorch, and 3.91 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1001/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1010/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 17.06 MiB is free. Process 134835 has 21.98 GiB memory in use. Including non-PyTorch memory, this process has 9.34 GiB memory in use. Of the allocated memory 8.84 GiB is allocated by PyTorch, and 16.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 77.06 MiB is free. Process 134835 has 22.00 GiB memory in use. Including non-PyTorch memory, this process has 9.26 GiB memory in use. Of the allocated memory 8.78 GiB is allocated by PyTorch, and 344.00 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 77.06 MiB is free. Process 134835 has 22.00 GiB memory in use. Including non-PyTorch memory, this process has 9.26 GiB memory in use. Of the allocated memory 8.78 GiB is allocated by PyTorch, and 344.00 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 77.06 MiB is free. Process 134835 has 22.00 GiB memory in use. Including non-PyTorch memory, this process has 9.26 GiB memory in use. Of the allocated memory 8.78 GiB is allocated by PyTorch, and 344.00 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 77.06 MiB is free. Process 134835 has 22.00 GiB memory in use. Including non-PyTorch memory, this process has 9.26 GiB memory in use. Of the allocated memory 8.78 GiB is allocated by PyTorch, and 344.00 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "RuntimeError: You can't move a model that has some modules offloaded to cpu or disk.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 49.06 MiB is free. Process 137386 has 17.18 GiB memory in use. Including non-PyTorch memory, this process has 14.11 GiB memory in use. Of the allocated memory 13.61 GiB is allocated by PyTorch, and 17.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    \"Cultural norms around thinness\" : [\n        \"Idealization of slendermodels in media portrayalsaesthetic preferences favourablingowth-to-weight ratiosbodies of marginalized gendervariety in body positivity movements\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1100/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python{\n    \"Cultural norms around thinness\" : [\n        \"Idealization of slendermodels in media portrayalsaesthetic preferences favourablingowth-to-weight ratiosbodies of marginalized gendervariety in body positivity movements\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 39.06 MiB is free. Process 139852 has 18.44 GiB memory in use. Including non-PyTorch memory, this process has 12.86 GiB memory in use. Of the allocated memory 12.37 GiB is allocated by PyTorch, and 251.50 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 37.06 MiB is free. Process 140038 has 18.03 GiB memory in use. Including non-PyTorch memory, this process has 13.27 GiB memory in use. Of the allocated memory 12.78 GiB is allocated by PyTorch, and 5.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1101/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 3.06 MiB is free. Process 140373 has 18.33 GiB memory in use. Including non-PyTorch memory, this process has 13.01 GiB memory in use. Of the allocated memory 12.51 GiB is allocated by PyTorch, and 7.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n{\n    \"Culture of eating that promotes healthy choicess\": [\n        \"nutrient-dense food culture\",\n        \"minimal-processed eating norm\",\n        Mindful dietary habits\",\n        \"sustainably-sourcings food traditions\",  # Note: Adjectival tweak to imply quantity/emphasasis (e.g., \"high-sustainaiblity sourcing vs. low-sustainability\")\n\t\"Avoider of ultra-processed foods\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Model did not return valid structured output: ```python\n{\n    \"Culture of eating that promotes healthy choicess\": [\n        \"nutrient-dense food culture\",\n        \"minimal-processed eating norm\",\n        Mindful dietary habits\",\n        \"sustainably-sourcings food traditions\",  # Note: Adjectival tweak to imply quantity/emphasasis (e.g., \"high-sustainaiblity sourcing vs. low-sustainability\")\n\t\"Avoider of ultra-processed foods\"\n    ]\n}\n```",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/mistralai__Ministral-3-8B-Instruct-2512/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "ValueError: Unsupported cache type: <class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. Contrastive search requires dynamic cache, so set `cache_implementation='dynamic'` in the generation config.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "message": "OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 7.06 MiB is free. Process 141353 has 17.54 GiB memory in use. Including non-PyTorch memory, this process has 13.80 GiB memory in use. Of the allocated memory 13.30 GiB is allocated by PyTorch, and 17.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-unified-00-of-01/runs/algo3/Qwen__Qwen3.5-9B/contrastive_penalty_alpha_0.8/subgraph_2_to_subgraph_1/1111/rep_01",
+      "type": "RuntimeError"
+    }
+  ],
+  "finished_count": 0,
+  "last_completed_run": null,
+  "pending_count": 1428,
+  "percent_complete": 0.0,
+  "running_count": 1,
+  "started_at": null,
+  "total_runs": 1521,
+  "updated_at": "2026-04-10T05:55:48.146405+00:00"
+}

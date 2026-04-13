@@ -58,6 +58,23 @@ In container mode the launcher mounts the synced repo and seeded results into th
 reuses the same remote preview and launch helpers. This is the lowest-friction path once the image
 exists, because the paid host only needs Docker and the image pull.
 
+## Operator Rules
+
+Fresh onboarding agents should follow these rules before changing code or relaunching a paid host:
+
+- Treat `data/results/open_weights/hf-paper-batch-canonical/ledger.json` as the source of truth for unfinished work.
+- Do not trust the physical run tree to tell you how many runs remain.
+- Do not trust `current_run` alone. It is only a claim/start signal.
+- Use three status surfaces together:
+  - remote `batch_status.json`
+  - local `results-sync-status.json`
+  - local canonical `ledger.json`
+- Distinguish cold model download from inference:
+  - cold download: `worker_state.phase = prefetching_model`, `model_loaded = false`, no `active_stage.json`, no GPU compute process, model blob files still growing
+  - live inference: `model_loaded = true`, stage or raw-response artifacts updating, GPU memory attached
+- If a fresh host looks “running but idle,” inspect model cache growth before debugging parser logic.
+- Do not destroy a rented SSH until results are synced locally and the canonical ledger state you care about is verified from local files.
+
 ## Fresh-Instance One-Command Flow
 
 For a brand-new rented GPU, or when moving the resumable batch onto a larger GPU, prefer the
@@ -71,7 +88,7 @@ scripts/vast/prepare_and_resume_hf_batch.sh \
   /workspace/llm-conceptual-modeling \
   configs/hf_transformers_paper_batch.yaml \
   /workspace/results/hf-paper-batch-algo1-olmo-current \
-  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-algo1-olmo-current
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/archives/olmo/hf-paper-batch-algo1-olmo-current
 ```
 
 This wrapper:
@@ -232,6 +249,70 @@ uv run lcm run algo1 \
   --resume
 ```
 
+Dedicated final Qwen `algo1` tail:
+
+Use this path when the only unfinished work is the 10-run Qwen `algo1` contrastive tail:
+
+- model: `Qwen/Qwen3.5-9B`
+- algorithm: `algo1`
+- decoding: `contrastive_penalty_alpha_0.8`
+- pair: `sg1_sg2`
+- bits: `00101` and `10100`
+- replications: `0..4`
+
+Prepare the isolated tail locally:
+
+```bash
+uv run lcm run prepare-qwen-algo1-tail \
+  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical \
+  --tail-results-root /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  --remote-output-root /workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail \
+  --json
+
+uv run lcm run qwen-algo1-tail-preflight \
+  --repo-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical \
+  --tail-results-root /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  --json
+```
+
+Expected dedicated preflight result:
+
+- `total_runs = 10`
+- `pending_count = 10`
+- `can_resume = true`
+
+Launch on the rented host:
+
+```bash
+bash scripts/vast/prepare_and_resume_qwen_algo1_tail.sh \
+  root@HOST \
+  PORT \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  /workspace/llm-conceptual-modeling \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical \
+  /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  /workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail
+```
+
+If the dedicated launcher stalls in preview on a fresh host, stop the preview process and relaunch the isolated batch directly with `HF_HUB_DISABLE_XET=1` and `HF_HOME=/workspace/.hf_home`.
+
+Finalize locally after the remote isolated tail finishes:
+
+```bash
+bash scripts/vast/finalize_qwen_algo1_tail.sh \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-paper-batch-canonical
+```
+
+Tail-run correctness checks:
+
+- isolated tail `batch_status.json` reaches `10 finished / 0 pending / 0 failed`
+- local canonical run dirs for the 10 target identities have `state.json = finished`
+- each of those 10 local canonical run dirs has `summary.json` and `raw_row.json`
+- canonical `ledger.json.records` marks the 10 target identities as `finished`
+
 Exact single-condition HF smoke run:
 
 ```bash
@@ -256,6 +337,22 @@ conditions resume instead of being permanently deferred when the old failure pay
 Fresh-host preview now also runs `lcm run prefetch-runtime` on the effective config before launch.
 That moves tokenizer/model cache population into the preview phase so a host is less likely to look
 "live" while it is still only downloading weights.
+
+Important limitation learned from the final Qwen tail:
+
+- `prefetch-runtime` can itself become the stall if the Hugging Face Xet download path deadlocks on a fresh host.
+- If preview never produces its expected artifacts and the remote process is stuck inside `lcm run prefetch-runtime`, bypass the preview for the dedicated tail run and launch the isolated batch directly after `remote_runtime_doctor.sh`.
+- When diagnosing that situation, inspect:
+  - `/workspace/.hf_home/hub/models--Qwen--Qwen3.5-9B/blobs/*.incomplete`
+  - `/workspace/.hf_home/xet/logs/*.log`
+- If the `.incomplete` blob mtimes stop moving and the Xet logs stop advancing, restart with:
+
+```bash
+export HF_HUB_DISABLE_XET=1
+export HF_HOME=/workspace/.hf_home
+```
+
+- Keep the partially downloaded blobs. Restarting with `HF_HUB_DISABLE_XET=1` can resume the same cold-download payload on a more reliable transfer path.
 
 Do not launch the full DOE until this exact smoke run:
 

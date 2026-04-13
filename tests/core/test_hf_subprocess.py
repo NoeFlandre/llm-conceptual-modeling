@@ -80,9 +80,17 @@ def test_run_monitored_command_records_worker_state_on_success(tmp_path: Path) -
     assert worker_state["pid"] > 0
 
 
-def test_build_hf_download_environment_disables_xet_by_default() -> None:
+def test_build_hf_download_environment_enables_xet_by_default() -> None:
     env = build_hf_download_environment({})
 
-    assert env["HF_HUB_DISABLE_XET"] == "1"
+    assert env["HF_HUB_DISABLE_XET"] == "0"
     assert env["HF_HUB_ENABLE_HF_TRANSFER"] == "0"
     assert env["PYTORCH_CUDA_ALLOC_CONF"] == "expandable_segments:True"
+
+
+def test_build_hf_download_environment_preserves_pythonpath(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PYTHONPATH", "/custom/path")
+
+    env = build_hf_download_environment({"FOO": "bar"})
+
+    assert env.get("PYTHONPATH") == "/custom/path"

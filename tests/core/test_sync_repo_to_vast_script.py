@@ -6,8 +6,11 @@ def test_sync_repo_script_excludes_local_results_tree() -> None:
     script_text = script_path.read_text(encoding="utf-8")
 
     assert "rsync -avz \\" in script_text
+    assert "--delete \\" in script_text
     assert "--exclude '.work-venv'" in script_text
     assert "--exclude '.ruff_cache'" in script_text
     assert "--exclude 'results'" in script_text
+    assert "--exclude 'runs'" in script_text
+    assert "--exclude 'worker-queues'" in script_text
     assert "--exclude 'data/results'" in script_text
     assert "--exclude 'data/analysis_artifacts'" in script_text

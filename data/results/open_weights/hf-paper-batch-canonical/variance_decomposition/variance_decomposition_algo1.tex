@@ -1,0 +1,94 @@
+\begin{table}[h]
+\begin{adjustwidth}{-2.25in}{0in}
+\centering
+\caption{Deterministic variance decomposition across all modeled factors for Qwen and Mistral in Algorithm 1. Each cell reports the share of variance for accuracy, recall, and precision. When accounting for the error term changes the displayed share, the table shows \textit{without error vs. with error}.}
+\resizebox{1.4\textwidth}{!}{%
+\begin{tabular}{|l|lll|lll|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Feature}} & \multicolumn{3}{c|}{\textit{Qwen}} & \multicolumn{3}{c|}{\textit{Mistral}} \\ \hline
+\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{\textbf{accuracy}} & \multicolumn{1}{c|}{\textbf{recall}} & \multicolumn{1}{c|}{\textbf{precision}} & \multicolumn{1}{c|}{\textbf{accuracy}} & \multicolumn{1}{c|}{\textbf{recall}} & \multicolumn{1}{c|}{\textbf{precision}} \\ \hline
+Explanation & 0.17 vs 0.08 & 0.17 vs 0.08 & 0.00 & 0.10 vs 0.08 & 0.10 vs 0.08 & 0.06 vs 0.05 \\
+\hline
+Example & 0.04 vs 0.02 & 0.04 vs 0.02 & 0.00 & 0.06 vs 0.05 & 0.06 vs 0.05 & 0.00 \\
+\hline
+Counterexample & 0.22 vs 0.10 & 0.22 vs 0.10 & 0.34 vs 0.19 & 0.10 vs 0.08 & 0.10 vs 0.08 & 0.06 vs 0.05 \\
+\hline
+Array/List & 0.23 vs 0.11 & 0.23 vs 0.11 & 0.54 vs 0.29 & 0.00 & 0.00 & 0.01 \\
+\hline
+Tag/Adjacency & 0.06 vs 0.03 & 0.06 vs 0.03 & 0.00 & 0.12 vs 0.10 & 0.12 vs 0.10 & 0.36 vs 0.30 \\
+\hline
+Greedy vs Beam/Contrastive & 4.88 vs 2.21 & 4.88 vs 2.21 & 5.32 vs 2.88 & 8.15 vs 6.53 & 8.15 vs 6.53 & 6.60 vs 5.46 \\
+\hline
+Beam vs Contrastive & 28.89 vs 13.05 & 28.89 vs 13.05 & 30.06 vs 16.27 & 28.63 vs 22.94 & 28.63 vs 22.94 & 33.00 vs 27.28 \\
+\hline
+Beam Width & 0.62 vs 0.28 & 0.62 vs 0.28 & 0.01 vs 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+Contrastive Penalty & 56.04 vs 25.33 & 56.04 vs 25.33 & 56.59 vs 30.62 & 60.49 vs 48.47 & 60.49 vs 48.47 & 57.11 vs 47.22 \\
+\hline
+Explanation\&Example & 0.00 & 0.00 & 0.00 & 0.20 vs 0.16 & 0.20 vs 0.16 & 0.13 vs 0.11 \\
+\hline
+Explanation\&Counterexample & 0.03 vs 0.02 & 0.03 vs 0.02 & 0.09 vs 0.05 & 0.02 & 0.02 & 0.01 \\
+\hline
+Explanation\&Array/List & 0.17 vs 0.08 & 0.17 vs 0.08 & 0.02 vs 0.01 & 0.15 vs 0.12 & 0.15 vs 0.12 & 0.23 vs 0.19 \\
+\hline
+Explanation\&Tag/Adjacency & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.09 vs 0.05 & 0.02 & 0.02 & 0.06 vs 0.05 \\
+\hline
+Explanation\&Greedy vs Beam/Contrastive & 0.04 vs 0.02 & 0.04 vs 0.02 & 0.03 vs 0.02 & 0.03 vs 0.02 & 0.03 vs 0.02 & 0.01 \\
+\hline
+Explanation\&Beam vs Contrastive & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.01 & 0.01 & 0.07 vs 0.06 \\
+\hline
+Explanation\&Beam Width & 0.04 vs 0.02 & 0.04 vs 0.02 & 0.14 vs 0.07 & 0.02 & 0.02 & 0.00 \\
+\hline
+Explanation\&Contrastive Penalty & 0.95 vs 0.43 & 0.95 vs 0.43 & 0.66 vs 0.36 & 0.24 vs 0.19 & 0.24 vs 0.19 & 0.32 vs 0.27 \\
+\hline
+Example\&Counterexample & 1.15 vs 0.52 & 1.15 vs 0.52 & 0.77 vs 0.42 & 0.01 & 0.01 & 0.01 \\
+\hline
+Example\&Array/List & 0.11 vs 0.05 & 0.11 vs 0.05 & 0.02 vs 0.01 & 0.04 vs 0.03 & 0.04 vs 0.03 & 0.06 vs 0.05 \\
+\hline
+Example\&Tag/Adjacency & 0.94 vs 0.42 & 0.94 vs 0.42 & 0.77 vs 0.42 & 0.07 vs 0.05 & 0.07 vs 0.05 & 0.06 vs 0.05 \\
+\hline
+Example\&Greedy vs Beam/Contrastive & 0.03 vs 0.01 & 0.03 vs 0.01 & 0.30 vs 0.16 & 0.01 & 0.01 & 0.00 \\
+\hline
+Example\&Beam vs Contrastive & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.03 vs 0.02 & 0.03 vs 0.02 & 0.00 \\
+\hline
+Example\&Beam Width & 0.59 vs 0.27 & 0.59 vs 0.27 & 0.02 vs 0.01 & 0.05 vs 0.04 & 0.05 vs 0.04 & 0.00 \\
+\hline
+Example\&Contrastive Penalty & 0.10 vs 0.04 & 0.10 vs 0.04 & 0.12 vs 0.07 & 0.24 vs 0.19 & 0.24 vs 0.19 & 0.32 vs 0.27 \\
+\hline
+Counterexample\&Array/List & 0.33 vs 0.15 & 0.33 vs 0.15 & 0.02 vs 0.01 & 0.01 & 0.01 & 0.06 vs 0.05 \\
+\hline
+Counterexample\&Tag/Adjacency & 0.00 & 0.00 & 0.09 vs 0.05 & 0.09 vs 0.07 & 0.09 vs 0.07 & 0.06 vs 0.05 \\
+\hline
+Counterexample\&Greedy vs Beam/Contrastive & 0.01 & 0.01 & 0.07 vs 0.04 & 0.00 & 0.00 & 0.01 \\
+\hline
+Counterexample\&Beam vs Contrastive & 0.15 vs 0.07 & 0.15 vs 0.07 & 0.17 vs 0.09 & 0.02 & 0.02 & 0.07 vs 0.06 \\
+\hline
+Counterexample\&Beam Width & 0.05 vs 0.02 & 0.05 vs 0.02 & 0.01 vs 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+Counterexample\&Contrastive Penalty & 0.17 vs 0.08 & 0.17 vs 0.08 & 0.01 & 0.01 & 0.01 & 0.04 vs 0.03 \\
+\hline
+Array/List\&Tag/Adjacency & 0.24 vs 0.11 & 0.24 vs 0.11 & 0.19 vs 0.10 & 0.02 vs 0.01 & 0.02 vs 0.01 & 0.01 \\
+\hline
+Array/List\&Greedy vs Beam/Contrastive & 0.13 vs 0.06 & 0.13 vs 0.06 & 0.30 vs 0.16 & 0.02 & 0.02 & 0.00 \\
+\hline
+Array/List\&Beam vs Contrastive & 0.71 vs 0.32 & 0.71 vs 0.32 & 0.81 vs 0.44 & 0.00 & 0.00 & 0.02 vs 0.01 \\
+\hline
+Array/List\&Beam Width & 0.02 vs 0.01 & 0.02 vs 0.01 & 0.01 vs 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+Array/List\&Contrastive Penalty & 2.33 vs 1.05 & 2.33 vs 1.05 & 2.26 vs 1.22 & 0.10 vs 0.08 & 0.10 vs 0.08 & 0.14 vs 0.12 \\
+\hline
+Tag/Adjacency\&Greedy vs Beam/Contrastive & 0.04 vs 0.02 & 0.04 vs 0.02 & 0.03 vs 0.02 & 0.26 vs 0.21 & 0.26 vs 0.21 & 0.09 vs 0.07 \\
+\hline
+Tag/Adjacency\&Beam vs Contrastive & 0.37 vs 0.17 & 0.37 vs 0.17 & 0.01 vs 0.00 & 0.46 vs 0.36 & 0.46 vs 0.36 & 0.45 vs 0.37 \\
+\hline
+Tag/Adjacency\&Beam Width & 0.04 vs 0.02 & 0.04 vs 0.02 & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.01 vs 0.00 & 0.00 \\
+\hline
+Tag/Adjacency\&Contrastive Penalty & 0.05 vs 0.02 & 0.05 vs 0.02 & 0.12 vs 0.07 & 0.22 vs 0.18 & 0.22 vs 0.18 & 0.57 vs 0.47 \\
+\hline
+\cellcolor[HTML]{FDE9D9}Error term & 54.81 & 54.81 & 45.89 & 19.86 & 19.86 & 17.32 \\
+\hline
+\end{tabular}
+}
+\label{table:algo1_variance_decomposition}
+\end{adjustwidth}
+\end{table}

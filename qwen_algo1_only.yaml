@@ -13,9 +13,11 @@ runtime:
   context_policy:
     prompt_truncation: forbid
     safety_margin_tokens: 64
-    generation_timeout_seconds: 20
-    resume_pass_mode: throughput
-    retry_timeout_failures_on_resume: false
+    generation_timeout_seconds: 600
+    resume_pass_mode: retry-all
+    retry_timeout_failures_on_resume: true
+    retry_oom_failures_on_resume: true
+    retry_infrastructure_failures_on_resume: true
   max_new_tokens_by_schema:
     edge_list: 256
     vote_list: 64

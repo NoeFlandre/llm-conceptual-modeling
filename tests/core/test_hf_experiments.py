@@ -194,6 +194,94 @@ def test_run_paper_batch_resumes_without_recomputing_finished_runs(
     assert call_count["count"] == first_count
 
 
+def test_run_paper_batch_respects_shard_manifest_and_skips_non_assigned_specs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    executed_specs: list[HFRunSpec] = []
+
+    spec_a = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={"subgraph1": [], "subgraph2": [], "graph": []},
+        runtime_profile=_runtime_profile(),
+    )
+    spec_b = HFRunSpec(
+        algorithm="algo2",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="beam", num_beams=2),
+        replication=1,
+        pair_name="sg2_sg3",
+        condition_bits="000000",
+        condition_label="beam_num_beams_2",
+        prompt_factors={},
+        raw_context={"pair_name": "sg2_sg3", "Repetition": 1},
+        input_payload={"subgraph1": [], "subgraph2": [], "graph": []},
+        runtime_profile=_runtime_profile(),
+    )
+
+    output_root.mkdir(parents=True, exist_ok=True)
+    (output_root / "shard_manifest.json").write_text(
+        json.dumps(
+            {
+                "shard_count": 2,
+                "shard_index": 1,
+                "identities": [
+                    {
+                        "algorithm": spec_b.algorithm,
+                        "model": spec_b.model,
+                        "condition_label": spec_b.condition_label,
+                        "pair_name": spec_b.pair_name,
+                        "condition_bits": spec_b.condition_bits,
+                        "replication": spec_b.replication,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [spec_a, spec_b],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(spec):
+        executed_specs.append(spec)
+        row = {"Recall": 0.0, **spec.raw_context, "Results": "[]"}
+        if spec.algorithm != "algo3":
+            row = _valid_edge_result_row(spec.raw_context)
+        return {
+            "raw_row": row,
+            "runtime": {"thinking_mode_supported": False},
+            "raw_response": "{}",
+        }
+
+    run_paper_batch(
+        output_root=output_root,
+        models=[spec_a.model],
+        embedding_model=spec_a.embedding_model,
+        replications=1,
+        runtime_factory=runtime_factory,
+    )
+
+    assert executed_specs == [spec_b]
+
+
 def test_run_paper_batch_resume_recomputes_partially_finished_run(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -573,6 +661,141 @@ def test_run_paper_batch_resume_can_retry_timeout_failed_run_when_enabled(
     assert state["status"] == "finished"
     assert batch_status["failed_count"] == 0
     assert batch_status["finished_count"] == 1
+
+
+def test_run_paper_batch_resume_keeps_retryable_structural_failure_in_pending_counts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    spec = HFRunSpec(
+        algorithm="algo3",
+        model="mistralai/Ministral-3-8B-Instruct-2512",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="contrastive", penalty_alpha=0.8, top_k=4),
+        replication=0,
+        pair_name="sg3_sg1",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        prompt_factors={},
+        raw_context={"pair_name": "sg3_sg1", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"retry_structural_failures_on_resume": True},
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [spec],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_count["count"] += 1
+        assert actual_spec == spec
+        raise ValueError("Model did not return valid structured output: ```python\\n'A': ['B']\\n```")
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["mistralai/Ministral-3-8B-Instruct-2512"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo3"
+        / "mistralai__Ministral-3-8B-Instruct-2512"
+        / "contrastive_penalty_alpha_0.8"
+        / "sg3_sg1"
+        / "00000"
+        / "rep_00"
+    )
+    state = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+
+    assert call_count["count"] == 1
+    assert state["status"] == "failed"
+    assert batch_status["failed_count"] == 0
+    assert batch_status["pending_count"] == 1
+    assert batch_status["failure_count"] == 0
+    assert batch_status["failures"] == []
+
+
+def test_run_paper_batch_resume_keeps_qwen_dynamic_cache_failure_in_pending_counts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_root = tmp_path / "runs"
+    call_count = {"count": 0}
+
+    spec = HFRunSpec(
+        algorithm="algo3",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="contrastive", penalty_alpha=0.8, top_k=4),
+        replication=0,
+        pair_name="subgraph_2_to_subgraph_3",
+        condition_bits="0011",
+        condition_label="contrastive_penalty_alpha_0.8",
+        prompt_factors={},
+        raw_context={"pair_name": "subgraph_2_to_subgraph_3", "Repetition": 0},
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={"retry_structural_failures_on_resume": True},
+    )
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs",
+        lambda **_: [spec],
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.write_aggregated_outputs",
+        lambda output_root, summary_frame: (output_root, summary_frame),
+    )
+
+    def runtime_factory(actual_spec):
+        call_count["count"] += 1
+        assert actual_spec == spec
+        raise RuntimeError(
+            "ValueError: Unsupported cache type: "
+            "<class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. "
+            "Contrastive search requires dynamic cache, so set "
+            "`cache_implementation='dynamic'` in the generation config."
+        )
+
+    run_paper_batch(
+        output_root=output_root,
+        models=["Qwen/Qwen3.5-9B"],
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        replications=1,
+        runtime_factory=runtime_factory,
+        resume=True,
+    )
+
+    batch_status = json.loads((output_root / "batch_status.json").read_text(encoding="utf-8"))
+
+    assert call_count["count"] == 1
+    assert batch_status["failed_count"] == 0
+    assert batch_status["pending_count"] == 1
+    assert batch_status["failure_count"] == 0
+    assert batch_status["failures"] == []
 
 
 def test_run_paper_batch_resume_prioritizes_low_timeout_risk_pairs(
@@ -1141,6 +1364,90 @@ def test_run_single_spec_persistent_mode_uses_session(
     assert served_pairs == ["sg1_sg2"]
 
 
+def test_run_local_hf_spec_closes_incompatible_persistent_sessions_before_starting_new_model(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from llm_conceptual_modeling.hf_experiments import _run_local_hf_spec
+
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={
+            "pair_name": "sg1_sg2",
+            "Repetition": 0,
+            "Explanation": -1,
+            "Example": -1,
+            "Counterexample": -1,
+            "Array/List(1/-1)": -1,
+            "Tag/Adjacency(1/-1)": -1,
+        },
+        input_payload={
+            "subgraph1": [("alpha", "beta")],
+            "subgraph2": [("gamma", "delta")],
+            "graph": [("alpha", "gamma")],
+        },
+        runtime_profile=_runtime_profile(),
+        context_policy={
+            "generation_timeout_seconds": 20,
+            "worker_process_mode": "persistent",
+        },
+    )
+    closed_sessions: list[str] = []
+    served_pairs: list[str] = []
+
+    class ExistingSession:
+        def close(self) -> None:
+            closed_sessions.append("qwen")
+
+    class FakeSession:
+        def __init__(
+            self,
+            *,
+            queue_dir: Path,
+            worker_python: str,
+            env=None,
+            max_requests_per_process: int | None = None,
+        ) -> None:
+            _ = env
+            _ = (queue_dir, worker_python, max_requests_per_process)
+
+        def run_spec(self, *, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
+            _ = run_dir
+            served_pairs.append(spec.pair_name)
+            return {
+                "raw_row": _valid_edge_result_row(spec.raw_context),
+                "runtime": {"thinking_mode_supported": False},
+                "raw_response": "{}",
+            }
+
+        def close(self) -> None:
+            return None
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_experiments.PersistentHFWorkerSession",
+        FakeSession,
+    )
+
+    result = _run_local_hf_spec(
+        spec=spec,
+        run_dir=tmp_path / "run",
+        output_root=tmp_path / "smoke",
+        persistent_sessions={"Qwen/Qwen3.5-9B": ExistingSession()},
+    )
+
+    assert result["raw_row"]["pair_name"] == "sg1_sg2"
+    assert served_pairs == ["sg1_sg2"]
+    assert closed_sessions == ["qwen"]
+
+
 def test_run_paper_batch_writes_batch_summary_csv(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -1464,6 +1771,69 @@ def test_collect_batch_status_reconstructs_health_from_run_tree(tmp_path: Path) 
     assert status["running_count"] == 1
     assert status["pending_count"] == 1
     assert status["failure_count"] == 1
+    assert status["percent_complete"] == 25.0
+    assert status["current_run"]["algorithm"] == "algo3"
+    assert status["last_completed_run"]["algorithm"] == "algo1"
+
+
+def test_collect_batch_status_requeues_retryable_failures_as_pending(tmp_path: Path) -> None:
+    output_root = tmp_path / "results"
+    finished_dir = (
+        output_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    )
+    retryable_failed_dir = (
+        output_root / "runs" / "algo2" / "model" / "greedy" / "sg1_sg2" / "000000" / "rep_00"
+    )
+    running_dir = (
+        output_root
+        / "runs"
+        / "algo3"
+        / "model"
+        / "greedy"
+        / "subgraph_1_to_subgraph_3"
+        / "0000"
+        / "rep_00"
+    )
+    pending_dir = (
+        output_root / "runs" / "algo1" / "model" / "greedy" / "sg2_sg3" / "00000" / "rep_00"
+    )
+    for directory in [finished_dir, retryable_failed_dir, running_dir, pending_dir]:
+        directory.mkdir(parents=True, exist_ok=True)
+    (finished_dir / "state.json").write_text('{"status": "finished"}', encoding="utf-8")
+    (finished_dir / "summary.json").write_text('{"status": "finished"}', encoding="utf-8")
+    (retryable_failed_dir / "state.json").write_text('{"status": "failed"}', encoding="utf-8")
+    (retryable_failed_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "MonitoredCommandTimeout",
+                "message": "Monitored command exceeded stage timeout of 20.0 seconds.",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (running_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (output_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "total_runs": 4,
+                "current_run": {"algorithm": "algo3", "pair_name": "subgraph_1_to_subgraph_3"},
+                "last_completed_run": {"algorithm": "algo1", "pair_name": "sg1_sg2"},
+                "started_at": "2026-03-31T00:00:00+00:00",
+                "updated_at": "2026-03-31T00:01:00+00:00",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["total_runs"] == 4
+    assert status["finished_count"] == 1
+    assert status["failed_count"] == 0
+    assert status["running_count"] == 1
+    assert status["pending_count"] == 2
+    assert status["failure_count"] == 0
+    assert status["failures"] == []
     assert status["percent_complete"] == 25.0
     assert status["current_run"]["algorithm"] == "algo3"
     assert status["last_completed_run"]["algorithm"] == "algo1"

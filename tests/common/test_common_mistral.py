@@ -204,6 +204,29 @@ def test_normalize_structured_response_rejects_odd_flat_edge_string_list() -> No
         )
 
 
+def test_normalize_structured_response_recovers_odd_flat_edge_list_with_noisy_tail() -> None:
+    actual = _normalize_structured_response(
+        [
+            "Prevalence of walking trails",
+            "Physical well-being",
+            "Appetite",
+            "Stress",
+            "resil,0,0,0,0",
+        ],
+        schema_name="edge_list",
+    )
+
+    assert actual == {
+        "edges": [
+            {
+                "source": "Prevalence of walking trails",
+                "target": "Physical well-being",
+            },
+            {"source": "Appetite", "target": "Stress"},
+        ]
+    }
+
+
 def test_mistral_chat_client_normalizes_list_edge_response() -> None:
     class FakeChat:
         def complete(self, **kwargs: object) -> SimpleNamespace:

@@ -8,12 +8,25 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
+from llm_conceptual_modeling.hf_active_models import resolve_active_chat_model_slugs
+from llm_conceptual_modeling.hf_failure_markers import classify_failure
+from llm_conceptual_modeling.hf_shard_manifest import manifest_identity_keys
+
+_RETRYABLE_FAILURE_KINDS = {"timeout", "oom", "infrastructure", "structural"}
 
 
 def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     output_root_path = Path(output_root)
     runs_root = output_root_path / "runs"
-    run_dirs = sorted(_iter_run_directories(runs_root))
+    active_model_slugs = resolve_active_chat_model_slugs(output_root_path)
+    manifest_identities = _load_manifest_identity_keys(output_root_path / "shard_manifest.json")
+    run_dirs = sorted(
+        _iter_run_directories(
+            runs_root,
+            active_model_slugs=active_model_slugs,
+            manifest_identities=manifest_identities,
+        )
+    )
 
     finished_count = 0
     failed_count = 0
@@ -29,8 +42,15 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
             finished_count += 1
             continue
         if status == "failed":
-            failed_count += 1
             error = _read_json(run_dir / "error.json")
+            failure_kind = classify_failure(
+                error_type=str(error.get("type", "")),
+                message=str(error.get("message", "")),
+            )
+            if failure_kind in _RETRYABLE_FAILURE_KINDS:
+                pending_count += 1
+                continue
+            failed_count += 1
             failures.append(
                 {
                     "run_dir": str(run_dir),
@@ -49,6 +69,8 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     if total_runs == 0:
         status_file = _read_json(output_root_path / "batch_status.json")
         total_runs = coerce_int(status_file.get("total_runs", 0))
+    if manifest_identities:
+        total_runs = len(manifest_identities)
 
     status_file = _read_json(output_root_path / "batch_status.json")
     pending_count = max(total_runs - finished_count - failed_count - running_count, pending_count)
@@ -100,18 +122,65 @@ def current_run_payload(
     }
 
 
-def _iter_run_directories(runs_root: Path) -> list[Path]:
+def _iter_run_directories(
+    runs_root: Path,
+    *,
+    active_model_slugs: set[str],
+    manifest_identities: set[tuple[str, str, str, str, str, int]],
+) -> list[Path]:
     if not runs_root.exists():
         return []
     return [
         path
         for path in runs_root.rglob("rep_*")
         if path.is_dir()
+        and _run_dir_matches_active_models(runs_root, path, active_model_slugs)
+        and _run_dir_matches_manifest(runs_root, path, manifest_identities)
     ]
 
 
 def _read_json(path: Path) -> dict[str, Any]:
     return read_json_dict(path)
+
+
+def _run_dir_matches_active_models(
+    runs_root: Path,
+    run_dir: Path,
+    active_model_slugs: set[str],
+) -> bool:
+    if not active_model_slugs:
+        return True
+    try:
+        model_slug = run_dir.resolve().relative_to(runs_root.resolve()).parts[1]
+    except Exception:
+        return True
+    return model_slug in active_model_slugs
+
+
+def _run_dir_matches_manifest(
+    runs_root: Path,
+    run_dir: Path,
+    manifest_identities: set[tuple[str, str, str, str, str, int]],
+) -> bool:
+    if not manifest_identities:
+        return True
+    try:
+        parts = run_dir.resolve().relative_to(runs_root.resolve()).parts
+        identity = (
+            parts[0],
+            parts[1].replace("__", "/"),
+            parts[2],
+            parts[3],
+            parts[4],
+            int(parts[5].removeprefix("rep_")),
+        )
+    except Exception:
+        return False
+    return identity in manifest_identities
+
+
+def _load_manifest_identity_keys(manifest_path: Path) -> set[tuple[str, str, str, str, str, int]]:
+    return manifest_identity_keys(read_json_dict(manifest_path))
 
 
 def _collect_active_run_details(run_dir: Path) -> dict[str, object]:

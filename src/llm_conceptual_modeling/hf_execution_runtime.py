@@ -127,6 +127,10 @@ def run_local_hf_spec(
     output_root: Path,
     persistent_sessions: dict[str, PersistentHFWorkerSession],
 ) -> RuntimeResult:
+    _close_incompatible_persistent_sessions(
+        spec=spec,
+        persistent_sessions=persistent_sessions,
+    )
     if resolve_worker_process_mode(spec.context_policy) != "persistent":
         return run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
     session = persistent_sessions.get(spec.model)
@@ -213,3 +217,20 @@ def _is_retryable_missing_result_artifact(*, stdout: str | None, stderr: str | N
 
 def coerce_timeout_seconds(raw_value: object) -> float:
     return _worker_policy_coerce_timeout_seconds(raw_value)
+
+
+def _close_incompatible_persistent_sessions(
+    *,
+    spec: HFRunSpec,
+    persistent_sessions: dict[str, PersistentHFWorkerSession],
+) -> None:
+    if not persistent_sessions:
+        return
+    model_names_to_close = [
+        model_name
+        for model_name in persistent_sessions
+        if model_name != spec.model
+    ]
+    for model_name in model_names_to_close:
+        session = persistent_sessions.pop(model_name)
+        session.close()

@@ -15,7 +15,8 @@ runtime:
   context_policy:
     prompt_truncation: forbid
     safety_margin_tokens: 64
-    generation_timeout_seconds: 600
+    generation_timeout_seconds: 60
+    retry_structural_failures_on_resume: true
     worker_process_mode: persistent
     max_requests_per_worker_process: 16
   max_new_tokens_by_schema:

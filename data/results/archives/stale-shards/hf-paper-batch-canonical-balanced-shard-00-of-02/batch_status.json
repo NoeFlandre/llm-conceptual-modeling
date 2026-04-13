@@ -1,0 +1,239 @@
+{
+  "current_run": {
+    "algorithm": "algo1",
+    "condition_bits": "11010",
+    "decoding_algorithm": "beam",
+    "model": "Qwen/Qwen3.5-9B",
+    "pair_name": "sg3_sg1",
+    "replication": 0
+  },
+  "failed_count": 30,
+  "failure_count": 30,
+  "failures": [
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Quality of the sport infrastructure', 'Quality of the sport infrastructure', 'Marketing of healthy foods', 'Marketing of healthy foods', 'Marketing of healthy foods, 'Public support for healthy products', 'Marketing of unhealthy foods', 'Restrictive covenants', 'Marketing of healthy foods']",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo1/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/11011/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: ['Prevalence of green fields, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/100111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/101111/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/110110/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111110/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Structured edge_list flat string response must contain an even number of items",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg1_sg2/111111/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_01",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000010/rep_03",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_00",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_02",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "structural",
+      "message": "ValueError: Model did not return valid structured output: A, D",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/000011/rep_04",
+      "type": "RuntimeError"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_01",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001010/rep_03",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_00",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_02",
+      "type": "MonitoredCommandTimeout"
+    },
+    {
+      "deferred_on_resume": true,
+      "failure_kind": "timeout",
+      "message": "Monitored command exceeded stage timeout of 45.0 seconds.",
+      "run_dir": "/workspace/results/hf-paper-batch-canonical-balanced-shard-00-of-02/runs/algo2/allenai__Olmo-3-7B-Instruct/greedy/sg2_sg3/001011/rep_04",
+      "type": "MonitoredCommandTimeout"
+    }
+  ],
+  "finished_count": 222,
+  "last_completed_run": {
+    "algorithm": "algo2",
+    "condition_bits": "110011",
+    "decoding_algorithm": "beam",
+    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+    "pair_name": "sg3_sg1",
+    "replication": 4
+  },
+  "pending_count": 4499,
+  "percent_complete": 4.67,
+  "running_count": 1,
+  "started_at": "2026-04-08T03:10:50.214998+00:00",
+  "total_runs": 4751,
+  "updated_at": "2026-04-08T06:11:26.539098+00:00"
+}

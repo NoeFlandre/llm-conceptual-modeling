@@ -1,0 +1,19 @@
+[remote_resume_launch] starting supervised resume loop
+[remote_resume_launch] pending_count=30
+[remote_resume_launch] pending_count=25
+[remote_resume_launch] pending_count=19
+[remote_resume_launch] pending_count=10
+[remote_resume_launch] pending_count=10
+[remote_resume_launch] pending_count=10
+[remote_resume_launch] pending_count=10
+[remote_resume_launch] pending_count=10
+[remote_resume_launch] pending_count=10
+[remote_resume_launch] starting supervised resume loop
+Traceback (most recent call last):
+  File "/workspace/llm-conceptual-modeling/.venv/bin/lcm", line 4, in <module>
+    from llm_conceptual_modeling.cli import run
+ModuleNotFoundError: No module named 'llm_conceptual_modeling'
+[remote_resume_launch] starting supervised resume loop
+[remote_resume_launch] starting supervised resume loop
+[remote_resume_launch] starting supervised resume loop
+[remote_resume_launch] starting supervised resume loop

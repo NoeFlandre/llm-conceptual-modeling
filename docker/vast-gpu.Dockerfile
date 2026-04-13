@@ -1,8 +1,8 @@
-FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime
+FROM pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    HF_HUB_DISABLE_XET=1 \
+    HF_HUB_DISABLE_XET=0 \
     HF_HUB_ENABLE_HF_TRANSFER=0
 
 WORKDIR /workspace/llm-conceptual-modeling

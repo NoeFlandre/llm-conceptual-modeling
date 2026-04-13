@@ -1,0 +1,1013 @@
+{
+  "active_chat_models": [
+    "Qwen/Qwen3.5-9B",
+    "mistralai/Ministral-3-8B-Instruct-2512"
+  ],
+  "generated_at": "2026-04-11T17:50:28.076897+00:00",
+  "identities": [
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "10100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "10100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "10100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "10100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "10100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg1_sg2",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "00010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "01000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "01000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "01000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "01000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "11001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "11001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo1",
+      "condition_bits": "11001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "010011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100100",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "100101",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "110001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg2_sg3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "000111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "001011",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo2",
+      "condition_bits": "101001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "sg3_sg1",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0000",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "1111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "1111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "Qwen/Qwen3.5-9B",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0001",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0010",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 0
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "1111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 3
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "1111",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_1_to_subgraph_3",
+      "replication": 4
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_2_to_subgraph_1",
+      "replication": 1
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_2_to_subgraph_1",
+      "replication": 2
+    },
+    {
+      "algorithm": "algo3",
+      "condition_bits": "0110",
+      "condition_label": "contrastive_penalty_alpha_0.8",
+      "model": "mistralai/Ministral-3-8B-Instruct-2512",
+      "pair_name": "subgraph_2_to_subgraph_1",
+      "replication": 3
+    }
+  ],
+  "ledger_root": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical",
+  "results_root": "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical",
+  "shard_count": 1,
+  "shard_index": 0
+}
