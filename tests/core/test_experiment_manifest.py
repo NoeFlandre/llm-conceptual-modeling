@@ -24,6 +24,11 @@ class TestParseManifest:
     - output_dir, repetitions (int), timestamp, condition_bits, pair_name
     """
 
+    def test_parse_manifest_is_implemented_in_the_common_package(self) -> None:
+        from llm_conceptual_modeling.experiment_manifest import parse_manifest
+
+        assert parse_manifest.__module__ == "llm_conceptual_modeling.common.experiment_manifest"
+
     def test_parse_manifest_loads_valid_yaml(self, tmp_path: Path) -> None:
         """parse_manifest() returns an ExperimentManifest when given a valid YAML file."""
         from llm_conceptual_modeling.experiment_manifest import parse_manifest
