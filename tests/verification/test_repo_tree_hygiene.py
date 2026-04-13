@@ -123,6 +123,7 @@ def test_docs_directory_keeps_only_maintained_guides() -> None:
         "algo3-method3-guide.md",
         "huggingface-dataset-README.md",
         "onboarding.md",
+        "tech-debt-day-guide.md",
         "variance-decomposition.md",
         "vast-ai-transformers.md",
     }

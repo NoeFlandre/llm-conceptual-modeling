@@ -6,6 +6,7 @@ the repository.
 ## Keep
 
 - `onboarding.md`
+- `tech-debt-day-guide.md`
 - `architecture.md`
 - `variance-decomposition.md`
 - `vast-ai-transformers.md`

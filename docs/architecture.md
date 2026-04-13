@@ -21,9 +21,12 @@ The codebase is organized around three requirements:
 - `data/inputs`
   Input graph files referenced by the generation-manifest layer.
   The canonical copy is published in the Hugging Face bucket.
-- `data/results`
-  Imported primary experiment outputs organized by algorithm and model.
-  The canonical copy is published in the Hugging Face bucket.
+- `data/results/frontier`
+  Imported frontier-model experiment outputs grouped by algorithm.
+- `data/results/open_weights`
+  Canonical paper-facing Qwen/Mistral outputs and variance-decomposition artifacts.
+- `data/results/archives`
+  Preserved OLMO artifacts and operational workdirs retained for provenance.
 - `data/analysis_artifacts`
   Reproducible audit artifacts derived from `data/results` for revision support.
   The canonical copy is published in the Hugging Face bucket.

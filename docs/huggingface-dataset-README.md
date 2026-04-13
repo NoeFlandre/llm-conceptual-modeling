@@ -5,7 +5,9 @@ This Hugging Face bucket stores the large offline artifacts for the `llm-concept
 - `inputs/`
   Original causal-map source files and auxiliary lexical resources used by the offline pipeline.
 - `results/`
-  Imported experiment outputs organized by algorithm and model.
+  Imported experiment outputs organized by algorithm and model. In the local
+  code checkout, these are partitioned into `data/results/frontier`,
+  `data/results/open_weights`, and `data/results/archives`.
 - `analysis_artifacts/`
   Reviewer-facing derived artifacts generated from the imported corpus.
 
