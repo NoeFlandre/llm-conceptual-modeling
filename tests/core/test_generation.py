@@ -2,6 +2,14 @@ import json
 from pathlib import Path
 
 from llm_conceptual_modeling.cli import main
+from llm_conceptual_modeling.generation import build_generation_stub_payload
+
+
+def test_generation_stub_payload_is_implemented_in_the_commands_package() -> None:
+    assert (
+        build_generation_stub_payload.__module__
+        == "llm_conceptual_modeling.commands.generation"
+    )
 
 
 def test_cli_generate_algo1_stub_returns_structured_not_implemented_payload(capsys) -> None:
