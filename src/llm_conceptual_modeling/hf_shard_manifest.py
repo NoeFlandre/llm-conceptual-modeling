@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
-from llm_conceptual_modeling.hf_active_models import resolve_active_chat_models
+from llm_conceptual_modeling.hf_state.active_models import resolve_active_chat_models
 
 
 def write_unfinished_shard_manifest(

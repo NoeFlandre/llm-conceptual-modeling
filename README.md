@@ -351,6 +351,8 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
   Algorithm-specific workflows.
 - `src/llm_conceptual_modeling/common`
   Shared evaluation, factorial-analysis, graph, parsing, and schema logic.
+- `src/llm_conceptual_modeling/hf_state`
+  Canonical batch-state helpers for active model discovery, shard-manifest generation, and ledger refresh.
 - `src/llm_conceptual_modeling/commands`
   CLI handlers.
 - `src/llm_conceptual_modeling/analysis`
