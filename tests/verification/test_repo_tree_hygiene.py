@@ -1,25 +1,33 @@
 from pathlib import Path
+from subprocess import run
 
 from llm_conceptual_modeling.paths import REPO_ROOT
 
 
-def test_repo_tree_has_no_ds_store_files_in_source_buckets() -> None:
-    junk_roots = [
-        REPO_ROOT / "src",
-        REPO_ROOT / "scripts",
-        REPO_ROOT / "docs",
-        REPO_ROOT / "tests",
-        REPO_ROOT / "paper",
-        REPO_ROOT / "data",
-        REPO_ROOT / "tmp",
+def test_repo_tree_has_no_tracked_ds_store_files_in_source_buckets() -> None:
+    tracked_roots = [
+        "src",
+        "scripts",
+        "docs",
+        "tests",
+        "paper",
+        "data",
+        "tmp",
     ]
 
-    junk_paths: list[Path] = []
-    for root in junk_roots:
-        if root.exists():
-            junk_paths.extend(root.rglob(".DS_Store"))
+    completed = run(
+        ["git", "-C", str(REPO_ROOT), "ls-files", "--", *tracked_roots],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    tracked_paths = [
+        Path(line)
+        for line in completed.stdout.splitlines()
+        if line.endswith(".DS_Store")
+    ]
 
-    assert junk_paths == []
+    assert tracked_paths == []
 
 
 def test_root_level_one_off_helper_scripts_are_removed() -> None:

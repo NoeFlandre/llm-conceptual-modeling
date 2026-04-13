@@ -188,6 +188,8 @@ top-level `results/` folder free of scratch-only clutter.
 The source tree itself should also stay free of Finder junk (`.DS_Store`) and other ad hoc
 temporary artifacts; keep scratch work isolated under `tmp/` or a throwaway worktree instead of
 committing it into the repo layout.
+On macOS, Finder may recreate local `.DS_Store` files transiently; the hygiene test guards against
+tracked occurrences in the maintained source buckets.
 One-off helper scripts should also stay out of the repo root unless they are part of the
 documented CLI or `scripts/` surface.
 Accidental copied worktrees or SSH-named mirror directories belong outside the repository root,
