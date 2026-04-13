@@ -1,3 +1,40 @@
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeFactory, RuntimeResult
+from __future__ import annotations
 
-__all__ = ["HFRunSpec", "RuntimeFactory", "RuntimeResult"]
+from dataclasses import dataclass
+from typing import Any, Callable
+
+from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
+
+Edge = tuple[str, str]
+RuntimeResult = dict[str, Any]
+
+
+@dataclass(frozen=True)
+class HFRunSpec:
+    algorithm: str
+    model: str
+    embedding_model: str
+    decoding: DecodingConfig
+    replication: int
+    pair_name: str
+    condition_bits: str
+    condition_label: str
+    prompt_factors: dict[str, bool | int]
+    raw_context: dict[str, object]
+    input_payload: dict[str, object]
+    runtime_profile: RuntimeProfile
+    prompt_bundle: dict[str, str] | None = None
+    max_new_tokens_by_schema: dict[str, int] | None = None
+    context_policy: dict[str, object] | None = None
+    base_seed: int = 0
+    seed: int = 0
+
+    @property
+    def run_name(self) -> str:
+        return (
+            f"{self.algorithm}_{self.pair_name}_rep"
+            f"{self.replication:02d}_cond{self.condition_bits}"
+        )
+
+
+RuntimeFactory = Callable[[HFRunSpec], RuntimeResult]

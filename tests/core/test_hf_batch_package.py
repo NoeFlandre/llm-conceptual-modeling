@@ -37,3 +37,7 @@ def test_hf_batch_prompts_is_implemented_in_the_package_module() -> None:
 
 def test_hf_batch_utils_is_implemented_in_the_package_module() -> None:
     assert runtime_details.__module__ == "llm_conceptual_modeling.hf_batch.utils"
+
+
+def test_hf_batch_types_is_implemented_in_the_package_module() -> None:
+    assert HFRunSpec.__module__ == "llm_conceptual_modeling.hf_batch.types"
