@@ -1,4 +1,4 @@
-from llm_conceptual_modeling.verification_cases import build_legacy_parity_cases
+from llm_conceptual_modeling.verification.cases import build_legacy_parity_cases
 
 
 def test_build_legacy_parity_cases_covers_all_verified_workflows() -> None:

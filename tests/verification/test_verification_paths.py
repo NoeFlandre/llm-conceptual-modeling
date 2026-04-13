@@ -3,7 +3,11 @@
 from pathlib import Path
 
 VER_FILE = (
-    Path(__file__).resolve().parents[2] / "src" / "llm_conceptual_modeling" / "verification.py"
+    Path(__file__).resolve().parents[2]
+    / "src"
+    / "llm_conceptual_modeling"
+    / "verification"
+    / "doctor.py"
 )
 
 FIXTURES_ROOT = Path(__file__).resolve().parents[2] / "tests" / "reference_fixtures" / "legacy"
@@ -28,7 +32,7 @@ FACTORIAL_FIXTURES = [
 
 
 def test_no_double_csv_extension_in_verification_source():
-    """Regression: ensure verification.py has no .csv.csv paths."""
+    """Regression: ensure verification doctor code has no .csv.csv paths."""
     content = VER_FILE.read_text()
     bad_lines = [line.strip() for line in content.splitlines() if ".csv.csv" in line]
     assert len(bad_lines) == 0, f"Found .csv.csv: {bad_lines}"

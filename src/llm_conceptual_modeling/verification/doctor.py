@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import cast
 
 import pandas as pd
 
@@ -22,7 +23,7 @@ from llm_conceptual_modeling.algo3.generation import (
 )
 from llm_conceptual_modeling.common.types import VerificationResult
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
-from llm_conceptual_modeling.verification_cases import (
+from llm_conceptual_modeling.verification.cases import (
     FIXTURES_ROOT,
     build_legacy_parity_cases,
     run_verification_case,
@@ -97,9 +98,9 @@ def _build_manifest_checks() -> list[dict[str, object]]:
     algo1_manifest: dict[str, object] = build_algo1_manifest(fixture_only=False)
     algo2_manifest: dict[str, object] = build_algo2_manifest(fixture_only=False)
     algo3_manifest: dict[str, object] = build_algo3_manifest(fixture_only=False)
-    mc1 = cast(dict[str, object], algo1_manifest.get("method_contract") or {})
-    mc2 = cast(dict[str, object], algo2_manifest.get("method_contract") or {})
-    mc3 = cast(dict[str, object], algo3_manifest.get("method_contract") or {})
+    mc1 = algo1_manifest.get("method_contract") or {}
+    mc2 = algo2_manifest.get("method_contract") or {}
+    mc3 = algo3_manifest.get("method_contract") or {}
     algo1_method_contract: dict[str, object] = mc1
     algo2_method_contract: dict[str, object] = mc2
     algo3_method_contract: dict[str, object] = mc3
@@ -158,7 +159,7 @@ def _build_manifest_checks() -> list[dict[str, object]]:
         ),
         _check(
             "algo2_thesaurus",
-            Path(cast(str, algo2_method_contract["thesaurus_path"])).exists(),
+            Path(str(algo2_method_contract["thesaurus_path"])).exists(),
             {
                 "path": algo2_method_contract["thesaurus_path"],
                 "synonym_entry_count": algo2_method_contract["synonym_entry_count"],

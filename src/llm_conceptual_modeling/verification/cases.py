@@ -13,7 +13,7 @@ from llm_conceptual_modeling.algo2.factorial import run_factorial_analysis as fa
 from llm_conceptual_modeling.algo3.evaluation import evaluate_results_file as eval_algo3
 from llm_conceptual_modeling.algo3.factorial import run_factorial_analysis as factorial_algo3
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 FIXTURES_ROOT = REPO_ROOT / "tests" / "reference_fixtures" / "legacy"
 
 

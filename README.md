@@ -357,6 +357,10 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
   Canonical batch-state helpers for active model discovery, shard-manifest generation, and ledger refresh.
 - `src/llm_conceptual_modeling/hf_drain`
   Drain planning and runtime supervisor logic for the remaining-results sweep.
+- `src/llm_conceptual_modeling/hf_execution`
+  Local worker execution helpers, subprocess fallback, and persistent-session orchestration.
+- `src/llm_conceptual_modeling/verification`
+  Doctor, legacy-parity, and repository verification logic.
 - `src/llm_conceptual_modeling/commands`
   CLI handlers.
 - `src/llm_conceptual_modeling/analysis`
