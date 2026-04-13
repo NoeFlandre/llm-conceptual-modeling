@@ -1,6 +1,6 @@
 import json
-from dataclasses import replace
 from collections.abc import Iterator, Mapping
+from dataclasses import replace
 from pathlib import Path
 from typing import cast
 
@@ -576,7 +576,16 @@ def test_load_deferred_failed_summary_retries_structural_failures_when_enabled(
 def test_load_deferred_failed_summary_retries_qwen_dynamic_cache_contrastive_failure(
     tmp_path: Path,
 ) -> None:
-    run_dir = tmp_path / "runs" / "algo3" / "Qwen__Qwen3.5-9B" / "contrastive_penalty_alpha_0.8" / "sg1_sg2" / "0000" / "rep_00"
+    run_dir = (
+        tmp_path
+        / "runs"
+        / "algo3"
+        / "Qwen__Qwen3.5-9B"
+        / "contrastive_penalty_alpha_0.8"
+        / "sg1_sg2"
+        / "0000"
+        / "rep_00"
+    )
     run_dir.mkdir(parents=True)
     (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
     (run_dir / "error.json").write_text(

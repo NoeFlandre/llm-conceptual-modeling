@@ -268,7 +268,10 @@ def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
     )
     assert worker_wait in script_text
     assert "find \"$REMOTE_RESULTS_DIR/worker-queues\" -type f" in script_text
-    assert "-name '*.request.json' -o -name '*.claimed.json' -o -name '*.result.json'" in script_text
+    assert (
+        "-name '*.request.json' -o -name '*.claimed.json' -o -name '*.result.json'"
+        in script_text
+    )
 
 
 def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
@@ -306,7 +309,8 @@ def test_vast_remote_script_path_translates_local_repo_paths() -> None:
             "-lc",
             (
                 f"source {common_script!s} && "
-                f"vast_remote_script_path {local_candidate!s} {local_repo_dir!s} {remote_repo_dir!s}"
+                "vast_remote_script_path "
+                f"{local_candidate!s} {local_repo_dir!s} {remote_repo_dir!s}"
             ),
         ],
         check=True,
