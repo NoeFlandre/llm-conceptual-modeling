@@ -350,7 +350,7 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
 - `src/llm_conceptual_modeling/algo1`, `algo2`, `algo3`
   Algorithm-specific workflows.
 - `src/llm_conceptual_modeling/common`
-  Shared evaluation, factorial-analysis, graph, parsing, and schema logic.
+  Shared evaluation, factorial-analysis, graph, parsing, path, and schema logic.
 - `src/llm_conceptual_modeling/hf_pipeline`
   Algorithm execution, shared result metrics, and worker-ready helpers used by the legacy `hf_experiments.py` facade.
 - `src/llm_conceptual_modeling/hf_batch`
