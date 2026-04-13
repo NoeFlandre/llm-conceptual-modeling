@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 from collections.abc import Iterator, Mapping
 from pathlib import Path
 from typing import cast
@@ -30,6 +31,7 @@ def _runtime_profile() -> RuntimeProfile:
 
 def _make_spec(
     *,
+    algorithm: str = "algo1",
     pair_name: str,
     condition_bits: str,
     replication: int = 0,
@@ -41,7 +43,7 @@ def _make_spec(
         context_policy or {"resume_pass_mode": "throughput"}
     )
     return HFRunSpec(
-        algorithm="algo1",
+        algorithm=algorithm,
         model="allenai/Olmo-3-7B-Instruct",
         embedding_model="Qwen/Qwen3-Embedding-0.6B",
         pair_name=pair_name,
@@ -418,6 +420,19 @@ def test_classify_failure_payload_detects_unsupported_decoding_failure() -> None
     assert classify_failure_payload(error) == "unsupported"
 
 
+def test_classify_failure_payload_treats_contrastive_generate_trust_remote_code_error_as_structural(
+) -> None:
+    error = {
+        "type": "RuntimeError",
+        "message": (
+            "ValueError: Contrastive Search requires `trust_remote_code=True` in your "
+            "`generate` call, since it loads https://hf.co/transformers-community/contrastive-search."
+        ),
+    }
+
+    assert classify_failure_payload(error) == "structural"
+
+
 def test_load_deferred_failed_summary_retries_qwen_contrastive_stateful_failure(
     tmp_path: Path,
 ) -> None:
@@ -544,6 +559,35 @@ def test_load_deferred_failed_summary_retries_structural_failures_when_enabled(
                 "message": (
                     "ValueError: Structured edge_list flat string response must contain "
                     "an even number of items"
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    deferred = load_deferred_failed_summary(
+        run_dir=run_dir,
+        context_policy={"retry_structural_failures_on_resume": True},
+    )
+
+    assert deferred is None
+
+
+def test_load_deferred_failed_summary_retries_qwen_dynamic_cache_contrastive_failure(
+    tmp_path: Path,
+) -> None:
+    run_dir = tmp_path / "runs" / "algo3" / "Qwen__Qwen3.5-9B" / "contrastive_penalty_alpha_0.8" / "sg1_sg2" / "0000" / "rep_00"
+    run_dir.mkdir(parents=True)
+    (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (run_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "RuntimeError",
+                "message": (
+                    "ValueError: Unsupported cache type: "
+                    "<class 'transformers.models.qwen3_5.modeling_qwen3_5.Qwen3_5DynamicCache'>. "
+                    "Contrastive search requires dynamic cache, so set "
+                    "`cache_implementation='dynamic'` in the generation config."
                 ),
             }
         ),
@@ -733,6 +777,205 @@ def test_order_planned_specs_for_resume_does_not_penalize_clean_decoding_family(
     assert ordered == [clean_greedy_pending, poisoned_beam_pending]
 
 
+def test_order_planned_specs_for_resume_prioritizes_cheaper_algorithm_when_risk_matches(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    faster_algo_pending = _make_spec(
+        algorithm="algo1",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        decoding_algorithm="contrastive",
+    )
+    slower_algo_pending = _make_spec(
+        algorithm="algo3",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        decoding_algorithm="contrastive",
+    )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[slower_algo_pending, faster_algo_pending],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [faster_algo_pending, slower_algo_pending]
+
+
+def test_order_planned_specs_for_resume_prioritizes_cheaper_algorithm_before_history_rates(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    faster_algo_spec = _make_spec(
+        algorithm="algo1",
+        pair_name="zz_fast",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        decoding_algorithm="contrastive",
+    )
+    slower_algo_spec = _make_spec(
+        algorithm="algo3",
+        pair_name="aa_slow",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        decoding_algorithm="contrastive",
+    )
+
+    for replication in range(1, 6):
+        failed_spec = _make_spec(
+            algorithm="algo1",
+            pair_name="zz_fast",
+            condition_bits="00000",
+            replication=replication,
+            condition_label="contrastive_penalty_alpha_0.8",
+            decoding_algorithm="contrastive",
+        )
+        failed_dir = _run_dir(output_root, failed_spec)
+        failed_dir.mkdir(parents=True, exist_ok=True)
+        (failed_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+        (failed_dir / "error.json").write_text(
+            json.dumps(
+                {
+                    "type": "RuntimeError",
+                    "message": "ValueError: Could not parse tuple content: no node",
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[slower_algo_spec, faster_algo_spec],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [faster_algo_spec, slower_algo_spec]
+
+
+def test_order_planned_specs_for_resume_prioritizes_cheaper_algorithm_before_pending_bucket(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    faster_retryable_spec = _make_spec(
+        algorithm="algo1",
+        pair_name="zz_fast",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        decoding_algorithm="contrastive",
+    )
+    slower_pending_spec = _make_spec(
+        algorithm="algo3",
+        pair_name="aa_slow",
+        condition_bits="00000",
+        condition_label="contrastive_penalty_alpha_0.8",
+        decoding_algorithm="contrastive",
+    )
+
+    faster_dir = _run_dir(output_root, faster_retryable_spec)
+    faster_dir.mkdir(parents=True, exist_ok=True)
+    (faster_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (faster_dir / "error.json").write_text(
+        json.dumps(
+            {
+                "type": "RuntimeError",
+                "message": "ValueError: Could not parse tuple content: no node",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[slower_pending_spec, faster_retryable_spec],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [faster_retryable_spec, slower_pending_spec]
+
+
+def test_order_planned_specs_for_resume_prefers_current_model_from_batch_status(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    qwen_spec = _make_spec(
+        algorithm="algo2",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+    )
+    mistral_spec = _make_spec(
+        algorithm="algo1",
+        pair_name="sg1_sg2",
+        condition_bits="00001",
+    )
+    qwen_spec = replace(qwen_spec, model="Qwen/Qwen3.5-9B")
+    mistral_spec = replace(mistral_spec, model="mistralai/Ministral-3-8B-Instruct-2512")
+    (output_root / "batch_status.json").parent.mkdir(parents=True, exist_ok=True)
+    (output_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "current_run": {
+                    "model": "Qwen/Qwen3.5-9B",
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[mistral_spec, qwen_spec],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [qwen_spec, mistral_spec]
+
+
+def test_order_planned_specs_for_resume_prefers_last_completed_model_when_idle(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "output"
+    qwen_spec = _make_spec(
+        algorithm="algo2",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+    )
+    mistral_spec = _make_spec(
+        algorithm="algo1",
+        pair_name="sg1_sg2",
+        condition_bits="00001",
+    )
+    qwen_spec = replace(qwen_spec, model="Qwen/Qwen3.5-9B")
+    mistral_spec = replace(mistral_spec, model="mistralai/Ministral-3-8B-Instruct-2512")
+    (output_root / "batch_status.json").parent.mkdir(parents=True, exist_ok=True)
+    (output_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "current_run": None,
+                "last_completed_run": {
+                    "model": "mistralai/Ministral-3-8B-Instruct-2512",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    ordered = order_planned_specs_for_resume(
+        planned_specs=[qwen_spec, mistral_spec],
+        output_root=output_root,
+        resume=True,
+        run_dir_for_spec_fn=_run_dir,
+    )
+
+    assert ordered == [mistral_spec, qwen_spec]
+
+
 def test_resume_priority_key_ignores_malformed_history_counts(
     tmp_path: Path,
 ) -> None:
@@ -772,5 +1015,6 @@ def test_resume_priority_key_ignores_malformed_history_counts(
         ),
     )
 
-    assert key[0] == 3.0
-    assert key[2] == 0.0
+    assert key[1] == 0
+    assert key[2] == 3.0
+    assert key[3] == 0.0

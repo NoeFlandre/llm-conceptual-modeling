@@ -15,10 +15,6 @@ from llm_conceptual_modeling.hf_failure_markers import (
 JsonObject = dict[str, object]
 
 
-def _noop_normalize_stale_running_run(run_dir: Path) -> None:
-    _ = run_dir
-
-
 def build_seeded_resume_snapshot(
     *,
     output_root: Path,
@@ -43,7 +39,7 @@ def build_seeded_resume_snapshot(
     if write_json_fn is None:
         write_json_fn = write_json
     if normalize_stale_running_run_fn is None:
-        normalize_stale_running_run_fn = _noop_normalize_stale_running_run
+        normalize_stale_running_run_fn = lambda _run_dir: None
 
     previous_status = read_artifact_json_fn(output_root / "batch_status.json")
 
@@ -318,7 +314,13 @@ def order_planned_specs_for_resume(
 ) -> list[HFRunSpec]:
     if not resume or not planned_specs:
         return planned_specs
+    if read_artifact_json_fn is None:
+        read_artifact_json_fn = read_artifact_json
     history = collect_resume_history(
+        output_root=output_root,
+        read_artifact_json_fn=read_artifact_json_fn,
+    )
+    preferred_model = _preferred_resume_model(
         output_root=output_root,
         read_artifact_json_fn=read_artifact_json_fn,
     )
@@ -328,9 +330,29 @@ def order_planned_specs_for_resume(
             spec=spec,
             run_dir=run_dir_for_spec_fn(output_root, spec),
             history=history,
+            preferred_model=preferred_model,
             read_artifact_json_fn=read_artifact_json_fn,
         ),
     )
+
+
+def _preferred_resume_model(
+    *,
+    output_root: Path,
+    read_artifact_json_fn: Callable[[Path], JsonObject],
+) -> str | None:
+    status = read_artifact_json_fn(output_root / "batch_status.json")
+    current_run = status.get("current_run")
+    if isinstance(current_run, Mapping):
+        current_model = current_run.get("model")
+        if isinstance(current_model, str) and current_model.strip():
+            return current_model
+    last_completed_run = status.get("last_completed_run")
+    if isinstance(last_completed_run, Mapping):
+        last_completed_model = last_completed_run.get("model")
+        if isinstance(last_completed_model, str) and last_completed_model.strip():
+            return last_completed_model
+    return None
 
 
 def collect_resume_history(
@@ -389,8 +411,9 @@ def resume_priority_key(
     spec: HFRunSpec,
     run_dir: Path,
     history: dict[str, dict[object, dict[str, int]]],
+    preferred_model: str | None = None,
     read_artifact_json_fn: Callable[[Path], JsonObject] | None = None,
-) -> tuple[float, float, float, float, str, str, int]:
+) -> tuple[int, int, float, float, float, float, str, str, int]:
     if read_artifact_json_fn is None:
         read_artifact_json_fn = read_artifact_json
     context_policy = spec.context_policy
@@ -452,8 +475,16 @@ def resume_priority_key(
     )
     family_total = family_finished + family_failures
     family_failure_rate = family_failures / family_total if family_total else 0.0
+    algorithm_priority = {
+        "algo1": 0,
+        "algo2": 1,
+        "algo3": 2,
+    }.get(spec.algorithm, 3)
+    preferred_model_priority = 0 if preferred_model == spec.model else 1
 
     return (
+        preferred_model_priority,
+        algorithm_priority,
         base_bucket_map.get(failure_kind, 4.0),
         family_failure_rate,
         pair_timeout_rate,
