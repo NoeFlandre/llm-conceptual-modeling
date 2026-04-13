@@ -1,7 +1,4 @@
-from llm_conceptual_modeling.hf_resume_profile import (
-    _resume_profile_overrides,
-    resolve_resume_profile,
-)
+from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
 
 
 def test_resolve_resume_profile_defaults_to_docker_and_safe_profiles() -> None:
@@ -52,17 +49,26 @@ def test_resolve_resume_profile_supports_explicit_full_coverage_override() -> No
     assert profile.excluded_decoding_labels == ()
 
 
-def test_resume_profile_overrides_capture_family_specific_safe_exclusions() -> None:
-    assert _resume_profile_overrides("olmo", "safe") == (
-        "olmo-safe",
-        ("contrastive_penalty_alpha_0.8",),
+def test_resume_profile_safe_phase_excludes_contrastive_decoding_per_family() -> None:
+    olmo_safe = resolve_resume_profile("hf-paper-batch-algo1-olmo-current", phase="safe")
+    assert olmo_safe.excluded_decoding_labels == ("contrastive_penalty_alpha_0.8",)
+
+    qwen_safe = resolve_resume_profile("hf-paper-batch-algo2-qwen-current", phase="safe")
+    assert qwen_safe.excluded_decoding_labels == (
+        "contrastive_penalty_alpha_0.2",
+        "contrastive_penalty_alpha_0.8",
     )
-    assert _resume_profile_overrides("qwen", "safe") == (
-        "qwen-safe",
-        ("contrastive_penalty_alpha_0.2", "contrastive_penalty_alpha_0.8"),
+
+    mistral_safe = resolve_resume_profile(
+        "hf-paper-batch-algo1-mistral-current", phase="safe"
     )
-    assert _resume_profile_overrides("mistral", "safe") == (
-        "mistral-safe",
-        ("contrastive_penalty_alpha_0.8",),
+    assert mistral_safe.excluded_decoding_labels == ("contrastive_penalty_alpha_0.8",)
+
+
+def test_resume_profile_risky_phase_includes_all_decoding() -> None:
+    qwen_risky = resolve_resume_profile(
+        "hf-paper-batch-algo2-qwen-current",
+        phase="risky",
     )
-    assert _resume_profile_overrides("qwen", "risky") == ("qwen-risky", ())
+    assert qwen_risky.excluded_decoding_labels == ()
+    assert qwen_risky.profile_name == "qwen-risky"
