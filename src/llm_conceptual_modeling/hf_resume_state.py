@@ -38,14 +38,13 @@ def build_seeded_resume_snapshot(
         read_artifact_json_fn = read_artifact_json
     if write_json_fn is None:
         write_json_fn = write_json
-    if normalize_stale_running_run_fn is None:
-        normalize_stale_running_run_fn = lambda _run_dir: None
 
     previous_status = read_artifact_json_fn(output_root / "batch_status.json")
 
     for spec in planned_specs:
         run_dir = run_dir_for_spec_fn(output_root, spec)
-        normalize_stale_running_run_fn(run_dir)
+        if normalize_stale_running_run_fn is not None:
+            normalize_stale_running_run_fn(run_dir)
 
         cached = load_valid_finished_summary(
             run_dir=run_dir,
