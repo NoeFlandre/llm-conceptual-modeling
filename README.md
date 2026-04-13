@@ -26,9 +26,12 @@ This repository does not claim runtime equivalence for historical provider behav
 - `data/inputs/`
   Input graph files and auxiliary lexical resources used by the offline workflows.
   The canonical copy is published in the Hugging Face bucket.
-- `data/results/`
-  Imported primary experiment outputs across algorithms and model families.
-  The canonical copy is published in the Hugging Face bucket.
+- `results/frontier/`
+  Imported frontier-model experiment outputs grouped by algorithm.
+- `results/open_weights/`
+  Canonical Qwen/Mistral paper-facing outputs and the variance-decomposition bundle.
+- `results/archives/`
+  Preserved OLMO artifacts, stale batch workdirs, and drained shard trees.
 - `data/baselines/`
   Deterministic structural baseline outputs.
 - `data/analysis_artifacts/`
@@ -153,6 +156,43 @@ uv run lcm analyze replication-budget \
   --output /tmp/algo1_replication_budget.csv
 ```
 
+Variance decomposition for the open-weight ablation study:
+
+```bash
+uv run python generate_variance_decomposition.py
+```
+
+This recomputes the deterministic Qwen/Mistral variance-decomposition bundle from
+the canonical finished-run ledger and writes the maintained artifacts under:
+
+- `results/hf-paper-batch-canonical/variance_decomposition/`
+
+That folder contains:
+
+- `variance_decomposition.csv`
+- `variance_decomposition_algo1.csv`
+- `variance_decomposition_algo2.csv`
+- `variance_decomposition_algo3.csv`
+- `variance_decomposition.tex`
+- `variance_decomposition_algo1.tex`
+- `variance_decomposition_algo2.tex`
+- `variance_decomposition_algo3.tex`
+
+Method and artifact details are documented in
+[docs/variance-decomposition.md](docs/variance-decomposition.md).
+
+Local experiment-result hygiene is documented in [results/README.md](results/README.md).
+In short: keep frontier outputs under `results/frontier/`, open-weight paper outputs under
+`results/open_weights/`, archive old operational workdirs under `results/archives/`, and leave the
+top-level `results/` folder free of scratch-only clutter.
+The source tree itself should also stay free of Finder junk (`.DS_Store`) and other ad hoc
+temporary artifacts; keep scratch work isolated under `tmp/` or a throwaway worktree instead of
+committing it into the repo layout.
+One-off helper scripts should also stay out of the repo root unless they are part of the
+documented CLI or `scripts/` surface.
+Accidental copied worktrees or SSH-named mirror directories belong outside the repository root,
+not alongside the maintained source tree.
+
 Generate deterministic baselines:
 
 ```bash
@@ -240,10 +280,65 @@ decoding-factor DOE analysis and the explicit residual `Error` row in `factorial
 Remote GPU workflow:
 
 - bootstrap and CUDA verification: [docs/vast-ai-transformers.md](docs/vast-ai-transformers.md)
+- long-form operator handoff and failure playbook: [qwen-mistral-remote-ops-handoff.md](qwen-mistral-remote-ops-handoff.md)
 - helper scripts:
   - `scripts/vast/bootstrap_gpu_host.sh`
   - `scripts/vast/sync_repo_to_vast.sh`
   - `scripts/vast/fetch_results_from_vast.sh`
+  - `scripts/vast/prepare_and_resume_qwen_algo1_tail.sh`
+  - `scripts/vast/finalize_qwen_algo1_tail.sh`
+
+Dedicated last-10 Qwen tail workflow:
+
+- The final Qwen-only `algo1` tail has a dedicated isolated workflow and should not be run through the generic multi-model resume path.
+- The source of truth is the canonical `results/hf-paper-batch-canonical/ledger.json` records surface, not the physical run tree.
+- Use the dedicated local prep commands first:
+
+```bash
+uv run lcm run prepare-qwen-algo1-tail \
+  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical \
+  --tail-results-root /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  --remote-output-root /workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail \
+  --json
+
+uv run lcm run qwen-algo1-tail-preflight \
+  --repo-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  --canonical-results-root /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical \
+  --tail-results-root /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  --json
+```
+
+- The dedicated preflight is expected to resolve to exactly `10` pending Qwen identities and `can_resume=true`.
+- The dedicated remote launcher is:
+
+```bash
+bash scripts/vast/prepare_and_resume_qwen_algo1_tail.sh \
+  root@HOST \
+  PORT \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  /workspace/llm-conceptual-modeling \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical \
+  /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  /workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail
+```
+
+- If the fresh host stalls in cold model download, inspect `/workspace/.hf_home/hub/models--Qwen--Qwen3.5-9B/blobs/*.incomplete` and the Xet logs before touching parser/runtime code.
+- If the `.incomplete` files stop growing and Xet logs stop advancing, relaunch the dedicated tail with:
+  - `HF_HUB_DISABLE_XET=1`
+  - `HF_HOME=/workspace/.hf_home`
+- After the remote tail reaches `10 finished / 0 pending / 0 failed`, pull the isolated root locally and finalize with:
+
+```bash
+bash scripts/vast/finalize_qwen_algo1_tail.sh \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling \
+  /private/tmp/qwen-tail-live/hf-paper-batch-qwen-algo1-tail \
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-paper-batch-canonical
+```
+
+- The final correctness check is not the whole-study top-line `pending_count`. It is:
+  - isolated tail `batch_status.json` shows `10 finished / 0 pending`
+  - canonical run dirs for the 10 target identities have `state.json = finished`
+  - canonical `ledger.json.records` marks those 10 identities as `finished`
 
 ## Repository Structure
 

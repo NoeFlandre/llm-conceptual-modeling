@@ -35,6 +35,7 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "--exclude 'worker-queues'" in script_text
     assert '"${SSH_CMD[@]}" "$SSH_TARGET" "mkdir -p \'$REMOTE_RESULTS_DIR\'"' in script_text
     assert 'vast_retry_rsync 3 rsync -avz \\' in script_text
+    assert "  --delete \\" in script_text
     seed_resume_flags = (
         '$(vast_rsync_resume_flags "$LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS") \\'
     )
@@ -57,6 +58,8 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert "BATCH_MAX_REQUESTS_PER_WORKER_PROCESS" in script_text
     assert "BATCH_EXCLUDED_DECODING_LABELS" in script_text
     assert "runtime_config.yaml" in script_text
+    assert "write-unfinished-manifest" in script_text
+    assert "shard_manifest.json" in script_text
     assert "REMOTE_PREVIEW_ENV_PREFIX" in script_text
     assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
     assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in (
@@ -70,6 +73,7 @@ def test_prepare_and_resume_script_retries_rsync_transfers() -> None:
 
     assert "vast_retry_rsync" in script_text
     assert 'vast_retry_rsync 3 rsync -avz \\' in script_text
+    assert "  --delete \\" in script_text
     assert '-e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/' in script_text
 
 
@@ -105,6 +109,31 @@ def test_prepare_and_resume_script_starts_local_autosync_after_remote_launch() -
     launch_branch = 'Launch resumable batch'
 
     assert script_text.index(launch_branch) < script_text.index(watcher_branch)
+
+
+def test_watch_results_script_passes_only_results_args_to_fetch_script() -> None:
+    script_path = Path("scripts/vast/watch_results_from_vast.sh")
+    script_text = script_path.read_text(encoding="utf-8")
+
+    fetch_call = 'SSH_PORT="$SSH_PORT" "$FETCH_SCRIPT" "$REMOTE_RESULTS_DIR" "$LOCAL_RESULTS_DIR"'
+    bad_fetch_call = (
+        'SSH_PORT="$SSH_PORT" "$FETCH_SCRIPT" "$REMOTE_RESULTS_DIR" '
+        '"$LOCAL_RESULTS_DIR" "$SSH_PORT"'
+    )
+
+    assert fetch_call in script_text
+    assert bad_fetch_call not in script_text
+
+
+def test_watch_results_script_tracks_local_ledger_snapshot_after_successful_sync() -> None:
+    script_text = Path("scripts/vast/watch_results_from_vast.sh").read_text(encoding="utf-8")
+
+    assert 'LEDGER_PATH_VALUE="$LOCAL_RESULTS_DIR/ledger.json"' in script_text
+    assert '"ledger_snapshot"' in script_text
+    assert '"generated_at": ledger.get("generated_at")' in script_text
+    assert 'lcm run refresh-ledger' in script_text
+    assert '--results-root "$LEDGER_RESULTS_DIR"' in script_text
+    assert '--ledger-root "$LEDGER_REFRESH_LEDGER_ROOT"' in script_text
 
 
 def test_prepare_and_resume_script_supports_container_first_runtime_mode() -> None:
@@ -144,6 +173,7 @@ def test_remote_resume_preview_script_writes_and_validates_effective_config() ->
     assert "REMOTE_CONFIG_PATH" in script_text
     assert "REMOTE_EFFECTIVE_CONFIG_PATH" in script_text
     assert "REMOTE_PREVIEW_DIR" in script_text
+    assert 'export PYTHONPATH="$REMOTE_REPO_DIR/src${PYTHONPATH:+:$PYTHONPATH}"' in script_text
     assert '.venv/bin/python - "$REMOTE_CONFIG_PATH" "$REMOTE_EFFECTIVE_CONFIG_PATH"' in script_text
     assert "context_policy['startup_timeout_seconds'] = float(timeout_value)" in script_text
     assert "BATCH_RETRY_INFRASTRUCTURE_FAILURES_ON_RESUME" in script_text
@@ -162,6 +192,7 @@ def test_remote_runtime_doctor_script_validates_selected_runtime_mode() -> None:
 
     assert 'REMOTE_RUNTIME_MODE="${REMOTE_RUNTIME_MODE:-bootstrap}"' in script_text
     assert 'REMOTE_DOCKER_IMAGE="${REMOTE_DOCKER_IMAGE:-}"' in script_text
+    assert 'export PYTHONPATH="$REMOTE_REPO_DIR/src${PYTHONPATH:+:$PYTHONPATH}"' in script_text
     assert "command -v docker >/dev/null 2>&1" in script_text
     assert "docker image inspect" in script_text
     assert "docker run --rm" in script_text
@@ -181,19 +212,61 @@ def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
         'REMOTE_GPU_LIVENESS_TIMEOUT_SECONDS="${REMOTE_GPU_LIVENESS_TIMEOUT_SECONDS:-600}"'
     )
     assert gpu_timeout in script_text
+    assert 'export PYTHONPATH="$REMOTE_REPO_DIR/src${PYTHONPATH:+:$PYTHONPATH}"' in script_text
     assert "REMOTE_GPU_LIVENESS_POLL_INTERVAL_SECONDS" in script_text
     assert "REMOTE_PRODUCTIVE_LIVENESS_TIMEOUT_SECONDS" in script_text
     assert "REMOTE_PRODUCTIVE_LIVENESS_POLL_INTERVAL_SECONDS" in script_text
-    assert "pkill -f 'lcm run paper-batch'" in script_text
-    assert "pkill -f 'llm_conceptual_modeling.hf_worker'" in script_text
-    assert "nohup env -u NVIDIA_VISIBLE_DEVICES -u CUDA_VISIBLE_DEVICES" in script_text
+    assert 'REMOTE_RELAUNCH_IF_PENDING="${REMOTE_RELAUNCH_IF_PENDING:-1}"' in script_text
+    assert 'REMOTE_RELAUNCH_SLEEP_SECONDS="${REMOTE_RELAUNCH_SLEEP_SECONDS:-5}"' in script_text
+    assert "export REMOTE_REPO_DIR" in script_text
+    assert "vast_pending_count()" in script_text
+    assert 'echo "[remote_resume_launch] starting supervised resume loop"' in script_text
+    assert "pkill -f " in script_text
+    assert "llm_conceptual_modeling.hf_worker --queue-dir" in script_text
+    assert 'echo "[remote_resume_launch] cleaned stale workers before resume"' in script_text
+    assert 'echo "[remote_resume_launch] pending_count=$pending_count"' in script_text
+    assert 'python3 - <<'"'"'PY'"'"'' in script_text
+    assert 'while true; do' in script_text
+    assert 'pending_count="$(python3 - <<' in script_text
+    assert 'if [ "$pending_count" -le 0 ]; then' in script_text
+    assert 'sleep "$REMOTE_RELAUNCH_SLEEP_SECONDS"' in script_text
+    assert "nohup bash <<'EOF'" in script_text
+    assert 'REMOTE_REPO_DIR="/workspace/llm-conceptual-modeling"' in script_text
+    assert 'REMOTE_RESULTS_DIR="/workspace/results/hf-paper-batch-canonical"' in script_text
+    assert "env -u NVIDIA_VISIBLE_DEVICES -u CUDA_VISIBLE_DEVICES" in script_text
+    assert 'PYTHONPATH="$REMOTE_REPO_DIR/src"' in script_text
+    assert '"$REMOTE_REPO_DIR/.venv/bin/lcm" run paper-batch' in script_text
     assert "vast_wait_for_gpu_liveness" in script_text
     assert "worker_state.json" in script_text
     assert "batch_status.json" in script_text
     assert "executing_algorithm" in script_text
     assert "vast_wait_for_productive_liveness" in script_text
     assert "--resume" in script_text
-    assert "pgrep -n -f" in script_text
+    assert "supervisor_pid=$!" in script_text
+    assert "REMOTE_PROCESS_EXIT_TIMEOUT_SECONDS" in script_text
+    assert "vast_wait_for_process_exit" in script_text
+    batch_pattern = (
+        'pkill -f -- ".venv/bin/lcm run paper-batch --config '
+        '$REMOTE_EFFECTIVE_CONFIG_PATH --resume"'
+    )
+    assert batch_pattern in script_text
+    worker_pattern = (
+        'pkill -f -- "llm_conceptual_modeling.hf_worker --queue-dir '
+        '$REMOTE_RESULTS_DIR/worker-queues/"'
+    )
+    assert worker_pattern in script_text
+    batch_wait = (
+        'vast_wait_for_process_exit ".venv/bin/lcm run paper-batch --config '
+        '$REMOTE_EFFECTIVE_CONFIG_PATH --resume"'
+    )
+    assert batch_wait in script_text
+    worker_wait = (
+        'vast_wait_for_process_exit "llm_conceptual_modeling.hf_worker --queue-dir '
+        '$REMOTE_RESULTS_DIR/worker-queues/"'
+    )
+    assert worker_wait in script_text
+    assert "find \"$REMOTE_RESULTS_DIR/worker-queues\" -type f" in script_text
+    assert "-name '*.request.json' -o -name '*.claimed.json' -o -name '*.result.json'" in script_text
 
 
 def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
@@ -215,13 +288,38 @@ def test_vast_common_script_centralizes_shared_shell_helpers() -> None:
     assert "ControlPersist=${VAST_SSH_CONTROL_PERSIST_SECONDS}" in script_text
     assert "ControlPath=${VAST_SSH_CONTROL_PATH}" in script_text
     assert "vast_ssh_command()" in script_text
-    assert "vast_rsync_ssh_command()" in script_text
-    assert "vast_rsync_resume_flags()" in script_text
-    assert "vast_has_value()" in script_text
-    assert "vast_require_positive_integer()" in script_text
-    assert "vast_parse_ssh_command()" in script_text
-    assert "vast_select_remote_runtime_mode()" in script_text
-    assert "vast_watcher_identity()" in script_text
+    assert "vast_remote_script_path()" in script_text
+
+
+def test_vast_remote_script_path_translates_local_repo_paths() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    common_script = repo_root / "scripts/vast/common.sh"
+    local_repo_dir = str(repo_root)
+    remote_repo_dir = "/workspace/llm-conceptual-modeling"
+    local_candidate = f"{local_repo_dir}/scripts/vast/remote_resume_preview.sh"
+
+    completed = subprocess.run(
+        [
+            "bash",
+            "-lc",
+            (
+                f"source {common_script!s} && "
+                f"vast_remote_script_path {local_candidate!s} {local_repo_dir!s} {remote_repo_dir!s}"
+            ),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.stdout.strip() == (
+        f"{remote_repo_dir}/scripts/vast/remote_resume_preview.sh"
+    )
+
+
+def test_remote_resume_preview_noop_script_is_removed() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    assert not (repo_root / "scripts/vast/remote_resume_preview_noop.sh").exists()
 
 
 def test_quick_resume_script_can_parse_raw_ssh_command_and_delegate() -> None:
