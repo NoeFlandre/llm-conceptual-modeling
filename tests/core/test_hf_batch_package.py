@@ -29,3 +29,7 @@ def test_hf_batch_planning_is_implemented_in_the_package_module() -> None:
 
 def test_hf_batch_outputs_is_implemented_in_the_package_module() -> None:
     assert write_aggregated_outputs.__module__ == "llm_conceptual_modeling.hf_batch.outputs"
+
+
+def test_hf_batch_prompts_is_implemented_in_the_package_module() -> None:
+    assert build_prompt_bundle.__module__ == "llm_conceptual_modeling.hf_batch.prompts"
