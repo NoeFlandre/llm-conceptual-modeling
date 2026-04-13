@@ -231,8 +231,9 @@ def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
     assert 'if [ "$pending_count" -le 0 ]; then' in script_text
     assert 'sleep "$REMOTE_RELAUNCH_SLEEP_SECONDS"' in script_text
     assert "nohup bash <<'EOF'" in script_text
-    assert 'REMOTE_REPO_DIR="/workspace/llm-conceptual-modeling"' in script_text
-    assert 'REMOTE_RESULTS_DIR="/workspace/results/hf-paper-batch-canonical"' in script_text
+    assert 'REMOTE_REPO_DIR="/workspace/llm-conceptual-modeling"' not in script_text
+    assert 'REMOTE_RESULTS_DIR="/workspace/results/hf-paper-batch-canonical"' not in script_text
+    assert "/workspace/results/hf-paper-batch-canonical/worker-queues/" not in script_text
     assert "env -u NVIDIA_VISIBLE_DEVICES -u CUDA_VISIBLE_DEVICES" in script_text
     assert 'PYTHONPATH="$REMOTE_REPO_DIR/src"' in script_text
     assert '"$REMOTE_REPO_DIR/.venv/bin/lcm" run paper-batch' in script_text
@@ -245,6 +246,7 @@ def test_remote_resume_launch_script_restarts_the_batch_process() -> None:
     assert "supervisor_pid=$!" in script_text
     assert "REMOTE_PROCESS_EXIT_TIMEOUT_SECONDS" in script_text
     assert "vast_wait_for_process_exit" in script_text
+    assert 'Path(os.environ["REMOTE_RESULTS_DIR"]) / "batch_status.json"' in script_text
     batch_pattern = (
         'pkill -f -- ".venv/bin/lcm run paper-batch --config '
         '$REMOTE_EFFECTIVE_CONFIG_PATH --resume"'

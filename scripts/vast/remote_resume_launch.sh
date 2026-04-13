@@ -20,13 +20,35 @@ REMOTE_GPU_LIVENESS_TIMEOUT_SECONDS="${REMOTE_GPU_LIVENESS_TIMEOUT_SECONDS:-600}
 REMOTE_GPU_LIVENESS_POLL_INTERVAL_SECONDS="${REMOTE_GPU_LIVENESS_POLL_INTERVAL_SECONDS:-5}"
 REMOTE_PRODUCTIVE_LIVENESS_TIMEOUT_SECONDS="${REMOTE_PRODUCTIVE_LIVENESS_TIMEOUT_SECONDS:-900}"
 REMOTE_PRODUCTIVE_LIVENESS_POLL_INTERVAL_SECONDS="${REMOTE_PRODUCTIVE_LIVENESS_POLL_INTERVAL_SECONDS:-5}"
+REMOTE_PROCESS_EXIT_TIMEOUT_SECONDS="${REMOTE_PROCESS_EXIT_TIMEOUT_SECONDS:-60}"
+REMOTE_RELAUNCH_IF_PENDING="${REMOTE_RELAUNCH_IF_PENDING:-1}"
+REMOTE_RELAUNCH_SLEEP_SECONDS="${REMOTE_RELAUNCH_SLEEP_SECONDS:-5}"
 
 cd "$REMOTE_REPO_DIR"
 mkdir -p "$REMOTE_RESULTS_DIR"
+export PYTHONPATH="$REMOTE_REPO_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
 
-pkill -f 'lcm run paper-batch' || true
-pkill -f 'llm_conceptual_modeling.hf_worker' || true
+vast_wait_for_process_exit() {
+  local pattern="$1"
+  local deadline=$((SECONDS + REMOTE_PROCESS_EXIT_TIMEOUT_SECONDS))
+  while pgrep -f -- "$pattern" >/dev/null 2>&1; do
+    if [ "$SECONDS" -ge "$deadline" ]; then
+      echo "process pattern failed to exit within ${REMOTE_PROCESS_EXIT_TIMEOUT_SECONDS}s: $pattern" >&2
+      return 1
+    fi
+    sleep 1
+  done
+}
+
+pkill -f -- ".venv/bin/lcm run paper-batch --config $REMOTE_EFFECTIVE_CONFIG_PATH --resume" || true
+pkill -f -- "llm_conceptual_modeling.hf_worker --queue-dir $REMOTE_RESULTS_DIR/worker-queues/" || true
+vast_wait_for_process_exit ".venv/bin/lcm run paper-batch --config $REMOTE_EFFECTIVE_CONFIG_PATH --resume"
+vast_wait_for_process_exit "llm_conceptual_modeling.hf_worker --queue-dir $REMOTE_RESULTS_DIR/worker-queues/"
 sleep 2
+
+find "$REMOTE_RESULTS_DIR/worker-queues" -type f \
+  \( -name '*.request.json' -o -name '*.claimed.json' -o -name '*.result.json' \) \
+  -delete 2>/dev/null || true
 
 vast_worker_pid() {
   pgrep -n -f 'llm_conceptual_modeling.hf_worker --queue-dir' || true
@@ -91,6 +113,21 @@ print(int(payload.get("finished_count", 0)))
 PY
 }
 
+vast_pending_count() {
+  python3 - <<'PY' "$REMOTE_RESULTS_DIR/batch_status.json"
+from pathlib import Path
+import json
+import sys
+
+path = Path(sys.argv[1])
+if not path.exists():
+    print(0)
+    raise SystemExit(0)
+payload = json.loads(path.read_text(encoding="utf-8"))
+print(int(payload.get("pending_count", 0)))
+PY
+}
+
 vast_wait_for_productive_liveness() {
   local initial_finished_count
   local current_finished_count
@@ -112,11 +149,49 @@ vast_wait_for_productive_liveness() {
   return 1
 }
 
-nohup env -u NVIDIA_VISIBLE_DEVICES -u CUDA_VISIBLE_DEVICES \
-  .venv/bin/lcm run paper-batch --config "$REMOTE_EFFECTIVE_CONFIG_PATH" --resume \
-  >"$REMOTE_RUN_LOG" 2>&1 </dev/null &
+export REMOTE_EFFECTIVE_CONFIG_PATH
+export REMOTE_RUN_LOG
+export REMOTE_REPO_DIR
+export REMOTE_RELAUNCH_IF_PENDING
+export REMOTE_RELAUNCH_SLEEP_SECONDS
+export REMOTE_RESULTS_DIR
+
+nohup bash <<'EOF' </dev/null >>"$REMOTE_RUN_LOG" 2>&1 &
+echo "[remote_resume_launch] starting supervised resume loop"
+while true; do
+  pkill -f "llm_conceptual_modeling.hf_worker --queue-dir ${REMOTE_RESULTS_DIR}/worker-queues/" >/dev/null 2>&1 || true
+  echo "[remote_resume_launch] cleaned stale workers before resume"
+  env -u NVIDIA_VISIBLE_DEVICES -u CUDA_VISIBLE_DEVICES \
+    PYTHONPATH="$REMOTE_REPO_DIR/src" \
+    "$REMOTE_REPO_DIR/.venv/bin/lcm" run paper-batch --config "$REMOTE_EFFECTIVE_CONFIG_PATH" --resume || true
+  if [ "$REMOTE_RELAUNCH_IF_PENDING" != "1" ]; then
+    echo "[remote_resume_launch] relaunch disabled; exiting supervisor"
+    break
+  fi
+  pending_count="$(python3 - <<'PY'
+import os
+from pathlib import Path
+import json
+
+path = Path(os.environ["REMOTE_RESULTS_DIR"]) / "batch_status.json"
+if not path.exists():
+    print(0)
+else:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    print(int(payload.get("pending_count", 0)))
+PY
+)"
+  echo "[remote_resume_launch] pending_count=$pending_count"
+  if [ "$pending_count" -le 0 ]; then
+    echo "[remote_resume_launch] pending complete; exiting supervisor"
+    break
+  fi
+  sleep "$REMOTE_RELAUNCH_SLEEP_SECONDS"
+done
+EOF
+supervisor_pid=$!
 sleep 2
-pgrep -n -f ".venv/bin/lcm run paper-batch --config $REMOTE_EFFECTIVE_CONFIG_PATH --resume" > "$REMOTE_PID_PATH"
+echo "$supervisor_pid" > "$REMOTE_PID_PATH"
 cat "$REMOTE_PID_PATH"
 
 vast_wait_for_gpu_liveness
