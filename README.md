@@ -353,6 +353,8 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
   Shared evaluation, factorial-analysis, graph, parsing, and schema logic.
 - `src/llm_conceptual_modeling/hf_pipeline`
   Algorithm execution, shared result metrics, and worker-ready helpers used by the legacy `hf_experiments.py` facade.
+- `src/llm_conceptual_modeling/hf_batch`
+  Batch-planning, prompt-building, outputs, monitoring, run-artifact, and type helpers grouped under one namespace.
 - `src/llm_conceptual_modeling/hf_state`
   Canonical batch-state helpers for active model discovery, shard-manifest generation, and ledger refresh.
 - `src/llm_conceptual_modeling/hf_drain`

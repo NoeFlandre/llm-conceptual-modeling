@@ -21,3 +21,11 @@ def test_hf_batch_package_exposes_refactored_modules() -> None:
     assert callable(write_text)
     assert HFRunSpec.__name__ == "HFRunSpec"
     assert RuntimeResult.__name__ == "dict"
+
+
+def test_hf_batch_planning_is_implemented_in_the_package_module() -> None:
+    assert plan_paper_batch_specs.__module__ == "llm_conceptual_modeling.hf_batch.planning"
+
+
+def test_hf_batch_outputs_is_implemented_in_the_package_module() -> None:
+    assert write_aggregated_outputs.__module__ == "llm_conceptual_modeling.hf_batch.outputs"

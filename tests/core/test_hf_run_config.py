@@ -239,7 +239,8 @@ algorithms:
 
 
 def test_qwen_batch_runtime_config_is_hardened_for_resume() -> None:
-    config = load_hf_run_config("data/results/open_weights/hf-paper-batch-canonical/runtime_config.yaml")
+    config_path = "data/results/open_weights/hf-paper-batch-canonical/runtime_config.yaml"
+    config = load_hf_run_config(config_path)
 
     assert config.run.output_root == "/workspace/results/hf-paper-batch-canonical"
     assert [decoding.algorithm for decoding in config.decoding] == [
@@ -336,7 +337,8 @@ def test_algo2_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
 
 
 def test_algo1_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
-    config = load_hf_run_config("data/results/archives/olmo/hf-paper-batch-algo1-olmo-current/runtime_config.yaml")
+    config_path = "data/results/archives/olmo/hf-paper-batch-algo1-olmo-current/runtime_config.yaml"
+    config = load_hf_run_config(config_path)
 
     assert config.models.chat_models == ["allenai/Olmo-3-7B-Instruct"]
     assert config.runtime.context_policy["generation_timeout_seconds"] == 180.0

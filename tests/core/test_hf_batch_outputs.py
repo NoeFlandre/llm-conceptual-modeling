@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from llm_conceptual_modeling.hf_batch_outputs import (
+from llm_conceptual_modeling.hf_batch.outputs import (
     _aggregated_analysis_spec,
     _analysis_value_columns,
     _budget_analysis_specs,
@@ -108,19 +108,19 @@ def test_write_aggregated_outputs_backfills_algo3_summary_recall_from_evaluation
     summary_frame.to_csv(output_root / "batch_summary.csv", index=False)
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.run_algo3_factorial_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.run_algo3_factorial_analysis",
         lambda evaluated_path, output_path: None,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_grouped_metric_stability",
+        "llm_conceptual_modeling.hf_batch.outputs.write_grouped_metric_stability",
         lambda *args, **kwargs: None,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_output_variability_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.write_output_variability_analysis",
         lambda *args, **kwargs: None,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_replication_budget_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.write_replication_budget_analysis",
         lambda *args, **kwargs: None,
     )
 
@@ -389,11 +389,11 @@ def test_evaluate_raw_output_dispatches_by_algorithm(
         calls.append(("algo3", input_path, output_path))
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.evaluate_connection_results_file",
+        "llm_conceptual_modeling.hf_batch.outputs.evaluate_connection_results_file",
         fake_connection_evaluator,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.evaluate_algo3_results",
+        "llm_conceptual_modeling.hf_batch.outputs.evaluate_algo3_results",
         fake_algo3_evaluator,
     )
 
@@ -427,7 +427,7 @@ def test_write_replication_budget_outputs_uses_budget_specs(
         calls.append((input_paths, output_path, relative_half_width_target, z_score))
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_replication_budget_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.write_replication_budget_analysis",
         fake_replication_budget,
     )
 
@@ -551,31 +551,31 @@ def test_write_combined_model_outputs_dispatches_raw_evaluation_by_algorithm(
         calls.append(("algo3", input_path, output_path))
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.evaluate_connection_results_file",
+        "llm_conceptual_modeling.hf_batch.outputs.evaluate_connection_results_file",
         fake_connection_evaluator,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.evaluate_algo3_results",
+        "llm_conceptual_modeling.hf_batch.outputs.evaluate_algo3_results",
         fake_algo3_evaluator,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.run_generalized_factorial_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.run_generalized_factorial_analysis",
         lambda *args, **kwargs: None,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_grouped_metric_stability",
+        "llm_conceptual_modeling.hf_batch.outputs.write_grouped_metric_stability",
         lambda *args, **kwargs: None,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_output_variability_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.write_output_variability_analysis",
         lambda *args, **kwargs: None,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_replication_budget_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.write_replication_budget_analysis",
         lambda *args, **kwargs: None,
     )
 
-    from llm_conceptual_modeling.hf_batch_outputs import _write_combined_model_outputs
+    from llm_conceptual_modeling.hf_batch.outputs import _write_combined_model_outputs
 
     _write_combined_model_outputs(
         aggregated_root=aggregated_root,
@@ -617,23 +617,23 @@ def test_evaluate_and_factorial_aggregate_output_dispatches_by_algorithm(
         calls.append(("algo3_factorial", (input_path, output_path)))
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.evaluate_connection_results_file",
+        "llm_conceptual_modeling.hf_batch.outputs.evaluate_connection_results_file",
         fake_connection_evaluator,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.run_algo1_factorial_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.run_algo1_factorial_analysis",
         fake_algo1_factorial,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.run_algo2_factorial_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.run_algo2_factorial_analysis",
         fake_algo2_factorial,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.evaluate_algo3_results",
+        "llm_conceptual_modeling.hf_batch.outputs.evaluate_algo3_results",
         fake_algo3_evaluator,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.run_algo3_factorial_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.run_algo3_factorial_analysis",
         fake_algo3_factorial,
     )
 
@@ -674,11 +674,11 @@ def test_write_analysis_outputs_uses_analysis_spec_columns(
         calls.append(("variability", args, kwargs))
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_grouped_metric_stability",
+        "llm_conceptual_modeling.hf_batch.outputs.write_grouped_metric_stability",
         fake_stability,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_batch_outputs.write_output_variability_analysis",
+        "llm_conceptual_modeling.hf_batch.outputs.write_output_variability_analysis",
         fake_variability,
     )
 
