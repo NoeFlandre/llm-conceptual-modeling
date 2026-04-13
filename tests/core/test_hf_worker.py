@@ -44,7 +44,7 @@ def test_hf_worker_writes_worker_state_before_running(monkeypatch, tmp_path: Pat
     spec_json.write_text(json.dumps(serialize_spec(spec)), encoding="utf-8")
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker.build_runtime_factory",
+        "llm_conceptual_modeling.hf_worker.entrypoint.build_runtime_factory",
         lambda hf_token=None: object(),
     )
     monkeypatch.setattr(
@@ -163,7 +163,7 @@ def test_persistent_hf_worker_serves_two_requests_with_one_model_load(
         }
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker.build_runtime_factory",
+        "llm_conceptual_modeling.hf_worker.entrypoint.build_runtime_factory",
         fake_build_runtime_factory,
     )
     monkeypatch.setattr(
@@ -171,7 +171,7 @@ def test_persistent_hf_worker_serves_two_requests_with_one_model_load(
         fake_run_algo1,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker._release_runtime_cache",
+        "llm_conceptual_modeling.hf_worker.entrypoint._release_runtime_cache",
         lambda: cache_release_calls.__setitem__("count", cache_release_calls["count"] + 1),
     )
 
@@ -296,7 +296,14 @@ def test_persistent_hf_worker_skips_stale_finished_requests(
         build_calls["count"] += 1
         return object()
 
-    def fake_execute_request(*, spec_json_path, result_json_path, run_dir, hf_runtime, requests_served_by_process=1):
+    def fake_execute_request(
+        *,
+        spec_json_path,
+        result_json_path,
+        run_dir,
+        hf_runtime,
+        requests_served_by_process=1,
+    ):
         _ = spec_json_path, hf_runtime, requests_served_by_process
         executed_runs.append(run_dir.name)
         result_json_path.write_text(
@@ -306,15 +313,15 @@ def test_persistent_hf_worker_skips_stale_finished_requests(
         return 0
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker.build_runtime_factory",
+        "llm_conceptual_modeling.hf_worker.entrypoint.build_runtime_factory",
         fake_build_runtime_factory,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker._execute_request",
+        "llm_conceptual_modeling.hf_worker.entrypoint._execute_request",
         fake_execute_request,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker._release_runtime_cache",
+        "llm_conceptual_modeling.hf_worker.entrypoint._release_runtime_cache",
         lambda: None,
     )
 
@@ -384,7 +391,14 @@ def test_persistent_hf_worker_recovers_claimed_unfinished_requests(
         build_calls["count"] += 1
         return object()
 
-    def fake_execute_request(*, spec_json_path, result_json_path, run_dir, hf_runtime, requests_served_by_process=1):
+    def fake_execute_request(
+        *,
+        spec_json_path,
+        result_json_path,
+        run_dir,
+        hf_runtime,
+        requests_served_by_process=1,
+    ):
         _ = spec_json_path, hf_runtime, requests_served_by_process
         executed_runs.append(run_dir.name)
         result_json_path.write_text(
@@ -394,15 +408,15 @@ def test_persistent_hf_worker_recovers_claimed_unfinished_requests(
         return 0
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker.build_runtime_factory",
+        "llm_conceptual_modeling.hf_worker.entrypoint.build_runtime_factory",
         fake_build_runtime_factory,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker._execute_request",
+        "llm_conceptual_modeling.hf_worker.entrypoint._execute_request",
         fake_execute_request,
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_worker._release_runtime_cache",
+        "llm_conceptual_modeling.hf_worker.entrypoint._release_runtime_cache",
         lambda: None,
     )
 
