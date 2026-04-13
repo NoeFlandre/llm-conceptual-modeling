@@ -7,7 +7,7 @@ import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_experiments import HFRunSpec
-from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
+from llm_conceptual_modeling.hf_execution.subprocess import MonitoredCommandTimeout
 
 
 def _runtime_profile() -> RuntimeProfile:

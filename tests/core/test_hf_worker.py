@@ -7,7 +7,7 @@ import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_experiments import HFRunSpec
-from llm_conceptual_modeling.hf_spec_codec import deserialize_spec, serialize_spec
+from llm_conceptual_modeling.common.spec_codec import deserialize_spec, serialize_spec
 from llm_conceptual_modeling.hf_worker import main, serve_request_queue
 from llm_conceptual_modeling.hf_worker_request import enqueue_worker_request, load_worker_request
 
@@ -544,3 +544,8 @@ def test_deserialize_spec_rejects_boolean_replication_value() -> None:
 
     with pytest.raises(TypeError, match="Spec field replication must be an integer, got bool"):
         deserialize_spec(payload)
+
+
+def test_hf_spec_codec_public_api_lives_in_common_module() -> None:
+    assert serialize_spec.__module__ == "llm_conceptual_modeling.common.spec_codec"
+    assert deserialize_spec.__module__ == "llm_conceptual_modeling.common.spec_codec"

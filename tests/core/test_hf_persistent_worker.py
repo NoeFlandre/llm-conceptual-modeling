@@ -8,8 +8,8 @@ import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec
-from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
-from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
+from llm_conceptual_modeling.hf_execution.subprocess import MonitoredCommandTimeout
+from llm_conceptual_modeling.hf_worker.persistent import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_worker_request import load_worker_request
 
 
@@ -412,9 +412,9 @@ def test_wait_for_result_does_not_treat_loading_model_as_stage_timeout(
     )
 
     old_time = 1_000.0
-    monkeypatch.setattr("llm_conceptual_modeling.hf_persistent_worker.time.time", lambda: old_time)
+    monkeypatch.setattr("llm_conceptual_modeling.hf_worker.persistent.time.time", lambda: old_time)
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_persistent_worker.time.monotonic",
+        "llm_conceptual_modeling.hf_worker.persistent.time.monotonic",
         lambda: 10.0,
     )
 
@@ -433,7 +433,7 @@ def test_wait_for_result_does_not_treat_loading_model_as_stage_timeout(
             encoding="utf-8",
         )
 
-    monkeypatch.setattr("llm_conceptual_modeling.hf_persistent_worker.time.sleep", fake_sleep)
+    monkeypatch.setattr("llm_conceptual_modeling.hf_worker.persistent.time.sleep", fake_sleep)
     old_timestamp = old_time - 30.0
     worker_state_path.touch()
     os.utime(worker_state_path, (old_timestamp, old_timestamp))

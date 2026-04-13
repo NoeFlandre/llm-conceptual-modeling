@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_conceptual_modeling.hf_subprocess import (
+from llm_conceptual_modeling.hf_execution.subprocess import (
     MonitoredCommandTimeout,
     build_hf_download_environment,
     run_monitored_command,
@@ -94,3 +94,9 @@ def test_build_hf_download_environment_preserves_pythonpath(monkeypatch: pytest.
     env = build_hf_download_environment({"FOO": "bar"})
 
     assert env.get("PYTHONPATH") == "/custom/path"
+
+
+def test_hf_execution_subprocess_public_api_lives_in_package_module() -> None:
+    assert MonitoredCommandTimeout.__module__ == "llm_conceptual_modeling.hf_execution.subprocess"
+    assert build_hf_download_environment.__module__ == "llm_conceptual_modeling.hf_execution.subprocess"
+    assert run_monitored_command.__module__ == "llm_conceptual_modeling.hf_execution.subprocess"

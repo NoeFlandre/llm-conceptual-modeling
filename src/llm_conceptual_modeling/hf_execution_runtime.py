@@ -7,7 +7,7 @@ from llm_conceptual_modeling.hf_execution import (
     run_local_hf_spec_subprocess,
 )
 from llm_conceptual_modeling.hf_execution import runtime as _execution_runtime
-from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
+from llm_conceptual_modeling.hf_worker.persistent import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_worker_policy import (
     resolve_run_retry_attempts,
     resolve_stage_timeout_seconds,

@@ -7,6 +7,8 @@ from llm_conceptual_modeling.paths import default_results_root
 
 def test_default_results_root_is_implemented_in_the_common_package() -> None:
     assert default_results_root.__module__ == "llm_conceptual_modeling.common.paths"
+    assert Path(default_results_root()).parent.name == "data"
+    assert Path(default_results_root()).name == "results"
 
 
 def test_results_layout_contains_frontier_models() -> None:

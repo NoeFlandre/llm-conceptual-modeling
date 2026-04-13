@@ -9,7 +9,7 @@ from typing import Any
 
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
 from llm_conceptual_modeling.hf_active_models import resolve_active_chat_model_slugs
-from llm_conceptual_modeling.hf_failure_markers import classify_failure
+from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.hf_shard_manifest import manifest_identity_keys
 
 _RETRYABLE_FAILURE_KINDS = {"timeout", "oom", "infrastructure", "structural"}

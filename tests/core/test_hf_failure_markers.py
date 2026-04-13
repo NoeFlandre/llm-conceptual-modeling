@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from llm_conceptual_modeling.hf_failure_markers import (
+from llm_conceptual_modeling.common.failure_markers import (
     classify_failure,
     is_retryable_runtime_failure,
 )
@@ -60,3 +60,8 @@ def test_is_retryable_runtime_failure_retries_contrastive_generate_trust_remote_
         )
         is True
     )
+
+
+def test_hf_failure_markers_public_api_lives_in_common_module() -> None:
+    assert classify_failure.__module__ == "llm_conceptual_modeling.common.failure_markers"
+    assert is_retryable_runtime_failure.__module__ == "llm_conceptual_modeling.common.failure_markers"

@@ -25,7 +25,7 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
 )
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
-from llm_conceptual_modeling.hf_subprocess import MonitoredCommandTimeout
+from llm_conceptual_modeling.hf_execution.subprocess import MonitoredCommandTimeout
 
 
 def _valid_edge_result_row(raw_context: dict[str, object]) -> dict[str, object]:

@@ -8,10 +8,10 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
-from llm_conceptual_modeling.hf_failure_markers import (
+from llm_conceptual_modeling.common.failure_markers import (
     is_retryable_runtime_failure,
 )
-from llm_conceptual_modeling.hf_subprocess import (
+from llm_conceptual_modeling.hf_execution.subprocess import (
     MonitoredCommandTimeout,
     _terminate_process,
     build_hf_download_environment,
@@ -168,6 +168,7 @@ class PersistentHFWorkerSession:
 
     def _terminate_process(self, process: subprocess.Popen[str] | Any) -> None:
         _terminate_process(process)
+
 
 def _is_retryable_runtime_error(error: Exception) -> bool:
     return is_retryable_runtime_failure(

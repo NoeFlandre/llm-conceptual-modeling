@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from llm_conceptual_modeling.common.io import coerce_int
-from llm_conceptual_modeling.hf_failure_markers import classify_failure
+from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.hf_resume_profile import RISKY_PHASE, SAFE_PHASE, ResumeProfile
 
 JsonDict = dict[str, Any]

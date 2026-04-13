@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 HUGGING_FACE_BUCKET_REPO = "NoeFlandre/llm-variability-conceptual-modeling"
 HUGGING_FACE_BUCKET_URL = f"https://huggingface.co/{HUGGING_FACE_BUCKET_REPO}"
 GITHUB_REPO_URL = "https://github.com/NoeFlandre/llm-conceptual-modeling"

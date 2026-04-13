@@ -6,11 +6,11 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, Callable, cast
 
-from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec
-from llm_conceptual_modeling.hf_failure_markers import (
+from llm_conceptual_modeling.common.failure_markers import (
     classify_failure,
 )
+from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
+from llm_conceptual_modeling.hf_batch_types import HFRunSpec
 
 JsonObject = dict[str, object]
 
@@ -129,7 +129,7 @@ def load_valid_finished_summary(
     *,
     run_dir: Path,
     algorithm: str,
-    validate_structural_runtime_result_fn: Callable[..., None],
+    validate_structural_runtime_result_fn: Callable[..., None] | None = None,
     write_json_fn: Callable[[Path, dict[str, Any]], None] | None = None,
 ) -> JsonObject | None:
     if not is_finished_run_directory(run_dir):
@@ -137,6 +137,12 @@ def load_valid_finished_summary(
 
     if write_json_fn is None:
         write_json_fn = write_json
+    if validate_structural_runtime_result_fn is None:
+        from llm_conceptual_modeling.hf_pipeline.metrics import (
+            validate_structural_runtime_result as _validate_structural_runtime_result,
+        )
+
+        validate_structural_runtime_result_fn = _validate_structural_runtime_result
 
     summary_path = run_dir / "summary.json"
     raw_row_path = run_dir / "raw_row.json"

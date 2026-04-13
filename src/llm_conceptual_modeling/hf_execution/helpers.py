@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_failure_markers import is_retryable_runtime_failure
+from llm_conceptual_modeling.common.failure_markers import is_retryable_runtime_failure
 from llm_conceptual_modeling.hf_worker_policy import (
     coerce_timeout_seconds as _worker_policy_coerce_timeout_seconds,
 )

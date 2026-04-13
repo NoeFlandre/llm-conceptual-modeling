@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_ledger import refresh_ledger
+from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 
 
 def _write_json(path: Path, payload: dict[str, object]) -> None:
@@ -208,3 +208,7 @@ def test_refresh_ledger_rebuilds_counts_from_multiple_roots(tmp_path: Path) -> N
     assert ledger_payload["finished_count"] == 1
     assert ledger_payload["pending_count"] == 1
     assert ledger_payload["records"][0]["status"] == "finished"
+
+
+def test_hf_ledger_public_api_lives_in_state_module() -> None:
+    assert refresh_ledger.__module__ == "llm_conceptual_modeling.hf_state.ledger"

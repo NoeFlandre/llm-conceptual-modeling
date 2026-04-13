@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 import pytest
 
-from llm_conceptual_modeling.hf_qwen_algo1_tail import (
+from llm_conceptual_modeling.hf_tail.qwen_algo1 import (
     QWEN_ALGO1_TAIL_CONDITION_LABEL,
     QWEN_ALGO1_TAIL_EXPECTED_COUNT,
     QWEN_ALGO1_TAIL_MODEL,
@@ -119,6 +119,27 @@ def _write_tail_ledger(path: Path) -> None:
     )
 
 
+def _seed_tail_run_dirs(root: Path) -> None:
+    for bits in ("00101", "10100"):
+        for replication in range(5):
+            run_dir = (
+                root
+                / "runs"
+                / "algo1"
+                / "Qwen__Qwen3.5-9B"
+                / "contrastive_penalty_alpha_0.8"
+                / "sg1_sg2"
+                / bits
+                / f"rep_{replication:02d}"
+            )
+            run_dir.mkdir(parents=True)
+            (run_dir / "error.json").write_text(
+                '{"type":"RuntimeError","message":"bad"}',
+                encoding="utf-8",
+            )
+            (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+
+
 def test_collect_qwen_algo1_tail_records_requires_exact_expected_surface(tmp_path: Path) -> None:
     results_root = tmp_path / "canonical"
     results_root.mkdir()
@@ -187,21 +208,7 @@ def test_prepare_qwen_algo1_tail_bundle_writes_restricted_manifest_and_config(tm
     canonical_root.mkdir()
     _write_tail_ledger(canonical_root / "ledger.json")
     _write_canonical_runtime_config(canonical_root / "runtime_config.yaml")
-    for bits in ("00101", "10100"):
-        for replication in range(5):
-            run_dir = (
-                canonical_root
-                / "runs"
-                / "algo1"
-                / "Qwen__Qwen3.5-9B"
-                / "contrastive_penalty_alpha_0.8"
-                / "sg1_sg2"
-                / bits
-                / f"rep_{replication:02d}"
-            )
-            run_dir.mkdir(parents=True)
-            (run_dir / "error.json").write_text('{"type":"RuntimeError","message":"bad"}', encoding="utf-8")
-            (run_dir / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    _seed_tail_run_dirs(canonical_root)
 
     tail_parent = tmp_path / "tail-parent"
     tail_root = tail_parent / "hf-paper-batch-qwen-algo1-tail"
@@ -221,7 +228,7 @@ def test_prepare_qwen_algo1_tail_bundle_writes_restricted_manifest_and_config(tm
     assert manifest["active_chat_models"] == [QWEN_ALGO1_TAIL_MODEL]
     assert config["models"]["chat_models"] == [QWEN_ALGO1_TAIL_MODEL]
     assert list(config["algorithms"]) == ["algo1"]
-    assert config["algorithms"]["algo1"]["pair_names"] == ["sg1_sg2"]
+    assert config["algorithms"]["algo1"]["pair_names"] == ["sg1_sg2", "sg2_sg3"]
     assert [item["algorithm"] for item in config["decoding"]] == ["contrastive"]
     assert [item["penalty_alpha"] for item in config["decoding"]] == [0.8]
     assert config["runtime"]["context_policy"]["worker_process_mode"] == "persistent"
@@ -242,6 +249,7 @@ def test_build_qwen_algo1_tail_preflight_report_rejects_degraded_watcher(tmp_pat
     canonical_root.mkdir(parents=True)
     _write_tail_ledger(canonical_root / "ledger.json")
     _write_canonical_runtime_config(canonical_root / "runtime_config.yaml")
+    _seed_tail_run_dirs(canonical_root)
 
     tail_parent = tmp_path / "tail-parent"
     tail_root = tail_parent / "hf-paper-batch-qwen-algo1-tail"
@@ -261,3 +269,8 @@ def test_build_qwen_algo1_tail_preflight_report_rejects_degraded_watcher(tmp_pat
             canonical_results_root=canonical_root,
             tail_results_root=tail_root,
         )
+
+
+def test_hf_tail_qwen_algo1_public_api_lives_in_package_module() -> None:
+    assert collect_qwen_algo1_tail_records.__module__ == "llm_conceptual_modeling.hf_tail.qwen_algo1"
+    assert prepare_qwen_algo1_tail_bundle.__module__ == "llm_conceptual_modeling.hf_tail.qwen_algo1"

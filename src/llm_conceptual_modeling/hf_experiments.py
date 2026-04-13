@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import json
-import sys
-from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, Callable, cast
 
@@ -59,8 +57,11 @@ from llm_conceptual_modeling.hf_batch.utils import (
 from llm_conceptual_modeling.hf_batch_utils import (
     manifest_for_spec as _manifest_for_spec,
 )
-from llm_conceptual_modeling.hf_execution_runtime import (
-    _close_incompatible_persistent_sessions as _execution_close_incompatible_persistent_sessions,
+from llm_conceptual_modeling.hf_execution.runtime import (
+    run_local_hf_spec as _execution_run_local_hf_spec,
+)
+from llm_conceptual_modeling.hf_execution.runtime import (
+    run_local_hf_spec_subprocess as _execution_run_local_hf_spec_subprocess,
 )
 from llm_conceptual_modeling.hf_execution_runtime import (
     build_worker_command as _execution_build_worker_command,
@@ -86,10 +87,6 @@ from llm_conceptual_modeling.hf_execution_runtime import (
 from llm_conceptual_modeling.hf_execution_runtime import (
     resolve_worker_process_mode as _execution_resolve_worker_process_mode,
 )
-from llm_conceptual_modeling.hf_execution_runtime import (
-    run_local_hf_spec_subprocess as _execution_run_local_hf_spec_subprocess,
-)
-from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_pipeline.algo1 import run_algo1 as _pipeline_run_algo1
 from llm_conceptual_modeling.hf_pipeline.algo2 import run_algo2 as _pipeline_run_algo2
 from llm_conceptual_modeling.hf_pipeline.algo3 import run_algo3 as _pipeline_run_algo3
@@ -141,20 +138,13 @@ from llm_conceptual_modeling.hf_resume_state import (
     resolve_retry_timeout_failures_on_resume as _resume_resolve_retry_timeout_failures_on_resume,
 )
 from llm_conceptual_modeling.hf_resume_state import (
-    resume_priority_key as _resume_resume_priority_key,
-)
-from llm_conceptual_modeling.hf_resume_state import (
     status_failures as _resume_status_failures,
 )
 from llm_conceptual_modeling.hf_resume_state import (
     status_int as _resume_status_int,
 )
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
-from llm_conceptual_modeling.hf_spec_codec import serialize_spec
-from llm_conceptual_modeling.hf_subprocess import (
-    build_hf_download_environment,
-    run_monitored_command,
-)
+from llm_conceptual_modeling.hf_worker.persistent import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_worker_state import (
     mark_worker_ready_for_execution as _worker_state_mark_ready_for_execution,
 )
@@ -166,6 +156,39 @@ _resume_resolve_retry_oom_failures_on_resume = resolve_retry_oom_failures_on_res
 _resume_resolve_retry_structural_failures_on_resume = (
     resolve_retry_structural_failures_on_resume
 )
+
+_connection_metric_summary = _pipeline_connection_metric_summary
+_trace_metric_summary = _pipeline_trace_metric_summary
+_summary_from_raw_row = _pipeline_summary_from_raw_row
+_validate_structural_runtime_result = _pipeline_validate_structural_runtime_result
+_sanitize_algorithm_edge_result = _pipeline_sanitize_algorithm_edge_result
+_is_finished_run_directory = _resume_is_finished_run_directory
+_load_valid_finished_summary = _resume_load_valid_finished_summary
+_load_deferred_failed_summary = _resume_load_deferred_failed_summary
+_status_int = _resume_status_int
+_status_failures = _resume_status_failures
+_resolve_retry_timeout_failures_on_resume = _resume_resolve_retry_timeout_failures_on_resume
+_resolve_retry_oom_failures_on_resume = _resume_resolve_retry_oom_failures_on_resume
+_resolve_retry_infrastructure_failures_on_resume = (
+    _resume_resolve_retry_infrastructure_failures_on_resume
+)
+_resolve_retry_structural_failures_on_resume = _resume_resolve_retry_structural_failures_on_resume
+_resolve_resume_pass_mode = _resume_resolve_resume_pass_mode
+_classify_failure_payload = _resume_classify_failure_payload
+_build_worker_command = _execution_build_worker_command
+_run_local_hf_spec_subprocess = _execution_run_local_hf_spec_subprocess
+_run_local_hf_spec = _execution_run_local_hf_spec
+_resolve_startup_timeout_seconds = _execution_resolve_startup_timeout_seconds
+_resolve_stage_timeout_seconds = _execution_resolve_stage_timeout_seconds
+_resolve_run_retry_attempts = _execution_resolve_run_retry_attempts
+_resolve_worker_process_mode = _execution_resolve_worker_process_mode
+_resolve_max_requests_per_worker_process = _execution_resolve_max_requests_per_worker_process
+_is_retryable_worker_error = _execution_is_retryable_worker_error
+_coerce_timeout_seconds = _execution_coerce_timeout_seconds
+_collect_resume_history = _resume_collect_resume_history
+_run_algo1 = _pipeline_run_algo1
+_run_algo2 = _pipeline_run_algo2
+_run_algo3 = _pipeline_run_algo3
 
 
 class BatchInfrastructureFailure(RuntimeError):
@@ -274,10 +297,15 @@ def run_paper_batch(
     persistent_sessions: dict[str, PersistentHFWorkerSession] = {}
     seeded_finished_run_dirs: set[Path] = set()
     seeded_failed_run_dirs: set[Path] = set()
-    planned_specs = _order_planned_specs_for_resume(
+    planned_specs = _resume_order_planned_specs_for_resume(
         planned_specs=planned_specs,
         output_root=output_root_path,
         resume=resume,
+        run_dir_for_spec_fn=lambda current_output_root, spec: _run_dir_for_spec(
+            output_root=current_output_root,
+            spec=spec,
+        ),
+        read_artifact_json_fn=_read_artifact_json,
     )
     total_runs = len(planned_specs)
     started_at = _status_timestamp_now()
@@ -523,14 +551,6 @@ def _build_seeded_resume_snapshot(
     )
 
 
-def _status_int(status_snapshot: dict[str, object], key: str) -> int:
-    return _resume_status_int(status_snapshot, key)
-
-
-def _status_failures(status_snapshot: dict[str, object]) -> list[dict[str, object]]:
-    return _resume_status_failures(status_snapshot)
-
-
 def select_run_spec(
     *,
     config: HFRunConfig,
@@ -683,35 +703,6 @@ def run_single_spec(
     return summary
 
 
-def _is_finished_run_directory(run_dir: Path) -> bool:
-    return _resume_is_finished_run_directory(run_dir)
-
-
-def _load_valid_finished_summary(
-    *,
-    run_dir: Path,
-    algorithm: str,
-) -> dict[str, object] | None:
-    return _resume_load_valid_finished_summary(
-        run_dir=run_dir,
-        algorithm=algorithm,
-        validate_structural_runtime_result_fn=_validate_structural_runtime_result,
-        write_json_fn=_write_json,
-    )
-
-
-def _load_deferred_failed_summary(
-    *,
-    run_dir: Path,
-    context_policy: dict[str, object] | None,
-) -> dict[str, object] | None:
-    return _resume_load_deferred_failed_summary(
-        run_dir=run_dir,
-        context_policy=context_policy,
-        read_artifact_json_fn=_read_artifact_json,
-    )
-
-
 def _smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
     return {
         "algorithm": spec.algorithm,
@@ -767,38 +758,6 @@ def _execute_run(
 
 
 
-def _resolve_retry_timeout_failures_on_resume(
-    context_policy: dict[str, object] | None,
-) -> bool:
-    return _resume_resolve_retry_timeout_failures_on_resume(context_policy)
-
-
-def _resolve_retry_oom_failures_on_resume(
-    context_policy: dict[str, object] | None,
-) -> bool:
-    return _resume_resolve_retry_oom_failures_on_resume(context_policy)
-
-
-def _resolve_retry_infrastructure_failures_on_resume(
-    context_policy: dict[str, object] | None,
-) -> bool:
-    return _resume_resolve_retry_infrastructure_failures_on_resume(context_policy)
-
-
-def _resolve_retry_structural_failures_on_resume(
-    context_policy: dict[str, object] | None,
-) -> bool:
-    return _resume_resolve_retry_structural_failures_on_resume(context_policy)
-
-
-def _resolve_resume_pass_mode(context_policy: dict[str, object] | None) -> str:
-    return _resume_resolve_resume_pass_mode(context_policy)
-
-
-def _classify_failure_payload(error: dict[str, object]) -> str:
-    return _resume_classify_failure_payload(error)
-
-
 def _should_keep_failure_pending_on_resume(
     *,
     resume: bool,
@@ -832,91 +791,6 @@ def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -
     return runtime
 
 
-def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
-    return _execution_run_local_hf_spec_subprocess(
-        spec=spec,
-        run_dir=run_dir,
-        clear_retry_artifacts_fn=_clear_retry_artifacts,
-        write_json_fn=_write_json,
-        serialize_spec_fn=serialize_spec,
-        run_monitored_command_fn=run_monitored_command,
-        build_worker_command_fn=_build_worker_command,
-        build_hf_download_environment_fn=build_hf_download_environment,
-        is_retryable_worker_error_fn=_is_retryable_worker_error,
-        validate_runtime_result_fn=_validate_structural_runtime_result,
-    )
-
-
-def _run_local_hf_spec(
-    *,
-    spec: HFRunSpec,
-    run_dir: Path,
-    output_root: Path,
-    persistent_sessions: dict[str, PersistentHFWorkerSession],
-) -> RuntimeResult:
-    _execution_close_incompatible_persistent_sessions(
-        spec=spec,
-        persistent_sessions=persistent_sessions,
-    )
-    if _resolve_worker_process_mode(spec.context_policy) != "persistent":
-        return _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
-    session = persistent_sessions.get(spec.model)
-    if session is None:
-        queue_dir = output_root / "worker-queues" / _slugify_model(spec.model)
-        session = PersistentHFWorkerSession(
-            queue_dir=queue_dir,
-            worker_python=sys.executable,
-            max_requests_per_process=_resolve_max_requests_per_worker_process(
-                spec.context_policy
-            ),
-        )
-        persistent_sessions[spec.model] = session
-    return session.run_spec(spec=spec, run_dir=run_dir)
-
-
-def _build_worker_command(
-    *,
-    spec_json_path: Path,
-    result_json_path: Path,
-    run_dir: Path,
-) -> list[str]:
-    return _execution_build_worker_command(
-        spec_json_path=spec_json_path,
-        result_json_path=result_json_path,
-        run_dir=run_dir,
-    )
-
-
-def _resolve_startup_timeout_seconds(context_policy: Mapping[str, object] | None) -> float:
-    return _execution_resolve_startup_timeout_seconds(context_policy)
-
-
-def _resolve_stage_timeout_seconds(context_policy: Mapping[str, object] | None) -> float:
-    return _execution_resolve_stage_timeout_seconds(context_policy)
-
-
-def _resolve_run_retry_attempts(context_policy: Mapping[str, object] | None) -> int:
-    return _execution_resolve_run_retry_attempts(context_policy)
-
-
-def _resolve_worker_process_mode(context_policy: Mapping[str, object] | None) -> str:
-    return _execution_resolve_worker_process_mode(context_policy)
-
-
-def _resolve_max_requests_per_worker_process(
-    context_policy: Mapping[str, object] | None,
-) -> int | None:
-    return _execution_resolve_max_requests_per_worker_process(context_policy)
-
-
-def _is_retryable_worker_error(error: dict[str, str]) -> bool:
-    return _execution_is_retryable_worker_error(error)
-
-
-def _coerce_timeout_seconds(raw_value: object) -> float:
-    return _execution_coerce_timeout_seconds(raw_value)
-
-
 def _run_dir_for_spec(*, output_root: Path, spec: HFRunSpec) -> Path:
     return (
         output_root
@@ -928,92 +802,3 @@ def _run_dir_for_spec(*, output_root: Path, spec: HFRunSpec) -> Path:
         / spec.condition_bits
         / f"rep_{spec.replication:02d}"
     )
-
-
-def _order_planned_specs_for_resume(
-    *,
-    planned_specs: list[HFRunSpec],
-    output_root: Path,
-    resume: bool,
-) -> list[HFRunSpec]:
-    return _resume_order_planned_specs_for_resume(
-        planned_specs=planned_specs,
-        output_root=output_root,
-        resume=resume,
-        run_dir_for_spec_fn=lambda current_output_root, spec: _run_dir_for_spec(
-            output_root=current_output_root,
-            spec=spec,
-        ),
-        read_artifact_json_fn=_read_artifact_json,
-    )
-
-
-def _collect_resume_history(output_root: Path) -> dict[str, dict[object, dict[str, int]]]:
-    return _resume_collect_resume_history(
-        output_root=output_root,
-        read_artifact_json_fn=_read_artifact_json,
-    )
-
-
-def _resume_priority_key(
-    *,
-    spec: HFRunSpec,
-    run_dir: Path,
-    history: dict[str, dict[object, dict[str, int]]],
-) -> tuple[float, float, float, str, str, int]:
-    return _resume_resume_priority_key(
-        spec=spec,
-        run_dir=run_dir,
-        history=history,
-        read_artifact_json_fn=_read_artifact_json,
-    )
-
-
-def _run_algo1(
-    spec: HFRunSpec,
-    *,
-    hf_runtime: HFTransformersRuntimeFactory,
-    run_dir: Path | None = None,
-) -> RuntimeResult:
-    return _pipeline_run_algo1(spec, hf_runtime=hf_runtime, run_dir=run_dir)
-
-
-def _run_algo2(
-    spec: HFRunSpec,
-    *,
-    hf_runtime: HFTransformersRuntimeFactory,
-    run_dir: Path | None = None,
-) -> RuntimeResult:
-    return _pipeline_run_algo2(spec, hf_runtime=hf_runtime, run_dir=run_dir)
-
-
-def _run_algo3(
-    spec: HFRunSpec,
-    *,
-    hf_runtime: HFTransformersRuntimeFactory,
-    run_dir: Path | None = None,
-) -> RuntimeResult:
-    return _pipeline_run_algo3(spec, hf_runtime=hf_runtime, run_dir=run_dir)
-
-
-def _connection_metric_summary(raw_row: dict[str, object]) -> dict[str, float]:
-    return _pipeline_connection_metric_summary(raw_row)
-
-
-def _trace_metric_summary(records: list[dict[str, object]]) -> dict[str, float | int]:
-    return _pipeline_trace_metric_summary(records)
-
-
-def _summary_from_raw_row(algorithm: str, raw_row: dict[str, object]) -> dict[str, object]:
-    return _pipeline_summary_from_raw_row(algorithm, raw_row)
-
-
-def _validate_structural_runtime_result(*, algorithm: str, raw_row: dict[str, object]) -> None:
-    _pipeline_validate_structural_runtime_result(algorithm=algorithm, raw_row=raw_row)
-
-
-def _sanitize_algorithm_edge_result(
-    algorithm: str,
-    result_edges: object,
-) -> list[tuple[str, str]]:
-    return _pipeline_sanitize_algorithm_edge_result(algorithm, result_edges)
