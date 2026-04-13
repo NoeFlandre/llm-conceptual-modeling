@@ -1,60 +1,66 @@
 # Codebase Onboarding
 
-This document is the primary orientation guide for anyone working in this
-repository.
+This is the primary operating manual for the repository.
 
-It explains what the codebase does, how the pieces fit together, how to work
-safely, and which rules matter most when you are modifying code, docs, tests,
-or experiment artifacts.
+If you are new here, read this file first. It explains what the codebase does,
+how the modules are organized, how to verify changes, how to keep the tree
+maintainable, and which habits matter most when you touch code, docs, tests, or
+data artifacts.
 
 ## What This Repository Is For
 
 `llm-conceptual-modeling` is the reproducible software companion to the
-manuscript on variability in generative AI for conceptual modeling.
+manuscript on variability in generative AI methods for conceptual modeling.
 
-The repository contains:
+The repository is used to:
 
-- the offline evaluation and analysis pipeline
-- deterministic baselines and parity fixtures
-- batch planning, resume, and worker orchestration for paper experiments
-- documentation for the manuscript-facing workflow
-- verification checks that keep the repo reproducible and maintainable
+- evaluate experiment outputs for Algorithms 1, 2, and 3
+- generate deterministic baselines and factorial summaries
+- run offline analysis, summaries, figures, hypothesis tests, and stability checks
+- support batch planning, result syncing, resume, and worker orchestration for
+  the paper-facing Hugging Face runs
+- preserve archived operational and frontier-model outputs without letting them
+  pollute the main paper-facing result tree
 
-The large experiment payload lives in the separate Hugging Face bucket:
+The source code lives in GitHub. The canonical experiment payload lives in the
+Hugging Face bucket:
 
-- [NoeFlandre/llm-variability-conceptual-modeling](https://huggingface.co/NoeFlandre/llm-variability-conceptual-modeling)
+- [`NoeFlandre/llm-variability-conceptual-modeling`](https://huggingface.co/NoeFlandre/llm-variability-conceptual-modeling)
 
 ## Core Mental Model
 
-Think of the project in three layers:
+Think of the project in four layers:
 
 1. `src/llm_conceptual_modeling/`
-   - all executable code
-   - organized by concern, not by historical accident
+   - executable code, split by concern
 2. `data/`
-   - tracked local mirror of the canonical inputs, results, and derived artifacts
+   - tracked inputs, paper-facing outputs, archives, and deterministic artifacts
 3. `docs/`
-   - long-form guides for contributors and operators
+   - long-form guides, operating rules, and maintainability notes
+4. `tests/`
+   - executable contracts that keep the repo reproducible
 
-The source tree is split by responsibility:
+The source tree is intentionally organized into small packages instead of one
+flat pile of scripts:
 
 - `algo1/`, `algo2/`, `algo3/`
-  - algorithm-specific workflows
-- `common/`
-  - shared parsing, graph, schema, and utility code
-- `commands/`
-  - CLI entrypoints and argument wiring
-- `hf_batch/`, `hf_state/`, `hf_resume/`, `hf_drain/`, `hf_execution/`, `hf_worker/`, `hf_tail/`
-  - batch planning, persistence, resume, execution, worker, and tail-run helpers
-- `hf_pipeline/`
-  - algorithm execution and shared result metrics
+  - algorithm-specific workflows and analysis helpers
 - `analysis/`
-  - deterministic offline analysis
+  - deterministic offline analysis, summaries, plots, and tables
+- `commands/`
+  - CLI entry points
+- `common/`
+  - shared parsing, schemas, I/O, type helpers, and low-level utilities
+- `hf_batch/`, `hf_state/`, `hf_resume/`, `hf_drain/`, `hf_execution/`,
+  `hf_worker/`, `hf_tail/`, `hf_config/`, `hf_pipeline/`
+  - batch planning, canonical state, resume logic, drain logic, execution,
+    worker behavior, final-tail handling, runtime config, and algorithm
+    execution helpers
 - `verification/`
-  - repository health checks
+  - health checks and parity checks
 
-Each major package directory has its own `README.md`. Read the local package
-README before editing that package.
+Each major package directory has a local `README.md`. That local README should
+be the first stop before editing the package internals.
 
 ## What The Codebase Reproduces
 
@@ -62,91 +68,23 @@ Without issuing new LLM calls, the repository can:
 
 - evaluate raw outputs for Algorithms 1 and 2
 - recompute evaluated outputs for Algorithm 3
-- run factorial analysis for all three algorithms
+- run deterministic factorial-analysis post-processing for all three algorithms
 - generate deterministic structural baselines
-- export descriptive summaries, hypothesis tests, stability reports, figures,
-  failure classifications, and variability summaries
-- verify deterministic parity against committed fixtures and the maintained
-  results tree
+- export summaries, failure classifications, figure-ready tables, stability
+  summaries, and output-variability summaries
+- generate variance decomposition outputs for the open-weight ablation study
+- verify deterministic parity against committed fixtures and maintained results
 
-The codebase does **not** promise historical provider replay equivalence.
-It promises deterministic, externally checkable software behavior.
+The repository does **not** promise historical provider replay equivalence. It
+promises deterministic, externally checkable behavior for the maintained data
+and workflows.
 
-## Working Rules
+## Canonical Data And Results Layout
 
-Use these rules whenever you touch the repository:
-
-- Run the baseline tests first.
-- Prefer red/green TDD.
-- Keep changes minimal and reviewable.
-- Do not guess about semantics that can be verified from the code or fixtures.
-- Delete dead code and stale docs when a cleaner source of truth exists.
-- Prefer package-local `README.md` files over a single giant architecture note.
-- Keep every file as small and focused as the design allows.
-- Make wrongness obvious with tests, fixtures, schemas, and CLI checks.
-
-If a task can be expressed as a narrow failing test, do that first.
-
-## Standard Development Loop
-
-1. Inspect the relevant code and tests.
-2. Run the narrowest existing verification command.
-3. Add or update a focused failing test.
-4. Implement the smallest correct fix.
-5. Run the focused tests again.
-6. Update docs when behavior or layout changes.
-7. Run the broader gate before handoff.
-
-This project is too easy to break by broad refactors. Keep the loop short.
-
-## Quality Requirements
-
-The repository should remain:
-
-- reproducible
-- deterministic where possible
-- documented close to the code
-- split by concern into small modules
-- easy to verify locally
-- free of stale helper scripts and duplicated logic
-
-Use `uv`, `ruff`, `ty`, and `pytest` where relevant. Keep dependencies minimal.
-
-## Current Repository Structure
-
-### Source
-
-- `src/llm_conceptual_modeling/algo1`, `algo2`, `algo3`
-  - algorithm-specific workflows and evaluation helpers
-- `src/llm_conceptual_modeling/common`
-  - shared utilities and shared model/data helpers
-- `src/llm_conceptual_modeling/commands`
-  - CLI surface
-- `src/llm_conceptual_modeling/hf_batch`
-  - batch planning, monitoring, and artifact helpers
-- `src/llm_conceptual_modeling/hf_state`
-  - canonical batch state, resume state, ledger, and shard-manifest helpers
-- `src/llm_conceptual_modeling/hf_resume`
-  - user-facing resume wrappers
-- `src/llm_conceptual_modeling/hf_drain`
-  - remaining-run drain planning and supervisor logic
-- `src/llm_conceptual_modeling/hf_execution`
-  - execution mechanics and subprocess monitoring
-- `src/llm_conceptual_modeling/hf_pipeline`
-  - algorithm execution and shared metrics
-- `src/llm_conceptual_modeling/hf_worker`
-  - worker process implementation and policy helpers
-- `src/llm_conceptual_modeling/hf_tail`
-  - dedicated final-tail prep and preflight helpers
-- `src/llm_conceptual_modeling/analysis`
-  - deterministic offline analysis
-- `src/llm_conceptual_modeling/verification`
-  - health checks and parity logic
-
-### Data
+The tracked data tree is the source of truth for local development:
 
 - `data/inputs/`
-  - canonical input payloads
+  - canonical input payloads and resources
 - `data/results/frontier/`
   - archived frontier-model experiment outputs
 - `data/results/open_weights/`
@@ -154,13 +92,11 @@ Use `uv`, `ruff`, `ty`, and `pytest` where relevant. Keep dependencies minimal.
 - `data/results/archives/`
   - preserved OLMO, operational, and stale-shard archives
 - `data/analysis_artifacts/`
-  - revision and analysis outputs
+  - revision, stability, and analysis artifacts
 - `data/baselines/`
   - deterministic baseline artifacts
 
-## Results Handling
-
-The maintained paper-facing results are under:
+Paper-facing open-weight results live under:
 
 - `data/results/open_weights/hf-paper-batch-canonical/`
 
@@ -172,30 +108,158 @@ That canonical tree contains:
 - run directories under `runs/`
 - variance-decomposition outputs under `variance_decomposition/`
 
-Do not trust the physical run tree alone when reasoning about completion state.
-The ledger is the source of truth for finished work.
+When reasoning about completion state, prefer the ledger and the batch metadata
+over the physical directory count alone.
 
-## Remote Execution Lessons
+Archive buckets are for preservation, not active use:
 
-The remote batch and tail workflows taught a few stable rules:
+- frontier experiment outputs go in `data/results/frontier/`
+- OLMO and old operational trees go in `data/results/archives/`
 
-- `current_run` is a claim signal, not proof of useful progress.
-- `batch_status.json`, watcher status, and `ledger.json` are different views.
-- A worker can look idle while it is still loading a model.
-- If a Qwen download stalls, check Xet and blob growth before rewriting parser code.
-- A failure family should become a test before it becomes a patch.
-- Remote deployment should be hash-verified before trusting a host.
+The goal is to keep the paper-facing tree clean and easy to navigate while
+preserving provenance where it matters.
 
-For remote GPU work, the high-level sequence is:
+## How To Work Safely
 
-1. sync the repository
-2. verify the runtime
-3. validate the results root
-4. launch the batch
-5. watch the status and the ledger
-6. finalize and sync locally
+Use these rules on every change:
 
-## Documentation Conventions
+- Run the baseline tests first.
+- Prefer red/green TDD for code changes.
+- Keep the smallest correct diff that solves the actual problem.
+- Do not guess about semantics that can be checked from the code or fixtures.
+- Make wrongness visible through tests, fixtures, schemas, and CLI checks.
+- Delete dead code, stale docs, obsolete scripts, and duplicate paths.
+- Prefer package-local READMEs over a single giant architecture note.
+- Keep files small and focused. If a file becomes a grab-bag, split it.
+- Treat every inference as provisional until you verify it.
+
+The repository has been shaped by repeated operational work. That means there are
+often several similar files or helper paths. Before you add another helper,
+check whether an existing package already owns that responsibility.
+
+## Standard Development Loop
+
+1. Inspect the relevant code, docs, and tests.
+2. Run the narrowest existing verification command.
+3. Add or update a focused failing test.
+4. Implement the smallest correct fix.
+5. Run the focused tests again.
+6. Update docs when behavior, layout, or operating assumptions change.
+7. Run the broader gate before handoff.
+
+This repository is easy to damage with broad refactors. Keep the loop short and
+keep the verification local.
+
+## Verification Workflow
+
+Use the repository’s normal toolchain:
+
+```bash
+uv sync --dev
+uv run pytest
+uv run ruff check .
+uv run ty check
+uv run lcm verify all --json
+```
+
+Prefer the narrowest useful command first, then expand outward:
+
+- a focused unit test before a full suite
+- a CLI smoke check before a broad doctor run
+- a fixture-based regression before a live run
+
+If a task touches analysis outputs, verify both the machine-readable artifact
+and the relevant regression test. If it touches orchestration, verify the
+runtime path, the ledger/state path, and the result snapshot together.
+
+## Repository Standards
+
+The repo should stay:
+
+- reproducible
+- deterministic where possible
+- documented close to the code
+- split by concern into small modules
+- easy to verify locally
+- free of stale helpers and duplicated logic
+
+The standard toolchain is:
+
+- `uv` for environment and dependency management
+- `ruff` for linting and formatting
+- `ty` for type checking
+- `pytest` for tests
+
+Keep dependencies minimal. If a dependency is only used by one abandoned path,
+remove it.
+
+## Source Tree Guide
+
+The package boundaries exist for a reason. Use the local README in each package
+before you edit internals.
+
+- `src/llm_conceptual_modeling/algo1/`
+  - Algorithm 1 evaluation, generation, factorial analysis, and baseline logic
+- `src/llm_conceptual_modeling/algo2/`
+  - Algorithm 2 evaluation, generation, factorial analysis, embeddings, and
+    baseline logic
+- `src/llm_conceptual_modeling/algo3/`
+  - Algorithm 3 tree-expansion, evaluation, generation, and factorial logic
+- `src/llm_conceptual_modeling/analysis/`
+  - summaries, figures, stability, variability, failure categorization,
+    variance decomposition, and paper-facing tables
+- `src/llm_conceptual_modeling/commands/`
+  - CLI wiring and command grouping
+- `src/llm_conceptual_modeling/common/`
+  - core helpers shared by the rest of the repo
+- `src/llm_conceptual_modeling/hf_batch/`
+  - batch planning, artifact handling, monitoring, types, and prompts
+- `src/llm_conceptual_modeling/hf_state/`
+  - batch state, ledger, resume state, and shard-manifest helpers
+- `src/llm_conceptual_modeling/hf_resume/`
+  - user-facing resume wrappers and preflight checks
+- `src/llm_conceptual_modeling/hf_drain/`
+  - remaining-run drain planning and supervisor logic
+- `src/llm_conceptual_modeling/hf_execution/`
+  - subprocess execution helpers and runtime orchestration
+- `src/llm_conceptual_modeling/hf_worker/`
+  - worker request, policy, state, result, entrypoint, and persistent-worker
+    logic
+- `src/llm_conceptual_modeling/hf_tail/`
+  - final-tail preparation and preflight helpers
+- `src/llm_conceptual_modeling/hf_config/`
+  - runtime configuration helpers
+- `src/llm_conceptual_modeling/hf_pipeline/`
+  - shared algorithm execution and metrics helpers
+- `src/llm_conceptual_modeling/verification/`
+  - repo health and parity checks
+
+Flat compatibility modules still exist where needed, but they should remain
+thin. When you see a large root-level module, treat it as a candidate for a
+package split.
+
+## Refactoring Rules
+
+When you are improving code structure:
+
+- split by responsibility, not by arbitrary file count
+- keep public facades thin and stable
+- move logic into focused package modules
+- remove dead wrappers after callers are repointed
+- prefer one small package with a clear README over one giant “utils” file
+- keep line count low per file, but do not create tiny files that obscure the
+  flow of responsibility
+
+The target is not maximal fragmentation. The target is clear ownership:
+
+- one package boundary for one coherent concern
+- one file for one focused job when practical
+- one public import surface per concern
+
+If a refactor adds more files, keep them grouped in subfolders and document the
+new boundaries immediately.
+
+## Documentation Rules
 
 Use this order when looking for information:
 
@@ -205,14 +269,82 @@ Use this order when looking for information:
 4. the narrow implementation file
 5. the matching test
 
-Long, one-off revision notes should not become permanent architecture docs.
-Delete or archive them once the stable package README or onboarding guide covers
-the same ground.
+Keep docs close to the code they describe. Prefer short package READMEs for
+local orientation and reserve the onboarding guide for cross-cutting rules and
+operating knowledge.
 
-## Future Experimental Work
+Do not keep long-lived revision notes once the stable package README or the
+onboarding guide covers the same ground. Delete or archive stale docs instead of
+letting them accumulate.
 
-The next likely expansion of the codebase is HTML causal-map ingestion and more
-experiments over Qwen and Mistral with the existing decoding strategies.
+## Remote Execution Lessons
+
+The remote batch and tail workflows produced a few stable lessons:
+
+- `current_run` is a claim signal, not proof of useful progress
+- `batch_status.json`, watcher status, and `ledger.json` are different views and
+  can temporarily disagree
+- a worker may look idle while it is still loading a model
+- model-switch churn can dominate time if the queue is not ordered carefully
+- a parser bug should become a regression test before it becomes a one-off fix
+- remote deployment should be hash-verified before trusting the host
+- if a Qwen download or startup stalls, inspect the runtime and logs before
+  changing the algorithm logic
+
+For remote GPU work, the stable sequence is:
+
+1. sync the repository
+2. verify the runtime environment
+3. validate the results root
+4. launch the batch or tail workflow
+5. watch the status, logs, and ledger
+6. finalize and sync locally
+
+The main operational rule is: do not reason from one artifact in isolation.
+Use the ledger, batch status, logs, and run directories together.
+
+## Results Hygiene
+
+The maintained result tree should stay clean and understandable:
+
+- keep paper-facing open-weight results in `data/results/open_weights/`
+- keep imported frontier outputs in `data/results/frontier/`
+- keep archives in `data/results/archives/`
+- keep scratch files, previews, and operational leftovers out of the maintained
+  tree
+
+Do not delete provenance-bearing artifacts unless you are sure they are
+redundant. If a result is archived, preserve the files needed to explain it:
+
+- `ledger.json`
+- `batch_status.json`
+- `runtime_config.yaml`
+- run logs
+- run summaries
+- sync logs
+
+If a folder is only an operational checkpoint or temporary workdir, archive it
+or remove it once you have verified that no finished result depends on it.
+
+## Quality Expectations
+
+The codebase should remain:
+
+- maintainable by a fresh contributor
+- easy to navigate from package README to implementation
+- explicit about what is canonical and what is archive
+- mechanically verifiable by tests and CLI commands
+- free of stale experiment-only clutter in tracked docs or source files
+
+When you find a bug, treat it as a documentation opportunity too. Add the
+regression test, fix the code, and update the relevant guide so the next person
+does not rediscover the same issue.
+
+## Future Work: HTML Causal Maps And New Experiments
+
+The next likely expansion is HTML causal-map ingestion plus more Qwen and
+Mistral experiments over the existing decoding strategies and design-of-
+experiments surface.
 
 Before adding that work:
 
@@ -221,6 +353,7 @@ Before adding that work:
 - add a narrow failing test before implementing the feature
 - keep the new code path aligned with the existing deterministic analysis and
   verification conventions
+- avoid reintroducing a flat helper dump under `src/`
 
-The goal is to make future experiments easy to add without turning the repo
-back into a flat pile of scripts.
+The point is to make future experiments easy to add without turning the repo
+back into an unreadable script pile.
