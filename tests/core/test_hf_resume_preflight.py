@@ -16,6 +16,8 @@ def _config(output_root: Path) -> object:
             chat_models=["allenai/Olmo-3-7B-Instruct"],
             embedding_model="Qwen/Qwen3-Embedding-0.6B",
         ),
+        algorithms={},
+        decoding=[],
     )
 
 
@@ -43,11 +45,11 @@ def test_build_resume_preflight_report_counts_pending_work_from_existing_seed(
     results_root.mkdir()
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.plan_paper_batch",
+        "llm_conceptual_modeling.hf_resume.preflight.plan_paper_batch",
         lambda **_kwargs: [object(), object(), object()],
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.build_seeded_resume_snapshot",
+        "llm_conceptual_modeling.hf_resume.preflight.build_seeded_resume_snapshot",
         lambda **_kwargs: (
             {
                 "finished_count": 1,
@@ -64,6 +66,7 @@ def test_build_resume_preflight_report_counts_pending_work_from_existing_seed(
         config=_config(results_root),
         repo_root=repo_root,
         results_root=results_root,
+        allow_empty=True,
     )
 
     assert report["results_root_exists"] is True
@@ -93,11 +96,11 @@ def test_build_resume_preflight_report_marks_running_root_as_active(
     )
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.plan_paper_batch",
+        "llm_conceptual_modeling.hf_resume.preflight.plan_paper_batch",
         lambda **_kwargs: [object(), object(), object()],
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.build_seeded_resume_snapshot",
+        "llm_conceptual_modeling.hf_resume.preflight.build_seeded_resume_snapshot",
         lambda **_kwargs: (
             {
                 "finished_count": 1,
@@ -114,6 +117,7 @@ def test_build_resume_preflight_report_marks_running_root_as_active(
         config=_config(results_root),
         repo_root=repo_root,
         results_root=results_root,
+        allow_empty=True,
     )
 
     assert report["running_count"] == 1
@@ -141,11 +145,11 @@ def test_build_resume_preflight_report_ignores_malformed_running_count(
     )
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.plan_paper_batch",
+        "llm_conceptual_modeling.hf_resume.preflight.plan_paper_batch",
         lambda **_kwargs: [object(), object(), object()],
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.build_seeded_resume_snapshot",
+        "llm_conceptual_modeling.hf_resume.preflight.build_seeded_resume_snapshot",
         lambda **_kwargs: (
             {
                 "finished_count": 1,
@@ -162,6 +166,7 @@ def test_build_resume_preflight_report_ignores_malformed_running_count(
         config=_config(results_root),
         repo_root=repo_root,
         results_root=results_root,
+        allow_empty=True,
     )
 
     assert report["running_count"] == 0
@@ -188,11 +193,11 @@ def test_build_resume_preflight_report_ignores_boolean_running_count(
     )
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.plan_paper_batch",
+        "llm_conceptual_modeling.hf_resume.preflight.plan_paper_batch",
         lambda **_kwargs: [object(), object(), object()],
     )
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_resume_preflight.build_seeded_resume_snapshot",
+        "llm_conceptual_modeling.hf_resume.preflight.build_seeded_resume_snapshot",
         lambda **_kwargs: (
             {
                 "finished_count": 1,
@@ -209,6 +214,7 @@ def test_build_resume_preflight_report_ignores_boolean_running_count(
         config=_config(results_root),
         repo_root=repo_root,
         results_root=results_root,
+        allow_empty=True,
     )
 
     assert report["running_count"] == 0
