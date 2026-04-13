@@ -67,3 +67,39 @@ def test_tmp_tree_has_no_known_generated_artifacts() -> None:
 
 def test_root_result_json_artifact_is_removed() -> None:
     assert not (REPO_ROOT / "--result-json").exists()
+
+
+def test_source_packages_have_local_readmes() -> None:
+    package_dirs = [
+        "src/llm_conceptual_modeling",
+        "src/llm_conceptual_modeling/analysis",
+        "src/llm_conceptual_modeling/algo1",
+        "src/llm_conceptual_modeling/algo2",
+        "src/llm_conceptual_modeling/algo3",
+        "src/llm_conceptual_modeling/commands",
+        "src/llm_conceptual_modeling/common",
+        "src/llm_conceptual_modeling/hf_batch",
+        "src/llm_conceptual_modeling/hf_config",
+        "src/llm_conceptual_modeling/hf_drain",
+        "src/llm_conceptual_modeling/hf_execution",
+        "src/llm_conceptual_modeling/hf_pipeline",
+        "src/llm_conceptual_modeling/hf_resume",
+        "src/llm_conceptual_modeling/hf_state",
+        "src/llm_conceptual_modeling/hf_tail",
+        "src/llm_conceptual_modeling/hf_worker",
+        "src/llm_conceptual_modeling/verification",
+        "docs",
+    ]
+
+    missing_readmes = [
+        REPO_ROOT / package_dir / "README.md"
+        for package_dir in package_dirs
+        if not (REPO_ROOT / package_dir / "README.md").exists()
+    ]
+
+    assert missing_readmes == []
+
+
+def test_revision_summary_docs_are_removed() -> None:
+    assert not (REPO_ROOT / "docs" / "revision-summary.md").exists()
+    assert not (REPO_ROOT / "docs" / "revision-summary-compact.md").exists()

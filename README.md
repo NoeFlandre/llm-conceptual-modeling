@@ -345,14 +345,18 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
 
 ## Repository Structure
 
+- Each major package directory under `src/llm_conceptual_modeling/` has its own
+  `README.md` describing its purpose and maintenance boundary.
 - `src/llm_conceptual_modeling/`
   Package source code.
 - `src/llm_conceptual_modeling/algo1`, `algo2`, `algo3`
   Algorithm-specific workflows.
 - `src/llm_conceptual_modeling/common`
-  Shared evaluation, factorial-analysis, graph, parsing, path, and schema logic.
+  Shared evaluation, factorial-analysis, graph, parsing, path, schema, and failure-classification logic.
 - `src/llm_conceptual_modeling/hf_pipeline`
   Algorithm execution, shared result metrics, and worker-ready helpers used by the legacy `hf_experiments.py` facade.
+- `src/llm_conceptual_modeling/hf_experiments.py`
+  Compatibility facade for the paper-batch orchestration entrypoint. The implementation delegates to `hf_pipeline`, `hf_state`, `hf_execution`, and `hf_worker` package modules.
 - `src/llm_conceptual_modeling/hf_batch`
   Batch-planning, prompt-building, outputs, utility helpers, monitoring, run-artifact, and type helpers grouped under one namespace.
 - `src/llm_conceptual_modeling/hf_state`
@@ -361,8 +365,11 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
   Drain planning and runtime supervisor logic for the remaining-results sweep.
 - `src/llm_conceptual_modeling/hf_execution`
   Local worker execution helpers, subprocess fallback, and persistent-session orchestration.
+  The subprocess monitor itself lives in `hf_execution/subprocess.py`.
 - `src/llm_conceptual_modeling/hf_worker`
   Worker entrypoint plus request, result, state, and policy helpers.
+- `src/llm_conceptual_modeling/hf_tail`
+  Dedicated tail-preparation helpers for the final Qwen algo1 bundle and preflight flow.
 - `src/llm_conceptual_modeling/verification`
   Doctor, legacy-parity, and repository verification logic.
 - `src/llm_conceptual_modeling/commands`
