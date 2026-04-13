@@ -364,7 +364,7 @@ bash scripts/vast/finalize_qwen_algo1_tail.sh \
 - `src/llm_conceptual_modeling/verification`
   Doctor, legacy-parity, and repository verification logic.
 - `src/llm_conceptual_modeling/commands`
-  CLI handlers.
+  CLI entrypoint and subcommand handlers.
 - `src/llm_conceptual_modeling/analysis`
   Deterministic offline analysis helpers.
 - `docs/architecture.md`

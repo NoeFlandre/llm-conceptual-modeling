@@ -6,6 +6,10 @@ import pytest
 from llm_conceptual_modeling.cli import main
 
 
+def test_cli_main_is_implemented_in_the_commands_package() -> None:
+    assert main.__module__ == "llm_conceptual_modeling.commands.cli"
+
+
 def test_cli_analyze_summary_bundle_writes_organized_review_artifacts(tmp_path) -> None:
     results_root = tmp_path / "results"
     _copy_fixture(
