@@ -103,3 +103,40 @@ def test_source_packages_have_local_readmes() -> None:
 def test_revision_summary_docs_are_removed() -> None:
     assert not (REPO_ROOT / "docs" / "revision-summary.md").exists()
     assert not (REPO_ROOT / "docs" / "revision-summary-compact.md").exists()
+
+
+def test_onboarding_doc_renamed_and_present() -> None:
+    onboarding_doc = REPO_ROOT / "docs" / "onboarding.md"
+    old_handoff = REPO_ROOT / "qwen-mistral-remote-ops-handoff.md"
+
+    assert onboarding_doc.exists()
+    assert not old_handoff.exists()
+
+
+def test_docs_directory_keeps_only_maintained_guides() -> None:
+    docs_root = REPO_ROOT / "docs"
+    expected_files = {
+        "README.md",
+        "architecture.md",
+        "algo1-method1-guide.md",
+        "algo2-method2-guide.md",
+        "algo3-method3-guide.md",
+        "huggingface-dataset-README.md",
+        "onboarding.md",
+        "variance-decomposition.md",
+        "vast-ai-transformers.md",
+    }
+
+    top_level_files = {
+        path.name
+        for path in docs_root.iterdir()
+        if path.is_file() and path.name != ".DS_Store"
+    }
+    top_level_dirs = {
+        path.name
+        for path in docs_root.iterdir()
+        if path.is_dir()
+    }
+
+    assert top_level_files == expected_files
+    assert top_level_dirs == set()

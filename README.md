@@ -282,7 +282,7 @@ decoding-factor DOE analysis and the explicit residual `Error` row in `factorial
 Remote GPU workflow:
 
 - bootstrap and CUDA verification: [docs/vast-ai-transformers.md](docs/vast-ai-transformers.md)
-- long-form operator handoff and failure playbook: [qwen-mistral-remote-ops-handoff.md](qwen-mistral-remote-ops-handoff.md)
+- onboarding guide and operating playbook: [docs/onboarding.md](docs/onboarding.md)
 - helper scripts:
   - `scripts/vast/bootstrap_gpu_host.sh`
   - `scripts/vast/sync_repo_to_vast.sh`

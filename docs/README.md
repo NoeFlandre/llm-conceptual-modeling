@@ -5,6 +5,7 @@ the repository.
 
 ## Keep
 
+- `onboarding.md`
 - `architecture.md`
 - `variance-decomposition.md`
 - `vast-ai-transformers.md`

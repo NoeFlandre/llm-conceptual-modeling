@@ -60,7 +60,8 @@ exists, because the paid host only needs Docker and the image pull.
 
 ## Operator Rules
 
-Fresh onboarding agents should follow these rules before changing code or relaunching a paid host:
+Fresh onboarding agents should read [docs/onboarding.md](docs/onboarding.md)
+before changing code or relaunching a paid host. The most important rules are:
 
 - Treat `data/results/open_weights/hf-paper-batch-canonical/ledger.json` as the source of truth for unfinished work.
 - Do not trust the physical run tree to tell you how many runs remain.
