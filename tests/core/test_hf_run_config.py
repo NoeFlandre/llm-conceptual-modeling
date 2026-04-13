@@ -239,14 +239,26 @@ algorithms:
 
 
 def test_qwen_batch_runtime_config_is_hardened_for_resume() -> None:
-    config = load_hf_run_config("results/hf-paper-batch-algo1-qwen/runtime_config.yaml")
+    config = load_hf_run_config("data/results/open_weights/hf-paper-batch-canonical/runtime_config.yaml")
 
-    assert config.run.output_root == "/workspace/results/hf-paper-batch-algo1-qwen"
-    assert [decoding.algorithm for decoding in config.decoding] == ["greedy", "beam", "beam"]
-    assert [decoding.num_beams for decoding in config.decoding] == [None, 2, 6]
-    assert [decoding.penalty_alpha for decoding in config.decoding] == [None, None, None]
-    assert config.runtime.context_policy["generation_timeout_seconds"] == 60.0
-    assert config.runtime.context_policy["resume_pass_mode"] == "retry-timeouts"
+    assert config.run.output_root == "/workspace/results/hf-paper-batch-canonical"
+    assert [decoding.algorithm for decoding in config.decoding] == [
+        "greedy",
+        "beam",
+        "beam",
+        "contrastive",
+        "contrastive",
+    ]
+    assert [decoding.num_beams for decoding in config.decoding] == [None, 2, 6, None, None]
+    assert [decoding.penalty_alpha for decoding in config.decoding] == [
+        None,
+        None,
+        None,
+        0.2,
+        0.8,
+    ]
+    assert config.runtime.context_policy["generation_timeout_seconds"] == 45.0
+    assert "resume_pass_mode" not in config.runtime.context_policy
     assert config.runtime.context_policy["retry_timeout_failures_on_resume"] is True
     assert config.algorithms["algo1"].pair_names == ["sg1_sg2", "sg2_sg3", "sg3_sg1"]
     assert config.algorithms["algo1"].prompt_templates["direct_edge"] == ""
@@ -324,7 +336,7 @@ def test_algo2_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
 
 
 def test_algo1_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
-    config = load_hf_run_config("results/hf-paper-batch-algo1-olmo-current/runtime_config.yaml")
+    config = load_hf_run_config("data/results/archives/olmo/hf-paper-batch-algo1-olmo-current/runtime_config.yaml")
 
     assert config.models.chat_models == ["allenai/Olmo-3-7B-Instruct"]
     assert config.runtime.context_policy["generation_timeout_seconds"] == 180.0
@@ -334,7 +346,7 @@ def test_algo1_olmo_batch_runtime_config_is_hardened_for_resume() -> None:
 
 
 def test_canonical_batch_runtime_config_focuses_on_qwen_and_mistral() -> None:
-    config_path = Path("results/hf-paper-batch-canonical/runtime_config.yaml")
+    config_path = Path("data/results/open_weights/hf-paper-batch-canonical/runtime_config.yaml")
     config_text = config_path.read_text(encoding="utf-8")
     config = load_hf_run_config(config_path)
 
