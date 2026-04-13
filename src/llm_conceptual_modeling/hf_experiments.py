@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import re
 import sys
 from collections.abc import Mapping
 from pathlib import Path
@@ -9,32 +8,12 @@ from typing import Any, Callable, cast
 
 import pandas as pd
 
-from llm_conceptual_modeling.algo1.method import execute_method1
-from llm_conceptual_modeling.algo1.mistral import (
-    build_cove_verifier,
-    build_edge_generator,
-)
-from llm_conceptual_modeling.algo2.method import execute_method2
-from llm_conceptual_modeling.algo2.mistral import (
-    build_edge_suggester,
-    build_label_proposer,
-)
-from llm_conceptual_modeling.algo3.method import (
-    ChildDictionaryProposer,
-    build_tree_expander,
-    execute_method3,
-)
-from llm_conceptual_modeling.algo3.mistral import build_child_proposer
-from llm_conceptual_modeling.common.connection_eval import find_valid_connections
-from llm_conceptual_modeling.common.graph_data import load_algo2_thesaurus
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     HFTransformersRuntimeFactory,
     RuntimeProfile,
     build_runtime_factory,
 )
-from llm_conceptual_modeling.common.literals import parse_python_literal
-from llm_conceptual_modeling.common.mistral import _format_knowledge_map
 from llm_conceptual_modeling.hf_batch.monitoring import (
     current_run_payload as _current_run_payload,
 )
@@ -52,21 +31,6 @@ from llm_conceptual_modeling.hf_batch.planning import (
 from llm_conceptual_modeling.hf_batch.prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
 )
-from llm_conceptual_modeling.hf_batch.prompts import (
-    generate_edges_from_prompt as _generate_edges_from_prompt,
-)
-from llm_conceptual_modeling.hf_batch.prompts import (
-    propose_children_from_prompt as _propose_children_from_prompt,
-)
-from llm_conceptual_modeling.hf_batch.prompts import (
-    propose_labels_from_prompt as _propose_labels_from_prompt,
-)
-from llm_conceptual_modeling.hf_batch.prompts import (
-    render_prompt as _render_prompt,
-)
-from llm_conceptual_modeling.hf_batch.prompts import (
-    verify_edges_from_prompt as _verify_edges_from_prompt,
-)
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     clear_retry_artifacts as _clear_retry_artifacts,
 )
@@ -81,13 +45,7 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
 )
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeFactory, RuntimeResult
 from llm_conceptual_modeling.hf_batch.utils import (
-    RecordingChatClient as _RecordingChatClient,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
     resolve_hf_token as _resolve_hf_token,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    runtime_details as _runtime_details,
 )
 from llm_conceptual_modeling.hf_batch.utils import (
     slugify_model as _slugify_model,
@@ -97,21 +55,6 @@ from llm_conceptual_modeling.hf_batch.utils import (
 )
 from llm_conceptual_modeling.hf_batch.utils import (
     write_text as _write_text,
-)
-from llm_conceptual_modeling.hf_batch_utils import (
-    algo1_prompt_config as _algo1_prompt_config,
-)
-from llm_conceptual_modeling.hf_batch_utils import (
-    algo2_prompt_config as _algo2_prompt_config,
-)
-from llm_conceptual_modeling.hf_batch_utils import (
-    algo3_prompt_config as _algo3_prompt_config,
-)
-from llm_conceptual_modeling.hf_batch_utils import (
-    coerce_edges as _coerce_edges,
-)
-from llm_conceptual_modeling.hf_batch_utils import (
-    collect_nodes as _collect_nodes,
 )
 from llm_conceptual_modeling.hf_batch_utils import (
     manifest_for_spec as _manifest_for_spec,
@@ -147,6 +90,24 @@ from llm_conceptual_modeling.hf_execution_runtime import (
     run_local_hf_spec_subprocess as _execution_run_local_hf_spec_subprocess,
 )
 from llm_conceptual_modeling.hf_persistent_worker import PersistentHFWorkerSession
+from llm_conceptual_modeling.hf_pipeline.algo1 import run_algo1 as _pipeline_run_algo1
+from llm_conceptual_modeling.hf_pipeline.algo2 import run_algo2 as _pipeline_run_algo2
+from llm_conceptual_modeling.hf_pipeline.algo3 import run_algo3 as _pipeline_run_algo3
+from llm_conceptual_modeling.hf_pipeline.metrics import (
+    connection_metric_summary as _pipeline_connection_metric_summary,
+)
+from llm_conceptual_modeling.hf_pipeline.metrics import (
+    sanitize_algorithm_edge_result as _pipeline_sanitize_algorithm_edge_result,
+)
+from llm_conceptual_modeling.hf_pipeline.metrics import (
+    summary_from_raw_row as _pipeline_summary_from_raw_row,
+)
+from llm_conceptual_modeling.hf_pipeline.metrics import (
+    trace_metric_summary as _pipeline_trace_metric_summary,
+)
+from llm_conceptual_modeling.hf_pipeline.metrics import (
+    validate_structural_runtime_result as _pipeline_validate_structural_runtime_result,
+)
 from llm_conceptual_modeling.hf_resume_state import (
     build_seeded_resume_snapshot as _resume_build_seeded_resume_snapshot,
 )
@@ -172,16 +133,12 @@ from llm_conceptual_modeling.hf_resume_state import (
     resolve_resume_pass_mode as _resume_resolve_resume_pass_mode,
 )
 from llm_conceptual_modeling.hf_resume_state import (
+    resolve_retry_infrastructure_failures_on_resume,
+    resolve_retry_oom_failures_on_resume,
+    resolve_retry_structural_failures_on_resume,
+)
+from llm_conceptual_modeling.hf_resume_state import (
     resolve_retry_timeout_failures_on_resume as _resume_resolve_retry_timeout_failures_on_resume,
-)
-from llm_conceptual_modeling.hf_resume_state import (
-    resolve_retry_oom_failures_on_resume as _resume_resolve_retry_oom_failures_on_resume,
-)
-from llm_conceptual_modeling.hf_resume_state import (
-    resolve_retry_infrastructure_failures_on_resume as _resume_resolve_retry_infrastructure_failures_on_resume,
-)
-from llm_conceptual_modeling.hf_resume_state import (
-    resolve_retry_structural_failures_on_resume as _resume_resolve_retry_structural_failures_on_resume,
 )
 from llm_conceptual_modeling.hf_resume_state import (
     resume_priority_key as _resume_resume_priority_key,
@@ -200,6 +157,14 @@ from llm_conceptual_modeling.hf_subprocess import (
 )
 from llm_conceptual_modeling.hf_worker_state import (
     mark_worker_ready_for_execution as _worker_state_mark_ready_for_execution,
+)
+
+_resume_resolve_retry_infrastructure_failures_on_resume = (
+    resolve_retry_infrastructure_failures_on_resume
+)
+_resume_resolve_retry_oom_failures_on_resume = resolve_retry_oom_failures_on_resume
+_resume_resolve_retry_structural_failures_on_resume = (
+    resolve_retry_structural_failures_on_resume
 )
 
 
@@ -465,8 +430,14 @@ def run_paper_batch(
                         "message": str(error),
                         "type": type(error).__name__,
                     }
-                    status_snapshot["failed_count"] = _status_int(status_snapshot, "failed_count") + 1
-                    status_snapshot["pending_count"] = _status_int(status_snapshot, "pending_count") - 1
+                    status_snapshot["failed_count"] = _status_int(
+                        status_snapshot,
+                        "failed_count",
+                    ) + 1
+                    status_snapshot["pending_count"] = _status_int(
+                        status_snapshot,
+                        "pending_count",
+                    ) - 1
                     failures.append(failure_entry)
                     status_snapshot["failures"] = failures
                     status_snapshot["failure_count"] = len(failures)
@@ -1004,94 +975,7 @@ def _run_algo1(
     hf_runtime: HFTransformersRuntimeFactory,
     run_dir: Path | None = None,
 ) -> RuntimeResult:
-    subgraph1 = _coerce_edges(spec.input_payload["subgraph1"])
-    subgraph2 = _coerce_edges(spec.input_payload["subgraph2"])
-    graph = _coerce_edges(spec.input_payload["graph"])
-    prompt_config = _algo1_prompt_config(spec.prompt_factors)
-    chat_client = hf_runtime.build_chat_client(
-        model=spec.model,
-        decoding_config=spec.decoding,
-        max_new_tokens_by_schema=spec.max_new_tokens_by_schema,
-        context_policy=spec.context_policy,
-        seed=spec.seed,
-    )
-    _mark_worker_ready_for_execution(run_dir)
-    recorder = _RecordingChatClient(
-        chat_client,
-        persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
-        active_stage_path=(run_dir / "active_stage.json") if run_dir is not None else None,
-        active_stage_context={
-            "algorithm": spec.algorithm,
-            "pair_name": spec.pair_name,
-            "condition_bits": spec.condition_bits,
-            "replication": spec.replication,
-            "model": spec.model,
-            "decoding_algorithm": spec.decoding.algorithm,
-        },
-    )
-    if spec.prompt_bundle is None:
-        result = execute_method1(
-            subgraph1=subgraph1,
-            subgraph2=subgraph2,
-            generate_edges=build_edge_generator(recorder, prompt_config=prompt_config),
-            verify_edges=build_cove_verifier(recorder),
-        )
-    else:
-        prompt_bundle = spec.prompt_bundle
-        formatted_subgraph1 = _format_knowledge_map(subgraph1, prompt_config=prompt_config)
-        formatted_subgraph2 = _format_knowledge_map(subgraph2, prompt_config=prompt_config)
-        stage_path = None if run_dir is None else run_dir / "stages" / "algo1_edge_generation.json"
-        if stage_path is not None and stage_path.exists():
-            stage_payload = json.loads(stage_path.read_text(encoding="utf-8"))
-            candidate_edges = [tuple(edge) for edge in stage_payload["candidate_edges"]]
-        else:
-            candidate_edges = _generate_edges_from_prompt(
-                recorder,
-                _render_prompt(
-                    prompt_bundle["direct_edge"],
-                    formatted_subgraph1=formatted_subgraph1,
-                    formatted_subgraph2=formatted_subgraph2,
-                ),
-            )
-            if stage_path is not None:
-                stage_path.parent.mkdir(parents=True, exist_ok=True)
-                _write_json(
-                    stage_path,
-                    {"candidate_edges": [list(edge) for edge in candidate_edges]},
-                )
-        verified_edges = _verify_edges_from_prompt(
-            recorder,
-            _render_prompt(
-                prompt_bundle["cove_verification"],
-                candidate_edges=repr(candidate_edges),
-            ),
-            candidate_edges,
-        )
-        result = execute_method1(
-            subgraph1=subgraph1,
-            subgraph2=subgraph2,
-            generate_edges=lambda *, subgraph1, subgraph2: candidate_edges,
-            verify_edges=lambda candidate_edges: verified_edges,
-        )
-    sanitized_verified_edges = _sanitize_algorithm_edge_result("algo1", result.verified_edges)
-    raw_row = {
-        **spec.raw_context,
-        "Result": repr(sanitized_verified_edges),
-        "graph": repr(graph),
-        "subgraph1": repr(subgraph1),
-        "subgraph2": repr(subgraph2),
-    }
-    return {
-        "raw_row": raw_row,
-        "runtime": _runtime_details(spec.runtime_profile),
-        "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
-        "summary": {
-            "candidate_edge_count": len(result.candidate_edges),
-            "verified_edge_count": len(sanitized_verified_edges),
-            **_trace_metric_summary(recorder.records),
-            **_connection_metric_summary(raw_row),
-        },
-    }
+    return _pipeline_run_algo1(spec, hf_runtime=hf_runtime, run_dir=run_dir)
 
 
 def _run_algo2(
@@ -1100,121 +984,7 @@ def _run_algo2(
     hf_runtime: HFTransformersRuntimeFactory,
     run_dir: Path | None = None,
 ) -> RuntimeResult:
-    subgraph1 = _coerce_edges(spec.input_payload["subgraph1"])
-    subgraph2 = _coerce_edges(spec.input_payload["subgraph2"])
-    graph = _coerce_edges(spec.input_payload["graph"])
-    prompt_config = _algo2_prompt_config(spec.prompt_factors)
-    chat_client = hf_runtime.build_chat_client(
-        model=spec.model,
-        decoding_config=spec.decoding,
-        max_new_tokens_by_schema=spec.max_new_tokens_by_schema,
-        context_policy=spec.context_policy,
-        seed=spec.seed,
-    )
-    embedding_client = hf_runtime.build_embedding_client(model=spec.embedding_model)
-    _mark_worker_ready_for_execution(run_dir)
-    recorder = _RecordingChatClient(
-        chat_client,
-        persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
-        active_stage_path=(run_dir / "active_stage.json") if run_dir is not None else None,
-        active_stage_context={
-            "algorithm": spec.algorithm,
-            "pair_name": spec.pair_name,
-            "condition_bits": spec.condition_bits,
-            "replication": spec.replication,
-            "model": spec.model,
-            "decoding_algorithm": spec.decoding.algorithm,
-        },
-    )
-    source_labels = _collect_nodes(subgraph1)
-    target_labels = _collect_nodes(subgraph2)
-    seed_labels = source_labels + [label for label in target_labels if label not in source_labels]
-    threshold = 0.02 if prompt_config.use_relaxed_convergence else 0.01
-    thesaurus = load_algo2_thesaurus()
-    if spec.prompt_bundle is None:
-        result = execute_method2(
-            seed_labels=seed_labels,
-            existing_edges=list(subgraph1) + list(subgraph2),
-            propose_labels=build_label_proposer(recorder, prompt_config=prompt_config),
-            suggest_edges=build_edge_suggester(recorder, prompt_config=prompt_config),
-            verify_edges=build_cove_verifier(recorder),
-            embedding_client=embedding_client,
-            convergence_threshold=threshold,
-            thesaurus=thesaurus,
-        )
-    else:
-        prompt_bundle = spec.prompt_bundle
-        formatted_subgraph1 = _format_knowledge_map(subgraph1, prompt_config=prompt_config)
-        formatted_subgraph2 = _format_knowledge_map(subgraph2, prompt_config=prompt_config)
-        result = execute_method2(
-            seed_labels=seed_labels,
-            existing_edges=list(subgraph1) + list(subgraph2),
-            propose_labels=lambda current_labels: _propose_labels_from_prompt(
-                recorder,
-                _render_prompt(
-                    prompt_bundle["label_expansion"],
-                    formatted_subgraph1=formatted_subgraph1,
-                    formatted_subgraph2=formatted_subgraph2,
-                    seed_labels=", ".join(current_labels),
-                ),
-            ),
-            suggest_edges=lambda expanded_label_context: _generate_edges_from_prompt(
-                recorder,
-                _render_prompt(
-                    prompt_bundle["edge_suggestion"],
-                    formatted_subgraph1=formatted_subgraph1,
-                    formatted_subgraph2=formatted_subgraph2,
-                    expanded_label_context=", ".join(expanded_label_context),
-                ),
-            ),
-            verify_edges=lambda candidate_edges: _verify_edges_from_prompt(
-                recorder,
-                _render_prompt(
-                    prompt_bundle["cove_verification"],
-                    candidate_edges=repr(candidate_edges),
-                ),
-                candidate_edges,
-            ),
-            embedding_client=embedding_client,
-            convergence_threshold=threshold,
-            thesaurus=thesaurus,
-        )
-    if run_dir is not None:
-        stages_dir = run_dir / "stages"
-        stages_dir.mkdir(parents=True, exist_ok=True)
-        _write_json(
-            stages_dir / "algo2_label_expansion.json",
-            {
-                "expanded_labels": result.expanded_labels,
-                "final_similarity": result.final_similarity,
-                "iteration_count": result.iteration_count,
-            },
-        )
-        _write_json(
-            stages_dir / "algo2_edge_generation.json",
-            {
-                "raw_edges": [list(edge) for edge in result.raw_edges],
-                "verified_edges": [list(edge) for edge in result.normalized_edges],
-            },
-        )
-    raw_row = {
-        **spec.raw_context,
-        "Result": repr(result.normalized_edges),
-        "graph": repr(graph),
-        "subgraph1": repr(subgraph1),
-        "subgraph2": repr(subgraph2),
-    }
-    return {
-        "raw_row": raw_row,
-        "runtime": _runtime_details(spec.runtime_profile),
-        "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
-        "summary": {
-            "candidate_edge_count": len(result.raw_edges),
-            "verified_edge_count": len(result.normalized_edges),
-            **_trace_metric_summary(recorder.records),
-            **_connection_metric_summary(raw_row),
-        },
-    }
+    return _pipeline_run_algo2(spec, hf_runtime=hf_runtime, run_dir=run_dir)
 
 
 def _run_algo3(
@@ -1223,214 +993,27 @@ def _run_algo3(
     hf_runtime: HFTransformersRuntimeFactory,
     run_dir: Path | None = None,
 ) -> RuntimeResult:
-    source_graph = _coerce_edges(spec.input_payload["source_graph"])
-    target_graph = _coerce_edges(spec.input_payload["target_graph"])
-    mother_graph = _coerce_edges(spec.input_payload["mother_graph"])
-    source_labels = _collect_nodes(source_graph)
-    target_labels = _collect_nodes(target_graph)
-    prompt_factors = dict(spec.prompt_factors)
-    child_count = int(prompt_factors.pop("child_count"))
-    max_depth = int(prompt_factors.pop("max_depth"))
-    prompt_config = _algo3_prompt_config(prompt_factors)
-    chat_client = hf_runtime.build_chat_client(
-        model=spec.model,
-        decoding_config=spec.decoding,
-        max_new_tokens_by_schema=spec.max_new_tokens_by_schema,
-        context_policy=spec.context_policy,
-        seed=spec.seed,
-    )
-    _mark_worker_ready_for_execution(run_dir)
-    recorder = _RecordingChatClient(
-        chat_client,
-        persist_path=(run_dir / "raw_response.json") if run_dir is not None else None,
-        active_stage_path=(run_dir / "active_stage.json") if run_dir is not None else None,
-        active_stage_context={
-            "algorithm": spec.algorithm,
-            "pair_name": spec.pair_name,
-            "condition_bits": spec.condition_bits,
-            "replication": spec.replication,
-            "model": spec.model,
-            "decoding_algorithm": spec.decoding.algorithm,
-        },
-    )
-    if spec.prompt_bundle is None:
-        result = execute_method3(
-            source_labels=source_labels,
-            target_labels=target_labels,
-            child_count=child_count,
-            max_depth=max_depth,
-            expand_tree=build_tree_expander(
-                build_child_proposer(recorder, prompt_config=prompt_config)
-            ),
-        )
-    else:
-        prompt_bundle = spec.prompt_bundle
-
-        def configured_child_proposer(
-            source_labels: list[str],
-            *,
-            child_count: int,
-        ) -> dict[str, list[str]]:
-            return _propose_children_from_prompt(
-                recorder,
-                _render_prompt(
-                    prompt_bundle["tree_expansion"],
-                    source_labels=repr(source_labels),
-                    child_count=child_count,
-                ),
-            )
-
-        child_proposer: ChildDictionaryProposer = configured_child_proposer
-        result = execute_method3(
-            source_labels=source_labels,
-            target_labels=target_labels,
-            child_count=child_count,
-            max_depth=max_depth,
-            expand_tree=build_tree_expander(child_proposer),
-        )
-    result_edges = [(node.parent_label, node.label) for node in result.expanded_nodes]
-    raw_row = {
-        **spec.raw_context,
-        "Source Graph": repr(source_graph),
-        "Target Graph": repr(target_graph),
-        "Mother Graph": repr(mother_graph),
-        "Results": repr(result_edges),
-        "Recall": 0.0,
-    }
-    return {
-        "raw_row": raw_row,
-        "runtime": _runtime_details(spec.runtime_profile),
-        "raw_response": json.dumps(recorder.records, indent=2, sort_keys=True),
-        "summary": {
-            "result_edge_count": len(result_edges),
-            "recall": float(raw_row["Recall"]),
-            **_trace_metric_summary(recorder.records),
-        },
-    }
+    return _pipeline_run_algo3(spec, hf_runtime=hf_runtime, run_dir=run_dir)
 
 
 def _connection_metric_summary(raw_row: dict[str, object]) -> dict[str, float]:
-    graph = parse_python_literal(str(raw_row["graph"]))
-    subgraph1 = parse_python_literal(str(raw_row["subgraph1"]))
-    subgraph2 = parse_python_literal(str(raw_row["subgraph2"]))
-    result_edges = parse_python_literal(str(raw_row["Result"]))
-    ground_truth_connections = find_valid_connections(graph, subgraph1, subgraph2)
-    proposed_edges = list(subgraph1) + list(subgraph2) + list(result_edges)
-    generated_connections = find_valid_connections(proposed_edges, subgraph1, subgraph2)
-    nodes1 = {node for edge in subgraph1 for node in edge}
-    nodes2 = {node for edge in subgraph2 for node in edge}
-    tp = len(generated_connections & ground_truth_connections)
-    fp = len(generated_connections - ground_truth_connections)
-    fn = len(ground_truth_connections - generated_connections)
-    tn = (len(nodes1) * len(nodes2)) - (tp + fp + fn)
-    total = tp + fp + fn + tn
-    accuracy = (tp + tn) / total if total > 0 else 0.0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
-    denominator = precision + recall
-    f1 = (2 * precision * recall) / denominator if denominator > 0 else 0.0
-    return {
-        "accuracy": accuracy,
-        "precision": precision,
-        "recall": recall,
-        "f1": f1,
-    }
+    return _pipeline_connection_metric_summary(raw_row)
 
 
 def _trace_metric_summary(records: list[dict[str, object]]) -> dict[str, float | int]:
-    durations: list[float] = []
-    tokens_per_second: list[float] = []
-    completion_tokens: list[int] = []
-    prompt_tokens: list[int] = []
-    for record in records:
-        raw_metrics = record.get("metrics")
-        if not isinstance(raw_metrics, dict):
-            continue
-        metrics = cast(dict[str, object], raw_metrics)
-        duration = metrics.get("duration_seconds")
-        if isinstance(duration, (int, float)):
-            durations.append(float(duration))
-        tps = metrics.get("tokens_per_second")
-        if isinstance(tps, (int, float)):
-            tokens_per_second.append(float(tps))
-        completion = metrics.get("completion_token_count")
-        if isinstance(completion, int):
-            completion_tokens.append(completion)
-        prompt = metrics.get("prompt_token_count")
-        if isinstance(prompt, int):
-            prompt_tokens.append(prompt)
-    if not durations and not tokens_per_second and not completion_tokens and not prompt_tokens:
-        return {}
-    summary: dict[str, float | int] = {"response_trace_count": len(records)}
-    if durations:
-        summary["avg_duration_seconds"] = sum(durations) / len(durations)
-        summary["max_duration_seconds"] = max(durations)
-    if tokens_per_second:
-        summary["avg_tokens_per_second"] = sum(tokens_per_second) / len(tokens_per_second)
-        summary["max_tokens_per_second"] = max(tokens_per_second)
-    if completion_tokens:
-        summary["total_completion_tokens"] = sum(completion_tokens)
-    if prompt_tokens:
-        summary["total_prompt_tokens"] = sum(prompt_tokens)
-    return summary
+    return _pipeline_trace_metric_summary(records)
 
 
 def _summary_from_raw_row(algorithm: str, raw_row: dict[str, object]) -> dict[str, object]:
-    if algorithm in {"algo1", "algo2"} and "Result" in raw_row:
-        result_edges = parse_python_literal(str(raw_row["Result"]))
-        result_count = len(result_edges)
-        return {
-            "candidate_edge_count": result_count,
-            "verified_edge_count": result_count,
-            **_connection_metric_summary(raw_row),
-        }
-    if algorithm == "algo3" and "Results" in raw_row:
-        result_edges = parse_python_literal(str(raw_row["Results"]))
-        return {
-            "result_edge_count": len(result_edges),
-            "recall": float(str(raw_row.get("Recall", 0.0))),
-        }
-    return {}
+    return _pipeline_summary_from_raw_row(algorithm, raw_row)
 
 
 def _validate_structural_runtime_result(*, algorithm: str, raw_row: dict[str, object]) -> None:
-    if algorithm != "algo1":
-        return
-    result_literal = raw_row.get("Result")
-    if result_literal is None:
-        raise ValueError(f"Structurally invalid {algorithm} result: missing Result field.")
-    result_edges = parse_python_literal(str(result_literal))
-    sanitized_edges = _sanitize_algorithm_edge_result(algorithm, result_edges)
-    raw_row["Result"] = repr(sanitized_edges)
+    _pipeline_validate_structural_runtime_result(algorithm=algorithm, raw_row=raw_row)
 
 
 def _sanitize_algorithm_edge_result(
     algorithm: str,
     result_edges: object,
 ) -> list[tuple[str, str]]:
-    if not isinstance(result_edges, (list, tuple)):
-        raise ValueError(f"Structurally invalid {algorithm} result: Result is not a list.")
-    sanitized_edges: list[tuple[str, str]] = []
-    for edge in result_edges:
-        if not isinstance(edge, (list, tuple)) or len(edge) < 2:
-            continue
-        source = _normalize_structural_endpoint(edge[0], algorithm=algorithm)
-        target = _normalize_structural_endpoint(edge[1], algorithm=algorithm)
-        if source is None or target is None:
-            continue
-        if not _looks_like_textual_concept(source) or not _looks_like_textual_concept(target):
-            continue
-        sanitized_edges.append((source, target))
-    return sanitized_edges
-
-
-def _normalize_structural_endpoint(value: object, *, algorithm: str) -> str | None:
-    text = str(value).strip()
-    if not text:
-        return None
-    _ = algorithm
-    return text
-
-
-def _looks_like_textual_concept(text: str) -> bool:
-    return bool(re.search(r"[A-Za-z]", text))
+    return _pipeline_sanitize_algorithm_edge_result(algorithm, result_edges)
