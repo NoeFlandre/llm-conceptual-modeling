@@ -1,8 +1,6 @@
 import subprocess
 from pathlib import Path
 
-import pytest
-
 from llm_conceptual_modeling.paths import REPO_ROOT
 
 

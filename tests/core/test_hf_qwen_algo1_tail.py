@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import yaml
 import pytest
+import yaml
 
 from llm_conceptual_modeling.hf_tail.qwen_algo1 import (
     QWEN_ALGO1_TAIL_CONDITION_LABEL,

@@ -7,10 +7,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.common.failure_markers import (
     is_retryable_runtime_failure,
 )
+from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_execution.subprocess import (
     MonitoredCommandTimeout,
     _terminate_process,

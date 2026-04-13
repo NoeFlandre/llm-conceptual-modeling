@@ -10,7 +10,6 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-
 MODEL_LABELS = {
     "Qwen/Qwen3.5-9B": "Qwen",
     "mistralai/Ministral-3-8B-Instruct-2512": "Mistral",

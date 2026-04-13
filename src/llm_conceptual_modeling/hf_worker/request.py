@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.common.spec_codec import serialize_spec
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 
 
 @dataclass(frozen=True)

@@ -17,7 +17,6 @@ from llm_conceptual_modeling.analysis.variance_decomposition import (
     render_variance_decomposition_table,
 )
 
-
 QWEN = "Qwen/Qwen3.5-9B"
 MISTRAL = "mistralai/Ministral-3-8B-Instruct-2512"
 

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import ast
 import gc
-import importlib.util
 import importlib
+import importlib.util
 import json
 import random
 import re

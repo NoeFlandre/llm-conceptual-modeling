@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-import json
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
+from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
 from llm_conceptual_modeling.hf_batch.utils import slugify_model
-from llm_conceptual_modeling.common.failure_markers import classify_failure
 
 RETRYABLE_FAILURE_KINDS = {"timeout", "oom", "infrastructure", "structural"}
 

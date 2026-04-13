@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 from collections import deque
+from dataclasses import dataclass
 from typing import Protocol
 
 from llm_conceptual_modeling.algo3.tree import TreeExpansionNode
