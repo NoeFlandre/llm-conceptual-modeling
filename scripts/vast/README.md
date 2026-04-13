@@ -46,6 +46,7 @@ The repository sync step now excludes the top-level `results/` tree plus local-o
   `executing_algorithm`, which makes startup easier to reason about during resumes.
 - The local watcher status file now carries a stable `watcher_identity` and explicit states (`starting`, `syncing`, `healthy`, `degraded`, `stopped`) so stale watchers from older hosts are easier to detect.
 - The remote runtime is split into small helpers so the preview/config rewrite step and the launch step can be reused in both host-bootstrap and container modes.
+- `remote_resume_launch.sh` now reads its repo and results roots from the exported runtime environment instead of pinning the canonical path in its supervisor loop, which keeps the helper reusable for dedicated tail roots and future archive drains.
 - Remote launch no longer treats “GPU-attached worker exists” as sufficient proof of a healthy
   resume. The launcher now waits for productive liveness: either the worker reaches
   `executing_algorithm` or the root records a fresh finished run.
