@@ -7,7 +7,6 @@ The regression test guards against that set growing.
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 import pytest
@@ -56,7 +55,7 @@ def test_no_new_hf_shim_files_appear_at_package_root() -> None:
     """
     # Keep the comprehensive allowlist since many hf_*.py files at root
     # are legitimate (hf_experiments, hf_batch_types, hf_run_config, etc.)
-    KNOWN_LEGITIMATE = frozenset({
+    frozenset({
         "hf_experiments.py",
         "hf_batch_types.py",
         "hf_run_config.py",

@@ -43,7 +43,7 @@ def prepare_qwen_algo1_tail_bundle(
         tail_results_root=tail_results_root_path,
         records=records,
     )
-    config = write_qwen_algo1_tail_config(
+    write_qwen_algo1_tail_config(
         canonical_results_root=canonical_results_root_path,
         tail_results_root=tail_results_root_path,
         remote_output_root=remote_output_root,
