@@ -1,3 +1,7 @@
+from llm_conceptual_modeling.hf_execution.dispatch import (
+    execute_run,
+    runtime_factory_from_hf_runtime,
+)
 from llm_conceptual_modeling.hf_execution.helpers import (
     build_worker_command,
     coerce_timeout_seconds,
@@ -19,6 +23,7 @@ __all__ = [
     "build_worker_command",
     "build_hf_download_environment",
     "coerce_timeout_seconds",
+    "execute_run",
     "is_retryable_worker_error",
     "MonitoredCommandTimeout",
     "resolve_max_requests_per_worker_process",
@@ -26,4 +31,5 @@ __all__ = [
     "run_local_hf_spec",
     "run_local_hf_spec_subprocess",
     "run_monitored_command",
+    "runtime_factory_from_hf_runtime",
 ]

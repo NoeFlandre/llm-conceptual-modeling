@@ -2,7 +2,19 @@ from pathlib import Path
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec
-from llm_conceptual_modeling.hf_state.resume_state import resume_priority_key
+from llm_conceptual_modeling.hf_state.resume_state import (
+    resume_priority_key,
+    should_keep_failure_pending_on_resume,
+)
+
+
+def test_should_keep_failure_pending_returns_false_when_not_resuming() -> None:
+    assert (
+        should_keep_failure_pending_on_resume(
+            resume=False, failure_kind="timeout", context_policy=None
+        )
+        is False
+    )
 
 
 def _runtime_profile() -> RuntimeProfile:

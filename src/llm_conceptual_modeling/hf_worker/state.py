@@ -81,3 +81,9 @@ def _running_worker_state_update(timestamp: str) -> dict[str, object]:
         "status": "running",
         "updated_at": timestamp,
     }
+
+
+def worker_loaded_model(run_dir: Path) -> bool:
+    """Return True when the worker has loaded the model for the given run."""
+    worker_state = read_worker_state(run_dir / "worker_state.json")
+    return worker_state.get("model_loaded") is True or (run_dir / "active_stage.json").exists()

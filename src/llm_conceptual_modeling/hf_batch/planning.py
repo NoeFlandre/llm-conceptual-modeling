@@ -484,9 +484,7 @@ def _build_configured_specs_for_pairs(
                     payload=payload,
                 ),
                 input_payload={
-                    key: value
-                    for key, value in payload.items()
-                    if not key.endswith("_name")
+                    key: value for key, value in payload.items() if not key.endswith("_name")
                 },
                 runtime_profile=runtime_profile,
                 prompt_bundle=prompt_bundle,
@@ -534,3 +532,40 @@ def _build_raw_context(
         context["Source Subgraph Name"] = payload["source_name"]
         context["Target Subgraph Name"] = payload["target_name"]
     return context
+
+
+def select_run_spec(
+    *,
+    config: HFRunConfig,
+    algorithm: str,
+    model: str,
+    pair_name: str,
+    condition_bits: str,
+    decoding: DecodingConfig,
+    replication: int,
+    runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
+) -> HFRunSpec:
+    specs = plan_paper_batch_specs(
+        models=[model],
+        embedding_model=config.models.embedding_model,
+        replications=max(replication + 1, 1),
+        algorithms=(algorithm,),
+        config=config,
+        runtime_profile_provider=runtime_profile_provider,
+    )
+    for spec in specs:
+        if (
+            spec.algorithm == algorithm
+            and spec.model == model
+            and spec.pair_name == pair_name
+            and spec.condition_bits == condition_bits
+            and spec.replication == replication
+            and spec.decoding == decoding
+        ):
+            return spec
+    raise ValueError(
+        "No configured run spec matches "
+        f"algorithm={algorithm!r}, model={model!r}, pair_name={pair_name!r}, "
+        f"condition_bits={condition_bits!r}, decoding={decoding!r}, "
+        f"replication={replication!r}."
+    )

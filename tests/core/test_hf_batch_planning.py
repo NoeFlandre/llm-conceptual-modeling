@@ -8,6 +8,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
 from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch_specs,
+    select_run_spec,
 )
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
 
@@ -170,3 +171,7 @@ def test_qwen_contrastive_chat_client_is_constructible() -> None:
     )
 
     assert client is not None
+
+
+def test_select_run_spec_module() -> None:
+    assert select_run_spec.__module__ == "llm_conceptual_modeling.hf_batch.planning"

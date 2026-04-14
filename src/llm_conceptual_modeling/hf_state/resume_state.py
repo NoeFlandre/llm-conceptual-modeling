@@ -506,3 +506,24 @@ def read_artifact_json(path: Path) -> JsonObject:
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     write_json_dict(path, payload)
+
+
+def should_keep_failure_pending_on_resume(
+    *,
+    resume: bool,
+    failure_kind: str,
+    context_policy: dict[str, object] | None,
+) -> bool:
+    """Return True when a failed run should be retried during a resume pass."""
+    if not resume:
+        return False
+    retry_checks = {
+        "timeout": resolve_retry_timeout_failures_on_resume,
+        "oom": resolve_retry_oom_failures_on_resume,
+        "infrastructure": resolve_retry_infrastructure_failures_on_resume,
+        "structural": resolve_retry_structural_failures_on_resume,
+    }
+    retry_check = retry_checks.get(failure_kind)
+    if retry_check is None:
+        return False
+    return retry_check(context_policy)

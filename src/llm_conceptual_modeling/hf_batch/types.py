@@ -9,6 +9,10 @@ Edge = tuple[str, str]
 RuntimeResult = dict[str, Any]
 
 
+class BatchInfrastructureFailure(RuntimeError):
+    """Abort a batch when the worker host is unhealthy."""
+
+
 @dataclass(frozen=True)
 class HFRunSpec:
     algorithm: str
@@ -32,8 +36,7 @@ class HFRunSpec:
     @property
     def run_name(self) -> str:
         return (
-            f"{self.algorithm}_{self.pair_name}_rep"
-            f"{self.replication:02d}_cond{self.condition_bits}"
+            f"{self.algorithm}_{self.pair_name}_rep{self.replication:02d}_cond{self.condition_bits}"
         )
 
 

@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
-from typing import Any, Callable, cast
+from typing import Callable, cast
 
 import pandas as pd
 
 from llm_conceptual_modeling.common.hf_transformers import (
-    DecodingConfig,
-    HFTransformersRuntimeFactory,
     RuntimeProfile,
     build_runtime_factory,
 )
@@ -25,18 +22,7 @@ from llm_conceptual_modeling.hf_batch.outputs import write_aggregated_outputs
 from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch_specs,
-)
-from llm_conceptual_modeling.hf_batch.spec_path import (
-    filter_planned_specs_for_output_root as _filter_planned_specs_for_output_root,
-)
-from llm_conceptual_modeling.hf_batch.spec_path import (
-    run_dir_for_spec as _run_dir_for_spec,
-)
-from llm_conceptual_modeling.hf_batch.spec_path import (
-    smoke_spec_identity as _smoke_spec_identity,
-)
-from llm_conceptual_modeling.hf_batch.spec_path import (
-    spec_identity as _spec_identity,
+    select_run_spec,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_batch.prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
@@ -53,7 +39,23 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     write_smoke_verdict as _write_smoke_verdict,
 )
-from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeFactory, RuntimeResult
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    filter_planned_specs_for_output_root as _filter_planned_specs_for_output_root,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    run_dir_for_spec as _run_dir_for_spec,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    smoke_spec_identity as _smoke_spec_identity,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    spec_identity as _spec_identity,  # noqa: F401
+)
+from llm_conceptual_modeling.hf_batch.types import (
+    BatchInfrastructureFailure,
+    HFRunSpec,
+    RuntimeFactory,
+)
 from llm_conceptual_modeling.hf_batch.utils import (
     manifest_for_spec as _manifest_for_spec,
 )
@@ -61,7 +63,7 @@ from llm_conceptual_modeling.hf_batch.utils import (
     resolve_hf_token as _resolve_hf_token,
 )
 from llm_conceptual_modeling.hf_batch.utils import (
-    slugify_model as _slugify_model,
+    slugify_model as _slugify_model,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_batch.utils import (
     write_json as _write_json,
@@ -69,147 +71,111 @@ from llm_conceptual_modeling.hf_batch.utils import (
 from llm_conceptual_modeling.hf_batch.utils import (
     write_text as _write_text,
 )
-from llm_conceptual_modeling.hf_execution.helpers import (
-    build_worker_command as _execution_build_worker_command,
+from llm_conceptual_modeling.hf_execution.dispatch import (
+    execute_run as _execute_run,
+)
+from llm_conceptual_modeling.hf_execution.dispatch import (
+    runtime_factory_from_hf_runtime as _runtime_factory_from_hf_runtime,
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    coerce_timeout_seconds as _execution_coerce_timeout_seconds,
+    build_worker_command as _build_worker_command,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    is_retryable_worker_error as _execution_is_retryable_worker_error,
+    coerce_timeout_seconds as _coerce_timeout_seconds,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    resolve_max_requests_per_worker_process as _execution_resolve_max_requests_per_worker_process,
+    is_retryable_worker_error as _is_retryable_worker_error,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    resolve_run_retry_attempts as _execution_resolve_run_retry_attempts,
+    resolve_max_requests_per_worker_process as _resolve_max_requests_per_worker_process,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    resolve_stage_timeout_seconds as _execution_resolve_stage_timeout_seconds,
+    resolve_run_retry_attempts as _resolve_run_retry_attempts,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    resolve_startup_timeout_seconds as _execution_resolve_startup_timeout_seconds,
+    resolve_stage_timeout_seconds as _resolve_stage_timeout_seconds,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
-    resolve_worker_process_mode as _execution_resolve_worker_process_mode,
+    resolve_startup_timeout_seconds as _resolve_startup_timeout_seconds,  # noqa: F401
+)
+from llm_conceptual_modeling.hf_execution.helpers import (
+    resolve_worker_process_mode as _resolve_worker_process_mode,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.runtime import (
-    run_local_hf_spec as _execution_run_local_hf_spec,
+    run_local_hf_spec as _run_local_hf_spec,
 )
 from llm_conceptual_modeling.hf_execution.runtime import (
-    run_local_hf_spec_subprocess as _execution_run_local_hf_spec_subprocess,
+    run_local_hf_spec_subprocess as _run_local_hf_spec_subprocess,  # noqa: F401
 )
-from llm_conceptual_modeling.hf_execution.subprocess import (
-    run_monitored_command as _run_monitored_command,
-)
-from llm_conceptual_modeling.hf_pipeline.algo1 import run_algo1 as _pipeline_run_algo1
-from llm_conceptual_modeling.hf_pipeline.algo2 import run_algo2 as _pipeline_run_algo2
-from llm_conceptual_modeling.hf_pipeline.algo3 import run_algo3 as _pipeline_run_algo3
+from llm_conceptual_modeling.hf_execution.subprocess import run_monitored_command  # noqa: F401
+from llm_conceptual_modeling.hf_pipeline.algo1 import run_algo1 as _run_algo1  # noqa: F401
+from llm_conceptual_modeling.hf_pipeline.algo2 import run_algo2 as _run_algo2  # noqa: F401
+from llm_conceptual_modeling.hf_pipeline.algo3 import run_algo3 as _run_algo3  # noqa: F401
 from llm_conceptual_modeling.hf_pipeline.metrics import (
-    connection_metric_summary as _pipeline_connection_metric_summary,
+    connection_metric_summary as _connection_metric_summary,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_pipeline.metrics import (
-    sanitize_algorithm_edge_result as _pipeline_sanitize_algorithm_edge_result,
+    sanitize_algorithm_edge_result as _sanitize_algorithm_edge_result,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_pipeline.metrics import (
-    summary_from_raw_row as _pipeline_summary_from_raw_row,
+    summary_from_raw_row as _summary_from_raw_row,
 )
 from llm_conceptual_modeling.hf_pipeline.metrics import (
-    trace_metric_summary as _pipeline_trace_metric_summary,
+    trace_metric_summary as _trace_metric_summary,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_pipeline.metrics import (
-    validate_structural_runtime_result as _pipeline_validate_structural_runtime_result,
+    validate_structural_runtime_result as _validate_structural_runtime_result,
 )
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
 from llm_conceptual_modeling.hf_state.resume_state import (
     build_seeded_resume_snapshot as _resume_build_seeded_resume_snapshot,
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    classify_failure_payload as _resume_classify_failure_payload,
+    classify_failure_payload as _classify_failure_payload,
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    collect_resume_history as _resume_collect_resume_history,
+    collect_resume_history as _collect_resume_history,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    is_finished_run_directory as _resume_is_finished_run_directory,
+    is_finished_run_directory as _is_finished_run_directory,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    load_deferred_failed_summary as _resume_load_deferred_failed_summary,
+    load_deferred_failed_summary as _load_deferred_failed_summary,
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    load_valid_finished_summary as _resume_load_valid_finished_summary,
+    load_valid_finished_summary as _load_valid_finished_summary,
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
     order_planned_specs_for_resume as _resume_order_planned_specs_for_resume,
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_resume_pass_mode as _resume_resolve_resume_pass_mode,
+    resolve_resume_pass_mode as _resolve_resume_pass_mode,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_retry_infrastructure_failures_on_resume,
-    resolve_retry_oom_failures_on_resume,
-    resolve_retry_structural_failures_on_resume,
+    resolve_retry_infrastructure_failures_on_resume as _resolve_retry_infrastructure_failures_on_resume,  # noqa: E501, F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_retry_timeout_failures_on_resume as _resume_resolve_retry_timeout_failures_on_resume,
+    resolve_retry_oom_failures_on_resume as _resolve_retry_oom_failures_on_resume,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    status_failures as _resume_status_failures,
+    resolve_retry_structural_failures_on_resume as _resolve_retry_structural_failures_on_resume,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    status_int as _resume_status_int,
+    resolve_retry_timeout_failures_on_resume as _resolve_retry_timeout_failures_on_resume,  # noqa: F401
+)
+from llm_conceptual_modeling.hf_state.resume_state import (
+    should_keep_failure_pending_on_resume as _should_keep_failure_pending_on_resume,
+)
+from llm_conceptual_modeling.hf_state.resume_state import (
+    status_failures as _status_failures,
+)
+from llm_conceptual_modeling.hf_state.resume_state import (
+    status_int as _status_int,
 )
 from llm_conceptual_modeling.hf_worker.persistent import PersistentHFWorkerSession
 from llm_conceptual_modeling.hf_worker.state import (
-    mark_worker_ready_for_execution as _worker_state_mark_ready_for_execution,
+    worker_loaded_model as _worker_loaded_model,  # noqa: F401
 )
-
-_resume_resolve_retry_infrastructure_failures_on_resume = (
-    resolve_retry_infrastructure_failures_on_resume
-)
-_resume_resolve_retry_oom_failures_on_resume = resolve_retry_oom_failures_on_resume
-_resume_resolve_retry_structural_failures_on_resume = (
-    resolve_retry_structural_failures_on_resume
-)
-
-_connection_metric_summary = _pipeline_connection_metric_summary
-_trace_metric_summary = _pipeline_trace_metric_summary
-_summary_from_raw_row = _pipeline_summary_from_raw_row
-_validate_structural_runtime_result = _pipeline_validate_structural_runtime_result
-_sanitize_algorithm_edge_result = _pipeline_sanitize_algorithm_edge_result
-_is_finished_run_directory = _resume_is_finished_run_directory
-_load_valid_finished_summary = _resume_load_valid_finished_summary
-_load_deferred_failed_summary = _resume_load_deferred_failed_summary
-_status_int = _resume_status_int
-_status_failures = _resume_status_failures
-_resolve_retry_timeout_failures_on_resume = _resume_resolve_retry_timeout_failures_on_resume
-_resolve_retry_oom_failures_on_resume = _resume_resolve_retry_oom_failures_on_resume
-_resolve_retry_infrastructure_failures_on_resume = (
-    _resume_resolve_retry_infrastructure_failures_on_resume
-)
-_resolve_retry_structural_failures_on_resume = _resume_resolve_retry_structural_failures_on_resume
-_resolve_resume_pass_mode = _resume_resolve_resume_pass_mode
-_classify_failure_payload = _resume_classify_failure_payload
-_build_worker_command = _execution_build_worker_command
-_run_local_hf_spec_subprocess = _execution_run_local_hf_spec_subprocess
-_run_local_hf_spec = _execution_run_local_hf_spec
-_resolve_startup_timeout_seconds = _execution_resolve_startup_timeout_seconds
-_resolve_stage_timeout_seconds = _execution_resolve_stage_timeout_seconds
-_resolve_run_retry_attempts = _execution_resolve_run_retry_attempts
-_resolve_worker_process_mode = _execution_resolve_worker_process_mode
-_resolve_max_requests_per_worker_process = _execution_resolve_max_requests_per_worker_process
-_is_retryable_worker_error = _execution_is_retryable_worker_error
-_coerce_timeout_seconds = _execution_coerce_timeout_seconds
-_collect_resume_history = _resume_collect_resume_history
-_run_monitored_command = _run_monitored_command
-_run_algo1 = _pipeline_run_algo1
-_run_algo2 = _pipeline_run_algo2
-_run_algo3 = _pipeline_run_algo3
-run_monitored_command = _run_monitored_command
-
-
-class BatchInfrastructureFailure(RuntimeError):
-    """Abort a batch when the worker host is unhealthy."""
 
 
 def plan_paper_batch(
@@ -441,14 +407,20 @@ def run_paper_batch(
                         "message": str(error),
                         "type": type(error).__name__,
                     }
-                    status_snapshot["failed_count"] = _status_int(
-                        status_snapshot,
-                        "failed_count",
-                    ) + 1
-                    status_snapshot["pending_count"] = _status_int(
-                        status_snapshot,
-                        "pending_count",
-                    ) - 1
+                    status_snapshot["failed_count"] = (
+                        _status_int(
+                            status_snapshot,
+                            "failed_count",
+                        )
+                        + 1
+                    )
+                    status_snapshot["pending_count"] = (
+                        _status_int(
+                            status_snapshot,
+                            "pending_count",
+                        )
+                        - 1
+                    )
                     failures.append(failure_entry)
                     status_snapshot["failures"] = failures
                     status_snapshot["failure_count"] = len(failures)
@@ -531,43 +503,6 @@ def _build_seeded_resume_snapshot(
         normalize_stale_running_run_fn=_normalize_stale_running_run,
         read_artifact_json_fn=_read_artifact_json,
         write_json_fn=_write_json,
-    )
-
-
-def select_run_spec(
-    *,
-    config: HFRunConfig,
-    algorithm: str,
-    model: str,
-    pair_name: str,
-    condition_bits: str,
-    decoding: DecodingConfig,
-    replication: int,
-    runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
-) -> HFRunSpec:
-    specs = plan_paper_batch(
-        models=[model],
-        embedding_model=config.models.embedding_model,
-        replications=max(replication + 1, 1),
-        algorithms=(algorithm,),
-        config=config,
-        runtime_profile_provider=runtime_profile_provider,
-    )
-    for spec in specs:
-        if (
-            spec.algorithm == algorithm
-            and spec.model == model
-            and spec.pair_name == pair_name
-            and spec.condition_bits == condition_bits
-            and spec.replication == replication
-            and spec.decoding == decoding
-        ):
-            return spec
-    raise ValueError(
-        "No configured run spec matches "
-        f"algorithm={algorithm!r}, model={model!r}, pair_name={pair_name!r}, "
-        f"condition_bits={condition_bits!r}, decoding={decoding!r}, "
-        f"replication={replication!r}."
     )
 
 
@@ -668,9 +603,7 @@ def run_single_spec(
         "condition_bits": spec.condition_bits,
         "replication": spec.replication,
         "status": "finished",
-        "thinking_mode_supported": runtime_result["runtime"].get(
-            "thinking_mode_supported", False
-        ),
+        "thinking_mode_supported": runtime_result["runtime"].get("thinking_mode_supported", False),
         "raw_row_path": str(raw_row_path),
         **_summary_from_raw_row(spec.algorithm, raw_row),
         **runtime_result.get("summary", {}),
@@ -684,80 +617,3 @@ def run_single_spec(
         worker_loaded_model=_worker_loaded_model(run_dir) or True,
     )
     return summary
-
-
-def _worker_loaded_model(run_dir: Path) -> bool:
-    worker_state = _read_artifact_json(run_dir / "worker_state.json")
-    return worker_state.get("model_loaded") is True or (run_dir / "active_stage.json").exists()
-
-
-def _mark_worker_ready_for_execution(run_dir: Path | None) -> None:
-    if run_dir is None:
-        return
-    _worker_state_mark_ready_for_execution(
-        run_dir / "worker_state.json",
-        timestamp=_status_timestamp_now(),
-    )
-
-
-def _execute_run(
-    *,
-    spec: HFRunSpec,
-    runtime_factory: RuntimeFactory,
-    dry_run: bool,
-    run_dir: Path | None = None,
-) -> RuntimeResult:
-    if dry_run:
-        return {
-            "raw_row": dict(spec.raw_context),
-            "runtime": {
-                "thinking_mode_supported": spec.runtime_profile.supports_thinking_toggle,
-                "device": spec.runtime_profile.device,
-                "dtype": spec.runtime_profile.dtype,
-                "quantization": spec.runtime_profile.quantization,
-            },
-            "raw_response": "[]",
-        }
-    try:
-        runtime_callable = cast(Any, runtime_factory)
-        return runtime_callable(spec, run_dir=run_dir)
-    except TypeError as error:
-        if "run_dir" not in str(error):
-            raise
-        return runtime_factory(spec)
-
-
-
-
-def _should_keep_failure_pending_on_resume(
-    *,
-    resume: bool,
-    failure_kind: str,
-    context_policy: dict[str, object] | None,
-) -> bool:
-    if not resume:
-        return False
-    retry_checks = {
-        "timeout": _resolve_retry_timeout_failures_on_resume,
-        "oom": _resolve_retry_oom_failures_on_resume,
-        "infrastructure": _resolve_retry_infrastructure_failures_on_resume,
-        "structural": _resolve_retry_structural_failures_on_resume,
-    }
-    retry_check = retry_checks.get(failure_kind)
-    if retry_check is None:
-        return False
-    return retry_check(context_policy)
-
-
-def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -> RuntimeFactory:
-    def runtime(spec: HFRunSpec, *, run_dir: Path | None = None) -> RuntimeResult:
-        if spec.algorithm == "algo1":
-            return _run_algo1(spec, hf_runtime=hf_runtime, run_dir=run_dir)
-        if spec.algorithm == "algo2":
-            return _run_algo2(spec, hf_runtime=hf_runtime, run_dir=run_dir)
-        if spec.algorithm == "algo3":
-            return _run_algo3(spec, hf_runtime=hf_runtime, run_dir=run_dir)
-        raise ValueError(f"Unsupported algorithm: {spec.algorithm}")
-
-    return runtime
-

@@ -1,7 +1,11 @@
 from llm_conceptual_modeling.hf_batch.outputs import write_aggregated_outputs
 from llm_conceptual_modeling.hf_batch.planning import plan_paper_batch_specs
 from llm_conceptual_modeling.hf_batch.prompts import build_prompt_bundle, render_prompt
-from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeResult
+from llm_conceptual_modeling.hf_batch.types import (
+    BatchInfrastructureFailure,
+    HFRunSpec,
+    RuntimeResult,
+)
 from llm_conceptual_modeling.hf_batch.utils import (
     RecordingChatClient,
     runtime_details,
@@ -41,3 +45,7 @@ def test_hf_batch_utils_is_implemented_in_the_package_module() -> None:
 
 def test_hf_batch_types_is_implemented_in_the_package_module() -> None:
     assert HFRunSpec.__module__ == "llm_conceptual_modeling.hf_batch.types"
+
+
+def test_batch_infrastructure_failure_module() -> None:
+    assert BatchInfrastructureFailure.__module__ == "llm_conceptual_modeling.hf_batch.types"
