@@ -2188,7 +2188,7 @@ def test_parse_generated_json_rejects_truncated_edge_list() -> None:
         _parse_generated_json(text, schema_name="edge_list")
 
 
-def test_parse_generated_json_recovers_embedded_fence_in_children_key() -> None:
+def test_parse_generated_json_recovers_embedded_fence_in_children_key_last_fence_logic() -> None:
     """Regression: Mistral contrastive embeds ``` inside a JSON string key.
 
     The model generated: "Emotional eati\\n```ng" as a dict key, where \\n```ng

@@ -195,7 +195,7 @@ def test_generate_variance_decomposition_bundle_is_deterministic(tmp_path: Path)
         assert set(algorithm_frame["algorithm"]) == {algorithm}
 
     decomposition = pd.read_csv(first["decomposition_csv"])
-    for (algorithm, _model, _metric), group in decomposition.groupby(["algorithm", "model", "metric"]):
+    for (_algorithm, _model, _metric), group in decomposition.groupby(["algorithm", "model", "metric"]):
         assert pytest.approx(group["pct_with_error"].sum(), abs=1e-8) == 100.0
         non_error = group[group["feature"] != "Error"]
         assert pytest.approx(non_error["pct_without_error"].sum(), abs=1e-8) == 100.0
