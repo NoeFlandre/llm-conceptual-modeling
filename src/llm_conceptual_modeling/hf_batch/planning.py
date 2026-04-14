@@ -17,6 +17,25 @@ from llm_conceptual_modeling.hf_batch.utils import condition_label, derive_run_s
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
 
 
+def plan_paper_batch(
+    *,
+    models: list[str],
+    embedding_model: str,
+    replications: int,
+    algorithms: tuple[str, ...] | None = None,
+    config: HFRunConfig | None = None,
+    runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
+) -> list[HFRunSpec]:
+    return plan_paper_batch_specs(
+        models=models,
+        embedding_model=embedding_model,
+        replications=replications,
+        algorithms=algorithms,
+        config=config,
+        runtime_profile_provider=runtime_profile_provider,
+    )
+
+
 def plan_paper_batch_specs(
     *,
     models: list[str],

@@ -3,9 +3,12 @@ from __future__ import annotations
 import os
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeResult
+from llm_conceptual_modeling.hf_batch.utils import manifest_for_spec
+from llm_conceptual_modeling.hf_pipeline.metrics import summary_from_raw_row
 
 VOLATILE_RUN_FILENAMES = (
     "active_stage.json",
@@ -95,8 +98,69 @@ def _runtime_snapshot_reference() -> str | None:
     return str(snapshot_path)
 
 
+def write_text(path: Path, payload: str) -> None:
+    path.write_text(payload, encoding="utf-8")
+
+
 def _timestamp_now() -> str:
     return datetime.now(UTC).isoformat()
+
+
+def build_run_summary(
+    *,
+    spec: HFRunSpec,
+    raw_row: dict[str, object],
+    runtime_result: RuntimeResult,
+    raw_row_path: Path,
+) -> dict[str, object]:
+    """Build the run summary dict for a finished spec.
+
+    Pure transformation: no I/O, no state mutation.
+    """
+    return {
+        "algorithm": spec.algorithm,
+        "model": spec.model,
+        "embedding_model": spec.embedding_model,
+        "decoding_algorithm": spec.decoding.algorithm,
+        "condition_label": spec.condition_label,
+        "pair_name": spec.pair_name,
+        "condition_bits": spec.condition_bits,
+        "replication": spec.replication,
+        "status": "finished",
+        "thinking_mode_supported": runtime_result["runtime"].get(
+            "thinking_mode_supported", False
+        ),
+        "raw_row_path": str(raw_row_path),
+        **summary_from_raw_row(spec.algorithm, raw_row),
+        **runtime_result.get("summary", {}),
+    }
+
+
+def write_run_artifacts(
+    *,
+    run_dir: Path,
+    spec: HFRunSpec,
+    runtime_result: RuntimeResult,
+    raw_row: dict[str, object],
+    raw_row_path: Path,
+    write_json_fn: Callable[[Path, dict[str, object]], None] | None = None,
+    write_text_fn: Callable[[Path, str], None] | None = None,
+    manifest_for_spec_fn: Callable[[HFRunSpec], dict[str, object]] | None = None,
+) -> None:
+    """Write all run artifact files for a finished spec.
+
+    Writes: manifest.json, state.json, raw_row_path, runtime.json, raw_response.json.
+    Does NOT write summary.json (caller does that) or smoke_verdict.json
+    (requires output_root and spec_identity which differ per caller).
+    """
+    _wj = write_json_fn if write_json_fn is not None else write_json
+    _wt = write_text_fn if write_text_fn is not None else write_text
+    _ms = manifest_for_spec_fn if manifest_for_spec_fn is not None else manifest_for_spec
+    _wj(run_dir / "manifest.json", _ms(spec))
+    _wj(run_dir / "state.json", {"status": "finished"})
+    _wj(raw_row_path, raw_row)
+    _wj(run_dir / "runtime.json", runtime_result["runtime"])
+    _wt(run_dir / "raw_response.json", runtime_result["raw_response"])
 
 
 def _is_live_worker_pid(raw_pid: object) -> bool:

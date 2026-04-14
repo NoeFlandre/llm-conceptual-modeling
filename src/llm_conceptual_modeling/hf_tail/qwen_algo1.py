@@ -9,8 +9,10 @@ from typing import Any
 
 import yaml
 
-from llm_conceptual_modeling.hf_batch.planning import default_runtime_profile_provider
-from llm_conceptual_modeling.hf_experiments import plan_paper_batch
+from llm_conceptual_modeling.hf_batch.planning import (
+    default_runtime_profile_provider,
+    plan_paper_batch,
+)
 from llm_conceptual_modeling.hf_run_config import HFRunConfig, load_hf_run_config
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 
@@ -102,7 +104,9 @@ def build_qwen_algo1_tail_preflight_report(
         results_root=tail_results_root_path.parent,
         ledger_root=tail_results_root_path,
     )
-    manifest = json.loads((tail_results_root_path / "shard_manifest.json").read_text(encoding="utf-8"))
+    manifest = json.loads(
+        (tail_results_root_path / "shard_manifest.json").read_text(encoding="utf-8")
+    )
     manifest_identities = manifest.get("identities", [])
     if len(manifest_identities) != QWEN_ALGO1_TAIL_EXPECTED_COUNT:
         raise RuntimeError("Dedicated tail manifest does not contain the expected 10 identities.")
@@ -139,7 +143,9 @@ def build_qwen_algo1_tail_preflight_report(
         in allowed_identities
     ]
     if len(filtered_specs) != QWEN_ALGO1_TAIL_EXPECTED_COUNT:
-        raise RuntimeError("Dedicated tail config planned an unexpected number of manifest-matched runs.")
+        raise RuntimeError(
+            "Dedicated tail config planned an unexpected number of manifest-matched runs."
+        )
     unfinished_count = int(dedicated_ledger["pending_count"]) + int(
         dedicated_ledger["retryable_failed_count"]
     ) + int(dedicated_ledger["terminal_failed_count"])
@@ -360,7 +366,9 @@ def _build_tail_runtime_config(
         if item.algorithm == "contrastive" and item.penalty_alpha == 0.8
     ]
     if len(decoding) != 1:
-        raise RuntimeError("Canonical config does not contain the expected contrastive decoding entry.")
+        raise RuntimeError(
+            "Canonical config does not contain the expected contrastive decoding entry."
+        )
     tail_config = replace(
         canonical_config,
         run=replace(canonical_config.run, output_root=remote_output_root, replications=5),

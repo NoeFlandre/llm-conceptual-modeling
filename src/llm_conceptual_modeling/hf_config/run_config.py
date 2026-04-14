@@ -606,7 +606,7 @@ def _write_condition_prompt_previews(
 
 
 def _write_condition_matrix(*, config: HFRunConfig, output_dir: Path) -> None:
-    from llm_conceptual_modeling.hf_experiments import plan_paper_batch
+    from llm_conceptual_modeling.hf_batch.planning import plan_paper_batch
 
     planned_specs = plan_paper_batch(
         models=config.models.chat_models,

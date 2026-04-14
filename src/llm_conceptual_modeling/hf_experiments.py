@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Callable, cast
+from typing import cast
 
 import pandas as pd
 
 from llm_conceptual_modeling.common.hf_transformers import (
-    RuntimeProfile,
     build_runtime_factory,
 )
 from llm_conceptual_modeling.hf_batch.monitoring import (
@@ -21,11 +20,17 @@ from llm_conceptual_modeling.hf_batch.monitoring import (
 from llm_conceptual_modeling.hf_batch.outputs import write_aggregated_outputs
 from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
-    plan_paper_batch_specs,
+    plan_paper_batch,  # noqa: F401
     select_run_spec,  # noqa: F401
+)
+from llm_conceptual_modeling.hf_batch.planning import (
+    plan_paper_batch_specs as _plan_paper_batch_specs,
 )
 from llm_conceptual_modeling.hf_batch.prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    build_run_summary as _build_run_summary,
 )
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     clear_retry_artifacts as _clear_retry_artifacts,
@@ -35,6 +40,9 @@ from llm_conceptual_modeling.hf_batch.run_artifacts import (
 )
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     read_json as _read_artifact_json,
+)
+from llm_conceptual_modeling.hf_batch.run_artifacts import (
+    write_run_artifacts as _write_run_artifacts,
 )
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     write_smoke_verdict as _write_smoke_verdict,
@@ -67,9 +75,6 @@ from llm_conceptual_modeling.hf_batch.utils import (
 )
 from llm_conceptual_modeling.hf_batch.utils import (
     write_json as _write_json,
-)
-from llm_conceptual_modeling.hf_batch.utils import (
-    write_text as _write_text,
 )
 from llm_conceptual_modeling.hf_execution.dispatch import (
     execute_run as _execute_run,
@@ -116,9 +121,6 @@ from llm_conceptual_modeling.hf_pipeline.metrics import (
 )
 from llm_conceptual_modeling.hf_pipeline.metrics import (
     sanitize_algorithm_edge_result as _sanitize_algorithm_edge_result,  # noqa: F401
-)
-from llm_conceptual_modeling.hf_pipeline.metrics import (
-    summary_from_raw_row as _summary_from_raw_row,
 )
 from llm_conceptual_modeling.hf_pipeline.metrics import (
     trace_metric_summary as _trace_metric_summary,  # noqa: F401
@@ -177,24 +179,9 @@ from llm_conceptual_modeling.hf_worker.state import (
     worker_loaded_model as _worker_loaded_model,  # noqa: F401
 )
 
-
-def plan_paper_batch(
-    *,
-    models: list[str],
-    embedding_model: str,
-    replications: int,
-    algorithms: tuple[str, ...] | None = None,
-    config: HFRunConfig | None = None,
-    runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
-) -> list[HFRunSpec]:
-    return plan_paper_batch_specs(
-        models=models,
-        embedding_model=embedding_model,
-        replications=replications,
-        algorithms=algorithms,
-        config=config,
-        runtime_profile_provider=runtime_profile_provider,
-    )
+# Public compat alias for internal helper — used by tests that monkeypatch
+# llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs
+plan_paper_batch_specs = _plan_paper_batch_specs  # noqa: F401
 
 
 def run_paper_batch(
@@ -225,7 +212,7 @@ def run_paper_batch(
         profile_provider = default_runtime_profile_provider
     else:
         profile_provider = hf_runtime.profile_for_chat_model if hf_runtime else None
-    planned_specs = plan_paper_batch(
+    planned_specs = plan_paper_batch_specs(
         models=models,
         embedding_model=embedding_model,
         replications=replications,
@@ -433,28 +420,21 @@ def run_paper_batch(
                 continue
 
             raw_row = runtime_result["raw_row"]
-            _write_json(raw_row_path, raw_row)
-            _write_json(run_dir / "state.json", {"status": "finished"})
-            _write_json(run_dir / "runtime.json", runtime_result["runtime"])
-            _write_text(run_dir / "raw_response.json", runtime_result["raw_response"])
+            _write_run_artifacts(
+                run_dir=run_dir,
+                spec=spec,
+                runtime_result=runtime_result,
+                raw_row=raw_row,
+                raw_row_path=raw_row_path,
+                manifest_for_spec_fn=_manifest_for_spec,
+            )
 
-            summary = {
-                "algorithm": spec.algorithm,
-                "model": spec.model,
-                "embedding_model": spec.embedding_model,
-                "decoding_algorithm": spec.decoding.algorithm,
-                "condition_label": spec.condition_label,
-                "pair_name": spec.pair_name,
-                "condition_bits": spec.condition_bits,
-                "replication": spec.replication,
-                "status": "finished",
-                "thinking_mode_supported": runtime_result["runtime"].get(
-                    "thinking_mode_supported", False
-                ),
-                "raw_row_path": str(raw_row_path),
-                **_summary_from_raw_row(spec.algorithm, raw_row),
-                **runtime_result.get("summary", {}),
-            }
+            summary = _build_run_summary(
+                spec=spec,
+                raw_row=raw_row,
+                runtime_result=runtime_result,
+                raw_row_path=raw_row_path,
+            )
             _write_json(summary_path, summary)
             summary_rows.append(summary)
             last_completed_run = current_run
@@ -588,26 +568,21 @@ def run_single_spec(
         for session in persistent_sessions.values():
             session.close()
     raw_row = runtime_result["raw_row"]
-    _write_json(raw_row_path, raw_row)
-    _write_json(run_dir / "state.json", {"status": "finished"})
-    _write_json(run_dir / "runtime.json", runtime_result["runtime"])
-    _write_text(run_dir / "raw_response.json", runtime_result["raw_response"])
+    _write_run_artifacts(
+        run_dir=run_dir,
+        spec=spec,
+        runtime_result=runtime_result,
+        raw_row=raw_row,
+        raw_row_path=raw_row_path,
+        manifest_for_spec_fn=_manifest_for_spec,
+    )
 
-    summary = {
-        "algorithm": spec.algorithm,
-        "model": spec.model,
-        "embedding_model": spec.embedding_model,
-        "decoding_algorithm": spec.decoding.algorithm,
-        "condition_label": spec.condition_label,
-        "pair_name": spec.pair_name,
-        "condition_bits": spec.condition_bits,
-        "replication": spec.replication,
-        "status": "finished",
-        "thinking_mode_supported": runtime_result["runtime"].get("thinking_mode_supported", False),
-        "raw_row_path": str(raw_row_path),
-        **_summary_from_raw_row(spec.algorithm, raw_row),
-        **runtime_result.get("summary", {}),
-    }
+    summary = _build_run_summary(
+        spec=spec,
+        raw_row=raw_row,
+        runtime_result=runtime_result,
+        raw_row_path=raw_row_path,
+    )
     _write_json(summary_path, summary)
     _write_smoke_verdict(
         output_root=output_root_path,
