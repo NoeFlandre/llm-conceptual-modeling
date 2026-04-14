@@ -4,9 +4,11 @@ import json
 from pathlib import Path
 
 from llm_conceptual_modeling.hf_batch.planning import default_runtime_profile_provider
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    run_dir_for_spec as _run_dir_for_spec,
+)
 from llm_conceptual_modeling.hf_experiments import (
     _current_run_payload,
-    _run_dir_for_spec,
     _status_timestamp_now,
     _validate_structural_runtime_result,
     plan_paper_batch,

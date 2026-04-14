@@ -26,6 +26,18 @@ from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch_specs,
 )
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    filter_planned_specs_for_output_root as _filter_planned_specs_for_output_root,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    run_dir_for_spec as _run_dir_for_spec,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    smoke_spec_identity as _smoke_spec_identity,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    spec_identity as _spec_identity,
+)
 from llm_conceptual_modeling.hf_batch.prompts import (
     build_prompt_bundle as _build_prompt_bundle,  # noqa: F401
 )
@@ -216,40 +228,6 @@ def plan_paper_batch(
         algorithms=algorithms,
         config=config,
         runtime_profile_provider=runtime_profile_provider,
-    )
-
-
-def _filter_planned_specs_for_output_root(
-    *,
-    planned_specs: list[HFRunSpec],
-    output_root: Path,
-) -> list[HFRunSpec]:
-    manifest_path = output_root / "shard_manifest.json"
-    if not manifest_path.exists():
-        return planned_specs
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    allowed_identities = {
-        (
-            str(item["algorithm"]),
-            str(item["model"]),
-            str(item["condition_label"]),
-            str(item["pair_name"]),
-            str(item["condition_bits"]),
-            int(item["replication"]),
-        )
-        for item in manifest.get("identities", [])
-    }
-    return [spec for spec in planned_specs if _spec_identity(spec) in allowed_identities]
-
-
-def _spec_identity(spec: HFRunSpec) -> tuple[str, str, str, str, str, int]:
-    return (
-        spec.algorithm,
-        spec.model,
-        spec.condition_label,
-        spec.pair_name,
-        spec.condition_bits,
-        spec.replication,
     )
 
 
@@ -708,18 +686,6 @@ def run_single_spec(
     return summary
 
 
-def _smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
-    return {
-        "algorithm": spec.algorithm,
-        "model": spec.model,
-        "embedding_model": spec.embedding_model,
-        "decoding_algorithm": spec.decoding.algorithm,
-        "pair_name": spec.pair_name,
-        "condition_bits": spec.condition_bits,
-        "replication": spec.replication,
-    }
-
-
 def _worker_loaded_model(run_dir: Path) -> bool:
     worker_state = _read_artifact_json(run_dir / "worker_state.json")
     return worker_state.get("model_loaded") is True or (run_dir / "active_stage.json").exists()
@@ -795,15 +761,3 @@ def _runtime_factory_from_hf_runtime(hf_runtime: HFTransformersRuntimeFactory) -
 
     return runtime
 
-
-def _run_dir_for_spec(*, output_root: Path, spec: HFRunSpec) -> Path:
-    return (
-        output_root
-        / "runs"
-        / spec.algorithm
-        / _slugify_model(spec.model)
-        / spec.condition_label
-        / spec.pair_name
-        / spec.condition_bits
-        / f"rep_{spec.replication:02d}"
-    )
