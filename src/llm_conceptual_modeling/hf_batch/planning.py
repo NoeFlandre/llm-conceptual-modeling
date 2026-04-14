@@ -12,8 +12,8 @@ from llm_conceptual_modeling.common.hf_transformers import (
     supports_explicit_thinking_disable,
 )
 from llm_conceptual_modeling.hf_batch.prompts import build_prompt_bundle
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec
-from llm_conceptual_modeling.hf_batch_utils import condition_label, derive_run_seed
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec
+from llm_conceptual_modeling.hf_batch.utils import condition_label, derive_run_seed
 from llm_conceptual_modeling.hf_run_config import HFRunConfig
 
 

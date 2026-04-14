@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_state.resume_state import resume_priority_key
 
 

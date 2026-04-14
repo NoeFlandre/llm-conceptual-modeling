@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import sys
+from collections.abc import Mapping
 from pathlib import Path
 
 from llm_conceptual_modeling.common.failure_markers import is_retryable_runtime_failure
-from llm_conceptual_modeling.hf_worker_policy import (
+from llm_conceptual_modeling.hf_worker.policy import (
     coerce_timeout_seconds as _worker_policy_coerce_timeout_seconds,
+    resolve_run_retry_attempts as _worker_policy_resolve_run_retry_attempts,
+    resolve_stage_timeout_seconds as _worker_policy_resolve_stage_timeout_seconds,
+    resolve_startup_timeout_seconds as _worker_policy_resolve_startup_timeout_seconds,
 )
 
 
@@ -73,6 +77,18 @@ def is_retryable_worker_error(error: dict[str, str]) -> bool:
 
 def coerce_timeout_seconds(raw_value: object) -> float:
     return _worker_policy_coerce_timeout_seconds(raw_value)
+
+
+def resolve_run_retry_attempts(context_policy: Mapping[str, object] | None) -> int:
+    return _worker_policy_resolve_run_retry_attempts(context_policy)
+
+
+def resolve_stage_timeout_seconds(context_policy: Mapping[str, object] | None) -> float:
+    return _worker_policy_resolve_stage_timeout_seconds(context_policy)
+
+
+def resolve_startup_timeout_seconds(context_policy: Mapping[str, object] | None) -> float:
+    return _worker_policy_resolve_startup_timeout_seconds(context_policy)
 
 
 def _is_retryable_missing_result_artifact(*, stdout: str | None, stderr: str | None) -> bool:

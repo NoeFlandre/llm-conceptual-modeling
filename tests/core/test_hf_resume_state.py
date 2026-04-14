@@ -7,8 +7,8 @@ from typing import cast
 import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec
-from llm_conceptual_modeling.hf_resume_state import (
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec
+from llm_conceptual_modeling.hf_state.resume_state import (
     _should_defer_failure_kind,
     build_seeded_resume_snapshot,
     classify_failure_payload,

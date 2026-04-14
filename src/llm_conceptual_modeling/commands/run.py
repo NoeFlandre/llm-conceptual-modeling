@@ -8,7 +8,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
     build_runtime_factory,
 )
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
-from llm_conceptual_modeling.hf_drain_supervisor import (
+from llm_conceptual_modeling.hf_drain import (
     build_drain_plan,
     read_drain_state_report,
     run_drain_supervisor,
@@ -18,14 +18,14 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
     select_run_spec,
 )
-from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
-from llm_conceptual_modeling.hf_resume_sweep import build_resume_sweep_report
+from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
+from llm_conceptual_modeling.hf_resume.sweep import build_resume_sweep_report
 from llm_conceptual_modeling.hf_run_config import (
     HFRunConfig,
     load_hf_run_config,
     write_resolved_run_preview,
 )
-from llm_conceptual_modeling.hf_shard_manifest import write_unfinished_shard_manifest
+from llm_conceptual_modeling.hf_state.shard_manifest import write_unfinished_shard_manifest
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 from llm_conceptual_modeling.hf_tail.qwen_algo1 import (
     build_qwen_algo1_tail_preflight_report,

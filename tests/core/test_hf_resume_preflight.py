@@ -6,7 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from llm_conceptual_modeling.hf_resume_preflight import build_resume_preflight_report
+from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
 
 
 def _config(output_root: Path) -> object:

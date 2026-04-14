@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_shard_manifest import write_unfinished_shard_manifest
+from llm_conceptual_modeling.hf_state.shard_manifest import write_unfinished_shard_manifest
 
 
 def test_write_unfinished_shard_manifest_keeps_only_active_unfinished_identities(

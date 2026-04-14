@@ -18,9 +18,9 @@ from llm_conceptual_modeling.hf_batch.prompts import (
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_batch.utils import RecordingChatClient, runtime_details
 from llm_conceptual_modeling.hf_batch.utils import write_json as _write_json
-from llm_conceptual_modeling.hf_batch_utils import algo2_prompt_config as _algo2_prompt_config
-from llm_conceptual_modeling.hf_batch_utils import coerce_edges as _coerce_edges
-from llm_conceptual_modeling.hf_batch_utils import collect_nodes as _collect_nodes
+from llm_conceptual_modeling.hf_batch.utils import algo2_prompt_config as _algo2_prompt_config
+from llm_conceptual_modeling.hf_batch.utils import coerce_edges as _coerce_edges
+from llm_conceptual_modeling.hf_batch.utils import collect_nodes as _collect_nodes
 from llm_conceptual_modeling.hf_pipeline.common import (
     mark_worker_ready_for_execution as _mark_worker_ready_for_execution,
 )

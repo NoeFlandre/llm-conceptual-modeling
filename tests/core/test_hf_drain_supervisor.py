@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_drain_supervisor import (
+from llm_conceptual_modeling.hf_drain import (
     build_drain_plan,
     summarize_results_root_failures,
 )

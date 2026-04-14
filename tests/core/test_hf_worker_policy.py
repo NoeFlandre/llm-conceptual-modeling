@@ -4,7 +4,7 @@ from collections.abc import Iterator, Mapping
 
 import pytest
 
-from llm_conceptual_modeling.hf_worker_policy import (
+from llm_conceptual_modeling.hf_worker.policy import (
     coerce_timeout_seconds,
     resolve_run_retry_attempts,
     resolve_stage_timeout_seconds,

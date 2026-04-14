@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_conceptual_modeling.hf_worker_result import (
+from llm_conceptual_modeling.hf_worker.result import (
     load_runtime_result,
     raise_missing_result_artifact,
 )

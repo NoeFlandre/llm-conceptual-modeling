@@ -25,7 +25,7 @@ from llm_conceptual_modeling.hf_resume.profile import (
     SAFE_PHASE,
     resolve_resume_profile,
 )
-from llm_conceptual_modeling.hf_resume_sweep import build_resume_sweep_report
+from llm_conceptual_modeling.hf_resume.sweep import build_resume_sweep_report
 
 summarize_results_root_failures = _summarize_results_root_failures
 

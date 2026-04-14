@@ -16,7 +16,7 @@ from llm_conceptual_modeling.algo2.mistral import Method2PromptConfig
 from llm_conceptual_modeling.algo3.mistral import Method3PromptConfig
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.io import write_json_dict
-from llm_conceptual_modeling.hf_batch_types import Edge, HFRunSpec
+from llm_conceptual_modeling.hf_batch.types import Edge, HFRunSpec
 
 
 def manifest_for_spec(spec: HFRunSpec) -> dict[str, object]:

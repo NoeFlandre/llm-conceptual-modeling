@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator, Mapping
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_resume_sweep import build_resume_sweep_report
+from llm_conceptual_modeling.hf_resume.sweep import build_resume_sweep_report
 
 
 def test_build_resume_sweep_report_classifies_resume_ready_failure_only_and_active_roots(

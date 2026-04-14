@@ -1,4 +1,4 @@
-from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
+from llm_conceptual_modeling.hf_resume.profile import resolve_resume_profile
 
 
 def test_resolve_resume_profile_defaults_to_docker_and_safe_profiles() -> None:

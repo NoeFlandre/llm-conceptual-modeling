@@ -7,10 +7,10 @@ from pathlib import Path
 import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_execution.subprocess import MonitoredCommandTimeout
 from llm_conceptual_modeling.hf_worker.persistent import PersistentHFWorkerSession
-from llm_conceptual_modeling.hf_worker_request import load_worker_request
+from llm_conceptual_modeling.hf_worker.request import load_worker_request
 
 
 class _FakeProcess:

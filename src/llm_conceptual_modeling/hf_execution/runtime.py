@@ -25,12 +25,12 @@ from llm_conceptual_modeling.hf_execution.subprocess import (
     run_monitored_command,
 )
 from llm_conceptual_modeling.hf_worker.persistent import PersistentHFWorkerSession
-from llm_conceptual_modeling.hf_worker_policy import (
+from llm_conceptual_modeling.hf_worker.policy import (
     resolve_run_retry_attempts,
     resolve_stage_timeout_seconds,
     resolve_startup_timeout_seconds,
 )
-from llm_conceptual_modeling.hf_worker_result import (
+from llm_conceptual_modeling.hf_worker.result import (
     load_runtime_result,
     raise_missing_result_artifact,
 )

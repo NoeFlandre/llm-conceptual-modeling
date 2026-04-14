@@ -5,7 +5,7 @@ from typing import Any
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.io import coerce_int
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 
 
 def serialize_spec(spec: HFRunSpec) -> dict[str, object]:

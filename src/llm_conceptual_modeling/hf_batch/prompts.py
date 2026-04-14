@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, cast
 
 from llm_conceptual_modeling.algo1.cove import apply_cove_verification, build_cove_prompt
-from llm_conceptual_modeling.hf_batch_types import Edge
+from llm_conceptual_modeling.hf_batch.types import Edge
 
 
 def build_prompt_bundle(

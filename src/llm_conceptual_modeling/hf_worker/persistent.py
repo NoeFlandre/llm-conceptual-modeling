@@ -10,24 +10,20 @@ from typing import Any
 from llm_conceptual_modeling.common.failure_markers import (
     is_retryable_runtime_failure,
 )
-from llm_conceptual_modeling.hf_batch_types import HFRunSpec, RuntimeResult
+from llm_conceptual_modeling.hf_batch.types import HFRunSpec, RuntimeResult
 from llm_conceptual_modeling.hf_execution.subprocess import (
     MonitoredCommandTimeout,
     _terminate_process,
     build_hf_download_environment,
 )
-from llm_conceptual_modeling.hf_worker_policy import (
+from llm_conceptual_modeling.hf_worker.policy import (
     resolve_run_retry_attempts as _resolve_run_retry_attempts,
-)
-from llm_conceptual_modeling.hf_worker_policy import (
     resolve_stage_timeout_seconds as _resolve_stage_timeout_seconds,
-)
-from llm_conceptual_modeling.hf_worker_policy import (
     resolve_startup_timeout_seconds as _resolve_startup_timeout_seconds,
 )
-from llm_conceptual_modeling.hf_worker_request import enqueue_worker_request
-from llm_conceptual_modeling.hf_worker_result import load_runtime_result
-from llm_conceptual_modeling.hf_worker_state import (
+from llm_conceptual_modeling.hf_worker.request import enqueue_worker_request
+from llm_conceptual_modeling.hf_worker.result import load_runtime_result
+from llm_conceptual_modeling.hf_worker.state import (
     read_worker_state,
     worker_has_started_stage_execution,
 )

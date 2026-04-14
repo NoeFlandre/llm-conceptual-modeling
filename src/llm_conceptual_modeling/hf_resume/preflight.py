@@ -11,7 +11,7 @@ from llm_conceptual_modeling.hf_experiments import (
     _validate_structural_runtime_result,
     plan_paper_batch,
 )
-from llm_conceptual_modeling.hf_resume_state import (
+from llm_conceptual_modeling.hf_state.resume_state import (
     build_seeded_resume_snapshot,
     status_int,
 )
