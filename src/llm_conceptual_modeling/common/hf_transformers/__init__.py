@@ -1,0 +1,283 @@
+"""hf_transformers compatibility facade — re-exports from _compat and submodules."""
+
+import ast
+import contextlib  # noqa: F401 — re-exported for tests
+import gc
+import importlib
+import json
+import random
+import re
+import time
+
+import numpy as np
+
+# Import from _children_mapping — all children mapping recovery helpers.
+from llm_conceptual_modeling.common.hf_transformers._children_mapping import (
+    _children_mapping_needs_more_recovery,
+    _extract_quoted_strings_from_bracket,
+    # Also import _looks_like_children_mapping from _children_mapping
+    # (not from _parse) so the _children_mapping version is exposed.
+    _looks_like_children_mapping,
+    _recover_children_mapping_from_lines,
+    _recover_children_mapping_from_outer_block,
+    _recover_double_quoted_children_values,
+    _recover_fenced_python_children_mapping,
+    _recover_first_quoted_children_entry,
+    _recover_inline_children_mapping,
+    _recover_malformed_children_mapping,
+    _recover_single_key_children_values,
+    _recover_truncated_children_mapping_blocks,
+    _recover_unquoted_key_comma_separated,
+    _remove_nonstring_bracket_patterns,
+    _sanitize_children_mapping_text_for_recovery,
+    _scan_lenient_mapping_key,
+    _scan_lenient_quoted_list,
+    _scan_unquoted_list_item,
+    _scan_unquoted_mapping_key,
+    _skip_inline_mapping_separators,
+    _skip_nested_bracketed_value,
+    _strip_fenced_content_artifacts,
+    _strip_mapping_comments,
+    _try_inline_children_parse,
+)
+from llm_conceptual_modeling.common.hf_transformers._compat import (
+    _MINISTRAL_CHAT_MODEL,
+    # Constants
+    _QWEN_CHAT_MODEL,
+    _SUPPORTED_CHAT_MODELS,
+    _SUPPORTED_EMBEDDING_MODELS,
+    _TRUSTED_REMOTE_CODE_CHAT_MODELS,
+    # Policy
+    DecodingConfig,
+    # Classes
+    HFTransformersChatClient,
+    HFTransformersEmbeddingClient,
+    HFTransformersRuntimeFactory,
+    RuntimeProfile,
+    _build_runtime_profile,
+    _custom_generate_overrides,
+    # Runtime helpers used by callers
+    _decoding_kwargs,
+    _dtype_from_profile,
+    _encode_chat_prompt,
+    _ensure_qwen_dynamic_cache_compatibility,
+    _flash_attention_available,
+    _generator_kwarg_rejected,
+    _load_chat_model,
+    _load_chat_tokenizer,
+    _load_qwen_dynamic_cache_type,
+    _model_uses_accelerate_device_map,
+    _mutate_qwen_cache_state_lists,
+    _next_max_new_tokens,
+    _normalize_eos_ids,
+    _patch_qwen_contrastive_custom_generate,
+    # Qwen cache helpers
+    _qwen_cache_batch_repeat_interleave,
+    _qwen_cache_batch_select_indices,
+    _qwen_cache_crop,
+    _release_prefetched_model_object,
+    _require_cuda,
+    _resolve_attention_implementation,
+    _resolve_context_limit,
+    _resolve_generation_timeout_seconds,
+    _resolve_pad_token_id,
+    _resolve_safety_margin_tokens,
+    _response_hit_generation_limit,
+    _set_generation_temperature,
+    _temporarily_disable_stateful_guard,
+    # Lazy-loader stubs
+    _torch,
+    _transformers,
+    _trusted_remote_code_kwargs,
+    # Public helpers
+    build_default_decoding_grid,
+    build_runtime_factory,
+    derive_context_window,
+    derive_context_window_from_input_length,
+    runtime_generation_overrides,
+    should_disable_stateful_guard,
+    supports_decoding_config,
+    supports_explicit_thinking_disable,
+)
+
+# Import from _edge_list — recovery functions for edge lists.
+from llm_conceptual_modeling.common.hf_transformers._edge_list import (
+    _extract_edge_pair_from_bracket,
+    _extract_recoverable_edge_endpoints,
+    _looks_like_edge_endpoint,
+    _looks_like_truncated_single_edge_endpoint,
+    _recover_bare_comma_separated_edge_pair,
+    _recover_bracketed_edge_pairs,
+)
+
+# Import from _label_list — these must come from here (not _parse) so the
+# namespace exposes the _label_list versions.
+from llm_conceptual_modeling.common.hf_transformers._label_list import (
+    _extract_first_balanced_block,
+    _extract_outer_block,
+    _extract_quoted_line_value,
+    _looks_like_packed_label,
+    _looks_like_recoverable_label,
+    _normalize_label_list_payload,
+    _recover_bare_comma_separated_label_list,
+    _recover_label_list_from_lines,
+    _recover_label_list_from_quoted_candidates,
+    _recover_label_list_from_segments,
+    _recover_quoted_label_list_with_comments,
+    _recover_single_bare_label,
+    _recover_truncated_list_block,
+    _scan_lenient_quoted_string,
+    _split_packed_label_string,
+)
+
+# Import ONLY the unique orchestrator/utility functions from _parse.
+# Recovery functions that also exist in submodules are NOT imported from
+# _parse here — import them from the original submodules below to avoid
+# shadowing issues (_parse defines local copies that shadow its imports).
+from llm_conceptual_modeling.common.hf_transformers._parse import (
+    _looks_retryable_malformed_output,
+    _looks_retryable_normalization_failure,
+    _normalize_schema_response,
+    _parse_generated_json,
+    _resolve_malformed_output_retry_limit,
+    _should_normalize_exhausted_malformed_edge_list_to_empty,
+    # _normalize_label_list_payload and _split_packed_label_string are defined
+    # in _parse too, but we import them from _label_list (below) so the
+    # _label_list versions take precedence for the namespace.
+    # _looks_like_children_mapping is also locally defined in _parse; we
+    # import it from _children_mapping (below) instead.
+    _strip_assistant_prefix,
+    _strip_code_fence,
+)
+
+__all__ = [
+    # Classes
+    "HFTransformersChatClient",
+    "HFTransformersEmbeddingClient",
+    "HFTransformersRuntimeFactory",
+    # Policy
+    "DecodingConfig",
+    "RuntimeProfile",
+    # Public helpers
+    "build_default_decoding_grid",
+    "derive_context_window",
+    "derive_context_window_from_input_length",
+    "supports_explicit_thinking_disable",
+    "supports_decoding_config",
+    "should_disable_stateful_guard",
+    "runtime_generation_overrides",
+    # Runtime helpers
+    "_decoding_kwargs",
+    "_response_hit_generation_limit",
+    "_set_generation_temperature",
+    "_resolve_safety_margin_tokens",
+    "_resolve_generation_timeout_seconds",
+    "_next_max_new_tokens",
+    "_normalize_eos_ids",
+    "_encode_chat_prompt",
+    "_resolve_pad_token_id",
+    "_build_runtime_profile",
+    "_resolve_context_limit",
+    "_dtype_from_profile",
+    "build_runtime_factory",
+    "_release_prefetched_model_object",
+    "_model_uses_accelerate_device_map",
+    "_load_chat_tokenizer",
+    "_load_chat_model",
+    "_trusted_remote_code_kwargs",
+    "_resolve_attention_implementation",
+    "_flash_attention_available",
+    "_custom_generate_overrides",
+    "_patch_qwen_contrastive_custom_generate",
+    "_load_qwen_dynamic_cache_type",
+    "_ensure_qwen_dynamic_cache_compatibility",
+    "_temporarily_disable_stateful_guard",
+    "_generator_kwarg_rejected",
+    "_require_cuda",
+    # Lazy loaders
+    "_torch",
+    "_transformers",
+    # Constants
+    "_QWEN_CHAT_MODEL",
+    "_MINISTRAL_CHAT_MODEL",
+    "_SUPPORTED_CHAT_MODELS",
+    "_SUPPORTED_EMBEDDING_MODELS",
+    "_TRUSTED_REMOTE_CODE_CHAT_MODELS",
+    # Qwen cache helpers
+    "_qwen_cache_batch_repeat_interleave",
+    "_qwen_cache_crop",
+    "_qwen_cache_batch_select_indices",
+    "_mutate_qwen_cache_state_lists",
+    # Parse orchestrator
+    "_parse_generated_json",
+    "_strip_assistant_prefix",
+    "_strip_code_fence",
+    "_normalize_schema_response",
+    "_normalize_label_list_payload",
+    "_split_packed_label_string",
+    # Shape detection
+    "_looks_like_children_mapping",
+    "_looks_retryable_malformed_output",
+    "_looks_retryable_normalization_failure",
+    "_looks_like_truncated_single_edge_endpoint",
+    "_looks_like_edge_endpoint",
+    "_looks_like_recoverable_label",
+    "_looks_like_packed_label",
+    # Block extraction
+    "_extract_outer_block",
+    "_extract_first_balanced_block",
+    "_extract_quoted_line_value",
+    # Retry helpers
+    "_resolve_malformed_output_retry_limit",
+    "_should_normalize_exhausted_malformed_edge_list_to_empty",
+    # Recovery entrypoints
+    "_recover_non_json_response",
+    "_recover_bare_comma_separated_edge_pair",
+    "_recover_bracketed_edge_pairs",
+    "_extract_edge_pair_from_bracket",
+    "_recover_malformed_children_mapping",
+    "_recover_children_mapping_from_outer_block",
+    "_strip_mapping_comments",
+    "_recover_inline_children_mapping",
+    "_try_inline_children_parse",
+    "_skip_inline_mapping_separators",
+    "_scan_lenient_mapping_key",
+    "_scan_lenient_quoted_list",
+    "_skip_nested_bracketed_value",
+    "_scan_lenient_quoted_string",
+    "_scan_unquoted_list_item",
+    "_scan_unquoted_mapping_key",
+    "_sanitize_children_mapping_text_for_recovery",
+    "_strip_fenced_content_artifacts",
+    "_recover_unquoted_key_comma_separated",
+    "_recover_fenced_python_children_mapping",
+    "_recover_first_quoted_children_entry",
+    "_recover_single_key_children_values",
+    "_recover_double_quoted_children_values",
+    "_recover_truncated_children_mapping_blocks",
+    "_recover_children_mapping_from_lines",
+    # Children mapping helpers
+    "_children_mapping_needs_more_recovery",
+    "_remove_nonstring_bracket_patterns",
+    "_extract_quoted_strings_from_bracket",
+    # Label list recovery
+    "_recover_label_list_from_lines",
+    "_recover_truncated_list_block",
+    "_recover_label_list_from_segments",
+    "_recover_label_list_from_quoted_candidates",
+    "_recover_bare_comma_separated_label_list",
+    "_recover_quoted_label_list_with_comments",
+    "_recover_single_bare_label",
+    # Edge list recovery
+    "_extract_recoverable_edge_endpoints",
+    # Standard library re-exports for tests
+    "time",
+    "gc",
+    "random",
+    "np",
+    "json",
+    "ast",
+    "re",
+    "importlib",
+    "contextlib",
+]

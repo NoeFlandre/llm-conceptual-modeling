@@ -409,7 +409,7 @@ def test_complete_json_retries_multiple_times_for_qwen_contrastive_malformed_out
     tokenizer = _SequentialDecodeTokenizer(
         [
             '[\n  ("Prevalene',
-            '{ <think>\n"Okay, let\'s tackle this problem...',
+            "{ <think>\n\"Okay, let's tackle this problem...",
             '{"edges": []}',
         ]
     )
@@ -440,7 +440,7 @@ def test_complete_json_uses_distinct_seeds_for_qwen_contrastive_malformed_output
     tokenizer = _SequentialDecodeTokenizer(
         [
             '[\n  ("Prevalene',
-            '{ <think>\n"Okay, let\'s tackle this problem...',
+            "{ <think>\n\"Okay, let's tackle this problem...",
             '{"edges": []}',
         ]
     )
@@ -483,7 +483,7 @@ def test_complete_json_grows_max_new_tokens_for_qwen_contrastive_malformed_outpu
     tokenizer = _SequentialDecodeTokenizer(
         [
             '[\n  ("Prevalene',
-            '{ <think>\n"Okay, let\'s tackle this problem...',
+            "{ <think>\n\"Okay, let's tackle this problem...",
             '{"edges": []}',
         ]
     )
@@ -813,7 +813,9 @@ def test_runtime_factory_skips_manual_device_move_for_accelerate_dispatched_mode
 
         def to(self, device: str):
             self.to_calls.append(device)
-            raise RuntimeError("You can't move a model that has some modules offloaded to cpu or disk.")
+            raise RuntimeError(
+                "You can't move a model that has some modules offloaded to cpu or disk."
+            )
 
     dispatched_model = _DispatchedModel()
 
@@ -1179,13 +1181,13 @@ def test_parse_generated_json_recovers_fenced_children_mapping_without_outer_bra
     parsed = hf_transformers._parse_generated_json(
         """```python{
 "% Population Engaging in Walk-for-Commuting": [
-    "% Population Walking >5 km per day (any purpose)",  # Higher/lower frequency of long-duration walking in daily life
+    "% Population Walking >5 km per day (any purpose)",  # Higher/lower frequency of long-duration walking in daily life  # noqa: E501
     "Average Distance Traveled on Footscray by Residents (km/person/annum)"  #
         (quantitative measure of foot travel beyond commuting context),
     "'Car-Freedom Index' (% Households Without Personal Vehicl Access)"  #
         Inverse proxy for reliance/redundancy of non-walk modes
 ]
-```""",
+```""",  # noqa: E501
         schema_name="children_by_label",
     )
 
@@ -1200,18 +1202,19 @@ def test_parse_generated_json_recovers_fenced_children_mapping_without_outer_bra
     }
 
 
-def test_parse_generated_json_recovers_fenced_children_mapping_without_braces_or_dict_wrapper(
-) -> None:
+def test_parse_generated_json_recovers_fenced_children_mapping_without_braces_or_dict_wrapper() -> (
+    None
+):
     parsed = hf_transformers._parse_generated_json(
         """```python
 'Supportive食環境': [
     'Convenience of nutritious food access',
     'Affordabiltiy of wholesomeness in diet',
-    'Proximity-to-health-promoters (e.g., farmers markets/grocery stores)',  # Less = distance to fast/sugarcalorie sources increases
+    'Proximity-to-health-promoters (e.g., farmers markets/grocery stores)',  # Less = distance to fast/sugarcalorie sources increases  # noqa: E501
 \t'Harmonized school/univerisity cafeteria policies (e.‚Äögreens by default, sugar tax on desser)t',
     'Urban/rur‚ÅÑÔ∏è food desert vs oasismapping (extent of "green zones")'
 ]
-```""",
+```""",  # noqa: E501
         schema_name="children_by_label",
     )
 
@@ -1221,15 +1224,16 @@ def test_parse_generated_json_recovers_fenced_children_mapping_without_braces_or
                 "Convenience of nutritious food access",
                 "Affordabiltiy of wholesomeness in diet",
                 "Proximity-to-health-promoters (e.g., farmers markets/grocery stores)",
-                "Harmonized school/univerisity cafeteria policies (e.‚Äögreens by default, sugar tax on desser)t",
+                "Harmonized school/univerisity cafeteria policies (e.‚Äögreens by default, sugar tax on desser)t",  # noqa: E501
                 'Urban/rur‚ÅÑÔ∏è food desert vs oasismapping (extent of "green zones")',
             ]
         }
     }
 
 
-def test_parse_generated_json_recovers_children_mapping_with_trailing_note_after_empty_dict(
-) -> None:
+def test_parse_generated_json_recovers_children_mapping_with_trailing_note_after_empty_dict() -> (
+    None
+):
     parsed = hf_transformers._parse_generated_json(
         (
             "{}\n\n"
@@ -1267,8 +1271,9 @@ def test_parse_generated_json_recovers_inline_children_mapping_with_duplicates()
     }
 
 
-def test_parse_generated_json_recovers_inline_children_mapping_with_mismatched_terminal_quote(
-) -> None:
+def test_parse_generated_json_recovers_inline_children_mapping_with_mismatched_terminal_quote() -> (
+    None
+):
     parsed = hf_transformers._parse_generated_json(
         (
             "{'Availability of healthy foods' : ['Nutritional diversity', "
@@ -1310,12 +1315,9 @@ def test_parse_generated_json_recovers_fenced_label_list_with_comments() -> None
         "Urban sprawl and walkablility barriers",
         "Nudging strategies in cafeteria/placemaking "
         "(e.g., salad bars over fritters in public spaces)",
-        '"JUNK FOOD ZONES" (spatially concentrated fast-foodies '
-        "vs supermarkets in low-SOC areas)",
-        "Antibiotic overuse in livestock and gut-microbiome links "
-        "to obesity/metabolic health",
-        "Climate-induced food price volatility "
-        "(disproportionate impact on vulnerable eaters)",
+        '"JUNK FOOD ZONES" (spatially concentrated fast-foodies vs supermarkets in low-SOC areas)',
+        "Antibiotic overuse in livestock and gut-microbiome links to obesity/metabolic health",
+        "Climate-induced food price volatility (disproportionate impact on vulnerable eaters)",
     ]
 
 
@@ -1377,8 +1379,8 @@ def test_parse_generated_json_recovers_truncated_label_list_missing_closing_brac
 
 def test_parse_generated_json_normalizes_label_dict_with_packed_single_string() -> None:
     response = (
-        '{"labels": ["Nutritional education\', \'Obesity prevention\', '
-        '\'Food accessibility\', \'Food policy\', \'Health promotion"]}'
+        "{\"labels\": [\"Nutritional education', 'Obesity prevention', "
+        "'Food accessibility', 'Food policy', 'Health promotion\"]}"
     )
 
     parsed = hf_transformers._parse_generated_json(response, schema_name="label_list")
@@ -1392,8 +1394,9 @@ def test_parse_generated_json_normalizes_label_dict_with_packed_single_string() 
     ]
 
 
-def test_parse_generated_json_recovers_comma_separated_label_list_with_inconsistent_quotes(
-) -> None:
+def test_parse_generated_json_recovers_comma_separated_label_list_with_inconsistent_quotes() -> (
+    None
+):
     response = (
         "[\n"
         "  'Quality to hire',\n"
@@ -1443,8 +1446,8 @@ def test_parse_generated_json_recovers_commented_label_list_with_trailing_markdo
     response = (
         "['Lifestyle interventions (diet/exercise programs)',\n"
         "'Hepatic steatosis (NAFL/NASH progression)', # From obesity/MetS links\n"
-        "'Bone marrow adiposity and hematopoiesis dysfunction', # Emerging obesity-metabol* research\n"
-        "'Circadian misalignment (shift work/sleep disorders)' + metabolic disruption links, # Short sleep/obesity axis expansion]\n"
+        "'Bone marrow adiposity and hematopoiesis dysfunction', # Emerging obesity-metabol* research\n"  # noqa: E501
+        "'Circadian misalignment (shift work/sleep disorders)' + metabolic disruption links, # Short sleep/obesity axis expansion]\n"  # noqa: E501
         "**Note:** Prioritized nodes with:\n"
         "1) relevance.\n"
     )
@@ -1783,8 +1786,9 @@ def test_parse_generated_json_recovers_label_list_from_prose_with_quoted_candida
     ]
 
 
-def test_parse_generated_json_recovers_empty_children_mapping_with_nested_braces_in_commentary(
-) -> None:
+def test_parse_generated_json_recovers_empty_children_mapping_with_nested_braces_in_commentary() -> (  # noqa: E501
+    None
+):
     """Regression: SSH1 {} // commentary containing {'A': [...]} nested blocks."""
     text = (
         "{} // No recommendations. "
@@ -1796,8 +1800,7 @@ def test_parse_generated_json_recovers_empty_children_mapping_with_nested_braces
     assert parsed == {"children_by_label": {}}
 
 
-def test_parse_generated_json_recovers_children_mapping_with_missing_opening_quotes(
-) -> None:
+def test_parse_generated_json_recovers_children_mapping_with_missing_opening_quotes() -> None:
     """Regression: SSH2 children dict with missing opening quotes on some values."""
     text = (
         "{\n"
@@ -1823,8 +1826,9 @@ def test_parse_generated_json_recovers_children_mapping_with_missing_opening_quo
     }
 
 
-def test_parse_generated_json_recovers_children_mapping_with_commentary_and_second_attempt(
-) -> None:
+def test_parse_generated_json_recovers_children_mapping_with_commentary_and_second_attempt() -> (
+    None
+):
     """Regression: SSH1 partial dict + parenthesized note + second dict attempt."""
     text = (
         "{\n"
@@ -1889,12 +1893,12 @@ def test_parse_generated_json_recovers_label_list_from_unquoted_prose_candidates
 def test_parse_generated_json_recovers_children_mapping_with_paren_list_closer() -> None:
     """Regression: OLMo produces ) instead of ] as list closer."""
     text = (
-        '{\n'
+        "{\n"
         '  "Stress": ["anxiety reduction", \n'
         '              "calmness", \n'
         '              "resilience"),\n'
         '  "Workload": ["intensity", "crisis"]\n'
-        '}'
+        "}"
     )
     parsed = _parse_generated_json(text, schema_name="children_by_label")
 
@@ -2093,9 +2097,13 @@ def test_parse_generated_json_recovers_literal_error_text() -> None:
 
 def test_parse_generated_json_recovers_bare_word_in_brackets() -> None:
     """Regression: Qwen returns [diet] bare word in brackets with trailing garbage."""
-    text = '{ "#AteWhatINeed messaging": ["nutri-messaging", "calorie-tracker alerts", [diet] reminders"]}'
+    text = '{ "#AteWhatINeed messaging": ["nutri-messaging", "calorie-tracker alerts", [diet] reminders"]}'  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
-    assert parsed == {"children_by_label": {"#AteWhatINeed messaging": ["nutri-messaging", "calorie-tracker alerts"]}}
+    assert parsed == {
+        "children_by_label": {
+            "#AteWhatINeed messaging": ["nutri-messaging", "calorie-tracker alerts"]
+        }
+    }
 
 
 def test_parse_generated_json_recovers_nested_brackets_with_mismatched_quote() -> None:
@@ -2111,7 +2119,11 @@ def test_parse_generated_json_recovers_unquoted_key_comma_separated_children() -
     text = "{Adaptability: Resilience, Flexibilite, Versatilit\u00e9agility}"
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     # Parser recovers by treating the comma-separated part as values for the key
-    assert parsed == {"children_by_label": {"Adaptability": ["Resilience", "Flexibilite", "Versatilit\u00e9agility"]}}
+    assert parsed == {
+        "children_by_label": {
+            "Adaptability": ["Resilience", "Flexibilite", "Versatilit\u00e9agility"]
+        }
+    }
 
 
 def test_parse_generated_json_recovers_json_pseudo_fence() -> None:
@@ -2137,10 +2149,18 @@ def test_parse_generated_json_recovers_trailing_comma_before_brace() -> None:
 
 def test_parse_generated_json_recovers_fenced_python_children_without_colons() -> None:
     """Regression: Mistral returns fenced python with children dict missing colons."""
-    text = '```python\n{\n    "anorexia nervosa" ["starvation behavior", "extreme caloriavidence",\n                       "sevelfeedingrestrictiveness"]\n```'
+    text = '```python\n{\n    "anorexia nervosa" ["starvation behavior", "extreme caloriavidence",\n                       "sevelfeedingrestrictiveness"]\n```'  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     # Parser recovers by extracting quoted key-value pairs without requiring colons
-    assert parsed == {"children_by_label": {"anorexia nervosa": ["starvation behavior", "extreme caloriavidence", "sevelfeedingrestrictiveness"]}}
+    assert parsed == {
+        "children_by_label": {
+            "anorexia nervosa": [
+                "starvation behavior",
+                "extreme caloriavidence",
+                "sevelfeedingrestrictiveness",
+            ]
+        }
+    }
 
 
 def test_parse_generated_json_recovers_embedded_fence_in_children_key() -> None:
@@ -2150,9 +2170,7 @@ def test_parse_generated_json_recovers_embedded_fence_in_children_key() -> None:
     looks like a code fence language specifier but is actually part of the key text.
     The key is recovered as "Emotional eati" after stripping the embedded fence.
     """
-    text = (
-        '```python\n{\n    "Emotional eati\n```ng" : [\n    "mindful eating habits",\n\t"Arousal-triggered snack cravings",\n\t"Heuristic food choices under stress (HFUS) behavior",\n     "Strategic comfort-avoidance behaviors (SCAB)",\n     "Regulatory focus imbalance (RFI)"\n    ]\n}\n```'
-    )
+    text = '```python\n{\n    "Emotional eati\n```ng" : [\n    "mindful eating habits",\n\t"Arousal-triggered snack cravings",\n\t"Heuristic food choices under stress (HFUS) behavior",\n     "Strategic comfort-avoidance behaviors (SCAB)",\n     "Regulatory focus imbalance (RFI)"\n    ]\n}\n```'  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     assert parsed == {
         "children_by_label": {
@@ -2169,16 +2187,25 @@ def test_parse_generated_json_recovers_embedded_fence_in_children_key() -> None:
 
 def test_parse_generated_json_recovers_children_with_key_comments() -> None:
     """Regression: Mistral returns children with parenthetical comments in keys."""
-    text = '```python\n{\n    "Supportive食品环境" (Chinese for clarity):\n    ["nutrient-abundant diet culture", "convenient health food access"]\n}\n```'
+    text = '```python\n{\n    "Supportive食品环境" (Chinese for clarity):\n    ["nutrient-abundant diet culture", "convenient health food access"]\n}\n```'  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
-    assert parsed == {"children_by_label": {"Supportive食品环境": ["nutrient-abundant diet culture", "convenient health food access"]}}
+    assert parsed == {
+        "children_by_label": {
+            "Supportive食品环境": [
+                "nutrient-abundant diet culture",
+                "convenient health food access",
+            ]
+        }
+    }
 
 
 def test_parse_generated_json_recovers_children_with_single_quoted_key_and_comment() -> None:
     """Regression: Mistral single-quoted key with parenthetical comment."""
-    text = "```python\n{\n    'Embodied joy' (opposite: anheonia):\n    ['Vibrational euphoria', 'Emotional resonance']\n}\n```"
+    text = "```python\n{\n    'Embodied joy' (opposite: anheonia):\n    ['Vibrational euphoria', 'Emotional resonance']\n}\n```"  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
-    assert parsed == {"children_by_label": {"Embodied joy": ["Vibrational euphoria", "Emotional resonance"]}}
+    assert parsed == {
+        "children_by_label": {"Embodied joy": ["Vibrational euphoria", "Emotional resonance"]}
+    }
 
 
 def test_parse_generated_json_rejects_truncated_edge_list() -> None:
@@ -2196,9 +2223,7 @@ def test_parse_generated_json_recovers_embedded_fence_in_children_key_last_fence
     The closing fence should be identified as the LAST ``` in the text, not the
     embedded one, so the key is recovered as "Emotional eati" (ng lost to embedded fence).
     """
-    text = (
-        '```python\n{\n    "Emotional eati\n```ng" : [\n    "mindful eating habits",\n\t"Arousal-triggered snack cravings",\n\t"Heuristic food choices under stress (HFUS) behavior",\n     "Strategic comfort-avoidance behaviors (SCAB)",\n     "Regulatory focus imbalance (RFI)"\n    ]\n}\n```'
-    )
+    text = '```python\n{\n    "Emotional eati\n```ng" : [\n    "mindful eating habits",\n\t"Arousal-triggered snack cravings",\n\t"Heuristic food choices under stress (HFUS) behavior",\n     "Strategic comfort-avoidance behaviors (SCAB)",\n     "Regulatory focus imbalance (RFI)"\n    ]\n}\n```'  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     assert parsed == {
         "children_by_label": {
@@ -2221,19 +2246,27 @@ def test_parse_generated_json_recovers_thinking_block_inside_code_fence() -> Non
     These thinking tags must be stripped before JSON parsing.
     """
     text = (
-        '```python\n'
-        '{ <think>\n'
-        '"Okay, let\'s tackle this problem. The user wants me to come up with 3 related concept names for \'Preva...\n'
-        '</think>\n'
-        '    "Prevalence of walking trails": ["Trail density", "Path length per capita", "Trail accessibility"],\n'
-        '    "Quality of sport infrastructure": ["Facility maintenance", "Equipment quality", "Safety standards"]\n'
-        '}\n```'
+        "```python\n"
+        "{ <think>\n"
+        "\"Okay, let's tackle this problem. The user wants me to come up with 3 related concept names for 'Preva...\n"  # noqa: E501
+        "</think>\n"
+        '    "Prevalence of walking trails": ["Trail density", "Path length per capita", "Trail accessibility"],\n'  # noqa: E501
+        '    "Quality of sport infrastructure": ["Facility maintenance", "Equipment quality", "Safety standards"]\n'  # noqa: E501
+        "}\n```"
     )
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     assert parsed == {
         "children_by_label": {
-            "Prevalence of walking trails": ["Trail density", "Path length per capita", "Trail accessibility"],
-            "Quality of sport infrastructure": ["Facility maintenance", "Equipment quality", "Safety standards"],
+            "Prevalence of walking trails": [
+                "Trail density",
+                "Path length per capita",
+                "Trail accessibility",
+            ],
+            "Quality of sport infrastructure": [
+                "Facility maintenance",
+                "Equipment quality",
+                "Safety standards",
+            ],
         }
     }
 
@@ -2245,15 +2278,15 @@ def test_parse_generated_json_recovers_markdown_bold_in_children_values() -> Non
     JSON. These bold markers must be stripped from fenced content before parsing.
     """
     text = (
-        '```python\n'
-        '{\n'
-        '    \'Macronutrient balance (carbs : fats : proteïn)\' : [\n'
-        '        \'Proportion of plant-sourced foods\',\n'
-        '        \'Glycemic load per calorie\',\n'
-        '        \'**Original concept: Nutrient density in diets (per calorie)** :\n'
-        '        [   \'**1. Protein efficiency ratio**\',\n'
-        '            \'**2. Antioxidant-capacity-to-inflammasome-priming**\' ]\n'
-        '}\n```'
+        "```python\n"
+        "{\n"
+        "    'Macronutrient balance (carbs : fats : proteïn)' : [\n"
+        "        'Proportion of plant-sourced foods',\n"
+        "        'Glycemic load per calorie',\n"
+        "        '**Original concept: Nutrient density in diets (per calorie)** :\n"
+        "        [   '**1. Protein efficiency ratio**',\n"
+        "            '**2. Antioxidant-capacity-to-inflammasome-priming**' ]\n"
+        "}\n```"
     )
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     assert parsed == {
@@ -2271,7 +2304,7 @@ def test_parse_generated_json_recovers_markdown_bold_in_children_values() -> Non
 
 def test_parse_generated_json_recovers_fenced_python_with_thinking_block() -> None:
     """Regression: Qwen algo3 contrastive has <think> block at start of fenced output."""
-    text = '```python\n{ <think>\n"Okay, let\'s tackle this problem..."\n</think>\n"RelatedConceptA": ["Sub1", "Sub2"],\n"RelatedConceptB": ["Sub3"]\n}\n```'
+    text = '```python\n{ <think>\n"Okay, let\'s tackle this problem..."\n</think>\n"RelatedConceptA": ["Sub1", "Sub2"],\n"RelatedConceptB": ["Sub3"]\n}\n```'  # noqa: E501
     parsed = _parse_generated_json(text, schema_name="children_by_label")
     assert parsed == {
         "children_by_label": {
@@ -2290,26 +2323,37 @@ def test_parse_generated_json_rejects_truncated_edge_list_with_partial_second_el
 
 def test_parse_generated_json_rejects_thinking_text_output() -> None:
     """Regression: Model returns thinking/reasoning text instead of structured output."""
-    text = '{ <think>\n"Okay, let\'s tackle this problem. The user wants me to come up with 3 related concept names for \'Preva...\n</think>\n'
+    text = "{ <think>\n\"Okay, let's tackle this problem. The user wants me to come up with 3 related concept names for 'Preva...\n</think>\n"  # noqa: E501
     with pytest.raises(ValueError, match="Model did not return valid structured output"):
         _parse_generated_json(text, schema_name="edge_list")
 
 
-def test_parse_generated_json_recovers_children_double_quoted_single_quoted_key_with_comment() -> None:
+def test_parse_generated_json_recovers_children_double_quoted_single_quoted_key_with_comment() -> (
+    None
+):
     """Regression: Mistral returns "'key' (comment): [values]" pattern."""
-    text = '''```python
+    text = """```python
 {
     "'jun food dominance index' (JFD*): [
         "processed food saturation index (PFSI)",
         "ultra-refined calorie ratio (URC*R)"
     ]
 }
-```'''
+```"""
     parsed = _parse_generated_json(text, schema_name="children_by_label")
-    assert parsed == {"children_by_label": {"'jun food dominance index'": ["processed food saturation index (PFSI)", "ultra-refined calorie ratio (URC*R)"]}}
+    assert parsed == {
+        "children_by_label": {
+            "'jun food dominance index'": [
+                "processed food saturation index (PFSI)",
+                "ultra-refined calorie ratio (URC*R)",
+            ]
+        }
+    }
 
 
-def test_parse_generated_json_recovers_first_valid_entry_from_markdown_heavy_fenced_children_mapping() -> None:
+def test_parse_generated_json_recovers_first_valid_entry_from_markdown_heavy_fenced_children_mapping() -> (  # noqa: E501
+    None
+):
     text = """```python {
     'Macronutrient balance (carbs : fats : proteïn)' : ['Proportion of plant-sourced foods',
                                                      'Glycemic load per calorie',
@@ -2328,7 +2372,7 @@ def test_parse_generated_json_recovers_first_valid_entry_from_markdown_heavy_fen
         **4. Trace-mineral-biodisponibility (Zn/Cupremic vs phytate chelatation, μmoI/L urinary excretiōn post-chalconefortiﬁcātiōn)**,
         **5. Lipid-partition-coefᶠcient (DHA/EpDHA in n-3 PUFA vs arachidonic/γ-linolenic, % bound to chylomicrons/HDL)**
 }
-```"""
+```"""  # noqa: E501
 
     parsed = _parse_generated_json(text, schema_name="children_by_label")
 
@@ -2338,11 +2382,12 @@ def test_parse_generated_json_recovers_first_valid_entry_from_markdown_heavy_fen
                 "Proportion of plant-sourced foods",
                 "Glycemic load per calorie",
                 '"Empty-calorie" intake (e.g., sugary drinks/snacks vs nutrient-packed)',
-                "% calories sourced post-digestive satiety (fructooligosaccharides, resistant starçh) vs pre-digéstive (glucose/fructoseloaded)",
-                "Micelle-worthy fat-to-solubility ratio (phytosterols, lecithin vs trans/saturated)",
+                "% calories sourced post-digestive satiety (fructooligosaccharides, resistant starçh) vs pre-digéstive (glucose/fructoseloaded)",  # noqa: E501
+                "Micelle-worthy fat-to-solubility ratio (phytosterols, lecithin vs trans/saturated)",  # noqa: E501
             ]
         }
     }
+
 
 def test_recover_fenced_python_children_mapping_mistral_quote_artifact():
     payload = r"""```python{
@@ -2355,8 +2400,9 @@ def test_recover_fenced_python_children_mapping_mistral_quote_artifact():
             'Lack_offinancial_stabillity_linktodietrestricting_behaviors' # Correlate: "DoIavoidbuyinggroceriesbecausemoneyisshort?Yes(5)No(1).Higherfinancialstress→morereliedoncheapoflimitedcaloriestoeat"
     ]
 }
-```"""
+```"""  # noqa: E501
     from llm_conceptual_modeling.common.hf_transformers import _parse_generated_json
+
     result = _parse_generated_json(payload, schema_name="children_by_label")
     assert "Pressure_to_be_thin" in result["children_by_label"]
     assert len(result["children_by_label"]["Pressure_to_be_thin"]) == 6
