@@ -87,6 +87,9 @@ from llm_conceptual_modeling.hf_execution.helpers import (
 from llm_conceptual_modeling.hf_execution.helpers import (
     resolve_worker_process_mode as _execution_resolve_worker_process_mode,
 )
+from llm_conceptual_modeling.hf_execution.subprocess import (
+    run_monitored_command as _run_monitored_command,
+)
 from llm_conceptual_modeling.hf_pipeline.algo1 import run_algo1 as _pipeline_run_algo1
 from llm_conceptual_modeling.hf_pipeline.algo2 import run_algo2 as _pipeline_run_algo2
 from llm_conceptual_modeling.hf_pipeline.algo3 import run_algo3 as _pipeline_run_algo3
@@ -164,9 +167,11 @@ _resolve_max_requests_per_worker_process = _execution_resolve_max_requests_per_w
 _is_retryable_worker_error = _execution_is_retryable_worker_error
 _coerce_timeout_seconds = _execution_coerce_timeout_seconds
 _collect_resume_history = _resume_collect_resume_history
+_run_monitored_command = _run_monitored_command
 _run_algo1 = _pipeline_run_algo1
 _run_algo2 = _pipeline_run_algo2
 _run_algo3 = _pipeline_run_algo3
+run_monitored_command = _run_monitored_command
 
 
 class BatchInfrastructureFailure(RuntimeError):

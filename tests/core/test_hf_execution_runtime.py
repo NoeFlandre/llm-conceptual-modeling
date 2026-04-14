@@ -110,7 +110,7 @@ def test_run_local_hf_spec_persistent_mode_reuses_existing_session(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    from llm_conceptual_modeling.hf_execution.helpers import run_local_hf_spec
+    from llm_conceptual_modeling.hf_execution.runtime import run_local_hf_spec
 
     spec = HFRunSpec(
         algorithm="algo1",
@@ -161,7 +161,7 @@ def test_run_local_hf_spec_persistent_mode_reuses_existing_session(
             }
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        "llm_conceptual_modeling.hf_worker.persistent.PersistentHFWorkerSession",
         FakeSession,
     )
 
@@ -188,7 +188,7 @@ def test_run_local_hf_spec_uses_persistent_session_for_contrastive_runs_in_persi
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    from llm_conceptual_modeling.hf_execution.helpers import run_local_hf_spec
+    from llm_conceptual_modeling.hf_execution.runtime import run_local_hf_spec
 
     spec = _contrastive_spec(
         context_policy={
@@ -223,7 +223,7 @@ def test_run_local_hf_spec_uses_persistent_session_for_contrastive_runs_in_persi
             }
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        "llm_conceptual_modeling.hf_worker.persistent.PersistentHFWorkerSession",
         FakeSession,
     )
 
@@ -243,7 +243,7 @@ def test_run_local_hf_spec_closes_other_model_sessions_before_reusing_persistent
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    from llm_conceptual_modeling.hf_execution.helpers import run_local_hf_spec
+    from llm_conceptual_modeling.hf_execution.runtime import run_local_hf_spec
 
     spec = _algo1_spec(
         context_policy={
@@ -280,7 +280,7 @@ def test_run_local_hf_spec_closes_other_model_sessions_before_reusing_persistent
             }
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        "llm_conceptual_modeling.hf_worker.persistent.PersistentHFWorkerSession",
         FakeSession,
     )
     persistent_sessions: dict[str, object] = {
@@ -303,7 +303,7 @@ def test_run_local_hf_spec_keeps_matching_model_session_for_contrastive_persiste
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    from llm_conceptual_modeling.hf_execution.helpers import run_local_hf_spec
+    from llm_conceptual_modeling.hf_execution.runtime import run_local_hf_spec
 
     spec = _contrastive_spec(
         context_policy={
@@ -333,7 +333,7 @@ def test_run_local_hf_spec_keeps_matching_model_session_for_contrastive_persiste
             }
 
     monkeypatch.setattr(
-        "llm_conceptual_modeling.hf_execution_runtime.PersistentHFWorkerSession",
+        "llm_conceptual_modeling.hf_worker.persistent.PersistentHFWorkerSession",
         ExistingSession,
     )
 
@@ -358,7 +358,7 @@ def test_run_local_hf_spec_keeps_matching_model_session_for_contrastive_persiste
 def test_run_local_hf_spec_subprocess_retries_retryable_structural_validation_failure(
     tmp_path: Path,
 ) -> None:
-    from llm_conceptual_modeling.hf_execution.helpers import run_local_hf_spec_subprocess
+    from llm_conceptual_modeling.hf_execution.runtime import run_local_hf_spec_subprocess
 
     run_dir = tmp_path / "run"
     run_dir.mkdir()
@@ -408,7 +408,7 @@ def test_run_local_hf_spec_subprocess_retries_retryable_structural_validation_fa
 def test_run_local_hf_spec_subprocess_retries_monitored_command_timeout(
     tmp_path: Path,
 ) -> None:
-    from llm_conceptual_modeling.hf_execution.helpers import run_local_hf_spec_subprocess
+    from llm_conceptual_modeling.hf_execution.runtime import run_local_hf_spec_subprocess
 
     run_dir = tmp_path / "run"
     run_dir.mkdir()
