@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from llm_conceptual_modeling.analysis._stability_helpers import _slugify
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
 from llm_conceptual_modeling.common.types import PathLike
 
@@ -209,21 +210,6 @@ that evidence into global means and file-level winner counts so the revision doc
 most informative patterns without repeating entire CSVs inline.
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")
-
-
-def _slugify(value: str) -> str:
-    slug = value.lower()
-    for source, target in (
-        (" ", "_"),
-        ("/", "_"),
-        ("(", ""),
-        (")", ""),
-        ("-", "_"),
-    ):
-        slug = slug.replace(source, target)
-    while "__" in slug:
-        slug = slug.replace("__", "_")
-    return slug.strip("_")
 
 
 def _stringify_level(value: object) -> str:

@@ -183,9 +183,9 @@ def test_generate_variance_decomposition_bundle_is_deterministic(tmp_path: Path)
     first = generate_variance_decomposition_bundle(results_root, output_root)
     second = generate_variance_decomposition_bundle(results_root, output_root)
 
-    assert first["decomposition_csv"].read_text(encoding="utf-8") == second["decomposition_csv"].read_text(
+    assert first["decomposition_csv"].read_text(
         encoding="utf-8"
-    )
+    ) == second["decomposition_csv"].read_text(encoding="utf-8")
     for algorithm in ("algo1", "algo2", "algo3"):
         assert first["tables"][algorithm] == second["tables"][algorithm]
         assert (output_root / f"variance_decomposition_{algorithm}.tex").exists()
@@ -195,7 +195,7 @@ def test_generate_variance_decomposition_bundle_is_deterministic(tmp_path: Path)
         assert set(algorithm_frame["algorithm"]) == {algorithm}
 
     decomposition = pd.read_csv(first["decomposition_csv"])
-    for (_algorithm, _model, _metric), group in decomposition.groupby(["algorithm", "model", "metric"]):
+    for _, group in decomposition.groupby(["algorithm", "model", "metric"]):
         assert pytest.approx(group["pct_with_error"].sum(), abs=1e-8) == 100.0
         non_error = group[group["feature"] != "Error"]
         assert pytest.approx(non_error["pct_without_error"].sum(), abs=1e-8) == 100.0
@@ -204,7 +204,7 @@ def test_generate_variance_decomposition_bundle_is_deterministic(tmp_path: Path)
     assert first["combined_table"].parent == output_root
 
 
-def test_generate_variance_decomposition_bundle_defaults_to_dedicated_subfolder(tmp_path: Path) -> None:
+def test_variance_decomposition_bundle_defaults_to_subfolder(tmp_path: Path) -> None:
     results_root = tmp_path / "results"
     results_root.mkdir(parents=True, exist_ok=True)
     (results_root / "ledger.json").write_text(
@@ -306,7 +306,7 @@ def _synthetic_rows(algorithm: str, model_label: str) -> list[dict[str, object]]
                         noise = _replicate_noise(pair_index, replication)
                         rows.append(
                             {
-                                "condition_bits": "".join("1" if level == 1 else "0" for level in levels),
+                                "condition_bits": _bits_from_levels(levels),
                                 "condition_label": condition_label,
                                 "pair_name": pair_name,
                                 "replication": replication,
@@ -320,7 +320,14 @@ def _synthetic_rows(algorithm: str, model_label: str) -> list[dict[str, object]]
         for pair_index, pair_name in enumerate(pair_names):
             for replication in (0, 1):
                 for levels in product((-1, 1), repeat=6):
-                    explanation, example, counterexample, array_level, adjacency_level, convergence = levels
+                    (
+                        explanation,
+                        example,
+                        counterexample,
+                        array_level,
+                        adjacency_level,
+                        convergence,
+                    ) = levels
                     for condition_label in (
                         "greedy",
                         "beam_num_beams_2",
@@ -340,7 +347,7 @@ def _synthetic_rows(algorithm: str, model_label: str) -> list[dict[str, object]]
                         noise = _replicate_noise(pair_index, replication)
                         rows.append(
                             {
-                                "condition_bits": "".join("1" if level == 1 else "0" for level in levels),
+                                "condition_bits": _bits_from_levels(levels),
                                 "condition_label": condition_label,
                                 "pair_name": pair_name,
                                 "replication": replication,
@@ -356,7 +363,9 @@ def _synthetic_rows(algorithm: str, model_label: str) -> list[dict[str, object]]
         )
         for pair_index, pair_name in enumerate(pair_names):
             for replication in (0, 1):
-                for example, counterexample, number_of_words, depth in product((-1, 1), (-1, 1), (-1, 1), (-1, 1)):
+                for example, counterexample, number_of_words, depth in product(
+                    (-1, 1), (-1, 1), (-1, 1), (-1, 1)
+                ):
                     for condition_label in (
                         "greedy",
                         "beam_num_beams_2",
@@ -375,13 +384,8 @@ def _synthetic_rows(algorithm: str, model_label: str) -> list[dict[str, object]]
                         noise = _replicate_noise(pair_index, replication)
                         rows.append(
                             {
-                                "condition_bits": "".join(
-                                    [
-                                        "1" if example == 1 else "0",
-                                        "1" if counterexample == 1 else "0",
-                                        "1" if number_of_words == 1 else "0",
-                                        "1" if depth == 1 else "0",
-                                    ]
+                                "condition_bits": _bits_from_levels(
+                                    (example, counterexample, number_of_words, depth)
                                 ),
                                 "condition_label": condition_label,
                                 "pair_name": pair_name,
@@ -400,6 +404,10 @@ def _replicate_noise(pair_index: int, replication: int) -> float:
         (1, 1): -0.5,
     }
     return noise_lookup[(pair_index, replication)]
+
+
+def _bits_from_levels(levels: tuple[int, ...]) -> str:
+    return "".join("1" if level == 1 else "0" for level in levels)
 
 
 def _decoding_basis(condition_label: str) -> dict[str, int]:

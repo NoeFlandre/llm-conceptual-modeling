@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from llm_conceptual_modeling.analysis._stability_helpers import _slugify
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.common.types import PathLike
 
@@ -384,17 +385,3 @@ flat directory of unrelated CSV files.
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")
 
-
-def _slugify(value: str) -> str:
-    slug = value.lower()
-    for source, target in (
-        (" ", "_"),
-        ("/", "_"),
-        ("(", ""),
-        (")", ""),
-        ("-", "_"),
-    ):
-        slug = slug.replace(source, target)
-    while "__" in slug:
-        slug = slug.replace("__", "_")
-    return slug.strip("_")

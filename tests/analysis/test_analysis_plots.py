@@ -190,3 +190,40 @@ def test_legend_model_order_groups_families_with_latest_second() -> None:
         "gpt-4o",
         "gpt-5",
     ]
+
+
+def test_path_helpers() -> None:
+    from pathlib import Path
+
+    from llm_conceptual_modeling.analysis._path_helpers import (
+        _discover_main_results_root,
+        _path_triplet,
+    )
+
+    # Test _path_triplet
+    path = Path("/results/aggregated/algo1/gpt-5/greedy/evaluated.csv")
+    algo, model, cond = _path_triplet(path)
+    assert algo == "algo1" and model == "gpt-5" and cond == "greedy"
+    # Test _discover_main_results_root with a temp path
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+        discovered = _discover_main_results_root(tmp)
+        assert isinstance(discovered, Path)
+
+
+def test_color_mapping_functions() -> None:
+    from llm_conceptual_modeling.analysis._color_mapping import (
+        _build_model_color_map,
+        _canonical_model_label,
+        _legend_model_order,
+        _model_family,
+    )
+    models = ["deepseek-chat-v3.1", "gpt-5", "gemini-2.5-pro"]
+    colors = _build_model_color_map(models)
+    assert len(colors) == 3
+    assert _canonical_model_label("google-gemini-2.5-pro") == "gemini-2.5-pro"
+    assert _model_family("deepseek-v3-chat-0324") == "deepseek"
+    legend_order = _legend_model_order(["gpt-5", "deepseek-v3-chat-0324"])
+    assert legend_order == ["deepseek-v3-chat-0324", "gpt-5"]

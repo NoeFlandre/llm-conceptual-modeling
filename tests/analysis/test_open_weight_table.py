@@ -59,7 +59,13 @@ def test_aggregate_open_weight_ablation_filters_and_averages(tmp_path: Path) -> 
     )
     _write_summary(
         runs_root
-        / "algo1/allenai__Olmo-3-7B-Instruct/contrastive_penalty_alpha_0.2/sg1_sg2/00004/rep_00/summary.json",
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "contrastive_penalty_alpha_0.2"
+        / "sg1_sg2"
+        / "00004"
+        / "rep_00"
+        / "summary.json",
         {
             "status": "finished",
             "algorithm": "algo1",

@@ -91,3 +91,12 @@ class TestPatchAlgorithmRows:
         frame = pd.DataFrame([{"algorithm": "algo1", "metric": "accuracy", "condition_count": 100}])
         result = patch_algorithm_rows(frame, {"algorithm": "algo1", "metric": "accuracy"})
         assert len(result) == 1
+
+
+def test_slugify() -> None:
+    from llm_conceptual_modeling.analysis._stability_helpers import _slugify
+
+    assert _slugify("Example / Counterexample (1/-1)") == "example_counterexample_1_1"
+    assert _slugify("Tag/Adjacency") == "tag_adjacency"
+    assert _slugify("Convergence") == "convergence"
+    assert _slugify("Depth") == "depth"

@@ -4,7 +4,7 @@ from __future__ import annotations
 import pandas as pd
 
 
-def slugify(value: str) -> str:
+def _slugify(value: str) -> str:
     """Lowercase slug of a factor label for use in filenames."""
     slug = value.lower()
     for source, target in (
@@ -18,6 +18,9 @@ def slugify(value: str) -> str:
     while "__" in slug:
         slug = slug.replace("__", "_")
     return slug.strip("_")
+
+
+slugify = _slugify  # backward-compat: exported as public API for existing callers
 
 
 def frame_to_overview_records(frame: pd.DataFrame) -> list[dict[str, object]]:

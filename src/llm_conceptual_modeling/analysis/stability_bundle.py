@@ -12,13 +12,13 @@ from llm_conceptual_modeling.analysis._algo3_stability import (
     write_algo3_pair_aware_outputs,
 )
 from llm_conceptual_modeling.analysis._stability_helpers import (
+    _slugify,
+)
+from llm_conceptual_modeling.analysis._stability_helpers import (
     frame_to_overview_records as _frame_to_overview_records,
 )
 from llm_conceptual_modeling.analysis._stability_helpers import (
     patch_algorithm_rows as _patch_algorithm_rows,
-)
-from llm_conceptual_modeling.analysis._stability_helpers import (
-    slugify as _slugify,
 )
 from llm_conceptual_modeling.analysis.replication_budget import write_replication_budget_analysis
 from llm_conceptual_modeling.common.types import PathLike

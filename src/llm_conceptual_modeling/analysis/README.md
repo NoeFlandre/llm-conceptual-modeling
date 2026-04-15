@@ -16,14 +16,25 @@ Primary bundle orchestrators (entry points):
 
 - `stability_bundle.py` — replication stability bundle assembly
 - `baseline_bundle.py` — non-LLM baseline comparison bundle
-- `variability_bundle.py`, `hypothesis_bundle.py`, etc.
+- `variability_bundle.py`, `hypothesis_bundle.py`, `output_validity_bundle.py`,
+  `variance_decomposition.py` — bundle assembly and report generation
 
 Sub-packages and extracted helpers:
 
 - `_algo3_stability.py` — algo3-specific pair-aware stability: raw input resolution,
   pair-aware condition frames, level stability/variability aggregation, metric overview rows
-- `_stability_helpers.py` — pure helpers: `slugify`, `frame_to_overview_records`,
+- `_stability_helpers.py` — pure helpers: `_slugify`, `frame_to_overview_records`,
   `patch_algorithm_rows`
+- `_variance_decomposition_spec.py` — data model (`ALGORITHM_SPECS`, `AlgorithmSpec`),
+  decode helpers (`decode_condition_bits`, `decode_decoding_columns`,
+  `coerce_analysis_frame`), and LaTeX table rendering for variance decomposition
+- `_color_mapping.py` — model-family color maps, canonical label resolution,
+  and release-rank ordering for figure rendering
+- `_path_helpers.py` — path-triplet extraction from aggregated-directory layouts
+  and results-root discovery
+- `_bundle_stats.py` — pure DataFrame transformers for output-validity and
+  breadth bundle assembly (`_build_validity_summary`, `_build_breadth_distribution`,
+  `_build_parsed_edge_quartiles`, `_build_failure_rates`, `_build_parsed_edge_counts`)
 
 ## Notes
 
