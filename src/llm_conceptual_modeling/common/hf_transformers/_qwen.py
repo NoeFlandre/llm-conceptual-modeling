@@ -74,7 +74,7 @@ def _patch_qwen_contrastive_custom_generate(custom_generate: Any) -> Any:
 def _load_qwen_dynamic_cache_type() -> type[Any] | None:
     try:
         module = importlib.import_module("transformers.models.qwen3_5.modeling_qwen3_5")
-    except Exception:
+    except ImportError:
         return None
     dynamic_cache_type = getattr(module, "Qwen3_5DynamicCache", None)
     if isinstance(dynamic_cache_type, type):

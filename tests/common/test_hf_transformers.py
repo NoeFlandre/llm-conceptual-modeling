@@ -745,6 +745,19 @@ def test_patch_qwen_contrastive_custom_generate_accepts_qwen_dynamic_cache_type(
     assert hasattr(_QwenDynamicCache, "batch_select_indices")
 
 
+def test_load_qwen_dynamic_cache_type_propagates_non_import_errors(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def boom(module_name: str) -> object:
+        _ = module_name
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(hf_transformers.importlib, "import_module", boom)
+
+    with pytest.raises(RuntimeError, match="boom"):
+        hf_transformers._load_qwen_dynamic_cache_type()
+
+
 def test_contrastive_decoding_kwargs_force_trust_remote_code_for_mistral() -> None:
     kwargs = hf_transformers._decoding_kwargs(
         DecodingConfig(algorithm="contrastive", penalty_alpha=0.2, top_k=4),
