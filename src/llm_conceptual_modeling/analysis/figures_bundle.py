@@ -7,6 +7,7 @@ from typing import Any
 import pandas as pd
 import scipy.stats as stats
 
+from llm_conceptual_modeling.analysis._bundle_stats import _extract_model
 from llm_conceptual_modeling.common.types import PathLike
 
 
@@ -235,16 +236,6 @@ def _mean_ci95(series: pd.Series) -> tuple[float, float]:
     se = series.std(ddof=1) / (n**0.5)
     t_val = float(stats.t.ppf(0.975, df=n - 1))
     return float(mean - t_val * se), float(mean + t_val * se)
-
-
-def _extract_model(input_path: Path) -> str:
-    parts = input_path.parts
-    for i, part in enumerate(parts):
-        if part in ("results", "legacy") and i + 2 < len(parts):
-            return parts[i + 2]
-    return "unknown"
-
-
 def _write_bundle_readme(output_dir: Path) -> None:
     readme = """# Figure-Ready Exports Audit Bundle
 

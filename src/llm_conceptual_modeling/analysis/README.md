@@ -40,7 +40,8 @@ Sub-packages and extracted helpers:
   factor-overview aggregation helpers
 - `_bundle_stats.py` — pure DataFrame transformers for output-validity and
   breadth bundle assembly (`_build_validity_summary`, `_build_breadth_distribution`,
-  `_build_parsed_edge_quartiles`, `_build_failure_rates`, `_build_parsed_edge_counts`)
+  `_build_parsed_edge_quartiles`, `_build_failure_rates`, `_build_parsed_edge_counts`,
+  `_extract_model`)
 
 ## Notes
 

@@ -14,10 +14,12 @@ def _annotate(df: pd.DataFrame, label: str) -> pd.DataFrame:
 
 def _extract_model(source_input: str) -> str:
     parts = PurePosixPath(source_input).parts
-    # Format: /.../algo1/<model>/raw/...
-    # parts[1]=results, parts[2]=algoN, parts[3]=model
-    if len(parts) >= 4:
-        return str(parts[3])
+    for i, part in enumerate(parts):
+        if part in ("results", "legacy") and i + 2 < len(parts):
+            return str(parts[i + 2])
+    for i, part in enumerate(parts):
+        if part in ("raw", "evaluated") and i > 0:
+            return str(parts[i - 1])
     return str(parts[-1]) if parts else source_input
 
 

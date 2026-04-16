@@ -11,6 +11,7 @@ from llm_conceptual_modeling.analysis._bundle_stats import (
     _build_parsed_edge_counts,
     _build_parsed_edge_quartiles,
     _build_validity_summary,
+    _extract_model,
 )
 
 
@@ -20,6 +21,28 @@ class TestAnnotate:
         result = _annotate(df, "failure_rates")
         assert "summary_type" in result.columns
         assert (result["summary_type"] == "failure_rates").all()
+
+
+class TestExtractModel:
+    def test_extracts_model_from_legacy_and_results_paths(self) -> None:
+        assert (
+            _extract_model(
+                "/algo1/gpt-5/raw/x.csv",
+            )
+            == "gpt-5"
+        )
+        assert (
+            _extract_model(
+                "/private/var/tmp/results/algo1/gpt-5/evaluated/x.csv",
+            )
+            == "gpt-5"
+        )
+        assert (
+            _extract_model(
+                "/private/var/tmp/legacy/algo2/mistral/raw/y.csv",
+            )
+            == "mistral"
+        )
 
 
 class TestBuildValiditySummary:

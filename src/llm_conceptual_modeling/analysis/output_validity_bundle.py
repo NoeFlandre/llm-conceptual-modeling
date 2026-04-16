@@ -12,6 +12,7 @@ from llm_conceptual_modeling.analysis._bundle_stats import (
     _build_parsed_edge_counts,
     _build_parsed_edge_quartiles,
     _build_validity_summary,
+    _extract_model,
 )
 from llm_conceptual_modeling.analysis.failures import write_failure_analysis
 from llm_conceptual_modeling.common.types import PathLike
@@ -175,19 +176,6 @@ def write_output_validity_bundle(
     bundle_overview.to_csv(output_dir_path / "bundle_overview.csv", index=False)
 
     _write_bundle_readme(output_dir_path)
-
-
-def _extract_model(source_input: str) -> str:
-    from pathlib import PurePosixPath
-
-    parts = PurePosixPath(source_input).parts
-    # Format: /.../algo1/<model>/raw/...
-    # parts[1]=results, parts[2]=algoN, parts[3]=model
-    if len(parts) >= 4:
-        return str(parts[3])
-    return str(parts[-1]) if parts else source_input
-
-
 def _write_bundle_readme(output_dir: Path) -> None:
     readme = """# Output Validity and Breadth Audit Bundle
 
