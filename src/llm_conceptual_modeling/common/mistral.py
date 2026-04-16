@@ -20,15 +20,19 @@ import importlib
 import json
 import re
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Protocol, cast
+from typing import TYPE_CHECKING, Any, cast
 
 try:
     from pydantic import BaseModel
 except ImportError:  # pragma: no cover - pydantic is an explicit runtime dependency
     BaseModel = None  # type: ignore[assignment]
 
+from llm_conceptual_modeling.common.client_protocols import (
+    ChatCompletionClient as _ChatCompletionClient,
+)
 from llm_conceptual_modeling.common.retry import call_with_retry
 from llm_conceptual_modeling.common.structured_output import normalize_structured_response
+from llm_conceptual_modeling.common.types import Edge
 
 if TYPE_CHECKING:
     pass
@@ -46,11 +50,7 @@ __all__ = [
 ]
 
 
-# ---------------------------------------------------------------------------
-# Type aliases
-# ---------------------------------------------------------------------------
-
-Edge = tuple[str, str]
+ChatCompletionClient = _ChatCompletionClient
 
 
 # ---------------------------------------------------------------------------
@@ -135,27 +135,6 @@ class MistralChatClient:
         return response
 
 
-# ---------------------------------------------------------------------------
-# ChatCompletionClient protocol
-# ---------------------------------------------------------------------------
-
-
-class ChatCompletionClient(Protocol):
-    """Minimal protocol for a chat client that returns structured JSON.
-
-    Both :class:`MistralChatClient` and the fake clients used in tests
-    satisfy this protocol.
-    """
-
-    def complete_json(
-        self,
-        *,
-        prompt: str,
-        schema_name: str,
-        schema: dict[str, object],
-    ) -> dict[str, object]: ...
-
-
 class _EdgeItemModel(BaseModel):
     source: str
     target: str
@@ -208,21 +187,18 @@ def _complete_structured_json(
 ) -> dict[str, object]:
     parse_model = _STRUCTURED_RESPONSE_MODELS.get(schema_name)
     if parse_model is not None and hasattr(sdk_client.chat, "parse"):
-        try:
-            parsed_response = sdk_client.chat.parse(
-                response_format=parse_model,
-                model=model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
-            )
-            parsed_choice = parsed_response.choices[0]
-            parsed_message = parsed_choice.message
-            if parsed_message is None or parsed_message.parsed is None:
-                raise ValueError(f"Mistral returned an empty parsed completion for {schema_name}")
-            parsed_payload = parsed_message.parsed.model_dump()
-            return _normalize_structured_response(parsed_payload, schema_name=schema_name)
-        except Exception:
-            pass
+        parsed_response = sdk_client.chat.parse(
+            response_format=parse_model,
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+        )
+        parsed_choice = parsed_response.choices[0]
+        parsed_message = parsed_choice.message
+        if parsed_message is None or parsed_message.parsed is None:
+            raise ValueError(f"Mistral returned an empty parsed completion for {schema_name}")
+        parsed_payload = parsed_message.parsed.model_dump()
+        return _normalize_structured_response(parsed_payload, schema_name=schema_name)
 
     response = sdk_client.chat.complete(
         model=model,

@@ -110,16 +110,13 @@ def test_mistral_chat_client_uses_parse_when_available() -> None:
     assert captured["temperature"] == 0.0
 
 
-def test_mistral_chat_client_falls_back_to_complete_when_parse_fails() -> None:
-    captured: dict[str, object] = {}
-
+def test_mistral_chat_client_propagates_parse_decode_errors() -> None:
     class FakeChat:
         def parse(self, **kwargs: object) -> SimpleNamespace:
             raise json.JSONDecodeError("bad json", "['Y', 'N']", 1)
 
         def complete(self, **kwargs: object) -> SimpleNamespace:
-            captured.update(kwargs)
-            return _fake_chat_completion_response("['Y', 'N', 'Y']")
+            raise AssertionError("complete should not be called")
 
     class FakeSDKClient:
         def __init__(self) -> None:
@@ -131,16 +128,40 @@ def test_mistral_chat_client_falls_back_to_complete_when_parse_fails() -> None:
         sdk_client=FakeSDKClient(),
     )
 
-    result = client.complete_json(
-        prompt="verify",
-        schema_name="vote_list",
-        schema={"type": "object", "properties": {"votes": {"type": "array"}}},
+    with pytest.raises(json.JSONDecodeError, match="bad json"):
+        client.complete_json(
+            prompt="verify",
+            schema_name="vote_list",
+            schema={"type": "object", "properties": {"votes": {"type": "array"}}},
+        )
+
+
+def test_mistral_chat_client_propagates_unexpected_parse_errors() -> None:
+    class FakeChat:
+        def parse(self, **kwargs: object) -> SimpleNamespace:
+            _ = kwargs
+            raise RuntimeError("boom")
+
+        def complete(self, **kwargs: object) -> SimpleNamespace:
+            _ = kwargs
+            raise AssertionError("complete should not be called")
+
+    class FakeSDKClient:
+        def __init__(self) -> None:
+            self.chat = FakeChat()
+
+    client = MistralChatClient(
+        api_key="test-key",
+        model="mistral-medium-2508",
+        sdk_client=FakeSDKClient(),
     )
 
-    assert result == {"votes": ["Y", "N", "Y"]}
-    assert captured["model"] == "mistral-medium-2508"
-    assert captured["messages"] == [{"role": "user", "content": "verify"}]
-    assert captured["temperature"] == 0.0
+    with pytest.raises(RuntimeError, match="boom"):
+        client.complete_json(
+            prompt="verify",
+            schema_name="vote_list",
+            schema={"type": "object", "properties": {"votes": {"type": "array"}}},
+        )
 
 
 def test_normalize_structured_response_rejects_null_edge_endpoints() -> None:
