@@ -64,6 +64,8 @@ Sub-packages and extracted helpers:
   breadth bundle assembly (`_build_validity_summary`, `_build_breadth_distribution`,
   `_build_parsed_edge_quartiles`, `_build_failure_rates`, `_build_parsed_edge_counts`,
   `_extract_model`)
+- `_baseline_outputs.py` — baseline comparison summary aggregation and bundle
+  README writing helpers
 
 ## Notes
 
