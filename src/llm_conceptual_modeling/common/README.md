@@ -9,6 +9,7 @@ Shared utilities that are used across the repository live here.
 - parsing, schema, and literal handling
 - path resolution and repository-root helpers
 - failure classification, retry logic, and spec serialization
+- shared client protocols for chat and embedding providers
 - `hf_transformers`: packaged runtime, client, parsing, and policy helpers
 
 ## Maintenance Rule

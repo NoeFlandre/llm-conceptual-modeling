@@ -1,4 +1,4 @@
-from typing import Any, Protocol
+from typing import Any
 
 try:
     from mistralai.client import Mistral
@@ -6,11 +6,8 @@ except ImportError:  # pragma: no cover - exercised indirectly in import-light t
     Mistral = None  # type: ignore[assignment]
 
 from llm_conceptual_modeling.algo2.expansion import average_best_match_similarity
+from llm_conceptual_modeling.common.client_protocols import EmbeddingClient
 from llm_conceptual_modeling.common.retry import call_with_retry
-
-
-class EmbeddingClient(Protocol):
-    def embed_texts(self, texts: list[str]) -> dict[str, list[float]]: ...
 
 
 class MistralEmbeddingClient:
