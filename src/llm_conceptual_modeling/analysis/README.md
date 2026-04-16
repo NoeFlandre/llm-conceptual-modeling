@@ -66,6 +66,7 @@ Sub-packages and extracted helpers:
   `_extract_model`)
 - `_baseline_outputs.py` — baseline comparison summary aggregation and bundle
   README writing helpers
+- `_edge_parsing.py` — cached edge-list parsing for baseline comparison inputs
 
 ## Notes
 

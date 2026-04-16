@@ -26,7 +26,7 @@ def _parse_edges_cached(text: str) -> tuple[tuple[str, str], ...]:
                 if isinstance(item, (list, tuple)) and len(item) == 2:
                     edges.append((str(item[0]).strip(), str(item[1]).strip()))
             return tuple(edges)
-    except Exception:
+    except (ValueError, SyntaxError):
         return tuple()
     return tuple()
 
@@ -51,7 +51,7 @@ def _parse_algo3_edge_list_cached(text: str) -> tuple[tuple[str, str], ...]:
                     parsed_edges.append((str(item[0]).strip(), str(item[1]).strip()))
             if parsed_edges:
                 return tuple(parsed_edges)
-    except Exception:
+    except (ValueError, SyntaxError):
         pass
 
     pairs = re.findall(r"\(([^()]+?,[^()]+?)\)", text)
