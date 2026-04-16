@@ -28,6 +28,8 @@ Sub-packages and extracted helpers:
 - `_variance_decomposition_spec.py` — data model (`ALGORITHM_SPECS`, `AlgorithmSpec`),
   decode helpers (`decode_condition_bits`, `decode_decoding_columns`,
   `coerce_analysis_frame`), and LaTeX table rendering for variance decomposition
+- `_variance_decomposition_math.py` — variance-decomposition basis construction,
+  orthogonality checks, and sum-of-squares helpers
 - `_color_mapping.py` — model-family color maps, canonical label resolution,
   and release-rank ordering for figure rendering
 - `_path_helpers.py` — path-triplet extraction from aggregated-directory layouts
