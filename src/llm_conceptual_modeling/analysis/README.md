@@ -36,6 +36,8 @@ Sub-packages and extracted helpers:
   and results-root discovery
 - `_plot_frames.py` — plot-frame builders for aggregated distributions,
   factor effects, variability summaries, and main-metric rows
+- `_figure_stats.py` — figure-ready long-format melting and distributional
+  summary helpers
 - `_hypothesis_bundle_helpers.py` — hypothesis-test significance summaries and
   factor-overview aggregation helpers
 - `_bundle_stats.py` — pure DataFrame transformers for output-validity and
