@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-Edge = tuple[str, str]
+from llm_conceptual_modeling.common.types import Edge
 
 
 def parse_edge_list(value: str | None) -> list[Edge]:
@@ -17,7 +17,7 @@ def parse_edge_list(value: str | None) -> list[Edge]:
 
     try:
         parsed = ast.literal_eval(text)
-    except Exception:
+    except (ValueError, SyntaxError):
         parsed = None
     else:
         if isinstance(parsed, (list, set, tuple)):
@@ -41,7 +41,7 @@ def parse_edge_list(value: str | None) -> list[Edge]:
         if left.startswith("(") and left.endswith(")"):
             try:
                 nested = ast.literal_eval(left)
-            except Exception:
+            except (ValueError, SyntaxError):
                 pass
             else:
                 if isinstance(nested, (list, tuple)) and nested:
