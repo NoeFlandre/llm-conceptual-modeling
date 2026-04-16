@@ -9,6 +9,9 @@ from llm_conceptual_modeling.analysis._path_helpers import _discover_main_result
 from llm_conceptual_modeling.analysis._plot_distribution import (
     write_distribution_plot,
 )
+from llm_conceptual_modeling.analysis._plot_factor_effect import (
+    write_factor_effect_plot,
+)
 from llm_conceptual_modeling.analysis._plot_frames import (
     _build_aggregated_distribution_frame,
     _build_aggregated_factor_effect_frame,
@@ -37,53 +40,13 @@ def write_revision_plots(*, results_root: PathLike, output_dir: PathLike) -> Non
     main_metric_rows = _build_main_metric_rows(_discover_main_results_root(results_root_path))
 
     write_distribution_plot(figures, output_dir_path / "distribution_metrics.png")
-    _write_factor_effect_plot(hypothesis, output_dir_path / "factor_effect_summary.png")
+    write_factor_effect_plot(hypothesis, output_dir_path / "factor_effect_summary.png")
     _write_variability_plot(variability, output_dir_path / "raw_output_variability.png")
     write_main_metric_spread_plots(
         frame=main_metric_rows,
         boxplot_output_path=output_dir_path / "main_metric_spread_boxplots.png",
         violin_output_path=output_dir_path / "main_metric_spread_violins.png",
     )
-
-
-def _write_factor_effect_plot(frame: pd.DataFrame, output_path: Path) -> None:
-    plt = _load_pyplot()
-    if frame.empty:
-        fig, ax = plt.subplots(figsize=(9, 5.2))
-        ax.set_title("Factor-effect heatmap")
-        fig.tight_layout()
-        fig.savefig(output_path)
-        plt.close(fig)
-        return
-    figure_data = frame.copy()
-    if (
-        "effect_share" not in figure_data.columns
-        and "mean_difference_average" in figure_data.columns
-    ):
-        figure_data["effect_share"] = figure_data["mean_difference_average"]
-    figure_data["column_label"] = (
-        figure_data["algorithm"].astype(str) + ":" + figure_data["metric"].astype(str)
-    )
-    pivot = figure_data.pivot_table(
-        index="factor",
-        columns="column_label",
-        values="effect_share",
-        aggfunc="mean",
-        fill_value=0.0,
-    )
-    fig, ax = plt.subplots(figsize=(9, 5.2))
-    image = ax.imshow(pivot.to_numpy(), cmap="Blues", aspect="auto")
-    ax.set_xticks(range(len(pivot.columns)))
-    ax.set_xticklabels(pivot.columns, rotation=45, ha="right")
-    ax.set_yticks(range(len(pivot.index)))
-    ax.set_yticklabels(pivot.index)
-    ax.set_title("Factor-effect heatmap")
-    fig.colorbar(image, ax=ax, label="Effect share (%)")
-    fig.tight_layout()
-    fig.savefig(output_path)
-    plt.close(fig)
-
-
 def _write_variability_plot(frame: pd.DataFrame, output_path: Path) -> None:
     plt = _load_pyplot()
     if frame.empty:

@@ -46,6 +46,7 @@ Sub-packages and extracted helpers:
   factor effects, variability summaries, and main-metric rows
 - `_plot_distribution.py` — main-metric distribution plot writer
 - `_plot_spread.py` — main-metric spread plots (box and violin variants)
+- `_plot_factor_effect.py` — factor-effect heatmap writer
 - `_figure_stats.py` — figure-ready long-format melting and distributional
   summary helpers
 - `_hypothesis_bundle_helpers.py` — hypothesis-test significance summaries and
