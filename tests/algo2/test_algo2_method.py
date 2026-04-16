@@ -1,8 +1,8 @@
-from llm_conceptual_modeling.algo2.embeddings import EmbeddingClient
 from llm_conceptual_modeling.algo2.method import (
     Method2ExecutionResult,
     execute_method2,
 )
+from llm_conceptual_modeling.common.client_protocols import EmbeddingClient
 from llm_conceptual_modeling.common.graph_data import load_algo2_thesaurus
 
 
