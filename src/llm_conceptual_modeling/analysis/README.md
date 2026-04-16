@@ -25,6 +25,8 @@ Sub-packages and extracted helpers:
   pair-aware condition frames, level stability/variability aggregation, metric overview rows
 - `_stability_helpers.py` — pure helpers: `_slugify`, `frame_to_overview_records`,
   `patch_algorithm_rows`
+- `_stability_budget.py` — replication-budget overview record construction for
+  stability bundles
 - `_variance_decomposition_spec.py` — data model (`ALGORITHM_SPECS`, `AlgorithmSpec`),
   decode helpers (`decode_condition_bits`, `decode_decoding_columns`,
   `coerce_analysis_frame`), and LaTeX table rendering for variance decomposition

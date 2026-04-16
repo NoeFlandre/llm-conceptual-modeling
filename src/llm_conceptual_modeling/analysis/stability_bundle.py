@@ -11,6 +11,9 @@ from llm_conceptual_modeling.analysis._algo3_stability import (
 from llm_conceptual_modeling.analysis._algo3_stability import (
     write_algo3_pair_aware_outputs,
 )
+from llm_conceptual_modeling.analysis._stability_budget import (
+    build_replication_budget_overview_records,
+)
 from llm_conceptual_modeling.analysis._stability_helpers import (
     _slugify,
 )
@@ -173,34 +176,12 @@ def write_stability_bundle(
                     }
                 )
                 budget_frame = pd.read_csv(replication_budget_path)
-                for _, row in (
-                    budget_frame.groupby("metric", dropna=False)
-                    .agg(
-                        condition_count=("metric", "size"),
-                        max_required_total_runs=("required_total_runs", "max"),
-                        max_additional_runs_needed=("additional_runs_needed", "max"),
-                        mean_required_total_runs=("required_total_runs", "mean"),
-                        conditions_needing_more_runs=(
-                            "additional_runs_needed",
-                            lambda series: int((series > 0).sum()),
-                        ),
+                replication_budget_overview_records.extend(
+                    build_replication_budget_overview_records(
+                        algorithm=algorithm_spec.algorithm,
+                        budget_frame=budget_frame,
                     )
-                    .reset_index()
-                    .iterrows()
-                ):
-                    replication_budget_overview_records.append(
-                        {
-                            "algorithm": algorithm_spec.algorithm,
-                            "metric": row["metric"],
-                            "condition_count": int(row["condition_count"]),
-                            "max_required_total_runs": int(row["max_required_total_runs"]),
-                            "max_additional_runs_needed": int(row["max_additional_runs_needed"]),
-                            "mean_required_total_runs": float(row["mean_required_total_runs"]),
-                            "conditions_needing_more_runs": int(
-                                row["conditions_needing_more_runs"]
-                            ),
-                        }
-                    )
+                )
 
         # Level-specific stability and variability-incidence files
         for level_factor in algorithm_spec.level_factors:
