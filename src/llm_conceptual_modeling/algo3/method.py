@@ -1,28 +1,11 @@
 from collections import deque
 from dataclasses import dataclass
-from typing import Protocol
 
-from llm_conceptual_modeling.algo3.tree import TreeExpansionNode
-
-
-class TreeExpansionFunction(Protocol):
-    def __call__(
-        self,
-        *,
-        source_labels: list[str],
-        target_labels: list[str],
-        child_count: int,
-        max_depth: int,
-    ) -> list[TreeExpansionNode]: ...
-
-
-class ChildDictionaryProposer(Protocol):
-    def __call__(
-        self,
-        source_labels: list[str],
-        *,
-        child_count: int,
-    ) -> dict[str, list[str]]: ...
+from llm_conceptual_modeling.algo3.types import (
+    ChildDictionaryProposer,
+    TreeExpansionFunction,
+    TreeExpansionNode,
+)
 
 
 @dataclass(frozen=True)

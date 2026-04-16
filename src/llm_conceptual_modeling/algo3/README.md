@@ -9,6 +9,7 @@ Algorithm 3 implements the tree-expansion workflow.
 - `factorial.py`: factorial design helpers
 - `baseline.py`: deterministic baseline generation
 - `method.py`, `mistral.py`, `tree.py`: algorithm-specific runtime logic
+- `types.py`: shared tree-expansion node and proposer protocols
 
 ## Maintenance Rule
 

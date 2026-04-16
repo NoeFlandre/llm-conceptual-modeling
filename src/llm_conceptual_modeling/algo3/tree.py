@@ -1,19 +1,6 @@
 from collections import deque
-from dataclasses import dataclass
-from typing import Protocol
 
-
-class ChildProposer(Protocol):
-    def __call__(self, label: str, *, child_count: int) -> list[str]: ...
-
-
-@dataclass(frozen=True)
-class TreeExpansionNode:
-    root_label: str
-    parent_label: str
-    label: str
-    depth: int
-    matched_target: bool
+from llm_conceptual_modeling.algo3.types import ChildProposer, TreeExpansionNode
 
 
 def expand_source_tree(
