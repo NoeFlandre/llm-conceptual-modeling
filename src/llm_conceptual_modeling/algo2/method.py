@@ -1,27 +1,17 @@
 from dataclasses import dataclass
-from typing import Protocol
 
-from llm_conceptual_modeling.algo2.embeddings import (
-    EmbeddingClient,
-    compute_average_best_match_similarity,
-)
+from llm_conceptual_modeling.algo2.embeddings import compute_average_best_match_similarity
 from llm_conceptual_modeling.algo2.expansion import run_label_expansion
 from llm_conceptual_modeling.algo2.thesaurus import normalize_edge_terms
+from llm_conceptual_modeling.algo2.types import (
+    EdgeSuggestionFunction,
+    EdgeVerificationFunction,
+    LabelProposalFunction,
+)
+from llm_conceptual_modeling.common.client_protocols import EmbeddingClient
+from llm_conceptual_modeling.common.types import Edge
 
-Edge = tuple[str, str]
 Thesaurus = dict[str, dict[str, list[str]]]
-
-
-class LabelProposalFunction(Protocol):
-    def __call__(self, current_labels: list[str]) -> list[str]: ...
-
-
-class EdgeSuggestionFunction(Protocol):
-    def __call__(self, expanded_label_context: list[str]) -> list[Edge]: ...
-
-
-class EdgeVerificationFunction(Protocol):
-    def __call__(self, candidate_edges: list[Edge]) -> list[Edge]: ...
 
 
 @dataclass(frozen=True)
