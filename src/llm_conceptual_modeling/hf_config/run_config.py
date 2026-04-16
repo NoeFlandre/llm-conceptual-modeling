@@ -14,6 +14,7 @@ from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     supports_explicit_thinking_disable,
 )
+from llm_conceptual_modeling.hf_batch.prompts import build_prompt_bundle
 
 
 @dataclass(frozen=True)
@@ -562,21 +563,12 @@ def _build_preview_bundle(
         if factor.high_runtime_value == factor.low_runtime_value:
             active_high_factors.append(factor_name)
 
-    try:
-        from llm_conceptual_modeling.hf_experiments import _build_prompt_bundle
-
-        return _build_prompt_bundle(
-            algorithm_name=algorithm_name,
-            algorithm_config=algorithm_config,
-            active_high_factors=active_high_factors,
-            prompt_factors=prompt_factors,
-        )
-    except (ImportError, KeyError, ValueError):
-        preview_text = algorithm_config.assemble_prompt(
-            [],
-            template_name=_default_preview_template_name(algorithm_config),
-        )
-        return {"base": preview_text}
+    return build_prompt_bundle(
+        algorithm_name=algorithm_name,
+        algorithm_config=algorithm_config,
+        active_high_factors=active_high_factors,
+        prompt_factors=prompt_factors,
+    )
 
 
 def _write_condition_prompt_previews(
@@ -655,18 +647,9 @@ def _build_preview_bundle_for_condition(
     active_high_factors: list[str],
     prompt_factors: dict[str, bool | int],
 ) -> dict[str, str]:
-    try:
-        from llm_conceptual_modeling.hf_experiments import _build_prompt_bundle
-
-        return _build_prompt_bundle(
-            algorithm_name=algorithm_name,
-            algorithm_config=algorithm_config,
-            active_high_factors=active_high_factors,
-            prompt_factors=prompt_factors,
-        )
-    except (ImportError, KeyError, ValueError):
-        preview_text = algorithm_config.assemble_prompt(
-            active_high_factors,
-            template_name=_default_preview_template_name(algorithm_config),
-        )
-        return {"base": preview_text}
+    return build_prompt_bundle(
+        algorithm_name=algorithm_name,
+        algorithm_config=algorithm_config,
+        active_high_factors=active_high_factors,
+        prompt_factors=prompt_factors,
+    )

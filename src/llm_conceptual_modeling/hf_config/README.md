@@ -6,6 +6,7 @@ Configuration helpers for Hugging Face-backed workflows live here.
 
 - run-config loading and normalization
 - config objects used by batch and resume workflows
+- resolved preview artifact generation for prompt bundles and condition matrices
 
 ## Maintenance Rule
 

@@ -180,6 +180,63 @@ algorithms:
     assert "You are a helpful assistant. Task body." == prompt_preview
 
 
+def test_write_resolved_run_preview_surfaces_prompt_bundle_errors(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    config_path = tmp_path / "run.yaml"
+    output_dir = tmp_path / "preview"
+    _write_config(
+        config_path,
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 5
+runtime:
+  seed: 7
+  temperature: 1.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    edge_list: 256
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  greedy:
+    enabled: true
+inputs:
+  graph_source: default
+shared_fragments:
+  assistant_role: "You are a helpful assistant."
+algorithms:
+  algo1:
+    base_fragments: [assistant_role]
+    factors: {}
+    fragment_definitions: {}
+    prompt_templates:
+      body: "Task body."
+""",
+    )
+
+    def boom(**_: object) -> dict[str, str]:
+        raise ValueError("boom")
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_config.run_config.build_prompt_bundle",
+        boom,
+    )
+
+    config = load_hf_run_config(config_path)
+    with pytest.raises(ValueError, match="boom"):
+        write_resolved_run_preview(config=config, output_dir=output_dir)
+
+
 def test_load_hf_run_config_accepts_resolved_preview_decoding_list(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"
