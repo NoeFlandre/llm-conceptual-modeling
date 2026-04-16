@@ -29,6 +29,8 @@ Sub-packages and extracted helpers:
   stability bundles
 - `_stability_outputs.py` — final stability bundle export, metadata writing,
   and README generation
+- `_output_validity_outputs.py` — final output-validity bundle export, metadata
+  writing, and README generation
 - `_variance_decomposition_spec.py` — data model (`ALGORITHM_SPECS`, `AlgorithmSpec`),
   decode helpers (`decode_condition_bits`, `decode_decoding_columns`,
   `coerce_analysis_frame`), and LaTeX table rendering for variance decomposition
