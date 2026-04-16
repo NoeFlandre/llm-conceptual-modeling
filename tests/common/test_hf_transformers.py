@@ -871,6 +871,16 @@ def test_runtime_factory_skips_manual_device_move_for_accelerate_dispatched_mode
     assert dispatched_model.to_calls == []
 
 
+def test_release_prefetched_model_object_propagates_cleanup_errors() -> None:
+    class _BrokenModel:
+        def to(self, device: str):
+            _ = device
+            raise RuntimeError("cleanup failed")
+
+    with pytest.raises(RuntimeError, match="cleanup failed"):
+        hf_transformers._release_prefetched_model_object(_BrokenModel())
+
+
 def test_parse_generated_json_recovers_flat_quoted_edge_list_with_trailing_garbage() -> None:
     actual = _parse_generated_json(
         "['capacity to hire','quality of the sport infrastructure',"

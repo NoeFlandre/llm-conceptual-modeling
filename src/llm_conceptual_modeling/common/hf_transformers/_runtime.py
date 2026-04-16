@@ -14,6 +14,10 @@ from llm_conceptual_modeling.common.hf_transformers._policy import (
     RuntimeProfile,
     supports_explicit_thinking_disable,
 )
+from llm_conceptual_modeling.common.hf_transformers._runtime_support import (
+    _get_torch,
+    _resolve_context_limit,
+)
 
 if TYPE_CHECKING:
     pass
@@ -179,16 +183,10 @@ def build_runtime_factory(*, hf_token: str | None = None) -> HFTransformersRunti
 
 
 def _release_prefetched_model_object(model_object: Any) -> None:
-    try:
-        model_object.to("cpu")
-    except Exception:
-        pass
+    model_object.to("cpu")
     del model_object
     gc.collect()
-    try:
-        torch = _torch()
-    except Exception:
-        return
+    torch = _get_torch()
     if not torch.cuda.is_available():
         return
     torch.cuda.empty_cache()
@@ -275,50 +273,6 @@ def _build_runtime_profile(model: str, *, context_limit: int | None) -> RuntimeP
         context_limit=context_limit,
     )
 
-
-def _resolve_context_limit(tokenizer: Any) -> int | None:
-    max_model_length = getattr(tokenizer, "model_max_length", None)
-    if isinstance(max_model_length, int) and 0 < max_model_length < 10**9:
-        return max_model_length
-    return None
-
-
-# ---------------------------------------------------------------------------
-# Zone A: Context window derivation
-# ---------------------------------------------------------------------------
-
-def derive_context_window(
-    *,
-    tokenizer: Any,
-    prompt: str,
-    max_new_tokens: int,
-    safety_margin_tokens: int = 64,
-) -> int:
-    prompt_token_count = len(tokenizer.encode(prompt, add_special_tokens=False))
-    return derive_context_window_from_input_length(
-        tokenizer=tokenizer,
-        input_token_count=prompt_token_count,
-        max_new_tokens=max_new_tokens,
-        safety_margin_tokens=safety_margin_tokens,
-    )
-
-
-def derive_context_window_from_input_length(
-    *,
-    tokenizer: Any,
-    input_token_count: int,
-    max_new_tokens: int,
-    safety_margin_tokens: int = 64,
-) -> int:
-    required_window = input_token_count + max_new_tokens + safety_margin_tokens
-    max_model_length = _resolve_context_limit(tokenizer)
-    if max_model_length is not None and required_window > max_model_length:
-        raise ValueError(
-            f"Prompt requires {required_window} tokens but tokenizer limit is {max_model_length}."
-        )
-    return required_window
-
-
 def _dtype_from_profile(torch: Any, dtype_name: str) -> Any:
     if dtype_name == "bfloat16":
         return torch.bfloat16
@@ -336,38 +290,11 @@ def _require_cuda(torch: Any) -> None:
         )
 
 
-# ---------------------------------------------------------------------------
-# Lazy module-level lookups so tests can patch via the hf_transformers namespace.
-# Monkeypatch.setattr(hf_transformers, "_torch", ...) resolves via the
-# _get_* functions declared in __init__.py, which look up the symbol from the
-# hf_transformers package namespace. Each _get_* function here falls back to
-# the local definition if the namespace lookup returns None.
-# ---------------------------------------------------------------------------
-
-@lru_cache(maxsize=1)
-def _torch() -> Any:
-    import torch
-
-    return torch
-
-
 @lru_cache(maxsize=1)
 def _transformers() -> Any:
     import transformers
 
     return transformers
-
-
-def _get_torch() -> Any:
-    """Look up _torch from the hf_transformers namespace, falling back to local."""
-    import sys as _sys
-
-    hf = _sys.modules.get("llm_conceptual_modeling.common.hf_transformers")
-    if hf is not None:
-        _torch_ref = getattr(hf, "_torch", None)
-        if _torch_ref is not None:
-            return _torch_ref()
-    return _torch()
 
 
 def _get_transformers() -> Any:
