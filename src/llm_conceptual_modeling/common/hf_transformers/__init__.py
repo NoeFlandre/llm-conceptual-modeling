@@ -40,64 +40,35 @@ from llm_conceptual_modeling.common.hf_transformers._children_mapping import (
     _strip_mapping_comments,
     _try_inline_children_parse,
 )
-from llm_conceptual_modeling.common.hf_transformers._compat import (
-    _MINISTRAL_CHAT_MODEL,
-    # Constants
-    _QWEN_CHAT_MODEL,
-    _SUPPORTED_CHAT_MODELS,
-    _SUPPORTED_EMBEDDING_MODELS,
-    _TRUSTED_REMOTE_CODE_CHAT_MODELS,
-    # Policy
-    DecodingConfig,
-    # Classes
+
+# Zone C — client classes and helpers from _client.
+from llm_conceptual_modeling.common.hf_transformers._client import (
     HFTransformersChatClient,
     HFTransformersEmbeddingClient,
-    HFTransformersRuntimeFactory,
-    RuntimeProfile,
-    _build_runtime_profile,
-    _custom_generate_overrides,
-    # Runtime helpers used by callers
     _decoding_kwargs,
-    _dtype_from_profile,
     _encode_chat_prompt,
-    _ensure_qwen_dynamic_cache_compatibility,
-    _flash_attention_available,
     _generator_kwarg_rejected,
-    _load_chat_model,
-    _load_chat_tokenizer,
-    _load_qwen_dynamic_cache_type,
-    _model_uses_accelerate_device_map,
-    _mutate_qwen_cache_state_lists,
     _next_max_new_tokens,
     _normalize_eos_ids,
-    _patch_qwen_contrastive_custom_generate,
-    # Qwen cache helpers
-    _qwen_cache_batch_repeat_interleave,
-    _qwen_cache_batch_select_indices,
-    _qwen_cache_crop,
-    _release_prefetched_model_object,
-    _require_cuda,
-    _resolve_attention_implementation,
-    _resolve_context_limit,
     _resolve_generation_timeout_seconds,
     _resolve_pad_token_id,
     _resolve_safety_margin_tokens,
     _response_hit_generation_limit,
     _set_generation_temperature,
+)
+
+# Zone B — runtime helpers that also need monkeypatch surface.
+from llm_conceptual_modeling.common.hf_transformers._compat import (
+    _custom_generate_overrides,
+    _ensure_qwen_dynamic_cache_compatibility,
+    _load_qwen_dynamic_cache_type,
+    _mutate_qwen_cache_state_lists,
+    _patch_qwen_contrastive_custom_generate,
+    # Qwen cache helpers
+    _qwen_cache_batch_repeat_interleave,
+    _qwen_cache_batch_select_indices,
+    _qwen_cache_crop,
     _temporarily_disable_stateful_guard,
-    # Lazy-loader stubs
-    _torch,
-    _transformers,
-    _trusted_remote_code_kwargs,
-    # Public helpers
-    build_default_decoding_grid,
-    build_runtime_factory,
-    derive_context_window,
-    derive_context_window_from_input_length,
-    runtime_generation_overrides,
-    should_disable_stateful_guard,
-    supports_decoding_config,
-    supports_explicit_thinking_disable,
 )
 
 # Import from _edge_list — recovery functions for edge lists.
@@ -148,6 +119,45 @@ from llm_conceptual_modeling.common.hf_transformers._parse import (
     # import it from _children_mapping (below) instead.
     _strip_assistant_prefix,
     _strip_code_fence,
+)
+
+# Zone A — compatibility and policy layer.
+# Policy symbols re-exported from _policy (they were always in _policy, not _compat).
+from llm_conceptual_modeling.common.hf_transformers._policy import (
+    DecodingConfig,
+    RuntimeProfile,
+    build_default_decoding_grid,
+    runtime_generation_overrides,
+    should_disable_stateful_guard,
+    supports_decoding_config,
+    supports_explicit_thinking_disable,
+)
+
+# Zone A — context window helpers from _runtime (moved from _compat).
+# Zone B — runtime loading/factory imported directly from _runtime.
+from llm_conceptual_modeling.common.hf_transformers._runtime import (
+    _MINISTRAL_CHAT_MODEL,
+    _QWEN_CHAT_MODEL,
+    _SUPPORTED_CHAT_MODELS,
+    _SUPPORTED_EMBEDDING_MODELS,
+    _TRUSTED_REMOTE_CODE_CHAT_MODELS,
+    HFTransformersRuntimeFactory,
+    _build_runtime_profile,
+    _dtype_from_profile,
+    _flash_attention_available,
+    _load_chat_model,
+    _load_chat_tokenizer,
+    _model_uses_accelerate_device_map,
+    _release_prefetched_model_object,
+    _require_cuda,
+    _resolve_attention_implementation,
+    _resolve_context_limit,
+    _torch,
+    _transformers,
+    _trusted_remote_code_kwargs,
+    build_runtime_factory,
+    derive_context_window,
+    derive_context_window_from_input_length,
 )
 
 __all__ = [
