@@ -53,6 +53,39 @@ def run_dir_for_spec(*, output_root: Path, spec: HFRunSpec) -> Path:
     )
 
 
+def run_dir_identity(
+    *,
+    runs_root: Path,
+    run_dir: Path,
+) -> tuple[str, tuple[str, str, str, str, str, int]] | None:
+    """Return the model slug and manifest identity for a run directory."""
+    try:
+        relative_parts = run_dir.resolve().relative_to(runs_root.resolve()).parts
+    except ValueError:
+        return None
+    if len(relative_parts) != 6:
+        return None
+    algorithm, model_slug, condition_label, pair_name, condition_bits, replication_part = (
+        relative_parts
+    )
+    if not replication_part.startswith("rep_"):
+        return None
+    replication_text = replication_part.removeprefix("rep_")
+    if not replication_text.isdigit():
+        return None
+    return (
+        model_slug,
+        (
+            algorithm,
+            model_slug.replace("__", "/"),
+            condition_label,
+            pair_name,
+            condition_bits,
+            int(replication_text),
+        ),
+    )
+
+
 def filter_planned_specs_for_output_root(
     *,
     planned_specs: list[HFRunSpec],

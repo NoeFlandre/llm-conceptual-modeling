@@ -124,6 +124,55 @@ def test_collect_batch_status_uses_worker_state_age_when_stage_file_is_missing(
     assert status["active_stage_age_seconds"] >= 0.0
 
 
+def test_collect_batch_status_ignores_malformed_run_directories(tmp_path: Path) -> None:
+    output_root = tmp_path / "results"
+    output_root.mkdir(parents=True, exist_ok=True)
+    (output_root / "runtime_config.yaml").write_text(
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 1
+runtime:
+  seed: 7
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    edge_list: 128
+models:
+  chat_models:
+    - allenai/Olmo-3-7B-Instruct
+  embedding_model: Qwen/Qwen3-Embedding-0.6B
+""".strip()
+        + "\n",
+        encoding="utf-8",
+    )
+
+    malformed_run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+    )
+    malformed_run_dir.mkdir(parents=True, exist_ok=True)
+    (malformed_run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (output_root / "batch_status.json").write_text(
+        json.dumps({"total_runs": 1, "current_run": {"algorithm": "algo1"}}),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["total_runs"] == 1
+    assert status["running_count"] == 0
+    assert status["pending_count"] == 1
+
+
 def test_collect_batch_status_requires_boolean_true_for_worker_loaded_model(
     tmp_path: Path,
 ) -> None:

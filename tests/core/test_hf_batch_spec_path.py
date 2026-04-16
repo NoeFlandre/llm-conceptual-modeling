@@ -143,6 +143,56 @@ def test_run_dir_for_spec_handles_higher_replication() -> None:
 
 
 # ---------------------------------------------------------------------------
+# run_dir_identity
+# ---------------------------------------------------------------------------
+
+def test_run_dir_identity_returns_model_slug_and_manifest_identity() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import run_dir_identity
+
+    output_root = Path("/tmp/test-output")
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+
+    identity = run_dir_identity(runs_root=output_root / "runs", run_dir=run_dir)
+
+    assert identity == (
+        "allenai__Olmo-3-7B-Instruct",
+        (
+            "algo1",
+            "allenai/Olmo-3-7B-Instruct",
+            "greedy",
+            "sg1_sg2",
+            "00000",
+            0,
+        ),
+    )
+
+
+def test_run_dir_identity_returns_none_for_malformed_path() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import run_dir_identity
+
+    output_root = Path("/tmp/test-output")
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "sg1_sg2"
+    )
+
+    assert run_dir_identity(runs_root=output_root / "runs", run_dir=run_dir) is None
+
+
+# ---------------------------------------------------------------------------
 # filter_planned_specs_for_output_root
 # ---------------------------------------------------------------------------
 

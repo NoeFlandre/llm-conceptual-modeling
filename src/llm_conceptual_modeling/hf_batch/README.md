@@ -9,7 +9,8 @@ Batch-planning and run-artifact helpers for the paper batch live here.
 - run-artifact reading and writing
 - output aggregation and utility helpers
 - type definitions for batch execution
-- `spec_path`: pure spec-identity and run-directory path-resolution helpers
+- `spec_path`: pure spec-identity and run-directory path-resolution helpers,
+  including run-directory identity parsing for monitoring and resume checks
 
 ## Maintenance Rule
 

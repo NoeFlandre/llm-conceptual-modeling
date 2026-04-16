@@ -9,6 +9,7 @@ from typing import Any
 
 from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
+from llm_conceptual_modeling.hf_batch.spec_path import run_dir_identity
 from llm_conceptual_modeling.hf_state.active_models import resolve_active_chat_model_slugs
 from llm_conceptual_modeling.hf_state.shard_manifest import manifest_identity_keys
 
@@ -134,8 +135,12 @@ def _iter_run_directories(
         path
         for path in runs_root.rglob("rep_*")
         if path.is_dir()
-        and _run_dir_matches_active_models(runs_root, path, active_model_slugs)
-        and _run_dir_matches_manifest(runs_root, path, manifest_identities)
+        and _run_dir_matches_filters(
+            runs_root,
+            path,
+            active_model_slugs=active_model_slugs,
+            manifest_identities=manifest_identities,
+        )
     ]
 
 
@@ -143,39 +148,21 @@ def _read_json(path: Path) -> dict[str, Any]:
     return read_json_dict(path)
 
 
-def _run_dir_matches_active_models(
+def _run_dir_matches_filters(
     runs_root: Path,
     run_dir: Path,
     active_model_slugs: set[str],
-) -> bool:
-    if not active_model_slugs:
-        return True
-    try:
-        model_slug = run_dir.resolve().relative_to(runs_root.resolve()).parts[1]
-    except Exception:
-        return True
-    return model_slug in active_model_slugs
-
-
-def _run_dir_matches_manifest(
-    runs_root: Path,
-    run_dir: Path,
+    *,
     manifest_identities: set[tuple[str, str, str, str, str, int]],
 ) -> bool:
+    parsed_identity = run_dir_identity(runs_root=runs_root, run_dir=run_dir)
+    if parsed_identity is None:
+        return False
+    model_slug, identity = parsed_identity
+    if active_model_slugs and model_slug not in active_model_slugs:
+        return False
     if not manifest_identities:
         return True
-    try:
-        parts = run_dir.resolve().relative_to(runs_root.resolve()).parts
-        identity = (
-            parts[0],
-            parts[1].replace("__", "/"),
-            parts[2],
-            parts[3],
-            parts[4],
-            int(parts[5].removeprefix("rep_")),
-        )
-    except Exception:
-        return False
     return identity in manifest_identities
 
 
