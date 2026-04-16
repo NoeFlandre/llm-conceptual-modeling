@@ -50,6 +50,8 @@ Sub-packages and extracted helpers:
 - `_plot_variability.py` — raw-output variability chart writer
 - `_figure_stats.py` — figure-ready long-format melting and distributional
   summary helpers
+- `_variance_decomposition_outputs.py` — variance-decomposition bundle export,
+  metadata writing, and README generation
 - `_hypothesis_bundle_helpers.py` — hypothesis-test significance summaries and
   factor-overview aggregation helpers
 - `_hypothesis_outputs.py` — final hypothesis bundle export, metadata writing,

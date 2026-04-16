@@ -15,6 +15,9 @@ from llm_conceptual_modeling.analysis._variance_decomposition_math import (
     _build_term_columns,
     _column_sum_of_squares,
 )
+from llm_conceptual_modeling.analysis._variance_decomposition_outputs import (
+    write_variance_decomposition_outputs,
+)
 from llm_conceptual_modeling.analysis._variance_decomposition_spec import (
     ALGORITHM_SPECS,
     DECODING_CONDITIONS,
@@ -139,37 +142,27 @@ def generate_variance_decomposition_bundle(
         frame = pd.DataFrame(rows)
         decompositions.append(compute_variance_decomposition(frame, algorithm, model))
     full = pd.concat(decompositions, ignore_index=True) if decompositions else pd.DataFrame()
-
-    csv_path = target_dir / "variance_decomposition.csv"
-    full.to_csv(csv_path, index=False)
-
     tables: dict[str, str] = {}
     algorithm_csvs: dict[str, Path] = {}
     for algorithm in ALGORITHM_SPECS:
-        algorithm_frame = full[full["algorithm"] == algorithm].copy()
         algorithm_csv_path = target_dir / f"variance_decomposition_{algorithm}.csv"
-        algorithm_frame.to_csv(algorithm_csv_path, index=False)
         algorithm_csvs[algorithm] = algorithm_csv_path
-        table = render_variance_decomposition_table(
+        algorithm_frame = full[full["algorithm"] == algorithm].copy()
+        tables[algorithm] = render_variance_decomposition_table(
             algorithm,
             algorithm_frame,
         )
-        tables[algorithm] = table
-        (target_dir / f"variance_decomposition_{algorithm}.tex").write_text(
-            table,
-            encoding="utf-8",
-        )
 
-    combined = "\n\n".join(tables[algorithm] for algorithm in ALGORITHM_SPECS)
-    combined_path = target_dir / "variance_decomposition.tex"
-    combined_path.write_text(combined, encoding="utf-8")
+    output_records = write_variance_decomposition_outputs(
+        output_dir=target_dir,
+        decomposition=full,
+        algorithm_csvs=algorithm_csvs,
+        tables=tables,
+    )
 
     return {
         "decomposition": full,
-        "decomposition_csv": csv_path,
-        "algorithm_csvs": algorithm_csvs,
-        "tables": tables,
-        "combined_table": combined_path,
+        **output_records,
     }
 
 
