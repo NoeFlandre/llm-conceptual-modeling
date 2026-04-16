@@ -44,6 +44,7 @@ Sub-packages and extracted helpers:
   and results-root discovery
 - `_plot_frames.py` — plot-frame builders for aggregated distributions,
   factor effects, variability summaries, and main-metric rows
+- `_plot_distribution.py` — main-metric distribution plot writer
 - `_plot_spread.py` — main-metric spread plots (box and violin variants)
 - `_figure_stats.py` — figure-ready long-format melting and distributional
   summary helpers
