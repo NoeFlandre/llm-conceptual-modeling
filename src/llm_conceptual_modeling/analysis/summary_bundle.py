@@ -3,10 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-import pandas as pd
-
 from llm_conceptual_modeling.analysis._stability_helpers import _slugify
 from llm_conceptual_modeling.analysis._summary_helpers import _build_metric_overview
+from llm_conceptual_modeling.analysis._summary_outputs import (
+    write_summary_bundle_outputs,
+)
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
 from llm_conceptual_modeling.common.types import PathLike
 
@@ -113,40 +114,8 @@ def write_statistical_reporting_bundle(
             )
             overview_records.extend(metric_overview.to_dict(orient="records"))
 
-    pd.DataFrame.from_records(manifest_records).to_csv(
-        output_dir_path / "bundle_manifest.csv",
-        index=False,
+    write_summary_bundle_outputs(
+        output_dir_path=output_dir_path,
+        manifest_records=manifest_records,
+        overview_records=overview_records,
     )
-    pd.DataFrame.from_records(overview_records).to_csv(
-        output_dir_path / "bundle_overview.csv",
-        index=False,
-    )
-    _write_bundle_readme(output_dir_path)
-def _write_bundle_readme(output_dir: Path) -> None:
-    readme = """# Statistical Reporting Audit Bundle
-
-This directory contains the organized artifacts for the statistical-reporting revision item.
-
-## Purpose
-
-The reviewer asked for confidence intervals and stronger statistical reporting. This bundle captures
-the descriptive evidence used to answer that request across all imported evaluated result files.
-
-## Layout
-
-- `bundle_manifest.csv`
-  Index of every generated summary file and overview file.
-- `bundle_overview.csv`
-  One row per algorithm, factor, and metric with global means and per-file winner counts.
-- `<algorithm>/<factor_slug>/grouped_metric_summary.csv`
-  The full grouped descriptive summary produced by `lcm analyze summary`.
-- `<algorithm>/<factor_slug>/metric_overview.csv`
-  A compact reviewer-facing overview for that factor.
-
-## Interpretation
-
-The grouped summary files preserve per-source-file provenance. The metric overview files compress
-that evidence into global means and file-level winner counts so the revision document can cite the
-most informative patterns without repeating entire CSVs inline.
-"""
-    (output_dir / "README.md").write_text(readme, encoding="utf-8")
