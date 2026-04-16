@@ -27,6 +27,8 @@ Sub-packages and extracted helpers:
   `patch_algorithm_rows`
 - `_stability_budget.py` — replication-budget overview record construction for
   stability bundles
+- `_stability_outputs.py` — final stability bundle export, metadata writing,
+  and README generation
 - `_variance_decomposition_spec.py` — data model (`ALGORITHM_SPECS`, `AlgorithmSpec`),
   decode helpers (`decode_condition_bits`, `decode_decoding_columns`,
   `coerce_analysis_frame`), and LaTeX table rendering for variance decomposition
