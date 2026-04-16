@@ -2,10 +2,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from llm_conceptual_modeling.analysis.plots import (
+from llm_conceptual_modeling.analysis._color_mapping import (
     _build_model_color_map,
     _canonical_model_label,
     _legend_model_order,
+)
+from llm_conceptual_modeling.analysis.plots import (
     write_revision_plots,
 )
 
