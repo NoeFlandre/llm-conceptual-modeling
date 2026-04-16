@@ -46,6 +46,8 @@ Sub-packages and extracted helpers:
   summary helpers
 - `_hypothesis_bundle_helpers.py` — hypothesis-test significance summaries and
   factor-overview aggregation helpers
+- `_hypothesis_outputs.py` — final hypothesis bundle export, metadata writing,
+  and README generation
 - `_summary_helpers.py` — statistical summary overview construction and level
   stringification helpers
 - `_bundle_stats.py` — pure DataFrame transformers for output-validity and
