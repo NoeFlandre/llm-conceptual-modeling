@@ -135,6 +135,18 @@ def build_parser() -> argparse.ArgumentParser:
     replication_budget_parser.add_argument("--relative-half-width-target", type=float, default=0.05)
     replication_budget_parser.add_argument("--z-score", type=float, default=1.96)
 
+    replication_budget_sufficiency_parser = analyze_subparsers.add_parser(
+        "replication-budget-sufficiency"
+    )
+    replication_budget_sufficiency_parser.add_argument("--results-root", required=True)
+    replication_budget_sufficiency_parser.add_argument("--output", required=True)
+    replication_budget_sufficiency_parser.add_argument("--model", action="append")
+    replication_budget_sufficiency_parser.add_argument(
+        "--expected-replications",
+        type=int,
+        default=5,
+    )
+
     stability_bundle_parser = analyze_subparsers.add_parser("stability-bundle")
     stability_bundle_parser.add_argument(
         "--results-root",

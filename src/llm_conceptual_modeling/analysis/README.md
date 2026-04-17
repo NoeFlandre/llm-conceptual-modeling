@@ -27,6 +27,8 @@ Sub-packages and extracted helpers:
   `patch_algorithm_rows`
 - `_stability_budget.py` — replication-budget overview record construction for
   stability bundles
+- `replication_budget_summary.py` — ledger-driven replication sufficiency
+  summaries across CI profiles
 - `_stability_outputs.py` — final stability bundle export, metadata writing,
   and README generation
 - `_output_validity_outputs.py` — final output-validity bundle export, metadata
@@ -67,6 +69,17 @@ Sub-packages and extracted helpers:
 - `_baseline_outputs.py` — baseline comparison summary aggregation and bundle
   README writing helpers
 - `_edge_parsing.py` — cached edge-list parsing for baseline comparison inputs
+
+## CLI reports
+
+The replication sufficiency report reads finished rows from `ledger.json` and
+writes aggregate rows plus exact underpowered condition-metric rows:
+
+```bash
+uv run lcm analyze replication-budget-sufficiency \
+  --results-root data/results/open_weights/hf-paper-batch-canonical \
+  --output data/results/open_weights/hf-paper-batch-canonical/replication_budget_sufficiency_summary.csv
+```
 
 ## Notes
 

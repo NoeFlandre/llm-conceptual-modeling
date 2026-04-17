@@ -31,7 +31,7 @@ def write_replication_budget_analysis(
         enriched["z_score"] = float(z_score)
         enriched["precision_margin"] = enriched["mean"].abs() * float(relative_half_width_target)
         enriched["required_total_runs"] = enriched.apply(
-            lambda row: _required_total_runs(
+            lambda row: required_total_runs(
                 observed_runs=int(row["n"]),
                 mean=float(row["mean"]),
                 sample_std=float(row["sample_std"]),
@@ -47,24 +47,7 @@ def write_replication_budget_analysis(
     pd.concat(output_frames, ignore_index=True).to_csv(output_csv_path, index=False)
 
 
-def required_total_runs_from_row(
-    *,
-    observed_runs: int,
-    mean: float,
-    sample_std: float,
-    relative_half_width_target: float = 0.05,
-    z_score: float = 1.96,
-) -> int:
-    return _required_total_runs(
-        observed_runs=observed_runs,
-        mean=mean,
-        sample_std=sample_std,
-        relative_half_width_target=relative_half_width_target,
-        z_score=z_score,
-    )
-
-
-def _required_total_runs(
+def required_total_runs(
     *,
     observed_runs: int,
     mean: float,
@@ -84,6 +67,23 @@ def _required_total_runs(
     precision_margin = abs(mean) * relative_half_width_target
     required = math.ceil(((z_score * sample_std) / precision_margin) ** 2)
     return max(required, observed_runs)
+
+
+def required_total_runs_from_row(
+    *,
+    observed_runs: int,
+    mean: float,
+    sample_std: float,
+    relative_half_width_target: float = 0.05,
+    z_score: float = 1.96,
+) -> int:
+    return required_total_runs(
+        observed_runs=observed_runs,
+        mean=mean,
+        sample_std=sample_std,
+        relative_half_width_target=relative_half_width_target,
+        z_score=z_score,
+    )
 
 
 def _requirement_status(row: pd.Series) -> str:

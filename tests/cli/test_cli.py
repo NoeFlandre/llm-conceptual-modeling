@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -8,6 +9,12 @@ from llm_conceptual_modeling.cli import main
 
 def test_cli_main_is_implemented_in_the_commands_package() -> None:
     assert main.__module__ == "llm_conceptual_modeling.commands.cli"
+
+
+def test_cli_shim_exports_script_entrypoint() -> None:
+    from llm_conceptual_modeling.cli import run
+
+    assert run.__module__ == "llm_conceptual_modeling.commands.cli"
 
 
 def test_cli_analyze_summary_bundle_writes_organized_review_artifacts(tmp_path) -> None:
@@ -583,6 +590,53 @@ def test_cli_analyze_replication_budget_supports_relaxed_ci_profile(tmp_path) ->
     assert actual.iloc[0]["z_score"] == 1.645
     assert actual.iloc[0]["relative_half_width_target"] == 0.1
     assert actual.iloc[0]["required_total_runs"] == 5
+
+
+def test_cli_analyze_replication_budget_sufficiency_writes_summary(tmp_path) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    (results_root / "ledger.json").write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "identity": {
+                            "algorithm": "algo1",
+                            "model": "Qwen/Qwen3.5-9B",
+                            "condition_label": "greedy",
+                            "pair_name": "sg1_sg2",
+                            "condition_bits": "00000",
+                            "replication": 0,
+                        },
+                        "status": "finished",
+                        "winner": {
+                            "metrics": {"accuracy": 100.0},
+                            "status": "finished",
+                        },
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    output_path = tmp_path / "summary.csv"
+
+    exit_code = main(
+        [
+            "analyze",
+            "replication-budget-sufficiency",
+            "--results-root",
+            str(results_root),
+            "--output",
+            str(output_path),
+        ]
+    )
+
+    actual = pd.read_csv(output_path)
+
+    assert exit_code == 0
+    assert set(actual["profile"]) == {"ci95_rel05", "ci90_rel05"}
+    assert actual.iloc[0]["source_finished_run_count"] == 1
 
 
 def test_cli_analyze_plots_writes_revision_plot_family(tmp_path) -> None:
