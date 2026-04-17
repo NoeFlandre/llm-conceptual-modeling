@@ -639,6 +639,64 @@ def test_cli_analyze_replication_budget_sufficiency_writes_summary(tmp_path) -> 
     assert actual.iloc[0]["source_finished_run_count"] == 1
 
 
+def test_cli_analyze_replication_budget_sufficiency_writes_compact_table(
+    tmp_path,
+) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    (results_root / "ledger.json").write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "identity": {
+                            "algorithm": "algo1",
+                            "model": "Qwen/Qwen3.5-9B",
+                            "condition_label": "greedy",
+                            "pair_name": "sg1_sg2",
+                            "condition_bits": "00000",
+                            "replication": replication,
+                        },
+                        "status": "finished",
+                        "winner": {
+                            "metrics": {"accuracy": 100.0},
+                            "status": "finished",
+                        },
+                    }
+                    for replication in range(5)
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    detailed_path = tmp_path / "detailed.csv"
+    compact_path = tmp_path / "compact.csv"
+
+    exit_code = main(
+        [
+            "analyze",
+            "replication-budget-sufficiency",
+            "--results-root",
+            str(results_root),
+            "--output",
+            str(detailed_path),
+            "--compact-output",
+            str(compact_path),
+        ]
+    )
+
+    compact = pd.read_csv(compact_path)
+
+    assert exit_code == 0
+    assert compact.columns.tolist()[:4] == [
+        "algorithm",
+        "decoding",
+        "qwen_runs",
+        "qwen_condition_metrics",
+    ]
+    assert compact.iloc[0]["qwen_runs"] == 5
+
+
 def test_cli_analyze_plots_writes_revision_plot_family(tmp_path) -> None:
     results_root = tmp_path / "tracker"
     (results_root / "figure_exports").mkdir(parents=True)

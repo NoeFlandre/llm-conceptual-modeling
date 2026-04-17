@@ -1,0 +1,16 @@
+algorithm,decoding,qwen_runs,qwen_condition_metrics,qwen_ci90_needing_more,qwen_ci90_share,qwen_ci90_max_required_runs,qwen_ci95_needing_more,qwen_ci95_share,qwen_ci95_max_required_runs,mistral_runs,mistral_condition_metrics,mistral_ci90_needing_more,mistral_ci90_share,mistral_ci90_max_required_runs,mistral_ci95_needing_more,mistral_ci95_share,mistral_ci95_max_required_runs
+Algorithm 1,greedy,480,384,12,0.03125,81,12,0.03125,114,480,384,3,0.0078125,21,3,0.0078125,29
+Algorithm 1,beam_num_beams_2,480,384,10,0.026041666666666668,2030,10,0.026041666666666668,2882,480,384,0,0.0,5,0,0.0,5
+Algorithm 1,beam_num_beams_6,480,384,4,0.010416666666666666,903,4,0.010416666666666666,1281,480,384,6,0.015625,76,6,0.015625,108
+Algorithm 1,contrastive_penalty_alpha_0.2,480,384,0,0.0,5,0,0.0,5,480,384,4,0.010416666666666666,17,6,0.015625,24
+Algorithm 1,contrastive_penalty_alpha_0.8,480,384,0,0.0,5,0,0.0,5,480,384,0,0.0,5,0,0.0,5
+Algorithm 2,greedy,960,768,0,0.0,5,0,0.0,5,960,768,0,0.0,5,2,0.0026041666666666665,7
+Algorithm 2,beam_num_beams_2,960,768,0,0.0,5,0,0.0,5,960,768,0,0.0,5,0,0.0,5
+Algorithm 2,beam_num_beams_6,960,768,0,0.0,5,0,0.0,5,960,768,9,0.01171875,319,9,0.01171875,452
+Algorithm 2,contrastive_penalty_alpha_0.2,960,768,8,0.010416666666666666,339,8,0.010416666666666666,481,960,768,9,0.01171875,345,9,0.01171875,489
+Algorithm 2,contrastive_penalty_alpha_0.8,960,768,0,0.0,5,0,0.0,5,960,768,0,0.0,5,0,0.0,5
+Algorithm 3,greedy,240,48,0,0.0,5,0,0.0,5,240,48,0,0.0,5,0,0.0,5
+Algorithm 3,beam_num_beams_2,240,48,0,0.0,5,0,0.0,5,240,48,0,0.0,5,0,0.0,5
+Algorithm 3,beam_num_beams_6,240,48,0,0.0,5,0,0.0,5,240,48,0,0.0,5,0,0.0,5
+Algorithm 3,contrastive_penalty_alpha_0.2,240,48,0,0.0,5,0,0.0,5,240,48,0,0.0,5,0,0.0,5
+Algorithm 3,contrastive_penalty_alpha_0.8,240,48,0,0.0,5,0,0.0,5,240,48,0,0.0,5,0,0.0,5

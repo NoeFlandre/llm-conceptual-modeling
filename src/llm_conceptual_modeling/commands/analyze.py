@@ -12,6 +12,7 @@ from llm_conceptual_modeling.analysis.output_validity_bundle import write_output
 from llm_conceptual_modeling.analysis.plots import write_revision_plots
 from llm_conceptual_modeling.analysis.replication_budget import write_replication_budget_analysis
 from llm_conceptual_modeling.analysis.replication_budget_summary import (
+    write_compact_replication_budget_sufficiency_table,
     write_replication_budget_sufficiency_summary,
 )
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
@@ -74,6 +75,13 @@ def handle_analyze(args: Namespace) -> int:
                 models=tuple(args.model) if args.model else None,
                 expected_replications=args.expected_replications,
             )
+            if args.compact_output:
+                write_compact_replication_budget_sufficiency_table(
+                    results_root=args.results_root,
+                    output_csv_path=args.compact_output,
+                    models=tuple(args.model) if args.model else None,
+                    expected_replications=args.expected_replications,
+                )
             return 0
         if args.analysis_target == "stability-bundle":
             write_stability_bundle(

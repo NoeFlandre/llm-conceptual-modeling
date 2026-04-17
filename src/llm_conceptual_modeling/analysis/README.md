@@ -78,7 +78,8 @@ writes aggregate rows plus exact underpowered condition-metric rows:
 ```bash
 uv run lcm analyze replication-budget-sufficiency \
   --results-root data/results/open_weights/hf-paper-batch-canonical \
-  --output data/results/open_weights/hf-paper-batch-canonical/replication_budget_sufficiency_summary.csv
+  --output data/results/open_weights/hf-paper-batch-canonical/replication_budget_sufficiency_summary.csv \
+  --compact-output data/results/open_weights/hf-paper-batch-canonical/replication_budget_sufficiency_compact.csv
 ```
 
 ## Notes

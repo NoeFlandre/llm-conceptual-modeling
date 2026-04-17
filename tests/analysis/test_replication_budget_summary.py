@@ -106,3 +106,89 @@ def test_write_replication_budget_sufficiency_summary_groups_underpowered_condit
     assert qwen_accuracy_95["required_total_runs_max"] == 23
     assert qwen_accuracy_detail_95["pair_name"] == "sg1_sg2"
     assert qwen_accuracy_detail_95["condition_bits"] == "000000"
+
+
+def test_write_compact_replication_budget_sufficiency_table_pivots_by_model(
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.analysis.replication_budget_summary import (
+        write_compact_replication_budget_sufficiency_table,
+    )
+
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    records = [
+        _ledger_record(
+            algorithm="algo1",
+            model="Qwen/Qwen3.5-9B",
+            condition_label="greedy",
+            metric_values={"accuracy": accuracy, "precision": 100.0},
+            replication=replication,
+        )
+        for replication, accuracy in enumerate([88.0, 88.0, 100.0, 112.0, 112.0])
+    ]
+    records.extend(
+        _ledger_record(
+            algorithm="algo1",
+            model="mistralai/Ministral-3-8B-Instruct-2512",
+            condition_label="greedy",
+            metric_values={"accuracy": 100.0, "precision": 100.0},
+            replication=replication,
+        )
+        for replication in range(5)
+    )
+    (results_root / "ledger.json").write_text(
+        json.dumps({"records": records}),
+        encoding="utf-8",
+    )
+    output_path = tmp_path / "compact.csv"
+
+    write_compact_replication_budget_sufficiency_table(
+        results_root=results_root,
+        output_csv_path=output_path,
+    )
+
+    table = pd.read_csv(output_path)
+
+    assert table.columns.tolist() == [
+        "algorithm",
+        "decoding",
+        "qwen_runs",
+        "qwen_condition_metrics",
+        "qwen_ci90_needing_more",
+        "qwen_ci90_share",
+        "qwen_ci90_max_required_runs",
+        "qwen_ci95_needing_more",
+        "qwen_ci95_share",
+        "qwen_ci95_max_required_runs",
+        "mistral_runs",
+        "mistral_condition_metrics",
+        "mistral_ci90_needing_more",
+        "mistral_ci90_share",
+        "mistral_ci90_max_required_runs",
+        "mistral_ci95_needing_more",
+        "mistral_ci95_share",
+        "mistral_ci95_max_required_runs",
+    ]
+    assert table.to_dict("records") == [
+        {
+            "algorithm": "Algorithm 1",
+            "decoding": "greedy",
+            "qwen_runs": 5,
+            "qwen_condition_metrics": 2,
+            "qwen_ci90_needing_more": 1,
+            "qwen_ci90_share": 0.5,
+            "qwen_ci90_max_required_runs": 16,
+            "qwen_ci95_needing_more": 1,
+            "qwen_ci95_share": 0.5,
+            "qwen_ci95_max_required_runs": 23,
+            "mistral_runs": 5,
+            "mistral_condition_metrics": 2,
+            "mistral_ci90_needing_more": 0,
+            "mistral_ci90_share": 0.0,
+            "mistral_ci90_max_required_runs": 5,
+            "mistral_ci95_needing_more": 0,
+            "mistral_ci95_share": 0.0,
+            "mistral_ci95_max_required_runs": 5,
+        }
+    ]

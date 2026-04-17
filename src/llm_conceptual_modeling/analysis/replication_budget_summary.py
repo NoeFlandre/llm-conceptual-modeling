@@ -52,6 +52,31 @@ _GROUPINGS = (
     ),
 )
 
+_MODEL_COLUMN_PREFIXES = {
+    "Qwen/Qwen3.5-9B": "qwen",
+    "mistralai/Ministral-3-8B-Instruct-2512": "mistral",
+}
+
+_ALGORITHM_LABELS = {
+    "algo1": "Algorithm 1",
+    "algo2": "Algorithm 2",
+    "algo3": "Algorithm 3",
+}
+
+_ALGORITHM_ORDER = {
+    "algo1": 1,
+    "algo2": 2,
+    "algo3": 3,
+}
+
+_DECODING_ORDER = {
+    "greedy": 1,
+    "beam_num_beams_2": 2,
+    "beam_num_beams_6": 3,
+    "contrastive_penalty_alpha_0.2": 4,
+    "contrastive_penalty_alpha_0.8": 5,
+}
+
 
 def write_replication_budget_sufficiency_summary(
     *,
@@ -82,6 +107,38 @@ def write_replication_budget_sufficiency_summary(
         profiles=profiles,
     )
     summary.to_csv(output_csv_path, index=False)
+
+
+def write_compact_replication_budget_sufficiency_table(
+    *,
+    results_root: PathLike,
+    output_csv_path: PathLike,
+    models: tuple[str, ...] | None = None,
+    expected_replications: int = 5,
+    profiles: tuple[ReplicationBudgetProfile, ...] = _DEFAULT_PROFILES,
+) -> None:
+    if expected_replications <= 0:
+        raise ValueError("expected_replications must be positive.")
+
+    results_root_path = Path(results_root)
+    ledger = _read_ledger(results_root_path / "ledger.json")
+    selected_models = set(models or _DEFAULT_MODELS)
+    observations = _ledger_metric_observations(ledger=ledger, models=selected_models)
+    if observations.empty:
+        raise ValueError("No finished ledger metric observations matched the requested models.")
+
+    budget_rows = _condition_metric_budget_rows(
+        observations=observations,
+        profiles=profiles,
+        expected_replications=expected_replications,
+    )
+    compact = _compact_budget_table(
+        budget_rows=budget_rows,
+        observations=observations,
+        models=tuple(model for model in _DEFAULT_MODELS if model in selected_models),
+        profiles=profiles,
+    )
+    compact.to_csv(output_csv_path, index=False)
 
 
 def _read_ledger(path: Path) -> dict[str, Any]:
@@ -315,3 +372,74 @@ def _aggregate_group(
         "additional_runs_needed_total": int(group["additional_runs_needed"].sum()),
         "additional_runs_needed_max": int(group["additional_runs_needed"].max()),
     }
+
+
+def _compact_budget_table(
+    *,
+    budget_rows: pd.DataFrame,
+    observations: pd.DataFrame,
+    models: tuple[str, ...],
+    profiles: tuple[ReplicationBudgetProfile, ...],
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    ordered_profiles = tuple(sorted(profiles, key=lambda profile: profile.confidence_level))
+    algorithm_decoding_pairs = (
+        observations[["algorithm", "decoding_condition"]]
+        .drop_duplicates()
+        .sort_values(
+            by=["algorithm", "decoding_condition"],
+            key=_compact_sort_key,
+            kind="mergesort",
+        )
+    )
+    for _, pair in algorithm_decoding_pairs.iterrows():
+        algorithm = str(pair["algorithm"])
+        decoding = str(pair["decoding_condition"])
+        row: dict[str, object] = {
+            "algorithm": _ALGORITHM_LABELS.get(algorithm, algorithm),
+            "decoding": decoding,
+        }
+        for model in models:
+            model_prefix = _MODEL_COLUMN_PREFIXES[model]
+            model_observations = observations[
+                (observations["algorithm"] == algorithm)
+                & (observations["decoding_condition"] == decoding)
+                & (observations["model"] == model)
+            ]
+            row[f"{model_prefix}_runs"] = int(model_observations["run_key"].nunique())
+            model_budget = budget_rows[
+                (budget_rows["algorithm"] == algorithm)
+                & (budget_rows["decoding_condition"] == decoding)
+                & (budget_rows["model"] == model)
+            ]
+            row[f"{model_prefix}_condition_metrics"] = int(
+                len(model_budget[model_budget["profile"] == profiles[0].name])
+            )
+            for profile in ordered_profiles:
+                profile_budget = model_budget[model_budget["profile"] == profile.name]
+                profile_prefix = _profile_column_prefix(profile)
+                condition_count = int(len(profile_budget))
+                needs_more = int(profile_budget["needs_more_runs"].sum())
+                row[f"{model_prefix}_{profile_prefix}_needing_more"] = needs_more
+                row[f"{model_prefix}_{profile_prefix}_share"] = (
+                    needs_more / condition_count if condition_count else 0.0
+                )
+                row[f"{model_prefix}_{profile_prefix}_max_required_runs"] = (
+                    int(profile_budget["required_total_runs"].max())
+                    if condition_count
+                    else 0
+                )
+        rows.append(row)
+    return pd.DataFrame.from_records(rows)
+
+
+def _compact_sort_key(values: pd.Series) -> pd.Series:
+    if values.name == "algorithm":
+        return values.map(lambda value: _ALGORITHM_ORDER.get(str(value), 999))
+    if values.name == "decoding_condition":
+        return values.map(lambda value: _DECODING_ORDER.get(str(value), 999))
+    return values
+
+
+def _profile_column_prefix(profile: ReplicationBudgetProfile) -> str:
+    return f"ci{int(round(profile.confidence_level * 100))}"

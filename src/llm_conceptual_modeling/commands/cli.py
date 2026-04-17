@@ -140,6 +140,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     replication_budget_sufficiency_parser.add_argument("--results-root", required=True)
     replication_budget_sufficiency_parser.add_argument("--output", required=True)
+    replication_budget_sufficiency_parser.add_argument("--compact-output")
     replication_budget_sufficiency_parser.add_argument("--model", action="append")
     replication_budget_sufficiency_parser.add_argument(
         "--expected-replications",
