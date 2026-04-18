@@ -1,0 +1,16 @@
+graph_sources:
+  babs_johnson:
+    display_name: Babs Johnson
+    categories_path: open_weight_map_extension/babs_johnson_categories.csv
+    edges_path: open_weight_map_extension/babs_johnson_edges.csv
+    cluster_labels: ["1", "2", "3"]
+  clarice_starling:
+    display_name: Clarice Starling
+    categories_path: open_weight_map_extension/clarice_starling_categories.csv
+    edges_path: open_weight_map_extension/clarice_starling_edges.csv
+    cluster_labels: ["1", "2", "3"]
+  philip_marlowe:
+    display_name: Philip Marlowe
+    categories_path: open_weight_map_extension/philip_marlowe_categories.csv
+    edges_path: open_weight_map_extension/philip_marlowe_edges.csv
+    cluster_labels: ["1", "2", "3"]

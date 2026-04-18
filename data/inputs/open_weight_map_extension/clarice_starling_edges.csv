@@ -1,0 +1,64 @@
+Victimization of children,ACEs,1
+ACEs,(Unhealthy) coping strategies,1
+ACEs,Suicide attempt,1
+ACEs,Mental illness,1
+ACEs,Suicide ideation,1
+ACEs,Physiological response,1
+ACEs,Trauma history,1
+ACEs,Criminal justice involvement,1
+ACEs,Chronic illnesses,1
+Individual-level traits,Victimization of children,1
+Population-level inequities,Victimization of children,1
+Population-level inequities,Household dysfunction,1
+Delinquency,Individual-level traits,1
+Impulsivity,Individual-level traits,1
+Risk-taking behavior,Individual-level traits,1
+Mental illness,Individual-level traits,1
+Mental illness,Substance use,1
+Depression,Mental illness,1
+Anxiety,Mental illness,1
+Unhealthy behaviors,Individual-level traits,1
+Negative mentoring,Unhealthy behaviors,1
+Forms of discrimination,ACEs,1
+Exposure to violence,ACEs,1
+Gender-based violence,Exposure to violence,1
+Neighborhood violence,Exposure to violence,1
+Household dysfunction,ACEs,1
+Substance use of parents,Household dysfunction,1
+Substance use of parents,Stigma on mental health,1
+Substance use of parents,Caregivers' needs are unmet,1
+Mental illness of parents,Household dysfunction,1
+Mental illness of parents,Stigma on mental health,1
+Mental illness of parents,Caregivers' needs are unmet,1
+Single family parenting,Household dysfunction,1
+Incarceration,Single family parenting,1
+Divorce,Single family parenting,1
+Policy of mass incarceration,Incarceration,1
+African-American,Incarceration,1
+Poverty,Population-level inequities,1
+Concentration of disadvantage in a certain geographical area or target population,Population-level inequities,1
+Differential access to support services to be healthy,Population-level inequities,1
+Inequity in access to education,Population-level inequities,1
+Inequity in access to opportunities,Population-level inequities,1
+Structural policies that prevent a focus on mental health,Stigma on mental health,1
+Feeling about mental health,Stigma on mental health,1
+Caregivers' needs are unmet,Household dysfunction,1
+Problematic parental practices,Household dysfunction,1
+Corporal punishment of children,Problematic parental practices,1
+Resiliency,ACEs,-1
+Healthy mentoring,ACEs,-1
+(Unhealthy) coping strategies,Self-harm,1
+(Unhealthy) coping strategies,Substance use,1
+Suicide ideation,Substance use,1
+Substance use,Mental illness,1
+Substance use,Ability to protect self,-1
+Substance use,Buying drugs in places with exposure to violence,1
+Substance use,Financial well-being,-1
+Substance use,Struggles in relationships,1
+Substance use,Opioids,1
+Trauma history,Future perpretration of violence,1
+Ability to protect self,ACEs,-1
+Buying drugs in places with exposure to violence,Exposure to violence,1
+Struggles in relationships,Substance use,1
+Struggles in relationships,Mental illness,1
+Rural,Opioids,1

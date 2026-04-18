@@ -10,5 +10,7 @@ runs/
 paper/
 AGENTS.md
 data/analysis_artifacts/
-data/inputs/
+data/inputs/*
+!data/inputs/open_weight_map_extension/
+!data/inputs/open_weight_map_extension/**
 data/analysis_artifacts/

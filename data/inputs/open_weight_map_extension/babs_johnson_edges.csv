@@ -1,0 +1,113 @@
+Poverty,ACEs,1
+Poverty,Traumatic experience of the ACE,1
+ACEs,Cumulative trauma,1
+Racism and forms of systemic oppression,ACEs,1
+Racism and forms of systemic oppression,Societal risk factors,1
+Racism and forms of systemic oppression,Under-resourced communities,1
+Racism and forms of systemic oppression,Brain development problems,1
+Racism and forms of systemic oppression,Parental incarceration,1
+Parental risk factors,ACEs,1
+Parental risk factors,Parental stress,1
+Witnessing community violence,Exposure to violence,1
+Exposure to violence,ACEs,1
+Peer victimization,ACEs,1
+Single or unemployed parent,Parental risk factors,1
+Stresses in the current household living situation,Parental risk factors,1
+Household income,Income/person supported in the household,1
+Household income,Protective factors,1
+Income/person supported in the household,Parental risk factors,-1
+Number of children in home,Income/person supported in the household,-1
+Housing or economy instability/insecurity,Parental risk factors,1
+Societal risk factors,ACEs,1
+Societal risk factors,Parental stress,1
+Sexism,Societal risk factors,1
+Income inequality,Societal risk factors,1
+Parents' ACEs as children,Parental risk factors,1
+Parents' ACEs as children,Epi-genetic & behavioral modeling effects on parents,1
+Under-resourced communities,Societal risk factors,1
+Family resource centers and community services,Societal risk factors,-1
+Parental stress,Parental perpetration of ACE,1
+Epi-genetic effects on parents,Positive parenting practices,-1
+Positive parenting practices,Parental perpetration of ACE,-1
+Positive parenting practices,Protective factors,1
+Parental perpetration of ACE,ACEs,1
+Epi-genetic & behavioral modeling effects on parents,Parental perpetration of ACE,1
+Economic support for families,Protective factors,1
+Protective factors,ACEs,-1
+Parental paid leave,Economic support for families,1
+Parental paid leave,Parental stress,-1
+Availability of childcare,Economic support for families,1
+"Affordable housing, childcare, and education",Economic support for families,1
+Income tax credit,Economic support for families,1
+Childcare subsidies,"Affordable housing, childcare, and education",1
+Brain development problems,Mental health problems,1
+Mental health problems,Treatment of mental health issues,1
+Mental health problems,Substance use,1
+Mental health problems,Suicide ideation,1
+Child risk factors,ACEs,1
+Disabilities,Child risk factors,1
+Physical disability,Disabilities,1
+Mental disability,Disabilities,1
+Parents having attempted suicide,Parental risk factors,1
+Parents having suicide risks,Parental risk factors,1
+Parental mental health issues,Undiagnosed parental mental health issue,1
+Undiagnosed parental mental health issue,Untreated parental mental health issue,1
+Untreated parental mental health issue,Treatment of parental mental health issue,1
+Untreated parental mental health issue,Parental risk factors,1
+Treatment of parental mental health issue,Parental risk factors,-1
+Treatment of parental mental health issue,Hope of a positive outcome,1
+Parental substance use,Parental risk factors,1
+Treatment of mental health issues,Child risk factors,-1
+Treatment of mental health issues,Hope of a positive outcome,1
+Access to mental health care,Treatment of mental health issues,1
+Access to mental health care,Treatment of parental mental health issue,1
+Health insurance,Access to mental health care,-1
+Stigma of mental health treatment,Access to mental health care,-1
+Help-seeking behaviors,Access to mental health care,1
+Living in a home with intimate partner violence,Exposure to violence,1
+Parental incarceration,Separation from parents,1
+Separation from parents,ACEs,1
+Death of parents,Separation from parents,1
+Child welfare intervention,Separation from parents,1
+Child welfare intervention,Hope of a positive outcome,-1
+Parental warmth,Protective factors,1
+"Safe, stable, nurturing environments and relationships",Protective factors,1
+Supportive adults outside the home,Protective factors,1
+Supportive adults outside the home,Traumatic experience of the ACE,-1
+Social support for parents,Protective factors,1
+Two parents household,Protective factors,1
+Healthy coping strategies for parents,Protective factors,1
+Healthy coping strategies,Protective factors,1
+Societal empathy and compassion for others,Protective factors,1
+Societal empathy and compassion for others,Racism and forms of systemic oppression,-1
+Traumatic experience of the ACE,Cumulative trauma,1
+Cumulative trauma,Healthy coping strategies,-1
+Cumulative trauma,Engaging in externalizing behaviors,1
+Cumulative trauma,Mental health problems,1
+Cumulative trauma,Over-reactive and hyper-sensitive to feedback,1
+Cumulative trauma,Suicide ideation,1
+Severity,Traumatic experience of the ACE,1
+Chronicity,Traumatic experience of the ACE,1
+Age of onset,Traumatic experience of the ACE,1
+Frequency,Traumatic experience of the ACE,1
+Physical traces of the ACE,Traumatic experience of the ACE,1
+Hospitalization needed for the ACE,Traumatic experience of the ACE,1
+Shaming ACE,Traumatic experience of the ACE,1
+Fearful of telling about the ACE,Traumatic experience of the ACE,1
+Others knew and didn't intervene,Traumatic experience of the ACE,1
+Engaging in externalizing behaviors,Getting labeled at school,1
+Getting labeled at school,Engaging in externalizing behaviors,1
+Over-reactive and hyper-sensitive to feedback,Disruptive behaviors,1
+Disruptive behaviors,Engaging in conflicts,1
+Engaging in conflicts,Harsh discipline,1
+Harsh discipline,ACEs,1
+Substance use,Suicide ideation,1
+Co-morbidities,Suicide ideation,1
+Knowing where and how to get help,Help-seeking behaviors,1
+Hope of a positive outcome,Traumatic experience of the ACE,-1
+Stigma of asking for help,Help-seeking behaviors,-1
+Advantaged group,Hope of a positive outcome,1
+Knowing a peer who got help,Hope of a positive outcome,1
+Time necessary to go to facility,Access to mental health care,-1
+Childcare at the facility,Access to mental health care,1
+Eating at the facility,Access to mental health care,1

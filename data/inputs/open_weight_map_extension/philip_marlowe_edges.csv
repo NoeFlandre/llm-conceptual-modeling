@@ -1,0 +1,38 @@
+Spirituality,Suicide ideation,-1
+Spirituality,Suicide attempt,-1
+Suicide ideation,Suicide planning,1
+Suicide ideation,Suicide attempt,1
+Suicide attempt,Previous (history of) suicide attempt,1
+Nonviolent problem solving and conflict resolution skills,Suicide ideation,-1
+Connectedness,Suicide ideation,-1
+Connectedness,Suicide planning,-1
+Connectedness,Suicide attempt,-1
+Connectedness,Access to immediate effective clinical care,1
+Connectedness,Ability to safe life by treatment,1
+Perceived burdensomness,Suicide ideation,1
+Previous (history of) suicide attempt,Suicide ideation,1
+Family history of suicide,Suicide ideation,1
+Feelings of hopelessness,Suicide ideation,1
+History of mental disorders (particularly clinical depression),Suicide ideation,1
+History of mental disorders (particularly clinical depression),Substance (incl. alcohol) abuse,1
+Substance (incl. alcohol) abuse,Suicide ideation,1
+Substance (incl. alcohol) abuse,Suicide attempt,1
+Losses,Suicide ideation,1
+Isolation,Suicide ideation,1
+Isolation,Ability to safe life by treatment,-1
+Bullying,Suicide ideation,1
+History of child maltreatment,Suicide ideation,1
+Barriers to accessing mental health treatment for the individual,Suicide ideation,1
+Barriers to accessing mental health treatment for parents,Suicide ideation,1
+Suicide planning,Suicide attempt,1
+Impulsive/aggressive tendencies,Suicide attempt,1
+Ability to safe life by treatment,Death,-1
+Attempt,Death,1
+Attempt,Requires medical intervention,1
+Access to immediate effective clinical care,Ability to safe life by treatment,1
+Requires medical intervention,Access to lethal means,-1
+Lethality of the method,Ability to safe life by treatment,-1
+Access to lethal means,Lethality of the method,1
+Legislation on firearms,Access to firearms,-1
+Access to firearms,Access to lethal means,1
+Intention to have someone intervene,Lethality of the method,-1
