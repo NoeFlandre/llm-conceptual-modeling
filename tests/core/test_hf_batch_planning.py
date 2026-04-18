@@ -156,6 +156,35 @@ algorithms:
     assert any(spec.decoding.algorithm == "contrastive" for spec in specs)
 
 
+def test_manifest_for_spec_includes_graph_source() -> None:
+    from llm_conceptual_modeling.hf_batch.types import HFRunSpec
+    from llm_conceptual_modeling.hf_batch.utils import manifest_for_spec
+
+    spec = HFRunSpec(
+        algorithm="algo3",
+        model="Qwen/Qwen3.5-9B",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="beam", num_beams=6),
+        replication=0,
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="000",
+        condition_label="beam_num_beams_6",
+        prompt_factors={},
+        raw_context={"pair_name": "subgraph_1_to_subgraph_3", "Repetition": 0},
+        input_payload={"source_graph": [], "target_graph": [], "mother_graph": []},
+        runtime_profile=RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=True,
+            context_limit=None,
+        ),
+        graph_source="clarice_starling",
+    )
+
+    assert manifest_for_spec(spec)["graph_source"] == "clarice_starling"
+
+
 def test_qwen_contrastive_chat_client_is_constructible() -> None:
     from llm_conceptual_modeling.common.hf_transformers import HFTransformersChatClient
 

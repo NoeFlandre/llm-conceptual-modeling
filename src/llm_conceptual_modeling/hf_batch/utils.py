@@ -25,6 +25,7 @@ def manifest_for_spec(spec: HFRunSpec) -> dict[str, object]:
         "algorithm": spec.algorithm,
         "model": spec.model,
         "embedding_model": spec.embedding_model,
+        "graph_source": spec.graph_source,
         "temperature": spec.decoding.temperature,
         "base_seed": spec.base_seed,
         "seed": spec.seed,

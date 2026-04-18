@@ -4,8 +4,9 @@ from dataclasses import dataclass
 from typing import Any, Callable
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
+from llm_conceptual_modeling.common.types import Edge as _Edge
 
-Edge = tuple[str, str]
+Edge = _Edge
 RuntimeResult = dict[str, Any]
 
 
@@ -32,6 +33,7 @@ class HFRunSpec:
     context_policy: dict[str, object] | None = None
     base_seed: int = 0
     seed: int = 0
+    graph_source: str = "default"
 
     @property
     def run_name(self) -> str:

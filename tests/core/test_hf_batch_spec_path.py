@@ -1,6 +1,7 @@
 """Tests for hf_batch.spec_path: pure spec-identity and path-resolution helpers."""
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
@@ -98,6 +99,14 @@ def test_smoke_spec_identity_returns_dict_with_expected_keys() -> None:
     assert identity["pair_name"] == "sg1_sg2"
     assert identity["condition_bits"] == "00000"
     assert identity["replication"] == 0
+
+
+def test_smoke_spec_identity_includes_graph_source() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import smoke_spec_identity
+
+    spec = replace(_greedy_spec(), graph_source="babs_johnson")
+
+    assert smoke_spec_identity(spec)["graph_source"] == "babs_johnson"
 
 
 # ---------------------------------------------------------------------------

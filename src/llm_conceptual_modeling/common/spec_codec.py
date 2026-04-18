@@ -39,6 +39,7 @@ def deserialize_spec(payload: dict[str, Any]) -> HFRunSpec:
         context_policy=dict(payload["context_policy"]) if payload.get("context_policy") else None,
         base_seed=coerce_int(payload.get("base_seed", 0)),
         seed=coerce_int(payload.get("seed", 0)),
+        graph_source=str(payload.get("graph_source", "default")),
     )
 
 

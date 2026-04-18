@@ -514,6 +514,36 @@ def test_deserialize_spec_ignores_malformed_seed_values() -> None:
     assert decoded.seed == 0
 
 
+def test_spec_codec_roundtrips_graph_source() -> None:
+    spec = HFRunSpec(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        embedding_model="Qwen/Qwen3-Embedding-0.6B",
+        decoding=DecodingConfig(algorithm="greedy"),
+        replication=0,
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        condition_label="greedy",
+        prompt_factors={},
+        raw_context={"pair_name": "sg1_sg2", "Repetition": 0},
+        input_payload={"subgraph1": [], "subgraph2": [], "graph": []},
+        runtime_profile=RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=False,
+            context_limit=4096,
+        ),
+        graph_source="babs_johnson",
+    )
+
+    payload = serialize_spec(spec)
+    decoded = deserialize_spec(payload)
+
+    assert payload["graph_source"] == "babs_johnson"
+    assert decoded.graph_source == "babs_johnson"
+
+
 def test_deserialize_spec_rejects_boolean_replication_value() -> None:
     spec = HFRunSpec(
         algorithm="algo1",

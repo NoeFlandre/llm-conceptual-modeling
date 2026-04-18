@@ -198,6 +198,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_config/run_config.py
 
 ### Story 2.3: Add graph source to `HFRunSpec`
 
+**Status:** Complete in micro-step 5. `HFRunSpec` now carries a defaulted `graph_source`, manifests and smoke identities include it, and worker spec serialization/deserialization round-trips it while preserving legacy payloads through a `default` fallback.
+
 **Requirement:** each planned run must carry its causal map identity.
 
 **Red test:**

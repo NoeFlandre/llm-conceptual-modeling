@@ -32,6 +32,7 @@ def smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
         "algorithm": spec.algorithm,
         "model": spec.model,
         "embedding_model": spec.embedding_model,
+        "graph_source": spec.graph_source,
         "decoding_algorithm": spec.decoding.algorithm,
         "pair_name": spec.pair_name,
         "condition_bits": spec.condition_bits,
