@@ -169,6 +169,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_config/run_config.py tests/core
 
 ### Story 2.2: Add fixed runtime fields and fixed design columns
 
+**Status:** Complete in micro-step 4 for config parsing and prompt-preview runtime resolution. `AlgorithmPromptConfig` now supports `fixed_runtime_fields` and `fixed_columns`; runtime resolution starts from fixed fields before applying varied factors. Raw-context emission is deferred to the planning story because that is where run contexts are assembled.
+
 **Requirement:** allow a config to vary only `example`, `number_of_words`, and `depth` while fixing `include_counterexample=false` and `Counter-Example=-1`.
 
 **Red test:**

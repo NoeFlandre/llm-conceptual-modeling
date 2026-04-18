@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Mapping
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from itertools import product
 from pathlib import Path
 from typing import cast
@@ -60,6 +60,8 @@ class AlgorithmPromptConfig:
     factors: dict[str, FactorConfig]
     fragment_definitions: dict[str, str]
     prompt_templates: dict[str, str]
+    fixed_runtime_fields: dict[str, bool | int] = field(default_factory=dict)
+    fixed_columns: dict[str, bool | int | str] = field(default_factory=dict)
     pair_names: list[str] | None = None
 
     def assemble_prompt(
@@ -93,7 +95,7 @@ class AlgorithmPromptConfig:
         self,
         active_high_factors: list[str],
     ) -> dict[str, bool | int]:
-        resolved: dict[str, bool | int] = {}
+        resolved = dict(self.fixed_runtime_fields)
         for factor_name, factor in self.factors.items():
             if factor.runtime_field is None:
                 continue
@@ -151,6 +153,8 @@ class HFRunConfig:
                     },
                     "fragment_definitions": value.fragment_definitions,
                     "prompt_templates": value.prompt_templates,
+                    "fixed_runtime_fields": value.fixed_runtime_fields,
+                    "fixed_columns": value.fixed_columns,
                     "pair_names": value.pair_names,
                 }
                 for name, value in self.algorithms.items()
@@ -417,8 +421,30 @@ def _coerce_runtime_value(value: object) -> bool | int | None:
     return _coerce_int(value, label="Runtime value")
 
 
+def _coerce_fixed_column_value(value: object) -> bool | int | str:
+    if isinstance(value, bool | str):
+        return value
+    return _coerce_int(value, label="Fixed column value")
+
+
 def _load_string_map(raw: object, *, label: str) -> dict[str, str]:
     return {str(name): str(text) for name, text in _expect_mapping(raw, label=label).items()}
+
+
+def _load_runtime_value_map(raw: object, *, label: str) -> dict[str, bool | int]:
+    values: dict[str, bool | int] = {}
+    for name, value in _expect_mapping(raw, label=label).items():
+        coerced = _coerce_runtime_value(value)
+        if coerced is not None:
+            values[str(name)] = coerced
+    return values
+
+
+def _load_fixed_column_map(raw: object, *, label: str) -> dict[str, bool | int | str]:
+    return {
+        str(name): _coerce_fixed_column_value(value)
+        for name, value in _expect_mapping(raw, label=label).items()
+    }
 
 
 def _load_algorithm_configs(
@@ -473,6 +499,14 @@ def _load_algorithm_config(
         prompt_templates=_load_string_map(
             payload.get("prompt_templates", {}),
             label=f"prompt_templates for {algorithm_name}",
+        ),
+        fixed_runtime_fields=_load_runtime_value_map(
+            payload.get("fixed_runtime_fields", {}),
+            label=f"fixed_runtime_fields for {algorithm_name}",
+        ),
+        fixed_columns=_load_fixed_column_map(
+            payload.get("fixed_columns", {}),
+            label=f"fixed_columns for {algorithm_name}",
         ),
         pair_names=_load_optional_string_list(payload.get("pair_names")),
     )
@@ -594,7 +628,7 @@ def _build_preview_bundle(
     algorithm_name: str,
     algorithm_config: AlgorithmPromptConfig,
 ) -> dict[str, str]:
-    prompt_factors: dict[str, bool | int] = {}
+    prompt_factors = dict(algorithm_config.fixed_runtime_fields)
     active_high_factors: list[str] = []
     for factor_name, factor in algorithm_config.factors.items():
         if factor.runtime_field is None or factor.low_runtime_value is None:

@@ -180,6 +180,89 @@ def test_load_hf_run_config_rejects_unknown_graph_source(tmp_path: Path) -> None
         load_hf_run_config(config_path)
 
 
+def test_algorithm_config_supports_fixed_runtime_fields_and_columns(tmp_path: Path) -> None:
+    config_path = tmp_path / "run.yaml"
+    _write_config(
+        config_path,
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 1
+runtime:
+  seed: 7
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    children_by_label: 256
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  greedy:
+    enabled: true
+inputs:
+  graph_source: default
+shared_fragments: {}
+algorithms:
+  algo3:
+    base_fragments: []
+    fixed_runtime_fields:
+      include_counterexample: false
+    fixed_columns:
+      Counter-Example: -1
+    factors:
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      number_of_words:
+        column: Number of Words
+        levels: [3, 5]
+        runtime_field: child_count
+        low_runtime_value: 3
+        high_runtime_value: 5
+        low_fragments: []
+        high_fragments: []
+      depth:
+        column: Depth
+        levels: [1, 2]
+        runtime_field: max_depth
+        low_runtime_value: 1
+        high_runtime_value: 2
+        low_fragments: []
+        high_fragments: []
+    fragment_definitions: {}
+    prompt_templates:
+      label_expansion: "Expand labels."
+      child_generation: "Generate children."
+      parent_selection: "Select parents."
+""",
+    )
+
+    config = load_hf_run_config(config_path)
+    algorithm_config = config.algorithms["algo3"]
+
+    assert algorithm_config.factor_condition_count() == 8
+    assert algorithm_config.fixed_columns == {"Counter-Example": -1}
+    assert algorithm_config.resolve_runtime_fields([]) == {
+        "include_counterexample": False,
+        "include_example": False,
+        "child_count": 3,
+        "max_depth": 1,
+    }
+
+
 def test_load_hf_run_config_rejects_unknown_fragment_reference(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     _write_config(
