@@ -185,6 +185,39 @@ def test_manifest_for_spec_includes_graph_source() -> None:
     assert manifest_for_spec(spec)["graph_source"] == "clarice_starling"
 
 
+def test_derive_run_seed_preserves_default_seed_material() -> None:
+    from llm_conceptual_modeling.hf_batch.utils import derive_run_seed
+
+    assert derive_run_seed(
+        base_seed=7,
+        algorithm="algo3",
+        model="Qwen/Qwen3.5-9B",
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="000",
+        decoding=DecodingConfig(algorithm="beam", num_beams=6),
+        replication=0,
+    ) == 403453940
+
+
+def test_derive_run_seed_distinguishes_non_default_graph_sources() -> None:
+    from llm_conceptual_modeling.hf_batch.utils import derive_run_seed
+
+    base_kwargs = {
+        "base_seed": 7,
+        "algorithm": "algo3",
+        "model": "Qwen/Qwen3.5-9B",
+        "pair_name": "subgraph_1_to_subgraph_3",
+        "condition_bits": "000",
+        "decoding": DecodingConfig(algorithm="beam", num_beams=6),
+        "replication": 0,
+    }
+
+    babs_seed = derive_run_seed(**base_kwargs, graph_source="babs_johnson")
+    clarice_seed = derive_run_seed(**base_kwargs, graph_source="clarice_starling")
+
+    assert babs_seed != clarice_seed
+
+
 def test_qwen_contrastive_chat_client_is_constructible() -> None:
     from llm_conceptual_modeling.common.hf_transformers import HFTransformersChatClient
 

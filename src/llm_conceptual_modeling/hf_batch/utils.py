@@ -73,11 +73,13 @@ def derive_run_seed(
     condition_bits: str,
     decoding: DecodingConfig,
     replication: int,
+    graph_source: str = "default",
 ) -> int:
+    graph_seed_part = "" if graph_source == "default" else f"|{graph_source}"
     digest = sha256(
         (
             f"{base_seed}|{algorithm}|{model}|{pair_name}|{condition_bits}|"
-            f"{condition_label(decoding)}|{replication}"
+            f"{condition_label(decoding)}|{replication}{graph_seed_part}"
         ).encode("utf-8")
     ).hexdigest()
     return int(digest[:8], 16)

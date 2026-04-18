@@ -257,6 +257,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_batch tests/core/test_hf_batch_
 
 ### Story 2.5: Include graph source in deterministic seeds for non-default graphs
 
+**Status:** Complete in micro-step 7 for seed derivation. `derive_run_seed()` accepts an optional graph source, preserves the exact legacy default seed, and differentiates non-default map sources. Planner wiring is deferred to Epic 3, where graph-source iteration is introduced.
+
 **Requirement:** the same model/condition/replication on different maps should not reuse the same seed.
 
 **Red test:**
