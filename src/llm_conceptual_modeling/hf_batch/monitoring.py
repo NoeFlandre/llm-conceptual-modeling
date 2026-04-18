@@ -9,7 +9,7 @@ from typing import Any
 
 from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
-from llm_conceptual_modeling.hf_batch.spec_path import run_dir_identity
+from llm_conceptual_modeling.hf_batch.spec_path import SpecIdentity, run_dir_identity
 from llm_conceptual_modeling.hf_state.active_models import resolve_active_chat_model_slugs
 from llm_conceptual_modeling.hf_state.shard_manifest import manifest_identity_keys
 
@@ -127,7 +127,7 @@ def _iter_run_directories(
     runs_root: Path,
     *,
     active_model_slugs: set[str],
-    manifest_identities: set[tuple[str, str, str, str, str, int]],
+    manifest_identities: set[SpecIdentity],
 ) -> list[Path]:
     if not runs_root.exists():
         return []
@@ -153,7 +153,7 @@ def _run_dir_matches_filters(
     run_dir: Path,
     active_model_slugs: set[str],
     *,
-    manifest_identities: set[tuple[str, str, str, str, str, int]],
+    manifest_identities: set[SpecIdentity],
 ) -> bool:
     parsed_identity = run_dir_identity(runs_root=runs_root, run_dir=run_dir)
     if parsed_identity is None:
@@ -166,7 +166,7 @@ def _run_dir_matches_filters(
     return identity in manifest_identities
 
 
-def _load_manifest_identity_keys(manifest_path: Path) -> set[tuple[str, str, str, str, str, int]]:
+def _load_manifest_identity_keys(manifest_path: Path) -> set[SpecIdentity]:
     return manifest_identity_keys(read_json_dict(manifest_path))
 
 

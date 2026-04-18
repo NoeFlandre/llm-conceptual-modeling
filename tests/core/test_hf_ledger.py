@@ -210,5 +210,58 @@ def test_refresh_ledger_rebuilds_counts_from_multiple_roots(tmp_path: Path) -> N
     assert ledger_payload["records"][0]["status"] == "finished"
 
 
+def test_refresh_ledger_distinguishes_graph_sources_in_identity(tmp_path: Path) -> None:
+    results_root = tmp_path / "results"
+    ledger_root = results_root / "hf-paper-batch-canonical"
+    ledger_root.mkdir(parents=True, exist_ok=True)
+
+    identity_babs = {
+        "algorithm": "algo3",
+        "condition_bits": "000",
+        "condition_label": "beam_num_beams_6",
+        "graph_source": "babs_johnson",
+        "model": "Qwen/Qwen3.5-9B",
+        "pair_name": "subgraph_1_to_subgraph_3",
+        "replication": 0,
+    }
+    identity_clarice = {
+        **identity_babs,
+        "graph_source": "clarice_starling",
+    }
+
+    _write_json(
+        ledger_root / "ledger.json",
+        {
+            "records": [
+                {"identity": identity_babs, "status": "pending"},
+                {"identity": identity_clarice, "status": "pending"},
+            ]
+        },
+    )
+
+    batch_root = results_root / "hf-paper-batch-canonical-current"
+    _write_finished_run(
+        batch_root
+        / "runs"
+        / "algo3"
+        / "Qwen__Qwen3.5-9B"
+        / "beam_num_beams_6"
+        / "babs_johnson"
+        / "subgraph_1_to_subgraph_3"
+        / "000"
+        / "rep_00"
+    )
+
+    refreshed = refresh_ledger(results_root=results_root, ledger_root=ledger_root)
+
+    assert refreshed["finished_count"] == 1
+    assert refreshed["pending_count"] == 1
+    assert [record["identity"]["graph_source"] for record in refreshed["records"]] == [
+        "babs_johnson",
+        "clarice_starling",
+    ]
+    assert [record["status"] for record in refreshed["records"]] == ["finished", "pending"]
+
+
 def test_hf_ledger_public_api_lives_in_state_module() -> None:
     assert refresh_ledger.__module__ == "llm_conceptual_modeling.hf_state.ledger"

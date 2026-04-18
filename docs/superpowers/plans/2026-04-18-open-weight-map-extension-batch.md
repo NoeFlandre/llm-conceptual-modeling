@@ -359,6 +359,8 @@ uv run ruff check configs/hf_transformers_open_weight_map_extension.yaml src/llm
 
 ### Story 4.1: Update resume and ledger code paths for graph identity
 
+**Status:** Complete in micro-step 10. Ledger identity normalization, candidate run-directory reconstruction, shard-manifest identity emission, and manifest identity key matching now preserve non-default `graph_source` values. Regression tests prove that two runs differing only by map stay distinct, and finishing one map no longer marks the sibling map run as finished.
+
 **Requirement:** completed/pending/failed accounting must distinguish maps.
 
 **Red test:**

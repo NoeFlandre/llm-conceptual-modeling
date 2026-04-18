@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
+from llm_conceptual_modeling.hf_batch.spec_path import SpecIdentity
 from llm_conceptual_modeling.hf_state.active_models import resolve_active_chat_models
 
 
@@ -51,7 +52,7 @@ def _unfinished_active_identities(
     if not isinstance(records, list):
         return []
     identities: list[dict[str, object]] = []
-    seen: set[tuple[str, str, str, str, str, int]] = set()
+    seen: set[SpecIdentity] = set()
     for record in records:
         if not isinstance(record, dict):
             continue
@@ -72,14 +73,27 @@ def _unfinished_active_identities(
             "pair_name": str(identity["pair_name"]),
             "replication": int(identity["replication"]),
         }
-        key = (
-            str(normalized["algorithm"]),
-            str(normalized["model"]),
-            str(normalized["condition_label"]),
-            str(normalized["pair_name"]),
-            str(normalized["condition_bits"]),
-            int(normalized["replication"]),
-        )
+        graph_source = str(identity.get("graph_source", "default"))
+        if graph_source != "default":
+            normalized["graph_source"] = graph_source
+            key = (
+                str(normalized["algorithm"]),
+                str(normalized["model"]),
+                str(normalized["condition_label"]),
+                graph_source,
+                str(normalized["pair_name"]),
+                str(normalized["condition_bits"]),
+                int(normalized["replication"]),
+            )
+        else:
+            key = (
+                str(normalized["algorithm"]),
+                str(normalized["model"]),
+                str(normalized["condition_label"]),
+                str(normalized["pair_name"]),
+                str(normalized["condition_bits"]),
+                int(normalized["replication"]),
+            )
         if key in seen:
             continue
         seen.add(key)
@@ -87,13 +101,27 @@ def _unfinished_active_identities(
     return identities
 
 
-def manifest_identity_keys(manifest: dict[str, Any]) -> set[tuple[str, str, str, str, str, int]]:
+def manifest_identity_keys(manifest: dict[str, Any]) -> set[SpecIdentity]:
     identities = manifest.get("identities", [])
     if not isinstance(identities, list):
         return set()
-    keys: set[tuple[str, str, str, str, str, int]] = set()
+    keys: set[SpecIdentity] = set()
     for identity in identities:
         if not isinstance(identity, dict):
+            continue
+        graph_source = str(identity.get("graph_source", "default"))
+        if graph_source != "default":
+            keys.add(
+                (
+                    str(identity["algorithm"]),
+                    str(identity["model"]),
+                    str(identity["condition_label"]),
+                    graph_source,
+                    str(identity["pair_name"]),
+                    str(identity["condition_bits"]),
+                    int(identity["replication"]),
+                )
+            )
             continue
         keys.add(
             (

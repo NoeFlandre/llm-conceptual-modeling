@@ -6,6 +6,7 @@ from typing import Any, cast
 
 from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
+from llm_conceptual_modeling.hf_batch.spec_path import SpecIdentity
 from llm_conceptual_modeling.hf_batch.utils import slugify_model
 
 RETRYABLE_FAILURE_KINDS = {"timeout", "oom", "infrastructure", "structural"}
@@ -49,7 +50,8 @@ def refresh_ledger(
         if status not in counts:
             raise ValueError(f"Unexpected ledger status: {status}")
         counts[status] += 1
-        duplicate_logical_run_count += max(len(cast(list[dict[str, object]], record["candidates"])) - 1, 0)
+        candidate_count = len(cast(list[dict[str, object]], record["candidates"]))
+        duplicate_logical_run_count += max(candidate_count - 1, 0)
 
     duplicate_extra_artifact_count = coerce_int(
         existing_ledger.get("duplicate_extra_artifact_count", 0)
@@ -105,7 +107,7 @@ def _load_reference_records(
 
 
 def _discover_manifest_identities(results_root: Path) -> list[dict[str, object]]:
-    identities: dict[tuple[str, str, str, str, str, int], dict[str, object]] = {}
+    identities: dict[SpecIdentity, dict[str, object]] = {}
     for batch_root in _discover_batch_roots(results_root):
         manifest = read_json_dict(batch_root / "shard_manifest.json")
         manifest_identities = manifest.get("identities", [])
@@ -142,7 +144,9 @@ def _refresh_record(
         for batch_root in batch_roots
         if (candidate := _load_candidate(batch_root, identity)) is not None
     ]
-    finished_candidates = [candidate for candidate in candidates if candidate["status"] == "finished"]
+    finished_candidates = [
+        candidate for candidate in candidates if candidate["status"] == "finished"
+    ]
     if finished_candidates:
         winner = min(
             finished_candidates,
@@ -254,12 +258,16 @@ def _load_candidate(batch_root: Path, identity: dict[str, object]) -> dict[str, 
 
 
 def _candidate_run_dir(batch_root: Path, identity: dict[str, object]) -> Path:
+    graph_parts = []
+    if str(identity.get("graph_source", "default")) != "default":
+        graph_parts.append(str(identity["graph_source"]))
     return (
         batch_root
         / "runs"
         / str(identity["algorithm"])
         / slugify_model(str(identity["model"]))
         / str(identity["condition_label"])
+        / Path(*graph_parts)
         / str(identity["pair_name"])
         / str(identity["condition_bits"])
         / f"rep_{int(identity['replication']):02d}"
@@ -293,19 +301,30 @@ def _classify_failure_payload(error: dict[str, object]) -> str:
     )
 
 
-def _identity_key(identity: dict[str, object]) -> tuple[str, str, str, str, str, int]:
+def _identity_key(identity: dict[str, object]) -> SpecIdentity:
+    graph_source = str(identity.get("graph_source", "default"))
+    if graph_source != "default":
+        return (
+            str(identity["algorithm"]),
+            str(identity["model"]),
+            str(identity["condition_label"]),
+            graph_source,
+            str(identity["pair_name"]),
+            str(identity["condition_bits"]),
+            int(identity["replication"]),
+        )
     return (
         str(identity["algorithm"]),
-        str(identity["condition_bits"]),
-        str(identity["condition_label"]),
         str(identity["model"]),
+        str(identity["condition_label"]),
         str(identity["pair_name"]),
+        str(identity["condition_bits"]),
         int(identity["replication"]),
     )
 
 
 def _normalize_identity(identity: dict[str, object]) -> dict[str, object]:
-    return {
+    normalized = {
         "algorithm": str(identity["algorithm"]),
         "condition_bits": str(identity["condition_bits"]),
         "condition_label": str(identity["condition_label"]),
@@ -313,6 +332,10 @@ def _normalize_identity(identity: dict[str, object]) -> dict[str, object]:
         "pair_name": str(identity["pair_name"]),
         "replication": int(identity["replication"]),
     }
+    graph_source = str(identity.get("graph_source", "default"))
+    if graph_source != "default":
+        normalized["graph_source"] = graph_source
+    return normalized
 
 
 def _record_identity(record: dict[str, object]) -> dict[str, object]:
