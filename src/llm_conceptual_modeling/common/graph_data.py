@@ -67,13 +67,13 @@ def load_default_graph() -> tuple[
 
 
 def available_graph_sources() -> tuple[str, ...]:
-    return ("default", *tuple(_load_map_extension_specs().keys()))
+    return ("default", *tuple(_load_map_extension_specs(_inputs_root()).keys()))
 
 
 def load_graph_source(source_id: str) -> tuple[GraphEdges, GraphEdges, GraphEdges, GraphEdges]:
     if source_id == "default":
         return _load_legacy_default_graph()
-    specs = _load_map_extension_specs()
+    specs = _load_map_extension_specs(_inputs_root())
     if source_id not in specs:
         raise ValueError(f"Unknown graph source: {source_id}")
     return _load_clustered_graph(specs[source_id])
@@ -100,8 +100,8 @@ def _load_legacy_default_graph() -> tuple[GraphEdges, GraphEdges, GraphEdges, Gr
 
 
 @lru_cache(maxsize=1)
-def _load_map_extension_specs() -> dict[str, GraphSourceSpec]:
-    manifest_path = open_weight_map_extension_manifest_path()
+def _load_map_extension_specs(inputs_root: Path) -> dict[str, GraphSourceSpec]:
+    manifest_path = inputs_root / "open_weight_map_extension" / "manifest.yaml"
     if not manifest_path.exists():
         return {}
     payload = yaml.safe_load(manifest_path.read_text(encoding="utf-8")) or {}
@@ -114,8 +114,8 @@ def _load_map_extension_specs() -> dict[str, GraphSourceSpec]:
         specs[str(source_id)] = GraphSourceSpec(
             source_id=str(source_id),
             display_name=str(raw_spec["display_name"]),
-            categories_path=_inputs_root() / str(raw_spec["categories_path"]),
-            edges_path=_inputs_root() / str(raw_spec["edges_path"]),
+            categories_path=inputs_root / str(raw_spec["categories_path"]),
+            edges_path=inputs_root / str(raw_spec["edges_path"]),
             cluster_labels=(
                 cluster_labels[0],
                 cluster_labels[1],

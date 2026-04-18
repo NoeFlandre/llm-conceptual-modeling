@@ -103,6 +103,8 @@ uv run ruff check data/inputs/open_weight_map_extension src/llm_conceptual_model
 
 ### Story 1.2: Generalize graph loading without breaking the default graph
 
+**Status:** Complete in micro-step 2. Added default-loader compatibility, unknown-source rejection, and root-sensitive graph-source discovery tests. The manifest cache now keys off `LCM_INPUTS_ROOT` so local overrides cannot reuse stale graph-source metadata.
+
 **Requirement:** support both the legacy default graph and named map-extension graph sources through a single graph-loading API.
 
 **Red test:**

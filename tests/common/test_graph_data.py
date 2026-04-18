@@ -63,6 +63,31 @@ def test_open_weight_map_extension_sources_are_discoverable() -> None:
         assert sg3
 
 
+def test_load_graph_source_default_matches_legacy_loader() -> None:
+    from llm_conceptual_modeling.common.graph_data import load_graph_source
+
+    assert load_graph_source("default") == load_default_graph()
+
+
+def test_available_graph_sources_honors_lcm_inputs_root(monkeypatch, tmp_path) -> None:
+    from llm_conceptual_modeling.common.graph_data import available_graph_sources
+
+    assert "babs_johnson" in available_graph_sources()
+
+    monkeypatch.setenv("LCM_INPUTS_ROOT", str(tmp_path))
+
+    assert available_graph_sources() == ("default",)
+
+
+def test_load_graph_source_rejects_unknown_source() -> None:
+    import pytest
+
+    from llm_conceptual_modeling.common.graph_data import load_graph_source
+
+    with pytest.raises(ValueError, match="missing_map"):
+        load_graph_source("missing_map")
+
+
 def test_generation_manifests_preserve_legacy_condition_counts() -> None:
     assert algo1_manifest(fixture_only=False)["condition_count"] == 32
     assert algo2_manifest(fixture_only=False)["condition_count"] == 64
