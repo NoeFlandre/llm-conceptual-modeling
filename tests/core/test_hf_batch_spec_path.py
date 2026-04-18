@@ -82,6 +82,22 @@ def test_spec_identity_distinguishes_different_specs() -> None:
     assert spec_identity(_greedy_spec()) != spec_identity(_beam_spec())
 
 
+def test_spec_identity_includes_non_default_graph_source() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import spec_identity
+
+    spec = replace(_greedy_spec(), graph_source="babs_johnson")
+
+    assert spec_identity(spec) == (
+        "algo1",
+        "allenai/Olmo-3-7B-Instruct",
+        "greedy",
+        "babs_johnson",
+        "sg1_sg2",
+        "00000",
+        0,
+    )
+
+
 # ---------------------------------------------------------------------------
 # smoke_spec_identity
 # ---------------------------------------------------------------------------
@@ -151,6 +167,25 @@ def test_run_dir_for_spec_handles_higher_replication() -> None:
     )
 
 
+def test_run_dir_for_spec_includes_non_default_graph_source() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import run_dir_for_spec
+
+    output_root = Path("/tmp/test-output")
+    spec = replace(_greedy_spec(), graph_source="babs_johnson")
+
+    assert run_dir_for_spec(output_root=output_root, spec=spec) == (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "babs_johnson"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+
+
 # ---------------------------------------------------------------------------
 # run_dir_identity
 # ---------------------------------------------------------------------------
@@ -178,6 +213,36 @@ def test_run_dir_identity_returns_model_slug_and_manifest_identity() -> None:
             "algo1",
             "allenai/Olmo-3-7B-Instruct",
             "greedy",
+            "sg1_sg2",
+            "00000",
+            0,
+        ),
+    )
+
+
+def test_run_dir_identity_parses_non_default_graph_source_path() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import run_dir_identity
+
+    output_root = Path("/tmp/test-output")
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo1"
+        / "allenai__Olmo-3-7B-Instruct"
+        / "greedy"
+        / "babs_johnson"
+        / "sg1_sg2"
+        / "00000"
+        / "rep_00"
+    )
+
+    assert run_dir_identity(runs_root=output_root / "runs", run_dir=run_dir) == (
+        "allenai__Olmo-3-7B-Instruct",
+        (
+            "algo1",
+            "allenai/Olmo-3-7B-Instruct",
+            "greedy",
+            "babs_johnson",
             "sg1_sg2",
             "00000",
             0,
@@ -237,6 +302,43 @@ def test_filter_planned_specs_filters_by_shard_manifest(tmp_path: Path) -> None:
                         "algorithm": spec_a.algorithm,
                         "model": spec_a.model,
                         "condition_label": spec_a.condition_label,
+                        "pair_name": spec_a.pair_name,
+                        "condition_bits": spec_a.condition_bits,
+                        "replication": spec_a.replication,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = filter_planned_specs_for_output_root(
+        planned_specs=[spec_a, spec_b],
+        output_root=output_root,
+    )
+
+    assert result == [spec_a]
+
+
+def test_filter_planned_specs_filters_by_graph_source_manifest(tmp_path: Path) -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import filter_planned_specs_for_output_root
+
+    spec_a = replace(_greedy_spec(), graph_source="babs_johnson")
+    spec_b = replace(_greedy_spec(), graph_source="clarice_starling")
+
+    output_root = tmp_path / "sharded"
+    output_root.mkdir()
+    (output_root / "shard_manifest.json").write_text(
+        json.dumps(
+            {
+                "shard_count": 2,
+                "shard_index": 0,
+                "identities": [
+                    {
+                        "algorithm": spec_a.algorithm,
+                        "model": spec_a.model,
+                        "condition_label": spec_a.condition_label,
+                        "graph_source": spec_a.graph_source,
                         "pair_name": spec_a.pair_name,
                         "condition_bits": spec_a.condition_bits,
                         "replication": spec_a.replication,

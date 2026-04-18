@@ -13,9 +13,21 @@ from pathlib import Path
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_batch.utils import slugify_model
 
+SpecIdentity = tuple[object, ...]
 
-def spec_identity(spec: HFRunSpec) -> tuple[str, str, str, str, str, int]:
+
+def spec_identity(spec: HFRunSpec) -> SpecIdentity:
     """Return a deterministic tuple key for a run spec."""
+    if spec.graph_source != "default":
+        return (
+            spec.algorithm,
+            spec.model,
+            spec.condition_label,
+            spec.graph_source,
+            spec.pair_name,
+            spec.condition_bits,
+            spec.replication,
+        )
     return (
         spec.algorithm,
         spec.model,
@@ -42,12 +54,14 @@ def smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
 
 def run_dir_for_spec(*, output_root: Path, spec: HFRunSpec) -> Path:
     """Compute the deterministic run directory for a spec."""
+    graph_parts = [] if spec.graph_source == "default" else [spec.graph_source]
     return (
         output_root
         / "runs"
         / spec.algorithm
         / slugify_model(spec.model)
         / spec.condition_label
+        / Path(*graph_parts)
         / spec.pair_name
         / spec.condition_bits
         / f"rep_{spec.replication:02d}"
@@ -58,27 +72,53 @@ def run_dir_identity(
     *,
     runs_root: Path,
     run_dir: Path,
-) -> tuple[str, tuple[str, str, str, str, str, int]] | None:
+) -> tuple[str, SpecIdentity] | None:
     """Return the model slug and manifest identity for a run directory."""
     try:
         relative_parts = run_dir.resolve().relative_to(runs_root.resolve()).parts
     except ValueError:
         return None
-    if len(relative_parts) != 6:
+    if len(relative_parts) not in {6, 7}:
         return None
-    algorithm, model_slug, condition_label, pair_name, condition_bits, replication_part = (
-        relative_parts
-    )
+    if len(relative_parts) == 6:
+        graph_source = "default"
+        algorithm, model_slug, condition_label, pair_name, condition_bits, replication_part = (
+            relative_parts
+        )
+    else:
+        (
+            algorithm,
+            model_slug,
+            condition_label,
+            graph_source,
+            pair_name,
+            condition_bits,
+            replication_part,
+        ) = relative_parts
     if not replication_part.startswith("rep_"):
         return None
     replication_text = replication_part.removeprefix("rep_")
     if not replication_text.isdigit():
         return None
+    model = model_slug.replace("__", "/")
+    if graph_source != "default":
+        return (
+            model_slug,
+            (
+                algorithm,
+                model,
+                condition_label,
+                graph_source,
+                pair_name,
+                condition_bits,
+                int(replication_text),
+            ),
+        )
     return (
         model_slug,
         (
             algorithm,
-            model_slug.replace("__", "/"),
+            model,
             condition_label,
             pair_name,
             condition_bits,
@@ -98,14 +138,29 @@ def filter_planned_specs_for_output_root(
         return planned_specs
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     allowed_identities = {
-        (
+        _identity_from_manifest_item(item)
+        for item in manifest.get("identities", [])
+    }
+    return [spec for spec in planned_specs if spec_identity(spec) in allowed_identities]
+
+
+def _identity_from_manifest_item(item: dict[str, object]) -> SpecIdentity:
+    graph_source = str(item.get("graph_source", "default"))
+    if graph_source != "default":
+        return (
             str(item["algorithm"]),
             str(item["model"]),
             str(item["condition_label"]),
+            graph_source,
             str(item["pair_name"]),
             str(item["condition_bits"]),
             int(item["replication"]),
         )
-        for item in manifest.get("identities", [])
-    }
-    return [spec for spec in planned_specs if spec_identity(spec) in allowed_identities]
+    return (
+        str(item["algorithm"]),
+        str(item["model"]),
+        str(item["condition_label"]),
+        str(item["pair_name"]),
+        str(item["condition_bits"]),
+        int(item["replication"]),
+    )

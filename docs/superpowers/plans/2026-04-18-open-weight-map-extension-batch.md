@@ -224,6 +224,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_batch tests/core/test_hf_batch_
 
 ### Story 2.4: Make graph source part of run directory identity
 
+**Status:** Complete in micro-step 6. Non-default graph sources now appear in spec identity, run-directory paths, run-directory parsing, and shard-manifest filtering. The legacy `default` graph path and six-field identity remain unchanged.
+
 **Requirement:** non-default graph sources must never collide in run directories, resume manifests, or shard manifests.
 
 **Red test:**
