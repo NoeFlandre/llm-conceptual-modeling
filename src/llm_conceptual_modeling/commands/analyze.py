@@ -81,6 +81,7 @@ def handle_analyze(args: Namespace) -> int:
                     output_csv_path=args.compact_output,
                     models=tuple(args.model) if args.model else None,
                     expected_replications=args.expected_replications,
+                    include_graph_source=args.include_graph_source,
                 )
             return 0
         if args.analysis_target == "stability-bundle":

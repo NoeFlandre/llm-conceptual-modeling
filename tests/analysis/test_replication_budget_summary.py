@@ -11,12 +11,14 @@ def _ledger_record(
     condition_label: str,
     metric_values: dict[str, float],
     replication: int,
+    graph_source: str = "default",
 ) -> dict[str, object]:
     return {
         "identity": {
             "algorithm": algorithm,
             "model": model,
             "condition_label": condition_label,
+            "graph_source": graph_source,
             "pair_name": "sg1_sg2",
             "condition_bits": "000000",
             "replication": replication,
@@ -108,6 +110,63 @@ def test_write_replication_budget_sufficiency_summary_groups_underpowered_condit
     assert qwen_accuracy_detail_95["condition_bits"] == "000000"
 
 
+def test_write_replication_budget_sufficiency_summary_groups_by_graph_source(
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.analysis.replication_budget_summary import (
+        write_replication_budget_sufficiency_summary,
+    )
+
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    records = [
+        _ledger_record(
+            algorithm="algo3",
+            model="Qwen/Qwen3.5-9B",
+            condition_label="beam_num_beams_6",
+            metric_values={"recall": recall},
+            replication=replication,
+            graph_source="babs_johnson",
+        )
+        for replication, recall in enumerate([20.0, 20.0, 50.0, 80.0, 80.0])
+    ]
+    records.extend(
+        _ledger_record(
+            algorithm="algo3",
+            model="Qwen/Qwen3.5-9B",
+            condition_label="beam_num_beams_6",
+            metric_values={"recall": 50.0},
+            replication=replication,
+            graph_source="clarice_starling",
+        )
+        for replication in range(5)
+    )
+    (results_root / "ledger.json").write_text(
+        json.dumps({"records": records}),
+        encoding="utf-8",
+    )
+    output_path = tmp_path / "summary.csv"
+
+    write_replication_budget_sufficiency_summary(
+        results_root=results_root,
+        output_csv_path=output_path,
+    )
+
+    summary = pd.read_csv(output_path)
+
+    assert "graph_source" in summary.columns
+    assert {"graph_source", "algorithm_model_graph_source", "algorithm_model_graph_source_decoding",
+        "algorithm_model_graph_source_decoding_metric"} <= set(summary["grouping"])
+    graph_rows = summary[
+        (summary["profile"] == "ci95_rel05") & (summary["grouping"] == "graph_source")
+    ]
+    assert set(graph_rows["graph_source"]) == {"babs_johnson", "clarice_starling"}
+    babs_row = graph_rows[graph_rows["graph_source"] == "babs_johnson"].iloc[0]
+    clarice_row = graph_rows[graph_rows["graph_source"] == "clarice_starling"].iloc[0]
+    assert babs_row["conditions_needing_more_runs"] == 1
+    assert clarice_row["conditions_needing_more_runs"] == 0
+
+
 def test_write_compact_replication_budget_sufficiency_table_pivots_by_model(
     tmp_path: Path,
 ) -> None:
@@ -191,4 +250,118 @@ def test_write_compact_replication_budget_sufficiency_table_pivots_by_model(
             "mistral_ci95_share": 0.0,
             "mistral_ci95_max_required_runs": 5,
         }
+    ]
+
+
+def test_write_compact_replication_budget_sufficiency_table_can_split_by_graph_source(
+    tmp_path: Path,
+) -> None:
+    from llm_conceptual_modeling.analysis.replication_budget_summary import (
+        write_compact_replication_budget_sufficiency_table,
+    )
+
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    records = [
+        _ledger_record(
+            algorithm="algo3",
+            model="Qwen/Qwen3.5-9B",
+            condition_label="beam_num_beams_6",
+            metric_values={"recall": recall},
+            replication=replication,
+            graph_source="babs_johnson",
+        )
+        for replication, recall in enumerate([20.0, 20.0, 50.0, 80.0, 80.0])
+    ]
+    records.extend(
+        _ledger_record(
+            algorithm="algo3",
+            model="mistralai/Ministral-3-8B-Instruct-2512",
+            condition_label="beam_num_beams_6",
+            metric_values={"recall": 50.0},
+            replication=replication,
+            graph_source="babs_johnson",
+        )
+        for replication in range(5)
+    )
+    records.extend(
+        _ledger_record(
+            algorithm="algo3",
+            model="Qwen/Qwen3.5-9B",
+            condition_label="beam_num_beams_6",
+            metric_values={"recall": 50.0},
+            replication=replication,
+            graph_source="clarice_starling",
+        )
+        for replication in range(5)
+    )
+    records.extend(
+        _ledger_record(
+            algorithm="algo3",
+            model="mistralai/Ministral-3-8B-Instruct-2512",
+            condition_label="beam_num_beams_6",
+            metric_values={"recall": 50.0},
+            replication=replication,
+            graph_source="clarice_starling",
+        )
+        for replication in range(5)
+    )
+    (results_root / "ledger.json").write_text(
+        json.dumps({"records": records}),
+        encoding="utf-8",
+    )
+    output_path = tmp_path / "compact.csv"
+
+    write_compact_replication_budget_sufficiency_table(
+        results_root=results_root,
+        output_csv_path=output_path,
+        include_graph_source=True,
+    )
+
+    table = pd.read_csv(output_path)
+
+    assert table.columns.tolist()[:3] == ["algorithm", "graph_source", "decoding"]
+    assert table.to_dict("records") == [
+        {
+            "algorithm": "Algorithm 3",
+            "graph_source": "babs_johnson",
+            "decoding": "beam_num_beams_6",
+            "qwen_runs": 5,
+            "qwen_condition_metrics": 1,
+            "qwen_ci90_needing_more": 1,
+            "qwen_ci90_share": 1.0,
+            "qwen_ci90_max_required_runs": 390,
+            "qwen_ci95_needing_more": 1,
+            "qwen_ci95_share": 1.0,
+            "qwen_ci95_max_required_runs": 554,
+            "mistral_runs": 5,
+            "mistral_condition_metrics": 1,
+            "mistral_ci90_needing_more": 0,
+            "mistral_ci90_share": 0.0,
+            "mistral_ci90_max_required_runs": 5,
+            "mistral_ci95_needing_more": 0,
+            "mistral_ci95_share": 0.0,
+            "mistral_ci95_max_required_runs": 5,
+        },
+        {
+            "algorithm": "Algorithm 3",
+            "graph_source": "clarice_starling",
+            "decoding": "beam_num_beams_6",
+            "qwen_runs": 5,
+            "qwen_condition_metrics": 1,
+            "qwen_ci90_needing_more": 0,
+            "qwen_ci90_share": 0.0,
+            "qwen_ci90_max_required_runs": 5,
+            "qwen_ci95_needing_more": 0,
+            "qwen_ci95_share": 0.0,
+            "qwen_ci95_max_required_runs": 5,
+            "mistral_runs": 5,
+            "mistral_condition_metrics": 1,
+            "mistral_ci90_needing_more": 0,
+            "mistral_ci90_share": 0.0,
+            "mistral_ci90_max_required_runs": 5,
+            "mistral_ci95_needing_more": 0,
+            "mistral_ci95_share": 0.0,
+            "mistral_ci95_max_required_runs": 5,
+        },
     ]

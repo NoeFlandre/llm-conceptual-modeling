@@ -14,6 +14,7 @@ the repository.
 - `algo2-method2-guide.md`
 - `algo3-method3-guide.md`
 - `huggingface-dataset-README.md`
+- `open-weight-map-extension-runbook.md`
 
 ## Remove Or Archive
 

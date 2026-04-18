@@ -3436,6 +3436,7 @@ def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
             "subgraph2": [("gamma", "delta")],
             "graph": [("alpha", "gamma")],
         },
+        graph_source="babs_johnson",
         runtime_profile=_runtime_profile(),
     )
 
@@ -3469,6 +3470,7 @@ def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
         / "algo1"
         / "Qwen__Qwen3.5-9B"
         / "greedy"
+        / "babs_johnson"
         / "sg2_sg3"
         / "00000"
         / "rep_00"
@@ -3480,6 +3482,8 @@ def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
     smoke_verdict = json.loads((tmp_path / "smoke" / "smoke_verdict.json").read_text())
     assert smoke_verdict["status"] == "success"
     assert smoke_verdict["worker_loaded_model"] is True
+    assert smoke_verdict["spec"]["graph_source"] == "babs_johnson"
+    assert summary["graph_source"] == "babs_johnson"
     assert summary["pair_name"] == "sg2_sg3"
 
 

@@ -121,6 +121,7 @@ def build_run_summary(
         "algorithm": spec.algorithm,
         "model": spec.model,
         "embedding_model": spec.embedding_model,
+        "graph_source": spec.graph_source,
         "decoding_algorithm": spec.decoding.algorithm,
         "condition_label": spec.condition_label,
         "pair_name": spec.pair_name,

@@ -4,7 +4,7 @@
 
 **Goal:** make the scoped open-weight map-extension experiment batch runnable end-to-end from an SSH GPU instance, using the existing HF batch infrastructure, with resumable execution, deterministic planning, local/remote monitoring, graph-source-aware outputs, and post hoc CI replication sufficiency analysis.
 
-**Status:** Plan only. No implementation code should be written before the first red test in each story.
+**Status:** Complete through Epic 7. The map-extension batch is now implemented, verified, and documented for SSH execution on the checked-in `main` branch.
 
 ## Decision Summary
 
@@ -437,6 +437,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_resume src/llm_conceptual_model
 
 ### Story 5.1: Carry graph source into replication-budget observations
 
+**Status:** Complete in micro-step 13. Ledger-driven replication-budget observations now carry `graph_source`, detailed sufficiency summaries expose a `graph_source` column, and graph-aware groupings were added from top-level `graph_source` down to `algorithm_model_graph_source_decoding_metric`.
+
 **Requirement:** post-run CI sufficiency summaries should identify whether underpowered conditions concentrate by map.
 
 **Red test:**
@@ -464,6 +466,8 @@ uv run ruff check src/llm_conceptual_modeling/analysis/replication_budget_summar
 ```
 
 ### Story 5.2: Add compact map-extension sufficiency output
+
+**Status:** Complete in micro-step 13. The compact sufficiency writer now supports optional graph splitting via `--include-graph-source`, producing one row per algorithm/graph/decoding combination while preserving the legacy one-map compact output when the flag is omitted.
 
 **Requirement:** produce a concise CSV after the batch that is easy to inspect at a glance.
 
@@ -495,6 +499,8 @@ uv run ruff check src/llm_conceptual_modeling/analysis/replication_budget_summar
 ```
 
 ## Epic 6: SSH GPU Readiness And Documentation
+
+**Status:** Complete in micro-step 14. Added a dedicated operator runbook with exact local validation, graph-aware smoke, SSH launch, resume, and post-run CI commands; linked it from the docs index and the generic Vast guide; and manually executed the documented local validation, preview, preflight, and dry-run smoke commands.
 
 ### Story 6.1: Document exact local validation commands
 
@@ -589,6 +595,8 @@ git diff --check -- docs/open-weight-map-extension-runbook.md
 ```
 
 ## Epic 7: Final Integration Gate
+
+**Status:** Complete in micro-step 14 for the changed surface. The final focused gate on the map-extension implementation passed across graph loading, config/plan generation, graph-aware state identity, preflight, smoke selection, shell wrapper coverage, CLI analysis, and replication-budget summaries.
 
 Run these after all stories are green:
 

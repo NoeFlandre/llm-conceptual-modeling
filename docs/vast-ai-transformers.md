@@ -2,6 +2,10 @@
 
 This workflow is for the new local-`transformers` experiment family that runs on a remote NVIDIA GPU over SSH.
 
+For the scoped three-map open-weight extension batch, use
+[docs/open-weight-map-extension-runbook.md](/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/docs/open-weight-map-extension-runbook.md)
+as the operator source of truth instead of adapting the generic examples below.
+
 ## Scope
 
 - provider: `hf-transformers`

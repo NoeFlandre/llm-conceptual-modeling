@@ -697,6 +697,61 @@ def test_cli_analyze_replication_budget_sufficiency_writes_compact_table(
     assert compact.iloc[0]["qwen_runs"] == 5
 
 
+def test_cli_analyze_replication_budget_sufficiency_can_include_graph_source_in_compact_output(
+    tmp_path,
+) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    (results_root / "ledger.json").write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "identity": {
+                            "algorithm": "algo3",
+                            "model": "Qwen/Qwen3.5-9B",
+                            "condition_label": "beam_num_beams_6",
+                            "graph_source": "babs_johnson",
+                            "pair_name": "subgraph_1_to_subgraph_3",
+                            "condition_bits": "000",
+                            "replication": replication,
+                        },
+                        "status": "finished",
+                        "winner": {
+                            "metrics": {"recall": value},
+                            "status": "finished",
+                        },
+                    }
+                    for replication, value in enumerate([20.0, 20.0, 50.0, 80.0, 80.0])
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    detailed_path = tmp_path / "detailed.csv"
+    compact_path = tmp_path / "compact.csv"
+
+    exit_code = main(
+        [
+            "analyze",
+            "replication-budget-sufficiency",
+            "--results-root",
+            str(results_root),
+            "--output",
+            str(detailed_path),
+            "--compact-output",
+            str(compact_path),
+            "--include-graph-source",
+        ]
+    )
+
+    compact = pd.read_csv(compact_path)
+
+    assert exit_code == 0
+    assert compact.columns.tolist()[:3] == ["algorithm", "graph_source", "decoding"]
+    assert compact.iloc[0]["graph_source"] == "babs_johnson"
+
+
 def test_cli_analyze_plots_writes_revision_plot_family(tmp_path) -> None:
     results_root = tmp_path / "tracker"
     (results_root / "figure_exports").mkdir(parents=True)

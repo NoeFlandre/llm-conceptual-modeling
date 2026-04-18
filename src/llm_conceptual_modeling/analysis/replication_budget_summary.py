@@ -43,12 +43,22 @@ _DEFAULT_PROFILES = (
 _GROUPINGS = (
     ("overall", ()),
     ("algorithm", ("algorithm",)),
+    ("graph_source", ("graph_source",)),
     ("model", ("model",)),
     ("algorithm_model", ("algorithm", "model")),
+    ("algorithm_model_graph_source", ("algorithm", "model", "graph_source")),
     ("algorithm_model_decoding", ("algorithm", "model", "decoding_condition")),
+    (
+        "algorithm_model_graph_source_decoding",
+        ("algorithm", "model", "graph_source", "decoding_condition"),
+    ),
     (
         "algorithm_model_decoding_metric",
         ("algorithm", "model", "decoding_condition", "metric"),
+    ),
+    (
+        "algorithm_model_graph_source_decoding_metric",
+        ("algorithm", "model", "graph_source", "decoding_condition", "metric"),
     ),
 )
 
@@ -116,6 +126,7 @@ def write_compact_replication_budget_sufficiency_table(
     models: tuple[str, ...] | None = None,
     expected_replications: int = 5,
     profiles: tuple[ReplicationBudgetProfile, ...] = _DEFAULT_PROFILES,
+    include_graph_source: bool = False,
 ) -> None:
     if expected_replications <= 0:
         raise ValueError("expected_replications must be positive.")
@@ -137,6 +148,7 @@ def write_compact_replication_budget_sufficiency_table(
         observations=observations,
         models=tuple(model for model in _DEFAULT_MODELS if model in selected_models),
         profiles=profiles,
+        include_graph_source=include_graph_source,
     )
     compact.to_csv(output_csv_path, index=False)
 
@@ -168,6 +180,7 @@ def _ledger_metric_observations(*, ledger: dict[str, Any], models: set[str]) -> 
                 {
                     "run_key": run_key,
                     "algorithm": str(identity["algorithm"]),
+                    "graph_source": str(identity.get("graph_source", "default")),
                     "model": model,
                     "decoding_condition": str(identity["condition_label"]),
                     "pair_name": str(identity["pair_name"]),
@@ -186,6 +199,7 @@ def _run_key(identity: dict[str, object]) -> str:
             str(identity["algorithm"]),
             str(identity["model"]),
             str(identity["condition_label"]),
+            str(identity.get("graph_source", "default")),
             str(identity["pair_name"]),
             str(identity["condition_bits"]),
             str(identity["replication"]),
@@ -201,6 +215,7 @@ def _condition_metric_budget_rows(
 ) -> pd.DataFrame:
     group_columns = [
         "algorithm",
+        "graph_source",
         "model",
         "decoding_condition",
         "pair_name",
@@ -209,7 +224,9 @@ def _condition_metric_budget_rows(
     ]
     condition_rows: list[dict[str, object]] = []
     for group_key, group in observations.groupby(group_columns, sort=True, dropna=False):
-        algorithm, model, decoding_condition, pair_name, condition_bits, metric = group_key
+        algorithm, graph_source, model, decoding_condition, pair_name, condition_bits, metric = (
+            group_key
+        )
         observed_runs = int(group["replication"].nunique())
         mean = float(group["value"].mean())
         sample_std = float(group["value"].std(ddof=1))
@@ -229,6 +246,7 @@ def _condition_metric_budget_rows(
                     "z_score": profile.z_score,
                     "relative_half_width_target": profile.relative_half_width_target,
                     "algorithm": algorithm,
+                    "graph_source": graph_source,
                     "model": model,
                     "decoding_condition": decoding_condition,
                     "pair_name": pair_name,
@@ -288,6 +306,7 @@ def _aggregate_budget_rows(
         underpowered = profile_budget[profile_budget["needs_more_runs"]].sort_values(
             [
                 "algorithm",
+                "graph_source",
                 "model",
                 "decoding_condition",
                 "metric",
@@ -304,6 +323,7 @@ def _aggregate_budget_rows(
                     group=pd.DataFrame.from_records([row.to_dict()]),
                     key_values={
                         "algorithm": row["algorithm"],
+                        "graph_source": row["graph_source"],
                         "model": row["model"],
                         "decoding_condition": row["decoding_condition"],
                         "metric": row["metric"],
@@ -352,6 +372,7 @@ def _aggregate_group(
         "relative_half_width_target": profile.relative_half_width_target,
         "grouping": grouping_name,
         "algorithm": str(key_values.get("algorithm", "ALL")),
+        "graph_source": str(key_values.get("graph_source", "ALL")),
         "model": str(key_values.get("model", "ALL")),
         "decoding_condition": str(key_values.get("decoding_condition", "ALL")),
         "metric": str(key_values.get("metric", "ALL")),
@@ -380,25 +401,32 @@ def _compact_budget_table(
     observations: pd.DataFrame,
     models: tuple[str, ...],
     profiles: tuple[ReplicationBudgetProfile, ...],
+    include_graph_source: bool,
 ) -> pd.DataFrame:
     rows: list[dict[str, object]] = []
     ordered_profiles = tuple(sorted(profiles, key=lambda profile: profile.confidence_level))
+    grouping_columns = ["algorithm", "decoding_condition"]
+    if include_graph_source:
+        grouping_columns = ["algorithm", "graph_source", "decoding_condition"]
     algorithm_decoding_pairs = (
-        observations[["algorithm", "decoding_condition"]]
+        observations[grouping_columns]
         .drop_duplicates()
         .sort_values(
-            by=["algorithm", "decoding_condition"],
+            by=grouping_columns,
             key=_compact_sort_key,
             kind="mergesort",
         )
     )
     for _, pair in algorithm_decoding_pairs.iterrows():
         algorithm = str(pair["algorithm"])
+        graph_source = str(pair["graph_source"]) if include_graph_source else None
         decoding = str(pair["decoding_condition"])
         row: dict[str, object] = {
             "algorithm": _ALGORITHM_LABELS.get(algorithm, algorithm),
-            "decoding": decoding,
         }
+        if include_graph_source:
+            row["graph_source"] = graph_source
+        row["decoding"] = decoding
         for model in models:
             model_prefix = _MODEL_COLUMN_PREFIXES[model]
             model_observations = observations[
@@ -406,12 +434,18 @@ def _compact_budget_table(
                 & (observations["decoding_condition"] == decoding)
                 & (observations["model"] == model)
             ]
+            if include_graph_source:
+                model_observations = model_observations[
+                    model_observations["graph_source"] == graph_source
+                ]
             row[f"{model_prefix}_runs"] = int(model_observations["run_key"].nunique())
             model_budget = budget_rows[
                 (budget_rows["algorithm"] == algorithm)
                 & (budget_rows["decoding_condition"] == decoding)
                 & (budget_rows["model"] == model)
             ]
+            if include_graph_source:
+                model_budget = model_budget[model_budget["graph_source"] == graph_source]
             row[f"{model_prefix}_condition_metrics"] = int(
                 len(model_budget[model_budget["profile"] == profiles[0].name])
             )
