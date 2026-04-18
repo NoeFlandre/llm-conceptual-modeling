@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -355,12 +356,14 @@ algorithms:
 
     resolved_yaml = (output_dir / "resolved_run_config.yaml").read_text(encoding="utf-8")
     resolved_plan = (output_dir / "resolved_run_plan.json").read_text(encoding="utf-8")
+    resolved_plan_payload = json.loads(resolved_plan)
     prompt_preview = (
         output_dir / "prompt_preview" / "algo1" / "base.txt"
     ).read_text(encoding="utf-8")
 
     assert "temperature: 1.0" in resolved_yaml
     assert '"replications": 5' in resolved_plan
+    assert resolved_plan_payload["planned_total_runs"] == 5
     assert "You are a helpful assistant. Task body." == prompt_preview
 
 

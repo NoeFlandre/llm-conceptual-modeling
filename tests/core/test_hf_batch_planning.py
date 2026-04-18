@@ -318,6 +318,8 @@ algorithms:
     assert all(len(spec.condition_bits) == 3 for spec in specs)
     assert all(spec.prompt_factors["include_counterexample"] is False for spec in specs)
     assert all(spec.raw_context["Counter-Example"] == -1 for spec in specs)
+    assert {spec.raw_context["Number of Words"] for spec in specs} == {3, 5}
+    assert {spec.raw_context["Depth"] for spec in specs} == {1, 2}
     assert {
         spec.graph_source: len(spec.input_payload["mother_graph"])
         for spec in specs
@@ -326,6 +328,38 @@ algorithms:
         "clarice_starling": 64,
         "philip_marlowe": 38,
     }
+
+
+def test_open_weight_map_extension_config_plans_720_runs() -> None:
+    config = load_hf_run_config("configs/hf_transformers_open_weight_map_extension.yaml")
+
+    specs = plan_paper_batch_specs(
+        models=config.models.chat_models,
+        embedding_model=config.models.embedding_model,
+        replications=config.run.replications,
+        algorithms=("algo3",),
+        config=config,
+        runtime_profile_provider=lambda model: RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=model == "Qwen/Qwen3.5-9B",
+            context_limit=None,
+        ),
+    )
+
+    assert config.run.replications == 5
+    assert config.graph_sources == [
+        "babs_johnson",
+        "clarice_starling",
+        "philip_marlowe",
+    ]
+    assert set(config.algorithms) == {"algo3"}
+    assert [spec.condition_label for spec in specs] and {
+        spec.condition_label for spec in specs
+    } == {"beam_num_beams_6"}
+    assert len(specs) == 720
+    assert all(spec.prompt_factors["include_counterexample"] is False for spec in specs)
 
 
 def test_qwen_contrastive_chat_client_is_constructible() -> None:

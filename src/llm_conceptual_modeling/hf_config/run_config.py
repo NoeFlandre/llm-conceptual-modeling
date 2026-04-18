@@ -195,6 +195,7 @@ def write_resolved_run_preview(*, config: HFRunConfig, output_dir: str | Path) -
         "chat_models": config.models.chat_models,
         "embedding_model": config.models.embedding_model,
         "graph_sources": config.graph_sources,
+        "planned_total_runs": _planned_total_runs(config),
         "decoding_conditions": [asdict(item) for item in config.decoding],
         "algorithm_condition_counts": {
             name: value.factor_condition_count() for name, value in config.algorithms.items()
@@ -225,6 +226,28 @@ def write_resolved_run_preview(*, config: HFRunConfig, output_dir: str | Path) -
             output_dir=algorithm_dir / "conditions",
         )
     _write_condition_matrix(config=config, output_dir=output_dir_path)
+
+
+def _planned_total_runs(config: HFRunConfig) -> int:
+    model_count = len(config.models.chat_models)
+    decoding_count = len(config.decoding)
+    graph_source_count = len(config.graph_sources)
+    replication_count = config.run.replications
+    total_runs = 0
+
+    for algorithm_config in config.algorithms.values():
+        pair_count = len(algorithm_config.pair_names or ["default"])
+        condition_count = algorithm_config.factor_condition_count()
+        total_runs += (
+            model_count
+            * decoding_count
+            * graph_source_count
+            * replication_count
+            * pair_count
+            * condition_count
+        )
+
+    return total_runs
 
 
 def exclude_decoding_conditions_from_payload(

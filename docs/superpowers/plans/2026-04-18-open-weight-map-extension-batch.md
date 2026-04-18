@@ -317,6 +317,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_batch/planning.py tests/core/te
 
 ### Story 3.2: Add the production config
 
+**Status:** Complete in micro-step 9. Added `configs/hf_transformers_open_weight_map_extension.yaml` as the canonical 720-run map-extension config, verified it loads and plans exactly 720 Algo 3 beam runs across the three selected graph sources, and upgraded `write_resolved_run_preview()` so `resolved_run_plan.json` now exposes `planned_total_runs` for local preflight validation.
+
 **Requirement:** add a single canonical config for the map-extension batch.
 
 **Red test:**
