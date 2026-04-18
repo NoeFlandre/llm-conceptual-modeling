@@ -8,6 +8,11 @@ from llm_conceptual_modeling.common.hf_transformers import (
     build_runtime_factory,
 )
 from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
+from llm_conceptual_modeling.hf_config.run_config import (
+    HFRunConfig,
+    load_hf_run_config,
+    write_resolved_run_preview,
+)
 from llm_conceptual_modeling.hf_drain import (
     build_drain_plan,
     read_drain_state_report,
@@ -20,11 +25,6 @@ from llm_conceptual_modeling.hf_experiments import (
 )
 from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume.sweep import build_resume_sweep_report
-from llm_conceptual_modeling.hf_run_config import (
-    HFRunConfig,
-    load_hf_run_config,
-    write_resolved_run_preview,
-)
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 from llm_conceptual_modeling.hf_state.shard_manifest import write_unfinished_shard_manifest
 from llm_conceptual_modeling.hf_tail.qwen_algo1 import (
@@ -203,6 +203,7 @@ def handle_run(args: Namespace) -> int:
             config=config,
             algorithm=args.algorithm,
             model=args.model,
+            graph_source=args.graph_source,
             pair_name=args.pair_name,
             condition_bits=args.condition_bits,
             decoding=_decoding_from_args(args),

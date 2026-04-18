@@ -287,6 +287,7 @@ def build_parser() -> argparse.ArgumentParser:
     smoke_parser.add_argument("--config", required=True)
     smoke_parser.add_argument("--algorithm", choices=("algo1", "algo2", "algo3"), required=True)
     smoke_parser.add_argument("--model", required=True)
+    smoke_parser.add_argument("--graph-source")
     smoke_parser.add_argument("--pair-name", required=True)
     smoke_parser.add_argument("--condition-bits", required=True)
     smoke_parser.add_argument(

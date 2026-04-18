@@ -362,6 +362,23 @@ def test_open_weight_map_extension_config_plans_720_runs() -> None:
     assert all(spec.prompt_factors["include_counterexample"] is False for spec in specs)
 
 
+def test_select_run_spec_can_target_non_default_graph_source() -> None:
+    config = load_hf_run_config("configs/hf_transformers_open_weight_map_extension.yaml")
+
+    selected = select_run_spec(
+        config=config,
+        algorithm="algo3",
+        model="Qwen/Qwen3.5-9B",
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="000",
+        decoding=DecodingConfig(algorithm="beam", num_beams=6),
+        replication=0,
+        graph_source="clarice_starling",
+    )
+
+    assert selected.graph_source == "clarice_starling"
+
+
 def test_qwen_contrastive_chat_client_is_constructible() -> None:
     from llm_conceptual_modeling.common.hf_transformers import HFTransformersChatClient
 

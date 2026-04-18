@@ -477,12 +477,16 @@ def _build_configured_specs_for_pairs(
     payload: dict[str, object],
 ) -> list[HFRunSpec]:
     factor_names = list(algorithm_config.factors.keys())
+    factor_levels = [
+        tuple(algorithm_config.factors[factor_name].levels)
+        for factor_name in factor_names
+    ]
     specs: list[HFRunSpec] = []
-    for levels in product((-1, 1), repeat=len(factor_names)):
+    for levels in product(*factor_levels):
         active_high_factors = [
             factor_name
             for factor_name, level in zip(factor_names, levels, strict=True)
-            if level == 1
+            if level == algorithm_config.factors[factor_name].levels[-1]
         ]
         runtime_fields = algorithm_config.resolve_runtime_fields(active_high_factors)
         prompt_bundle = build_prompt_bundle(
@@ -491,7 +495,10 @@ def _build_configured_specs_for_pairs(
             active_high_factors=active_high_factors,
             prompt_factors=runtime_fields,
         )
-        condition_bits = "".join("1" if level == 1 else "0" for level in levels)
+        condition_bits = "".join(
+            "1" if level == algorithm_config.factors[factor_name].levels[-1] else "0"
+            for factor_name, level in zip(factor_names, levels, strict=True)
+        )
         specs.append(
             HFRunSpec(
                 algorithm=algorithm_name,
@@ -576,12 +583,17 @@ def select_run_spec(
     config: Any,
     algorithm: str,
     model: str,
+    graph_source: str | None = None,
     pair_name: str,
     condition_bits: str,
     decoding: DecodingConfig,
     replication: int,
     runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
 ) -> HFRunSpec:
+    resolved_graph_source = _resolve_selected_graph_source(
+        config=config,
+        graph_source=graph_source,
+    )
     specs = plan_paper_batch_specs(
         models=[model],
         embedding_model=config.models.embedding_model,
@@ -594,6 +606,7 @@ def select_run_spec(
         if (
             spec.algorithm == algorithm
             and spec.model == model
+            and spec.graph_source == resolved_graph_source
             and spec.pair_name == pair_name
             and spec.condition_bits == condition_bits
             and spec.replication == replication
@@ -602,7 +615,19 @@ def select_run_spec(
             return spec
     raise ValueError(
         "No configured run spec matches "
-        f"algorithm={algorithm!r}, model={model!r}, pair_name={pair_name!r}, "
+        f"algorithm={algorithm!r}, model={model!r}, graph_source={resolved_graph_source!r}, "
+        f"pair_name={pair_name!r}, "
         f"condition_bits={condition_bits!r}, decoding={decoding!r}, "
         f"replication={replication!r}."
+    )
+
+
+def _resolve_selected_graph_source(*, config: Any, graph_source: str | None) -> str:
+    configured_graph_sources = list(config.graph_sources)
+    if graph_source is not None:
+        return graph_source
+    if len(configured_graph_sources) == 1:
+        return configured_graph_sources[0]
+    raise ValueError(
+        "graph_source is required when smoke-selecting from a config with multiple graph_sources."
     )

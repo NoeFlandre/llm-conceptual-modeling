@@ -43,6 +43,9 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert '-e "$RSYNC_SSH" "$LOCAL_RESULTS_DIR"/ "$SSH_TARGET:$REMOTE_RESULTS_DIR"/' in script_text
     assert 'if vast_has_value "${SMOKE_ALGORITHM:-}"' in script_text
     assert ".venv/bin/lcm run smoke" in script_text
+    assert 'if vast_has_value "${SMOKE_GRAPH_SOURCE:-}"; then' in script_text
+    assert 'SMOKE_GRAPH_SOURCE_FLAG="--graph-source ${SMOKE_GRAPH_SOURCE}"' in script_text
+    assert '$SMOKE_GRAPH_SOURCE_FLAG \\' in script_text
     assert "BATCH_GENERATION_TIMEOUT_SECONDS" in script_text
     assert 'BATCH_STARTUP_TIMEOUT_SECONDS="${BATCH_STARTUP_TIMEOUT_SECONDS:-}"' in script_text
     assert "BATCH_RESUME_PASS_MODE" in script_text

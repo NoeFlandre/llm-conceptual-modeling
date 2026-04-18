@@ -1401,6 +1401,57 @@ algorithms:
     assert '"pair_name": "sg2_sg3"' in captured.out
 
 
+def test_cli_run_smoke_passes_graph_source_to_selected_spec(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(
+        Path("configs/hf_transformers_open_weight_map_extension.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    captured_call: dict[str, object] = {}
+
+    def fake_run_single_spec(**kwargs):
+        captured_call.update(kwargs)
+        return {"graph_source": kwargs["spec"].graph_source}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.run_single_spec",
+        fake_run_single_spec,
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "smoke",
+            "--config",
+            str(config_path),
+            "--algorithm",
+            "algo3",
+            "--model",
+            "Qwen/Qwen3.5-9B",
+            "--graph-source",
+            "clarice_starling",
+            "--pair-name",
+            "subgraph_1_to_subgraph_3",
+            "--condition-bits",
+            "000",
+            "--decoding",
+            "beam",
+            "--num-beams",
+            "6",
+            "--output-root",
+            str(tmp_path / "smoke"),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert captured_call["spec"].graph_source == "clarice_starling"
+    assert '"graph_source": "clarice_starling"' in captured.out
+
+
 def _write_flat(path, lines: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

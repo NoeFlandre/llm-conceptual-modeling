@@ -385,6 +385,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_experiments.py src/llm_conceptu
 
 ### Story 4.2: Make smoke selection graph-aware
 
+**Status:** Complete in micro-step 11. `select_run_spec()` now accepts an explicit `graph_source`, rejects ambiguous omission for multi-graph configs, the CLI exposes `--graph-source` for `lcm run smoke`, and the Vast wrapper forwards an optional `SMOKE_GRAPH_SOURCE` flag when configured.
+
 **Requirement:** `lcm run smoke` must be able to target one selected map explicitly.
 
 **Red test:**

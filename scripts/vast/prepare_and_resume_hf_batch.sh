@@ -248,6 +248,10 @@ if vast_has_value "${SMOKE_ALGORITHM:-}" \
   && vast_has_value "${SMOKE_CONDITION_BITS:-}" \
   && vast_has_value "${SMOKE_DECODING:-}"; then
   echo "[6/6] Run smoke gate"
+  SMOKE_GRAPH_SOURCE_FLAG=""
+  if vast_has_value "${SMOKE_GRAPH_SOURCE:-}"; then
+    SMOKE_GRAPH_SOURCE_FLAG="--graph-source ${SMOKE_GRAPH_SOURCE}"
+  fi
   "${SSH_CMD[@]}" "$SSH_TARGET" "
     set -euo pipefail
     cd '$REMOTE_REPO_DIR'
@@ -255,6 +259,7 @@ if vast_has_value "${SMOKE_ALGORITHM:-}" \
       --config '$REMOTE_EFFECTIVE_CONFIG_PATH' \
       --algorithm '${SMOKE_ALGORITHM}' \
       --model '${SMOKE_MODEL}' \
+      $SMOKE_GRAPH_SOURCE_FLAG \
       --pair-name '${SMOKE_PAIR_NAME}' \
       --condition-bits '${SMOKE_CONDITION_BITS}' \
       --decoding '${SMOKE_DECODING}' \
