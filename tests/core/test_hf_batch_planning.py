@@ -218,6 +218,116 @@ def test_derive_run_seed_distinguishes_non_default_graph_sources() -> None:
     assert babs_seed != clarice_seed
 
 
+def test_plan_paper_batch_specs_iterates_configured_graph_sources_for_algo3(
+    tmp_path: Path,
+) -> None:
+    config_path = tmp_path / "run.yaml"
+    config_path.write_text(
+        """
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 1
+runtime:
+  seed: 7
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    children_by_label: 256
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  beam:
+    enabled: true
+    num_beams: [6]
+inputs:
+  graph_sources: [babs_johnson, clarice_starling, philip_marlowe]
+shared_fragments: {}
+algorithms:
+  algo3:
+    pair_names:
+      - subgraph_1_to_subgraph_3
+      - subgraph_2_to_subgraph_1
+      - subgraph_2_to_subgraph_3
+    base_fragments: []
+    fixed_runtime_fields:
+      include_counterexample: false
+    fixed_columns:
+      Counter-Example: -1
+    factors:
+      example:
+        column: Example
+        levels: [-1, 1]
+        runtime_field: include_example
+        low_runtime_value: false
+        high_runtime_value: true
+        low_fragments: []
+        high_fragments: []
+      number_of_words:
+        column: Number of Words
+        levels: [3, 5]
+        runtime_field: child_count
+        low_runtime_value: 3
+        high_runtime_value: 5
+        low_fragments: []
+        high_fragments: []
+      depth:
+        column: Depth
+        levels: [1, 2]
+        runtime_field: max_depth
+        low_runtime_value: 1
+        high_runtime_value: 2
+        low_fragments: []
+        high_fragments: []
+    fragment_definitions: {}
+    prompt_templates:
+      tree_expansion: "Generate children."
+""",
+        encoding="utf-8",
+    )
+    config = load_hf_run_config(config_path)
+
+    specs = plan_paper_batch_specs(
+        models=config.models.chat_models,
+        embedding_model=config.models.embedding_model,
+        replications=config.run.replications,
+        algorithms=("algo3",),
+        config=config,
+        runtime_profile_provider=lambda _model: RuntimeProfile(
+            device="cuda",
+            dtype="bfloat16",
+            quantization="none",
+            supports_thinking_toggle=False,
+            context_limit=None,
+        ),
+    )
+
+    assert len(specs) == 72
+    assert {spec.graph_source for spec in specs} == {
+        "babs_johnson",
+        "clarice_starling",
+        "philip_marlowe",
+    }
+    assert all(len(spec.condition_bits) == 3 for spec in specs)
+    assert all(spec.prompt_factors["include_counterexample"] is False for spec in specs)
+    assert all(spec.raw_context["Counter-Example"] == -1 for spec in specs)
+    assert {
+        spec.graph_source: len(spec.input_payload["mother_graph"])
+        for spec in specs
+    } == {
+        "babs_johnson": 113,
+        "clarice_starling": 64,
+        "philip_marlowe": 38,
+    }
+
+
 def test_qwen_contrastive_chat_client_is_constructible() -> None:
     from llm_conceptual_modeling.common.hf_transformers import HFTransformersChatClient
 

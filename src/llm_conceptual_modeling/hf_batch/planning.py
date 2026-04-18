@@ -3,7 +3,7 @@ from __future__ import annotations
 from itertools import product
 from typing import Any, Callable
 
-from llm_conceptual_modeling.common.graph_data import load_default_graph
+from llm_conceptual_modeling.common.graph_data import load_default_graph, load_graph_source
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     RuntimeProfile,
@@ -14,7 +14,6 @@ from llm_conceptual_modeling.common.hf_transformers import (
 from llm_conceptual_modeling.hf_batch.prompts import build_prompt_bundle
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_batch.utils import condition_label, derive_run_seed
-from llm_conceptual_modeling.hf_run_config import HFRunConfig
 
 
 def plan_paper_batch(
@@ -23,7 +22,7 @@ def plan_paper_batch(
     embedding_model: str,
     replications: int,
     algorithms: tuple[str, ...] | None = None,
-    config: HFRunConfig | None = None,
+    config: Any | None = None,
     runtime_profile_provider: Callable[[str], RuntimeProfile] | None = None,
 ) -> list[HFRunSpec]:
     return plan_paper_batch_specs(
@@ -42,7 +41,7 @@ def plan_paper_batch_specs(
     embedding_model: str,
     replications: int,
     algorithms: tuple[str, ...] | None,
-    config: HFRunConfig | None,
+    config: Any | None,
     runtime_profile_provider: Callable[[str], RuntimeProfile] | None,
 ) -> list[HFRunSpec]:
     if config is not None:
@@ -303,7 +302,7 @@ def _plan_algo3_runs(
 
 def _plan_paper_batch_from_config(
     *,
-    config: HFRunConfig,
+    config: Any,
     algorithms: tuple[str, ...] | None,
     runtime_profile_provider: Callable[[str], RuntimeProfile] | None,
 ) -> list[HFRunSpec]:
@@ -315,52 +314,59 @@ def _plan_paper_batch_from_config(
         for decoding in config.decoding:
             if not supports_decoding_config(model=model, decoding_config=decoding):
                 continue
-            for replication in range(config.run.replications):
-                for algorithm_name in selected_algorithms:
-                    if algorithm_name == "algo1":
-                        specs.extend(
-                            _plan_algo1_runs_from_config(
-                                config=config,
-                                model=model,
-                                decoding=decoding,
-                                replication=replication,
-                                runtime_profile=runtime_profile,
+            for graph_source in config.graph_sources:
+                for replication in range(config.run.replications):
+                    for algorithm_name in selected_algorithms:
+                        if algorithm_name == "algo1":
+                            specs.extend(
+                                _plan_algo1_runs_from_config(
+                                    config=config,
+                                    model=model,
+                                    decoding=decoding,
+                                    graph_source=graph_source,
+                                    replication=replication,
+                                    runtime_profile=runtime_profile,
+                                )
                             )
-                        )
-                    elif algorithm_name == "algo2":
-                        specs.extend(
-                            _plan_algo2_runs_from_config(
-                                config=config,
-                                model=model,
-                                decoding=decoding,
-                                replication=replication,
-                                runtime_profile=runtime_profile,
+                        elif algorithm_name == "algo2":
+                            specs.extend(
+                                _plan_algo2_runs_from_config(
+                                    config=config,
+                                    model=model,
+                                    decoding=decoding,
+                                    graph_source=graph_source,
+                                    replication=replication,
+                                    runtime_profile=runtime_profile,
+                                )
                             )
-                        )
-                    elif algorithm_name == "algo3":
-                        specs.extend(
-                            _plan_algo3_runs_from_config(
-                                config=config,
-                                model=model,
-                                decoding=decoding,
-                                replication=replication,
-                                runtime_profile=runtime_profile,
+                        elif algorithm_name == "algo3":
+                            specs.extend(
+                                _plan_algo3_runs_from_config(
+                                    config=config,
+                                    model=model,
+                                    decoding=decoding,
+                                    graph_source=graph_source,
+                                    replication=replication,
+                                    runtime_profile=runtime_profile,
+                                )
                             )
-                        )
-                    else:
-                        raise ValueError(f"Unsupported algorithm in config: {algorithm_name}")
+                        else:
+                            raise ValueError(
+                                f"Unsupported algorithm in config: {algorithm_name}"
+                            )
     return specs
 
 
 def _plan_algo1_runs_from_config(
     *,
-    config: HFRunConfig,
+    config: Any,
     model: str,
     decoding: DecodingConfig,
+    graph_source: str,
     replication: int,
     runtime_profile: RuntimeProfile,
 ) -> list[HFRunSpec]:
-    sg1, sg2, sg3, graph = load_default_graph()
+    sg1, sg2, sg3, graph = load_graph_source(graph_source)
     pair_lookup = {"sg1_sg2": (sg1, sg2), "sg2_sg3": (sg2, sg3), "sg3_sg1": (sg3, sg1)}
     algorithm_config = config.algorithms["algo1"]
     specs: list[HFRunSpec] = []
@@ -373,6 +379,7 @@ def _plan_algo1_runs_from_config(
                 algorithm_config=algorithm_config,
                 model=model,
                 decoding=decoding,
+                graph_source=graph_source,
                 replication=replication,
                 pair_name=pair_name,
                 runtime_profile=runtime_profile,
@@ -384,13 +391,14 @@ def _plan_algo1_runs_from_config(
 
 def _plan_algo2_runs_from_config(
     *,
-    config: HFRunConfig,
+    config: Any,
     model: str,
     decoding: DecodingConfig,
+    graph_source: str,
     replication: int,
     runtime_profile: RuntimeProfile,
 ) -> list[HFRunSpec]:
-    sg1, sg2, sg3, graph = load_default_graph()
+    sg1, sg2, sg3, graph = load_graph_source(graph_source)
     pair_lookup = {"sg1_sg2": (sg1, sg2), "sg2_sg3": (sg2, sg3), "sg3_sg1": (sg3, sg1)}
     algorithm_config = config.algorithms["algo2"]
     specs: list[HFRunSpec] = []
@@ -403,6 +411,7 @@ def _plan_algo2_runs_from_config(
                 algorithm_config=algorithm_config,
                 model=model,
                 decoding=decoding,
+                graph_source=graph_source,
                 replication=replication,
                 pair_name=pair_name,
                 runtime_profile=runtime_profile,
@@ -414,13 +423,14 @@ def _plan_algo2_runs_from_config(
 
 def _plan_algo3_runs_from_config(
     *,
-    config: HFRunConfig,
+    config: Any,
     model: str,
     decoding: DecodingConfig,
+    graph_source: str,
     replication: int,
     runtime_profile: RuntimeProfile,
 ) -> list[HFRunSpec]:
-    sg1, sg2, sg3, graph = load_default_graph()
+    sg1, sg2, sg3, graph = load_graph_source(graph_source)
     pair_lookup = {
         "subgraph_1_to_subgraph_3": ("subgraph_1", "subgraph_3", sg1, sg3),
         "subgraph_2_to_subgraph_1": ("subgraph_2", "subgraph_1", sg2, sg1),
@@ -437,6 +447,7 @@ def _plan_algo3_runs_from_config(
                 algorithm_config=algorithm_config,
                 model=model,
                 decoding=decoding,
+                graph_source=graph_source,
                 replication=replication,
                 pair_name=pair_name,
                 runtime_profile=runtime_profile,
@@ -454,11 +465,12 @@ def _plan_algo3_runs_from_config(
 
 def _build_configured_specs_for_pairs(
     *,
-    config: HFRunConfig,
+    config: Any,
     algorithm_name: str,
     algorithm_config: Any,
     model: str,
     decoding: DecodingConfig,
+    graph_source: str,
     replication: int,
     pair_name: str,
     runtime_profile: RuntimeProfile,
@@ -486,6 +498,7 @@ def _build_configured_specs_for_pairs(
                 model=model,
                 embedding_model=config.models.embedding_model,
                 decoding=decoding,
+                graph_source=graph_source,
                 replication=replication,
                 pair_name=pair_name,
                 condition_bits=condition_bits,
@@ -500,6 +513,7 @@ def _build_configured_specs_for_pairs(
                     model=model,
                     embedding_model=config.models.embedding_model,
                     decoding=decoding,
+                    graph_source=graph_source,
                     payload=payload,
                 ),
                 input_payload={
@@ -518,6 +532,7 @@ def _build_configured_specs_for_pairs(
                     condition_bits=condition_bits,
                     decoding=decoding,
                     replication=replication,
+                    graph_source=graph_source,
                 ),
             )
         )
@@ -534,17 +549,20 @@ def _build_raw_context(
     model: str,
     embedding_model: str,
     decoding: DecodingConfig,
+    graph_source: str,
     payload: dict[str, object],
 ) -> dict[str, object]:
     context: dict[str, object] = {
         "pair_name": pair_name,
         "Repetition": replication,
+        "graph_source": graph_source,
         "model": model,
         "embedding_model": embedding_model,
         "provider": "hf-transformers",
         "decoding_algorithm": decoding.algorithm,
         "decoding_condition": condition_label(decoding),
     }
+    context.update(algorithm_config.fixed_columns)
     for factor_name, level in zip(algorithm_config.factors.keys(), levels, strict=True):
         context[algorithm_config.factors[factor_name].column] = level
     if algorithm_name == "algo3":
@@ -555,7 +573,7 @@ def _build_raw_context(
 
 def select_run_spec(
     *,
-    config: HFRunConfig,
+    config: Any,
     algorithm: str,
     model: str,
     pair_name: str,

@@ -285,6 +285,8 @@ uv run ruff check src/llm_conceptual_modeling/hf_batch
 
 ### Story 3.1: Load graph-specific subgraphs in config-based planning
 
+**Status:** Complete in micro-step 8. Config-based planning now iterates `config.graph_sources`, loads each graph source through `load_graph_source()`, writes `graph_source` and fixed design columns into `raw_context`, sets `HFRunSpec.graph_source`, and passes graph source into deterministic seed derivation.
+
 **Requirement:** planning should iterate graph sources before pairs and use the correct graph data for each source.
 
 **Red test:**
