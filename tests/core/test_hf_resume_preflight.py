@@ -6,6 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from llm_conceptual_modeling.hf_config.run_config import load_hf_run_config
 from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
 
 
@@ -76,6 +77,27 @@ def test_build_resume_preflight_report_counts_pending_work_from_existing_seed(
     assert report["pending_count"] == 1
     assert report["can_resume"] is True
     assert report["resume_mode"] == "resume"
+
+
+def test_build_resume_preflight_report_plans_open_weight_map_extension_batch() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    config = load_hf_run_config(
+        repo_root / "configs" / "hf_transformers_open_weight_map_extension.yaml"
+    )
+
+    report = build_resume_preflight_report(
+        config=config,
+        repo_root=repo_root,
+        results_root=None,
+        allow_empty=True,
+    )
+
+    assert report["results_root_exists"] is False
+    assert report["total_runs"] == 720
+    assert report["total_planned_runs"] == 720
+    assert report["pending_count"] == 720
+    assert report["can_resume"] is True
+    assert report["resume_mode"] == "fresh-root"
 
 
 def test_build_resume_preflight_report_marks_running_root_as_active(

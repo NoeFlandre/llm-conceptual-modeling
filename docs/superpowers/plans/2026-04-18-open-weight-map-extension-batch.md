@@ -411,7 +411,7 @@ uv run ruff check src/llm_conceptual_modeling/commands src/llm_conceptual_modeli
 
 ### Story 4.3: Verify dry-run and resume-preflight surfaces
 
-**Status:** In progress. Micro-step 12 added an explicit `total_planned_runs` alias to resume-preflight reports and propagated `graph_source` into the current/last-completed run status payload helper so status metadata can distinguish maps. The remaining work is the production-config preflight assertion and any CLI/report surfacing needed beyond the current JSON contract.
+**Status:** Complete in micro-step 12. Resume-preflight now reports both `total_runs` and `total_planned_runs`, the checked-in map-extension config preflights to exactly 720 pending runs on a fresh root, and status payload helpers now carry `graph_source` so active/last-completed run metadata can distinguish maps.
 
 **Requirement:** a GPU rental should start from a deterministic preview, a preflight report, and a dry-run or smoke check.
 
