@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 
 import pandas as pd
 
@@ -56,9 +56,6 @@ from llm_conceptual_modeling.hf_batch.spec_path import (
 from llm_conceptual_modeling.hf_batch.spec_path import (
     smoke_spec_identity as _smoke_spec_identity,
 )
-from llm_conceptual_modeling.hf_batch.spec_path import (
-    spec_identity as _spec_identity,  # noqa: F401
-)
 from llm_conceptual_modeling.hf_batch.types import (
     BatchInfrastructureFailure,
     HFRunSpec,
@@ -90,9 +87,6 @@ from llm_conceptual_modeling.hf_execution.helpers import (
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
     is_retryable_worker_error as _is_retryable_worker_error,  # noqa: F401
-)
-from llm_conceptual_modeling.hf_execution.helpers import (
-    resolve_max_requests_per_worker_process as _resolve_max_requests_per_worker_process,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
     resolve_run_retry_attempts as _resolve_run_retry_attempts,  # noqa: F401
@@ -128,7 +122,6 @@ from llm_conceptual_modeling.hf_pipeline.metrics import (
 from llm_conceptual_modeling.hf_pipeline.metrics import (
     validate_structural_runtime_result as _validate_structural_runtime_result,
 )
-from llm_conceptual_modeling.hf_run_config import HFRunConfig
 from llm_conceptual_modeling.hf_state.resume_state import (
     build_seeded_resume_snapshot as _resume_build_seeded_resume_snapshot,
 )
@@ -154,18 +147,6 @@ from llm_conceptual_modeling.hf_state.resume_state import (
     resolve_resume_pass_mode as _resolve_resume_pass_mode,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_retry_infrastructure_failures_on_resume as _resolve_retry_infrastructure_failures_on_resume,  # noqa: E501, F401
-)
-from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_retry_oom_failures_on_resume as _resolve_retry_oom_failures_on_resume,  # noqa: F401
-)
-from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_retry_structural_failures_on_resume as _resolve_retry_structural_failures_on_resume,  # noqa: F401
-)
-from llm_conceptual_modeling.hf_state.resume_state import (
-    resolve_retry_timeout_failures_on_resume as _resolve_retry_timeout_failures_on_resume,  # noqa: F401
-)
-from llm_conceptual_modeling.hf_state.resume_state import (
     should_keep_failure_pending_on_resume as _should_keep_failure_pending_on_resume,
 )
 from llm_conceptual_modeling.hf_state.resume_state import (
@@ -179,10 +160,6 @@ from llm_conceptual_modeling.hf_worker.state import (
     worker_loaded_model as _worker_loaded_model,  # noqa: F401
 )
 
-# Public compat alias for internal helper — used by tests that monkeypatch
-# llm_conceptual_modeling.hf_experiments.plan_paper_batch_specs
-plan_paper_batch_specs = _plan_paper_batch_specs  # noqa: F401
-
 
 def run_paper_batch(
     *,
@@ -191,7 +168,7 @@ def run_paper_batch(
     embedding_model: str,
     replications: int,
     algorithms: tuple[str, ...] | None = None,
-    config: HFRunConfig | None = None,
+    config: Any | None = None,
     runtime_factory: RuntimeFactory | None = None,
     resume: bool = False,
     dry_run: bool = False,
@@ -212,7 +189,7 @@ def run_paper_batch(
         profile_provider = default_runtime_profile_provider
     else:
         profile_provider = hf_runtime.profile_for_chat_model if hf_runtime else None
-    planned_specs = plan_paper_batch_specs(
+    planned_specs = _plan_paper_batch_specs(
         models=models,
         embedding_model=embedding_model,
         replications=replications,
@@ -313,6 +290,7 @@ def run_paper_batch(
                     algorithm=spec.algorithm,
                     model=spec.model,
                     decoding_algorithm=spec.decoding.algorithm,
+                    graph_source=spec.graph_source,
                     pair_name=spec.pair_name,
                     condition_bits=spec.condition_bits,
                     replication=spec.replication,
@@ -337,6 +315,7 @@ def run_paper_batch(
                 algorithm=spec.algorithm,
                 model=spec.model,
                 decoding_algorithm=spec.decoding.algorithm,
+                graph_source=spec.graph_source,
                 pair_name=spec.pair_name,
                 condition_bits=spec.condition_bits,
                 replication=spec.replication,

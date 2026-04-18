@@ -59,6 +59,7 @@ def build_seeded_resume_snapshot(
                 algorithm=spec.algorithm,
                 model=spec.model,
                 decoding_algorithm=spec.decoding.algorithm,
+                graph_source=spec.graph_source,
                 pair_name=spec.pair_name,
                 condition_bits=spec.condition_bits,
                 replication=spec.replication,

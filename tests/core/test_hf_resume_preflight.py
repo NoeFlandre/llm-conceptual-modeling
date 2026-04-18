@@ -70,6 +70,7 @@ def test_build_resume_preflight_report_counts_pending_work_from_existing_seed(
     )
 
     assert report["results_root_exists"] is True
+    assert report["total_planned_runs"] == 3
     assert report["finished_count"] == 1
     assert report["failed_count"] == 1
     assert report["pending_count"] == 1

@@ -8,7 +8,10 @@ import pytest
 from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
-from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
+from llm_conceptual_modeling.hf_batch.monitoring import (
+    collect_batch_status,
+    current_run_payload,
+)
 from llm_conceptual_modeling.hf_batch.types import RuntimeResult
 from llm_conceptual_modeling.hf_execution.subprocess import MonitoredCommandTimeout
 from llm_conceptual_modeling.hf_experiments import (
@@ -56,6 +59,20 @@ def test_timeout_resolution_accepts_numeric_like_values() -> None:
 
     assert _resolve_startup_timeout_seconds(context_policy) == 120.0
     assert _resolve_stage_timeout_seconds(context_policy) == 45.0
+
+
+def test_current_run_payload_includes_graph_source() -> None:
+    payload = current_run_payload(
+        algorithm="algo3",
+        model="Qwen/Qwen3.5-9B",
+        decoding_algorithm="beam",
+        graph_source="clarice_starling",
+        pair_name="subgraph_1_to_subgraph_3",
+        condition_bits="000",
+        replication=0,
+    )
+
+    assert payload["graph_source"] == "clarice_starling"
 
 
 def test_timeout_resolution_accepts_mapping_context_policy() -> None:

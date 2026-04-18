@@ -15,7 +15,6 @@ from llm_conceptual_modeling.hf_experiments import (
     _status_timestamp_now,
     _validate_structural_runtime_result,
 )
-from llm_conceptual_modeling.hf_run_config import HFRunConfig
 from llm_conceptual_modeling.hf_state.resume_state import (
     build_seeded_resume_snapshot,
     status_int,
@@ -24,7 +23,7 @@ from llm_conceptual_modeling.hf_state.resume_state import (
 
 def build_resume_preflight_report(
     *,
-    config: HFRunConfig,
+    config,
     repo_root: Path,
     results_root: Path | None,
     allow_empty: bool = False,
@@ -62,6 +61,7 @@ def build_resume_preflight_report(
         "results_root": str(effective_results_root),
         "results_root_exists": effective_results_root.exists(),
         "total_runs": len(planned_specs),
+        "total_planned_runs": len(planned_specs),
     }
 
     if not effective_results_root.exists():
