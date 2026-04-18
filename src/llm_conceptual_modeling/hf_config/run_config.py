@@ -10,6 +10,7 @@ from typing import cast
 import pandas as pd
 import yaml
 
+from llm_conceptual_modeling.common.graph_data import available_graph_sources
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     supports_explicit_thinking_disable,
@@ -120,17 +121,26 @@ class HFRunConfig:
     runtime: RuntimeConfig
     models: ModelsConfig
     decoding: list[DecodingConfig]
-    graph_source: str
+    graph_sources: list[str]
     shared_fragments: dict[str, str]
     algorithms: dict[str, AlgorithmPromptConfig]
 
+    @property
+    def graph_source(self) -> str:
+        return self.graph_sources[0]
+
     def to_dict(self) -> dict[str, object]:
+        inputs: dict[str, object]
+        if self.graph_sources == ["default"]:
+            inputs = {"graph_source": "default"}
+        else:
+            inputs = {"graph_sources": list(self.graph_sources)}
         return {
             "run": asdict(self.run),
             "runtime": asdict(self.runtime),
             "models": asdict(self.models),
             "decoding": [asdict(config) for config in self.decoding],
-            "inputs": {"graph_source": self.graph_source},
+            "inputs": inputs,
             "shared_fragments": dict(self.shared_fragments),
             "algorithms": {
                 name: {
@@ -159,7 +169,7 @@ def load_hf_run_config(path: str | Path) -> HFRunConfig:
             raw["decoding"],
             temperature=float(raw["runtime"]["temperature"]),
         ),
-        graph_source=str(raw["inputs"]["graph_source"]),
+        graph_sources=_load_graph_sources_config(raw),
         shared_fragments=shared_fragments,
         algorithms=_load_algorithm_configs(raw, shared_fragments=shared_fragments),
     )
@@ -180,6 +190,7 @@ def write_resolved_run_preview(*, config: HFRunConfig, output_dir: str | Path) -
         "seed": config.runtime.seed,
         "chat_models": config.models.chat_models,
         "embedding_model": config.models.embedding_model,
+        "graph_sources": config.graph_sources,
         "decoding_conditions": [asdict(item) for item in config.decoding],
         "algorithm_condition_counts": {
             name: value.factor_condition_count() for name, value in config.algorithms.items()
@@ -510,6 +521,29 @@ def _load_models_config(raw: Mapping[str, object]) -> ModelsConfig:
     )
 
 
+def _load_graph_sources_config(raw: Mapping[str, object]) -> list[str]:
+    inputs = _expect_mapping(raw["inputs"], label="inputs")
+    has_graph_source = "graph_source" in inputs
+    has_graph_sources = "graph_sources" in inputs
+    if has_graph_source and has_graph_sources:
+        raise ValueError("HF run config must use graph_source or graph_sources, not both.")
+    if has_graph_sources:
+        graph_sources = [
+            str(value)
+            for value in _expect_list(
+                inputs["graph_sources"],
+                label="graph_sources",
+            )
+        ]
+    elif has_graph_source:
+        graph_sources = [str(inputs["graph_source"])]
+    else:
+        raise ValueError("HF run config inputs must define graph_source or graph_sources.")
+    if not graph_sources:
+        raise ValueError("HF run config graph_sources must not be empty.")
+    return graph_sources
+
+
 def _validate_top_level_config(config: HFRunConfig) -> None:
     if config.run.provider != "hf-transformers":
         raise ValueError("HF run config provider must be hf-transformers.")
@@ -519,8 +553,14 @@ def _validate_top_level_config(config: HFRunConfig) -> None:
         raise ValueError("HF run config requires device_policy=cuda-only.")
     if config.runtime.context_policy.get("prompt_truncation") != "forbid":
         raise ValueError("HF run config requires prompt_truncation=forbid.")
-    if config.graph_source != "default":
-        raise ValueError("Only the default graph source is supported in HF run configs.")
+    known_graph_sources = set(available_graph_sources())
+    unknown_graph_sources = [
+        graph_source
+        for graph_source in config.graph_sources
+        if graph_source not in known_graph_sources
+    ]
+    if unknown_graph_sources:
+        raise ValueError(f"Unknown graph source in HF run config: {unknown_graph_sources[0]}")
     if not config.models.chat_models:
         raise ValueError("HF run config must list at least one chat model.")
     if not config.decoding:

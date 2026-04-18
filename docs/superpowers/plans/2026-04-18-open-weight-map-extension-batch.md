@@ -135,6 +135,8 @@ uv run ruff check src/llm_conceptual_modeling/common/graph_data.py tests/common/
 
 ### Story 2.1: Add multi-graph-source config support
 
+**Status:** Complete in micro-step 3 for parsing and validation. `HFRunConfig` now accepts legacy `graph_source` and new `graph_sources`, rejects conflicting/unknown sources, preserves legacy `to_dict()` output for `default`, and includes `graph_sources` in preview metadata. Planned run totals by graph source are deferred to the planning integration stories where specs become graph-aware.
+
 **Requirement:** allow configs to specify either the legacy single `graph_source` or the new `graph_sources` list.
 
 **Red test:**

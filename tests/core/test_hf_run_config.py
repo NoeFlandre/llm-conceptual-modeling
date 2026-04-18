@@ -16,6 +16,43 @@ def _write_config(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def _minimal_hf_config(*, inputs_block: str) -> str:
+    return f"""
+run:
+  provider: hf-transformers
+  output_root: /tmp/results
+  replications: 1
+runtime:
+  seed: 7
+  temperature: 0.0
+  quantization: none
+  device_policy: cuda-only
+  thinking_mode_by_model:
+    mistralai/Ministral-3-8B-Instruct-2512: acknowledged-unsupported
+  context_policy:
+    prompt_truncation: forbid
+  max_new_tokens_by_schema:
+    edge_list: 256
+models:
+  chat_models:
+    - mistralai/Ministral-3-8B-Instruct-2512
+  embedding_model: Qwen/Qwen3-Embedding-8B
+decoding:
+  greedy:
+    enabled: true
+inputs:
+{inputs_block}
+shared_fragments: {{}}
+algorithms:
+  algo1:
+    base_fragments: []
+    factors: {{}}
+    fragment_definitions: {{}}
+    prompt_templates:
+      body: "Task body."
+"""
+
+
 def test_load_hf_run_config_resolves_prompt_fragments_and_runtime_settings(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     _write_config(
@@ -77,6 +114,70 @@ algorithms:
     assert config.algorithms["algo1"].assemble_prompt(["explanation"]) == (
         "You are a helpful assistant. Explain the notation. Task body."
     )
+
+
+def test_load_hf_run_config_accepts_multiple_graph_sources(tmp_path: Path) -> None:
+    config_path = tmp_path / "run.yaml"
+    _write_config(
+        config_path,
+        _minimal_hf_config(
+            inputs_block="""
+  graph_sources:
+    - babs_johnson
+    - clarice_starling
+    - philip_marlowe
+""".strip("\n")
+        ),
+    )
+
+    config = load_hf_run_config(config_path)
+
+    assert config.graph_sources == [
+        "babs_johnson",
+        "clarice_starling",
+        "philip_marlowe",
+    ]
+
+
+def test_load_hf_run_config_preserves_legacy_graph_source(tmp_path: Path) -> None:
+    config_path = tmp_path / "run.yaml"
+    _write_config(
+        config_path,
+        _minimal_hf_config(inputs_block="  graph_source: default"),
+    )
+
+    config = load_hf_run_config(config_path)
+
+    assert config.graph_sources == ["default"]
+    assert config.to_dict()["inputs"] == {"graph_source": "default"}
+
+
+def test_load_hf_run_config_rejects_conflicting_graph_source_shapes(tmp_path: Path) -> None:
+    config_path = tmp_path / "run.yaml"
+    _write_config(
+        config_path,
+        _minimal_hf_config(
+            inputs_block="""
+  graph_source: default
+  graph_sources:
+    - babs_johnson
+""".strip("\n")
+        ),
+    )
+
+    with pytest.raises(ValueError, match="graph_source"):
+        load_hf_run_config(config_path)
+
+
+def test_load_hf_run_config_rejects_unknown_graph_source(tmp_path: Path) -> None:
+    config_path = tmp_path / "run.yaml"
+    _write_config(
+        config_path,
+        _minimal_hf_config(inputs_block="  graph_sources: [missing_map]"),
+    )
+
+    with pytest.raises(ValueError, match="missing_map"):
+        load_hf_run_config(config_path)
 
 
 def test_load_hf_run_config_rejects_unknown_fragment_reference(tmp_path: Path) -> None:
