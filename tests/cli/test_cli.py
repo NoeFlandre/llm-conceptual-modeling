@@ -87,6 +87,31 @@ def test_cli_analyze_hypothesis_bundle_writes_organized_review_artifacts(tmp_pat
     assert (output_dir / "algo3" / "depth" / "significance_summary.csv").exists()
 
 
+def test_cli_analyze_variance_decomposition_bundle_writes_bundle_outputs(tmp_path) -> None:
+    results_root = Path("data/results/open_weights/hf-paper-batch-canonical")
+    output_dir = tmp_path / "variance_decomposition"
+
+    exit_code = main(
+        [
+            "analyze",
+            "variance-decomposition-bundle",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "variance_decomposition.csv").exists()
+    assert (output_dir / "variance_decomposition_algo1.csv").exists()
+    assert (output_dir / "variance_decomposition_algo1.tex").exists()
+    assert (output_dir / "variance_decomposition.tex").exists()
+    assert (output_dir / "README.md").exists()
+    decomposition = pd.read_csv(output_dir / "variance_decomposition.csv")
+    assert {"algo1", "algo2", "algo3"}.issubset(set(decomposition["algorithm"]))
+
+
 def test_cli_eval_algo1_writes_legacy_parity_metrics(tmp_path) -> None:
     raw_path = "tests/reference_fixtures/legacy/algo1/gpt-5/raw/algorithm1_results_sg1_sg2.csv"
     expected_path = "tests/reference_fixtures/legacy/algo1/gpt-5/evaluated/metrics_sg1_sg2.csv"

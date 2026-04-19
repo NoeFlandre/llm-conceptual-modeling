@@ -83,15 +83,23 @@ Files:
 
 ## Command
 
-Regenerate the full variance-decomposition bundle:
+Regenerate the full variance-decomposition bundle from the canonical ledger:
 
 ```bash
-uv run python generate_variance_decomposition.py
+uv run lcm analyze variance-decomposition-bundle \
+  --results-root data/results/open_weights/hf-paper-batch-canonical \
+  --output-dir data/results/open_weights/hf-paper-batch-canonical/variance_decomposition
 ```
 
 This command reads the canonical ledger and rewrites the full contents of:
 
 - `data/results/open_weights/hf-paper-batch-canonical/variance_decomposition/`
+
+The legacy helper script remains available for convenience:
+
+```bash
+uv run python generate_variance_decomposition.py
+```
 
 ## Tests
 

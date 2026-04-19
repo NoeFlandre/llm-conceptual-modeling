@@ -585,12 +585,19 @@ uv run lcm analyze replication-budget-sufficiency \
   --include-graph-source
 ```
 
+```bash
+uv run lcm analyze variance-decomposition-bundle \
+  --results-root results/hf-open-weight-map-extension \
+  --output-dir results/hf-open-weight-map-extension/variance_decomposition
+```
+
 - If the final CLI flag name differs, update this plan and docs in the same commit that introduces it.
 
 **Verification:**
 
 ```bash
 uv run lcm analyze replication-budget-sufficiency --help
+uv run lcm analyze variance-decomposition-bundle --help
 git diff --check -- docs/open-weight-map-extension-runbook.md
 ```
 

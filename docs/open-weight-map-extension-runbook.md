@@ -186,7 +186,29 @@ This yields:
   - one row per algorithm / graph source / decoding condition
   - separate Qwen and Mistral sufficiency columns for 90% and 95% CI targets
 
-## 5. Notes
+## 5. Post-Run Variance Decomposition
+
+After the full batch is finished and the ledger has been refreshed, generate the
+variance-decomposition audit bundle from the same completed results root:
+
+```bash
+uv run lcm analyze variance-decomposition-bundle \
+  --results-root results/hf-open-weight-map-extension \
+  --output-dir results/hf-open-weight-map-extension/variance_decomposition
+```
+
+This writes the standard variance-decomposition bundle artifacts:
+
+- `variance_decomposition.csv`
+- `variance_decomposition_algo1.csv`
+- `variance_decomposition_algo2.csv`
+- `variance_decomposition_algo3.csv`
+- `variance_decomposition.tex`
+- `variance_decomposition_algo1.tex`
+- `variance_decomposition_algo2.tex`
+- `variance_decomposition_algo3.tex`
+
+## 6. Notes
 
 - `shellcheck` is not required by the repository and may not be installed
   locally. The script behavior is locked by the shell-script tests under

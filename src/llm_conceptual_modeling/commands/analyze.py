@@ -1,5 +1,6 @@
 import sys
 from argparse import Namespace
+from pathlib import Path
 
 from llm_conceptual_modeling.analysis.baseline_bundle import write_baseline_comparison_bundle
 from llm_conceptual_modeling.analysis.baseline_comparison import write_baseline_metric_comparison
@@ -21,6 +22,9 @@ from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summar
 from llm_conceptual_modeling.analysis.summary_bundle import write_statistical_reporting_bundle
 from llm_conceptual_modeling.analysis.variability import write_output_variability_analysis
 from llm_conceptual_modeling.analysis.variability_bundle import write_variability_bundle
+from llm_conceptual_modeling.analysis.variance_decomposition import (
+    generate_variance_decomposition_bundle,
+)
 
 
 def handle_analyze(args: Namespace) -> int:
@@ -151,6 +155,12 @@ def handle_analyze(args: Namespace) -> int:
             write_baseline_comparison_bundle(
                 results_root=args.results_root,
                 output_dir=args.output_dir,
+            )
+            return 0
+        if args.analysis_target == "variance-decomposition-bundle":
+            generate_variance_decomposition_bundle(
+                results_root=Path(args.results_root),
+                output_dir=Path(args.output_dir),
             )
             return 0
         if args.analysis_target == "plots":

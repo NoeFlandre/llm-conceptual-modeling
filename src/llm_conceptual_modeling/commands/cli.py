@@ -213,6 +213,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     baseline_bundle_parser.add_argument("--output-dir", required=True)
 
+    variance_decomposition_bundle_parser = analyze_subparsers.add_parser(
+        "variance-decomposition-bundle"
+    )
+    variance_decomposition_bundle_parser.add_argument(
+        "--results-root",
+        default=default_results_root(),
+    )
+    variance_decomposition_bundle_parser.add_argument("--output-dir", required=True)
+
     plots_parser = analyze_subparsers.add_parser("plots")
     plots_parser.add_argument("--results-root", required=True)
     plots_parser.add_argument("--output-dir", required=True)
