@@ -1,7 +1,8 @@
 from collections.abc import Mapping
 
+from llm_conceptual_modeling.common.types import Edge
+
 Thesaurus = Mapping[str, Mapping[str, list[str]]]
-Edge = tuple[str, str]
 
 
 def build_term_normalizer(thesaurus: Thesaurus) -> dict[str, str]:

@@ -43,13 +43,6 @@ def message_contains_any(message: str, markers: tuple[str, ...]) -> bool:
     return any(marker in lowered_message for marker in markers)
 
 
-def is_retryable_worker_failure_message(message: str) -> bool:
-    return "brokenpipeerror:" in message.lower() or message_contains_any(
-        message,
-        RETRYABLE_WORKER_FAILURE_MESSAGE_MARKERS,
-    )
-
-
 def classify_failure(*, error_type: str, message: str) -> str:
     if error_type == "MonitoredCommandTimeout" or "MonitoredCommandTimeout" in message:
         return "timeout"

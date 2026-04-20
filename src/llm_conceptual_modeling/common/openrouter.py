@@ -2,27 +2,22 @@ from __future__ import annotations
 
 import json
 import os
-from typing import Any, Protocol
+from typing import Any
 
 try:
     from openai import OpenAI
 except ImportError:  # pragma: no cover - exercised indirectly in import-light tests
     OpenAI = None  # type: ignore[assignment]
 
+from llm_conceptual_modeling.common.client_protocols import (
+    ChatCompletionClient as _ChatCompletionClient,
+)
 from llm_conceptual_modeling.common.retry import call_with_retry
 from llm_conceptual_modeling.common.structured_output import normalize_structured_response
 
 OPENROUTER_DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 
-
-class OpenRouterChatCompletionClient(Protocol):
-    def complete_json(
-        self,
-        *,
-        prompt: str,
-        schema_name: str,
-        schema: dict[str, object],
-    ) -> dict[str, object]: ...
+ChatCompletionClient = _ChatCompletionClient
 
 
 class OpenRouterChatClient:

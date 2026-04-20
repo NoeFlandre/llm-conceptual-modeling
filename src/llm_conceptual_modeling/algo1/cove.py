@@ -1,6 +1,6 @@
 from itertools import zip_longest
 
-Edge = tuple[str, str]
+from llm_conceptual_modeling.common.types import Edge
 
 
 def build_cove_prompt(candidate_edges: list[Edge]) -> str:

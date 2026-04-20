@@ -19,8 +19,10 @@ _RETRYABLE_FAILURE_KINDS = {"timeout", "oom", "infrastructure", "structural"}
 def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     output_root_path = Path(output_root)
     runs_root = output_root_path / "runs"
+    status_file = _read_json(output_root_path / "batch_status.json")
     active_model_slugs = resolve_active_chat_model_slugs(output_root_path)
     manifest_identities = _load_manifest_identity_keys(output_root_path / "shard_manifest.json")
+    planned_total_runs = _load_planned_total_runs(output_root_path)
     run_dirs = sorted(
         _iter_run_directories(
             runs_root,
@@ -35,6 +37,10 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
     pending_count = 0
     failures: list[dict[str, object]] = []
     running_run_dirs: list[Path] = []
+    has_explicit_batch_counts = any(
+        key in status_file
+        for key in ("finished_count", "failed_count", "running_count", "pending_count")
+    )
 
     for run_dir in run_dirs:
         state = _read_json(run_dir / "state.json")
@@ -67,14 +73,29 @@ def collect_batch_status(output_root: str | Path) -> dict[str, object]:
         pending_count += 1
 
     total_runs = len(run_dirs)
-    if total_runs == 0:
-        status_file = _read_json(output_root_path / "batch_status.json")
+    if has_explicit_batch_counts:
+        finished_count = coerce_int(status_file.get("finished_count", finished_count))
+        failed_count = coerce_int(status_file.get("failed_count", failed_count))
+        running_count = coerce_int(status_file.get("running_count", running_count))
+        pending_count = coerce_int(status_file.get("pending_count", pending_count))
+        total_runs = coerce_int(status_file.get("total_runs", total_runs))
+    else:
+        if total_runs == 0:
+            total_runs = coerce_int(status_file.get("total_runs", 0))
+        if total_runs <= 0:
+            total_runs = planned_total_runs
+        if manifest_identities:
+            total_runs = len(manifest_identities)
+        inferred_pending_count = total_runs - finished_count - failed_count - running_count
+        pending_count = max(inferred_pending_count, pending_count)
+
+    if total_runs <= 0:
         total_runs = coerce_int(status_file.get("total_runs", 0))
-    if manifest_identities:
+    if total_runs <= 0:
+        total_runs = planned_total_runs
+    if total_runs <= 0 and manifest_identities:
         total_runs = len(manifest_identities)
 
-    status_file = _read_json(output_root_path / "batch_status.json")
-    pending_count = max(total_runs - finished_count - failed_count - running_count, pending_count)
     percent_complete = round((finished_count / total_runs) * 100.0, 2) if total_runs else 0.0
     active_run = _collect_active_run_details(running_run_dirs[0]) if running_run_dirs else {}
     failure_type_counts = dict(
@@ -170,6 +191,12 @@ def _run_dir_matches_filters(
 
 def _load_manifest_identity_keys(manifest_path: Path) -> set[SpecIdentity]:
     return manifest_identity_keys(read_json_dict(manifest_path))
+
+
+def _load_planned_total_runs(output_root: Path) -> int:
+    preview_plan_path = output_root / "preview" / "resolved_run_plan.json"
+    preview_plan = _read_json(preview_plan_path)
+    return coerce_int(preview_plan.get("planned_total_runs", 0))
 
 
 def _collect_active_run_details(run_dir: Path) -> dict[str, object]:

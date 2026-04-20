@@ -1,15 +1,6 @@
 from dataclasses import dataclass
-from typing import Protocol
 
-Edge = tuple[str, str]
-
-
-class EdgeGenerator(Protocol):
-    def __call__(self, *, subgraph1: list[Edge], subgraph2: list[Edge]) -> list[Edge]: ...
-
-
-class CoveVerifier(Protocol):
-    def __call__(self, candidate_edges: list[Edge]) -> list[Edge]: ...
+from llm_conceptual_modeling.algo1.types import CoveVerifier, Edge, EdgeGenerator
 
 
 @dataclass(frozen=True)

@@ -13,7 +13,7 @@ from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch,
 )
-from llm_conceptual_modeling.hf_run_config import HFRunConfig, load_hf_run_config
+from llm_conceptual_modeling.hf_config.run_config import load_hf_run_config
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 
 QWEN_ALGO1_TAIL_MODEL = "Qwen/Qwen3.5-9B"
@@ -357,7 +357,7 @@ def read_watcher_status(path: str | Path) -> dict[str, object]:
 
 def _build_tail_runtime_config(
     *,
-    canonical_config: HFRunConfig,
+    canonical_config: Any,
     remote_output_root: str,
 ) -> dict[str, Any]:
     decoding = [

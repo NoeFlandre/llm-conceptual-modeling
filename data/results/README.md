@@ -23,6 +23,10 @@ Each algorithm directory contains the frontier model family outputs, grouped by 
   - canonical finished-run ledger and paper-facing outputs
   - `runs/` artifacts for the finalized Qwen/Mistral study
   - `variance_decomposition/` outputs for the paper
+- `hf-map-extension-canonical/`
+  - canonical three-map extension batch outputs
+  - `runs/` artifacts for the scoped Algo 3 map-extension study
+  - `variance_decomposition/` outputs including per-map CSV exports
 
 ### `archives/`
 - `olmo/`
@@ -44,4 +48,6 @@ Each algorithm directory contains the frontier model family outputs, grouped by 
   - scratch/debug files that do not explain a finished result
 - Failed-only trees may be archived for provenance, but they should not remain mixed into the top-level results layout.
 
-The goal is that someone can open `results/`, immediately find frontier outputs, the open-weight paper outputs, and then browse `archives/` only when operational history is needed.
+The goal is that someone can open `data/results/`, immediately find frontier
+outputs, the open-weight paper outputs, and then browse `archives/` only when
+operational history is needed.

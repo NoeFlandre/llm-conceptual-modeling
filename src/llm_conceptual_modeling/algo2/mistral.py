@@ -9,8 +9,12 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Protocol, cast
+from typing import TYPE_CHECKING, cast
 
+from llm_conceptual_modeling.algo2.types import (
+    EdgeSuggestionFunction,
+    LabelProposalFunction,
+)
 from llm_conceptual_modeling.common.mistral import (
     ChatCompletionClient,
     Edge,
@@ -295,12 +299,8 @@ def extract_label_list_from_chat_content(content: str) -> list[str]:
 # ---------------------------------------------------------------------------
 
 
-class LabelProposer(Protocol):
-    def __call__(self, current_labels: list[str]) -> list[str]: ...
-
-
-class EdgeSuggester(Protocol):
-    def __call__(self, expanded_label_context: list[str]) -> list[Edge]: ...
+LabelProposer = LabelProposalFunction
+EdgeSuggester = EdgeSuggestionFunction
 
 
 def build_label_proposer(

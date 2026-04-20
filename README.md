@@ -29,7 +29,9 @@ This repository does not claim runtime equivalence for historical provider behav
 - `data/results/frontier/`
   Imported frontier-model experiment outputs grouped by algorithm.
 - `data/results/open_weights/`
-  Canonical Qwen/Mistral paper-facing outputs and the variance-decomposition bundle.
+  Canonical Qwen/Mistral paper-facing outputs for both the full sweep and the
+  three-map extension batch, including the maintained variance-decomposition
+  bundles.
 - `data/results/archives/`
   Preserved OLMO artifacts, stale batch workdirs, and drained shard trees.
 - `data/baselines/`
@@ -182,9 +184,10 @@ Method and artifact details are documented in
 [docs/variance-decomposition.md](docs/variance-decomposition.md).
 
 Local experiment-result hygiene is documented in [data/results/README.md](data/results/README.md).
-In short: keep frontier outputs under `data/results/frontier/`, open-weight paper outputs under
-`data/results/open_weights/`, archive old operational workdirs under `data/results/archives/`, and
-leave the top-level `results/` folder free of maintained outputs.
+In short: keep frontier outputs under `data/results/frontier/`, keep both
+open-weight batches under `data/results/open_weights/`, archive old operational
+workdirs under `data/results/archives/`, and keep the repository root free of a
+maintained `results/` tree.
 The source tree itself should also stay free of Finder junk (`.DS_Store`) and other ad hoc
 temporary artifacts; keep scratch work isolated under `tmp/` or a throwaway worktree instead of
 committing it into the repo layout.

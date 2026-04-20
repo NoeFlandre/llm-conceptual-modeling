@@ -9,12 +9,12 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Protocol, cast
+from typing import TYPE_CHECKING, cast
 
 from llm_conceptual_modeling.algo1.cove import apply_cove_verification, build_cove_prompt
+from llm_conceptual_modeling.algo1.types import CoveVerifier, Edge, EdgeGenerator
 from llm_conceptual_modeling.common.mistral import (
     ChatCompletionClient,
-    Edge,
     MistralChatClient,
     _build_notation_section,
     _format_knowledge_map,
@@ -231,21 +231,6 @@ def extract_vote_list_from_chat_content(content: str) -> list[str]:
     parsed_content = json.loads(content)
     votes = parsed_content["votes"]
     return [str(v) for v in votes]
-
-
-# ---------------------------------------------------------------------------
-# Edge generator & CoVe verifier
-# ---------------------------------------------------------------------------
-
-
-class EdgeGenerator(Protocol):
-    def __call__(self, *, subgraph1: list[Edge], subgraph2: list[Edge]) -> list[Edge]: ...
-
-
-class CoveVerifier(Protocol):
-    def __call__(self, candidate_edges: list[Edge]) -> list[Edge]: ...
-
-
 def build_edge_generator(
     chat_client: ChatCompletionClient,
     prompt_config: "Method1PromptConfig | None" = None,

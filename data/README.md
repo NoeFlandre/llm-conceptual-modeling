@@ -12,6 +12,13 @@ The bucket contains:
 - `results/`
 - `analysis_artifacts/`
 
+Within a local checkout, the maintained results layout is:
+
+- `data/results/frontier/`
+- `data/results/open_weights/hf-paper-batch-canonical/`
+- `data/results/open_weights/hf-map-extension-canonical/`
+- `data/results/archives/`
+
 ## Expected External Directories
 
 Set these environment variables if the bucket contents are stored outside this

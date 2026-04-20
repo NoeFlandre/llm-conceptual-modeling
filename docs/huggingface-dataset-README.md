@@ -7,7 +7,9 @@ This Hugging Face bucket stores the large offline artifacts for the `llm-concept
 - `results/`
   Imported experiment outputs organized by algorithm and model. In the local
   code checkout, these are partitioned into `data/results/frontier`,
-  `data/results/open_weights`, and `data/results/archives`.
+  `data/results/open_weights`, and `data/results/archives`. The open-weight
+  partition contains both the full sweep (`hf-paper-batch-canonical/`) and the
+  three-map extension batch (`hf-map-extension-canonical/`).
 - `analysis_artifacts/`
   Reviewer-facing derived artifacts generated from the imported corpus.
 

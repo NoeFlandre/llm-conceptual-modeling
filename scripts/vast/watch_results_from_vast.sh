@@ -49,6 +49,7 @@ from pathlib import Path
 import json
 
 ledger_path = Path(environ["LEDGER_PATH_VALUE"])
+batch_status_path = ledger_path.with_name("batch_status.json")
 ledger_snapshot = None
 if ledger_path.exists():
     try:
@@ -63,6 +64,24 @@ if ledger_path.exists():
         }
     except json.JSONDecodeError:
         ledger_snapshot = None
+
+batch_status_snapshot = None
+if batch_status_path.exists():
+    try:
+        batch_status = json.loads(batch_status_path.read_text(encoding="utf-8"))
+        batch_status_snapshot = {
+            "generated_at": batch_status.get("updated_at"),
+            "expected_total_runs": batch_status.get("total_runs"),
+            "finished_count": batch_status.get("finished_count"),
+            "pending_count": batch_status.get("pending_count"),
+            "retryable_failed_count": 0,
+            "terminal_failed_count": batch_status.get("failed_count"),
+        }
+    except json.JSONDecodeError:
+        batch_status_snapshot = None
+
+if ledger_snapshot is None or int(ledger_snapshot.get("expected_total_runs", 0) or 0) <= 0:
+    ledger_snapshot = batch_status_snapshot
 
 status_payload = {
     "status": environ["SYNC_STATE"],

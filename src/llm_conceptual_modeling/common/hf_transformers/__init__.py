@@ -11,12 +11,9 @@ import time
 
 import numpy as np
 
-# Import from _children_mapping — all children mapping recovery helpers.
 from llm_conceptual_modeling.common.hf_transformers._children_mapping import (
     _children_mapping_needs_more_recovery,
     _extract_quoted_strings_from_bracket,
-    # Also import _looks_like_children_mapping from _children_mapping
-    # (not from _parse) so the _children_mapping version is exposed.
     _looks_like_children_mapping,
     _recover_children_mapping_from_lines,
     _recover_children_mapping_from_outer_block,
@@ -40,8 +37,6 @@ from llm_conceptual_modeling.common.hf_transformers._children_mapping import (
     _strip_mapping_comments,
     _try_inline_children_parse,
 )
-
-# Zone C — client classes and helpers from _client.
 from llm_conceptual_modeling.common.hf_transformers._client import (
     HFTransformersChatClient,
     HFTransformersEmbeddingClient,
@@ -56,22 +51,17 @@ from llm_conceptual_modeling.common.hf_transformers._client import (
     _response_hit_generation_limit,
     _set_generation_temperature,
 )
-
-# Zone B — runtime helpers that also need monkeypatch surface.
 from llm_conceptual_modeling.common.hf_transformers._compat import (
     _custom_generate_overrides,
     _ensure_qwen_dynamic_cache_compatibility,
     _load_qwen_dynamic_cache_type,
     _mutate_qwen_cache_state_lists,
     _patch_qwen_contrastive_custom_generate,
-    # Qwen cache helpers
     _qwen_cache_batch_repeat_interleave,
     _qwen_cache_batch_select_indices,
     _qwen_cache_crop,
     _temporarily_disable_stateful_guard,
 )
-
-# Import from _edge_list — recovery functions for edge lists.
 from llm_conceptual_modeling.common.hf_transformers._edge_list import (
     _extract_edge_pair_from_bracket,
     _extract_recoverable_edge_endpoints,
@@ -80,9 +70,6 @@ from llm_conceptual_modeling.common.hf_transformers._edge_list import (
     _recover_bare_comma_separated_edge_pair,
     _recover_bracketed_edge_pairs,
 )
-
-# Import from _label_list — these must come from here (not _parse) so the
-# namespace exposes the _label_list versions.
 from llm_conceptual_modeling.common.hf_transformers._label_list import (
     _extract_first_balanced_block,
     _extract_outer_block,
@@ -100,11 +87,6 @@ from llm_conceptual_modeling.common.hf_transformers._label_list import (
     _scan_lenient_quoted_string,
     _split_packed_label_string,
 )
-
-# Import ONLY the unique orchestrator/utility functions from _parse.
-# Recovery functions that also exist in submodules are NOT imported from
-# _parse here — import them from the original submodules below to avoid
-# shadowing issues (_parse defines local copies that shadow its imports).
 from llm_conceptual_modeling.common.hf_transformers._parse import (
     _looks_retryable_malformed_output,
     _looks_retryable_normalization_failure,
@@ -112,17 +94,9 @@ from llm_conceptual_modeling.common.hf_transformers._parse import (
     _parse_generated_json,
     _resolve_malformed_output_retry_limit,
     _should_normalize_exhausted_malformed_edge_list_to_empty,
-    # _normalize_label_list_payload and _split_packed_label_string are defined
-    # in _parse too, but we import them from _label_list (below) so the
-    # _label_list versions take precedence for the namespace.
-    # _looks_like_children_mapping is also locally defined in _parse; we
-    # import it from _children_mapping (below) instead.
     _strip_assistant_prefix,
     _strip_code_fence,
 )
-
-# Zone A — compatibility and policy layer.
-# Policy symbols re-exported from _policy (they were always in _policy, not _compat).
 from llm_conceptual_modeling.common.hf_transformers._policy import (
     DecodingConfig,
     RuntimeProfile,
@@ -132,9 +106,6 @@ from llm_conceptual_modeling.common.hf_transformers._policy import (
     supports_decoding_config,
     supports_explicit_thinking_disable,
 )
-
-# Zone A — context window helpers from _runtime (moved from _compat).
-# Zone B — runtime loading/factory imported directly from _runtime.
 from llm_conceptual_modeling.common.hf_transformers._runtime import (
     _MINISTRAL_CHAT_MODEL,
     _QWEN_CHAT_MODEL,
@@ -151,11 +122,13 @@ from llm_conceptual_modeling.common.hf_transformers._runtime import (
     _release_prefetched_model_object,
     _require_cuda,
     _resolve_attention_implementation,
-    _resolve_context_limit,
-    _torch,
     _transformers,
     _trusted_remote_code_kwargs,
     build_runtime_factory,
+)
+from llm_conceptual_modeling.common.hf_transformers._runtime_support import (
+    _resolve_context_limit,
+    _torch,
     derive_context_window,
     derive_context_window_from_input_length,
 )

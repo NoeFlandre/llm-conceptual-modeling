@@ -33,8 +33,24 @@ def _build_term_columns(
 
 
 def _basis_columns_for_factor(frame: pd.DataFrame, factor_name: str) -> list[np.ndarray]:
-    column = frame[factor_name].astype(float).to_numpy(dtype=float)
-    return [column]
+    series = frame[factor_name]
+    numeric = pd.to_numeric(series, errors="coerce")
+    if not numeric.isna().any():
+        values = numeric.to_numpy(dtype=float)
+        return [values]
+    return _categorical_basis_columns(series)
+
+
+def _categorical_basis_columns(series: pd.Series) -> list[np.ndarray]:
+    ordered_levels = sorted(pd.unique(series.astype(str)))
+    categorical = pd.Categorical(series.astype(str), categories=ordered_levels, ordered=True)
+    indicator = pd.get_dummies(categorical, dtype=float).to_numpy(dtype=float)
+    centered = indicator - indicator.mean(axis=0, keepdims=True)
+    if centered.shape[1] <= 1:
+        return [centered[:, 0]]
+    u, singular_values, _vh = np.linalg.svd(centered, full_matrices=False)
+    rank = int((singular_values > 1e-8).sum())
+    return [u[:, index] for index in range(rank)]
 
 
 def _column_sum_of_squares(column: np.ndarray, centered_response: np.ndarray) -> float:

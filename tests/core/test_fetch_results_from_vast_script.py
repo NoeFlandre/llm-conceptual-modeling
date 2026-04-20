@@ -32,7 +32,7 @@ def test_fetch_results_script_supports_ssh_key_and_port_overrides() -> None:
     assert '"$REMOTE_RESULTS_DIR"/ "$LOCAL_RESULTS_DIR"/' in script_text
 
 
-def test_fetch_results_script_protects_local_derived_ledger_artifacts_from_remote_overwrite() -> None:
+def test_fetch_results_script_protects_local_ledger_overwrite() -> None:
     script_text = Path("scripts/vast/fetch_results_from_vast.sh").read_text(encoding="utf-8")
 
     assert (
@@ -80,6 +80,13 @@ def test_watch_results_script_retries_fetch_and_writes_health_artifacts() -> Non
     assert 'WATCHER_IDENTITY_VALUE="$LOCAL_RESULTS_SYNC_IDENTITY"' in script_text
     assert 'environ["STATUS_PATH"]' in script_text
     assert '"watcher_identity": environ["WATCHER_IDENTITY_VALUE"]' in script_text
+    assert 'batch_status_path = ledger_path.with_name("batch_status.json")' in script_text
+    assert '"expected_total_runs": batch_status.get("total_runs")' in script_text
+    fallback_guard = (
+        'if ledger_snapshot is None or int('
+        'ledger_snapshot.get("expected_total_runs", 0) or 0) <= 0:'
+    )
+    assert fallback_guard in script_text
     assert 'write_sync_status "syncing" "Running result sync."' in script_text
     assert 'trap ' in script_text
     assert 'write_sync_status "stopped" "Watcher stopped."' in script_text

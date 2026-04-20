@@ -2,7 +2,7 @@ from collections import defaultdict, deque
 from collections.abc import Iterable
 from typing import Any
 
-Edge = tuple[str, str]
+from llm_conceptual_modeling.common.types import Edge
 
 
 def _nodes_from_edges(edges: Iterable[Edge]) -> set[str]:

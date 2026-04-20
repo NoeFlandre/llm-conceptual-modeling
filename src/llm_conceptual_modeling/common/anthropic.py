@@ -15,24 +15,18 @@ import os
 import re
 import time
 from collections.abc import Mapping
-from typing import Any, Protocol, cast
+from typing import Any, cast
 
 import anthropic
 import httpx
 
+from llm_conceptual_modeling.common.client_protocols import (
+    ChatCompletionClient as _ChatCompletionClient,
+)
+
 logger = logging.getLogger(__name__)
 
-
-class ChatCompletionClient(Protocol):
-    """Protocol defining the chat completion interface used across algorithm modules."""
-
-    def complete_json(
-        self,
-        *,
-        prompt: str,
-        schema_name: str,
-        schema: dict[str, object],
-    ) -> dict[str, object]: ...
+ChatCompletionClient = _ChatCompletionClient
 
 
 def _call_with_retry(

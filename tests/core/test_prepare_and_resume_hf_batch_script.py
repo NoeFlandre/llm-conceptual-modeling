@@ -17,6 +17,23 @@ def test_prepare_and_resume_script_bootstraps_and_launches_resumable_batch() -> 
     assert "remote_runtime_doctor.sh" in script_text
     assert "remote_resume_preview.sh" in script_text
     assert "remote_resume_launch.sh" in script_text
+    assert "llm_conceptual_modeling.hf_resume.profile" in script_text
+    assert "uv --directory \"$LOCAL_REPO_DIR\" run python - <<'PY'" in script_text
+    assert 'if [ -f "$LOCAL_REPO_DIR/$config_path" ]; then' in script_text
+    assert (
+        'LOCAL_RESULTS_HAS_SEED="false"' in script_text
+    )
+    seed_guard = (
+        'if vast_has_value "$LOCAL_RESULTS_DIR" && '
+        '{ [ -f "$LOCAL_RESULTS_DIR/ledger.json" ] || '
+        '[ -d "$LOCAL_RESULTS_DIR/runs" ]; }; then'
+    )
+    assert (
+        seed_guard in script_text
+    )
+    assert script_text.index('LOCAL_RESULTS_HAS_SEED="false"') < script_text.index(
+        "write-unfinished-manifest"
+    )
     assert "docker run -d" in script_text
     assert "docker exec" in script_text
     assert "REMOTE_RUNTIME_MODE" in script_text
@@ -27,7 +44,7 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     script_text = script_path.read_text(encoding="utf-8")
     assert 'SSH_CMD=($(vast_ssh_command "$SSH_PORT" "$SSH_KEY_PATH"))' in script_text
     assert 'RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"' in script_text
-    assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
+    assert 'if [ "$LOCAL_RESULTS_HAS_SEED" = "true" ]; then' in script_text
     assert "--exclude '.work-venv'" in script_text
     assert "--exclude '.ruff_cache'" in script_text
     assert "--exclude 'results'" in script_text
@@ -46,6 +63,9 @@ def test_prepare_and_resume_script_can_seed_remote_results_and_run_optional_smok
     assert 'if vast_has_value "${SMOKE_GRAPH_SOURCE:-}"; then' in script_text
     assert 'SMOKE_GRAPH_SOURCE_FLAG="--graph-source ${SMOKE_GRAPH_SOURCE}"' in script_text
     assert '$SMOKE_GRAPH_SOURCE_FLAG \\' in script_text
+    assert 'if [ "${SMOKE_DECODING}" = "beam" ]; then' in script_text
+    assert 'SMOKE_NUM_BEAMS_FLAG="--num-beams ${SMOKE_NUM_BEAMS:-6}"' in script_text
+    assert '$SMOKE_NUM_BEAMS_FLAG \\' in script_text
     assert "BATCH_GENERATION_TIMEOUT_SECONDS" in script_text
     assert 'BATCH_STARTUP_TIMEOUT_SECONDS="${BATCH_STARTUP_TIMEOUT_SECONDS:-}"' in script_text
     assert "BATCH_RESUME_PASS_MODE" in script_text
@@ -100,7 +120,7 @@ def test_prepare_and_resume_script_can_launch_local_results_autosync() -> None:
     assert 'SSH_PORT="$SSH_PORT" \\' in script_text
     assert '"$SSH_PORT" \\' in script_text
     assert "nohup bash" in script_text
-    assert 'if vast_has_value "$LOCAL_RESULTS_DIR"; then' in script_text
+    assert 'if [ "$LOCAL_RESULTS_HAS_SEED" = "true" ]; then' in script_text
     assert 'RSYNC_TIMEOUT_SECONDS="$LOCAL_RESULTS_SYNC_RSYNC_TIMEOUT_SECONDS" \\' in script_text
 
 

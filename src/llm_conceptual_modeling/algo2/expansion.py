@@ -1,14 +1,7 @@
 from dataclasses import dataclass
 from math import sqrt
-from typing import Protocol
 
-
-class LabelProposalFunction(Protocol):
-    def __call__(self, current_labels: list[str]) -> list[str]: ...
-
-
-class SimilarityFunction(Protocol):
-    def __call__(self, candidate_labels: list[str], seed_labels: list[str]) -> float: ...
+from llm_conceptual_modeling.algo2.types import LabelProposalFunction, SimilarityFunction
 
 
 @dataclass(frozen=True)

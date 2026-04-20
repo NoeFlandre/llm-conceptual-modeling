@@ -75,14 +75,14 @@ REMOTE_RUNTIME_DOCTOR_SCRIPT="$(vast_remote_script_path "$REMOTE_RUNTIME_DOCTOR_
 REMOTE_ROOT_NAME="$(basename "$REMOTE_RESULTS_DIR")"
 if [ -z "$BATCH_EXCLUDED_DECODING_LABELS" ]; then
   BATCH_EXCLUDED_DECODING_LABELS="$(
-    python3 - <<'PY' "$LOCAL_REPO_DIR" "$REMOTE_ROOT_NAME"
+    uv --directory "$LOCAL_REPO_DIR" run python - <<'PY' "$LOCAL_REPO_DIR" "$REMOTE_ROOT_NAME"
 from pathlib import Path
 import sys
 
 repo_root = Path(sys.argv[1])
 sys.path.insert(0, str(repo_root / "src"))
 
-from llm_conceptual_modeling.hf_resume_profile import resolve_resume_profile
+from llm_conceptual_modeling.hf_resume.profile import resolve_resume_profile
 
 profile = resolve_resume_profile(sys.argv[2])
 print(",".join(profile.excluded_decoding_labels))
@@ -96,16 +96,16 @@ RSYNC_SSH="$(vast_rsync_ssh_command "$SSH_PORT" "$SSH_KEY_PATH")"
 
 resolve_local_config_source() {
   local config_path="$1"
-  if [ -f "$config_path" ]; then
-    printf '%s\n' "$config_path"
-    return 0
-  fi
   if vast_has_value "$LOCAL_RESULTS_DIR" && [ -f "$LOCAL_RESULTS_DIR/$config_path" ]; then
     printf '%s\n' "$LOCAL_RESULTS_DIR/$config_path"
     return 0
   fi
   if [ -f "$LOCAL_REPO_DIR/$config_path" ]; then
     printf '%s\n' "$LOCAL_REPO_DIR/$config_path"
+    return 0
+  fi
+  if [ -f "$config_path" ]; then
+    printf '%s\n' "$config_path"
     return 0
   fi
   return 1
@@ -137,7 +137,7 @@ case "$LOCAL_CONFIG_SOURCE_PATH" in
 esac
 
 echo "[0/6] Local resume preflight"
-if vast_has_value "$LOCAL_RESULTS_DIR"; then
+if vast_has_value "$LOCAL_RESULTS_DIR" && [ -d "$LOCAL_RESULTS_DIR" ]; then
   uv --directory "$LOCAL_REPO_DIR" run lcm run resume-preflight \
     --config "$LOCAL_CONFIG_SOURCE_PATH" \
     --repo-root "$LOCAL_REPO_DIR" \
@@ -152,6 +152,15 @@ else
 fi
 
 if vast_has_value "$LOCAL_RESULTS_DIR"; then
+  mkdir -p "$LOCAL_RESULTS_DIR"
+fi
+
+LOCAL_RESULTS_HAS_SEED="false"
+if vast_has_value "$LOCAL_RESULTS_DIR" && { [ -f "$LOCAL_RESULTS_DIR/ledger.json" ] || [ -d "$LOCAL_RESULTS_DIR/runs" ]; }; then
+  LOCAL_RESULTS_HAS_SEED="true"
+fi
+
+if [ "$LOCAL_RESULTS_HAS_SEED" = "true" ]; then
   echo "[0.5/6] Build unfinished shard manifest"
   uv --directory "$LOCAL_REPO_DIR" run lcm run write-unfinished-manifest \
     --results-root "$LOCAL_RESULTS_DIR" \
@@ -187,7 +196,7 @@ else
   exit 1
 fi
 
-if vast_has_value "$LOCAL_RESULTS_DIR"; then
+if [ "$LOCAL_RESULTS_HAS_SEED" = "true" ]; then
   echo "[3/6] Seed remote results root from local copy"
   mkdir -p "$LOCAL_RESULTS_DIR"
   "${SSH_CMD[@]}" "$SSH_TARGET" "mkdir -p '$REMOTE_RESULTS_DIR'"
@@ -252,6 +261,10 @@ if vast_has_value "${SMOKE_ALGORITHM:-}" \
   if vast_has_value "${SMOKE_GRAPH_SOURCE:-}"; then
     SMOKE_GRAPH_SOURCE_FLAG="--graph-source ${SMOKE_GRAPH_SOURCE}"
   fi
+  SMOKE_NUM_BEAMS_FLAG=""
+  if [ "${SMOKE_DECODING}" = "beam" ]; then
+    SMOKE_NUM_BEAMS_FLAG="--num-beams ${SMOKE_NUM_BEAMS:-6}"
+  fi
   "${SSH_CMD[@]}" "$SSH_TARGET" "
     set -euo pipefail
     cd '$REMOTE_REPO_DIR'
@@ -263,6 +276,7 @@ if vast_has_value "${SMOKE_ALGORITHM:-}" \
       --pair-name '${SMOKE_PAIR_NAME}' \
       --condition-bits '${SMOKE_CONDITION_BITS}' \
       --decoding '${SMOKE_DECODING}' \
+      $SMOKE_NUM_BEAMS_FLAG \
       --replication '${SMOKE_REPLICATION}' \
       --output-root '${SMOKE_OUTPUT_ROOT}'
   "

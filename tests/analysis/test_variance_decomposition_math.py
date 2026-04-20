@@ -48,3 +48,32 @@ def test_assert_balanced_cells_raises_on_unbalanced_design() -> None:
 
     with pytest.raises(ValueError, match="balanced design"):
         _assert_balanced_cells(frame, ("Greedy vs Beam/Contrastive", "Beam Width"))
+
+
+def test_build_term_columns_supports_categorical_factors_with_orthogonal_basis() -> None:
+    frame = pd.DataFrame(
+        {
+            "graph_source": [
+                "babs_johnson",
+                "babs_johnson",
+                "clarice_starling",
+                "clarice_starling",
+                "philip_marlowe",
+                "philip_marlowe",
+            ],
+            "Example": [-1.0, 1.0, -1.0, 1.0, -1.0, 1.0],
+        }
+    )
+
+    term_columns = _build_term_columns(frame, ("graph_source", "Example"))
+
+    assert [name for name, _columns in term_columns] == [
+        "graph_source",
+        "Example",
+        "graph_source & Example",
+    ]
+    graph_columns = term_columns[0][1]
+    assert len(graph_columns) == 2
+    for left_index, left in enumerate(graph_columns):
+        for right in graph_columns[left_index + 1 :]:
+            assert abs(float(left @ right)) <= 1e-8

@@ -194,10 +194,6 @@ def _build_algo3_prompt_bundle(
     return {"tree_expansion": tree_expansion_prompt}
 
 
-def resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> str:
-    return _resolve_representation_variant(prompt_factors)
-
-
 def _resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> str:
     use_adjacency_notation = bool(prompt_factors.get("use_adjacency_notation", False))
     use_array_representation = bool(prompt_factors.get("use_array_representation", False))
@@ -208,10 +204,6 @@ def _resolve_representation_variant(prompt_factors: dict[str, bool | int]) -> st
     if not use_adjacency_notation and use_array_representation:
         return "edges"
     return "RDF"
-
-
-def join_prompt_sections(*sections: str) -> str:
-    return _join_prompt_sections(*sections)
 
 
 def _join_prompt_sections(*sections: str) -> str:

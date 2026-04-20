@@ -130,7 +130,7 @@ scripts/vast/prepare_and_resume_hf_batch.sh \
   /workspace/llm-conceptual-modeling \
   configs/hf_transformers_open_weight_map_extension.yaml \
   /workspace/results/hf-open-weight-map-extension \
-  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-open-weight-map-extension
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-map-extension-canonical
 ```
 
 The wrapper will:
@@ -155,7 +155,7 @@ scripts/vast/prepare_and_resume_hf_batch.sh \
   /workspace/llm-conceptual-modeling \
   configs/hf_transformers_open_weight_map_extension.yaml \
   /workspace/results/hf-open-weight-map-extension \
-  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/results/hf-open-weight-map-extension
+  /Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/data/results/open_weights/hf-map-extension-canonical
 ```
 
 The local results root can reseed the remote root, and unfinished identities are
@@ -169,9 +169,9 @@ graph-aware sufficiency summaries with one command:
 
 ```bash
 uv run lcm analyze replication-budget-sufficiency \
-  --results-root results/hf-open-weight-map-extension \
-  --output results/hf-open-weight-map-extension/replication_sufficiency_detailed.csv \
-  --compact-output results/hf-open-weight-map-extension/replication_sufficiency_compact.csv \
+  --results-root data/results/open_weights/hf-map-extension-canonical \
+  --output data/results/open_weights/hf-map-extension-canonical/replication_sufficiency_detailed.csv \
+  --compact-output data/results/open_weights/hf-map-extension-canonical/replication_sufficiency_compact.csv \
   --expected-replications 5 \
   --include-graph-source
 ```
@@ -193,12 +193,16 @@ variance-decomposition audit bundle from the same completed results root:
 
 ```bash
 uv run lcm analyze variance-decomposition-bundle \
-  --results-root results/hf-open-weight-map-extension \
-  --output-dir results/hf-open-weight-map-extension/variance_decomposition
+  --results-root data/results/open_weights/hf-map-extension-canonical \
+  --output-dir data/results/open_weights/hf-map-extension-canonical/variance_decomposition
 ```
 
 This writes the standard variance-decomposition bundle artifacts:
 
+- `open_weight_map_extension_summary.csv`
+  - compact summary table by `algorithm`, `condition_label`, `graph_source`, and
+    `pair_name`
+  - separate Qwen and Mistral run counts and mean recall values
 - `variance_decomposition.csv`
 - `variance_decomposition_algo1.csv`
 - `variance_decomposition_algo2.csv`

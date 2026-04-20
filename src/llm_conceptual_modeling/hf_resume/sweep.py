@@ -5,9 +5,9 @@ from pathlib import Path
 from typing import Callable, TypedDict
 
 from llm_conceptual_modeling.common.io import coerce_int
+from llm_conceptual_modeling.hf_config.run_config import load_hf_run_config
 from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume.profile import resolve_resume_profile
-from llm_conceptual_modeling.hf_run_config import load_hf_run_config
 
 
 class ResumeRootReport(TypedDict, total=False):

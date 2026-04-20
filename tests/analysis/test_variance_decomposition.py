@@ -11,6 +11,7 @@ import pandas as pd
 import pytest
 
 from llm_conceptual_modeling.analysis.variance_decomposition import (
+    build_open_weight_map_extension_summary,
     compute_variance_decomposition,
     extract_variance_rows_by_algorithm_and_model,
     generate_variance_decomposition_bundle,
@@ -220,6 +221,196 @@ def test_variance_decomposition_bundle_defaults_to_subfolder(tmp_path: Path) -> 
     assert (expected_dir / "variance_decomposition_algo1.csv").exists()
 
 
+def test_build_open_weight_map_extension_summary_groups_by_graph_source_and_pair_name() -> None:
+    frame = pd.DataFrame.from_records(
+        [
+            {
+                "algorithm": "algo3",
+                "condition_label": "beam_num_beams_6",
+                "graph_source": "babs_johnson",
+                "pair_name": "subgraph_1_to_subgraph_3",
+                "Example": -1,
+                "Number of Words": 3,
+                "Depth": 1,
+                "model": QWEN,
+                "recall": 0.25,
+            },
+            {
+                "algorithm": "algo3",
+                "condition_label": "beam_num_beams_6",
+                "graph_source": "babs_johnson",
+                "pair_name": "subgraph_1_to_subgraph_3",
+                "Example": -1,
+                "Number of Words": 3,
+                "Depth": 1,
+                "model": MISTRAL,
+                "recall": 0.5,
+            },
+            {
+                "algorithm": "algo3",
+                "condition_label": "beam_num_beams_6",
+                "graph_source": "clarice_starling",
+                "pair_name": "subgraph_2_to_subgraph_1",
+                "Example": 1,
+                "Number of Words": 5,
+                "Depth": 2,
+                "model": QWEN,
+                "recall": 0.75,
+            },
+            {
+                "algorithm": "algo3",
+                "condition_label": "beam_num_beams_6",
+                "graph_source": "clarice_starling",
+                "pair_name": "subgraph_2_to_subgraph_1",
+                "Example": 1,
+                "Number of Words": 5,
+                "Depth": 2,
+                "model": MISTRAL,
+                "recall": 0.125,
+            },
+        ]
+    )
+
+    summary = build_open_weight_map_extension_summary(frame)
+
+    assert list(summary.columns) == [
+        "algorithm",
+        "condition_label",
+        "graph_source",
+        "pair_name",
+        "example",
+        "number_of_words",
+        "depth",
+        "qwen_runs",
+        "qwen_recall",
+        "mistral_runs",
+        "mistral_recall",
+    ]
+    assert len(summary) == 2
+    first_row = summary.iloc[0]
+    assert first_row["algorithm"] == "algo3"
+    assert first_row["graph_source"] == "babs_johnson"
+    assert first_row["pair_name"] == "subgraph_1_to_subgraph_3"
+    assert bool(first_row["example"]) is False
+    assert first_row["number_of_words"] == 3
+    assert first_row["depth"] == 1
+    assert first_row["qwen_runs"] == 1
+    assert first_row["mistral_runs"] == 1
+    assert first_row["qwen_recall"] == 0.25
+    assert first_row["mistral_recall"] == 0.5
+
+
+def test_generate_variance_decomposition_bundle_uses_map_extension_evaluated_rows(
+    tmp_path: Path,
+) -> None:
+    results_root = tmp_path / "results"
+    output_root = results_root / "variance_decomposition"
+    results_root.mkdir(parents=True, exist_ok=True)
+    (results_root / "ledger.json").write_text(
+        json.dumps({"records": []}, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    _write_synthetic_map_extension_results(results_root, raw_root=tmp_path / "raw_rows")
+
+    bundle = generate_variance_decomposition_bundle(results_root, output_root)
+
+    assert (output_root / "open_weight_map_extension_summary.csv").exists()
+    assert (output_root / "variance_decomposition.csv").exists()
+    assert (output_root / "variance_decomposition_babs_johnson.csv").exists()
+    assert (output_root / "variance_decomposition_clarice_starling.csv").exists()
+    assert (output_root / "variance_decomposition_philip_marlowe.csv").exists()
+    assert (output_root / "map_recall_summary.csv").exists()
+    assert bundle["summary_csv"] == output_root / "open_weight_map_extension_summary.csv"
+    assert set(bundle["map_decomposition_csvs"]) == {
+        "babs_johnson",
+        "clarice_starling",
+        "philip_marlowe",
+    }
+    assert bundle["map_recall_summary_csv"] == output_root / "map_recall_summary.csv"
+    summary = pd.read_csv(output_root / "open_weight_map_extension_summary.csv")
+    assert set(summary["graph_source"]) == {
+        "babs_johnson",
+        "clarice_starling",
+        "philip_marlowe",
+    }
+    assert set(summary["number_of_words"]) == {3, 5}
+    assert set(summary["depth"]) == {1, 2}
+    assert set(summary["example"]) == {False, True}
+    assert summary["qwen_runs"].min() == 2
+    assert summary["mistral_runs"].min() == 2
+    assert summary["qwen_recall"].max() > 0.0
+    assert summary["mistral_recall"].max() > 0.0
+    decomposition = pd.read_csv(output_root / "variance_decomposition.csv")
+    assert {
+        "algorithm",
+        "model",
+        "feature",
+        "metric",
+        "pct_with_error",
+        "pct_without_error",
+        "ss",
+    }.issubset(set(decomposition.columns))
+    for _, group in decomposition.groupby(["algorithm", "model", "metric"]):
+        assert pytest.approx(group["pct_with_error"].sum(), abs=1e-8) == 100.0
+        non_error = group[group["feature"] != "Error"]
+        assert pytest.approx(non_error["pct_without_error"].sum(), abs=1e-8) == 100.0
+        assert set(group["feature"]).issuperset(
+            {"graph_source", "pair_name", "Example", "Number of Words", "Depth", "Error"}
+        )
+    for graph_source in ("babs_johnson", "clarice_starling", "philip_marlowe"):
+        map_decomposition = pd.read_csv(output_root / f"variance_decomposition_{graph_source}.csv")
+        assert set(map_decomposition["graph_source"]) == {graph_source}
+        for _, group in map_decomposition.groupby(["algorithm", "model", "metric"]):
+            assert pytest.approx(group["pct_with_error"].sum(), abs=1e-8) == 100.0
+            non_error = group[group["feature"] != "Error"]
+            assert pytest.approx(non_error["pct_without_error"].sum(), abs=1e-8) == 100.0
+
+    map_summary = pd.read_csv(output_root / "map_recall_summary.csv")
+    assert list(map_summary.columns) == [
+        "graph_source",
+        "pair_count",
+        "prompt_cell_count",
+        "qwen_runs",
+        "qwen_mean_recall",
+        "mistral_runs",
+        "mistral_mean_recall",
+        "overall_runs",
+        "overall_mean_recall",
+    ]
+    assert set(map_summary["graph_source"]) == {
+        "babs_johnson",
+        "clarice_starling",
+        "philip_marlowe",
+    }
+    assert (map_summary["pair_count"] == 3).all()
+    assert (map_summary["prompt_cell_count"] == 24).all()
+    assert (map_summary["qwen_runs"] == 48).all()
+    assert (map_summary["mistral_runs"] == 48).all()
+    assert (map_summary["overall_runs"] == 96).all()
+
+
+def test_generate_variance_decomposition_bundle_rejects_batch_summary_recall_mismatches(
+    tmp_path: Path,
+) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir(parents=True, exist_ok=True)
+    (results_root / "ledger.json").write_text(
+        json.dumps({"records": []}, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    _write_synthetic_map_extension_results(
+        results_root,
+        raw_root=tmp_path / "raw_rows",
+        mismatched_batch_summary_recall=True,
+    )
+
+    with pytest.raises(ValueError, match="recall mismatch"):
+        generate_variance_decomposition_bundle(
+            results_root,
+            results_root / "variance_decomposition",
+        )
+
+
 def _synthetic_ledger_records() -> Iterable[dict[str, object]]:
     for model in (QWEN, MISTRAL):
         for row in _synthetic_rows("algo1", "Qwen" if model == QWEN else "Mistral"):
@@ -394,6 +585,152 @@ def _synthetic_rows(algorithm: str, model_label: str) -> list[dict[str, object]]
                             }
                         )
     return rows
+
+
+def _write_synthetic_map_extension_results(
+    results_root: Path,
+    *,
+    raw_root: Path,
+    mismatched_batch_summary_recall: bool = False,
+) -> None:
+    records: list[dict[str, object]] = []
+    for model in (QWEN, MISTRAL):
+        evaluated_rows: list[dict[str, object]] = []
+        model_dir = (
+            results_root
+            / "aggregated"
+            / "algo3"
+            / model.replace("/", "__")
+            / "combined"
+        )
+        model_dir.mkdir(parents=True, exist_ok=True)
+        factor_space = product(
+            ("babs_johnson", "clarice_starling", "philip_marlowe"),
+            (
+                "subgraph_1_to_subgraph_3",
+                "subgraph_2_to_subgraph_1",
+                "subgraph_2_to_subgraph_3",
+            ),
+            (-1, 1),
+            (3, 5),
+            (1, 2),
+            (0, 1),
+        )
+        for index, (
+            graph_source,
+            pair_name,
+            example,
+            number_of_words,
+            depth,
+            replication,
+        ) in enumerate(factor_space):
+            recall = _map_extension_recall(
+                model=model,
+                graph_source=graph_source,
+                pair_name=pair_name,
+                example=example,
+                number_of_words=number_of_words,
+                depth=depth,
+                replication=replication,
+            )
+            raw_row_path = raw_root / model.replace("/", "__") / f"raw_row_{index}.json"
+            raw_row_path.parent.mkdir(parents=True, exist_ok=True)
+            raw_row_path.write_text(
+                json.dumps(
+                    {
+                        "Counter-Example": -1,
+                        "Depth": depth,
+                        "Example": example,
+                        "Number of Words": number_of_words,
+                        "Recall": recall,
+                        "Repetition": replication,
+                        "decoding_algorithm": "beam",
+                        "decoding_condition": "beam_num_beams_6",
+                        "embedding_model": model,
+                        "graph_source": graph_source,
+                        "model": model,
+                        "pair_name": pair_name,
+                        "provider": "hf",
+                    },
+                    indent=2,
+                    sort_keys=True,
+                ),
+                encoding="utf-8",
+            )
+            records.append(
+                {
+                    "algorithm": "algo3",
+                    "condition_label": "beam_num_beams_6",
+                    "condition_bits": "".join(
+                        (
+                            "1" if example == 1 else "0",
+                            "0",
+                            "1" if number_of_words == 5 else "0",
+                            "1" if depth == 2 else "0",
+                        )
+                    ),
+                    "graph_source": graph_source,
+                    "model": model,
+                    "pair_name": pair_name,
+                    "raw_row_path": str(raw_row_path),
+                    "recall": (
+                        1.0 - recall
+                        if mismatched_batch_summary_recall and model == QWEN and index == 0
+                        else recall
+                    ),
+                    "replication": replication,
+                    "status": "finished",
+                }
+            )
+            evaluated_rows.append(
+                {
+                    "Counter-Example": -1,
+                    "Depth": depth,
+                    "Example": example,
+                    "Number of Words": number_of_words,
+                    "Recall": recall,
+                    "Repetition": replication,
+                    "decoding_algorithm": "beam",
+                    "decoding_condition": "beam_num_beams_6",
+                    "embedding_model": model,
+                    "graph_source": graph_source,
+                    "model": model,
+                    "pair_name": pair_name,
+                    "provider": "hf",
+                }
+            )
+        pd.DataFrame.from_records(evaluated_rows).to_csv(
+            model_dir / "evaluated.csv",
+            index=False,
+        )
+    pd.DataFrame.from_records(records).to_csv(results_root / "batch_summary.csv", index=False)
+
+
+def _map_extension_recall(
+    *,
+    model: str,
+    graph_source: str,
+    pair_name: str,
+    example: int,
+    number_of_words: int,
+    depth: int,
+    replication: int,
+) -> float:
+    base = 0
+    if model == QWEN:
+        base += 1 if graph_source != "babs_johnson" else 0
+        base += 1 if pair_name == "subgraph_2_to_subgraph_3" else 0
+        base += 1 if example == 1 else 0
+        base += 1 if number_of_words == 5 else 0
+        base += 1 if depth == 2 else 0
+        return 1.0 if base >= 4 else 0.0
+    base += 1 if graph_source == "philip_marlowe" else 0
+    base += 1 if pair_name != "subgraph_2_to_subgraph_1" else 0
+    base += 1 if example == -1 else 0
+    base += 1 if number_of_words == 5 else 0
+    base += 1 if depth == 2 else 0
+    base += 1 if replication == 1 else 0
+    return 1.0 if base >= 5 else 0.0
 
 
 def _replicate_noise(pair_index: int, replication: int) -> float:

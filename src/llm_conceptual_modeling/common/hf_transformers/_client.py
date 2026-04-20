@@ -16,6 +16,8 @@ from llm_conceptual_modeling.common.hf_transformers._parse import (
     _should_normalize_exhausted_malformed_edge_list_to_empty,
 )
 from llm_conceptual_modeling.common.hf_transformers._policy import (
+    _QWEN_CHAT_MODEL,
+    _TRUSTED_REMOTE_CODE_CHAT_MODELS,
     DecodingConfig,
     runtime_generation_overrides,
     supports_decoding_config,
@@ -24,9 +26,7 @@ from llm_conceptual_modeling.common.hf_transformers._qwen import (
     _custom_generate_overrides,
     _temporarily_disable_stateful_guard,
 )
-from llm_conceptual_modeling.common.hf_transformers._runtime import (
-    _QWEN_CHAT_MODEL,
-    _TRUSTED_REMOTE_CODE_CHAT_MODELS,
+from llm_conceptual_modeling.common.hf_transformers._runtime_support import (
     _get_torch,
     _resolve_context_limit,
     derive_context_window_from_input_length,

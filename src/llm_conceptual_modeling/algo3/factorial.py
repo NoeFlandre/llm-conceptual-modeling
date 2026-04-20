@@ -1,12 +1,10 @@
 import ast
 import csv
 import itertools
-from pathlib import Path
-from typing import TypeAlias
 
 import pandas as pd
 
-PathLike: TypeAlias = str | Path
+from llm_conceptual_modeling.common.types import PathLike
 
 FACTOR_COLUMNS = ["Example", "Counter-Example", "Number of Words", "Depth"]
 

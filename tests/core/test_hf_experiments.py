@@ -719,7 +719,10 @@ def test_run_paper_batch_resume_keeps_retryable_structural_failure_in_pending_co
     def runtime_factory(actual_spec):
         call_count["count"] += 1
         assert actual_spec == spec
-        raise ValueError("Model did not return valid structured output: ```python\\n'A': ['B']\\n```")
+        raise ValueError(
+            "Model did not return valid structured output: "
+            "```python\\n'A': ['B']\\n```"
+        )
 
     run_paper_batch(
         output_root=output_root,
@@ -1791,6 +1794,90 @@ def test_collect_batch_status_reconstructs_health_from_run_tree(tmp_path: Path) 
     assert status["percent_complete"] == 25.0
     assert status["current_run"]["algorithm"] == "algo3"
     assert status["last_completed_run"]["algorithm"] == "algo1"
+
+
+def test_collect_batch_status_prefers_batch_status_when_run_tree_is_sparse(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "results"
+    run_dir = (
+        output_root
+        / "runs"
+        / "algo3"
+        / "Qwen__Qwen3.5-9B"
+        / "beam"
+        / "subgraph_1_to_subgraph_3"
+        / "0000"
+        / "rep_03"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
+    (run_dir / "worker_state.json").write_text(
+        json.dumps({"status": "running", "worker_pid": 1234}),
+        encoding="utf-8",
+    )
+    (output_root / "batch_status.json").write_text(
+        json.dumps(
+            {
+                "total_runs": 720,
+                "finished_count": 23,
+                "running_count": 1,
+                "pending_count": 694,
+                "failed_count": 0,
+                "current_run": {
+                    "algorithm": "algo3",
+                    "condition_bits": "000",
+                    "decoding_algorithm": "beam",
+                    "graph_source": "philip_marlowe",
+                    "model": "Qwen/Qwen3.5-9B",
+                    "pair_name": "subgraph_1_to_subgraph_3",
+                    "replication": 3,
+                },
+                "last_completed_run": {
+                    "algorithm": "algo3",
+                    "condition_bits": "000",
+                    "decoding_algorithm": "beam",
+                    "graph_source": "clarice_starling",
+                    "model": "Qwen/Qwen3.5-9B",
+                    "pair_name": "subgraph_1_to_subgraph_3",
+                    "replication": 3,
+                },
+                "started_at": "2026-04-20T10:24:41.237956+00:00",
+                "updated_at": "2026-04-20T10:32:25.195174+00:00",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["total_runs"] == 720
+    assert status["finished_count"] == 23
+    assert status["running_count"] == 1
+    assert status["pending_count"] == 694
+    assert status["percent_complete"] == 3.19
+    assert status["current_run"]["graph_source"] == "philip_marlowe"
+
+
+def test_collect_batch_status_uses_preview_planned_total_runs_for_fresh_root(
+    tmp_path: Path,
+) -> None:
+    output_root = tmp_path / "results"
+    preview_dir = output_root / "preview"
+    preview_dir.mkdir(parents=True, exist_ok=True)
+    (preview_dir / "resolved_run_plan.json").write_text(
+        json.dumps({"planned_total_runs": 720}),
+        encoding="utf-8",
+    )
+
+    status = collect_batch_status(output_root)
+
+    assert status["total_runs"] == 720
+    assert status["finished_count"] == 0
+    assert status["failed_count"] == 0
+    assert status["running_count"] == 0
+    assert status["pending_count"] == 720
+    assert status["percent_complete"] == 0.0
 
 
 def test_collect_batch_status_requeues_retryable_failures_as_pending(tmp_path: Path) -> None:

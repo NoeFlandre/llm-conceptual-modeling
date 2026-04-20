@@ -6,8 +6,7 @@ from collections.abc import Iterable
 from typing import Callable
 
 from llm_conceptual_modeling.common.graph_data import load_wordnet_label_lexicon
-
-Edge = tuple[str, str]
+from llm_conceptual_modeling.common.types import Edge
 
 # Fixed seed for reproducibility across runs and environments
 _RANDOM_SEED = 42

@@ -7,9 +7,7 @@ import pandas as pd
 
 from llm_conceptual_modeling.algo3.evaluation import parse_edge_list
 from llm_conceptual_modeling.common.csv_schema import assert_required_columns
-from llm_conceptual_modeling.common.types import PathLike
-
-Edge = tuple[str, str]
+from llm_conceptual_modeling.common.types import Edge, PathLike
 
 
 def write_output_variability_analysis(

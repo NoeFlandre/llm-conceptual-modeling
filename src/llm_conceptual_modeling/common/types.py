@@ -5,6 +5,7 @@ from typing import Any, TypeAlias
 
 import yaml
 
+Edge: TypeAlias = tuple[str, str]
 PathLike: TypeAlias = str | Path
 
 

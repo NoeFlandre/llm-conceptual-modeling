@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-# ---------------------------------------------------------------------------
-# Re-exported from _client for backwards compatibility
-# ---------------------------------------------------------------------------
 from llm_conceptual_modeling.common.hf_transformers._policy import (  # noqa: F403
     build_default_decoding_grid,  # noqa: F401  # re-exported via __init__
     should_disable_stateful_guard,  # noqa: F401  # re-exported via __init__
@@ -45,6 +42,4 @@ from llm_conceptual_modeling.common.hf_transformers._runtime import (  # noqa: F
     _resolve_context_limit,
     _trusted_remote_code_kwargs,
     build_runtime_factory,
-    derive_context_window,
-    derive_context_window_from_input_length,
 )

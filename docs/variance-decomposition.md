@@ -101,6 +101,46 @@ The legacy helper script remains available for convenience:
 uv run python generate_variance_decomposition.py
 ```
 
+For the scoped open-weight map-extension batch, the same command also writes a
+compact companion summary CSV:
+
+- `open_weight_map_extension_summary.csv`
+
+For that scoped batch, the implementation does not use `raw_row.json` as the
+metric source of truth. The authoritative recall values come from:
+
+- `aggregated/algo3/*/combined/evaluated.csv`
+
+Those evaluated rows are checked against:
+
+- `batch_summary.csv`
+
+The check is per run identity. If the evaluated recall and batch-summary recall
+diverge, bundle generation fails instead of emitting a silently incorrect CSV.
+
+The scoped summary CSV is broken down by:
+
+- `graph_source`
+- `pair_name`
+- `example`
+- `number_of_words`
+- `depth`
+
+This is deliberate. The earlier map-extension overview was too aggregated to
+inspect which prompt cells were truly zero and which were being averaged away.
+
+The scoped batch now also writes:
+
+- `map_recall_summary.csv`
+  One row per causal map with mean recall and run counts for Qwen, Mistral, and
+  both models combined.
+- `variance_decomposition_babs_johnson.csv`
+- `variance_decomposition_clarice_starling.csv`
+- `variance_decomposition_philip_marlowe.csv`
+  One variance-decomposition CSV per causal map. These use the within-map factor
+  surface only, so `graph_source` is carried as a constant column rather than a
+  decomposed factor.
+
 ## Tests
 
 Primary regression coverage:

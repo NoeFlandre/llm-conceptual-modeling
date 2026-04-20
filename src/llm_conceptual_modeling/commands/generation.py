@@ -11,7 +11,7 @@ from llm_conceptual_modeling.algo2.generation import (
 from llm_conceptual_modeling.algo3.generation import (
     build_generation_manifest as build_algo3_manifest,
 )
-from llm_conceptual_modeling.hf_run_config import load_hf_run_config
+from llm_conceptual_modeling.hf_config.run_config import load_hf_run_config
 
 
 def build_generation_stub_payload(
