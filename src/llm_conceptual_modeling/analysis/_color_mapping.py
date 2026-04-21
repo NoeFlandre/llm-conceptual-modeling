@@ -3,12 +3,12 @@ from __future__ import annotations
 
 
 def _build_model_color_map(models: list[str]) -> dict[str, tuple[float, float, float, float]]:
-    import matplotlib.cm as cm
+    import matplotlib as mpl
 
     family_bases = {
-        "deepseek": cm.Blues,
-        "gemini": cm.Greens,
-        "gpt": cm.Reds,
+        "deepseek": mpl.colormaps["Blues"],
+        "gemini": mpl.colormaps["Greens"],
+        "gpt": mpl.colormaps["Reds"],
     }
     grouped: dict[str, list[str]] = {"deepseek": [], "gemini": [], "gpt": []}
     for model in models:
