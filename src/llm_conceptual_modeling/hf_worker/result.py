@@ -1,18 +1,49 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from pathlib import Path
-from typing import cast
+from typing import TypedDict, cast
 
 from llm_conceptual_modeling.hf_batch.types import RuntimeResult
 
 
+class HFWorkerErrorPayload(TypedDict):
+    type: str
+    message: str
+
+
+class HFWorkerSuccessPayload(TypedDict):
+    ok: bool
+    runtime_result: RuntimeResult
+
+
 def load_runtime_result(result_json_path: Path) -> RuntimeResult:
     worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
-    if worker_payload.get("ok"):
-        return cast(RuntimeResult, worker_payload["runtime_result"])
-    error = cast(dict[str, str], worker_payload["error"])
-    raise RuntimeError(f"{error['type']}: {error['message']}")
+    if not isinstance(worker_payload, Mapping):
+        raise RuntimeError("Malformed HF worker payload: expected a JSON object.")
+    if worker_payload.get("ok") is True:
+        runtime_result = worker_payload.get("runtime_result")
+        if not isinstance(runtime_result, dict):
+            raise RuntimeError("Malformed HF worker success payload: missing runtime_result.")
+        success_payload = cast(
+            HFWorkerSuccessPayload,
+            {"ok": True, "runtime_result": cast(RuntimeResult, runtime_result)},
+        )
+        return success_payload["runtime_result"]
+    error_payload = _load_worker_error_payload(worker_payload)
+    raise RuntimeError(f"{error_payload['type']}: {error_payload['message']}")
+
+
+def _load_worker_error_payload(worker_payload: Mapping[str, object]) -> HFWorkerErrorPayload:
+    error = worker_payload.get("error")
+    if not isinstance(error, Mapping):
+        raise RuntimeError("Malformed HF worker error payload: missing error object.")
+    error_type = error.get("type")
+    error_message = error.get("message")
+    if not isinstance(error_type, str) or not isinstance(error_message, str):
+        raise RuntimeError("Malformed HF worker error payload: missing type/message.")
+    return {"type": error_type, "message": error_message}
 
 
 def raise_missing_result_artifact(

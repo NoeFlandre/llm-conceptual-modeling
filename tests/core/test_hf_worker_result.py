@@ -39,6 +39,32 @@ def test_load_runtime_result_raises_runtime_error_for_failure_payload(tmp_path: 
         load_runtime_result(result_json_path)
 
 
+def test_load_runtime_result_raises_clear_error_for_malformed_failure_payload(
+    tmp_path: Path,
+) -> None:
+    result_json_path = tmp_path / "worker_result.json"
+    result_json_path.write_text(
+        json.dumps({"ok": False, "error": {"message": "missing type"}}),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(RuntimeError, match="Malformed HF worker error payload"):
+        load_runtime_result(result_json_path)
+
+
+def test_load_runtime_result_raises_clear_error_for_missing_success_payload(
+    tmp_path: Path,
+) -> None:
+    result_json_path = tmp_path / "worker_result.json"
+    result_json_path.write_text(
+        json.dumps({"ok": True}),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(RuntimeError, match="Malformed HF worker success payload"):
+        load_runtime_result(result_json_path)
+
+
 def test_raise_missing_result_artifact_includes_context() -> None:
     with pytest.raises(RuntimeError, match="stdout='out' stderr='err'"):
         raise_missing_result_artifact(
