@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, TypedDict, cast
 
 from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
 from llm_conceptual_modeling.hf_batch.spec_path import (
@@ -14,12 +14,22 @@ from llm_conceptual_modeling.hf_batch.spec_path import (
 from llm_conceptual_modeling.hf_state.active_models import resolve_active_chat_models
 
 
+class UnfinishedShardManifest(TypedDict):
+    generated_at: str
+    results_root: str
+    ledger_root: str
+    active_chat_models: list[str]
+    shard_count: int
+    shard_index: int
+    identities: list[NormalizedSpecIdentityItem]
+
+
 def write_unfinished_shard_manifest(
     *,
     results_root: str | Path,
     ledger_root: str | Path | None = None,
     manifest_path: str | Path | None = None,
-) -> dict[str, object]:
+) -> UnfinishedShardManifest:
     results_root_path = Path(results_root).resolve()
     ledger_root_path = (
         Path(ledger_root).resolve() if ledger_root is not None else results_root_path
@@ -35,7 +45,7 @@ def write_unfinished_shard_manifest(
         ledger=ledger,
         active_chat_models=active_chat_models,
     )
-    manifest = {
+    manifest: UnfinishedShardManifest = {
         "generated_at": datetime.now(UTC).isoformat(),
         "results_root": str(results_root_path),
         "ledger_root": str(ledger_root_path),
@@ -44,8 +54,8 @@ def write_unfinished_shard_manifest(
         "shard_index": 0,
         "identities": identities,
     }
-    write_json_dict(manifest_output_path, manifest)
-    return cast(dict[str, object], manifest)
+    write_json_dict(manifest_output_path, cast(dict[str, Any], manifest))
+    return manifest
 
 
 def _unfinished_active_identities(

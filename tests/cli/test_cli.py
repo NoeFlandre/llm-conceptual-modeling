@@ -1060,6 +1060,115 @@ def test_cli_run_resume_preflight_reports_local_resume_readiness(
     assert '"can_resume": true' in captured.out
 
 
+def test_cli_run_write_unfinished_manifest_reports_identity_count(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    ledger_root = tmp_path / "ledger"
+    ledger_root.mkdir()
+    manifest_path = tmp_path / "shard_manifest.json"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.write_unfinished_shard_manifest",
+        lambda *, results_root, ledger_root, manifest_path: {
+            "generated_at": "2026-04-21T10:00:00+00:00",
+            "results_root": str(results_root),
+            "ledger_root": str(ledger_root),
+            "active_chat_models": ["Qwen/Qwen3.5-9B"],
+            "shard_count": 1,
+            "shard_index": 0,
+            "identities": [
+                {
+                    "algorithm": "algo1",
+                    "condition_bits": "00000",
+                    "condition_label": "greedy",
+                    "model": "Qwen/Qwen3.5-9B",
+                    "pair_name": "sg1_sg2",
+                    "replication": 0,
+                }
+            ],
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "write-unfinished-manifest",
+            "--results-root",
+            str(results_root),
+            "--ledger-root",
+            str(ledger_root),
+            "--manifest-path",
+            str(manifest_path),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert f"manifest_path={manifest_path}" in captured.out
+    assert "identity_count=1" in captured.out
+    assert "active_chat_models=Qwen/Qwen3.5-9B" in captured.out
+
+
+def test_cli_run_qwen_algo1_tail_preflight_reports_nested_resume_counts(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    canonical_results_root = tmp_path / "canonical"
+    canonical_results_root.mkdir()
+    tail_results_root = tmp_path / "tail"
+    tail_results_root.mkdir()
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_qwen_algo1_tail_preflight_report",
+        lambda *, repo_root, canonical_results_root, tail_results_root, watcher_status_path=None: {
+            "repo_root": str(repo_root),
+            "canonical_results_root": str(canonical_results_root),
+            "tail_results_root": str(tail_results_root),
+            "watcher_status": None,
+            "canonical_ledger": {"finished_count": 0},
+            "tail_ledger": {"pending_count": 10},
+            "resume_preflight": {
+                "results_root": str(tail_results_root),
+                "total_runs": 10,
+                "finished_count": 0,
+                "failed_count": 0,
+                "pending_count": 10,
+                "running_count": 0,
+                "can_resume": True,
+                "resume_mode": "resume",
+            },
+        },
+    )
+
+    exit_code = main(
+        [
+            "run",
+            "qwen-algo1-tail-preflight",
+            "--repo-root",
+            str(repo_root),
+            "--canonical-results-root",
+            str(canonical_results_root),
+            "--tail-results-root",
+            str(tail_results_root),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert f"tail_results_root={tail_results_root}" in captured.out
+    assert "tail_pending_count=10" in captured.out
+    assert "tail_can_resume=True" in captured.out
+
+
 def test_cli_run_resume_sweep_reports_root_classification_as_json(
     monkeypatch,
     tmp_path,

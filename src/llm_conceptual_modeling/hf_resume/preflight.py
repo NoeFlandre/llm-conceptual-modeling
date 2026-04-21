@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import TypedDict
 
 from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
@@ -21,13 +22,29 @@ from llm_conceptual_modeling.hf_state.resume_state import (
 )
 
 
+class ResumePreflightReport(TypedDict, total=False):
+    repo_root: str
+    inputs_root: str
+    results_root: str
+    results_root_exists: bool
+    total_runs: int
+    total_planned_runs: int
+    finished_count: int
+    failed_count: int
+    pending_count: int
+    running_count: int
+    can_resume: bool
+    resume_mode: str
+    status_updated_at: object
+
+
 def build_resume_preflight_report(
     *,
     config,
     repo_root: Path,
     results_root: Path | None,
     allow_empty: bool = False,
-) -> dict[str, object]:
+) -> ResumePreflightReport:
     repo_root_path = Path(repo_root)
     if not repo_root_path.exists():
         raise FileNotFoundError(f"Local repo root does not exist: {repo_root_path}")
@@ -55,7 +72,7 @@ def build_resume_preflight_report(
         config=config,
         runtime_profile_provider=default_runtime_profile_provider,
     )
-    report: dict[str, object] = {
+    report: ResumePreflightReport = {
         "repo_root": str(repo_root_path),
         "inputs_root": str(inputs_root),
         "results_root": str(effective_results_root),

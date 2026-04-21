@@ -23,7 +23,10 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
     select_run_spec,
 )
-from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
+from llm_conceptual_modeling.hf_resume.preflight import (
+    ResumePreflightReport,
+    build_resume_preflight_report,
+)
 from llm_conceptual_modeling.hf_resume.sweep import build_resume_sweep_report
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 from llm_conceptual_modeling.hf_state.shard_manifest import write_unfinished_shard_manifest
@@ -124,7 +127,7 @@ def handle_run(args: Namespace) -> int:
         else:
             print(f"manifest_path={args.manifest_path}")
             print(f"identity_count={len(manifest['identities'])}")
-            print(f"active_chat_models={','.join(cast(list[str], manifest['active_chat_models']))}")
+            print(f"active_chat_models={','.join(manifest['active_chat_models'])}")
         return 0
     if args.run_target == "prepare-qwen-algo1-tail":
         report = prepare_qwen_algo1_tail_bundle(
@@ -150,9 +153,10 @@ def handle_run(args: Namespace) -> int:
         if args.json:
             print(json.dumps(report, indent=2, sort_keys=True))
         else:
+            resume_preflight = cast(ResumePreflightReport, report["resume_preflight"])
             print(f"tail_results_root={report['tail_results_root']}")
-            print(f"tail_pending_count={report['resume_preflight']['pending_count']}")
-            print(f"tail_can_resume={report['resume_preflight']['can_resume']}")
+            print(f"tail_pending_count={resume_preflight['pending_count']}")
+            print(f"tail_can_resume={resume_preflight['can_resume']}")
         return 0
     if args.run_target == "drain-remaining":
         if args.plan_only:
