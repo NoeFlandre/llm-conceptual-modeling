@@ -199,7 +199,7 @@ class HFTransformersChatClient:
                     malformed_output_retry_limit=malformed_output_retry_limit,
                     text=text,
                 ):
-                    normalized_content = {"edges": []}
+                    normalized_content: dict[str, object] = {"edges": []}
                     self.last_failed_response_text = None
                     self.last_call_metrics = {
                         "schema_name": schema_name,
@@ -288,7 +288,7 @@ def _decoding_kwargs(config: DecodingConfig, *, model: str | None = None) -> dic
         return {"do_sample": False}
     if config.algorithm == "beam":
         return {"do_sample": False, "num_beams": config.num_beams}
-    kwargs = {
+    kwargs: dict[str, object] = {
         "do_sample": False,
         "penalty_alpha": config.penalty_alpha,
         "top_k": config.top_k,
