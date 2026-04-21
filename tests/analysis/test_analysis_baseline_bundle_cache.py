@@ -40,3 +40,27 @@ def test_compute_baseline_counts_reuses_identical_requests(monkeypatch) -> None:
 
     assert first == second == {"tp": 1, "fp": 0, "fn": 0}
     assert call_count == 1
+
+
+def test_compute_baseline_counts_cached_returns_tuple_items(monkeypatch) -> None:
+    monkeypatch.setattr(
+        _baseline_sampling,
+        "_sample_baseline_edges",
+        lambda **_: {("a", "x")},
+    )
+    monkeypatch.setattr(
+        _baseline_sampling,
+        "find_valid_connections",
+        lambda *_args: {("a", "x")},
+    )
+
+    result = _baseline_sampling._compute_baseline_counts_cached(
+        baseline_strategy="random-k",
+        k=1,
+        mother_edges=(("a", "x"),),
+        subgraph1_edges=(("a", "b"),),
+        subgraph2_edges=(("x", "y"),),
+        ground_truth=(("a", "x"),),
+    )
+
+    assert result == (("tp", 1), ("fp", 0), ("fn", 0))

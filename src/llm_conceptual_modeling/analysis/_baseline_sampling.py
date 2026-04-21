@@ -112,8 +112,10 @@ def _compute_baseline_counts_cached(
         list(subgraph2_edges),
     )
     ground_truth_edges = set(ground_truth)
-    return {
-        "tp": len(generated_connections & ground_truth_edges),
-        "fp": len(generated_connections - ground_truth_edges),
-        "fn": len(ground_truth_edges - generated_connections),
-    }.items()
+    return tuple(
+        {
+            "tp": len(generated_connections & ground_truth_edges),
+            "fp": len(generated_connections - ground_truth_edges),
+            "fn": len(ground_truth_edges - generated_connections),
+        }.items()
+    )
