@@ -148,8 +148,7 @@ class HFRunConfig:
                 name: {
                     "base_fragments": value.base_fragments,
                     "factors": {
-                        factor_name: asdict(factor)
-                        for factor_name, factor in value.factors.items()
+                        factor_name: asdict(factor) for factor_name, factor in value.factors.items()
                     },
                     "fragment_definitions": value.fragment_definitions,
                     "prompt_templates": value.prompt_templates,
@@ -351,7 +350,10 @@ def _load_resolved_decoding_configs(raw: object, *, temperature: float) -> list[
                     label="Decoding penalty_alpha",
                 ),
                 top_k=_coerce_optional_int(data.get("top_k"), label="Decoding top_k"),
-                temperature=float(data.get("temperature", temperature)),
+                temperature=_coerce_float(
+                    data.get("temperature", temperature),
+                    label="Decoding temperature",
+                ),
             )
         )
     return configs
@@ -506,10 +508,7 @@ def _load_algorithm_config(
         payload.get("factors", {}),
         label=f"factors for {algorithm_name}",
     )
-    factors = {
-        str(name): _load_factor_config(value)
-        for name, value in factors_payload.items()
-    }
+    factors = {str(name): _load_factor_config(value) for name, value in factors_payload.items()}
     base_fragments = _expect_list(
         payload.get("base_fragments", []),
         label=f"base_fragments for {algorithm_name}",
@@ -540,20 +539,20 @@ def _load_run_config(raw: Mapping[str, object]) -> RunConfig:
     return RunConfig(
         provider=str(run["provider"]),
         output_root=str(run["output_root"]),
-        replications=int(run["replications"]),
+        replications=_coerce_int(run["replications"], label="Run replications"),
     )
 
 
 def _load_runtime_config(raw: Mapping[str, object]) -> RuntimeConfig:
     runtime = _expect_mapping(raw["runtime"], label="runtime")
     return RuntimeConfig(
-        seed=int(runtime["seed"]),
-        temperature=float(runtime["temperature"]),
+        seed=_coerce_int(runtime["seed"], label="Runtime seed"),
+        temperature=_coerce_float(runtime["temperature"], label="Runtime temperature"),
         quantization=str(runtime["quantization"]),
         device_policy=str(runtime["device_policy"]),
         context_policy=dict(_expect_mapping(runtime["context_policy"], label="context_policy")),
         max_new_tokens_by_schema={
-            str(name): int(value)
+            str(name): _coerce_int(value, label=f"max_new_tokens_by_schema.{name}")
             for name, value in _expect_mapping(
                 runtime["max_new_tokens_by_schema"],
                 label="max_new_tokens_by_schema",
