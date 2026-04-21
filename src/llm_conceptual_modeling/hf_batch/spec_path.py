@@ -9,11 +9,22 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import TypedDict
 
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_batch.utils import slugify_model
 
 SpecIdentity = tuple[object, ...]
+
+
+class ShardManifestIdentityItem(TypedDict, total=False):
+    algorithm: str
+    model: str
+    condition_label: str
+    graph_source: str
+    pair_name: str
+    condition_bits: str
+    replication: int | str
 
 
 def spec_identity(spec: HFRunSpec) -> SpecIdentity:
@@ -144,8 +155,9 @@ def filter_planned_specs_for_output_root(
     return [spec for spec in planned_specs if spec_identity(spec) in allowed_identities]
 
 
-def _identity_from_manifest_item(item: dict[str, object]) -> SpecIdentity:
+def _identity_from_manifest_item(item: ShardManifestIdentityItem) -> SpecIdentity:
     graph_source = str(item.get("graph_source", "default"))
+    replication = _coerce_manifest_replication(item)
     if graph_source != "default":
         return (
             str(item["algorithm"]),
@@ -154,7 +166,7 @@ def _identity_from_manifest_item(item: dict[str, object]) -> SpecIdentity:
             graph_source,
             str(item["pair_name"]),
             str(item["condition_bits"]),
-            int(item["replication"]),
+            replication,
         )
     return (
         str(item["algorithm"]),
@@ -162,5 +174,12 @@ def _identity_from_manifest_item(item: dict[str, object]) -> SpecIdentity:
         str(item["condition_label"]),
         str(item["pair_name"]),
         str(item["condition_bits"]),
-        int(item["replication"]),
+        replication,
     )
+
+
+def _coerce_manifest_replication(item: ShardManifestIdentityItem) -> int:
+    replication = item["replication"]
+    if isinstance(replication, bool):
+        raise TypeError("Shard manifest replication must be an integer or numeric string.")
+    return int(replication)
