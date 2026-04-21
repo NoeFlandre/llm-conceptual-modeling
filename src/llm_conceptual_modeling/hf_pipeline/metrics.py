@@ -40,10 +40,9 @@ def trace_metric_summary(records: list[dict[str, object]]) -> dict[str, float | 
     completion_tokens: list[int] = []
     prompt_tokens: list[int] = []
     for record in records:
-        raw_metrics = record.get("metrics")
-        if not isinstance(raw_metrics, dict):
+        metrics = _trace_metrics(record)
+        if metrics is None:
             continue
-        metrics = raw_metrics
         duration = metrics.get("duration_seconds")
         if isinstance(duration, (int, float)):
             durations.append(float(duration))
@@ -70,6 +69,13 @@ def trace_metric_summary(records: list[dict[str, object]]) -> dict[str, float | 
     if prompt_tokens:
         summary["total_prompt_tokens"] = sum(prompt_tokens)
     return summary
+
+
+def _trace_metrics(record: dict[str, object]) -> dict[str, object] | None:
+    raw_metrics = record.get("metrics")
+    if not isinstance(raw_metrics, dict):
+        return None
+    return {str(key): value for key, value in raw_metrics.items()}
 
 
 def summary_from_raw_row(algorithm: str, raw_row: dict[str, object]) -> dict[str, object]:
