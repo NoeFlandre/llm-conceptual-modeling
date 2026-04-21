@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from typing import Any, cast
 
@@ -89,6 +90,9 @@ from llm_conceptual_modeling.hf_execution.helpers import (
     is_retryable_worker_error as _is_retryable_worker_error,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
+    resolve_max_requests_per_worker_process as _resolve_max_requests_per_worker_process,
+)
+from llm_conceptual_modeling.hf_execution.helpers import (
     resolve_run_retry_attempts as _resolve_run_retry_attempts,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.helpers import (
@@ -101,10 +105,7 @@ from llm_conceptual_modeling.hf_execution.helpers import (
     resolve_worker_process_mode as _resolve_worker_process_mode,  # noqa: F401
 )
 from llm_conceptual_modeling.hf_execution.runtime import (
-    run_local_hf_spec as _run_local_hf_spec,
-)
-from llm_conceptual_modeling.hf_execution.runtime import (
-    run_local_hf_spec_subprocess as _run_local_hf_spec_subprocess,  # noqa: F401
+    run_local_hf_spec_subprocess as _run_local_hf_spec_subprocess_impl,
 )
 from llm_conceptual_modeling.hf_execution.subprocess import run_monitored_command  # noqa: F401
 from llm_conceptual_modeling.hf_pipeline.algo1 import run_algo1 as _run_algo1  # noqa: F401
@@ -160,6 +161,52 @@ from llm_conceptual_modeling.hf_worker.state import (
     worker_loaded_model as _worker_loaded_model,  # noqa: F401
 )
 
+plan_paper_batch_specs = _plan_paper_batch_specs
+
+
+def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> dict[str, object]:
+    return _run_local_hf_spec_subprocess_impl(
+        spec=spec,
+        run_dir=run_dir,
+        run_monitored_command_fn=run_monitored_command,
+        build_worker_command_fn=_build_worker_command,
+        is_retryable_worker_error_fn=_is_retryable_worker_error,
+        validate_runtime_result_fn=_validate_structural_runtime_result,
+    )
+
+
+def _run_local_hf_spec(
+    *,
+    spec: HFRunSpec,
+    run_dir: Path,
+    output_root: Path,
+    persistent_sessions: dict[str, PersistentHFWorkerSession],
+) -> dict[str, object]:
+    model_names_to_close = [
+        model_name
+        for model_name in persistent_sessions
+        if model_name != spec.model
+    ]
+    for model_name in model_names_to_close:
+        session = persistent_sessions.pop(model_name)
+        session.close()
+
+    if _resolve_worker_process_mode(spec.context_policy) != "persistent":
+        return _run_local_hf_spec_subprocess(spec=spec, run_dir=run_dir)
+
+    session = persistent_sessions.get(spec.model)
+    if session is None:
+        queue_dir = output_root / "worker-queues" / _slugify_model(spec.model)
+        session = PersistentHFWorkerSession(
+            queue_dir=queue_dir,
+            worker_python=sys.executable,
+            max_requests_per_process=_resolve_max_requests_per_worker_process(
+                spec.context_policy
+            ),
+        )
+        persistent_sessions[spec.model] = session
+    return session.run_spec(spec=spec, run_dir=run_dir)
+
 
 def run_paper_batch(
     *,
@@ -189,7 +236,7 @@ def run_paper_batch(
         profile_provider = default_runtime_profile_provider
     else:
         profile_provider = hf_runtime.profile_for_chat_model if hf_runtime else None
-    planned_specs = _plan_paper_batch_specs(
+    planned_specs = plan_paper_batch_specs(
         models=models,
         embedding_model=embedding_model,
         replications=replications,
