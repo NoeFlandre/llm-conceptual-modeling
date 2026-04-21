@@ -9,12 +9,16 @@ from __future__ import annotations
 
 import importlib
 from contextlib import contextmanager
-from typing import Any
+from typing import Any, Protocol, cast
 
 from llm_conceptual_modeling.common.hf_transformers._policy import (
     _QWEN_CHAT_MODEL,
     DecodingConfig,
 )
+
+
+class _SliceableTensor(Protocol):
+    def __getitem__(self, key: object) -> object: ...
 
 
 def _get_load_qwen_dynamic_cache_type() -> Any:
@@ -108,11 +112,15 @@ def _qwen_cache_crop(self: Any, max_length: int) -> None:
     if isinstance(key_cache, list):
         for index, tensor in enumerate(key_cache):
             if tensor is not None:
-                key_cache[index] = tensor[..., :max_length, :]
+                key_cache[index] = _crop_qwen_cache_tensor(tensor, max_length)
     if isinstance(value_cache, list):
         for index, tensor in enumerate(value_cache):
             if tensor is not None:
-                value_cache[index] = tensor[..., :max_length, :]
+                value_cache[index] = _crop_qwen_cache_tensor(tensor, max_length)
+
+
+def _crop_qwen_cache_tensor(tensor: object, max_length: int) -> object:
+    return cast(_SliceableTensor, tensor)[..., :max_length, :]
 
 
 def _qwen_cache_batch_select_indices(self: Any, indices: Any) -> None:
