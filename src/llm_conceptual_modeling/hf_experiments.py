@@ -61,6 +61,7 @@ from llm_conceptual_modeling.hf_batch.types import (
     BatchInfrastructureFailure,
     HFRunSpec,
     RuntimeFactory,
+    RuntimeResult,
 )
 from llm_conceptual_modeling.hf_batch.utils import (
     manifest_for_spec as _manifest_for_spec,
@@ -164,7 +165,7 @@ from llm_conceptual_modeling.hf_worker.state import (
 plan_paper_batch_specs = _plan_paper_batch_specs
 
 
-def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> dict[str, object]:
+def _run_local_hf_spec_subprocess(*, spec: HFRunSpec, run_dir: Path) -> RuntimeResult:
     return _run_local_hf_spec_subprocess_impl(
         spec=spec,
         run_dir=run_dir,
@@ -181,7 +182,7 @@ def _run_local_hf_spec(
     run_dir: Path,
     output_root: Path,
     persistent_sessions: dict[str, PersistentHFWorkerSession],
-) -> dict[str, object]:
+) -> RuntimeResult:
     model_names_to_close = [
         model_name
         for model_name in persistent_sessions
@@ -373,6 +374,7 @@ def run_paper_batch(
             _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
 
             try:
+                runtime_result: RuntimeResult
                 if use_monitored_hf_subprocess:
                     runtime_result = _run_local_hf_spec(
                         spec=spec,
@@ -390,9 +392,10 @@ def run_paper_batch(
                         run_dir=run_dir,
                     )
                 if not dry_run:
+                    raw_row = runtime_result["raw_row"]
                     _validate_structural_runtime_result(
                         algorithm=spec.algorithm,
-                        raw_row=runtime_result["raw_row"],
+                        raw_row=raw_row,
                     )
             except Exception as error:
                 failure_payload = {
@@ -415,7 +418,7 @@ def run_paper_batch(
                     _write_status_snapshot(output_root=output_root_path, status=status_snapshot)
                 else:
                     failures = _status_failures(status_snapshot)
-                    failure_entry = {
+                    failure_entry: dict[str, object] = {
                         "run_dir": str(run_dir),
                         "message": str(error),
                         "type": type(error).__name__,
@@ -548,6 +551,7 @@ def run_single_spec(
     _write_json(run_dir / "manifest.json", _manifest_for_spec(spec))
     _write_json(run_dir / "state.json", {"status": "running"})
     try:
+        runtime_result: RuntimeResult
         if use_monitored_hf_subprocess:
             runtime_result = _run_local_hf_spec(
                 spec=spec,
@@ -566,9 +570,10 @@ def run_single_spec(
                 run_dir=run_dir,
             )
         if not dry_run:
+            raw_row = runtime_result["raw_row"]
             _validate_structural_runtime_result(
                 algorithm=spec.algorithm,
-                raw_row=runtime_result["raw_row"],
+                raw_row=raw_row,
             )
     except Exception as error:
         _write_json(
