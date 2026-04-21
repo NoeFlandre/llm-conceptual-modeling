@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import cast
+from typing import TypedDict, cast
 
 import pandas as pd
 
@@ -26,6 +26,36 @@ from llm_conceptual_modeling.hf_batch.utils import (
     add_decoding_factor_columns,
     slugify_model,
 )
+
+
+class AnalysisValueSpec(TypedDict):
+    metrics: list[str]
+    result_column: str
+
+
+class AnalysisSpec(AnalysisValueSpec):
+    stability_group_by: list[str]
+    variability_group_by: list[str]
+
+
+class BudgetAnalysisSpec(TypedDict):
+    suffix: str
+    relative_half_width_target: float
+    z_score: float
+
+
+def _build_analysis_spec(
+    *,
+    stability_group_by: list[str],
+    variability_group_by: list[str],
+    value_spec: AnalysisValueSpec,
+) -> AnalysisSpec:
+    return {
+        "stability_group_by": stability_group_by,
+        "variability_group_by": variability_group_by,
+        "metrics": value_spec["metrics"],
+        "result_column": value_spec["result_column"],
+    }
 
 
 def write_aggregated_outputs(output_root: Path, summary_frame: pd.DataFrame) -> None:
@@ -161,10 +191,10 @@ def _load_raw_rows_frame(
     return raw_frame
 
 
-def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
+def _aggregated_analysis_spec(algorithm: str) -> AnalysisSpec:
     if algorithm == "algo1":
-        return {
-            "stability_group_by": [
+        return _build_analysis_spec(
+            stability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -172,7 +202,7 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
             ],
-            "variability_group_by": [
+            variability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -180,11 +210,11 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
             ],
-            **_analysis_value_columns(algorithm),
-        }
+            value_spec=_analysis_value_columns(algorithm),
+        )
     if algorithm == "algo2":
-        return {
-            "stability_group_by": [
+        return _build_analysis_spec(
+            stability_group_by=[
                 "pair_name",
                 "Convergence",
                 "Explanation",
@@ -193,7 +223,7 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Array/List(1/-1)",
                 "Tag/Adjacency(1/-1)",
             ],
-            "variability_group_by": [
+            variability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -202,25 +232,25 @@ def _aggregated_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Tag/Adjacency(1/-1)",
                 "Convergence",
             ],
-            **_analysis_value_columns(algorithm),
-        }
-    return {
-        "stability_group_by": [
+            value_spec=_analysis_value_columns(algorithm),
+        )
+    return _build_analysis_spec(
+        stability_group_by=[
             "pair_name",
             "Depth",
             "Number of Words",
             "Example",
             "Counter-Example",
         ],
-        "variability_group_by": [
+        variability_group_by=[
             "pair_name",
             "Depth",
             "Number of Words",
             "Example",
             "Counter-Example",
         ],
-        **_analysis_value_columns(algorithm),
-    }
+        value_spec=_analysis_value_columns(algorithm),
+    )
 
 
 def _evaluate_and_factorial_aggregate_output(
@@ -247,7 +277,7 @@ def _write_analysis_outputs(
     evaluated_path: Path,
     stability_path: Path,
     variability_path: Path,
-    analysis_spec: dict[str, object],
+    analysis_spec: AnalysisSpec,
 ) -> None:
     write_grouped_metric_stability(
         [evaluated_path],
@@ -339,13 +369,13 @@ def _write_replication_budget_outputs(
     for budget_spec in _budget_analysis_specs():
         write_replication_budget_analysis(
             [stability_path],
-            budget_paths[str(budget_spec["suffix"])],
-            relative_half_width_target=float(budget_spec["relative_half_width_target"]),
-            z_score=float(budget_spec["z_score"]),
+            budget_paths[budget_spec["suffix"]],
+            relative_half_width_target=budget_spec["relative_half_width_target"],
+            z_score=budget_spec["z_score"],
         )
 
 
-def _budget_analysis_specs() -> list[dict[str, object]]:
+def _budget_analysis_specs() -> list[BudgetAnalysisSpec]:
     return [
         {
             "suffix": "strict",
@@ -368,7 +398,7 @@ def _decoding_factor_columns() -> list[str]:
     ]
 
 
-def _analysis_value_columns(algorithm: str) -> dict[str, object]:
+def _analysis_value_columns(algorithm: str) -> AnalysisValueSpec:
     if algorithm in {"algo1", "algo2"}:
         return {
             "metrics": ["accuracy", "recall", "precision"],
@@ -424,10 +454,10 @@ def _combined_factorial_spec(algorithm: str) -> GeneralizedFactorialSpec:
     )
 
 
-def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
+def _combined_analysis_spec(algorithm: str) -> AnalysisSpec:
     if algorithm == "algo1":
-        return {
-            "stability_group_by": [
+        return _build_analysis_spec(
+            stability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -436,7 +466,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Tag/Adjacency(1/-1)",
                 *_decoding_factor_columns(),
             ],
-            "variability_group_by": [
+            variability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -445,11 +475,11 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Tag/Adjacency(1/-1)",
                 *_decoding_factor_columns(),
             ],
-            **_analysis_value_columns(algorithm),
-        }
+            value_spec=_analysis_value_columns(algorithm),
+        )
     if algorithm == "algo2":
-        return {
-            "stability_group_by": [
+        return _build_analysis_spec(
+            stability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -459,7 +489,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 "Tag/Adjacency(1/-1)",
                 *_decoding_factor_columns(),
             ],
-            "variability_group_by": [
+            variability_group_by=[
                 "pair_name",
                 "Explanation",
                 "Example",
@@ -469,10 +499,10 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
                 *_decoding_factor_columns(),
                 "Convergence",
             ],
-            **_analysis_value_columns(algorithm),
-        }
-    return {
-        "stability_group_by": [
+            value_spec=_analysis_value_columns(algorithm),
+        )
+    return _build_analysis_spec(
+        stability_group_by=[
             "pair_name",
             "Depth",
             "Number of Words",
@@ -480,7 +510,7 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
             "Counter-Example",
             *_decoding_factor_columns(),
         ],
-        "variability_group_by": [
+        variability_group_by=[
             "pair_name",
             "Depth",
             "Number of Words",
@@ -488,5 +518,5 @@ def _combined_analysis_spec(algorithm: str) -> dict[str, object]:
             "Counter-Example",
             *_decoding_factor_columns(),
         ],
-        **_analysis_value_columns(algorithm),
-    }
+        value_spec=_analysis_value_columns(algorithm),
+    )
