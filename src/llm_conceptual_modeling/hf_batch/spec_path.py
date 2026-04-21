@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import TypedDict
+from typing import Mapping, TypedDict
 
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_batch.utils import slugify_model
@@ -27,26 +27,74 @@ class ShardManifestIdentityItem(TypedDict, total=False):
     replication: int | str
 
 
-def spec_identity(spec: HFRunSpec) -> SpecIdentity:
-    """Return a deterministic tuple key for a run spec."""
-    if spec.graph_source != "default":
+class NormalizedSpecIdentityItem(TypedDict, total=False):
+    algorithm: str
+    model: str
+    condition_label: str
+    graph_source: str
+    pair_name: str
+    condition_bits: str
+    replication: int
+
+
+def build_spec_identity(
+    *,
+    algorithm: str,
+    model: str,
+    condition_label: str,
+    graph_source: str = "default",
+    pair_name: str,
+    condition_bits: str,
+    replication: int,
+) -> SpecIdentity:
+    if graph_source != "default":
         return (
-            spec.algorithm,
-            spec.model,
-            spec.condition_label,
-            spec.graph_source,
-            spec.pair_name,
-            spec.condition_bits,
-            spec.replication,
+            algorithm,
+            model,
+            condition_label,
+            graph_source,
+            pair_name,
+            condition_bits,
+            replication,
         )
     return (
-        spec.algorithm,
-        spec.model,
-        spec.condition_label,
-        spec.pair_name,
-        spec.condition_bits,
-        spec.replication,
+        algorithm,
+        model,
+        condition_label,
+        pair_name,
+        condition_bits,
+        replication,
     )
+
+
+def spec_identity(spec: HFRunSpec) -> SpecIdentity:
+    """Return a deterministic tuple key for a run spec."""
+    return build_spec_identity(
+        algorithm=spec.algorithm,
+        model=spec.model,
+        condition_label=spec.condition_label,
+        graph_source=spec.graph_source,
+        pair_name=spec.pair_name,
+        condition_bits=spec.condition_bits,
+        replication=spec.replication,
+    )
+
+
+def normalize_spec_identity_item(
+    identity: Mapping[str, object],
+) -> NormalizedSpecIdentityItem:
+    normalized: NormalizedSpecIdentityItem = {
+        "algorithm": str(identity["algorithm"]),
+        "condition_bits": str(identity["condition_bits"]),
+        "condition_label": str(identity["condition_label"]),
+        "model": str(identity["model"]),
+        "pair_name": str(identity["pair_name"]),
+        "replication": _coerce_identity_replication(identity["replication"]),
+    }
+    graph_source = str(identity.get("graph_source", "default"))
+    if graph_source != "default":
+        normalized["graph_source"] = graph_source
+    return normalized
 
 
 def smoke_spec_identity(spec: HFRunSpec) -> dict[str, object]:
@@ -112,28 +160,16 @@ def run_dir_identity(
     if not replication_text.isdigit():
         return None
     model = model_slug.replace("__", "/")
-    if graph_source != "default":
-        return (
-            model_slug,
-            (
-                algorithm,
-                model,
-                condition_label,
-                graph_source,
-                pair_name,
-                condition_bits,
-                int(replication_text),
-            ),
-        )
     return (
         model_slug,
-        (
-            algorithm,
-            model,
-            condition_label,
-            pair_name,
-            condition_bits,
-            int(replication_text),
+        build_spec_identity(
+            algorithm=algorithm,
+            model=model,
+            condition_label=condition_label,
+            graph_source=graph_source,
+            pair_name=pair_name,
+            condition_bits=condition_bits,
+            replication=int(replication_text),
         ),
     )
 
@@ -156,30 +192,22 @@ def filter_planned_specs_for_output_root(
 
 
 def _identity_from_manifest_item(item: ShardManifestIdentityItem) -> SpecIdentity:
-    graph_source = str(item.get("graph_source", "default"))
-    replication = _coerce_manifest_replication(item)
-    if graph_source != "default":
-        return (
-            str(item["algorithm"]),
-            str(item["model"]),
-            str(item["condition_label"]),
-            graph_source,
-            str(item["pair_name"]),
-            str(item["condition_bits"]),
-            replication,
-        )
-    return (
-        str(item["algorithm"]),
-        str(item["model"]),
-        str(item["condition_label"]),
-        str(item["pair_name"]),
-        str(item["condition_bits"]),
-        replication,
+    normalized = normalize_spec_identity_item(item)
+    return build_spec_identity(
+        algorithm=normalized["algorithm"],
+        model=normalized["model"],
+        condition_label=normalized["condition_label"],
+        graph_source=normalized.get("graph_source", "default"),
+        pair_name=normalized["pair_name"],
+        condition_bits=normalized["condition_bits"],
+        replication=normalized["replication"],
     )
 
-
-def _coerce_manifest_replication(item: ShardManifestIdentityItem) -> int:
-    replication = item["replication"]
+def _coerce_identity_replication(replication: object) -> int:
     if isinstance(replication, bool):
         raise TypeError("Shard manifest replication must be an integer or numeric string.")
-    return int(replication)
+    if isinstance(replication, int):
+        return replication
+    if isinstance(replication, str):
+        return int(replication)
+    raise TypeError("Shard manifest replication must be an integer or numeric string.")

@@ -98,6 +98,49 @@ def test_spec_identity_includes_non_default_graph_source() -> None:
     )
 
 
+def test_build_spec_identity_omits_default_graph_source() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import build_spec_identity
+
+    assert build_spec_identity(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        condition_label="greedy",
+        graph_source="default",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        replication=0,
+    ) == (
+        "algo1",
+        "allenai/Olmo-3-7B-Instruct",
+        "greedy",
+        "sg1_sg2",
+        "00000",
+        0,
+    )
+
+
+def test_build_spec_identity_includes_non_default_graph_source() -> None:
+    from llm_conceptual_modeling.hf_batch.spec_path import build_spec_identity
+
+    assert build_spec_identity(
+        algorithm="algo1",
+        model="allenai/Olmo-3-7B-Instruct",
+        condition_label="greedy",
+        graph_source="babs_johnson",
+        pair_name="sg1_sg2",
+        condition_bits="00000",
+        replication=0,
+    ) == (
+        "algo1",
+        "allenai/Olmo-3-7B-Instruct",
+        "greedy",
+        "babs_johnson",
+        "sg1_sg2",
+        "00000",
+        0,
+    )
+
+
 # ---------------------------------------------------------------------------
 # smoke_spec_identity
 # ---------------------------------------------------------------------------

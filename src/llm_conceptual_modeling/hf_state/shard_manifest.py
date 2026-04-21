@@ -2,10 +2,15 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from llm_conceptual_modeling.common.io import read_json_dict, write_json_dict
-from llm_conceptual_modeling.hf_batch.spec_path import SpecIdentity
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    NormalizedSpecIdentityItem,
+    SpecIdentity,
+    build_spec_identity,
+    normalize_spec_identity_item,
+)
 from llm_conceptual_modeling.hf_state.active_models import resolve_active_chat_models
 
 
@@ -40,18 +45,18 @@ def write_unfinished_shard_manifest(
         "identities": identities,
     }
     write_json_dict(manifest_output_path, manifest)
-    return manifest
+    return cast(dict[str, object], manifest)
 
 
 def _unfinished_active_identities(
     *,
     ledger: dict[str, Any],
     active_chat_models: set[str],
-) -> list[dict[str, object]]:
+) -> list[NormalizedSpecIdentityItem]:
     records = ledger.get("records", [])
     if not isinstance(records, list):
         return []
-    identities: list[dict[str, object]] = []
+    identities: list[NormalizedSpecIdentityItem] = []
     seen: set[SpecIdentity] = set()
     for record in records:
         if not isinstance(record, dict):
@@ -59,41 +64,22 @@ def _unfinished_active_identities(
         identity = record.get("identity")
         if not isinstance(identity, dict):
             continue
-        model = str(identity.get("model", ""))
+        normalized = normalize_spec_identity_item(identity)
+        model = normalized["model"]
         status = str(record.get("status", "pending"))
         if active_chat_models and model not in active_chat_models:
             continue
         if status == "finished":
             continue
-        normalized = {
-            "algorithm": str(identity["algorithm"]),
-            "condition_bits": str(identity["condition_bits"]),
-            "condition_label": str(identity["condition_label"]),
-            "model": model,
-            "pair_name": str(identity["pair_name"]),
-            "replication": int(identity["replication"]),
-        }
-        graph_source = str(identity.get("graph_source", "default"))
-        if graph_source != "default":
-            normalized["graph_source"] = graph_source
-            key = (
-                str(normalized["algorithm"]),
-                str(normalized["model"]),
-                str(normalized["condition_label"]),
-                graph_source,
-                str(normalized["pair_name"]),
-                str(normalized["condition_bits"]),
-                int(normalized["replication"]),
-            )
-        else:
-            key = (
-                str(normalized["algorithm"]),
-                str(normalized["model"]),
-                str(normalized["condition_label"]),
-                str(normalized["pair_name"]),
-                str(normalized["condition_bits"]),
-                int(normalized["replication"]),
-            )
+        key = build_spec_identity(
+            algorithm=normalized["algorithm"],
+            model=normalized["model"],
+            condition_label=normalized["condition_label"],
+            graph_source=normalized.get("graph_source", "default"),
+            pair_name=normalized["pair_name"],
+            condition_bits=normalized["condition_bits"],
+            replication=normalized["replication"],
+        )
         if key in seen:
             continue
         seen.add(key)
@@ -109,28 +95,16 @@ def manifest_identity_keys(manifest: dict[str, Any]) -> set[SpecIdentity]:
     for identity in identities:
         if not isinstance(identity, dict):
             continue
-        graph_source = str(identity.get("graph_source", "default"))
-        if graph_source != "default":
-            keys.add(
-                (
-                    str(identity["algorithm"]),
-                    str(identity["model"]),
-                    str(identity["condition_label"]),
-                    graph_source,
-                    str(identity["pair_name"]),
-                    str(identity["condition_bits"]),
-                    int(identity["replication"]),
-                )
-            )
-            continue
+        normalized = normalize_spec_identity_item(identity)
         keys.add(
-            (
-                str(identity["algorithm"]),
-                str(identity["model"]),
-                str(identity["condition_label"]),
-                str(identity["pair_name"]),
-                str(identity["condition_bits"]),
-                int(identity["replication"]),
+            build_spec_identity(
+                algorithm=normalized["algorithm"],
+                model=normalized["model"],
+                condition_label=normalized["condition_label"],
+                graph_source=normalized.get("graph_source", "default"),
+                pair_name=normalized["pair_name"],
+                condition_bits=normalized["condition_bits"],
+                replication=normalized["replication"],
             )
         )
     return keys

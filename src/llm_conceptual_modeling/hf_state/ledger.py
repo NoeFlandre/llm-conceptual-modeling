@@ -6,7 +6,12 @@ from typing import Any, cast
 
 from llm_conceptual_modeling.common.failure_markers import classify_failure
 from llm_conceptual_modeling.common.io import coerce_int, read_json_dict, write_json_dict
-from llm_conceptual_modeling.hf_batch.spec_path import SpecIdentity
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    NormalizedSpecIdentityItem,
+    SpecIdentity,
+    build_spec_identity,
+    normalize_spec_identity_item,
+)
 from llm_conceptual_modeling.hf_batch.utils import slugify_model
 
 RETRYABLE_FAILURE_KINDS = {"timeout", "oom", "infrastructure", "structural"}
@@ -72,7 +77,7 @@ def refresh_ledger(
         "terminal_failed_count": counts["terminal_failed"],
     }
     write_json_dict(ledger_path, refreshed_ledger)
-    return refreshed_ledger
+    return cast(dict[str, object], refreshed_ledger)
 
 
 def _load_reference_records(
@@ -91,7 +96,7 @@ def _load_reference_records(
                 continue
             normalized_records.append(
                 {
-                    "identity": _normalize_identity(identity),
+                    "identity": normalize_spec_identity_item(identity),
                     "status": str(record.get("status", "pending")),
                 }
             )
@@ -106,8 +111,8 @@ def _load_reference_records(
     ]
 
 
-def _discover_manifest_identities(results_root: Path) -> list[dict[str, object]]:
-    identities: dict[SpecIdentity, dict[str, object]] = {}
+def _discover_manifest_identities(results_root: Path) -> list[NormalizedSpecIdentityItem]:
+    identities: dict[SpecIdentity, NormalizedSpecIdentityItem] = {}
     for batch_root in _discover_batch_roots(results_root):
         manifest = read_json_dict(batch_root / "shard_manifest.json")
         manifest_identities = manifest.get("identities", [])
@@ -116,7 +121,7 @@ def _discover_manifest_identities(results_root: Path) -> list[dict[str, object]]
         for identity in manifest_identities:
             if not isinstance(identity, dict):
                 continue
-            normalized = _normalize_identity(identity)
+            normalized = normalize_spec_identity_item(identity)
             identities[_identity_key(normalized)] = normalized
     return [
         identities[key]
@@ -134,7 +139,7 @@ def _discover_batch_roots(results_root: Path) -> list[Path]:
 
 def _refresh_record(
     *,
-    identity: dict[str, object],
+    identity: NormalizedSpecIdentityItem,
     batch_roots: list[Path],
     results_root: Path,
     ledger_root: Path,
@@ -212,7 +217,10 @@ def _refresh_record(
     }
 
 
-def _load_candidate(batch_root: Path, identity: dict[str, object]) -> dict[str, object] | None:
+def _load_candidate(
+    batch_root: Path,
+    identity: NormalizedSpecIdentityItem,
+) -> dict[str, object] | None:
     run_dir = _candidate_run_dir(batch_root, identity)
     if not run_dir.exists():
         return None
@@ -257,7 +265,7 @@ def _load_candidate(batch_root: Path, identity: dict[str, object]) -> dict[str, 
     }
 
 
-def _candidate_run_dir(batch_root: Path, identity: dict[str, object]) -> Path:
+def _candidate_run_dir(batch_root: Path, identity: NormalizedSpecIdentityItem) -> Path:
     graph_parts = []
     if str(identity.get("graph_source", "default")) != "default":
         graph_parts.append(str(identity["graph_source"]))
@@ -270,7 +278,7 @@ def _candidate_run_dir(batch_root: Path, identity: dict[str, object]) -> Path:
         / Path(*graph_parts)
         / str(identity["pair_name"])
         / str(identity["condition_bits"])
-        / f"rep_{int(identity['replication']):02d}"
+        / f"rep_{identity['replication']:02d}"
     )
 
 
@@ -301,48 +309,23 @@ def _classify_failure_payload(error: dict[str, object]) -> str:
     )
 
 
-def _identity_key(identity: dict[str, object]) -> SpecIdentity:
-    graph_source = str(identity.get("graph_source", "default"))
-    if graph_source != "default":
-        return (
-            str(identity["algorithm"]),
-            str(identity["model"]),
-            str(identity["condition_label"]),
-            graph_source,
-            str(identity["pair_name"]),
-            str(identity["condition_bits"]),
-            int(identity["replication"]),
-        )
-    return (
-        str(identity["algorithm"]),
-        str(identity["model"]),
-        str(identity["condition_label"]),
-        str(identity["pair_name"]),
-        str(identity["condition_bits"]),
-        int(identity["replication"]),
+def _identity_key(identity: NormalizedSpecIdentityItem) -> SpecIdentity:
+    return build_spec_identity(
+        algorithm=identity["algorithm"],
+        model=identity["model"],
+        condition_label=identity["condition_label"],
+        graph_source=identity.get("graph_source", "default"),
+        pair_name=identity["pair_name"],
+        condition_bits=identity["condition_bits"],
+        replication=identity["replication"],
     )
 
 
-def _normalize_identity(identity: dict[str, object]) -> dict[str, object]:
-    normalized = {
-        "algorithm": str(identity["algorithm"]),
-        "condition_bits": str(identity["condition_bits"]),
-        "condition_label": str(identity["condition_label"]),
-        "model": str(identity["model"]),
-        "pair_name": str(identity["pair_name"]),
-        "replication": int(identity["replication"]),
-    }
-    graph_source = str(identity.get("graph_source", "default"))
-    if graph_source != "default":
-        normalized["graph_source"] = graph_source
-    return normalized
-
-
-def _record_identity(record: dict[str, object]) -> dict[str, object]:
+def _record_identity(record: dict[str, object]) -> NormalizedSpecIdentityItem:
     identity = record.get("identity")
     if not isinstance(identity, dict):
         raise ValueError("Ledger record is missing a valid identity")
-    return _normalize_identity(identity)
+    return normalize_spec_identity_item(cast(dict[str, object], identity))
 
 
 def _root_rank_for_run_dir(run_dir: Path, *, results_root: Path, ledger_root: Path) -> int:
