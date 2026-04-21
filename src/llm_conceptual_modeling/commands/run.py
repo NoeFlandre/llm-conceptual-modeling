@@ -23,10 +23,7 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
     select_run_spec,
 )
-from llm_conceptual_modeling.hf_resume.preflight import (
-    ResumePreflightReport,
-    build_resume_preflight_report,
-)
+from llm_conceptual_modeling.hf_resume.preflight import build_resume_preflight_report
 from llm_conceptual_modeling.hf_resume.sweep import build_resume_sweep_report
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 from llm_conceptual_modeling.hf_state.shard_manifest import write_unfinished_shard_manifest
@@ -153,7 +150,7 @@ def handle_run(args: Namespace) -> int:
         if args.json:
             print(json.dumps(report, indent=2, sort_keys=True))
         else:
-            resume_preflight = cast(ResumePreflightReport, report["resume_preflight"])
+            resume_preflight = report["resume_preflight"]
             print(f"tail_results_root={report['tail_results_root']}")
             print(f"tail_pending_count={resume_preflight['pending_count']}")
             print(f"tail_can_resume={resume_preflight['can_resume']}")

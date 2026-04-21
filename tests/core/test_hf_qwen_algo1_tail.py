@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import get_type_hints
 
 import pytest
 import yaml
@@ -10,6 +11,7 @@ from llm_conceptual_modeling.hf_tail.qwen_algo1 import (
     QWEN_ALGO1_TAIL_CONDITION_LABEL,
     QWEN_ALGO1_TAIL_EXPECTED_COUNT,
     QWEN_ALGO1_TAIL_MODEL,
+    QwenAlgo1TailPreflightReport,
     build_qwen_algo1_tail_preflight_report,
     collect_qwen_algo1_tail_records,
     prepare_qwen_algo1_tail_bundle,
@@ -203,7 +205,9 @@ def test_collect_qwen_algo1_tail_records_ignores_finished_history_outside_the_ta
     assert len(records) == QWEN_ALGO1_TAIL_EXPECTED_COUNT
 
 
-def test_prepare_qwen_algo1_tail_bundle_writes_restricted_manifest_and_config(tmp_path: Path) -> None:
+def test_prepare_qwen_algo1_tail_bundle_writes_restricted_manifest_and_config(
+    tmp_path: Path,
+) -> None:
     canonical_root = tmp_path / "canonical"
     canonical_root.mkdir()
     _write_tail_ledger(canonical_root / "ledger.json")
@@ -235,7 +239,10 @@ def test_prepare_qwen_algo1_tail_bundle_writes_restricted_manifest_and_config(tm
     assert config["runtime"]["context_policy"]["retry_structural_failures_on_resume"] is True
     assert config["runtime"]["context_policy"]["max_requests_per_worker_process"] == 64
     assert config["runtime"]["max_new_tokens_by_schema"]["edge_list"] == 512
-    assert config["run"]["output_root"] == "/workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail"
+    assert (
+        config["run"]["output_root"]
+        == "/workspace/results/qwen-tail/hf-paper-batch-qwen-algo1-tail"
+    )
     assert len(seed_ledger["records"]) == 10
     assert all(record["status"] == "retryable_failed" for record in seed_ledger["records"])
     assert len(report["copied_run_dirs"]) == 10
@@ -272,5 +279,13 @@ def test_build_qwen_algo1_tail_preflight_report_rejects_degraded_watcher(tmp_pat
 
 
 def test_hf_tail_qwen_algo1_public_api_lives_in_package_module() -> None:
-    assert collect_qwen_algo1_tail_records.__module__ == "llm_conceptual_modeling.hf_tail.qwen_algo1"
+    assert (
+        collect_qwen_algo1_tail_records.__module__ == "llm_conceptual_modeling.hf_tail.qwen_algo1"
+    )
     assert prepare_qwen_algo1_tail_bundle.__module__ == "llm_conceptual_modeling.hf_tail.qwen_algo1"
+
+
+def test_qwen_algo1_tail_preflight_report_has_explicit_type_contract() -> None:
+    hints = get_type_hints(build_qwen_algo1_tail_preflight_report)
+
+    assert hints["return"] is QwenAlgo1TailPreflightReport

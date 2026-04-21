@@ -20,6 +20,7 @@ from llm_conceptual_modeling.hf_batch.spec_path import (
     normalize_spec_identity_item,
 )
 from llm_conceptual_modeling.hf_config.run_config import load_hf_run_config
+from llm_conceptual_modeling.hf_resume.preflight import ResumePreflightReport
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
 
 QWEN_ALGO1_TAIL_MODEL = "Qwen/Qwen3.5-9B"
@@ -70,6 +71,24 @@ class QwenAlgo1TailBundleReport(TypedDict):
     copied_run_dir_count: int
     copied_run_dirs: list[str]
     seed_status_counts: dict[str, int]
+
+
+class QwenAlgo1TailLedgerSnapshot(TypedDict):
+    finished_count: int
+    pending_count: int
+    retryable_failed_count: int
+    terminal_failed_count: int
+    expected_total_runs: int
+
+
+class QwenAlgo1TailPreflightReport(TypedDict):
+    repo_root: str
+    canonical_results_root: str
+    tail_results_root: str
+    watcher_status: dict[str, object] | None
+    canonical_ledger: QwenAlgo1TailLedgerSnapshot
+    tail_ledger: QwenAlgo1TailLedgerSnapshot
+    resume_preflight: ResumePreflightReport
 
 
 def prepare_qwen_algo1_tail_bundle(
@@ -130,7 +149,7 @@ def build_qwen_algo1_tail_preflight_report(
     canonical_results_root: str | Path,
     tail_results_root: str | Path,
     watcher_status_path: str | Path | None = None,
-) -> dict[str, object]:
+) -> QwenAlgo1TailPreflightReport:
     repo_root_path = Path(repo_root).resolve()
     canonical_results_root_path = Path(canonical_results_root).resolve()
     tail_results_root_path = Path(tail_results_root).resolve()
@@ -198,7 +217,7 @@ def build_qwen_algo1_tail_preflight_report(
     )
     if unfinished_count != QWEN_ALGO1_TAIL_EXPECTED_COUNT:
         raise RuntimeError("Dedicated tail ledger does not resolve to exactly 10 unfinished runs.")
-    resume_report = {
+    resume_report: ResumePreflightReport = {
         "results_root": str(tail_results_root_path),
         "total_runs": len(filtered_specs),
         "finished_count": coerce_int(dedicated_ledger["finished_count"]),
@@ -405,7 +424,7 @@ def _build_tail_runtime_config(
     return payload
 
 
-def _ledger_snapshot(payload: Mapping[str, object]) -> dict[str, object]:
+def _ledger_snapshot(payload: Mapping[str, object]) -> QwenAlgo1TailLedgerSnapshot:
     return {
         "finished_count": coerce_int(payload.get("finished_count", 0)),
         "pending_count": coerce_int(payload.get("pending_count", 0)),
