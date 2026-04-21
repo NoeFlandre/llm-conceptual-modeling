@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
 
 MODEL_LABELS = {
     "allenai/Olmo-3-7B-Instruct": "OLMo",
@@ -103,12 +103,16 @@ def _float_values(rows: Iterable[dict[str, object]], key: str) -> list[float]:
         raw = row.get(key)
         if raw is None:
             continue
+        if isinstance(raw, bool):
+            continue
         if isinstance(raw, (int, float)):
             values.append(float(raw))
             continue
+        if not isinstance(raw, str):
+            continue
         try:
             values.append(float(raw))
-        except (TypeError, ValueError):
+        except ValueError:
             continue
     return values
 
@@ -122,9 +126,13 @@ def _mean(values: list[float]) -> float | None:
 def _coerce_int(value: object) -> int | None:
     if value is None:
         return None
+    if isinstance(value, bool):
+        return None
     if isinstance(value, int):
         return value
+    if not isinstance(value, str):
+        return None
     try:
         return int(value)
-    except (TypeError, ValueError):
+    except ValueError:
         return None
