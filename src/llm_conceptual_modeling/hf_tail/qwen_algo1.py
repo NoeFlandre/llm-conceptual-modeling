@@ -2,16 +2,22 @@ from __future__ import annotations
 
 import json
 import shutil
+from collections.abc import Mapping
 from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict, cast
 
 import yaml
 
+from llm_conceptual_modeling.common.io import coerce_int
 from llm_conceptual_modeling.hf_batch.planning import (
     default_runtime_profile_provider,
     plan_paper_batch,
+)
+from llm_conceptual_modeling.hf_batch.spec_path import (
+    NormalizedSpecIdentityItem,
+    normalize_spec_identity_item,
 )
 from llm_conceptual_modeling.hf_config.run_config import load_hf_run_config
 from llm_conceptual_modeling.hf_state.ledger import refresh_ledger
@@ -25,12 +31,53 @@ QWEN_ALGO1_TAIL_EXPECTED_BITS = frozenset({"00101", "10100"})
 QWEN_ALGO1_TAIL_EXPECTED_REPLICATIONS = frozenset(range(5))
 
 
+class QwenAlgo1TailRecord(TypedDict):
+    identity: NormalizedSpecIdentityItem
+    status: str
+
+
+class QwenAlgo1TailManifest(TypedDict):
+    generated_at: str
+    canonical_results_root: str
+    results_root: str
+    ledger_root: str
+    active_chat_models: list[str]
+    shard_count: int
+    shard_index: int
+    identities: list[NormalizedSpecIdentityItem]
+
+
+class QwenAlgo1TailSeedLedger(TypedDict):
+    duplicate_extra_artifact_count: int
+    duplicate_logical_run_count: int
+    expected_total_runs: int
+    finished_count: int
+    generated_at: str
+    pending_count: int
+    records: list[QwenAlgo1TailRecord]
+    retryable_failed_count: int
+    terminal_failed_count: int
+
+
+class QwenAlgo1TailBundleReport(TypedDict):
+    canonical_results_root: str
+    tail_results_root: str
+    remote_output_root: str
+    manifest_path: str
+    config_path: str
+    ledger_path: str
+    identity_count: int
+    copied_run_dir_count: int
+    copied_run_dirs: list[str]
+    seed_status_counts: dict[str, int]
+
+
 def prepare_qwen_algo1_tail_bundle(
     *,
     canonical_results_root: str | Path,
     tail_results_root: str | Path,
     remote_output_root: str,
-) -> dict[str, object]:
+) -> QwenAlgo1TailBundleReport:
     canonical_results_root_path = Path(canonical_results_root).resolve()
     tail_results_root_path = Path(tail_results_root).resolve()
     if not tail_results_root_path.name.startswith("hf-paper-batch-"):
@@ -104,9 +151,7 @@ def build_qwen_algo1_tail_preflight_report(
         results_root=tail_results_root_path.parent,
         ledger_root=tail_results_root_path,
     )
-    manifest = json.loads(
-        (tail_results_root_path / "shard_manifest.json").read_text(encoding="utf-8")
-    )
+    manifest = _read_tail_manifest(tail_results_root_path / "shard_manifest.json")
     manifest_identities = manifest.get("identities", [])
     if len(manifest_identities) != QWEN_ALGO1_TAIL_EXPECTED_COUNT:
         raise RuntimeError("Dedicated tail manifest does not contain the expected 10 identities.")
@@ -146,15 +191,17 @@ def build_qwen_algo1_tail_preflight_report(
         raise RuntimeError(
             "Dedicated tail config planned an unexpected number of manifest-matched runs."
         )
-    unfinished_count = int(dedicated_ledger["pending_count"]) + int(
-        dedicated_ledger["retryable_failed_count"]
-    ) + int(dedicated_ledger["terminal_failed_count"])
+    unfinished_count = (
+        coerce_int(dedicated_ledger["pending_count"])
+        + coerce_int(dedicated_ledger["retryable_failed_count"])
+        + coerce_int(dedicated_ledger["terminal_failed_count"])
+    )
     if unfinished_count != QWEN_ALGO1_TAIL_EXPECTED_COUNT:
         raise RuntimeError("Dedicated tail ledger does not resolve to exactly 10 unfinished runs.")
     resume_report = {
         "results_root": str(tail_results_root_path),
         "total_runs": len(filtered_specs),
-        "finished_count": int(dedicated_ledger["finished_count"]),
+        "finished_count": coerce_int(dedicated_ledger["finished_count"]),
         "failed_count": 0,
         "pending_count": unfinished_count,
         "running_count": 0,
@@ -172,20 +219,16 @@ def build_qwen_algo1_tail_preflight_report(
     }
 
 
-def collect_qwen_algo1_tail_records(ledger_root: str | Path) -> list[dict[str, object]]:
+def collect_qwen_algo1_tail_records(ledger_root: str | Path) -> list[QwenAlgo1TailRecord]:
     ledger_root_path = Path(ledger_root).resolve()
-    ledger = json.loads((ledger_root_path / "ledger.json").read_text(encoding="utf-8"))
+    ledger = _read_tail_seed_ledger(ledger_root_path / "ledger.json")
     records = ledger.get("records")
     if not isinstance(records, list):
         raise ValueError("ledger.json does not contain a records list.")
-    tail_records: list[dict[str, object]] = []
-    seen: set[tuple[str, str, str, str, int]] = set()
+    tail_records: list[QwenAlgo1TailRecord] = []
+    seen: set[tuple[str, int]] = set()
     for record in records:
-        if not isinstance(record, dict):
-            continue
-        identity = record.get("identity")
-        if not isinstance(identity, dict):
-            continue
+        identity = record["identity"]
         if str(identity.get("model")) != QWEN_ALGO1_TAIL_MODEL:
             continue
         if str(identity.get("algorithm")) != QWEN_ALGO1_TAIL_ALGORITHM:
@@ -198,20 +241,11 @@ def collect_qwen_algo1_tail_records(ledger_root: str | Path) -> list[dict[str, o
             raise ValueError("Qwen algo1 tail unexpectedly contains a non-sg1_sg2 pair.")
         if str(identity.get("condition_bits")) not in QWEN_ALGO1_TAIL_EXPECTED_BITS:
             raise ValueError("Qwen algo1 tail unexpectedly contains an unknown condition_bits.")
-        if int(identity.get("replication")) not in QWEN_ALGO1_TAIL_EXPECTED_REPLICATIONS:
+        if identity["replication"] not in QWEN_ALGO1_TAIL_EXPECTED_REPLICATIONS:
             raise ValueError("Qwen algo1 tail unexpectedly contains an unknown replication.")
-        normalized_identity = {
-            "algorithm": QWEN_ALGO1_TAIL_ALGORITHM,
-            "condition_bits": str(identity["condition_bits"]),
-            "condition_label": QWEN_ALGO1_TAIL_CONDITION_LABEL,
-            "model": QWEN_ALGO1_TAIL_MODEL,
-            "pair_name": QWEN_ALGO1_TAIL_PAIR_NAME,
-            "replication": int(identity["replication"]),
-        }
+        normalized_identity = normalize_spec_identity_item(identity)
         key = (
             normalized_identity["condition_bits"],
-            normalized_identity["condition_label"],
-            normalized_identity["pair_name"],
             normalized_identity["replication"],
         )
         if key in seen:
@@ -231,8 +265,8 @@ def collect_qwen_algo1_tail_records(ledger_root: str | Path) -> list[dict[str, o
     return sorted(
         tail_records,
         key=lambda record: (
-            str(record["identity"]["condition_bits"]),
-            int(record["identity"]["replication"]),
+            record["identity"]["condition_bits"],
+            record["identity"]["replication"],
         ),
     )
 
@@ -241,11 +275,11 @@ def write_qwen_algo1_tail_manifest(
     *,
     canonical_results_root: str | Path,
     tail_results_root: str | Path,
-    records: list[dict[str, object]],
-) -> dict[str, object]:
+    records: list[QwenAlgo1TailRecord],
+) -> QwenAlgo1TailManifest:
     canonical_results_root_path = Path(canonical_results_root).resolve()
     tail_results_root_path = Path(tail_results_root).resolve()
-    manifest = {
+    manifest: QwenAlgo1TailManifest = {
         "generated_at": datetime.now(UTC).isoformat(),
         "canonical_results_root": str(canonical_results_root_path),
         "results_root": str(tail_results_root_path),
@@ -289,33 +323,15 @@ def seed_qwen_algo1_tail_results(
     *,
     canonical_results_root: str | Path,
     tail_results_root: str | Path,
-    records: list[dict[str, object]],
+    records: list[QwenAlgo1TailRecord],
 ) -> list[str]:
     canonical_results_root_path = Path(canonical_results_root).resolve()
     tail_results_root_path = Path(tail_results_root).resolve()
     copied_run_dirs: list[str] = []
     for record in records:
         identity = record["identity"]
-        source_run_dir = (
-            canonical_results_root_path
-            / "runs"
-            / str(identity["algorithm"])
-            / str(identity["model"]).replace("/", "__")
-            / str(identity["condition_label"])
-            / str(identity["pair_name"])
-            / str(identity["condition_bits"])
-            / f"rep_{int(identity['replication']):02d}"
-        )
-        destination_run_dir = (
-            tail_results_root_path
-            / "runs"
-            / str(identity["algorithm"])
-            / str(identity["model"]).replace("/", "__")
-            / str(identity["condition_label"])
-            / str(identity["pair_name"])
-            / str(identity["condition_bits"])
-            / f"rep_{int(identity['replication']):02d}"
-        )
+        source_run_dir = _tail_run_dir(canonical_results_root_path, identity)
+        destination_run_dir = _tail_run_dir(tail_results_root_path, identity)
         destination_run_dir.parent.mkdir(parents=True, exist_ok=True)
         if destination_run_dir.exists():
             shutil.rmtree(destination_run_dir)
@@ -327,10 +343,10 @@ def seed_qwen_algo1_tail_results(
 def write_qwen_algo1_tail_seed_ledger(
     *,
     tail_results_root: str | Path,
-    records: list[dict[str, object]],
-) -> dict[str, object]:
+    records: list[QwenAlgo1TailRecord],
+) -> QwenAlgo1TailSeedLedger:
     tail_results_root_path = Path(tail_results_root).resolve()
-    ledger = {
+    ledger: QwenAlgo1TailSeedLedger = {
         "duplicate_extra_artifact_count": 0,
         "duplicate_logical_run_count": 0,
         "expected_total_runs": len(records),
@@ -389,11 +405,34 @@ def _build_tail_runtime_config(
     return payload
 
 
-def _ledger_snapshot(payload: dict[str, object]) -> dict[str, object]:
+def _ledger_snapshot(payload: Mapping[str, object]) -> dict[str, object]:
     return {
-        "finished_count": int(payload.get("finished_count", 0)),
-        "pending_count": int(payload.get("pending_count", 0)),
-        "retryable_failed_count": int(payload.get("retryable_failed_count", 0)),
-        "terminal_failed_count": int(payload.get("terminal_failed_count", 0)),
-        "expected_total_runs": int(payload.get("expected_total_runs", 0)),
+        "finished_count": coerce_int(payload.get("finished_count", 0)),
+        "pending_count": coerce_int(payload.get("pending_count", 0)),
+        "retryable_failed_count": coerce_int(payload.get("retryable_failed_count", 0)),
+        "terminal_failed_count": coerce_int(payload.get("terminal_failed_count", 0)),
+        "expected_total_runs": coerce_int(payload.get("expected_total_runs", 0)),
     }
+
+
+def _tail_run_dir(root: Path, identity: NormalizedSpecIdentityItem) -> Path:
+    return (
+        root
+        / "runs"
+        / identity["algorithm"]
+        / identity["model"].replace("/", "__")
+        / identity["condition_label"]
+        / identity["pair_name"]
+        / identity["condition_bits"]
+        / f"rep_{identity['replication']:02d}"
+    )
+
+
+def _read_tail_manifest(path: Path) -> QwenAlgo1TailManifest:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return cast(QwenAlgo1TailManifest, payload)
+
+
+def _read_tail_seed_ledger(path: Path) -> QwenAlgo1TailSeedLedger:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return cast(QwenAlgo1TailSeedLedger, payload)
