@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 
 from llm_conceptual_modeling.analysis._bundle_stats import (
@@ -43,6 +45,11 @@ class TestExtractModel:
             )
             == "mistral"
         )
+
+    def test_extracts_model_from_path_objects(self) -> None:
+        path = Path("/private/var/tmp/results/algo1/gpt-5/evaluated/x.csv")
+
+        assert _extract_model(path) == "gpt-5"
 
 
 class TestBuildValiditySummary:

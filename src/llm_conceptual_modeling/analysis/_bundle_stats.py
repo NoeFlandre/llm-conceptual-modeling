@@ -5,6 +5,8 @@ from pathlib import PurePosixPath
 
 import pandas as pd
 
+from llm_conceptual_modeling.common.types import PathLike
+
 
 def _annotate(df: pd.DataFrame, label: str) -> pd.DataFrame:
     out = df.copy()
@@ -12,15 +14,16 @@ def _annotate(df: pd.DataFrame, label: str) -> pd.DataFrame:
     return out
 
 
-def _extract_model(source_input: str) -> str:
-    parts = PurePosixPath(source_input).parts
+def _extract_model(source_input: PathLike) -> str:
+    source_text = str(source_input)
+    parts = PurePosixPath(source_text).parts
     for i, part in enumerate(parts):
         if part in ("results", "legacy") and i + 2 < len(parts):
             return str(parts[i + 2])
     for i, part in enumerate(parts):
         if part in ("raw", "evaluated") and i > 0:
             return str(parts[i - 1])
-    return str(parts[-1]) if parts else source_input
+    return str(parts[-1]) if parts else source_text
 
 
 def _build_validity_summary(df: pd.DataFrame, algorithm: str) -> pd.DataFrame:
