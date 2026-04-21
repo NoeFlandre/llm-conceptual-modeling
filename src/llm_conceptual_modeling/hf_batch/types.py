@@ -1,13 +1,22 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import Callable, TypedDict
 
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.types import Edge as _Edge
 
 Edge = _Edge
-RuntimeResult = dict[str, Any]
+
+
+class _RuntimeResultOptional(TypedDict, total=False):
+    summary: dict[str, object]
+
+
+class RuntimeResult(_RuntimeResultOptional):
+    raw_row: dict[str, object]
+    runtime: dict[str, object]
+    raw_response: str
 
 
 class BatchInfrastructureFailure(RuntimeError):

@@ -3,7 +3,7 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Protocol
 
 from llm_conceptual_modeling.common.spec_codec import serialize_spec
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
@@ -36,6 +36,10 @@ from llm_conceptual_modeling.hf_worker.result import (
 )
 
 
+class RuntimeResultValidator(Protocol):
+    def __call__(self, *, algorithm: str, raw_row: dict[str, object]) -> None: ...
+
+
 def run_local_hf_spec_subprocess(
     *,
     spec: HFRunSpec,
@@ -49,7 +53,7 @@ def run_local_hf_spec_subprocess(
     build_worker_command_fn: Callable[..., list[str]] | None = None,
     build_hf_download_environment_fn: Callable[[], dict[str, str]] = build_hf_download_environment,
     is_retryable_worker_error_fn: Callable[[dict[str, str]], bool] | None = None,
-    validate_runtime_result_fn: Callable[[str, dict[str, object]], None] | None = None,
+    validate_runtime_result_fn: RuntimeResultValidator | None = None,
 ) -> RuntimeResult:
     startup_timeout_seconds = resolve_startup_timeout_seconds(spec.context_policy)
     stage_timeout_seconds = resolve_stage_timeout_seconds(spec.context_policy)
@@ -127,8 +131,12 @@ def run_local_hf_spec(
     run_dir: Path,
     output_root: Path,
     persistent_sessions: dict[str, PersistentHFWorkerSession],
-    persistent_worker_session_cls: type[PersistentHFWorkerSession] = PersistentHFWorkerSession,
+    persistent_worker_session_cls: type[PersistentHFWorkerSession] | None = None,
 ) -> RuntimeResult:
+    if persistent_worker_session_cls is None:
+        from llm_conceptual_modeling.hf_worker.persistent import (
+            PersistentHFWorkerSession as persistent_worker_session_cls,
+        )
     _close_incompatible_persistent_sessions(
         spec=spec,
         persistent_sessions=persistent_sessions,

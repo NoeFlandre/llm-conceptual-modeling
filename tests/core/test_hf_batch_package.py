@@ -24,7 +24,12 @@ def test_hf_batch_package_exposes_refactored_modules() -> None:
     assert callable(slugify_model)
     assert callable(write_text)
     assert HFRunSpec.__name__ == "HFRunSpec"
-    assert RuntimeResult.__name__ == "dict"
+    assert RuntimeResult.__name__ == "RuntimeResult"
+
+
+def test_runtime_result_declares_required_and_optional_keys() -> None:
+    assert RuntimeResult.__required_keys__ == {"raw_response", "raw_row", "runtime"}
+    assert RuntimeResult.__optional_keys__ == {"summary"}
 
 
 def test_hf_batch_planning_is_implemented_in_the_package_module() -> None:

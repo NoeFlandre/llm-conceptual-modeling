@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping
 from pathlib import Path
 from typing import TypedDict, cast
 
@@ -20,7 +19,7 @@ class HFWorkerSuccessPayload(TypedDict):
 
 def load_runtime_result(result_json_path: Path) -> RuntimeResult:
     worker_payload = json.loads(result_json_path.read_text(encoding="utf-8"))
-    if not isinstance(worker_payload, Mapping):
+    if not isinstance(worker_payload, dict):
         raise RuntimeError("Malformed HF worker payload: expected a JSON object.")
     if worker_payload.get("ok") is True:
         runtime_result = worker_payload.get("runtime_result")
@@ -35,12 +34,13 @@ def load_runtime_result(result_json_path: Path) -> RuntimeResult:
     raise RuntimeError(f"{error_payload['type']}: {error_payload['message']}")
 
 
-def _load_worker_error_payload(worker_payload: Mapping[str, object]) -> HFWorkerErrorPayload:
+def _load_worker_error_payload(worker_payload: dict[str, object]) -> HFWorkerErrorPayload:
     error = worker_payload.get("error")
-    if not isinstance(error, Mapping):
+    if not isinstance(error, dict):
         raise RuntimeError("Malformed HF worker error payload: missing error object.")
-    error_type = error.get("type")
-    error_message = error.get("message")
+    error_payload = cast(dict[str, object], error)
+    error_type = error_payload.get("type")
+    error_message = error_payload.get("message")
     if not isinstance(error_type, str) or not isinstance(error_message, str):
         raise RuntimeError("Malformed HF worker error payload: missing type/message.")
     return {"type": error_type, "message": error_message}
