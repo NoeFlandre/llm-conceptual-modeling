@@ -224,8 +224,9 @@ def _condition_metric_budget_rows(
     ]
     condition_rows: list[dict[str, object]] = []
     for group_key, group in observations.groupby(group_columns, sort=True, dropna=False):
+        key_values = _group_key_tuple(group_key, expected_size=len(group_columns))
         algorithm, graph_source, model, decoding_condition, pair_name, condition_bits, metric = (
-            group_key
+            key_values
         )
         observed_runs = int(group["replication"].nunique())
         mean = float(group["value"].mean())
@@ -348,10 +349,17 @@ def _aggregate_budget_rows(
 
 
 def _group_key_values(columns: tuple[str, ...], key: object) -> dict[str, object]:
-    if len(columns) == 1:
+    values = _group_key_tuple(key, expected_size=len(columns))
+    return dict(zip(columns, values, strict=True))
+
+
+def _group_key_tuple(key: object, *, expected_size: int) -> tuple[object, ...]:
+    if expected_size == 1:
         value = key[0] if isinstance(key, tuple) else key
-        return {columns[0]: value}
-    return dict(zip(columns, key, strict=True))
+        return (value,)
+    if not isinstance(key, tuple) or len(key) != expected_size:
+        raise ValueError(f"Expected grouped key with {expected_size} values, got {key!r}.")
+    return key
 
 
 def _aggregate_group(
@@ -459,9 +467,7 @@ def _compact_budget_table(
                     needs_more / condition_count if condition_count else 0.0
                 )
                 row[f"{model_prefix}_{profile_prefix}_max_required_runs"] = (
-                    int(profile_budget["required_total_runs"].max())
-                    if condition_count
-                    else 0
+                    int(profile_budget["required_total_runs"].max()) if condition_count else 0
                 )
         rows.append(row)
     return pd.DataFrame.from_records(rows)

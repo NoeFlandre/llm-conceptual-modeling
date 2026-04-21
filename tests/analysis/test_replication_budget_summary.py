@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 
 def _ledger_record(
@@ -30,6 +31,15 @@ def _ledger_record(
             "validated": True,
         },
     }
+
+
+def test_group_key_values_rejects_scalar_for_multi_column_grouping() -> None:
+    from llm_conceptual_modeling.analysis.replication_budget_summary import (
+        _group_key_values,
+    )
+
+    with pytest.raises(ValueError, match="Expected grouped key"):
+        _group_key_values(("algorithm", "model"), "qm")
 
 
 def test_write_replication_budget_sufficiency_summary_groups_underpowered_conditions(
@@ -155,8 +165,12 @@ def test_write_replication_budget_sufficiency_summary_groups_by_graph_source(
     summary = pd.read_csv(output_path)
 
     assert "graph_source" in summary.columns
-    assert {"graph_source", "algorithm_model_graph_source", "algorithm_model_graph_source_decoding",
-        "algorithm_model_graph_source_decoding_metric"} <= set(summary["grouping"])
+    assert {
+        "graph_source",
+        "algorithm_model_graph_source",
+        "algorithm_model_graph_source_decoding",
+        "algorithm_model_graph_source_decoding_metric",
+    } <= set(summary["grouping"])
     graph_rows = summary[
         (summary["profile"] == "ci95_rel05") & (summary["grouping"] == "graph_source")
     ]
