@@ -95,6 +95,26 @@ def test_extract_variance_rows_by_algorithm_and_model_derives_expected_factors()
     assert algo3_rows[0]["Depth"] == 1
 
 
+def test_extract_variance_rows_by_algorithm_and_model_skips_boolean_metrics() -> None:
+    ledger = {
+        "records": [
+            _finished_record(
+                algorithm="algo3",
+                model=QWEN,
+                condition_bits="1111",
+                condition_label="beam_num_beams_6",
+                pair_name="subgraph_1_to_subgraph_3",
+                replication=0,
+                recall=True,
+            )
+        ]
+    }
+
+    rows_by_key = extract_variance_rows_by_algorithm_and_model(ledger)
+
+    assert rows_by_key == {}
+
+
 def test_compute_variance_decomposition_closes_to_100_for_algo1() -> None:
     frame = pd.DataFrame(_synthetic_rows("algo1", "Qwen"))
 
@@ -184,9 +204,9 @@ def test_generate_variance_decomposition_bundle_is_deterministic(tmp_path: Path)
     first = generate_variance_decomposition_bundle(results_root, output_root)
     second = generate_variance_decomposition_bundle(results_root, output_root)
 
-    assert first["decomposition_csv"].read_text(
-        encoding="utf-8"
-    ) == second["decomposition_csv"].read_text(encoding="utf-8")
+    assert first["decomposition_csv"].read_text(encoding="utf-8") == second[
+        "decomposition_csv"
+    ].read_text(encoding="utf-8")
     for algorithm in ("algo1", "algo2", "algo3"):
         assert first["tables"][algorithm] == second["tables"][algorithm]
         assert (output_root / f"variance_decomposition_{algorithm}.tex").exists()
@@ -596,13 +616,7 @@ def _write_synthetic_map_extension_results(
     records: list[dict[str, object]] = []
     for model in (QWEN, MISTRAL):
         evaluated_rows: list[dict[str, object]] = []
-        model_dir = (
-            results_root
-            / "aggregated"
-            / "algo3"
-            / model.replace("/", "__")
-            / "combined"
-        )
+        model_dir = results_root / "aggregated" / "algo3" / model.replace("/", "__") / "combined"
         model_dir.mkdir(parents=True, exist_ok=True)
         factor_space = product(
             ("babs_johnson", "clarice_starling", "philip_marlowe"),

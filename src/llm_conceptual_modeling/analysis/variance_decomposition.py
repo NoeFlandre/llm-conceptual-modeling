@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from pathlib import Path
 
 import numpy as np
@@ -39,10 +40,10 @@ _MODEL_PREFIXES = {
 
 
 def extract_variance_rows_by_algorithm_and_model(
-    ledger: dict,
+    ledger: dict[str, object],
 ) -> dict[tuple[str, str], list[dict[str, object]]]:
     return _extract_variance_rows_by_algorithm_and_model_from_records(
-        ledger.get("records", [])
+        _ledger_records(ledger.get("records", []))
     )
 
 
@@ -70,12 +71,10 @@ def build_open_weight_map_extension_summary(frame: pd.DataFrame) -> pd.DataFrame
     working["depth"] = working["Depth"].astype(int)
     if working["model_prefix"].isna().any():
         unknown_models = sorted(
-            str(model)
-            for model in working.loc[working["model_prefix"].isna(), "model"].unique()
+            str(model) for model in working.loc[working["model_prefix"].isna(), "model"].unique()
         )
         raise ValueError(
-            "Unsupported model(s) in open-weight summary frame: "
-            f"{', '.join(unknown_models)}"
+            f"Unsupported model(s) in open-weight summary frame: {', '.join(unknown_models)}"
         )
 
     grouped = (
@@ -178,12 +177,10 @@ def build_map_recall_summary(frame: pd.DataFrame) -> pd.DataFrame:
     working["model_prefix"] = working["model"].map(_model_prefix)
     if working["model_prefix"].isna().any():
         unknown_models = sorted(
-            str(model)
-            for model in working.loc[working["model_prefix"].isna(), "model"].unique()
+            str(model) for model in working.loc[working["model_prefix"].isna(), "model"].unique()
         )
         raise ValueError(
-            "Unsupported model(s) in map recall summary frame: "
-            f"{', '.join(unknown_models)}"
+            f"Unsupported model(s) in map recall summary frame: {', '.join(unknown_models)}"
         )
 
     rows: list[dict[str, object]] = []
@@ -321,12 +318,13 @@ def generate_variance_decomposition_bundle(
         }
 
     decompositions: list[pd.DataFrame] = []
-    for (algorithm, model), frame in sorted(
+    for group_key, frame in sorted(
         source_frame.groupby(["algorithm", "model"], dropna=False),
         key=lambda item: item[0],
     ):
+        algorithm, model = _group_key_tuple(group_key, expected_size=2)
         frame = frame.copy()
-        decompositions.append(compute_variance_decomposition(frame, algorithm, model))
+        decompositions.append(compute_variance_decomposition(frame, str(algorithm), str(model)))
     full = pd.concat(decompositions, ignore_index=True) if decompositions else pd.DataFrame()
     tables: dict[str, str] = {}
     algorithm_csvs: dict[str, Path] = {}
@@ -481,8 +479,7 @@ def _assert_map_extension_recall_matches_batch_summary(
     if not (merged["_merge"] == "both").all():
         mismatch_count = int((merged["_merge"] != "both").sum())
         raise ValueError(
-            "Map-extension evaluated/batch-summary identity mismatch for "
-            f"{mismatch_count} run(s)."
+            f"Map-extension evaluated/batch-summary identity mismatch for {mismatch_count} run(s)."
         )
     mismatched = merged[
         ~np.isclose(
@@ -499,7 +496,7 @@ def _assert_map_extension_recall_matches_batch_summary(
 
 def _ledger_to_variance_source_frame(ledger: dict[str, object]) -> pd.DataFrame:
     rows_by_key = _extract_variance_rows_by_algorithm_and_model_from_records(
-        ledger.get("records", [])
+        _ledger_records(ledger.get("records", []))
     )
     rows: list[dict[str, object]] = []
     for key_rows in rows_by_key.values():
@@ -632,26 +629,20 @@ def _binary_contrast_levels(series: pd.Series) -> pd.Series:
 
 
 def _extract_variance_rows_by_algorithm_and_model_from_records(
-    records: list[dict[str, object]] | tuple[dict[str, object], ...] | list[object],
+    records: Iterable[dict[str, object]],
 ) -> dict[tuple[str, str], list[dict[str, object]]]:
     rows_by_key: dict[tuple[str, str], list[dict[str, object]]] = {}
 
     for record in records:
-        if not isinstance(record, dict):
-            continue
         if record.get("status", "finished") != "finished":
             continue
 
         if "identity" in record:
-            identity = record.get("identity", {})
-            if not isinstance(identity, dict):
+            identity = _string_key_mapping(record.get("identity"))
+            if identity is None:
                 continue
-            metrics = record.get("winner", {})
-            if not isinstance(metrics, dict):
-                metrics = {}
-            metric_values = metrics.get("metrics", {})
-            if not isinstance(metric_values, dict):
-                metric_values = {}
+            winner = _string_key_mapping(record.get("winner")) or {}
+            metric_values = _string_key_mapping(winner.get("metrics")) or {}
         else:
             identity = record
             metric_values = record
@@ -673,22 +664,81 @@ def _extract_variance_rows_by_algorithm_and_model_from_records(
             continue
 
         condition_bits = str(identity.get("condition_bits", ""))
+        replication = _integer_value(identity.get("replication", 0))
+        if replication is None:
+            continue
         row: dict[str, object] = {
             "algorithm": algorithm,
             "model": model_label,
             "pair_name": str(identity.get("pair_name", "")),
             "condition_bits": condition_bits,
             "condition_label": condition_label,
-            "replication": int(identity.get("replication", 0)),
+            "replication": replication,
         }
         if "graph_source" in identity or "graph_source" in record:
             row["graph_source"] = str(identity.get("graph_source", record.get("graph_source", "")))
         row.update(decode_condition_bits(algorithm, condition_bits))
         row.update(decode_decoding_columns(condition_label))
+        metric_row: dict[str, float] = {}
         for metric in spec.metrics:
-            value = metric_values.get(metric, record.get(metric, 0.0))
-            row[metric] = float(value)
+            value = _numeric_metric(metric_values.get(metric, record.get(metric)))
+            if value is None:
+                metric_row = {}
+                break
+            metric_row[metric] = value
+        if not metric_row:
+            continue
+        row.update(metric_row)
 
         rows_by_key.setdefault((algorithm, model_label), []).append(row)
 
     return rows_by_key
+
+
+def _ledger_records(value: object) -> tuple[dict[str, object], ...]:
+    if not isinstance(value, (list, tuple)):
+        return ()
+    records: list[dict[str, object]] = []
+    for item in value:
+        record = _string_key_mapping(item)
+        if record is not None:
+            records.append(record)
+    return tuple(records)
+
+
+def _string_key_mapping(value: object) -> dict[str, object] | None:
+    if not isinstance(value, dict):
+        return None
+    return {str(key): entry for key, entry in value.items()}
+
+
+def _numeric_metric(value: object) -> float | None:
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if not isinstance(value, str):
+        return None
+    try:
+        return float(value)
+    except ValueError:
+        return None
+
+
+def _integer_value(value: object) -> int | None:
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if not isinstance(value, str):
+        return None
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+
+def _group_key_tuple(key: object, *, expected_size: int) -> tuple[object, ...]:
+    if not isinstance(key, tuple) or len(key) != expected_size:
+        raise ValueError(f"Expected grouped key with {expected_size} values, got {key!r}.")
+    return key
