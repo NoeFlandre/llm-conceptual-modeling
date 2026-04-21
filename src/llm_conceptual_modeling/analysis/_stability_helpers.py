@@ -1,4 +1,5 @@
 """Pure helper utilities extracted from stability_bundle.py for cohesion."""
+
 from __future__ import annotations
 
 import pandas as pd
@@ -18,9 +19,6 @@ def _slugify(value: str) -> str:
     while "__" in slug:
         slug = slug.replace("__", "_")
     return slug.strip("_")
-
-
-slugify = _slugify  # backward-compat: exported as public API for existing callers
 
 
 def frame_to_overview_records(frame: pd.DataFrame) -> list[dict[str, object]]:
@@ -53,8 +51,6 @@ def patch_algorithm_rows(
         return frame
     algorithm = replacement_row["algorithm"]
     metric = replacement_row["metric"]
-    filtered = frame.loc[
-        ~((frame["algorithm"] == algorithm) & (frame["metric"] == metric))
-    ].copy()
+    filtered = frame.loc[~((frame["algorithm"] == algorithm) & (frame["metric"] == metric))].copy()
     replacement_frame = pd.DataFrame.from_records([replacement_row])
     return pd.concat([filtered, replacement_frame], ignore_index=True)

@@ -1,13 +1,15 @@
 """Tests for _stability_helpers."""
+
 from __future__ import annotations
 
 import pandas as pd
 import pytest
 
+import llm_conceptual_modeling.analysis._stability_helpers as stability_helpers
 from llm_conceptual_modeling.analysis._stability_helpers import (
+    _slugify,
     frame_to_overview_records,
     patch_algorithm_rows,
-    slugify,
 )
 
 
@@ -29,7 +31,10 @@ class TestSlugify:
         ],
     )
     def test_slugify(self, input_value: str, expected: str) -> None:
-        assert slugify(input_value) == expected
+        assert _slugify(input_value) == expected
+
+    def test_legacy_slugify_alias_is_removed(self) -> None:
+        assert not hasattr(stability_helpers, "slugify")
 
 
 class TestFrameToOverviewRecords:
