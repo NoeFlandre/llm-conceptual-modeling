@@ -3,6 +3,7 @@ from pathlib import Path
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.hf_batch.types import HFRunSpec
 from llm_conceptual_modeling.hf_state.resume_state import (
+    _preferred_resume_model,
     resume_priority_key,
     should_keep_failure_pending_on_resume,
 )
@@ -55,3 +56,26 @@ def test_hf_state_resume_state_package_imports_and_prioritizes_models(tmp_path: 
 
     assert isinstance(key, tuple)
     assert len(key) == 9
+
+
+def test_preferred_resume_model_prefers_current_run_then_last_completed(tmp_path: Path) -> None:
+    batch_status_path = tmp_path / "batch_status.json"
+    batch_status_path.write_text("{}", encoding="utf-8")
+
+    current_run_model = _preferred_resume_model(
+        output_root=tmp_path,
+        read_artifact_json_fn=lambda _path: {
+            "current_run": {"model": "Qwen/Qwen3.5-9B"},
+            "last_completed_run": {"model": "mistralai/Ministral-3-8B-Instruct-2512"},
+        },
+    )
+    last_completed_model = _preferred_resume_model(
+        output_root=tmp_path,
+        read_artifact_json_fn=lambda _path: {
+            "current_run": {"model": "   "},
+            "last_completed_run": {"model": "mistralai/Ministral-3-8B-Instruct-2512"},
+        },
+    )
+
+    assert current_run_model == "Qwen/Qwen3.5-9B"
+    assert last_completed_model == "mistralai/Ministral-3-8B-Instruct-2512"

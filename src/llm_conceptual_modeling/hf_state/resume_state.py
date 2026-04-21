@@ -348,16 +348,22 @@ def _preferred_resume_model(
     read_artifact_json_fn: Callable[[Path], JsonObject],
 ) -> str | None:
     status = read_artifact_json_fn(output_root / "batch_status.json")
-    current_run = status.get("current_run")
-    if isinstance(current_run, Mapping):
-        current_model = current_run.get("model")
-        if isinstance(current_model, str) and current_model.strip():
-            return current_model
-    last_completed_run = status.get("last_completed_run")
-    if isinstance(last_completed_run, Mapping):
-        last_completed_model = last_completed_run.get("model")
-        if isinstance(last_completed_model, str) and last_completed_model.strip():
-            return last_completed_model
+    current_model = _status_run_model(status.get("current_run"))
+    if current_model is not None:
+        return current_model
+    last_completed_model = _status_run_model(status.get("last_completed_run"))
+    if last_completed_model is not None:
+        return last_completed_model
+    return None
+
+
+def _status_run_model(run_payload: object) -> str | None:
+    if not isinstance(run_payload, dict):
+        return None
+    payload = cast(JsonObject, run_payload)
+    model = payload.get("model")
+    if isinstance(model, str) and model.strip():
+        return model
     return None
 
 
