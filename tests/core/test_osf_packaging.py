@@ -79,6 +79,18 @@ def test_write_osf_package_creates_readmes_checksums_and_zip_contents(tmp_path: 
         assert all("hf-map-extension-canonical" not in name for name in names)
 
 
+def test_package_readme_links_source_of_truth_repositories(tmp_path: Path) -> None:
+    data_root = _write_fixture_data_tree(tmp_path)
+    output_dir = tmp_path / "package"
+
+    write_osf_package(data_root=data_root, output_dir=output_dir)
+
+    readme = (output_dir / "README.md").read_text(encoding="utf-8")
+    assert "https://github.com/NoeFlandre/llm-conceptual-modeling" in readme
+    assert "https://huggingface.co/NoeFlandre/llm-variability-conceptual-modeling" in readme
+    assert "source of truth" in readme
+
+
 def test_write_osf_package_dry_run_reports_paths_without_writing(tmp_path: Path) -> None:
     data_root = _write_fixture_data_tree(tmp_path)
     output_dir = tmp_path / "package"

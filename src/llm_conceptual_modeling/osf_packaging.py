@@ -508,8 +508,14 @@ def _package_readme(archives: list[PackageArchive]) -> str:
         "# OSF PLOS Reviewer Package",
         "",
         "This directory contains reviewer-facing ZIP files prepared from the local data tree.",
-        "GitHub remains the source-code home, and Hugging Face remains the modular data bucket.",
-        "OSF is the PLOS-compatible archival package.",
+        "OSF is the PLOS-compatible archival package. The source of truth repositories remain:",
+        "",
+        "- GitHub: [NoeFlandre/llm-conceptual-modeling]"
+        "(https://github.com/NoeFlandre/llm-conceptual-modeling), containing the code, tests, "
+        "CLI, documentation, and reproducibility tooling.",
+        "- Hugging Face: [NoeFlandre/llm-variability-conceptual-modeling]"
+        "(https://huggingface.co/NoeFlandre/llm-variability-conceptual-modeling), containing "
+        "the complete inputs, results, and analysis artifacts.",
         "",
         "## ZIP files",
         "",
