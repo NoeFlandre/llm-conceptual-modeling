@@ -1,7 +1,8 @@
 """Baseline edge sampling and count computation for baseline comparison.
 
 Provides cached sampling for three non-LLM baseline strategies:
-- random-k: sample k edges uniformly at random from the mother graph
+- random-k: sample k direct edges uniformly at random from all admissible
+  cross-subgraph node pairs
 - wordnet-ontology-match: rank by WordNet semantic overlap
 - edit-distance: rank by edit-distance similarity
 
@@ -13,7 +14,7 @@ from __future__ import annotations
 from functools import lru_cache
 
 from llm_conceptual_modeling.common.baseline import (
-    propose_random_k_edges,
+    propose_random_cross_subgraph_edges,
     propose_strategy_cross_subgraph_edges,
 )
 from llm_conceptual_modeling.common.connection_eval import find_valid_connections
@@ -28,6 +29,7 @@ def _sample_baseline_edges(
     mother_edges: list[tuple[str, str]],
     subgraph1_edges: list[tuple[str, str]],
     subgraph2_edges: list[tuple[str, str]],
+    random_seed: int = _RANDOM_SEED,
 ) -> set[tuple[str, str]]:
     mother_key = tuple(mother_edges)
     subgraph1_key = tuple(subgraph1_edges)
@@ -39,6 +41,7 @@ def _sample_baseline_edges(
         mother_edges=mother_key,
         subgraph1_edges=subgraph1_key,
         subgraph2_edges=subgraph2_key,
+        random_seed=random_seed,
     )
     return set(ranked_edges[:k])
 
@@ -50,9 +53,18 @@ def _ranked_baseline_edges(
     mother_edges: tuple[tuple[str, str], ...],
     subgraph1_edges: tuple[tuple[str, str], ...],
     subgraph2_edges: tuple[tuple[str, str], ...],
+    random_seed: int,
 ) -> tuple[tuple[str, str], ...]:
     if baseline_strategy == "random-k":
-        return tuple(propose_random_k_edges(mother_edges, len(mother_edges), seed=_RANDOM_SEED))
+        pair_count = _cross_subgraph_pair_count(subgraph1_edges, subgraph2_edges)
+        return tuple(
+            propose_random_cross_subgraph_edges(
+                subgraph1_edges,
+                subgraph2_edges,
+                sample_count=pair_count,
+                seed=random_seed,
+            )
+        )
     subgraph1_nodes = {node for edge in subgraph1_edges for node in edge}
     subgraph2_nodes = {node for edge in subgraph2_edges for node in edge}
     max_pair_count = len(subgraph1_nodes) * len(subgraph2_nodes)
@@ -75,6 +87,7 @@ def _compute_baseline_counts(
     subgraph1_edges: list[tuple[str, str]],
     subgraph2_edges: list[tuple[str, str]],
     ground_truth: set[tuple[str, str]],
+    random_seed: int = _RANDOM_SEED,
 ) -> dict[str, int]:
     return dict(
         _compute_baseline_counts_cached(
@@ -84,6 +97,7 @@ def _compute_baseline_counts(
             subgraph1_edges=tuple(subgraph1_edges),
             subgraph2_edges=tuple(subgraph2_edges),
             ground_truth=tuple(sorted(ground_truth)),
+            random_seed=random_seed,
         )
     )
 
@@ -97,6 +111,7 @@ def _compute_baseline_counts_cached(
     subgraph1_edges: tuple[tuple[str, str], ...],
     subgraph2_edges: tuple[tuple[str, str], ...],
     ground_truth: tuple[tuple[str, str], ...],
+    random_seed: int = _RANDOM_SEED,
 ) -> tuple[tuple[str, int], ...]:
     baseline_edges = _sample_baseline_edges(
         baseline_strategy=baseline_strategy,
@@ -104,6 +119,7 @@ def _compute_baseline_counts_cached(
         mother_edges=list(mother_edges),
         subgraph1_edges=list(subgraph1_edges),
         subgraph2_edges=list(subgraph2_edges),
+        random_seed=random_seed,
     )
     proposed_edges = [*subgraph1_edges, *subgraph2_edges, *sorted(baseline_edges)]
     generated_connections = find_valid_connections(
@@ -118,4 +134,34 @@ def _compute_baseline_counts_cached(
             "fp": len(generated_connections - ground_truth_edges),
             "fn": len(ground_truth_edges - generated_connections),
         }.items()
+    )
+
+
+def _scored_connection_count(
+    proposed_edges: list[tuple[str, str]],
+    *,
+    subgraph1_edges: list[tuple[str, str]],
+    subgraph2_edges: list[tuple[str, str]],
+) -> int:
+    generated_connections = find_valid_connections(
+        [*subgraph1_edges, *subgraph2_edges, *proposed_edges],
+        subgraph1_edges,
+        subgraph2_edges,
+    )
+    return len(generated_connections)
+
+
+def _cross_subgraph_pair_count(
+    subgraph1_edges: tuple[tuple[str, str], ...],
+    subgraph2_edges: tuple[tuple[str, str], ...],
+) -> int:
+    subgraph1_nodes = {node for edge in subgraph1_edges for node in edge}
+    subgraph2_nodes = {node for edge in subgraph2_edges for node in edge}
+    return len(
+        {
+            tuple(sorted((left, right)))
+            for left in subgraph1_nodes
+            for right in subgraph2_nodes
+            if left != right
+        }
     )

@@ -9,6 +9,9 @@ from llm_conceptual_modeling.analysis.figures import write_figure_ready_metric_r
 from llm_conceptual_modeling.analysis.figures_bundle import write_figures_bundle
 from llm_conceptual_modeling.analysis.hypothesis import write_paired_factor_hypothesis_tests
 from llm_conceptual_modeling.analysis.hypothesis_bundle import write_hypothesis_testing_bundle
+from llm_conceptual_modeling.analysis.map_extension_baseline_bundle import (
+    write_map_extension_baseline_bundle,
+)
 from llm_conceptual_modeling.analysis.output_validity_bundle import write_output_validity_bundle
 from llm_conceptual_modeling.analysis.plots import write_revision_plots
 from llm_conceptual_modeling.analysis.replication_budget import write_replication_budget_analysis
@@ -155,6 +158,14 @@ def handle_analyze(args: Namespace) -> int:
             write_baseline_comparison_bundle(
                 results_root=args.results_root,
                 output_dir=args.output_dir,
+                random_repetitions=args.random_repetitions,
+            )
+            return 0
+        if args.analysis_target == "map-extension-baseline-bundle":
+            write_map_extension_baseline_bundle(
+                results_root=args.results_root,
+                output_dir=args.output_dir,
+                random_repetitions=args.random_repetitions,
             )
             return 0
         if args.analysis_target == "variance-decomposition-bundle":

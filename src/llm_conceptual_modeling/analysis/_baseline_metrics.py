@@ -27,17 +27,43 @@ def _safe_div(numerator: float, denominator: float) -> float:
     return numerator / denominator if denominator > 0 else 0.0
 
 
-def _group_comparison_rows(comparison_rows: list[dict[str, object]]) -> pd.DataFrame:
+def _ci95_low(values: pd.Series) -> float:
+    mean = float(values.mean())
+    count = int(values.count())
+    if count <= 1:
+        return mean
+    return mean - (1.96 * float(values.std(ddof=1)) / (count**0.5))
+
+
+def _ci95_high(values: pd.Series) -> float:
+    mean = float(values.mean())
+    count = int(values.count())
+    if count <= 1:
+        return mean
+    return mean + (1.96 * float(values.std(ddof=1)) / (count**0.5))
+
+
+def _group_comparison_rows(
+    comparison_rows: list[dict[str, object]],
+    *,
+    group_columns: list[str] | None = None,
+) -> pd.DataFrame:
     comparison_frame = pd.DataFrame(comparison_rows)
+    columns = group_columns or ["algorithm", "model", "baseline_strategy", "metric"]
     return (
         comparison_frame.groupby(
-            ["algorithm", "model", "baseline_strategy", "metric"],
+            columns,
             dropna=False,
         )
         .agg(
             llm_mean=("llm_metric", "mean"),
             baseline_mean=("baseline_metric", "mean"),
+            baseline_ci95_low=("baseline_metric", _ci95_low),
+            baseline_ci95_high=("baseline_metric", _ci95_high),
             mean_delta=("delta", "mean"),
+            mean_k=("k", "mean"),
+            row_count=("baseline_metric", "count"),
+            llm_row_count=("source_row", "nunique"),
         )
         .reset_index()
     )
@@ -53,11 +79,14 @@ def _build_algo12_metric_rows(
     llm_precision: float,
     llm_recall: float,
     k: int,
+    source_row: int,
+    baseline_repetition: int | None,
     baseline_tp: int,
     baseline_fp: int,
     baseline_fn: int,
     subgraph1_edges: list[tuple[str, str]],
     subgraph2_edges: list[tuple[str, str]],
+    extra_fields: dict[str, object] | None = None,
 ) -> list[dict[str, object]]:
     baseline_tn = _cross_subgraph_pair_count(subgraph1_edges, subgraph2_edges) - (
         baseline_tp + baseline_fp + baseline_fn
@@ -78,19 +107,22 @@ def _build_algo12_metric_rows(
             llm_metric = llm_recall
             baseline_metric = _safe_div(baseline_tp, baseline_tp + baseline_fn)
 
-        rows.append(
-            {
-                "algorithm": algo,
-                "model": model,
-                "baseline_strategy": baseline_strategy,
-                "metric": metric,
-                "source_file": source_file,
-                "k": k,
-                "llm_metric": llm_metric,
-                "baseline_metric": baseline_metric,
-                "delta": llm_metric - baseline_metric,
-            }
-        )
+        row_data: dict[str, object] = {
+            "algorithm": algo,
+            "model": model,
+            "baseline_strategy": baseline_strategy,
+            "metric": metric,
+            "source_file": source_file,
+            "source_row": source_row,
+            "baseline_repetition": baseline_repetition,
+            "k": k,
+            "llm_metric": llm_metric,
+            "baseline_metric": baseline_metric,
+            "delta": llm_metric - baseline_metric,
+        }
+        if extra_fields:
+            row_data.update(extra_fields)
+        rows.append(row_data)
     return rows
 
 
@@ -100,6 +132,8 @@ def _build_algo3_metric_rows(
     baseline_strategy: str,
     source_file: str,
     k: int,
+    source_row: int,
+    baseline_repetition: int | None,
     llm_recall: float,
     llm_edges: set[tuple[str, str]],
     baseline_edges: set[tuple[str, str]],
@@ -107,6 +141,7 @@ def _build_algo3_metric_rows(
     mother_edges: list[tuple[str, str]],
     source_edges: list[tuple[str, str]],
     target_edges: list[tuple[str, str]],
+    extra_fields: dict[str, object] | None = None,
 ) -> list[dict[str, object]]:
     baseline_tp = len(baseline_edges & ground_truth)
     baseline_fp = len(baseline_edges - ground_truth)
@@ -146,17 +181,20 @@ def _build_algo3_metric_rows(
             llm_metric = llm_recall
             baseline_metric = baseline_recall
 
-        rows.append(
-            {
-                "algorithm": "algo3",
-                "model": model,
-                "baseline_strategy": baseline_strategy,
-                "metric": metric,
-                "source_file": source_file,
-                "k": k,
-                "llm_metric": llm_metric,
-                "baseline_metric": baseline_metric,
-                "delta": llm_metric - baseline_metric,
-            }
-        )
+        row_data: dict[str, object] = {
+            "algorithm": "algo3",
+            "model": model,
+            "baseline_strategy": baseline_strategy,
+            "metric": metric,
+            "source_file": source_file,
+            "source_row": source_row,
+            "baseline_repetition": baseline_repetition,
+            "k": k,
+            "llm_metric": llm_metric,
+            "baseline_metric": baseline_metric,
+            "delta": llm_metric - baseline_metric,
+        }
+        if extra_fields:
+            row_data.update(extra_fields)
+        rows.append(row_data)
     return rows

@@ -59,3 +59,6 @@ def test_write_bundle_readme_writes_expected_sections(tmp_path: Path) -> None:
     assert "# Non-LLM Baseline Comparison Bundle" in readme
     assert "`random-k`" in readme
     assert "baseline_advantage_summary.csv" in readme
+    assert "scored cross-subgraph connections" in readme
+    assert "five deterministic replications" in readme
+    assert "direct lexical matching baseline" in readme

@@ -87,6 +87,71 @@ def test_cli_analyze_hypothesis_bundle_writes_organized_review_artifacts(tmp_pat
     assert (output_dir / "algo3" / "depth" / "significance_summary.csv").exists()
 
 
+def test_cli_analyze_map_extension_baseline_bundle_writes_outputs(tmp_path) -> None:
+    results_root = tmp_path / "hf-map-extension-canonical"
+    output_dir = tmp_path / "bundle"
+    raw_row_path = (
+        results_root
+        / "runs"
+        / "algo3"
+        / "Qwen__Qwen3.5-9B"
+        / "greedy"
+        / "case_a"
+        / "subgraph_1_to_subgraph_2"
+        / "000"
+        / "rep_00"
+        / "raw_row.json"
+    )
+    raw_row_path.parent.mkdir(parents=True, exist_ok=True)
+    raw_row_path.write_text(
+        json.dumps(
+            {
+                "Source Graph": "[('a', 'b')]",
+                "Target Graph": "[('x', 'y')]",
+                "Mother Graph": "[('a', 'b'), ('x', 'y'), ('b', 'x')]",
+                "Results": "[('b', 'bridge'), ('bridge', 'x')]",
+                "Recall": 1.0,
+                "model": "Qwen/Qwen3.5-9B",
+                "graph_source": "case_a",
+                "pair_name": "subgraph_1_to_subgraph_2",
+                "decoding_algorithm": "greedy",
+            }
+        ),
+        encoding="utf-8",
+    )
+    pd.DataFrame.from_records(
+        [
+            {
+                "algorithm": "algo3",
+                "model": "Qwen/Qwen3.5-9B",
+                "graph_source": "case_a",
+                "decoding_algorithm": "greedy",
+                "pair_name": "subgraph_1_to_subgraph_2",
+                "replication": 0,
+                "status": "finished",
+                "raw_row_path": str(raw_row_path),
+            }
+        ]
+    ).to_csv(results_root / "batch_summary.csv", index=False)
+
+    exit_code = main(
+        [
+            "analyze",
+            "map-extension-baseline-bundle",
+            "--results-root",
+            str(results_root),
+            "--output-dir",
+            str(output_dir),
+            "--random-repetitions",
+            "5",
+        ]
+    )
+
+    assert exit_code == 0
+    assert (output_dir / "row_level_baseline_comparison.csv").exists()
+    assert (output_dir / "map_extension_model_vs_baseline.csv").exists()
+
+
 def test_cli_analyze_variance_decomposition_bundle_writes_bundle_outputs(tmp_path) -> None:
     results_root = Path("data/results/open_weights/hf-paper-batch-canonical")
     output_dir = tmp_path / "variance_decomposition"

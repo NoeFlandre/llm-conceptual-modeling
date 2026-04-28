@@ -73,12 +73,9 @@ def propose_random_k_edges(
 ) -> list[Edge]:
     """Sample exactly k edges uniformly at random from a candidate edge set.
 
-    This is the random-k baseline used in the non-LLM comparison: for each
-    LLM output row, the baseline samples exactly k edges (where k equals the
-    number of edges the LLM proposed) from the mother graph, with no knowledge
-    of which edges are cross-subgraph.  Both the LLM and the baseline are
-    then evaluated against the ground-truth cross edges, giving a fair,
-    volume-matched comparison.
+    This helper samples from an explicit candidate set. The manuscript-facing
+    random-k comparison samples from all admissible cross-subgraph pairs in
+    ``analysis._baseline_sampling`` rather than from the mother graph.
     """
     rng = random.Random(seed)
     candidates = sorted({_normalize_edge(e) for e in candidate_edges})

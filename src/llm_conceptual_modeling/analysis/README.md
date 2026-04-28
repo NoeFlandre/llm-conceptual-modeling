@@ -15,7 +15,8 @@ Deterministic offline analysis helpers live here.
 Primary bundle orchestrators (entry points):
 
 - `stability_bundle.py` — replication stability bundle assembly
-- `baseline_bundle.py` — non-LLM baseline comparison bundle
+- `baseline_bundle.py` — frontier non-LLM baseline comparison bundle
+- `map_extension_baseline_bundle.py` — open-weight map-extension baseline bundle
 - `variability_bundle.py`, `hypothesis_bundle.py`, `output_validity_bundle.py`,
   `variance_decomposition.py` — bundle assembly and report generation
 
@@ -69,6 +70,29 @@ Sub-packages and extracted helpers:
 - `_baseline_outputs.py` — baseline comparison summary aggregation and bundle
   README writing helpers
 - `_edge_parsing.py` — cached edge-list parsing for baseline comparison inputs
+
+## Baseline comparison semantics
+
+The manuscript-facing baseline bundles use volume-matched baselines. For each
+LLM output row, `k` is the number of scored cross-subgraph connections produced
+after adding the LLM output to the source and target graphs. The `random-k`
+baseline samples `k` direct pairs from all admissible source-target node pairs
+and repeats this five times with deterministic seeds. The WordNet baseline ranks
+the same admissible direct pairs and takes the top `k`; it should be interpreted
+as a clean direct lexical matching baseline, not as an equivalent generative
+method that proposes intermediate concepts.
+
+```bash
+uv run lcm analyze baseline-bundle \
+  --results-root data/results/frontier \
+  --output-dir data/analysis_artifacts/revision_tracker/baseline_comparison \
+  --random-repetitions 5
+
+uv run lcm analyze map-extension-baseline-bundle \
+  --results-root data/results/open_weights/hf-map-extension-canonical \
+  --output-dir data/results/open_weights/hf-map-extension-canonical/baseline_comparison \
+  --random-repetitions 5
+```
 
 ## CLI reports
 

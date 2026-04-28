@@ -7,8 +7,13 @@ import pandas as pd
 import pytest
 
 from llm_conceptual_modeling.algo3.evaluation import compute_recall_for_row, parse_edge_list
+from llm_conceptual_modeling.analysis._baseline_compare import (
+    _baseline_repetitions,
+    _stable_random_seed,
+)
 from llm_conceptual_modeling.analysis.baseline_bundle import (
     _sample_baseline_edges,
+    _scored_connection_count,
     write_baseline_comparison_bundle,
 )
 from llm_conceptual_modeling.common.connection_eval import find_valid_connections
@@ -57,24 +62,18 @@ class TestWriteBaselineComparisonBundle:
                 )
                 assert row["model_count"] > 0
 
-    def test_algo3_llm_loses_to_random_baseline(self, fixture_bundle_path: Path) -> None:
-        """ALGO3 outputs are noisy and inconsistent; even random guessing
-        (concentrated in a few correct edges) outperforms the LLM on all metrics.
-        This confirms that ALGO3's approach does not add value over random."""
+    def test_algo3_random_baseline_summary_is_auditable(
+        self,
+        fixture_bundle_path: Path,
+    ) -> None:
         bundle_path = fixture_bundle_path
         summary = pd.read_csv(bundle_path / "baseline_advantage_summary.csv")
         algo3_rows = summary[
             (summary["algorithm"] == "algo3") & (summary["baseline_strategy"] == "random-k")
         ]
         for _, row in algo3_rows.iterrows():
-            assert row["models_beating_baseline"] == 0, (
-                f"{row['algorithm']} {row['metric']}: expected 0 models "
-                f"beating baseline, got {row['models_beating_baseline']}"
-            )
-            assert row["best_model_delta"] < 0, (
-                f"{row['algorithm']} {row['metric']}: expected negative delta, "
-                f"got {row['best_model_delta']}"
-            )
+            assert 0 <= row["models_beating_baseline"] <= row["model_count"]
+            assert row["model_count"] > 0
 
     def test_random_k_baseline_produces_nontrivial_comparison(
         self,
@@ -119,9 +118,97 @@ class TestWriteBaselineComparisonBundle:
             "edit-distance",
         }.issubset(set(summary["baseline_strategy"].unique()))
 
+    def test_random_k_samples_admissible_cross_pairs_not_mother_edges(self) -> None:
+        mother_edges = [("a", "b"), ("x", "y")]
+        subgraph1_edges = [("a", "b")]
+        subgraph2_edges = [("x", "y")]
+
+        sampled = _sample_baseline_edges(
+            baseline_strategy="random-k",
+            k=4,
+            mother_edges=mother_edges,
+            subgraph1_edges=subgraph1_edges,
+            subgraph2_edges=subgraph2_edges,
+            random_seed=17,
+        )
+
+        admissible_pairs = {
+            ("a", "x"),
+            ("a", "y"),
+            ("b", "x"),
+            ("b", "y"),
+        }
+        assert sampled == admissible_pairs
+        assert sampled.isdisjoint(set(mother_edges))
+
+    def test_scored_k_counts_cross_connections_not_raw_edges(self) -> None:
+        subgraph1_edges = [("a", "b")]
+        subgraph2_edges = [("x", "y")]
+        raw_edges = [("b", "bridge"), ("bridge", "x"), ("bridge", "unused")]
+
+        assert len(raw_edges) == 3
+        assert (
+            _scored_connection_count(
+                raw_edges,
+                subgraph1_edges=subgraph1_edges,
+                subgraph2_edges=subgraph2_edges,
+            )
+            == 4
+        )
+
+    def test_random_k_grouped_output_uses_five_repetitions(self, tmp_path: Path) -> None:
+        output_dir = tmp_path / "bundle"
+        results_root = _build_fixture_results_root(tmp_path)
+
+        write_baseline_comparison_bundle(
+            results_root=str(results_root),
+            output_dir=str(output_dir),
+            random_repetitions=5,
+        )
+
+        row_level = pd.read_csv(output_dir / "row_level_baseline_comparison.csv")
+        random_rows = row_level[row_level["baseline_strategy"] == "random-k"]
+        assert set(random_rows["baseline_repetition"].dropna().astype(int)) == {0, 1, 2, 3, 4}
+
+        grouped = pd.read_csv(output_dir / "all_models_vs_baseline.csv")
+        random_grouped = grouped[grouped["baseline_strategy"] == "random-k"]
+        assert {"baseline_ci95_low", "baseline_ci95_high", "mean_k", "row_count"}.issubset(
+            random_grouped.columns
+        )
+
+    def test_per_model_summary_is_emitted_with_random_interval_columns(
+        self,
+        tmp_path: Path,
+    ) -> None:
+        output_dir = tmp_path / "bundle"
+        results_root = _build_fixture_results_root(tmp_path)
+
+        write_baseline_comparison_bundle(
+            results_root=str(results_root),
+            output_dir=str(output_dir),
+            random_repetitions=5,
+        )
+
+        summary = pd.read_csv(output_dir / "per_model_baseline_summary.csv")
+        assert {
+            "algorithm",
+            "model",
+            "metric",
+            "llm_mean",
+            "random_k_mean",
+            "random_k_ci95_low",
+            "random_k_ci95_high",
+            "wordnet_ontology_match_mean",
+            "mean_k",
+            "row_count",
+        }.issubset(summary.columns)
+
     def test_all_models_vs_baseline_overwrites_not_appends(self, tmp_path: Path) -> None:
         output_dir = tmp_path / "bundle"
         results_root = _build_fixture_results_root(tmp_path)
+        stale_tex = output_dir / "deepseek_gpt_gemini_wordnet_randomk.tex"
+        output_dir.mkdir(parents=True)
+        stale_tex.write_text("stale", encoding="utf-8")
 
         write_baseline_comparison_bundle(
             results_root=str(results_root),
@@ -140,6 +227,7 @@ class TestWriteBaselineComparisonBundle:
             f"all_models_vs_baseline has {total} rows but only {unique} unique "
             f"(algorithm, model, baseline_strategy, metric) combos."
         )
+        assert not stale_tex.exists()
 
     def test_llm_means_are_invariant_across_baseline_strategies(
         self,
@@ -242,16 +330,13 @@ class TestWriteBaselineComparisonBundle:
                     "edit-distance",
                 ]:
                     metric_rows = []
-                    for _, row in raw.iterrows():
+                    for row_index, row in raw.iterrows():
                         llm_result_edges = _normalize_edges(parse_python_literal(row["Result"]))
-                        k = len(llm_result_edges)
                         mother_edges = _normalize_edges(parse_python_literal(row["graph"]))
                         subgraph1_edges = _normalize_edges(parse_python_literal(row["subgraph1"]))
                         subgraph2_edges = _normalize_edges(parse_python_literal(row["subgraph2"]))
-                        baseline_edges = _sample_baseline_edges(
-                            baseline_strategy=baseline_strategy,
-                            k=k,
-                            mother_edges=mother_edges,
+                        k = _scored_connection_count(
+                            llm_result_edges,
                             subgraph1_edges=subgraph1_edges,
                             subgraph2_edges=subgraph2_edges,
                         )
@@ -261,30 +346,52 @@ class TestWriteBaselineComparisonBundle:
                             subgraph1_edges,
                             subgraph2_edges,
                         )
-                        proposed_edges = [
-                            *subgraph1_edges,
-                            *subgraph2_edges,
-                            *sorted(baseline_edges),
-                        ]
-                        generated_connections = find_valid_connections(
-                            proposed_edges,
-                            subgraph1_edges,
-                            subgraph2_edges,
-                        )
-                        nodes1 = {node for edge in subgraph1_edges for node in edge}
-                        nodes2 = {node for edge in subgraph2_edges for node in edge}
-                        tp = len(generated_connections & ground_truth)
-                        fp = len(generated_connections - ground_truth)
-                        fn = len(ground_truth - generated_connections)
-                        tn = (len(nodes1) * len(nodes2)) - (tp + fp + fn)
-                        total = tp + fp + fn + tn
-                        metric_rows.append(
-                            {
-                                "accuracy": (tp + tn) / total if total > 0 else 0.0,
-                                "precision": tp / (tp + fp) if (tp + fp) > 0 else 0.0,
-                                "recall": tp / (tp + fn) if (tp + fn) > 0 else 0.0,
-                            }
-                        )
+                        for baseline_repetition in _baseline_repetitions(
+                            baseline_strategy,
+                            5,
+                        ):
+                            baseline_edges = _sample_baseline_edges(
+                                baseline_strategy=baseline_strategy,
+                                k=k,
+                                mother_edges=mother_edges,
+                                subgraph1_edges=subgraph1_edges,
+                                subgraph2_edges=subgraph2_edges,
+                                random_seed=_stable_random_seed(
+                                    algorithm,
+                                    model,
+                                    raw_file.name.replace("algorithm1_results_", "metrics_")
+                                    if algorithm == "algo1"
+                                    else raw_file.name.replace("algorithm2_results_", "metrics_"),
+                                    row_index,
+                                    baseline_strategy,
+                                    baseline_repetition,
+                                ),
+                            )
+
+                            proposed_edges = [
+                                *subgraph1_edges,
+                                *subgraph2_edges,
+                                *sorted(baseline_edges),
+                            ]
+                            generated_connections = find_valid_connections(
+                                proposed_edges,
+                                subgraph1_edges,
+                                subgraph2_edges,
+                            )
+                            nodes1 = {node for edge in subgraph1_edges for node in edge}
+                            nodes2 = {node for edge in subgraph2_edges for node in edge}
+                            tp = len(generated_connections & ground_truth)
+                            fp = len(generated_connections - ground_truth)
+                            fn = len(ground_truth - generated_connections)
+                            tn = (len(nodes1) * len(nodes2)) - (tp + fp + fn)
+                            total = tp + fp + fn + tn
+                            metric_rows.append(
+                                {
+                                    "accuracy": (tp + tn) / total if total > 0 else 0.0,
+                                    "precision": tp / (tp + fp) if (tp + fp) > 0 else 0.0,
+                                    "recall": tp / (tp + fn) if (tp + fn) > 0 else 0.0,
+                                }
+                            )
 
                     metric_frame = pd.DataFrame.from_records(metric_rows)
                     for metric in ["accuracy", "precision", "recall"]:
@@ -342,26 +449,43 @@ class TestWriteBaselineComparisonBundle:
                 "edit-distance",
             ]:
                 recalls = []
-                for _, row in evaluated.iterrows():
+                for row_index, row in evaluated.iterrows():
                     source_edges = _normalize_edges(row.get("Source Graph", []))
                     target_edges = _normalize_edges(row.get("Target Graph", []))
                     mother_edges = _normalize_edges(row.get("Mother Graph", []))
                     llm_edges = _normalize_edges(row.get("Results", []))
-                    baseline_edges = _sample_baseline_edges(
-                        baseline_strategy=baseline_strategy,
-                        k=len(llm_edges),
-                        mother_edges=mother_edges,
+                    k = _scored_connection_count(
+                        llm_edges,
                         subgraph1_edges=source_edges,
                         subgraph2_edges=target_edges,
                     )
-                    recalls.append(
-                        compute_recall_for_row(
-                            source_edges,
-                            target_edges,
-                            mother_edges,
-                            sorted(baseline_edges),
+                    for baseline_repetition in _baseline_repetitions(
+                        baseline_strategy,
+                        5,
+                    ):
+                        baseline_edges = _sample_baseline_edges(
+                            baseline_strategy=baseline_strategy,
+                            k=k,
+                            mother_edges=mother_edges,
+                            subgraph1_edges=source_edges,
+                            subgraph2_edges=target_edges,
+                            random_seed=_stable_random_seed(
+                                "algo3",
+                                model,
+                                eval_file.name,
+                                row_index,
+                                baseline_strategy,
+                                baseline_repetition,
+                            ),
                         )
-                    )
+                        recalls.append(
+                            compute_recall_for_row(
+                                source_edges,
+                                target_edges,
+                                mother_edges,
+                                sorted(baseline_edges),
+                            )
+                        )
 
                 expected_rows.append(
                     {

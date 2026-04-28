@@ -212,6 +212,14 @@ def build_parser() -> argparse.ArgumentParser:
         default=default_results_root(),
     )
     baseline_bundle_parser.add_argument("--output-dir", required=True)
+    baseline_bundle_parser.add_argument("--random-repetitions", type=int, default=5)
+
+    map_extension_baseline_parser = analyze_subparsers.add_parser(
+        "map-extension-baseline-bundle"
+    )
+    map_extension_baseline_parser.add_argument("--results-root", required=True)
+    map_extension_baseline_parser.add_argument("--output-dir", required=True)
+    map_extension_baseline_parser.add_argument("--random-repetitions", type=int, default=5)
 
     variance_decomposition_bundle_parser = analyze_subparsers.add_parser(
         "variance-decomposition-bundle"
