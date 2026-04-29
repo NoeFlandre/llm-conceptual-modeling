@@ -1,0 +1,15 @@
+algorithm,baseline_strategy,metric,model_count,models_beating_baseline,best_model,best_model_delta,worst_model,worst_model_delta,average_model_delta
+algo1,random-k,accuracy,6,0,gemini-2.5-pro,-0.07513622520889962,gpt-5,-0.09349595414275647,-0.08247704935568308
+algo1,random-k,precision,6,0,gemini-2.5-pro,-0.5958016231453732,deepseek-v3-chat-0324,-0.739824996050855,-0.678401664174925
+algo1,random-k,recall,6,0,gpt-5,-0.7611137677554382,deepseek-chat-v3.1,-0.9308627970676366,-0.883445692709882
+algo1,wordnet-ontology-match,accuracy,6,0,gemini-2.5-pro,-0.07513622520889962,gpt-5,-0.09349595414275647,-0.08247704935568308
+algo1,wordnet-ontology-match,precision,6,0,gemini-2.5-pro,-0.5958016231453732,deepseek-v3-chat-0324,-0.739824996050855,-0.678401664174925
+algo1,wordnet-ontology-match,recall,6,0,gpt-5,-0.7611137677554382,deepseek-chat-v3.1,-0.9308627970676365,-0.8834456927098819
+algo2,random-k,accuracy,6,0,openai-gpt-4o,-0.047144776250880906,deepseek-chat-v3-0324,-0.08717823479814758,-0.07411078706500218
+algo2,random-k,precision,6,0,openai-gpt-4o,-0.3683841765873016,gemini-2.0-flash-exp,-0.6605476965468742,-0.5963992680033728
+algo2,random-k,recall,6,0,openai-gpt-4o,-0.624271716101695,gemini-2.5-pro,-0.9022370672648049,-0.8291710239207591
+algo2,wordnet-ontology-match,accuracy,6,0,openai-gpt-4o,-0.047144776250880906,deepseek-chat-v3-0324,-0.08717823479814758,-0.07411078706500217
+algo2,wordnet-ontology-match,precision,6,0,openai-gpt-4o,-0.3683841765873016,gemini-2.0-flash-exp,-0.6605476965468742,-0.5963992680033728
+algo2,wordnet-ontology-match,recall,6,0,openai-gpt-4o,-0.624271716101695,gemini-2.5-pro,-0.9022370672648048,-0.8291710239207591
+algo3,random-k,recall,6,0,gpt-5,0.0,gemini-2.0-flash-exp,-0.0517045375,-0.015088381944444444
+algo3,wordnet-ontology-match,recall,6,0,gpt-5,0.0,gemini-2.0-flash-exp,-0.0517045375,-0.015088381944444444

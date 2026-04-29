@@ -1,0 +1,5 @@
+file,description
+row_level_baseline_comparison.csv,Auditable row-level ALGO3 map-extension baseline comparison.
+map_extension_model_vs_baseline.csv,Grouped map-extension baseline comparison by case study and model.
+per_model_baseline_summary.csv,Per-model map-extension baseline summary.
+all_models_vs_baseline.csv,Grouped map-extension baseline comparison across case studies.

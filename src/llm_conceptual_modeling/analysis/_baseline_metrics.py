@@ -11,7 +11,7 @@ import pandas as pd
 from llm_conceptual_modeling.algo3.evaluation import compute_recall_for_row
 
 _ALGO12_METRICS = ["accuracy", "precision", "recall"]
-_ALGO3_METRICS = ["accuracy", "precision", "recall"]
+_ALGO3_METRICS = ["recall"]
 
 
 def _cross_subgraph_pair_count(
@@ -143,19 +143,6 @@ def _build_algo3_metric_rows(
     target_edges: list[tuple[str, str]],
     extra_fields: dict[str, object] | None = None,
 ) -> list[dict[str, object]]:
-    baseline_tp = len(baseline_edges & ground_truth)
-    baseline_fp = len(baseline_edges - ground_truth)
-    baseline_fn = len(ground_truth - baseline_edges)
-    baseline_tn = _cross_subgraph_pair_count(source_edges, target_edges) - (
-        baseline_tp + baseline_fp + baseline_fn
-    )
-
-    llm_tp = len(llm_edges & ground_truth)
-    llm_fp = len(llm_edges - ground_truth)
-    llm_fn = len(ground_truth - llm_edges)
-    llm_tn = _cross_subgraph_pair_count(source_edges, target_edges) - (
-        llm_tp + llm_fp + llm_fn
-    )
     baseline_recall = compute_recall_for_row(
         source_edges,
         target_edges,
@@ -165,21 +152,8 @@ def _build_algo3_metric_rows(
 
     rows: list[dict[str, object]] = []
     for metric in _ALGO3_METRICS:
-        if metric == "accuracy":
-            llm_metric = _safe_div(
-                llm_tp + llm_tn,
-                llm_tp + llm_fp + llm_fn + llm_tn,
-            )
-            baseline_metric = _safe_div(
-                baseline_tp + baseline_tn,
-                baseline_tp + baseline_fp + baseline_fn + baseline_tn,
-            )
-        elif metric == "precision":
-            llm_metric = _safe_div(llm_tp, llm_tp + llm_fp)
-            baseline_metric = _safe_div(baseline_tp, baseline_tp + baseline_fp)
-        else:
-            llm_metric = llm_recall
-            baseline_metric = baseline_recall
+        llm_metric = llm_recall
+        baseline_metric = baseline_recall
 
         row_data: dict[str, object] = {
             "algorithm": "algo3",

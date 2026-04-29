@@ -115,8 +115,7 @@ class TestWriteBaselineComparisonBundle:
         assert {
             "random-k",
             "wordnet-ontology-match",
-            "edit-distance",
-        }.issubset(set(summary["baseline_strategy"].unique()))
+        } == set(summary["baseline_strategy"].unique())
 
     def test_random_k_samples_admissible_cross_pairs_not_mother_edges(self) -> None:
         mother_edges = [("a", "b"), ("x", "y")]
@@ -202,6 +201,24 @@ class TestWriteBaselineComparisonBundle:
             "mean_k",
             "row_count",
         }.issubset(summary.columns)
+
+    def test_algo3_baseline_outputs_are_recall_only(self, tmp_path: Path) -> None:
+        output_dir = tmp_path / "bundle"
+        results_root = _build_fixture_results_root(tmp_path)
+
+        write_baseline_comparison_bundle(
+            results_root=str(results_root),
+            output_dir=str(output_dir),
+            random_repetitions=5,
+        )
+
+        row_level = pd.read_csv(output_dir / "row_level_baseline_comparison.csv")
+        grouped = pd.read_csv(output_dir / "algo3_model_vs_baseline.csv")
+        summary = pd.read_csv(output_dir / "per_model_baseline_summary.csv")
+
+        assert set(row_level[row_level["algorithm"] == "algo3"]["metric"]) == {"recall"}
+        assert set(grouped["metric"]) == {"recall"}
+        assert set(summary[summary["algorithm"] == "algo3"]["metric"]) == {"recall"}
 
     def test_all_models_vs_baseline_overwrites_not_appends(self, tmp_path: Path) -> None:
         output_dir = tmp_path / "bundle"
@@ -327,7 +344,6 @@ class TestWriteBaselineComparisonBundle:
                 for baseline_strategy in [
                     "random-k",
                     "wordnet-ontology-match",
-                    "edit-distance",
                 ]:
                     metric_rows = []
                     for row_index, row in raw.iterrows():
@@ -446,7 +462,6 @@ class TestWriteBaselineComparisonBundle:
             for baseline_strategy in [
                 "random-k",
                 "wordnet-ontology-match",
-                "edit-distance",
             ]:
                 recalls = []
                 for row_index, row in evaluated.iterrows():

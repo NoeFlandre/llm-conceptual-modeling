@@ -1,0 +1,13 @@
+algorithm,graph_source,model,baseline_strategy,metric,llm_mean,baseline_mean,baseline_ci95_low,baseline_ci95_high,mean_delta,mean_k,row_count,llm_row_count
+algo3,babs_johnson,Qwen/Qwen3.5-9B,random-k,recall,0.0,0.0,0.0,0.0,0.0,0.0,600,120
+algo3,babs_johnson,Qwen/Qwen3.5-9B,wordnet-ontology-match,recall,0.0,0.0,0.0,0.0,0.0,0.0,120,120
+algo3,babs_johnson,mistralai/Ministral-3-8B-Instruct-2512,random-k,recall,0.0,0.0,0.0,0.0,0.0,0.0,600,120
+algo3,babs_johnson,mistralai/Ministral-3-8B-Instruct-2512,wordnet-ontology-match,recall,0.0,0.0,0.0,0.0,0.0,0.0,120,120
+algo3,clarice_starling,Qwen/Qwen3.5-9B,random-k,recall,0.125,0.125,0.098514895357077,0.1514851046429229,0.0,46.75,600,120
+algo3,clarice_starling,Qwen/Qwen3.5-9B,wordnet-ontology-match,recall,0.125,0.125,0.0655787718660984,0.1844212281339015,0.0,46.75,120,120
+algo3,clarice_starling,mistralai/Ministral-3-8B-Instruct-2512,random-k,recall,0.0,0.0,0.0,0.0,0.0,0.0,600,120
+algo3,clarice_starling,mistralai/Ministral-3-8B-Instruct-2512,wordnet-ontology-match,recall,0.0,0.0,0.0,0.0,0.0,0.0,120,120
+algo3,philip_marlowe,Qwen/Qwen3.5-9B,random-k,recall,0.3333333333333333,0.3333333333333333,0.2955816428850767,0.3710850237815898,0.0,22.166666666666668,600,120
+algo3,philip_marlowe,Qwen/Qwen3.5-9B,wordnet-ontology-match,recall,0.3333333333333333,0.3333333333333333,0.2486347134558504,0.4180319532108161,0.0,22.166666666666668,120,120
+algo3,philip_marlowe,mistralai/Ministral-3-8B-Instruct-2512,random-k,recall,0.4166666666666667,0.4166666666666667,0.377185003751486,0.4561483295818473,0.0,33.0,600,120
+algo3,philip_marlowe,mistralai/Ministral-3-8B-Instruct-2512,wordnet-ontology-match,recall,0.4166666666666667,0.4166666666666667,0.3280867297240487,0.5052466036092846,0.0,33.0,120,120

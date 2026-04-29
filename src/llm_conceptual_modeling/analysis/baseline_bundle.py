@@ -39,7 +39,6 @@ __all__ = [
 _COMPARISON_BASELINE_STRATEGIES = [
     "random-k",
     "wordnet-ontology-match",
-    "edit-distance",
 ]
 
 
@@ -79,7 +78,7 @@ def write_baseline_comparison_bundle(
                 "file": output_path.name,
                 "description": (
                     f"{algorithm.upper()} per-model comparison against random-k, "
-                    "WordNet-based, and edit-distance baselines."
+                    "and WordNet-based baselines."
                 ),
             }
         )
@@ -99,8 +98,7 @@ def write_baseline_comparison_bundle(
             {
                 "file": output_path.name,
                 "description": (
-                    "ALGO3 per-model comparison against random-k, WordNet-based, "
-                    "and edit-distance baselines."
+                    "ALGO3 per-model comparison against random-k and WordNet-based baselines."
                 ),
             }
         )

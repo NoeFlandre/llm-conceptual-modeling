@@ -4,7 +4,6 @@ Provides cached sampling for three non-LLM baseline strategies:
 - random-k: sample k direct edges uniformly at random from all admissible
   cross-subgraph node pairs
 - wordnet-ontology-match: rank by WordNet semantic overlap
-- edit-distance: rank by edit-distance similarity
 
 And a cached baseline-count pipeline that feeds into metric row construction.
 """

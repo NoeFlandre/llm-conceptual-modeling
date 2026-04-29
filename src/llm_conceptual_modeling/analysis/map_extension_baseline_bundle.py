@@ -150,14 +150,17 @@ def _build_map_extension_comparison_rows(
                     random_seed=random_seed,
                 )
                 comparison_rows.extend(
-                    _build_algo3_metric_rows(
+                    row
+                    for row in _build_algo3_metric_rows(
                         model=model,
                         baseline_strategy=baseline_strategy,
                         source_file=str(raw_row_path.relative_to(results_root)),
                         k=k,
                         source_row=row_position,
                         baseline_repetition=baseline_repetition,
-                        llm_recall=float(raw_row.get("Recall", 0)),
+                        llm_recall=float(
+                            summary_row.get("recall", raw_row.get("Recall", 0))
+                        ),
                         llm_edges=llm_edges,
                         baseline_edges=baseline_edges,
                         ground_truth=ground_truth,
@@ -170,6 +173,7 @@ def _build_map_extension_comparison_rows(
                             "decoding_algorithm": decoding_algorithm,
                         },
                     )
+                    if row["metric"] == "recall"
                 )
     return comparison_rows
 
@@ -194,9 +198,9 @@ def _write_map_extension_readme(output_dir: Path) -> None:
     readme = """# Open-Weight Map-Extension Baseline Comparison Bundle
 
 This directory contains the corrected non-LLM baseline comparison for the ALGO3
-open-weight map-extension runs. The bundle uses the same semantics as the frontier
-baseline comparison: `k` is the scored LLM cross-subgraph connection count, random-k
-is sampled from all admissible source-target pairs with five deterministic replications,
-and WordNet is interpreted as a direct lexical matching baseline.
+open-weight map-extension runs. Because map extension is interpreted through recall,
+this bundle reports recall only. `k` is the scored LLM cross-subgraph connection count,
+random-k is sampled from all admissible source-target pairs with five deterministic
+replications, and WordNet is interpreted as a direct lexical matching baseline.
 """
     (output_dir / "README.md").write_text(readme, encoding="utf-8")

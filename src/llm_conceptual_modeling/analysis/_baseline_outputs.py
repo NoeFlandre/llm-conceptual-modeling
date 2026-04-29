@@ -102,11 +102,10 @@ This directory contains the organized artifacts for the non-LLM baseline compari
 ## Purpose
 
 The reviewer asked for non-LLM comparators to contextualize the value proposition of using
-LLMs despite their inherent variability. The bundle compares three baseline strategies:
+LLMs despite their inherent variability. The bundle compares two baseline strategies:
 
 - `random-k`, sampled from all admissible cross-subgraph pairs with five deterministic replications.
 - `wordnet-ontology-match`, a volume-matched direct lexical matching baseline.
-- `edit-distance`
 
 Each baseline proposes exactly `k` edges for each row, where `k` is the number of
 scored cross-subgraph connections produced by the corresponding LLM output row after adding its

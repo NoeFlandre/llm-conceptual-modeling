@@ -1,0 +1,8 @@
+file,description
+algo1_model_vs_baseline.csv,"ALGO1 per-model comparison against random-k, and WordNet-based baselines."
+algo2_model_vs_baseline.csv,"ALGO2 per-model comparison against random-k, and WordNet-based baselines."
+algo3_model_vs_baseline.csv,ALGO3 per-model comparison against random-k and WordNet-based baselines.
+row_level_baseline_comparison.csv,Auditable row-level comparison including scored k and random repetitions.
+all_models_vs_baseline.csv,Combined baseline comparison across all algorithms and baseline strategies.
+per_model_baseline_summary.csv,Manuscript-facing per-model summary with random-k intervals.
+baseline_advantage_summary.csv,"Cross-model summary by algorithm, baseline_strategy, and metric."

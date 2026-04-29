@@ -30,7 +30,6 @@ from llm_conceptual_modeling.common.connection_eval import find_valid_connection
 _COMPARISON_BASELINE_STRATEGIES = [
     "random-k",
     "wordnet-ontology-match",
-    "edit-distance",
 ]
 
 
