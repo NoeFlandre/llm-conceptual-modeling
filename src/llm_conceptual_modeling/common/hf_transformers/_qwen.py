@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import importlib
 from contextlib import contextmanager
-from typing import Any, Protocol, cast
+from typing import Any, Protocol
 
 from llm_conceptual_modeling.common.hf_transformers._policy import (
     _QWEN_CHAT_MODEL,
@@ -62,6 +62,20 @@ def _patch_qwen_contrastive_custom_generate(custom_generate: Any) -> Any:
     if not isinstance(custom_generate_globals, dict):
         return custom_generate
     dynamic_cache_type = custom_generate_globals.get("DynamicCache")
+    return _patch_dynamic_cache_global(
+        custom_generate,
+        custom_generate_globals,
+        dynamic_cache_type,
+        qwen_dynamic_cache_type,
+    )
+
+
+def _patch_dynamic_cache_global(
+    custom_generate: Any,
+    custom_generate_globals: dict[str, object],
+    dynamic_cache_type: object,
+    qwen_dynamic_cache_type: type[Any],
+) -> Any:
     if dynamic_cache_type is None:
         return custom_generate
     if isinstance(dynamic_cache_type, tuple):
@@ -103,24 +117,30 @@ def _qwen_cache_batch_repeat_interleave(self: Any, repeats: int) -> None:
 
 
 def _qwen_cache_crop(self: Any, max_length: int) -> None:
-    if max_length < 0:
-        max_length = self.get_seq_length() - abs(max_length)
+    max_length = _resolve_qwen_crop_length(self, max_length)
     if self.get_seq_length() <= max_length:
         return
-    key_cache = getattr(self, "key_cache", None)
-    value_cache = getattr(self, "value_cache", None)
-    if isinstance(key_cache, list):
-        for index, tensor in enumerate(key_cache):
-            if tensor is not None:
-                key_cache[index] = _crop_qwen_cache_tensor(tensor, max_length)
-    if isinstance(value_cache, list):
-        for index, tensor in enumerate(value_cache):
-            if tensor is not None:
-                value_cache[index] = _crop_qwen_cache_tensor(tensor, max_length)
+    _crop_qwen_cache_list(getattr(self, "key_cache", None), max_length)
+    _crop_qwen_cache_list(getattr(self, "value_cache", None), max_length)
+
+
+def _resolve_qwen_crop_length(self: Any, max_length: int) -> int:
+    if max_length < 0:
+        return self.get_seq_length() - abs(max_length)
+    return max_length
+
+
+def _crop_qwen_cache_list(cache_states: object, max_length: int) -> None:
+    if not isinstance(cache_states, list):
+        return
+    for index, tensor in enumerate(cache_states):
+        if tensor is not None:
+            cache_states[index] = _crop_qwen_cache_tensor(tensor, max_length)
 
 
 def _crop_qwen_cache_tensor(tensor: object, max_length: int) -> object:
-    return cast(_SliceableTensor, tensor)[..., :max_length, :]
+    sliceable_tensor = tensor
+    return sliceable_tensor[..., :max_length, :]  # type: ignore[index]
 
 
 def _qwen_cache_batch_select_indices(self: Any, indices: Any) -> None:

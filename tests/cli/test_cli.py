@@ -1,10 +1,35 @@
 import json
+from argparse import Namespace
 from pathlib import Path
 
 import pandas as pd
 import pytest
 
 from llm_conceptual_modeling.cli import main
+from llm_conceptual_modeling.commands.run import (
+    _decoding_from_args,
+    _drain_remaining_report,
+    _handle_drain_remaining,
+    _handle_drain_status,
+    _handle_experiment_run,
+    _handle_prefetch_runtime,
+    _handle_prepare_qwen_algo1_tail,
+    _handle_qwen_algo1_tail_preflight,
+    _handle_refresh_ledger,
+    _handle_resume_preflight,
+    _handle_resume_sweep,
+    _handle_smoke,
+    _handle_status,
+    _handle_write_unfinished_manifest,
+    _load_optional_run_config,
+    _prefetch_runtime_report_lines,
+    _require_hf_transformers_provider,
+    _resume_preflight_output_key,
+    _resume_sweep_output_key,
+    _run_algorithms,
+    _status_output_key,
+    prefetch_runtime_for_config,
+)
 
 
 def test_cli_main_is_implemented_in_the_commands_package() -> None:
@@ -513,10 +538,7 @@ def test_cli_analyze_stability_bundle_reorganizes_flat_files(tmp_path) -> None:
     _write_flat(
         results_root / "variability_incidence_by_algorithm.csv",
         [
-            (
-                "algorithm,metric,condition_count,varying_condition_count,"
-                "varying_condition_share"
-            ),
+            ("algorithm,metric,condition_count,varying_condition_count,varying_condition_share"),
             "algo1,accuracy,576,2,0.0035",
             "algo3,Recall,96,44,0.4583",
         ],
@@ -546,10 +568,7 @@ def test_cli_analyze_stability_bundle_reorganizes_flat_files(tmp_path) -> None:
     _write_flat(
         results_root / "algo2_convergence_variability_incidence.csv",
         [
-            (
-                "Convergence,metric,condition_count,varying_condition_count,"
-                "varying_condition_share"
-            ),
+            ("Convergence,metric,condition_count,varying_condition_count,varying_condition_share"),
             "-1,accuracy,576,1,0.0017",
             "1,accuracy,576,0,0.0",
         ],
@@ -1004,12 +1023,8 @@ algorithms:
 
 def test_cli_run_status_reports_batch_health_as_json(tmp_path, capsys) -> None:
     results_root = tmp_path / "results"
-    run_dir = (
-        results_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
-    )
-    run_dir.mkdir(
-        parents=True, exist_ok=True
-    )
+    run_dir = results_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
+    run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "state.json").write_text(
         '{"status": "finished"}',
         encoding="utf-8",
@@ -1397,9 +1412,7 @@ def test_cli_run_prefetch_runtime_rejects_non_list_chat_models(
 
 def test_cli_run_status_reports_active_worker_fields(monkeypatch, tmp_path, capsys) -> None:
     results_root = tmp_path / "results"
-    run_dir = (
-        results_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
-    )
+    run_dir = results_root / "runs" / "algo1" / "model" / "greedy" / "sg1_sg2" / "00000" / "rep_00"
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "state.json").write_text('{"status": "running"}', encoding="utf-8")
     (run_dir / "worker_state.json").write_text(
@@ -1525,6 +1538,149 @@ def test_cli_run_drain_status_reports_saved_state(monkeypatch, tmp_path, capsys)
     assert exit_code == 0
     assert '"health": "healthy"' in captured.out
     assert '"current_phase": "safe"' in captured.out
+
+
+def test_plain_run_status_handlers_preserve_scriptable_output(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    results_root = tmp_path / "results"
+    ledger_root = tmp_path / "ledger"
+    state_path = tmp_path / "state.json"
+    config_path = tmp_path / "config.yaml"
+    repo_root = tmp_path / "repo"
+    for path in (results_root, ledger_root, repo_root):
+        path.mkdir()
+    config_path.write_text("run: {}\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.refresh_ledger",
+        lambda **_kwargs: {
+            "expected_total_runs": 2,
+            "finished_count": 1,
+            "retryable_failed_count": 0,
+            "terminal_failed_count": 0,
+            "pending_count": 1,
+        },
+    )
+    assert (
+        _handle_refresh_ledger(
+            Namespace(results_root=results_root, ledger_root=ledger_root, json=False)
+        )
+        == 0
+    )
+    assert f"ledger_root={ledger_root}" in capsys.readouterr().out
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.load_hf_run_config",
+        lambda _path: object(),
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_resume_preflight_report",
+        lambda **_kwargs: {
+            "results_root": str(results_root),
+            "total_runs": 12,
+            "finished_count": 4,
+            "failed_count": 1,
+            "pending_count": 7,
+            "can_resume": True,
+            "resume_mode": "resume",
+        },
+    )
+    assert (
+        _handle_resume_preflight(
+            Namespace(
+                config=config_path,
+                repo_root=repo_root,
+                results_root=results_root,
+                allow_empty=False,
+                json=False,
+            )
+        )
+        == 0
+    )
+    preflight_output = capsys.readouterr().out
+    assert "finished=4" in preflight_output
+    assert "pending=7" in preflight_output
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_resume_sweep_report",
+        lambda **_kwargs: {
+            "repo_root": str(repo_root),
+            "results_root": str(results_root),
+            "root_count": 2,
+            "ready_count": 1,
+            "needs_config_fix_count": 0,
+            "invalid_config_count": 0,
+            "active_count": 1,
+            "finished_count": 0,
+        },
+    )
+    assert (
+        _handle_resume_sweep(Namespace(repo_root=repo_root, results_root=results_root, json=False))
+        == 0
+    )
+    assert "roots=2" in capsys.readouterr().out
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run._drain_remaining_report",
+        lambda _args: {
+            "state_file": str(state_path),
+            "safe_queue_count": 2,
+            "risky_queue_count": 1,
+            "adopted_results_root": str(results_root / "active"),
+        },
+    )
+    assert _handle_drain_remaining(Namespace(json=False)) == 0
+    drain_output = capsys.readouterr().out
+    assert "safe_queue_count=2" in drain_output
+    assert "adopted_results_root=" in drain_output
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.read_drain_state_report",
+        lambda _state_file: {
+            "health": "healthy",
+            "current_phase": "safe",
+            "current_results_root": str(results_root),
+        },
+    )
+    assert _handle_drain_status(Namespace(state_file=state_path, json=False)) == 0
+    status_output = capsys.readouterr().out
+    assert "health=healthy" in status_output
+    assert "current_phase=safe" in status_output
+
+
+def test_prepare_qwen_algo1_tail_handler_preserves_plain_and_json_output(
+    monkeypatch,
+    tmp_path,
+    capsys,
+) -> None:
+    report = {
+        "tail_results_root": str(tmp_path / "tail"),
+        "identity_count": 10,
+        "config_path": str(tmp_path / "tail" / "runtime_config.yaml"),
+        "manifest_path": str(tmp_path / "tail" / "shard_manifest.json"),
+    }
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.prepare_qwen_algo1_tail_bundle",
+        lambda **_kwargs: report,
+    )
+    args = Namespace(
+        canonical_results_root=tmp_path / "canonical",
+        tail_results_root=tmp_path / "tail",
+        remote_output_root="/workspace/results/tail",
+        json=False,
+    )
+
+    assert _handle_prepare_qwen_algo1_tail(args) == 0
+    plain_output = capsys.readouterr().out
+    assert "identity_count=10" in plain_output
+    assert "manifest_path=" in plain_output
+
+    args.json = True
+    assert _handle_prepare_qwen_algo1_tail(args) == 0
+    assert json.loads(capsys.readouterr().out) == report
 
 
 def test_cli_run_smoke_executes_single_selected_spec(monkeypatch, tmp_path, capsys) -> None:
@@ -1655,9 +1811,7 @@ algorithms:
     assert '"pair_name": "sg2_sg3"' in captured.out
 
 
-def test_cli_run_smoke_passes_graph_source_to_selected_spec(
-    monkeypatch, tmp_path, capsys
-) -> None:
+def test_cli_run_smoke_passes_graph_source_to_selected_spec(monkeypatch, tmp_path, capsys) -> None:
     config_path = tmp_path / "config.yaml"
     config_path.write_text(
         Path("configs/hf_transformers_open_weight_map_extension.yaml").read_text(encoding="utf-8"),
@@ -1704,6 +1858,729 @@ def test_cli_run_smoke_passes_graph_source_to_selected_spec(
     assert exit_code == 0
     assert captured_call["spec"].graph_source == "clarice_starling"
     assert '"graph_source": "clarice_starling"' in captured.out
+
+
+@pytest.mark.parametrize(
+    ("converter", "key", "expected"),
+    [
+        (_resume_preflight_output_key, "finished_count", "finished"),
+        (_resume_preflight_output_key, "failed_count", "failed"),
+        (_resume_preflight_output_key, "pending_count", "pending"),
+        (_resume_sweep_output_key, "root_count", "roots"),
+        (_resume_sweep_output_key, "ready_count", "ready"),
+        (_resume_sweep_output_key, "needs_config_fix_count", "needs_config_fix"),
+        (_resume_sweep_output_key, "invalid_config_count", "invalid_config"),
+        (_resume_sweep_output_key, "active_count", "active"),
+        (_resume_sweep_output_key, "finished_count", "finished"),
+        (_status_output_key, "total_runs", "total"),
+        (_status_output_key, "finished_count", "finished"),
+        (_status_output_key, "failed_count", "failed"),
+        (_status_output_key, "running_count", "running"),
+        (_status_output_key, "pending_count", "pending"),
+    ],
+)
+def test_run_plain_output_key_aliases_are_stable(converter, key, expected) -> None:
+    assert converter(key) == expected
+
+
+@pytest.mark.parametrize(
+    "converter",
+    [_resume_preflight_output_key, _resume_sweep_output_key, _status_output_key],
+)
+def test_run_plain_output_key_aliases_preserve_unknown_keys(converter) -> None:
+    assert converter("unmapped_field") == "unmapped_field"
+
+
+def test_resume_preflight_handler_forwards_inputs_and_preserves_json_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    repo_root = tmp_path / "repo"
+    results_root = tmp_path / "results"
+    config_marker = object()
+    loaded_paths = []
+    forwarded = {}
+    report = {
+        "results_root": str(results_root),
+        "allow_empty": True,
+        "config_is_expected": True,
+        "repo_root": str(repo_root),
+    }
+
+    def fake_load(path):
+        loaded_paths.append(path)
+        return config_marker
+
+    def fake_build(*, config, repo_root, results_root, allow_empty):
+        forwarded.update(
+            config=config,
+            repo_root=repo_root,
+            results_root=results_root,
+            allow_empty=allow_empty,
+        )
+        return {
+            **report,
+            "config_is_expected": config is config_marker,
+        }
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.load_hf_run_config", fake_load)
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_resume_preflight_report",
+        fake_build,
+    )
+
+    args = Namespace(
+        config=config_path,
+        repo_root=repo_root,
+        results_root=results_root,
+        allow_empty=True,
+        json=True,
+    )
+
+    assert _handle_resume_preflight(args) == 0
+    assert loaded_paths == [config_path]
+    assert forwarded == {
+        "config": config_marker,
+        "repo_root": repo_root,
+        "results_root": results_root,
+        "allow_empty": True,
+    }
+    assert capsys.readouterr().out == json.dumps(report, indent=2, sort_keys=True) + "\n"
+
+
+def test_resume_sweep_handler_forwards_inputs_and_preserves_plain_and_json_contracts(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    repo_root = tmp_path / "repo"
+    results_root = tmp_path / "results"
+    forwarded = {}
+    report = {
+        "repo_root": str(repo_root),
+        "results_root": str(results_root),
+        "root_count": 2,
+        "ready_count": 1,
+        "needs_config_fix_count": 3,
+        "invalid_config_count": 4,
+        "active_count": 5,
+        "finished_count": 6,
+    }
+
+    def fake_build(*, repo_root, results_root):
+        forwarded.update(repo_root=repo_root, results_root=results_root)
+        return report
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_resume_sweep_report",
+        fake_build,
+    )
+    args = Namespace(repo_root=repo_root, results_root=results_root, json=False)
+
+    assert _handle_resume_sweep(args) == 0
+    assert forwarded == {"repo_root": repo_root, "results_root": results_root}
+    assert capsys.readouterr().out == (
+        f"repo_root={repo_root}\n"
+        f"results_root={results_root}\n"
+        "roots=2\n"
+        "ready=1\n"
+        "needs_config_fix=3\n"
+        "invalid_config=4\n"
+        "active=5\n"
+        "finished=6\n"
+    )
+
+    args.json = True
+    assert _handle_resume_sweep(args) == 0
+    assert capsys.readouterr().out == json.dumps(report, indent=2, sort_keys=True) + "\n"
+
+
+def test_prefetch_runtime_handler_forwards_config_and_preserves_json_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_marker = object()
+    loaded_paths = []
+    forwarded = []
+    report = {
+        "embedding_model": "embedding-model",
+        "chat_models": ["model-a", "model-b"],
+    }
+
+    def fake_load(path):
+        loaded_paths.append(path)
+        return config_marker
+
+    def fake_prefetch(*, config):
+        forwarded.append(config)
+        return report
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.load_hf_run_config", fake_load)
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.prefetch_runtime_for_config",
+        fake_prefetch,
+    )
+
+    assert _handle_prefetch_runtime(Namespace(config=config_path, json=True)) == 0
+    assert loaded_paths == [config_path]
+    assert forwarded == [config_marker]
+    assert capsys.readouterr().out == json.dumps(report, indent=2, sort_keys=True) + "\n"
+
+
+def test_prefetch_runtime_report_lines_validate_contract_exactly() -> None:
+    assert _prefetch_runtime_report_lines(
+        {"chat_models": ["model-a", "model-b"], "embedding_model": "embedding-model"}
+    ) == [
+        "chat_models=model-a,model-b",
+        "embedding_model=embedding-model",
+    ]
+
+    with pytest.raises(ValueError) as exc_info:
+        _prefetch_runtime_report_lines(
+            {"chat_models": "model-a", "embedding_model": "embedding-model"}
+        )
+    assert str(exc_info.value) == "Prefetch runtime report chat_models must be a list of strings"
+
+    with pytest.raises(ValueError) as exc_info:
+        _prefetch_runtime_report_lines(
+            {"chat_models": ["model-a", 7], "embedding_model": "embedding-model"}
+        )
+    assert str(exc_info.value) == "Prefetch runtime report chat_models must be a list of strings"
+
+    with pytest.raises(ValueError) as exc_info:
+        _prefetch_runtime_report_lines({"chat_models": [], "embedding_model": 7})
+    assert str(exc_info.value) == "Prefetch runtime report embedding_model must be a string"
+
+
+def test_status_handler_preserves_exact_json_and_plain_contracts(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    results_root = tmp_path / "results"
+    json_status = {
+        "total_runs": 10,
+        "running_count": 1,
+        "percent_complete": 37.5,
+        "pending_count": 4,
+        "finished_count": 3,
+        "failed_count": 2,
+    }
+    plain_status = {
+        "failed_count": 2,
+        "finished_count": 3,
+        "pending_count": 4,
+        "percent_complete": 37.5,
+        "running_count": 1,
+        "total_runs": 10,
+    }
+    statuses = [json_status, plain_status]
+    received_roots = []
+
+    def fake_collect(root):
+        received_roots.append(root)
+        return statuses.pop(0)
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.collect_batch_status",
+        fake_collect,
+    )
+
+    assert _handle_status(Namespace(results_root=results_root, json=True)) == 0
+    assert capsys.readouterr().out == json.dumps(json_status, indent=2, sort_keys=True) + "\n"
+
+    assert _handle_status(Namespace(results_root=results_root, json=False)) == 0
+    assert capsys.readouterr().out == (
+        "total=10\nfinished=3\nfailed=2\nrunning=1\npending=4\ncomplete=37.5%\n"
+    )
+    assert received_roots == [results_root, results_root]
+
+
+def test_refresh_ledger_handler_forwards_paths_and_preserves_exact_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    results_root = tmp_path / "results"
+    ledger_root = tmp_path / "ledger"
+    ledger = {
+        "expected_total_runs": 10,
+        "finished_count": 3,
+        "retryable_failed_count": 1,
+        "terminal_failed_count": 2,
+        "pending_count": 4,
+    }
+    forwarded = []
+
+    def fake_refresh(*, results_root, ledger_root):
+        forwarded.append((results_root, ledger_root))
+        return ledger
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.refresh_ledger", fake_refresh)
+    args = Namespace(results_root=results_root, ledger_root=ledger_root, json=False)
+
+    assert _handle_refresh_ledger(args) == 0
+    assert forwarded == [(results_root, ledger_root)]
+    assert capsys.readouterr().out == (
+        f"ledger_root={ledger_root}\n"
+        "expected_total_runs=10\n"
+        "finished_count=3\n"
+        "retryable_failed_count=1\n"
+        "terminal_failed_count=2\n"
+        "pending_count=4\n"
+    )
+
+    args.json = True
+    assert _handle_refresh_ledger(args) == 0
+    assert capsys.readouterr().out == json.dumps(ledger, indent=2, sort_keys=True) + "\n"
+
+
+def test_write_unfinished_manifest_handler_forwards_paths_and_json_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    results_root = tmp_path / "results"
+    ledger_root = tmp_path / "ledger"
+    manifest_path = tmp_path / "manifest.json"
+    manifest = {
+        "manifest_path": str(manifest_path),
+        "identities": [{"algorithm": "algo1"}],
+        "active_chat_models": ["model-a", "model-b"],
+    }
+    forwarded = []
+
+    def fake_write(*, results_root, ledger_root, manifest_path):
+        forwarded.append((results_root, ledger_root, manifest_path))
+        return manifest
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.write_unfinished_shard_manifest",
+        fake_write,
+    )
+
+    assert (
+        _handle_write_unfinished_manifest(
+            Namespace(
+                results_root=results_root,
+                ledger_root=ledger_root,
+                manifest_path=manifest_path,
+                json=True,
+            )
+        )
+        == 0
+    )
+    assert forwarded == [(results_root, ledger_root, manifest_path)]
+    assert capsys.readouterr().out == json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+
+    args = Namespace(
+        results_root=results_root,
+        ledger_root=ledger_root,
+        manifest_path=manifest_path,
+        json=False,
+    )
+    assert _handle_write_unfinished_manifest(args) == 0
+    assert capsys.readouterr().out == (
+        f"manifest_path={manifest_path}\nidentity_count=1\nactive_chat_models=model-a,model-b\n"
+    )
+
+
+def test_qwen_tail_handlers_forward_paths_and_preserve_json_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    canonical_root = tmp_path / "canonical"
+    tail_root = tmp_path / "tail"
+    remote_root = "/workspace/results/tail"
+    prepare_report = {
+        "tail_results_root": str(tail_root),
+        "manifest_path": str(tail_root / "shard_manifest.json"),
+        "identity_count": 2,
+        "config_path": str(tail_root / "runtime_config.yaml"),
+    }
+    preflight_report = {
+        "tail_results_root": str(tail_root),
+        "resume_preflight": {"can_resume": True, "pending_count": 3},
+        "repo_root": str(tmp_path / "repo"),
+        "canonical_results_root": str(canonical_root),
+    }
+    prepare_forwarded = []
+    preflight_forwarded = []
+
+    def fake_prepare(*, canonical_results_root, tail_results_root, remote_output_root):
+        prepare_forwarded.append((canonical_results_root, tail_results_root, remote_output_root))
+        return prepare_report
+
+    def fake_preflight(
+        *, repo_root, canonical_results_root, tail_results_root, watcher_status_path
+    ):
+        preflight_forwarded.append(
+            (repo_root, canonical_results_root, tail_results_root, watcher_status_path)
+        )
+        return preflight_report
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.prepare_qwen_algo1_tail_bundle",
+        fake_prepare,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_qwen_algo1_tail_preflight_report",
+        fake_preflight,
+    )
+
+    assert (
+        _handle_prepare_qwen_algo1_tail(
+            Namespace(
+                canonical_results_root=canonical_root,
+                tail_results_root=tail_root,
+                remote_output_root=remote_root,
+                json=True,
+            )
+        )
+        == 0
+    )
+    assert capsys.readouterr().out == json.dumps(prepare_report, indent=2, sort_keys=True) + "\n"
+
+    watcher_path = tmp_path / "watcher.json"
+    assert (
+        _handle_qwen_algo1_tail_preflight(
+            Namespace(
+                repo_root=tmp_path / "repo",
+                canonical_results_root=canonical_root,
+                tail_results_root=tail_root,
+                watcher_status_path=watcher_path,
+                json=True,
+            )
+        )
+        == 0
+    )
+    assert capsys.readouterr().out == json.dumps(preflight_report, indent=2, sort_keys=True) + "\n"
+    assert prepare_forwarded == [(canonical_root, tail_root, remote_root)]
+    assert preflight_forwarded == [(tmp_path / "repo", canonical_root, tail_root, watcher_path)]
+
+
+def test_drain_remaining_report_forwards_plan_and_supervisor_arguments(
+    monkeypatch, tmp_path
+) -> None:
+    common = {
+        "repo_root": tmp_path / "repo",
+        "results_root": tmp_path / "results",
+        "ssh_command": "ssh example",
+        "state_file": tmp_path / "state.json",
+        "phase": "safe",
+        "full_coverage": True,
+        "root_name_contains": "olmo",
+    }
+    args = Namespace(
+        **common,
+        plan_only=True,
+        poll_seconds=12.5,
+        stale_after_seconds=99.0,
+        quick_resume_script=tmp_path / "resume.sh",
+    )
+    plan_calls = []
+    supervisor_calls = []
+
+    def fake_plan(**kwargs):
+        plan_calls.append(kwargs)
+        return {"mode": "plan"}
+
+    def fake_supervisor(**kwargs):
+        supervisor_calls.append(kwargs)
+        return {"mode": "supervisor"}
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.build_drain_plan", fake_plan)
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.run_drain_supervisor",
+        fake_supervisor,
+    )
+
+    assert _drain_remaining_report(args) == {"mode": "plan"}
+    assert plan_calls == [common]
+    assert supervisor_calls == []
+
+    args.plan_only = False
+    assert _drain_remaining_report(args) == {"mode": "supervisor"}
+    assert supervisor_calls == [
+        {
+            **common,
+            "poll_seconds": 12.5,
+            "stale_after_seconds": 99.0,
+            "quick_resume_script": tmp_path / "resume.sh",
+        }
+    ]
+
+
+def test_drain_remaining_handler_preserves_defaults_and_json_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    state_file = tmp_path / "state.json"
+    reports = [
+        {"state_file": str(state_file)},
+        {
+            "state_file": str(state_file),
+            "safe_queue_count": 3,
+            "risky_queue_count": 2,
+            "adopted_results_root": "/tmp/adopted",
+        },
+    ]
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run._drain_remaining_report",
+        lambda _args: reports.pop(0),
+    )
+
+    assert _handle_drain_remaining(Namespace(json=False)) == 0
+    assert capsys.readouterr().out == (
+        f"state_file={state_file}\nsafe_queue_count=0\nrisky_queue_count=0\n"
+    )
+
+    assert _handle_drain_remaining(Namespace(json=True)) == 0
+    expected = {
+        "state_file": str(state_file),
+        "safe_queue_count": 3,
+        "risky_queue_count": 2,
+        "adopted_results_root": "/tmp/adopted",
+    }
+    assert capsys.readouterr().out == json.dumps(expected, indent=2, sort_keys=True) + "\n"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run._drain_remaining_report",
+        lambda _args: expected,
+    )
+    assert _handle_drain_remaining(Namespace(json=False)) == 0
+    assert capsys.readouterr().out == (
+        f"state_file={state_file}\n"
+        "safe_queue_count=3\n"
+        "risky_queue_count=2\n"
+        "adopted_results_root=/tmp/adopted\n"
+    )
+
+
+def test_drain_status_handler_forwards_path_and_preserves_missing_field_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    state_file = tmp_path / "state.json"
+    full_report = {
+        "health": "healthy",
+        "current_results_root": "/tmp/results",
+        "current_phase": "safe",
+    }
+    calls = []
+
+    def fake_read(path):
+        calls.append(path)
+        return full_report
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.read_drain_state_report",
+        fake_read,
+    )
+    assert _handle_drain_status(Namespace(state_file=state_file, json=True)) == 0
+    assert capsys.readouterr().out == json.dumps(full_report, indent=2, sort_keys=True) + "\n"
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.read_drain_state_report",
+        lambda _path: {"health": "healthy", "current_phase": "safe"},
+    )
+    assert _handle_drain_status(Namespace(state_file=state_file, json=False)) == 0
+    assert capsys.readouterr().out == (
+        f"state_file={state_file}\n"
+        "health=healthy\n"
+        "current_phase=safe\n"
+        "current_results_root=unknown\n"
+    )
+    assert calls == [state_file]
+
+
+def test_smoke_handler_forwards_run_controls_and_preserves_json_contract(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_marker = object()
+    spec_marker = object()
+    selected = {}
+    executed = {}
+    summary = {"status": "dry-run", "pair_name": "pair"}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.load_hf_run_config",
+        lambda _path: config_marker,
+    )
+
+    def fake_select(**kwargs):
+        selected.update(kwargs)
+        return spec_marker
+
+    def fake_run(**kwargs):
+        executed.update(kwargs)
+        return summary
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.select_run_spec", fake_select)
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.run_single_spec", fake_run)
+    output_root = tmp_path / "smoke"
+    args = Namespace(
+        config=config_path,
+        algorithm="algo1",
+        model="model",
+        graph_source="graph",
+        pair_name="pair",
+        condition_bits="00000",
+        decoding="greedy",
+        num_beams=2,
+        penalty_alpha=0.2,
+        top_k=4,
+        replication=3,
+        output_root=output_root,
+        dry_run=True,
+        resume=True,
+    )
+
+    assert _handle_smoke(args) == 0
+    assert selected["config"] is config_marker
+    assert selected["algorithm"] == "algo1"
+    assert selected["model"] == "model"
+    assert selected["graph_source"] == "graph"
+    assert selected["pair_name"] == "pair"
+    assert selected["condition_bits"] == "00000"
+    assert selected["replication"] == 3
+    assert selected["decoding"].algorithm == "greedy"
+    assert executed == {
+        "spec": spec_marker,
+        "output_root": output_root,
+        "dry_run": True,
+        "resume": True,
+    }
+    assert capsys.readouterr().out == json.dumps(summary, indent=2, sort_keys=True) + "\n"
+
+
+def test_experiment_handler_loads_config_and_forwards_batch_arguments(
+    monkeypatch, tmp_path
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_marker = object()
+    loaded = []
+    provider_calls = []
+    batch_calls = []
+
+    def fake_load(path):
+        loaded.append(path)
+        return config_marker
+
+    def fake_require(args, config):
+        provider_calls.append((args, config))
+
+    def fake_run_paper_batch(**kwargs):
+        batch_calls.append(kwargs)
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.load_hf_run_config", fake_load)
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run._require_hf_transformers_provider",
+        fake_require,
+    )
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.run_paper_batch",
+        fake_run_paper_batch,
+    )
+
+    args = Namespace(
+        config=config_path,
+        provider="hf-transformers",
+        run_target="algo2",
+        output_root=tmp_path / "output",
+        model=["model"],
+        embedding_model="embedding",
+        replications=3,
+        resume=True,
+        dry_run=True,
+    )
+    assert _handle_experiment_run(args) == 0
+    assert loaded == [config_path]
+    assert provider_calls == [(args, config_marker)]
+    assert batch_calls == [
+        {
+            "output_root": args.output_root,
+            "models": ["model"],
+            "embedding_model": "embedding",
+            "replications": 3,
+            "algorithms": ("algo2",),
+            "config": config_marker,
+            "resume": True,
+            "dry_run": True,
+        }
+    ]
+
+    args.embedding_model = ""
+    assert _handle_experiment_run(args) == 0
+    assert batch_calls[-1]["embedding_model"] == ""
+
+
+def test_prefetch_runtime_for_config_forwards_model_configuration(monkeypatch) -> None:
+    calls = []
+
+    class FakeRuntimeFactory:
+        def prefetch_models(self, *, chat_models, embedding_model):
+            calls.append((chat_models, embedding_model))
+            return {"prefetched": True}
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.commands.run.build_runtime_factory",
+        lambda: FakeRuntimeFactory(),
+    )
+    config = Namespace(
+        models=Namespace(
+            chat_models=["model-a", "model-b"],
+            embedding_model="embedding-model",
+        )
+    )
+
+    assert prefetch_runtime_for_config(config=config) == {"prefetched": True}
+    assert calls == [(["model-a", "model-b"], "embedding-model")]
+
+
+def test_load_optional_run_config_distinguishes_missing_and_present_paths(
+    monkeypatch, tmp_path
+) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_marker = object()
+    loaded = []
+
+    def fake_load(path):
+        loaded.append(path)
+        return config_marker
+
+    monkeypatch.setattr("llm_conceptual_modeling.commands.run.load_hf_run_config", fake_load)
+    assert _load_optional_run_config(Namespace()) is None
+    assert _load_optional_run_config(Namespace(config=config_path)) is config_marker
+    assert loaded == [config_path]
+
+
+def test_run_provider_and_algorithm_helpers_preserve_errors_and_targets() -> None:
+    with pytest.raises(ValueError) as exc_info:
+        _require_hf_transformers_provider(Namespace(provider="mistral"), None)
+    assert str(exc_info.value) == (
+        "The run command currently supports only --provider hf-transformers."
+    )
+
+    assert _run_algorithms("paper-batch") is None
+    assert _run_algorithms("algo1") == ("algo1",)
+    assert _run_algorithms("algo2") == ("algo2",)
+    assert _run_algorithms("algo3") == ("algo3",)
+    with pytest.raises(ValueError) as exc_info:
+        _run_algorithms("unknown")
+    assert str(exc_info.value) == "Unsupported run target: unknown"
+
+
+def test_decoding_from_args_builds_all_supported_configs() -> None:
+    greedy = _decoding_from_args(Namespace(decoding="greedy"))
+    assert greedy.algorithm == "greedy"
+    assert greedy.temperature == 0.0
+    assert greedy.num_beams is None
+    assert greedy.penalty_alpha is None
+    assert greedy.top_k is None
+
+    beam = _decoding_from_args(Namespace(decoding="beam", num_beams=6))
+    assert beam.algorithm == "beam"
+    assert beam.num_beams == 6
+    assert beam.temperature == 0.0
+    assert beam.penalty_alpha is None
+    assert beam.top_k is None
+
+    contrastive = _decoding_from_args(Namespace(decoding="contrastive", penalty_alpha=0.8, top_k=4))
+    assert contrastive.algorithm == "contrastive"
+    assert contrastive.penalty_alpha == 0.8
+    assert contrastive.top_k == 4
+    assert contrastive.temperature == 0.0
 
 
 def _write_flat(path, lines: list[str]) -> None:

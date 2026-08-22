@@ -1,16 +1,23 @@
 from collections.abc import Mapping
+from types import FunctionType
 
 import pytest
 
 import llm_conceptual_modeling.common.hf_transformers as hf_transformers
+import llm_conceptual_modeling.common.hf_transformers._parse as parse_module
+import llm_conceptual_modeling.common.hf_transformers._qwen as qwen_module
 from llm_conceptual_modeling.common.hf_transformers import (
     DecodingConfig,
     HFTransformersChatClient,
     HFTransformersEmbeddingClient,
     HFTransformersRuntimeFactory,
+    _children_mapping,
     _parse_generated_json,
     _response_hit_generation_limit,
     derive_context_window,
+)
+from llm_conceptual_modeling.common.hf_transformers._parse import (
+    _looks_retryable_malformed_output,
 )
 
 
@@ -520,8 +527,8 @@ def test_complete_json_grows_max_new_tokens_for_qwen_contrastive_malformed_outpu
     assert model.max_new_tokens == [8, 16, 32]
 
 
-def test_complete_json_normalizes_short_odd_flat_edge_list_to_empty() -> None:
-    tokenizer = _SequentialDecodeTokenizer(["['A', 'B', 'C']"])
+def test_complete_json_normalizes_odd_flat_label_list_to_empty_edges() -> None:
+    tokenizer = _SequentialDecodeTokenizer(["['A', 'B', 'C', 'D', 'E', 'F', 'G']"])
     model = _CapturingModel()
     client = HFTransformersChatClient(
         model="allenai/Olmo-3-7B-Instruct",
@@ -743,6 +750,1496 @@ def test_patch_qwen_contrastive_custom_generate_accepts_qwen_dynamic_cache_type(
     assert hasattr(_QwenDynamicCache, "batch_repeat_interleave")
     assert hasattr(_QwenDynamicCache, "crop")
     assert hasattr(_QwenDynamicCache, "batch_select_indices")
+
+
+def test_patch_qwen_contrastive_custom_generate_leaves_missing_cache_global_unchanged(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    custom_generate = FunctionType(compile("lambda: None", "<test>", "eval"), {})
+
+    class _QwenDynamicCache:
+        pass
+
+    monkeypatch.setattr(
+        hf_transformers,
+        "_load_qwen_dynamic_cache_type",
+        lambda: _QwenDynamicCache,
+    )
+
+    patched = hf_transformers._patch_qwen_contrastive_custom_generate(custom_generate)
+
+    assert patched is custom_generate
+    assert "DynamicCache" not in custom_generate.__globals__
+
+
+def test_patch_qwen_contrastive_custom_generate_preserves_existing_cache_variants(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class _DynamicCache:
+        pass
+
+    class _QwenDynamicCache:
+        pass
+
+    monkeypatch.setattr(
+        hf_transformers,
+        "_load_qwen_dynamic_cache_type",
+        lambda: _QwenDynamicCache,
+    )
+
+    def _already_tuple():
+        return None
+
+    _already_tuple.__globals__["DynamicCache"] = (_DynamicCache, _QwenDynamicCache)
+    assert hf_transformers._patch_qwen_contrastive_custom_generate(_already_tuple) is _already_tuple
+
+    def _already_same():
+        return None
+
+    _already_same.__globals__["DynamicCache"] = _QwenDynamicCache
+    assert hf_transformers._patch_qwen_contrastive_custom_generate(_already_same) is _already_same
+
+
+def test_patch_qwen_contrastive_custom_generate_handles_non_function_callable() -> None:
+    class _Callable:
+        def __call__(self) -> None:
+            return None
+
+    callable_object = _Callable()
+    assert (
+        hf_transformers._patch_qwen_contrastive_custom_generate(callable_object) is callable_object
+    )
+    assert hf_transformers._patch_qwen_contrastive_custom_generate(None) is None
+
+
+def test_get_load_qwen_dynamic_cache_type_falls_back_when_namespace_ref_is_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delattr(hf_transformers, "_load_qwen_dynamic_cache_type")
+
+    assert qwen_module._get_load_qwen_dynamic_cache_type() is (
+        qwen_module._load_qwen_dynamic_cache_type
+    )
+
+
+def test_custom_generate_overrides_requires_qwen_contrastive_policy(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class _Model:
+        def load_custom_generate(self, *_args: object, **_kwargs: object) -> object:
+            return object()
+
+    monkeypatch.setattr(
+        qwen_module,
+        "_patch_qwen_contrastive_custom_generate",
+        lambda _custom_generate: "patched",
+    )
+    model_object = _Model()
+
+    assert (
+        qwen_module._custom_generate_overrides(
+            model="other/model",
+            model_object=model_object,
+            decoding_config=DecodingConfig(algorithm="contrastive"),
+        )
+        == {}
+    )
+    assert (
+        qwen_module._custom_generate_overrides(
+            model="Qwen/Qwen3.5-9B",
+            model_object=model_object,
+            decoding_config=DecodingConfig(algorithm="greedy"),
+        )
+        == {}
+    )
+    assert qwen_module._custom_generate_overrides(
+        model="Qwen/Qwen3.5-9B",
+        model_object=model_object,
+        decoding_config=DecodingConfig(algorithm="contrastive"),
+    ) == {"custom_generate": "patched"}
+
+
+def test_patch_dynamic_cache_global_handles_tuple_and_scalar_variants() -> None:
+    class _DynamicCache:
+        pass
+
+    class _QwenDynamicCache:
+        pass
+
+    def custom_generate() -> None:
+        return None
+
+    globals_dict: dict[str, object] = {}
+    assert (
+        qwen_module._patch_dynamic_cache_global(
+            custom_generate,
+            globals_dict,
+            _DynamicCache,
+            _QwenDynamicCache,
+        )
+        is custom_generate
+    )
+    assert globals_dict["DynamicCache"] == (_DynamicCache, _QwenDynamicCache)
+
+    globals_dict["DynamicCache"] = (_DynamicCache, _QwenDynamicCache)
+    qwen_module._patch_dynamic_cache_global(
+        custom_generate,
+        globals_dict,
+        globals_dict["DynamicCache"],
+        _QwenDynamicCache,
+    )
+    assert globals_dict["DynamicCache"] == (_DynamicCache, _QwenDynamicCache)
+
+    globals_dict["DynamicCache"] = (_DynamicCache,)
+    qwen_module._patch_dynamic_cache_global(
+        custom_generate,
+        globals_dict,
+        globals_dict["DynamicCache"],
+        _QwenDynamicCache,
+    )
+    assert globals_dict["DynamicCache"] == (_DynamicCache, _QwenDynamicCache)
+
+
+def test_load_qwen_dynamic_cache_type_reads_the_expected_symbol(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class _QwenDynamicCache:
+        pass
+
+    class _Module:
+        Qwen3_5DynamicCache = _QwenDynamicCache
+
+    imported_names: list[str] = []
+
+    def import_module(name: str) -> object:
+        imported_names.append(name)
+        return _Module()
+
+    monkeypatch.setattr(qwen_module.importlib, "import_module", import_module)
+
+    assert qwen_module._load_qwen_dynamic_cache_type() is _QwenDynamicCache
+    assert imported_names == ["transformers.models.qwen3_5.modeling_qwen3_5"]
+
+
+def test_load_qwen_dynamic_cache_type_returns_none_without_expected_symbol(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(qwen_module.importlib, "import_module", lambda _name: object())
+
+    assert qwen_module._load_qwen_dynamic_cache_type() is None
+
+
+def test_ensure_qwen_dynamic_cache_compatibility_preserves_and_adds_methods() -> None:
+    batch_repeat_sentinel = object()
+    crop_sentinel = object()
+    batch_select_sentinel = object()
+
+    class _Existing:
+        batch_repeat_interleave = batch_repeat_sentinel
+        crop = crop_sentinel
+        batch_select_indices = batch_select_sentinel
+
+    qwen_module._ensure_qwen_dynamic_cache_compatibility(_Existing)
+    assert _Existing.batch_repeat_interleave is batch_repeat_sentinel
+    assert _Existing.crop is crop_sentinel
+    assert _Existing.batch_select_indices is batch_select_sentinel
+
+    class _Missing:
+        pass
+
+    qwen_module._ensure_qwen_dynamic_cache_compatibility(_Missing)
+    assert _Missing.batch_repeat_interleave is qwen_module._qwen_cache_batch_repeat_interleave
+    assert _Missing.crop is qwen_module._qwen_cache_crop
+    assert _Missing.batch_select_indices is qwen_module._qwen_cache_batch_select_indices
+
+
+def test_qwen_cache_batch_helpers_transform_all_list_state_attributes() -> None:
+    class _Tensor:
+        device = "cpu"
+
+        def repeat_interleave(self, repeats: int, *, dim: int) -> tuple[str, int, int]:
+            return ("repeated", repeats, dim)
+
+        def index_select(self, dim: int, indices: object) -> tuple[str, int, object]:
+            return ("selected", dim, indices)
+
+    class _Indices:
+        def to(self, device: object) -> tuple[str, object]:
+            return ("indices", device)
+
+    cache = type("Cache", (), {})()
+    cache.key_cache = [_Tensor(), None]
+    cache.value_cache = [_Tensor()]
+    cache.conv_states = "not a list"
+    cache.recurrent_states = [None, _Tensor()]
+
+    hf_transformers._qwen_cache_batch_repeat_interleave(cache, 2)
+    assert cache.key_cache == [("repeated", 2, 0), None]
+    assert cache.value_cache == [("repeated", 2, 0)]
+    assert cache.recurrent_states == [None, ("repeated", 2, 0)]
+
+    select_cache = type("Cache", (), {})()
+    select_cache.key_cache = [_Tensor(), None]
+    select_cache.value_cache = [_Tensor()]
+    select_cache.conv_states = "not a list"
+    select_cache.recurrent_states = [None, _Tensor()]
+    hf_transformers._qwen_cache_batch_select_indices(select_cache, _Indices())
+    assert select_cache.key_cache == [("selected", 0, ("indices", "cpu")), None]
+    assert select_cache.value_cache == [("selected", 0, ("indices", "cpu"))]
+    assert select_cache.recurrent_states == [None, ("selected", 0, ("indices", "cpu"))]
+
+
+def test_qwen_cache_crop_updates_key_and_value_caches() -> None:
+    class _CacheTensor:
+        def __init__(self, name: str) -> None:
+            self.name = name
+            self.slices: list[object] = []
+
+        def __getitem__(self, key: object) -> object:
+            self.slices.append(key)
+            return f"cropped-{self.name}"
+
+    class _Cache:
+        def get_seq_length(self) -> int:
+            return 10
+
+    key_tensor = _CacheTensor("key")
+    value_tensor = _CacheTensor("value")
+    cache = _Cache()
+    cache.key_cache = [key_tensor, None]
+    cache.value_cache = [value_tensor, None]
+
+    hf_transformers._qwen_cache_crop(cache, -3)
+
+    assert cache.key_cache == ["cropped-key", None]
+    assert cache.value_cache == ["cropped-value", None]
+    assert key_tensor.slices == [(..., slice(None, 7), slice(None, None))]
+    assert value_tensor.slices == [(..., slice(None, 7), slice(None, None))]
+
+
+def test_qwen_cache_crop_leaves_short_cache_and_non_list_attributes_unchanged() -> None:
+    class _Cache:
+        key_cache = "not a list"
+        value_cache = None
+
+        def get_seq_length(self) -> int:
+            return 3
+
+    cache = _Cache()
+
+    hf_transformers._qwen_cache_crop(cache, 3)
+
+    assert cache.key_cache == "not a list"
+    assert cache.value_cache is None
+
+
+def test_qwen_cache_crop_skips_equal_length_and_missing_cache_attributes() -> None:
+    class _Tensor:
+        def __init__(self) -> None:
+            self.slices: list[object] = []
+
+        def __getitem__(self, key: object) -> object:
+            self.slices.append(key)
+            return self
+
+    class _ExactLength:
+        def get_seq_length(self) -> int:
+            return 3
+
+    exact = _ExactLength()
+    exact.key_cache = [_Tensor()]
+    exact.value_cache = [_Tensor()]
+    qwen_module._qwen_cache_crop(exact, 3)
+    assert exact.key_cache[0].slices == []
+    assert exact.value_cache[0].slices == []
+
+    class _MissingCaches:
+        def get_seq_length(self) -> int:
+            return 10
+
+    qwen_module._qwen_cache_crop(_MissingCaches(), 3)
+
+
+def test_resolve_qwen_crop_length_treats_zero_as_an_absolute_length() -> None:
+    class _Cache:
+        def get_seq_length(self) -> int:
+            return 10
+
+    assert qwen_module._resolve_qwen_crop_length(_Cache(), 0) == 0
+
+
+def test_mutate_qwen_cache_state_lists_handles_optional_attributes() -> None:
+    class _Tensor:
+        pass
+
+    cache = type("Cache", (), {})()
+    cache.key_cache = [_Tensor()]
+    cache.conv_states = [_Tensor()]
+
+    qwen_module._mutate_qwen_cache_state_lists(cache, lambda tensor: ("changed", tensor))
+
+    assert cache.key_cache[0][0] == "changed"
+    assert cache.conv_states[0][0] == "changed"
+
+
+@pytest.mark.parametrize(
+    ("text", "schema_name", "expected"),
+    [
+        ("", "edge_list", True),
+        ("{ <think>draft</think>", "children_by_label", True),
+        ("<think>draft</think>", "label_list", True),
+        ('["source", "target"]', "edge_list", False),
+        ('["source", "target"]   ', "edge_list", False),
+        ("[]", "edge_list", False),
+        ('["source"', "edge_list", True),
+        ('["source", "target", "dangling"]', "edge_list", True),
+        ('{"parent": ["child"]}', "children_by_label", False),
+        ('{"parent": ["child"]', "children_by_label", True),
+        ('{"parent": ["child"]}   ', "children_by_label", False),
+        ("plain text", "label_list", False),
+    ],
+)
+def test_looks_retryable_malformed_output_classifies_shape_failures(
+    text: str,
+    schema_name: str,
+    expected: bool,
+) -> None:
+    assert _looks_retryable_malformed_output(text=text, schema_name=schema_name) is expected
+
+
+@pytest.mark.parametrize(
+    ("parsed_content", "schema_name", "error", "expected"),
+    [
+        (["source", "target"], "edge_list", ValueError("even number of items"), True),
+        (["source", 1], "edge_list", ValueError("even number of items"), False),
+        (["source"], "label_list", ValueError("even number of items"), False),
+        (["source"], "edge_list", ValueError("other error"), False),
+    ],
+)
+def test_looks_retryable_normalization_failure_classifies_edge_shape_errors(
+    parsed_content: object,
+    schema_name: str,
+    error: ValueError,
+    expected: bool,
+) -> None:
+    assert (
+        hf_transformers._looks_retryable_normalization_failure(
+            parsed_content=parsed_content,
+            schema_name=schema_name,
+            error=error,
+        )
+        is expected
+    )
+
+
+def test_retryable_shape_helpers_preserve_trailing_whitespace_semantics() -> None:
+    assert not parse_module._looks_retryable_edge_list_output('["source", "target"]   ')
+    assert not parse_module._looks_retryable_children_mapping_output('{"parent": ["child"]}   ')
+
+
+@pytest.mark.parametrize(
+    ("model", "algorithm", "schema_name", "retries", "limit", "text", "expected"),
+    [
+        (
+            "Qwen/Qwen3.5-9B",
+            "contrastive",
+            "edge_list",
+            3,
+            3,
+            '["source"',
+            True,
+        ),
+        (
+            "other/model",
+            "contrastive",
+            "edge_list",
+            3,
+            3,
+            '["source"',
+            False,
+        ),
+        (
+            "Qwen/Qwen3.5-9B",
+            "greedy",
+            "edge_list",
+            3,
+            3,
+            '["source"',
+            False,
+        ),
+        (
+            "Qwen/Qwen3.5-9B",
+            "contrastive",
+            "label_list",
+            3,
+            3,
+            '["source"',
+            False,
+        ),
+        (
+            "Qwen/Qwen3.5-9B",
+            "contrastive",
+            "edge_list",
+            2,
+            3,
+            '["source"',
+            False,
+        ),
+        (
+            "Qwen/Qwen3.5-9B",
+            "contrastive",
+            "edge_list",
+            3,
+            3,
+            '["source", "target"]',
+            False,
+        ),
+    ],
+)
+def test_should_normalize_exhausted_malformed_edge_list_to_empty_checks_policy(
+    model: str,
+    algorithm: str,
+    schema_name: str,
+    retries: int,
+    limit: int,
+    text: str,
+    expected: bool,
+) -> None:
+    config = DecodingConfig(algorithm=algorithm)
+
+    assert (
+        hf_transformers._should_normalize_exhausted_malformed_edge_list_to_empty(
+            model=model,
+            decoding_config=config,
+            schema_name=schema_name,
+            malformed_output_retries=retries,
+            malformed_output_retry_limit=limit,
+            text=text,
+        )
+        is expected
+    )
+
+
+@pytest.mark.parametrize(
+    ("model", "algorithm", "schema_name", "expected"),
+    [
+        ("Qwen/Qwen3.5-9B", "contrastive", "edge_list", 3),
+        ("other/model", "contrastive", "edge_list", 1),
+        ("Qwen/Qwen3.5-9B", "greedy", "edge_list", 1),
+        ("Qwen/Qwen3.5-9B", "contrastive", "label_list", 1),
+        ("Qwen/Qwen3.5-9B", "contrastive", "children_by_label", 3),
+        ("Qwen/Qwen3.5-9B", "contrastive", "other", 1),
+    ],
+)
+def test_resolve_malformed_output_retry_limit_requires_all_policy_conditions(
+    model: str,
+    algorithm: str,
+    schema_name: str,
+    expected: int,
+) -> None:
+    assert (
+        hf_transformers._resolve_malformed_output_retry_limit(
+            model=model,
+            decoding_config=DecodingConfig(algorithm=algorithm),
+            schema_name=schema_name,
+        )
+        == expected
+    )
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("assistant\nvalue", "value"),
+        ("assistant: value", "value"),
+        ("ASSISTANT:\nvalue", "value"),
+        ("assistant???", ""),
+        ("assistant content", "content"),
+        ("assistantAnswer", "assistantAnswer"),
+    ],
+)
+def test_strip_assistant_prefix_handles_supported_prefixes_and_noise(
+    text: str,
+    expected: str,
+) -> None:
+    assert hf_transformers._strip_assistant_prefix(text) == expected
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("plain text", "plain text"),
+        ('```json\n{"A": 1}\n```', '{"A": 1}'),
+        (
+            '```json\n{"A```B": ["Child"]}\n```',
+            '{"A```B": ["Child"]}',
+        ),
+        (
+            'prefix\n```json\n{"A": "x```B"}\n```',
+            '{"A": "x```B"}',
+        ),
+        (
+            '```json{"A": "x```B"}```',
+            '{"A": "x```B"}',
+        ),
+    ],
+)
+def test_strip_code_fence_handles_plain_and_embedded_fences(
+    text: str,
+    expected: str,
+) -> None:
+    assert hf_transformers._strip_code_fence(text) == expected
+
+
+def test_empty_children_response_recognizes_exact_sentinel_only() -> None:
+    assert parse_module._is_empty_children_response('"""json"""')
+    assert not parse_module._is_empty_children_response('"""JSON"""')
+
+
+def test_children_recovery_candidates_prioritize_artifacts_and_fix_trailing_comma() -> None:
+    artifact_text = '{"A": ["B"]} <think>noise</think>'
+    candidates = parse_module._children_recovery_candidates(artifact_text)
+    assert candidates[:3] == [
+        '{"A": ["B"]} ',
+        '{"A": ["B"]}',
+        artifact_text,
+    ]
+
+    comma_text = "{Discipline: ['Patience', 'Consistenc', } ]"
+    assert "{Discipline: ['Patience', 'Consistenc']" in (
+        parse_module._children_recovery_candidates(comma_text)
+    )
+
+
+def test_candidate_helpers_insert_and_append_only_new_values() -> None:
+    candidates = ["first", "last"]
+    parse_module._insert_unique_candidate(candidates, "middle", 1)
+    parse_module._insert_unique_candidate(candidates, "first", 1)
+    assert candidates == ["first", "middle", "last"]
+
+    parse_module._append_unique_candidate(candidates, "new")
+    parse_module._append_unique_candidate(candidates, "middle")
+    assert candidates == ["first", "middle", "last", "new"]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        '{{"Parent": ["Child"]}',
+        '{"Parent": ["Child"]}}',
+    ],
+)
+def test_recover_children_candidate_skips_double_quote_fast_path_for_extra_braces(
+    monkeypatch: pytest.MonkeyPatch,
+    text: str,
+) -> None:
+    sentinel = {"sentinel": ["value"]}
+    monkeypatch.setattr(
+        parse_module,
+        "_recover_fenced_python_children_mapping",
+        lambda _text: None,
+    )
+    monkeypatch.setattr(
+        parse_module,
+        "_recover_double_quoted_children_values",
+        lambda _text: sentinel,
+    )
+    monkeypatch.setattr(
+        parse_module,
+        "_recover_standard_children_candidate",
+        lambda _text: None,
+    )
+
+    assert parse_module._recover_children_candidate(text) is None
+
+
+def test_recover_children_candidate_uses_double_quote_fast_path_for_one_sided_brace(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    sentinel = {"sentinel": ["value"]}
+    monkeypatch.setattr(
+        parse_module,
+        "_recover_fenced_python_children_mapping",
+        lambda _text: None,
+    )
+    monkeypatch.setattr(
+        parse_module,
+        "_recover_double_quoted_children_values",
+        lambda _text: sentinel,
+    )
+    monkeypatch.setattr(
+        parse_module,
+        "_recover_standard_children_candidate",
+        lambda _text: None,
+    )
+
+    assert parse_module._recover_children_candidate('{"Parent": ["Child"]}') == sentinel
+
+
+@pytest.mark.parametrize(
+    ("tuple_text", "expected"),
+    [
+        ("'Source', \"Target\"", ("Source", "Target")),
+        ("'XSource', \"TargetX\"", ("XSource", "TargetX")),
+        ("Source, Target, Extra", ("Source", "Target, Extra")),
+        ("'', 'Target'", None),
+    ],
+)
+def test_parse_tuple_edge_pair_handles_quotes_delimiters_and_empty_endpoints(
+    tuple_text: str,
+    expected: tuple[str, str] | None,
+) -> None:
+    assert parse_module._parse_tuple_edge_pair(tuple_text) == expected
+
+
+def test_recover_vote_list_response_accepts_both_token_cases() -> None:
+    assert parse_module._recover_vote_list_response("y n Y N") == ["Y", "N", "Y", "N"]
+
+
+def test_normalize_schema_response_wraps_children_mapping_and_recovers_labels() -> None:
+    assert hf_transformers._normalize_schema_response(
+        {"Parent": ["Child"]},
+        schema_name="children_by_label",
+    ) == {"children_by_label": {"Parent": ["Child"]}}
+    assert hf_transformers._normalize_schema_response(
+        "'First', 'Second'",
+        schema_name="label_list",
+    ) == ["First", "Second"]
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ('{"Parent": ["Child", "Second"]}', {"Parent": ["Child", "Second"]}),
+        ('{"Parent": []}', None),
+        ("plain text", None),
+    ],
+)
+def test_recover_single_key_children_values(
+    text: str,
+    expected: dict[str, list[str]] | None,
+) -> None:
+    assert hf_transformers._recover_single_key_children_values(text) == expected
+
+
+@pytest.mark.parametrize(
+    ("payload", "expected"),
+    [
+        ({"Parent": ["Child"]}, True),
+        ({}, False),
+        ({"children_by_label": {"Parent": ["Child"]}}, False),
+        ({"children_by_label": []}, False),
+        ({1: ["Child"]}, False),
+        ({"Parent": "Child"}, False),
+        ({"Parent": [1]}, False),
+    ],
+)
+def test_looks_like_children_mapping_validates_mapping_shape(
+    payload: object,
+    expected: bool,
+) -> None:
+    assert hf_transformers._looks_like_children_mapping(payload) is expected
+
+
+def test_strip_mapping_comments_preserves_hashes_inside_quoted_values() -> None:
+    text = '{"Parent": ["Child # keep"]} # discard this note\n'
+
+    assert hf_transformers._strip_mapping_comments(text) == ('{"Parent": ["Child # keep"]} \n')
+
+
+def test_recover_truncated_children_mapping_blocks_adds_missing_delimiters() -> None:
+    candidates = hf_transformers._recover_truncated_children_mapping_blocks('{"Parent": ["Child"')
+
+    assert candidates[0] == '{"Parent": ["Child"'
+    assert '{"Parent": ["Child"]' in candidates
+    assert '{"Parent": ["Child"}' in candidates
+    assert '{"Parent": ["Child"]}' in candidates
+    assert '{"Parent": ["Child"]' in hf_transformers._recover_truncated_children_mapping_blocks(
+        '{"Parent": ["Child", }]'
+    )
+
+
+def test_recover_children_mapping_from_lines_handles_inline_and_multiline_values() -> None:
+    text = """{
+  "Parent": ["First",
+    "Second"
+  ],
+  "Other": [
+    "Third"
+  ]
+}"""
+
+    assert hf_transformers._recover_children_mapping_from_lines(text) == {
+        "Parent": ["First", "Second"],
+        "Other": ["Third"],
+    }
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ('{"Parent": ["Child"]', {"Parent": ["Child"]}),
+        ("plain text", None),
+        ('{"Parent": "Child"', None),
+    ],
+)
+def test_recover_malformed_children_mapping_handles_truncated_and_invalid_shapes(
+    text: str,
+    expected: dict[str, list[str]] | None,
+) -> None:
+    assert hf_transformers._recover_malformed_children_mapping(text) == expected
+
+
+@pytest.mark.parametrize(
+    ("parsed", "expected"),
+    [
+        (None, None),
+        ({}, {}),
+        ({"Parent": ["Child"]}, {"Parent": ["Child"]}),
+        ([], None),
+    ],
+)
+def test_normalize_children_mapping_candidate_accepts_only_mapping_shapes(
+    parsed: object | None,
+    expected: dict[str, list[str]] | None,
+) -> None:
+    assert _children_mapping._normalize_children_mapping_candidate(parsed) == expected
+
+
+def test_strip_mapping_comments_removes_hash_comment_at_end_of_text() -> None:
+    assert hf_transformers._strip_mapping_comments('{"Parent": ["Child"]} # note') == (
+        '{"Parent": ["Child"]} '
+    )
+
+
+def test_strip_mapping_comments_removes_inline_and_parenthetical_notes() -> None:
+    assert (
+        hf_transformers._strip_mapping_comments('{"Parent": ["Child"]} // discard')
+        == '{"Parent": ["Child"]} '
+    )
+    assert (
+        hf_transformers._strip_mapping_comments('{"Parent": ["Child"]} (note: discard)')
+        == '{"Parent": ["Child"]} '
+    )
+    assert (
+        hf_transformers._strip_mapping_comments('{\n(irrelevant),\n"Parent": ["Child"]\n}')
+        == '{\n\n"Parent": ["Child"]\n}'
+    )
+    for note in ("NOTE", "WARNING", "Caveat", "Correction", "Actually"):
+        assert (
+            hf_transformers._strip_mapping_comments(f'{{"Parent": ["Child"]}} ({note}: discard)')
+            == '{"Parent": ["Child"]} '
+        )
+    assert (
+        hf_transformers._strip_mapping_comments(
+            '{"Parent": ["Child"]} (note with context: discard)'
+        )
+        == '{"Parent": ["Child"]} '
+    )
+    assert (
+        hf_transformers._strip_mapping_comments('{"Parent": ["Child"]} (noteX: keep)')
+        == '{"Parent": ["Child"]} (noteX: keep)'
+    )
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("text", None),
+        ('["Child"', None),
+    ],
+)
+def test_scan_lenient_quoted_list_rejects_wrong_and_unterminated_inputs(
+    text: str,
+    expected: tuple[list[str], int] | None,
+) -> None:
+    assert hf_transformers._scan_lenient_quoted_list(text, 0) == expected
+
+
+def test_scan_lenient_quoted_list_rejects_empty_list_after_separators() -> None:
+    assert hf_transformers._scan_lenient_quoted_list("[ ", 0) is None
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("text", -1),
+        ("[[nested]", -1),
+        ("[[]]", 4),
+    ],
+)
+def test_skip_nested_bracketed_value_handles_invalid_and_nested_inputs(
+    text: str,
+    expected: int,
+) -> None:
+    assert hf_transformers._skip_nested_bracketed_value(text, 0) == expected
+    assert hf_transformers._skip_nested_bracketed_value("[][", 2) == -1
+
+
+def test_scan_nested_list_position_rejects_unclosed_nested_values() -> None:
+    assert _children_mapping._scan_nested_list_position("[[nested]", 0, []) is None
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("bare text", None),
+        ("'", None),
+        ("}: value", None),
+    ],
+)
+def test_scan_unquoted_list_item_handles_missing_delimiters_and_empty_values(
+    text: str,
+    expected: tuple[str, int] | None,
+) -> None:
+    assert hf_transformers._scan_unquoted_list_item(text, 0) == expected
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("no colon", None),
+        (": value", None),
+        ("}: value", None),
+        ("Parent: value", ("Parent", 6)),
+    ],
+)
+def test_scan_unquoted_mapping_key_handles_invalid_and_valid_inputs(
+    text: str,
+    expected: tuple[str, int] | None,
+) -> None:
+    assert hf_transformers._scan_unquoted_mapping_key(text, 0) == expected
+    assert hf_transformers._scan_unquoted_mapping_key(text, None) is None
+
+
+def test_scan_lenient_mapping_key_falls_back_to_unquoted_keys() -> None:
+    assert hf_transformers._scan_lenient_mapping_key("Parent: value", 0) == (
+        "Parent",
+        6,
+    )
+    assert hf_transformers._scan_lenient_mapping_key('"Parent": value', 0) == (
+        "Parent",
+        8,
+    )
+    assert hf_transformers._scan_lenient_mapping_key('"Parent: Label": value', 0) == (
+        "Parent: Label",
+        15,
+    )
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "plain text",
+        '{"Parent": ["Child"]}',
+        "{Parent: }",
+    ],
+)
+def test_recover_unquoted_key_comma_separated_rejects_non_matching_shapes(text: str) -> None:
+    assert hf_transformers._recover_unquoted_key_comma_separated(text) is None
+
+
+def test_recover_unquoted_key_comma_separated_rejects_mapping_without_colon() -> None:
+    assert hf_transformers._recover_unquoted_key_comma_separated("{Parent value}") is None
+
+
+@pytest.mark.parametrize(
+    ("text", "parsed", "expected"),
+    [
+        ("plain text", {"Parent": ["Child"]}, False),
+        ('{"Parent": ["Child"]}', {"Parent": ["Child"]}, False),
+        ('{"Parent": ["\\"dangling\\""]}', {"Parent": ['"dangling"']}, True),
+        (
+            '{"Parent": ["Child"], "Other": ["Value"]}',
+            {"Parent": ["Child"], "Other": ["Value"]},
+            False,
+        ),
+    ],
+)
+def test_children_mapping_needs_more_recovery_classifies_shapes(
+    text: str,
+    parsed: dict[str, list[str]],
+    expected: bool,
+) -> None:
+    assert (
+        hf_transformers._children_mapping_needs_more_recovery(
+            text=text,
+            parsed=parsed,
+        )
+        is expected
+    )
+
+
+def test_recover_inline_children_mapping_returns_none_for_unparseable_text() -> None:
+    assert hf_transformers._recover_inline_children_mapping("plain text") is None
+
+
+def test_inline_children_mapping_blocks_keep_distinct_balanced_and_outer_blocks() -> None:
+    blocks = _children_mapping._inline_children_mapping_blocks(
+        '{"Parent": ["Child"]} trailing {"Other": ["Value"]}'
+    )
+
+    assert len(blocks) == 2
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("plain text", None),
+        ('{"Parent": []}', None),
+        ('{"Parent": ["Child"]}', {"Parent": ["Child"]}),
+        ("{' ': ['Child']}", None),
+    ],
+)
+def test_recover_first_quoted_children_entry_handles_empty_and_valid_values(
+    text: str,
+    expected: dict[str, list[str]] | None,
+) -> None:
+    assert hf_transformers._recover_first_quoted_children_entry(text) == expected
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("plain text", None),
+        ('{"Parent": []}', None),
+        ('{"Parent": ["Child"]}', {"Parent": ["Child"]}),
+    ],
+)
+def test_recover_double_quoted_children_values_handles_empty_and_valid_values(
+    text: str,
+    expected: dict[str, list[str]] | None,
+) -> None:
+    assert hf_transformers._recover_double_quoted_children_values(text) == expected
+
+
+def test_recover_double_quoted_children_values_rejects_blank_key() -> None:
+    assert hf_transformers._recover_double_quoted_children_values('" ": ["Child"]') is None
+
+
+@pytest.mark.parametrize(
+    ("content", "expected"),
+    [
+        ("no quoted values", ""),
+        ("'First', 'Second'", '"First", "Second"'),
+    ],
+)
+def test_extract_quoted_strings_from_bracket_handles_empty_and_quoted_content(
+    content: str,
+    expected: str,
+) -> None:
+    assert hf_transformers._extract_quoted_strings_from_bracket(content) == expected
+
+
+def test_recover_children_mapping_from_lines_returns_none_for_empty_input() -> None:
+    assert hf_transformers._recover_children_mapping_from_lines("\n  \n") is None
+
+
+def test_recover_children_mapping_from_lines_flushes_inline_entry() -> None:
+    assert hf_transformers._recover_children_mapping_from_lines('{"Inline": ["Only"]}') == {
+        "Inline": ["Only"]
+    }
+
+
+@pytest.mark.parametrize(
+    ("line", "expected"),
+    [
+        ("", None),
+        ('"Parent" ["Child"]', ("Parent", ["Child"])),
+        ('"Parent" : []', None),
+    ],
+)
+def test_parse_fenced_children_line_rejects_empty_and_empty_value_lines(
+    line: str,
+    expected: tuple[str, list[str]] | None,
+) -> None:
+    assert _children_mapping._parse_fenced_children_line(line) == expected
+
+
+def test_children_mapping_low_level_shape_and_comment_helpers() -> None:
+    for payload in (None, [], "text", 1):
+        assert _children_mapping._looks_like_children_mapping(payload) is False
+
+    truncated = '{"Parent": ["Child"]'
+    assert _children_mapping._malformed_children_mapping_candidates(truncated) == [
+        '{"Parent": ["Child"]}',
+        '{"Parent": ["Child"}',
+    ]
+    assert _children_mapping._malformed_children_mapping_candidates("{Parent: Child") == [
+        "{Parent: Child}",
+    ]
+
+    balanced = '{"Parent": ["Child"]}'
+    assert _children_mapping._children_mapping_blocks(f"prefix {balanced} suffix") == [balanced]
+    blocks = _children_mapping._children_mapping_blocks(
+        f'prefix {balanced} commentary {{"Other": ["Value"]}}'
+    )
+    assert blocks == [balanced, f'{balanced} commentary {{"Other": ["Value"]}}']
+    assert _children_mapping._children_mapping_candidate_variants(balanced) == (balanced,)
+    commented = f"{balanced} # note"
+    variants = _children_mapping._children_mapping_candidate_variants(commented)
+    assert variants[0] == commented
+    assert variants[1] == f"{balanced} "
+
+
+def test_children_mapping_comment_quote_state_helpers() -> None:
+    text = '/* first\nsecond */ {"Parent": ["Child"]}'
+    assert _children_mapping._strip_mapping_comments(text) == ' {"Parent": ["Child"]}'
+    assert (
+        _children_mapping._strip_mapping_hash_comments("'a#b' # drop\n\"c#d\" # drop")
+        == "'a#b' \n\"c#d\" "
+    )
+
+    assert _children_mapping._is_mapping_quote("'", False, False)
+    assert not _children_mapping._is_mapping_quote("'", False, True)
+    assert _children_mapping._is_mapping_quote('"', False, False)
+    assert not _children_mapping._is_mapping_quote('"', True, False)
+    assert _children_mapping._toggle_mapping_quote("'", False, True) == (True, True)
+    assert _children_mapping._toggle_mapping_quote('"', True, False) == (True, True)
+    assert _children_mapping._is_mapping_hash_comment_start("#", False, False)
+    assert not _children_mapping._is_mapping_hash_comment_start("#", True, False)
+    assert not _children_mapping._is_mapping_hash_comment_start("#", False, True)
+    assert not _children_mapping._is_mapping_hash_comment_start("x", False, False)
+    assert _children_mapping._strip_mapping_hash_comments(r"escaped\#keep # drop") == (
+        r"escaped\#keep "
+    )
+    assert _children_mapping._strip_mapping_hash_comments(r"escaped\#") == r"escaped\#"
+    assert _children_mapping._strip_mapping_hash_comments("trailing\\") == "trailing\\"
+    result: list[str] = []
+    assert _children_mapping._consume_mapping_hash_character(
+        text="x",
+        index=0,
+        character="x",
+        result=result,
+        in_single_quote=False,
+        in_double_quote=False,
+    ) == (1, False, False)
+    assert result == ["x"]
+    quoted_result: list[str] = []
+    assert _children_mapping._consume_mapping_hash_character(
+        text='"',
+        index=0,
+        character='"',
+        result=quoted_result,
+        in_single_quote=False,
+        in_double_quote=False,
+    ) == (1, False, True)
+    assert quoted_result == ['"']
+    assert _children_mapping._skip_mapping_hash_comment("abc\ndef", 1) == 3
+    assert _children_mapping._skip_mapping_hash_comment("abc", 1) == 3
+
+
+def test_children_mapping_inline_scanner_helpers_cover_boundaries() -> None:
+    assert _children_mapping._consume_inline_mapping_token(":", 0, ":") == 1
+    assert _children_mapping._consume_inline_mapping_token("", 0, ":") is None
+    assert _children_mapping._consume_inline_mapping_token("x", 0, ":") is None
+    assert _children_mapping._skip_inline_mapping_comma(",", 0) == 1
+    assert _children_mapping._skip_inline_mapping_comma("x", 0) == 0
+    assert _children_mapping._skip_inline_mapping_comma("", 0) == 0
+    assert _children_mapping._skip_inline_mapping_separators(" \t\nX", 0) == 3
+    assert _children_mapping._skip_inline_mapping_separators("\rX", 0) == 1
+
+    mapping = {"Parent": ["old"]}
+    _children_mapping._store_inline_children_entry(mapping, "Parent", ["new"])
+    assert mapping == {"Parent": ["new"]}
+    _children_mapping._store_inline_children_entry(mapping, "Parent", [])
+    assert mapping == {"Parent": ["new"]}
+
+    block = '{"Parent": ["Child"]}'
+    assert _children_mapping._try_inline_children_parse(block) == {"Parent": ["Child"]}
+    assert _children_mapping._inline_children_mapping_finished("abc", 3, 3)
+    assert _children_mapping._inline_children_mapping_finished("}", 0, 1)
+    assert _children_mapping._inline_children_mapping_blocks(f"prefix {block} suffix") == [block]
+    assert _children_mapping._inline_children_mapping_blocks(
+        f'prefix {block} commentary {{"Other": ["Value"]}}'
+    ) == [block, f'{block} commentary {{"Other": ["Value"]}}']
+
+
+def test_children_mapping_list_and_unquoted_scanner_helpers_cover_delimiters() -> None:
+    assert _children_mapping._scan_lenient_quoted_list('["First", "Second"]', 0) == (
+        ["First", "Second"],
+        len('["First", "Second"]'),
+    )
+    assert _children_mapping._scan_lenient_list_position(")", 0, [], lambda *_: None) == (
+        [],
+        1,
+    )
+    assert _children_mapping._scan_lenient_list_position(",", 0, [], lambda *_: None) is None
+    assert _children_mapping._scan_lenient_list_position('"},', 0, [], lambda *_: None) == (
+        [],
+        2,
+    )
+    assert _children_mapping._is_terminal_quoted_list_item('"Child"]', 6)
+    assert _children_mapping._is_terminal_quoted_list_item("'Child')", 6)
+    assert not _children_mapping._is_terminal_quoted_list_item('"   ', 0)
+    assert _children_mapping._is_terminal_quoted_list_item('"}', 0)
+    assert _children_mapping._finish_nested_list_position("x?", 1, []) is None
+    assert _children_mapping._finish_nested_list_position("x,", 1, []) == 2
+    assert _children_mapping._finish_nested_list_position("x]", 1, []) == ([], 2)
+    assert _children_mapping._finish_nested_list_position("x)", 1, []) == ([], 2)
+    assert _children_mapping._finish_nested_list_position("]", 1, []) is None
+    assert _children_mapping._advance_after_lenient_list_item("x,]", 1, []) == 2
+    assert _children_mapping._skip_nested_bracketed_value("[]", 2) == -1
+    assert _children_mapping._scan_unquoted_list_item("Value}", 0) == ("Value", 5)
+    assert _children_mapping._scan_unquoted_mapping_key("prefix Parent: value", len("prefix ")) == (
+        "Parent",
+        "prefix Parent: value".index(":"),
+    )
+    assert _children_mapping._scan_unquoted_mapping_key(
+        "prefix: Parent:Value:more", len("prefix: ")
+    ) == ("Parent", "prefix: Parent:Value:more".index(":", len("prefix: ")))
+    assert _children_mapping._scan_unquoted_mapping_key("bad]key: value", 0) is None
+    assert _children_mapping._scan_unquoted_mapping_key("bad,key: value", 0) is None
+    assert _children_mapping._scan_unquoted_mapping_key("{Parent: Value", 0) == (
+        "Parent",
+        len("{Parent"),
+    )
+    assert _children_mapping._scan_unquoted_mapping_key("{ParentX: Value", 0) == (
+        "ParentX",
+        len("{ParentX"),
+    )
+    assert _children_mapping._scan_unquoted_mapping_key("'Parent': Value", 0) == (
+        "Parent",
+        len("'Parent'"),
+    )
+    assert _children_mapping._scan_unquoted_mapping_key("'XParentX': Value", 0) == (
+        "XParentX",
+        len("'XParentX'"),
+    )
+
+
+def test_children_mapping_recovery_artifact_helpers_cover_fences_and_quotes() -> None:
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery("plain") == "plain"
+    assert (
+        _children_mapping._sanitize_children_mapping_text_for_recovery('"unfinished')
+        == "unfinished"
+    )
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery('"closed"') == '"closed"'
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery("abc\\") == "abc"
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery("abc\\\\") == "abc\\"
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery("'\" ,") == ('"' + "',")
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery(r"\u0041") == "A"
+    assert _children_mapping._sanitize_children_mapping_text_for_recovery(r"\u004A") == "J"
+    assert (
+        _children_mapping._sanitize_children_mapping_text_for_recovery("‘ ’ “ ” ：")
+        == "' ' \" \" :"
+    )
+    assert (
+        _children_mapping._strip_fenced_content_artifacts("before\n```JSON\nafter")
+        == "before\nafter"
+    )
+    assert (
+        _children_mapping._strip_fenced_content_artifacts("before\n```json\nafter")
+        == "before\nafter"
+    )
+    assert _children_mapping._strip_fenced_content_artifacts("**bold text**") == "bold text"
+    assert _children_mapping._strip_fenced_content_artifacts("name** :") == "name:"
+    assert _children_mapping._strip_fenced_content_artifacts("name**") == "name"
+    fenced = '```json\n{"Parent": ["Child"]}\n```'
+    assert _children_mapping._extract_fenced_children_block(fenced) == ('{"Parent": ["Child"]}')
+    assert (
+        _children_mapping._strip_truncated_fence('```json\n{"Parent": ["Child"]}')
+        == '{"Parent": ["Child"]}'
+    )
+    assert (
+        _children_mapping._close_truncated_children_mapping('  {"Parent": ["Child"]}  ')
+        == '  {"Parent": ["Child"]}'
+    )
+    assert (
+        _children_mapping._close_truncated_children_mapping('  {"Parent": ["Child"]  ')
+        == '  {"Parent": ["Child"]}'
+    )
+    assert _children_mapping._close_truncated_children_mapping("}]") == "}]"
+    assert _children_mapping._recover_fenced_children_fallback('{"Parent": ["Child"]}') == {
+        "Parent": ["Child"]
+    }
+    structured = '{"Parent":\n ["Child"]}'
+    assert _children_mapping._recover_structured_fenced_children_mapping(structured) == {
+        "Parent": ["Child"]
+    }
+
+    assert (
+        _children_mapping._normalize_fenced_children_line("  'Parent' ['Child'], ")
+        == "'Parent' ['Child']"
+    )
+    assert _children_mapping._normalize_fenced_children_line("lineX") == "lineX"
+    assert (
+        _children_mapping._normalize_fenced_children_line("  'Parent' ['Child'] },")
+        == "'Parent' ['Child']}"
+    )
+    assert _children_mapping._normalize_fenced_children_line("}") is None
+    assert _children_mapping._normalize_fenced_children_line("},") is None
+    assert _children_mapping._match_fenced_children_line("'Parent' ['Child']") == (
+        "Parent",
+        ["Child"],
+    )
+    assert _children_mapping._split_fenced_children_values("'First', \"Second\"") == [
+        "First",
+        "Second",
+    ]
+    assert _children_mapping._split_fenced_children_values("'XFirstX', \"Second\"") == [
+        "XFirstX",
+        "Second",
+    ]
+    assert _children_mapping._match_fenced_children_line("\"'Parent' (Note): ['Child']") == (
+        "'Parent'",
+        ["Child"],
+    )
+    assert _children_mapping._match_fenced_children_line("\"'XParent' (Note): ['Child']") == (
+        "'XParent'",
+        ["Child"],
+    )
+    assert (
+        _children_mapping._extract_fenced_children_block('````json\n{"Parent": ["Child"]}\n````')
+        is None
+    )
+    assert (
+        _children_mapping._extract_fenced_children_block('aaa\n{"Parent": ["Child"]}\naaa') is None
+    )
+
+
+def test_structured_fenced_mapping_uses_quote_closed_candidate_before_fallback(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    block = '{"Parent":\n ["Child"]}'
+    expected_candidate = '{"Parent"' + "', " + '"Child"]}'
+    seen: list[str] = []
+
+    def recover(candidate: str) -> dict[str, list[str]] | None:
+        seen.append(candidate)
+        return {"Parent": ["Child"]}
+
+    monkeypatch.setattr(_children_mapping, "_recover_first_quoted_children_entry", recover)
+    monkeypatch.setattr(
+        _children_mapping,
+        "_try_recovered_fenced_children_mapping",
+        lambda _candidate: None,
+    )
+
+    assert _children_mapping._recover_structured_fenced_children_mapping(block) == {
+        "Parent": ["Child"]
+    }
+    assert seen == [expected_candidate]
+
+
+def test_children_mapping_unquoted_and_truncated_recovery_helpers() -> None:
+    assert not _children_mapping._is_unquoted_children_mapping_candidate("{Parent: Value]")
+    assert _children_mapping._split_unquoted_children_mapping("{Parent: Value: Two}") == (
+        "Parent",
+        "Value: Two",
+    )
+    assert _children_mapping._split_unquoted_children_mapping("{Parent:Value: Two}") == (
+        "Parent",
+        "Value: Two",
+    )
+    assert _children_mapping._split_unquoted_children_mapping("{Parent:ValueX}") == (
+        "Parent",
+        "ValueX",
+    )
+    assert _children_mapping._parse_unquoted_children_values("'First', Second, \"Third\"") == [
+        "First",
+        "Second",
+        "Third",
+    ]
+    assert _children_mapping._parse_unquoted_children_values("'XFirstX'") == ["XFirstX"]
+    assert _children_mapping._children_values_need_more_recovery(["[dangling"])
+    assert _children_mapping._child_value_needs_more_recovery('"leading')
+    assert _children_mapping._child_value_needs_more_recovery("'leading")
+    assert _children_mapping._child_value_needs_more_recovery("trailing'")
+    assert _children_mapping._child_value_needs_more_recovery('trailing"')
+    assert _children_mapping._child_value_needs_more_recovery("contains]")
+    assert _children_mapping._children_text_needs_more_recovery("text [bare]")
+    assert _children_mapping._remove_nonstring_bracket_patterns("[diet] reminders") == ""
+    assert (
+        _children_mapping._remove_nonstring_bracket_patterns("[nested [a 'x' y 'z']]") == "[nested "
+    )
+    assert _children_mapping._remove_nonstring_bracket_patterns("[b[[ ' [cc'b[]") == '" [cc"'
+    assert _children_mapping._remove_nonstring_bracket_patterns("[''[]") == ""
+    assert (
+        _children_mapping._truncated_children_mapping_delimiter_candidates('{"Parent": []}') == []
+    )
+    assert _children_mapping._truncated_children_mapping_delimiter_candidates(
+        '{"Parent": "Child"'
+    ) == ['{"Parent": "Child"}']
+    assert _children_mapping._deduplicate_text_candidates(["a", "a", "b"]) == [
+        "a",
+        "b",
+    ]
+
+
+def test_children_mapping_line_recovery_helpers_preserve_state_contracts() -> None:
+    def extract_outer_block(**kwargs: object) -> str | None:
+        if kwargs.get("opener") != "{" or kwargs.get("closer") != "}":
+            return None
+        return '{"Parent": ["Child"]}'
+
+    prepared = _children_mapping._prepare_children_mapping_lines("ignored", extract_outer_block)
+    assert prepared == ('{"Parent": ["Child"]}', ['{"Parent": ["Child"]}'])
+
+    def extract_value(line: str) -> str | None:
+        if '"' not in line:
+            return None
+        return line.split('"')[1]
+
+    mapping: dict[str, list[str]] = {}
+    assert _children_mapping._consume_children_mapping_assignment(
+        line='"Parent": ["Child: value"]',
+        mapping=mapping,
+        key=None,
+        values=[],
+        in_children=False,
+        extract_quoted_line_value=extract_value,
+    ) == (None, [], False)
+    assert mapping == {"Parent": ["Child: value"]}
+
+    def extract_assignment_value(line: str) -> str | None:
+        if line == '"New"':
+            return "New"
+        if line.startswith('"Value"'):
+            return "Value"
+        return None
+
+    mapping = {}
+    assert _children_mapping._consume_children_mapping_assignment(
+        line='"New": ["Value"]',
+        mapping=mapping,
+        key="Old",
+        values=["old"],
+        in_children=True,
+        extract_quoted_line_value=extract_assignment_value,
+    ) == (None, [], False)
+    assert mapping == {"Old": ["old"], "New": ["Value"]}
+
+    def extract_fallback_value(line: str) -> str | None:
+        if line.endswith('"Value"'):
+            return "Value"
+        return None
+
+    assert _children_mapping._consume_children_mapping_assignment(
+        line='unquoted: "Value"',
+        mapping={},
+        key="Parent",
+        values=[],
+        in_children=True,
+        extract_quoted_line_value=extract_fallback_value,
+    ) == ("Parent", ["Value"], True)
+
+    assert _children_mapping._consume_children_mapping_assignment(
+        line="}: value",
+        mapping={"Parent": ["Child"]},
+        key="Parent",
+        values=["Child"],
+        in_children=True,
+        extract_quoted_line_value=extract_fallback_value,
+    ) == (None, [], False)
+
+    assert _children_mapping._consume_children_mapping_line(
+        line='unquoted: "Value"',
+        mapping={},
+        key="Parent",
+        values=[],
+        in_children=True,
+        extract_quoted_line_value=extract_fallback_value,
+    ) == ("Parent", ["Value"], True)
+
+    seen_value_parts: list[str] = []
+
+    def record_value_part(line: str) -> str | None:
+        seen_value_parts.append(line)
+        return "New" if line == '"New"' else None
+
+    assert _children_mapping._consume_children_mapping_assignment(
+        line='"New": [["Value"]',
+        mapping={},
+        key=None,
+        values=[],
+        in_children=False,
+        extract_quoted_line_value=record_value_part,
+    ) == (None, [], False)
+    assert seen_value_parts == ['"New"', '["Value"]']
+
+    def extract_brace_value(line: str) -> str | None:
+        if line == "{":
+            return "Unexpected"
+        return extract_value(line)
+
+    assert _children_mapping._consume_children_mapping_line(
+        line="{",
+        mapping={},
+        key="Parent",
+        values=["Child"],
+        in_children=True,
+        extract_quoted_line_value=extract_brace_value,
+    ) == ("Parent", ["Child"], True)
+    closed_mapping: dict[str, list[str]] = {}
+    assert _children_mapping._consume_children_mapping_line(
+        line="}",
+        mapping=closed_mapping,
+        key="Parent",
+        values=["Child"],
+        in_children=True,
+        extract_quoted_line_value=extract_value,
+    ) == (None, [], False)
+    assert closed_mapping == {"Parent": ["Child"]}
+
+    for closing_line in ("]", "}"):
+        closed_mapping = {}
+        assert _children_mapping._consume_children_mapping_value(
+            line=closing_line,
+            mapping=closed_mapping,
+            key="Parent",
+            values=["Child"],
+            in_children=True,
+            extract_quoted_line_value=extract_value,
+        ) == (None, [], False)
+        assert closed_mapping == {"Parent": ["Child"]}
+
+    assert _children_mapping._recover_children_mapping_from_lines('{\n"Parent": [\n"Child"\n') == {
+        "Parent": ["Child"]
+    }
+
+    assert _children_mapping._consume_children_mapping_value(
+        line='"Value"',
+        mapping={},
+        key=None,
+        values=[],
+        in_children=True,
+        extract_quoted_line_value=extract_value,
+    ) == (None, [], True)
+    assert _children_mapping._consume_children_mapping_value(
+        line='"Value"',
+        mapping={},
+        key="Parent",
+        values=[],
+        in_children=False,
+        extract_quoted_line_value=extract_value,
+    ) == ("Parent", [], False)
+    assert _children_mapping._flush_children_mapping_line_entry(mapping, "Parent", ["Child"]) == (
+        None,
+        [],
+        False,
+    )
+
+
+def test_recover_children_mapping_initializes_line_state(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observed: list[tuple[object, object]] = []
+
+    def capture_state(**kwargs: object) -> tuple[None, object, object]:
+        if not observed:
+            observed.append((kwargs["values"], kwargs["in_children"]))
+        return None, kwargs["values"], kwargs["in_children"]
+
+    monkeypatch.setattr(
+        _children_mapping,
+        "_consume_children_mapping_line",
+        capture_state,
+    )
+
+    _children_mapping._recover_children_mapping_from_lines('{"Parent": ["Child"]}')
+
+    assert observed == [([], False)]
 
 
 def test_load_qwen_dynamic_cache_type_propagates_non_import_errors(

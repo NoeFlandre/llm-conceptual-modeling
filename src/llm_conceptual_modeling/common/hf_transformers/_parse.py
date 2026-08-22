@@ -54,6 +54,10 @@ def _strip_assistant_prefix(text: str) -> str:
     for prefix in ("assistant\n", "assistant:\n", "assistant: ", "assistant "):
         if lowered.startswith(prefix):
             return text[len(prefix) :].strip()
+    return _strip_assistant_noise(text, lowered)
+
+
+def _strip_assistant_noise(text: str, lowered: str) -> str:
     if lowered.startswith("assistant"):
         suffix = text[len("assistant") :].strip()
         if suffix and all(not character.isalnum() for character in suffix):
@@ -77,14 +81,8 @@ def _strip_code_fence(text: str) -> str:
     # string. Re-extract using the LAST ``` as the true closing fence.
     if body.count('"') % 2 == 1:
         last_fence_pos = text.rfind("```")
-        if last_fence_pos > fenced.start():
-            # Skip past the opening fence lang line (```lang\n)
-            open_lang_end = text.find("\n", fenced.start())
-            if open_lang_end < 0:
-                open_lang_end = fenced.end()
-            else:
-                open_lang_end += 1  # include the newline
-            body = text[open_lang_end:last_fence_pos].strip()
+        body_start = fenced.start("body")
+        body = text[body_start:last_fence_pos].strip()
     return body
 
 
@@ -93,6 +91,10 @@ def _normalize_schema_response(parsed: object, *, schema_name: str) -> object:
         recovered = _recover_non_json_response(text=parsed, schema_name=schema_name)
         if recovered is not None:
             return recovered
+    return _normalize_non_string_schema_response(parsed, schema_name=schema_name)
+
+
+def _normalize_non_string_schema_response(parsed: object, *, schema_name: str) -> object:
     if schema_name == "label_list":
         recovered_labels = _normalize_label_list_payload(parsed)
         if recovered_labels is not None:
@@ -106,19 +108,24 @@ def _looks_retryable_malformed_output(*, text: str, schema_name: str) -> bool:
     stripped = _strip_code_fence(_strip_assistant_prefix(text.strip()))
     if not stripped:
         return True
-    lowered = stripped.lower()
-    if "<think>" in lowered or "" in lowered:
+    if "<think>" in stripped.lower():
         return True
     if schema_name == "edge_list":
-        if stripped.startswith("[") and not stripped.rstrip().endswith("]"):
-            return True
-        quoted_items = re.findall(r"""['"]([^'"]+)['"]""", stripped)
-        if quoted_items and len(quoted_items) % 2 == 1:
-            return True
+        return _looks_retryable_edge_list_output(stripped)
     if schema_name == "children_by_label":
-        if stripped.startswith("{") and not stripped.rstrip().endswith("}"):
-            return True
+        return _looks_retryable_children_mapping_output(stripped)
     return False
+
+
+def _looks_retryable_edge_list_output(text: str) -> bool:
+    if text.startswith("[") and not text.rstrip().endswith("]"):
+        return True
+    quoted_items = re.findall(r"""['"]([^'"]+)['"]""", text)
+    return bool(quoted_items) and len(quoted_items) % 2 == 1
+
+
+def _looks_retryable_children_mapping_output(text: str) -> bool:
+    return text.startswith("{") and not text.rstrip().endswith("}")
 
 
 def _looks_retryable_normalization_failure(
@@ -172,112 +179,169 @@ def _should_normalize_exhausted_malformed_edge_list_to_empty(
 
 
 def _recover_non_json_response(*, text: str, schema_name: str) -> object | None:
-    # Handle degenerate non-JSON outputs that contain no useful structure.
     stripped = text.strip().lower()
     if schema_name == "children_by_label":
-        # Model returned bare markdown code fence (```json) or literal "Error".
-        if not stripped or stripped in ("```json", "error", '"""json"""') or "```json" in stripped:
-            return {"children_by_label": {}}
-        candidate_texts = [text]
-        # Strip thinking blocks, markdown bold markers, and embedded fences FIRST.
-        # These are common model artifacts that corrupt JSON parsing before any recovery runs.
-        artifact_stripped = _strip_fenced_content_artifacts(text)
-        if artifact_stripped != text:
-            candidate_texts.insert(0, artifact_stripped)
-            # Also sanitize the artifact-stripped version
-            sanitized_artifact = _sanitize_children_mapping_text_for_recovery(artifact_stripped)
-            if (
-                sanitized_artifact != artifact_stripped
-                and sanitized_artifact not in candidate_texts
-            ):
-                candidate_texts.insert(1, sanitized_artifact)
-        sanitized_text = _sanitize_children_mapping_text_for_recovery(text)
-        if sanitized_text != text and sanitized_text not in candidate_texts:
-            candidate_texts.append(sanitized_text)
-        # Additional sanitization: remove non-string bracket patterns like [diet] reminders
-        # or [exhaustion', low vitality'] that break the parser.
-        extra_sanitized = _remove_nonstring_bracket_patterns(sanitized_text)
-        if extra_sanitized != sanitized_text and extra_sanitized not in candidate_texts:
-            candidate_texts.append(extra_sanitized)
-        # Also handle trailing comma before } like ['Patience', 'Consistenc', }]
-        comma_fixed = re.sub(r",\s*[\\]}]", "]", sanitized_text).rstrip()
-        if comma_fixed != sanitized_text and comma_fixed not in candidate_texts:
-            candidate_texts.append(comma_fixed)
-        for candidate_text in candidate_texts:
-            # Try fenced python children mapping FIRST (Mistral pattern with keys in quotes)
-            # This needs to run before _remove_nonstring_bracket_patterns corrupts the text
-            recovered_children = _recover_fenced_python_children_mapping(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-            if candidate_text.count("{") <= 1 and candidate_text.count("}") <= 1:
-                recovered_children = _recover_double_quoted_children_values(candidate_text)
-                if recovered_children is not None:
-                    return {"children_by_label": recovered_children}
-            recovered_children = _recover_children_mapping_from_outer_block(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-            recovered_children = _recover_malformed_children_mapping(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-            recovered_children = _recover_inline_children_mapping(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-            recovered_children = _recover_children_mapping_from_lines(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-            # Last resort: try unquoted key with comma-separated values
-            recovered_children = _recover_unquoted_key_comma_separated(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-        # Also try truncated candidates for patterns like {Key: [val1, val2}
-        truncated_candidates = _recover_truncated_children_mapping_blocks(text)
-        for candidate_text in truncated_candidates:
-            if candidate_text == text:
-                continue  # already tried
-            recovered_children = _recover_fenced_python_children_mapping(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
-            recovered_children = _recover_inline_children_mapping(candidate_text)
-            if recovered_children is not None:
-                return {"children_by_label": recovered_children}
+        recovered_children = _recover_children_non_json_response(text, stripped)
+        if recovered_children is not None:
+            return {"children_by_label": recovered_children}
+        return None
+    return _recover_non_children_response(text, schema_name)
+
+
+def _recover_non_children_response(text: str, schema_name: str) -> object | None:
     if schema_name == "label_list":
-        recovered_labels = _recover_label_list_from_lines(text)
-        if recovered_labels is not None:
-            return recovered_labels
-        recovered_labels = _recover_bare_comma_separated_label_list(text)
-        if recovered_labels is not None:
-            return recovered_labels
-        recovered_labels = _recover_quoted_label_list_with_comments(text)
-        if recovered_labels is not None:
-            return recovered_labels
-        recovered_labels = _recover_single_bare_label(text)
-        if recovered_labels is not None:
-            return recovered_labels
+        return _recover_label_list_response(text)
     if schema_name == "edge_list":
-        recovered_edge_pairs = _recover_bracketed_edge_pairs(text)
-        if recovered_edge_pairs is not None:
-            return recovered_edge_pairs
-        recovered_edge_pairs = _recover_bare_comma_separated_edge_pair(text)
-        if recovered_edge_pairs is not None:
-            return recovered_edge_pairs
-        tuple_matches = re.findall(r"\(([^()]*)\)", text)
-        if tuple_matches:
-            parsed_edges: list[tuple[str, str]] = []
-            for tuple_text in tuple_matches:
-                parts = [part.strip().strip("'\"") for part in tuple_text.split(",", 1)]
-                if len(parts) != 2 or not parts[0] or not parts[1]:
-                    continue
-                parsed_edges.append((parts[0], parts[1]))
-            if parsed_edges:
-                return parsed_edges
-        quoted_endpoints = _extract_recoverable_edge_endpoints(text)
-        if quoted_endpoints is not None:
-            return quoted_endpoints
+        return _recover_edge_list_response(text)
     if schema_name == "vote_list":
-        token_matches = re.findall(r"\b[YyNn]\b", text)
-        if token_matches:
-            return [token.upper() for token in token_matches]
+        return _recover_vote_list_response(text)
     return None
+
+
+def _recover_children_non_json_response(
+    text: str,
+    stripped: str,
+) -> dict[str, list[str]] | None:
+    if _is_empty_children_response(stripped):
+        return {}
+    recovered = _recover_first_children_candidate(text)
+    if recovered is not None:
+        return recovered
+    return _recover_truncated_children_candidates(text)
+
+
+def _recover_first_children_candidate(text: str) -> dict[str, list[str]] | None:
+    for candidate_text in _children_recovery_candidates(text):
+        recovered = _recover_children_candidate(candidate_text)
+        if recovered is not None:
+            return recovered
+    return None
+
+
+def _recover_truncated_children_candidates(text: str) -> dict[str, list[str]] | None:
+    for candidate_text in _recover_truncated_children_mapping_blocks(text):
+        if candidate_text == text:
+            continue
+        recovered = _recover_truncated_children_candidate(candidate_text)
+        if recovered is not None:
+            return recovered
+    return None
+
+
+def _is_empty_children_response(stripped: str) -> bool:
+    fence_json = "\x60\x60\x60json"
+    return not stripped or stripped in (fence_json, "error", '"""json"""') or fence_json in stripped
+
+
+def _children_recovery_candidates(text: str) -> list[str]:
+    candidates = [text]
+    artifact_stripped = _strip_fenced_content_artifacts(text)
+    if artifact_stripped != text:
+        candidates.insert(0, artifact_stripped)
+        sanitized_artifact = _sanitize_children_mapping_text_for_recovery(artifact_stripped)
+        _insert_unique_candidate(candidates, sanitized_artifact, 1)
+    sanitized_text = _sanitize_children_mapping_text_for_recovery(text)
+    _append_unique_candidate(candidates, sanitized_text)
+    extra_sanitized = _remove_nonstring_bracket_patterns(sanitized_text)
+    _append_unique_candidate(candidates, extra_sanitized)
+    comma_fixed = re.sub(r",\s*\}\s*\]", "]", sanitized_text)
+    _append_unique_candidate(candidates, comma_fixed)
+    return candidates
+
+
+def _insert_unique_candidate(candidates: list[str], candidate: str, index: int) -> None:
+    if candidate not in candidates:
+        candidates.insert(index, candidate)
+
+
+def _append_unique_candidate(candidates: list[str], candidate: str) -> None:
+    if candidate not in candidates:
+        candidates.append(candidate)
+
+
+def _recover_children_candidate(text: str) -> dict[str, list[str]] | None:
+    recovered = _recover_fenced_python_children_mapping(text)
+    if recovered is not None:
+        return recovered
+    if text.count("{") <= 1 and text.count("}") <= 1:
+        recovered = _recover_double_quoted_children_values(text)
+        if recovered is not None:
+            return recovered
+    return _recover_standard_children_candidate(text)
+
+
+def _recover_standard_children_candidate(text: str) -> dict[str, list[str]] | None:
+    for recovery in (
+        _recover_children_mapping_from_outer_block,
+        _recover_malformed_children_mapping,
+        _recover_inline_children_mapping,
+        _recover_children_mapping_from_lines,
+        _recover_unquoted_key_comma_separated,
+    ):
+        recovered = recovery(text)
+        if recovered is not None:
+            return recovered
+    return None
+
+
+def _recover_truncated_children_candidate(text: str) -> dict[str, list[str]] | None:
+    for recovery in (
+        _recover_fenced_python_children_mapping,
+        _recover_inline_children_mapping,
+    ):
+        recovered = recovery(text)
+        if recovered is not None:
+            return recovered
+    return None
+
+
+def _recover_label_list_response(text: str) -> object | None:
+    for recovery in (
+        _recover_label_list_from_lines,
+        _recover_bare_comma_separated_label_list,
+        _recover_quoted_label_list_with_comments,
+        _recover_single_bare_label,
+    ):
+        recovered = recovery(text)
+        if recovered is not None:
+            return recovered
+    return None
+
+
+def _recover_edge_list_response(text: str) -> object | None:
+    for recovery in (
+        _recover_bracketed_edge_pairs,
+        _recover_bare_comma_separated_edge_pair,
+    ):
+        recovered = recovery(text)
+        if recovered is not None:
+            return recovered
+    recovered = _recover_tuple_edge_pairs(text)
+    if recovered is not None:
+        return recovered
+    return _extract_recoverable_edge_endpoints(text)
+
+
+def _recover_tuple_edge_pairs(text: str) -> list[tuple[str, str]] | None:
+    tuple_matches = re.findall(r"\(([^()]*)\)", text)
+    parsed_edges: list[tuple[str, str]] = []
+    for tuple_text in tuple_matches:
+        edge = _parse_tuple_edge_pair(tuple_text)
+        if edge is not None:
+            parsed_edges.append(edge)
+    return parsed_edges or None
+
+
+def _parse_tuple_edge_pair(tuple_text: str) -> tuple[str, str] | None:
+    parts = [part.strip().strip("'\"") for part in tuple_text.split(",", 1)]
+    if len(parts) != 2 or not parts[0] or not parts[1]:
+        return None
+    return parts[0], parts[1]
+
+
+def _recover_vote_list_response(text: str) -> list[str] | None:
+    token_matches = re.findall(r"\b[YyNn]\b", text)
+    return [token.upper() for token in token_matches] or None
 
 
 # Constants from _compat module

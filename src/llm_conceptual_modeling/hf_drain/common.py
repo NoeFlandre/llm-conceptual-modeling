@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shlex
+from collections.abc import Iterable
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -51,30 +52,54 @@ def summarize_results_root_failures(results_root: Path) -> JsonDict:
     retryable_counts = {"timeout": 0, "oom": 0, "infrastructure": 0, "structural": 0}
     terminal_counts = {"unsupported": 0, "semantic": 0, "other": 0}
     runs_root = results_root / "runs"
-    if not runs_root.exists():
-        return _failure_summary_payload(retryable_counts, terminal_counts)
-    for state_path in runs_root.rglob("state.json"):
-        try:
-            state = json.loads(state_path.read_text(encoding="utf-8"))
-        except Exception:
+    for state_path in _failed_run_state_paths(runs_root):
+        failure_kind = _failed_run_failure_kind(state_path)
+        if failure_kind is None:
             continue
-        if state.get("status") != "failed":
-            continue
-        error_payload = _read_json_file(state_path.with_name("error.json"))
-        error_type = str(error_payload.get("type", "RuntimeError"))
-        message = str(error_payload.get("message", ""))
-        failure_kind = classify_failure(error_type=error_type, message=message)
-        if failure_kind in retryable_counts:
-            retryable_counts[failure_kind] += 1
-            continue
-        if failure_kind == "unsupported":
-            terminal_counts["unsupported"] += 1
-            continue
-        if failure_kind == "other":
-            terminal_counts["other"] += 1
-            continue
-        terminal_counts["semantic"] += 1
+        _increment_failure_counts(
+            failure_kind=failure_kind,
+            retryable_counts=retryable_counts,
+            terminal_counts=terminal_counts,
+        )
     return _failure_summary_payload(retryable_counts, terminal_counts)
+
+
+def _failed_run_state_paths(runs_root: Path) -> Iterable[Path]:
+    if not runs_root.exists():
+        return ()
+    return runs_root.rglob("state.json")
+
+
+def _failed_run_failure_kind(state_path: Path) -> str | None:
+    try:
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if state.get("status") != "failed":
+        return None
+    error_payload = _read_json_file(state_path.with_name("error.json"))
+    return classify_failure(
+        error_type=str(error_payload.get("type", "RuntimeError")),
+        message=str(error_payload.get("message", "")),
+    )
+
+
+def _increment_failure_counts(
+    *,
+    failure_kind: str,
+    retryable_counts: dict[str, int],
+    terminal_counts: dict[str, int],
+) -> None:
+    if failure_kind in retryable_counts:
+        retryable_counts[failure_kind] += 1
+        return
+    if failure_kind == "unsupported":
+        terminal_counts["unsupported"] += 1
+        return
+    if failure_kind == "other":
+        terminal_counts["other"] += 1
+        return
+    terminal_counts["semantic"] += 1
 
 
 def _resolve_ssh_target_and_port(
@@ -87,25 +112,52 @@ def _resolve_ssh_target_and_port(
         return ssh_target, ssh_port
     if ssh_command is None:
         return ssh_target, ssh_port
-    tokens = shlex.split(ssh_command)
-    parsed_target: str | None = None
+    parsed_target, parsed_port = _parse_ssh_command(ssh_command)
+    return (
+        _coalesce_ssh_value(ssh_target, parsed_target),
+        _coalesce_ssh_value(ssh_port, parsed_port),
+    )
+
+
+def _coalesce_ssh_value(primary: str | None, fallback: str | None) -> str | None:
+    return primary if primary is not None else fallback
+
+
+def _parse_ssh_command(ssh_command: str) -> tuple[str | None, str | None]:
+    return _parse_ssh_tokens(shlex.split(ssh_command))
+
+
+def _parse_ssh_tokens(tokens: list[str]) -> tuple[str | None, str | None]:
     parsed_port: str | None = None
     index = 0
-    while index < len(tokens):
-        token = tokens[index]
-        if token == "-p" and index + 1 < len(tokens):
-            parsed_port = tokens[index + 1]
-            index += 2
+    for _ in tokens:
+        token = _ssh_token_at(tokens, index)
+        if token is None:
+            break
+        if token == "-p":
+            parsed_port, index = _consume_ssh_port(tokens, index)
             continue
-        if token == "ssh":
+        if _is_ssh_option(token):
             index += 1
             continue
-        if token.startswith("-"):
-            index += 1
-            continue
-        parsed_target = token
-        break
-    return ssh_target or parsed_target, ssh_port or parsed_port
+        return token, parsed_port
+    return None, parsed_port
+
+
+def _ssh_token_at(tokens: list[str], index: int) -> str | None:
+    if index < 0 or index >= len(tokens):
+        return None
+    return tokens[index]
+
+
+def _is_ssh_option(token: str) -> bool:
+    return token == "ssh" or token.startswith("-")
+
+
+def _consume_ssh_port(tokens: list[str], index: int) -> tuple[str | None, int]:
+    if index + 1 < len(tokens):
+        return tokens[index + 1], index + 2
+    return None, index + 1
 
 
 def _expected_watcher_identity(

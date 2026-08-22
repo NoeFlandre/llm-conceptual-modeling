@@ -155,7 +155,7 @@ def write_osf_package(
     dry_run: bool = False,
 ) -> PackageWriteResult:
     output_dir = Path(output_dir)
-    archives = manifest or build_osf_manifest(Path(data_root))
+    archives = _resolve_package_archives(data_root, manifest)
     for archive in archives:
         _assert_unique_archive_paths(archive)
 
@@ -164,20 +164,50 @@ def write_osf_package(
     readme_path = output_dir / "README.md"
     checksum_path = output_dir / "checksums.txt"
     if dry_run:
-        return PackageWriteResult(
-            output_dir=output_dir,
-            readme_path=readme_path,
-            checksum_path=checksum_path,
-            zip_paths=zip_paths,
-        )
+        return _package_write_result(output_dir, readme_path, checksum_path, zip_paths)
 
+    _write_package_artifacts(
+        output_dir=output_dir,
+        readme_path=readme_path,
+        checksum_path=checksum_path,
+        readme_text=readme_text,
+        archives=archives,
+        zip_paths=zip_paths,
+    )
+    return _package_write_result(output_dir, readme_path, checksum_path, zip_paths)
+
+
+def _resolve_package_archives(
+    data_root: Path,
+    manifest: list[PackageArchive] | None,
+) -> list[PackageArchive]:
+    return manifest or build_osf_manifest(Path(data_root))
+
+
+def _write_package_artifacts(
+    *,
+    output_dir: Path,
+    readme_path: Path,
+    checksum_path: Path,
+    readme_text: str,
+    archives: list[PackageArchive],
+    zip_paths: list[Path],
+) -> None:
     if output_dir.exists():
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    readme_path.write_text(readme_text, encoding="utf-8")
+    readme_path.write_bytes(readme_text.encode())
     for archive, zip_path in zip(archives, zip_paths, strict=True):
         _write_zip(zip_path, archive)
-    checksum_path.write_text(_checksums(zip_paths), encoding="utf-8")
+    checksum_path.write_bytes(_checksums(zip_paths).encode())
+
+
+def _package_write_result(
+    output_dir: Path,
+    readme_path: Path,
+    checksum_path: Path,
+    zip_paths: list[Path],
+) -> PackageWriteResult:
     return PackageWriteResult(
         output_dir=output_dir,
         readme_path=readme_path,
@@ -383,16 +413,22 @@ def _add_tree_entries(
 ) -> None:
     if not source_root.exists():
         return
+    archive.entries.extend(_tree_entries(source_root, archive_root))
+
+
+def _tree_entries(source_root: Path, archive_root: PurePosixPath) -> list[PackageEntry]:
+    entries: list[PackageEntry] = []
     for source_path in sorted(path for path in source_root.rglob("*") if path.is_file()):
         if _is_excluded_path(source_path):
             continue
         relative_path = source_path.relative_to(source_root)
-        archive.entries.append(
+        entries.append(
             PackageEntry(
                 archive_path=archive_root / _to_posix_path(relative_path),
                 source_path=source_path,
             )
         )
+    return entries
 
 
 def _add_filtered_json(
@@ -404,20 +440,27 @@ def _add_filtered_json(
 ) -> None:
     if not source_path.exists() or _is_excluded_path(source_path):
         return
-    payload = json.loads(source_path.read_text(encoding="utf-8"))
-    if isinstance(payload, dict) and isinstance(payload.get("records"), list):
-        payload = {
-            **payload,
-            "records": [
-                record for record in payload["records"] if _record_model(record) == full_model_name
-            ],
-        }
+    payload = json.loads(source_path.read_bytes())
+    payload = _filter_json_payload(payload, full_model_name=full_model_name)
     archive.entries.append(
         PackageEntry(
             archive_path=archive_path,
-            data=(json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8"),
+            data=(json.dumps(payload, indent=2, sort_keys=True) + "\n").encode(),
         )
     )
+
+
+def _filter_json_payload(payload: object, *, full_model_name: str) -> object:
+    if not isinstance(payload, dict):
+        return payload
+    payload_dict = payload
+    records = payload_dict.get("records")
+    if not isinstance(records, list):
+        return payload
+    return {
+        **payload_dict,
+        "records": [record for record in records if _record_model(record) == full_model_name],
+    }
 
 
 def _add_filtered_csv(
@@ -432,7 +475,7 @@ def _add_filtered_csv(
     if not source_path.exists() or _is_excluded_path(source_path):
         return
     content = _filter_csv(
-        source_path.read_text(encoding="utf-8"),
+        source_path.read_bytes().decode(),
         full_model_name=full_model_name,
         model_label=model_label,
         model_column_prefix=model_column_prefix,
@@ -442,7 +485,7 @@ def _add_filtered_csv(
     archive.entries.append(
         PackageEntry(
             archive_path=archive_path,
-            data=content.encode("utf-8"),
+            data=content.encode(),
         )
     )
 
@@ -459,26 +502,65 @@ def _filter_csv(
         return text
     rows = list(reader)
     fieldnames = list(reader.fieldnames)
+    rows = _filter_csv_rows(
+        rows,
+        fieldnames=fieldnames,
+        full_model_name=full_model_name,
+        model_label=model_label,
+    )
+    fieldnames = _filter_csv_columns(fieldnames, model_column_prefix=model_column_prefix)
+    if not rows and ("model" in fieldnames or "Model" in fieldnames):
+        return None
+    return _render_csv(fieldnames, rows)
+
+
+def _filter_csv_rows(
+    rows: list[dict[str, str]],
+    *,
+    fieldnames: list[str],
+    full_model_name: str,
+    model_label: str,
+) -> list[dict[str, str]]:
     if "model" in fieldnames:
-        rows = [row for row in rows if row.get("model") in {full_model_name, model_label}]
-    elif "Model" in fieldnames:
-        rows = [row for row in rows if row.get("Model") == model_label]
+        return _filter_csv_rows_by_field(rows, "model", {full_model_name, model_label})
+    if "Model" in fieldnames:
+        return _filter_csv_rows_by_field(rows, "Model", {model_label})
+    return rows
+
+
+def _filter_csv_rows_by_field(
+    rows: list[dict[str, str]],
+    fieldname: str,
+    allowed_values: set[str],
+) -> list[dict[str, str]]:
+    return [row for row in rows if row.get(fieldname) in allowed_values]
+
+
+def _filter_csv_columns(fieldnames: list[str], *, model_column_prefix: str) -> list[str]:
     prefixed_columns = [name for name in fieldnames if name.startswith(f"{model_column_prefix}_")]
+    if not prefixed_columns:
+        return fieldnames
+    return _drop_other_model_columns(fieldnames, model_column_prefix=model_column_prefix)
+
+
+def _drop_other_model_columns(fieldnames: list[str], *, model_column_prefix: str) -> list[str]:
     other_model_prefixes = {
         prefix for prefix in ("qwen", "mistral") if prefix != model_column_prefix
     }
-    if prefixed_columns:
-        fieldnames = [
-            name
-            for name in fieldnames
-            if not any(name.startswith(f"{prefix}_") for prefix in other_model_prefixes)
-        ]
-    if not rows and ("model" in fieldnames or "Model" in fieldnames):
-        return None
+    return [name for name in fieldnames if _keep_model_column(name, other_model_prefixes)]
+
+
+def _keep_model_column(name: str, other_model_prefixes: set[str]) -> bool:
+    return all(not name.startswith(f"{prefix}_") for prefix in other_model_prefixes)
+
+
+def _render_csv(fieldnames: list[str], rows: list[dict[str, str]]) -> str:
     output = StringIO()
-    writer = csv.DictWriter(output, fieldnames=fieldnames, extrasaction="ignore")
-    writer.writeheader()
-    writer.writerows(rows)
+    writer = csv.writer(output)
+    writer.writerow(fieldnames)
+    writer.writerows(
+        [row[fieldname] if fieldname in row else "" for fieldname in fieldnames] for row in rows
+    )
     return output.getvalue()
 
 
@@ -487,7 +569,7 @@ def _prepend_archive_readme(archive: PackageArchive) -> None:
         0,
         PackageEntry(
             archive_path=PurePosixPath("README.md"),
-            data=_archive_readme(archive).encode("utf-8"),
+            data=_archive_readme(archive).encode(),
         ),
     )
 
@@ -537,10 +619,10 @@ def _package_readme(archives: list[PackageArchive]) -> str:
 
 
 def _write_zip(zip_path: Path, archive: PackageArchive) -> None:
-    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zip_file:
+    with zipfile.ZipFile(zip_path, "w") as zip_file:
         for entry in sorted(archive.entries, key=lambda item: str(item.archive_path)):
             data = entry.data if entry.data is not None else _read_source_entry(entry)
-            zip_info = zipfile.ZipInfo(str(entry.archive_path), date_time=(1980, 1, 1, 0, 0, 0))
+            zip_info = zipfile.ZipInfo(str(entry.archive_path), date_time=(1980, 1, 1, 0, 0, 1))
             zip_info.compress_type = zipfile.ZIP_DEFLATED
             zip_file.writestr(zip_info, data)
 
@@ -573,11 +655,19 @@ def _record_model(record: object) -> str | None:
     normalized = _string_key_mapping(record)
     if normalized is None:
         return None
-    identity = _string_key_mapping(normalized.get("identity"))
-    identity_model = identity.get("model") if identity is not None else None
+    identity_model = _record_identity_model(normalized)
     if isinstance(identity_model, str):
         return identity_model
-    model = normalized.get("model")
+    return _record_top_level_model(normalized)
+
+
+def _record_identity_model(record: dict[str, object]) -> object:
+    identity = _string_key_mapping(record.get("identity"))
+    return identity.get("model") if identity is not None else None
+
+
+def _record_top_level_model(record: dict[str, object]) -> str | None:
+    model = record.get("model")
     return model if isinstance(model, str) else None
 
 

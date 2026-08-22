@@ -1,10 +1,51 @@
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 from llm_conceptual_modeling.hf_drain import (
     build_drain_plan,
     summarize_results_root_failures,
 )
+from llm_conceptual_modeling.hf_drain.common import (
+    _can_continue_adopted_run,
+    _infer_algorithm_scope,
+    _infer_model_family,
+    _parse_timestamp,
+    _resolve_ssh_target_and_port,
+    _status_is_stale,
+)
+
+
+def test_resolve_ssh_target_and_port_prefers_explicit_values() -> None:
+    assert _resolve_ssh_target_and_port(
+        ssh_command="ssh -p 2222 parsed@example.com",
+        ssh_target="explicit@example.com",
+        ssh_port="3333",
+    ) == ("explicit@example.com", "3333")
+
+
+def test_resolve_ssh_target_and_port_returns_partial_values_without_command() -> None:
+    assert _resolve_ssh_target_and_port(
+        ssh_command=None,
+        ssh_target="explicit@example.com",
+        ssh_port=None,
+    ) == ("explicit@example.com", None)
+
+
+def test_resolve_ssh_target_and_port_parses_target_and_port_from_command() -> None:
+    assert _resolve_ssh_target_and_port(
+        ssh_command="ssh -p 2222 parsed@example.com",
+        ssh_target=None,
+        ssh_port=None,
+    ) == ("parsed@example.com", "2222")
+
+
+def test_resolve_ssh_target_and_port_keeps_port_when_command_has_no_target() -> None:
+    assert _resolve_ssh_target_and_port(
+        ssh_command="ssh -p 2222",
+        ssh_target=None,
+        ssh_port=None,
+    ) == (None, "2222")
 
 
 def test_build_drain_plan_adopts_matching_active_root_and_orders_safe_before_risky(
@@ -131,6 +172,79 @@ def test_summarize_results_root_failures_separates_retryable_and_terminal_failur
     assert summary["terminal"]["unsupported"] == 1
     assert summary["retryable_total"] == 1
     assert summary["terminal_total"] == 1
+
+
+def test_summarize_results_root_failures_ignores_missing_malformed_and_finished_states(
+    tmp_path: Path,
+) -> None:
+    results_root = tmp_path / "results"
+    assert summarize_results_root_failures(results_root)["retryable_total"] == 0
+
+    runs_root = results_root / "runs"
+    malformed_run = runs_root / "malformed"
+    malformed_run.mkdir(parents=True)
+    (malformed_run / "state.json").write_text("not-json", encoding="utf-8")
+    finished_run = runs_root / "finished"
+    finished_run.mkdir(parents=True)
+    (finished_run / "state.json").write_text('{"status":"finished"}', encoding="utf-8")
+    generic_run = runs_root / "generic"
+    generic_run.mkdir(parents=True)
+    (generic_run / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (generic_run / "error.json").write_text(
+        '{"type":"RuntimeError","message":"unexpected failure"}',
+        encoding="utf-8",
+    )
+    stale_run = runs_root / "stale"
+    stale_run.mkdir(parents=True)
+    (stale_run / "state.json").write_text('{"status":"failed"}', encoding="utf-8")
+    (stale_run / "error.json").write_text(
+        '{"type":"StaleRunState","message":"stale"}',
+        encoding="utf-8",
+    )
+
+    summary = summarize_results_root_failures(results_root)
+
+    assert summary["terminal"]["other"] == 1
+    assert summary["terminal"]["semantic"] == 1
+    assert summary["terminal_total"] == 2
+
+
+def test_drain_timestamp_and_adopted_run_checks_cover_missing_invalid_fresh_and_stale() -> None:
+    assert _parse_timestamp("2026-04-04T12:00:00").tzinfo == UTC
+    assert _status_is_stale({}, stale_after_seconds=60) is True
+    assert _status_is_stale({"updated_at": "invalid"}, stale_after_seconds=60) is True
+    assert _status_is_stale(
+        {"updated_at": "2000-01-01T00:00:00Z"}, stale_after_seconds=60
+    ) is True
+    fresh_timestamp = datetime.now(UTC).isoformat()
+    assert _status_is_stale({"updated_at": fresh_timestamp}, stale_after_seconds=60) is False
+
+    assert _can_continue_adopted_run(
+        item={"adopt_active_run": False},
+        status={"running_count": 1, "updated_at": fresh_timestamp},
+        stale_after_seconds=60,
+    ) is False
+    assert _can_continue_adopted_run(
+        item={"adopt_active_run": True},
+        status={"running_count": 0, "updated_at": fresh_timestamp},
+        stale_after_seconds=60,
+    ) is False
+    assert _can_continue_adopted_run(
+        item={"adopt_active_run": True},
+        status={"running_count": 1, "updated_at": fresh_timestamp},
+        stale_after_seconds=60,
+    ) is True
+
+
+def test_drain_root_name_inference_handles_known_and_unknown_names() -> None:
+    assert _infer_model_family("hf-paper-batch-algo1-qwen") == "qwen"
+    assert _infer_model_family("hf-paper-batch-algo1-mistral") == "mistral"
+    assert _infer_model_family("hf-paper-batch-algo1-olmo") == "olmo"
+    assert _infer_model_family("other") == "unknown"
+    assert _infer_algorithm_scope("hf-paper-batch-algo1-qwen") == "algo1"
+    assert _infer_algorithm_scope("hf-paper-batch-algo2-qwen") == "algo2"
+    assert _infer_algorithm_scope("hf-paper-batch-algo3-qwen") == "algo3"
+    assert _infer_algorithm_scope("other") == "unknown"
 
 
 def test_build_drain_plan_skips_invalid_config_roots(

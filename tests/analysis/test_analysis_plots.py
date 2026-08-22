@@ -215,6 +215,46 @@ def test_path_helpers() -> None:
         assert isinstance(discovered, Path)
 
 
+def test_discover_main_results_root_prefers_frontier_tree_when_present(tmp_path: Path) -> None:
+    from llm_conceptual_modeling.analysis._path_helpers import _discover_main_results_root
+
+    tracker_root = tmp_path / "data" / "analysis_artifacts" / "revision_tracker"
+    frontier_root = tmp_path / "data" / "results" / "frontier"
+    tracker_root.mkdir(parents=True)
+    frontier_root.mkdir(parents=True)
+
+    assert _discover_main_results_root(tracker_root) == frontier_root
+
+
+def test_discover_main_results_root_uses_nearest_results_tree(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    from llm_conceptual_modeling.analysis import _path_helpers
+
+    tracker_root = tmp_path / "data" / "analysis_artifacts" / "revision_tracker"
+    local_results_root = tracker_root.parent / "results"
+    tracker_root.mkdir(parents=True)
+    local_results_root.mkdir()
+    fallback_root = tmp_path / "fallback-results"
+    monkeypatch.setattr(_path_helpers, "default_results_root", lambda: str(fallback_root))
+
+    assert _path_helpers._discover_main_results_root(tracker_root) == local_results_root
+
+
+def test_discover_main_results_root_falls_back_to_configured_default(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    from llm_conceptual_modeling.analysis import _path_helpers
+
+    tracker_root = tmp_path / "tracker"
+    fallback_root = tmp_path / "fallback-results"
+    monkeypatch.setattr(_path_helpers, "default_results_root", lambda: str(fallback_root))
+
+    assert _path_helpers._discover_main_results_root(tracker_root) == fallback_root
+
+
 def test_color_mapping_functions() -> None:
     from llm_conceptual_modeling.analysis._color_mapping import (
         _build_model_color_map,

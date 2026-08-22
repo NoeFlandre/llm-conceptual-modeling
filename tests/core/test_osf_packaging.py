@@ -5,8 +5,14 @@ from pathlib import Path
 
 import pytest
 
+from llm_conceptual_modeling import osf_packaging
 from llm_conceptual_modeling.osf_packaging import (
     EXPECTED_ZIP_NAMES,
+    PackageWriteResult,
+    _filter_csv,
+    _filter_json_payload,
+    _is_excluded_path,
+    _record_model,
     build_osf_manifest,
     write_osf_package,
 )
@@ -116,6 +122,136 @@ def test_write_osf_package_rejects_duplicate_archive_paths(tmp_path: Path) -> No
             output_dir=tmp_path / "package",
             manifest=manifest,
         )
+
+
+@pytest.mark.parametrize(
+    ("text", "full_model_name", "model_label", "model_column_prefix", "expected"),
+    [
+        ("", "Qwen/Qwen3.5-9B", "Qwen", "qwen", ""),
+        (
+            "model,status\nQwen/Qwen3.5-9B,finished\nMistral,failed\n",
+            "Qwen/Qwen3.5-9B",
+            "Qwen",
+            "qwen",
+            "model,status\r\nQwen/Qwen3.5-9B,finished\r\n",
+        ),
+        (
+            "Model,status\nQwen,finished\nMistral,failed\n",
+            "Qwen/Qwen3.5-9B",
+            "Qwen",
+            "qwen",
+            "Model,status\r\nQwen,finished\r\n",
+        ),
+        (
+            "qwen_mean,mistral_mean,common\n1,2,3\n",
+            "Qwen/Qwen3.5-9B",
+            "Qwen",
+            "qwen",
+            "qwen_mean,common\r\n1,3\r\n",
+        ),
+    ],
+)
+def test_filter_csv_keeps_selected_model_rows_and_columns(
+    text: str,
+    full_model_name: str,
+    model_label: str,
+    model_column_prefix: str,
+    expected: str,
+) -> None:
+    assert _filter_csv(
+        text,
+        full_model_name=full_model_name,
+        model_label=model_label,
+        model_column_prefix=model_column_prefix,
+    ) == expected
+
+
+def test_filter_csv_returns_none_when_model_filter_removes_all_rows() -> None:
+    assert (
+        _filter_csv(
+            "model,status\nMistral,failed\n",
+            full_model_name="Qwen/Qwen3.5-9B",
+            model_label="Qwen",
+            model_column_prefix="qwen",
+        )
+        is None
+    )
+
+
+@pytest.mark.parametrize(
+    ("payload", "expected"),
+    [
+        ({"status": "ok"}, {"status": "ok"}),
+        (
+            {
+                "records": [
+                    {"identity": {"model": "Qwen/Qwen3.5-9B"}},
+                    {"identity": {"model": "Mistral"}},
+                ],
+                "status": "ok",
+            },
+            {
+                "records": [{"identity": {"model": "Qwen/Qwen3.5-9B"}}],
+                "status": "ok",
+            },
+        ),
+    ],
+)
+def test_filter_json_payload_keeps_only_selected_model_records(
+    payload: object,
+    expected: object,
+) -> None:
+    assert _filter_json_payload(payload, full_model_name="Qwen/Qwen3.5-9B") == expected
+
+
+@pytest.mark.parametrize(
+    ("path", "expected"),
+    [
+        (Path(".DS_Store"), True),
+        (Path("run.log"), True),
+        (Path("results-sync-status.json"), True),
+        (Path("archives") / "old.csv", True),
+        (Path("results") / "kept.csv", False),
+    ],
+)
+def test_is_excluded_path_applies_packaging_exclusions(path: Path, expected: bool) -> None:
+    assert _is_excluded_path(path) is expected
+
+
+@pytest.mark.parametrize(
+    ("record", "expected"),
+    [
+        ("not a mapping", None),
+        ({"identity": {"model": "Qwen/Qwen3.5-9B"}}, "Qwen/Qwen3.5-9B"),
+        ({"model": "Qwen/Qwen3.5-9B"}, "Qwen/Qwen3.5-9B"),
+        ({"status": "finished"}, None),
+    ],
+)
+def test_record_model_reads_identity_then_top_level_model(
+    record: object,
+    expected: str | None,
+) -> None:
+    assert _record_model(record) == expected
+
+
+def test_osf_packaging_main_prints_write_result(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    capsys,
+) -> None:
+    result = PackageWriteResult(
+        output_dir=tmp_path / "package",
+        readme_path=tmp_path / "package" / "README.md",
+        checksum_path=tmp_path / "package" / "checksums.txt",
+        zip_paths=[tmp_path / "package" / "inputs.zip"],
+    )
+
+    monkeypatch.setattr(osf_packaging, "write_osf_package", lambda **_: result)
+
+    assert osf_packaging.main(["--data-root", str(tmp_path), "--dry-run"]) == 0
+    output = capsys.readouterr().out
+    assert "Output directory:" in output
+    assert "inputs.zip" in output
 
 
 def _write_fixture_data_tree(tmp_path: Path) -> Path:

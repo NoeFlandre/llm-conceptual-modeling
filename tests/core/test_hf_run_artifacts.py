@@ -1,13 +1,58 @@
 import json
 import os
+import subprocess
 import time
 from pathlib import Path
 
-from llm_conceptual_modeling.hf_batch.monitoring import collect_batch_status
+import pytest
+
+from llm_conceptual_modeling.hf_batch.monitoring import (
+    _query_gpu_processes,
+    collect_batch_status,
+)
 from llm_conceptual_modeling.hf_batch.run_artifacts import (
     clear_retry_artifacts,
     normalize_stale_running_run,
 )
+
+
+def test_query_gpu_processes_parses_valid_and_invalid_rows(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch.monitoring.subprocess.run",
+        lambda *args, **kwargs: type(
+            "Completed",
+            (),
+            {
+                "stdout": "123, 456\ninvalid\n, 100\nnot-a-pid, 100\n789, not-a-memory\n",
+            },
+        )(),
+    )
+
+    assert _query_gpu_processes() == [
+        {"pid": 123, "used_gpu_memory_mib": 456},
+        {"pid": 789, "used_gpu_memory_mib": None},
+    ]
+
+
+@pytest.mark.parametrize(
+    "error",
+    [FileNotFoundError(), subprocess.CalledProcessError(1, "nvidia-smi")],
+)
+def test_query_gpu_processes_returns_empty_when_nvidia_smi_fails(
+    monkeypatch: pytest.MonkeyPatch,
+    error: Exception,
+) -> None:
+    def raise_error(*args: object, **kwargs: object) -> None:
+        raise error
+
+    monkeypatch.setattr(
+        "llm_conceptual_modeling.hf_batch.monitoring.subprocess.run",
+        raise_error,
+    )
+
+    assert _query_gpu_processes() == []
 
 
 def test_normalize_stale_running_run_marks_failed_when_worker_is_gone(tmp_path: Path) -> None:

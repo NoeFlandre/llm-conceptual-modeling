@@ -17,6 +17,7 @@ from llm_conceptual_modeling.hf_execution.subprocess import MonitoredCommandTime
 from llm_conceptual_modeling.hf_experiments import (
     HFRunSpec,
     _build_prompt_bundle,
+    _resolve_batch_runtime_factory,
     _resolve_stage_timeout_seconds,
     _resolve_startup_timeout_seconds,
     _run_algo1,
@@ -3572,6 +3573,25 @@ def test_run_single_spec_writes_smoke_artifacts(tmp_path: Path) -> None:
     assert smoke_verdict["spec"]["graph_source"] == "babs_johnson"
     assert summary["graph_source"] == "babs_johnson"
     assert summary["pair_name"] == "sg2_sg3"
+
+    cached_summary = run_single_spec(
+        spec=spec,
+        output_root=tmp_path / "smoke",
+        runtime_factory=lambda *_args, **_kwargs: pytest.fail("cached run was executed"),
+        dry_run=False,
+        resume=True,
+    )
+
+    assert cached_summary == summary
+
+
+def test_resolve_batch_runtime_factory_rejects_missing_local_runtime() -> None:
+    with pytest.raises(ValueError, match="Missing HF runtime"):
+        _resolve_batch_runtime_factory(
+            runtime_factory=None,
+            use_monitored_hf_subprocess=False,
+            hf_runtime=None,
+        )
 
 
 def test_run_single_spec_marks_failed_when_monitored_worker_times_out(
