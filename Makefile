@@ -1,10 +1,16 @@
-.PHONY: sync test lint typecheck verify doctor ci
+.PHONY: sync sync-locked lock-check format-check lint typecheck test verify doctor guardrails cli-smoke ci
 
 sync:
 	uv sync --dev
 
-test:
-	uv run pytest
+sync-locked:
+	uv sync --locked --dev
+
+lock-check:
+	uv lock --check
+
+format-check:
+	uv run ruff format --check .
 
 lint:
 	uv run ruff check .
@@ -12,13 +18,28 @@ lint:
 typecheck:
 	uv run ty check
 
+test:
+	uv run pytest
+
 verify:
 	uv run lcm verify all --json
 
 doctor:
 	uv run lcm doctor --json
 
+guardrails:
+	uv run python scripts/check_repo_guardrails.py
+
+cli-smoke:
+	uv run lcm doctor --json
+	uv run lcm generate algo1 --fixture-only --json
+	rm -rf /tmp/lcm-ci-preview
+	uv run lcm run validate-config --config configs/hf_transformers_paper_batch.yaml --output-dir /tmp/lcm-ci-preview
+
 ci:
-	uv run ruff check .
-	uv run ty check
-	uv run pytest
+	$(MAKE) lock-check
+	$(MAKE) lint
+	$(MAKE) guardrails
+	$(MAKE) cli-smoke
+	$(MAKE) test
+	$(MAKE) verify

@@ -88,7 +88,7 @@ def test_build_hf_download_environment_enables_xet_by_default() -> None:
     assert env["PYTORCH_CUDA_ALLOC_CONF"] == "expandable_segments:True"
 
 
-def test_build_hf_download_environment_preserves_pythonpath(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_hf_download_environment_preserves_pythonpath(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("PYTHONPATH", "/custom/path")
 
     env = build_hf_download_environment({"FOO": "bar"})
@@ -98,5 +98,8 @@ def test_build_hf_download_environment_preserves_pythonpath(monkeypatch: pytest.
 
 def test_hf_execution_subprocess_public_api_lives_in_package_module() -> None:
     assert MonitoredCommandTimeout.__module__ == "llm_conceptual_modeling.hf_execution.subprocess"
-    assert build_hf_download_environment.__module__ == "llm_conceptual_modeling.hf_execution.subprocess"
+    assert (
+        build_hf_download_environment.__module__
+        == "llm_conceptual_modeling.hf_execution.subprocess"
+    )
     assert run_monitored_command.__module__ == "llm_conceptual_modeling.hf_execution.subprocess"

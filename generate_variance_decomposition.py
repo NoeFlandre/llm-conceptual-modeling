@@ -9,7 +9,9 @@ from llm_conceptual_modeling.analysis.variance_decomposition import (
     generate_variance_decomposition_bundle,
 )
 
-RESULTS_ROOT = Path(__file__).resolve().parent / "results" / "open_weights" / "hf-paper-batch-canonical"
+RESULTS_ROOT = (
+    Path(__file__).resolve().parent / "results" / "open_weights" / "hf-paper-batch-canonical"
+)
 
 
 def main() -> None:

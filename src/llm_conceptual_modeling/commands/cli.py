@@ -152,6 +152,17 @@ def build_parser() -> argparse.ArgumentParser:
         default=5,
     )
 
+    replication_stability_parser = analyze_subparsers.add_parser("replication-stability")
+    replication_stability_parser.add_argument("--manifest", required=True)
+    replication_stability_parser.add_argument("--output-dir", required=True)
+    replication_stability_parser.add_argument("--metric-column", default="Recall")
+    replication_stability_parser.add_argument(
+        "--relative-half-width-target",
+        type=float,
+        default=0.05,
+    )
+    replication_stability_parser.add_argument("--z-score", type=float, default=1.96)
+
     stability_bundle_parser = analyze_subparsers.add_parser("stability-bundle")
     stability_bundle_parser.add_argument(
         "--results-root",

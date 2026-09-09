@@ -123,6 +123,9 @@ def test_docs_directory_keeps_only_maintained_guides() -> None:
         "algo3-method3-guide.md",
         "huggingface-dataset-README.md",
         "onboarding.md",
+        "open-weight-map-extension-decision.md",
+        "open-weight-map-extension-runbook.md",
+        "replication-sufficiency-decision.md",
         "tech-debt-day-guide.md",
         "variance-decomposition.md",
         "vast-ai-transformers.md",
@@ -140,4 +143,4 @@ def test_docs_directory_keeps_only_maintained_guides() -> None:
     }
 
     assert top_level_files == expected_files
-    assert top_level_dirs == set()
+    assert top_level_dirs == {"superpowers"}

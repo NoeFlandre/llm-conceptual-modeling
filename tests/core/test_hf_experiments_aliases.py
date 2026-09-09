@@ -30,15 +30,18 @@ def test_hf_experiments_helpers_are_package_aliases() -> None:
     )
     assert _resolve_resume_pass_mode.__module__ == "llm_conceptual_modeling.hf_state.resume_state"
     assert _resolve_run_retry_attempts.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
-    assert _resolve_startup_timeout_seconds.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
-    assert _resolve_stage_timeout_seconds.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
+    assert (
+        _resolve_startup_timeout_seconds.__module__
+        == "llm_conceptual_modeling.hf_execution.helpers"
+    )
+    assert (
+        _resolve_stage_timeout_seconds.__module__
+        == "llm_conceptual_modeling.hf_execution.helpers"
+    )
     assert _resolve_worker_process_mode.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
     assert _build_worker_command.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
-    assert (
-        _run_local_hf_spec_subprocess.__module__
-        == "llm_conceptual_modeling.hf_execution.runtime"
-    )
-    assert _run_local_hf_spec.__module__ == "llm_conceptual_modeling.hf_execution.runtime"
+    assert _run_local_hf_spec_subprocess.__module__ == "llm_conceptual_modeling.hf_experiments"
+    assert _run_local_hf_spec.__module__ == "llm_conceptual_modeling.hf_experiments"
     assert _is_retryable_worker_error.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
     assert _coerce_timeout_seconds.__module__ == "llm_conceptual_modeling.hf_execution.helpers"
     assert _collect_resume_history.__module__ == "llm_conceptual_modeling.hf_state.resume_state"

@@ -59,13 +59,35 @@ uv run lcm verify all --json
 Run the local quality gate:
 
 ```bash
-uv run pytest
 uv run ruff check .
-uv run ty check
+uv run python scripts/check_repo_guardrails.py
+uv run lcm doctor --json
+uv run lcm generate algo1 --fixture-only --json
+uv run lcm run validate-config \
+  --config configs/hf_transformers_paper_batch.yaml \
+  --output-dir /tmp/lcm-ci-preview
+uv run pytest
 uv run lcm verify all --json
 ```
 
-The [Makefile](Makefile) mirrors the common tasks through `make test`, `make lint`, `make typecheck`, `make verify`, and `make ci`.
+The CI workflow runs the same local gate:
+
+```bash
+uv sync --dev
+make ci
+```
+
+Use `make sync-locked` before `make ci` when you want to reproduce GitHub
+Actions' lockfile-enforced environment setup exactly. The [Makefile](Makefile)
+also exposes the individual checks: `make lock-check`, `make lint`,
+`make guardrails`, `make cli-smoke`, `make test`, and `make verify`.
+
+`make format-check` runs `ruff format --check .`, but it is not part of normal
+CI until the existing formatting debt is cleaned up in a separate mechanical
+change.
+
+`make typecheck` runs `ty check`, but it is not part of normal CI until the
+current type-checking backlog is resolved.
 
 ## Code/Data Split
 

@@ -49,7 +49,7 @@ def test_is_retryable_runtime_failure_retries_known_mistral_contrastive_type_err
     )
 
 
-def test_is_retryable_runtime_failure_retries_contrastive_generate_trust_remote_code_error() -> None:
+def test_retryable_runtime_failure_retries_contrastive_trust_remote_code_error() -> None:
     assert (
         is_retryable_runtime_failure(
             error_type="RuntimeError",
@@ -64,4 +64,7 @@ def test_is_retryable_runtime_failure_retries_contrastive_generate_trust_remote_
 
 def test_hf_failure_markers_public_api_lives_in_common_module() -> None:
     assert classify_failure.__module__ == "llm_conceptual_modeling.common.failure_markers"
-    assert is_retryable_runtime_failure.__module__ == "llm_conceptual_modeling.common.failure_markers"
+    assert (
+        is_retryable_runtime_failure.__module__
+        == "llm_conceptual_modeling.common.failure_markers"
+    )

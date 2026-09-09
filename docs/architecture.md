@@ -54,6 +54,159 @@ The `lcm generate ...` commands expose the experiment contract for each algorith
 
 The `lcm baseline ...` commands are also intentionally narrow. They expose deterministic graph and lexical heuristics, including WordNet-based ontology matching and edit-distance ranking. These baselines are auditable comparators, not substitutes for provider-backed generation.
 
+## Repository Diagrams
+
+These diagrams are intentionally coarse. They show the maintained code paths and
+artifact boundaries without listing every helper module, test file, or generated
+CSV.
+
+### High-Level Architecture
+
+```mermaid
+flowchart TD
+    CLI["lcm CLI<br/>commands/*"]
+    Algo["algo1 / algo2 / algo3<br/>method, eval, baseline, generation"]
+    Analysis["analysis<br/>summaries, plots, bundles, variance"]
+    HFOps["hf_* packages<br/>config, batch, pipeline, state, resume, drain, worker"]
+    Common["common<br/>graphs, schemas, parsing, clients, metrics"]
+    Data["data/<br/>inputs, results, baselines, analysis_artifacts"]
+    Scripts["scripts/vast<br/>sync, bootstrap, preview, launch, fetch"]
+    Docs["docs/ and package READMEs<br/>methods, runbooks, architecture"]
+    Tests["tests/<br/>unit, workflow, parity, hygiene"]
+
+    Scripts --> CLI
+    CLI --> Algo
+    CLI --> Analysis
+    CLI --> HFOps
+    Algo --> Common
+    Analysis --> Common
+    HFOps --> Common
+    CLI <--> Data
+    Docs --> CLI
+    Tests --> CLI
+    Tests --> Common
+```
+
+### Data-Flow Pipeline
+
+```mermaid
+flowchart LR
+    Inputs["data/inputs<br/>graph CSVs and resources"]
+    Frontier["data/results/frontier<br/>imported raw outputs"]
+    OpenWeights["data/results/open_weights<br/>Qwen/Mistral run outputs"]
+    Eval["lcm eval algo1|algo2|algo3"]
+    Evaluated["evaluated CSVs"]
+    Factorial["lcm factorial algo1|algo2|algo3"]
+    AnalysisCLI["lcm analyze ..."]
+    Baseline["lcm baseline ..."]
+    Artifacts["data/analysis_artifacts<br/>tables, summaries, plots"]
+    Baselines["data/baselines<br/>deterministic comparators"]
+    Verify["lcm verify all<br/>legacy parity and health checks"]
+    Fixtures["tests/fixtures and snapshots"]
+
+    Inputs --> Baseline --> Baselines
+    Frontier --> Eval
+    OpenWeights --> Eval
+    Eval --> Evaluated
+    Evaluated --> Factorial
+    Evaluated --> AnalysisCLI
+    Factorial --> AnalysisCLI
+    Baselines --> AnalysisCLI
+    AnalysisCLI --> Artifacts
+    Fixtures --> Verify
+    Artifacts --> Verify
+```
+
+### Experiment Lifecycle
+
+```mermaid
+flowchart TD
+    Configs["configs/*.yaml<br/>checked-in HF run configs"]
+    Load["hf_config.load_hf_run_config"]
+    Preview["lcm run validate-config<br/>resolved config, plan, prompt previews"]
+    Preflight["lcm run resume-preflight<br/>or resume-sweep"]
+    Runtime["lcm run prefetch-runtime<br/>model/cache warmup"]
+    Smoke["lcm run smoke<br/>single selected spec"]
+    Batch["lcm run paper-batch<br/>or lcm run algo1|algo2|algo3"]
+    Pipeline["hf_pipeline + algo packages<br/>execute method and metrics"]
+    RunDirs["run directories<br/>manifest, prompts, stages, summary/error"]
+    State["batch_status.json and ledger.json"]
+    Remote["scripts/vast wrappers<br/>sync, bootstrap, doctor, launch, fetch"]
+
+    Configs --> Load --> Preview --> Preflight
+    Preflight --> Runtime --> Smoke --> Batch
+    Batch --> Pipeline --> RunDirs --> State
+    Remote --> Preview
+    Remote --> Batch
+    Remote --> State
+```
+
+### Artifact And Cache Lifecycle
+
+```mermaid
+flowchart LR
+    Config["runtime_config.yaml<br/>or resolved_run_config.yaml"]
+    Plan["resolved_run_plan.json<br/>condition matrix and prompt_preview/"]
+    RunSpec["selected run spec"]
+    Active["state/checkpoint/stage artifacts"]
+    Finished["summary.json<br/>raw/evaluated outputs"]
+    Failed["error.json<br/>failure classification"]
+    BatchStatus["batch_status.json"]
+    Ledger["ledger.json<br/>canonical completion view"]
+    Resume["resume reports<br/>unfinished manifests and drain state"]
+    Sync["results-sync-*<br/>watcher status and logs"]
+    Review["analysis bundles<br/>variance, stability, figures"]
+
+    Config --> Plan --> RunSpec --> Active
+    Active --> Finished --> Ledger
+    Active --> Failed --> Ledger
+    Ledger --> BatchStatus
+    Ledger --> Resume
+    Ledger --> Review
+    Sync --> Ledger
+```
+
+### CLI And Module Map
+
+```mermaid
+flowchart TD
+    Entry["pyproject script: lcm<br/>llm_conceptual_modeling.cli"]
+    Parser["commands.cli<br/>argparse and dispatch"]
+    EvalCmd["eval / baseline / factorial"]
+    AnalyzeCmd["analyze"]
+    RunCmd["run"]
+    GenerateCmd["generate"]
+    VerifyCmd["doctor / verify"]
+    AlgoPkgs["algo1, algo2, algo3"]
+    AnalysisPkg["analysis"]
+    HFPkgs["hf_config, hf_batch, hf_pipeline,<br/>hf_state, hf_resume, hf_drain,<br/>hf_execution, hf_worker, hf_tail"]
+    VerificationPkg["verification"]
+    GenerationPkg["generation"]
+
+    Entry --> Parser
+    Parser --> EvalCmd --> AlgoPkgs
+    Parser --> AnalyzeCmd --> AnalysisPkg
+    Parser --> RunCmd --> HFPkgs
+    Parser --> GenerateCmd --> GenerationPkg
+    Parser --> VerifyCmd --> VerificationPkg
+```
+
+### Agent Workflow
+
+```mermaid
+flowchart LR
+    Request["Task request"]
+    Instructions["AGENTS.md<br/>prompts/ and docs/onboarding.md"]
+    Inspect["Inspect code, docs,<br/>configs, scripts, tests"]
+    Baseline["Run narrow baseline<br/>before edits"]
+    Change["Small scoped change<br/>docs, tests, or code"]
+    Verify["Focused checks<br/>then broader gate"]
+    Report["Final report<br/>evidence and residual risk"]
+
+    Request --> Instructions --> Inspect --> Baseline --> Change --> Verify --> Report
+    Verify -->|failure| Inspect
+```
+
 ## Verification Strategy
 
 The verification model is layered:

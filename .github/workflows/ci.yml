@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,13 +14,7 @@ jobs:
           python-version: "3.12"
       - name: Install uv
         uses: astral-sh/setup-uv@v5
-      - name: Sync
-        run: uv sync --dev
-      - name: Lint
-        run: uv run ruff check .
-      - name: Type check
-        run: uv run ty check
-      - name: Test
-        run: uv run pytest
-      - name: Verify
-        run: uv run lcm verify all --json
+      - name: Sync locked environment
+        run: uv sync --locked --dev
+      - name: Run local CI gate
+        run: make ci

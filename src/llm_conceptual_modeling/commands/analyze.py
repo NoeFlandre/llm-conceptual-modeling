@@ -19,6 +19,9 @@ from llm_conceptual_modeling.analysis.replication_budget_summary import (
     write_compact_replication_budget_sufficiency_table,
     write_replication_budget_sufficiency_summary,
 )
+from llm_conceptual_modeling.analysis.replication_stability import (
+    analyze_replication_stability,
+)
 from llm_conceptual_modeling.analysis.stability import write_grouped_metric_stability
 from llm_conceptual_modeling.analysis.stability_bundle import write_stability_bundle
 from llm_conceptual_modeling.analysis.summary import write_grouped_metric_summary
@@ -90,6 +93,15 @@ def handle_analyze(args: Namespace) -> int:
                     expected_replications=args.expected_replications,
                     include_graph_source=args.include_graph_source,
                 )
+            return 0
+        if args.analysis_target == "replication-stability":
+            analyze_replication_stability(
+                manifest_path=args.manifest,
+                output_dir=args.output_dir,
+                metric_column=args.metric_column,
+                relative_half_width_target=args.relative_half_width_target,
+                z_score=args.z_score,
+            )
             return 0
         if args.analysis_target == "stability-bundle":
             write_stability_bundle(

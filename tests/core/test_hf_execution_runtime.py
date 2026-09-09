@@ -210,7 +210,10 @@ def test_run_local_hf_spec_uses_persistent_session_for_contrastive_runs_in_persi
             worker_python: str,
             max_requests_per_process: int | None = None,
         ) -> None:
-            assert queue_dir == output_root / "worker-queues" / "mistralai__Ministral-3-8B-Instruct-2512"
+            expected_queue_dir = (
+                output_root / "worker-queues" / "mistralai__Ministral-3-8B-Instruct-2512"
+            )
+            assert queue_dir == expected_queue_dir
             assert worker_python
             assert max_requests_per_process == 9
 

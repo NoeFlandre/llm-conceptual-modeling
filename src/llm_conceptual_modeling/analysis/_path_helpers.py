@@ -23,6 +23,9 @@ def _discover_main_results_root(results_root: Path) -> Path:
         Path(default_results_root()),
     ]
     for candidate in candidates:
+        frontier_candidate = candidate / "frontier"
+        if frontier_candidate.exists():
+            return frontier_candidate
         if candidate.exists():
             return candidate
     return Path(default_results_root())
