@@ -8,6 +8,7 @@ from llm_conceptual_modeling.common.graph_data import (
     load_default_graph,
     load_wordnet_label_lexicon,
 )
+from tests.common.graph_data_fixtures import write_synthetic_default_graph
 
 
 def test_default_graph_partitions_are_non_empty() -> None:
@@ -54,10 +55,10 @@ def test_open_weight_map_extension_sources_are_discoverable() -> None:
 
         assert len(nodes) == counts["node_count"]
         assert len(mother) == counts["edge_count"]
-        assert tuple(
-            len({node for edge in subgraph for node in edge})
-            for subgraph in (sg1, sg2, sg3)
-        ) == counts["subgraph_node_counts"]
+        assert (
+            tuple(len({node for edge in subgraph for node in edge}) for subgraph in (sg1, sg2, sg3))
+            == counts["subgraph_node_counts"]
+        )
         assert sg1
         assert sg2
         assert sg3
@@ -114,21 +115,7 @@ def test_graph_data_loaders_honor_lcm_inputs_root(monkeypatch, tmp_path) -> None
     (inputs_root / "wordnet_label_lexicon.json").write_text(
         json.dumps({"Obesity": ["obesity.n.01", "corpulence.n.01"]})
     )
-    (inputs_root / "Giabbanelli & Macewan (categories).csv").write_text(
-        "\n".join(
-            [
-                "A,Consumption",
-                "B,Environment",
-                "C,Well-being",
-                "D,Social",
-                "E,Weight",
-                "F,Disease",
-            ]
-        )
-    )
-    (inputs_root / "Giabbanelli & Macewan (edges).csv").write_text(
-        "\n".join(["A,B,1", "C,D,1", "E,F,1", "A,C,1"])
-    )
+    write_synthetic_default_graph(inputs_root)
 
     monkeypatch.setenv("LCM_INPUTS_ROOT", str(inputs_root))
     load_wordnet_label_lexicon.cache_clear()
