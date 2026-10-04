@@ -37,3 +37,12 @@ def test_make_ci_collects_fast_quality_gates() -> None:
     for target in expected_targets:
         assert f"{target}:" in makefile_text
         assert f"$(MAKE) {target}" in ci_target
+
+
+def test_cli_smoke_target_uses_the_temporary_synthetic_input_subprocess() -> None:
+    makefile_text = (REPO_ROOT / "Makefile").read_text(encoding="utf-8")
+    cli_smoke_target = _target_body(makefile_text, "cli-smoke")
+
+    assert "tests/verification/test_cli_ci_smoke.py" in cli_smoke_target
+    assert "/tmp/lcm-ci-preview" not in cli_smoke_target
+    assert "rm -rf" not in cli_smoke_target

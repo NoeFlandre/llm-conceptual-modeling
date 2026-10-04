@@ -33,8 +33,7 @@ guardrails:
 cli-smoke:
 	uv run lcm doctor --json
 	uv run lcm generate algo1 --fixture-only --json
-	rm -rf /tmp/lcm-ci-preview
-	uv run lcm run validate-config --config configs/hf_transformers_paper_batch.yaml --output-dir /tmp/lcm-ci-preview
+	uv run pytest tests/verification/test_cli_ci_smoke.py
 
 ci:
 	$(MAKE) lock-check
