@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "bucket": "NoeFlandre/llm-variability-conceptual-modeling",
+  "global_revision": null,
+  "purpose": "Minimal integration-test artifact subset, not a complete research corpus.",
+  "global_revision_note": "This bucket has no immutable global revision. The CI subset is pinned per file by Xet hash, size, and SHA-256.",
+  "expected_hf_cli_version": "1.8.0",
+  "expected_asset_count": 5,
+  "expected_total_bytes": 42943,
+  "assets": [
+    {
+      "bucket_path": "inputs/Giabbanelli & Macewan (categories).csv",
+      "size_bytes": 3454,
+      "xet_hash": "3f891b33d8a1731dff0e48724ceaa5f2d0ff6a6e776d4d52880dea6d8b01fe83",
+      "sha256": "14892ca262e71f4f1ec78b54b4e727ec093e6fdb0a778b22a0c113357789799c"
+    },
+    {
+      "bucket_path": "inputs/Giabbanelli & Macewan (edges).csv",
+      "size_bytes": 9585,
+      "xet_hash": "238d68601203acb39e77e438e1a9f2612710f0a15c719961a19d2a5ce81c2479",
+      "sha256": "6d0b03365669cee2596838d581d31b4795d5886d2bcc8c37d4ce242e8f1d1584"
+    },
+    {
+      "bucket_path": "inputs/algo2_thesaurus.json",
+      "size_bytes": 2410,
+      "xet_hash": "a547052d76a84076fe466b9dd22230734f5624235116c67fe3b39c96f1bde9f4",
+      "sha256": "6f7fc5a7ee203f291e2cb0245c93356b373510857a7f523fc2054af22db46836"
+    },
+    {
+      "bucket_path": "inputs/wordnet_label_lexicon.json",
+      "size_bytes": 27468,
+      "xet_hash": "7c397e5c518f689b26a80e5f3aa977cd07aad3390d14ee5affef531e839bedb6",
+      "sha256": "40f9d040ab58b3deb45f0b9e9170e6452165f1306a903e3afde64fa33ff2d915"
+    },
+    {
+      "bucket_path": "results/open_weights/hf-paper-batch-canonical/runs/algo1/Qwen__Qwen3.5-9B/beam_num_beams_2/sg1_sg2/00000/rep_00/state.json",
+      "size_bytes": 26,
+      "xet_hash": "cffe5d0f03c66a4c47cf104f36e810ad9dfad99e3400094abd466ec43120402c",
+      "sha256": "25c9b85bab32e680bf107da4b6b1739445fa4114e1c3e29bc70333f37cc7c3b0"
+    }
+  ]
+}

@@ -17,6 +17,7 @@ the repository.
 - `open-weight-map-extension-decision.md`
 - `open-weight-map-extension-runbook.md`
 - `replication-sufficiency-decision.md`
+- `ci-artifact-subset.md`
 - `superpowers/plans/2026-04-18-open-weight-map-extension-batch.md`
 
 ## Remove Or Archive

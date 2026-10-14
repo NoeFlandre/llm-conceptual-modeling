@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from llm_conceptual_modeling.common.hf_transformers import RuntimeProfile
+from llm_conceptual_modeling.common.paths import REPO_ROOT
 from llm_conceptual_modeling.hf_batch.planning import plan_paper_batch_specs
 from llm_conceptual_modeling.hf_run_config import (
     exclude_decoding_conditions_from_payload,
@@ -52,6 +53,21 @@ algorithms:
     prompt_templates:
       body: "Task body."
 """
+
+
+@pytest.fixture
+def _synthetic_default_graph_inputs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    inputs_root = tmp_path / "inputs"
+    inputs_root.mkdir()
+    (inputs_root / "Giabbanelli & Macewan (categories).csv").write_text(
+        "A,Consumption\nB,Environment\nC,Well-being\nD,Social\nE,Weight\nF,Disease",
+        encoding="utf-8",
+    )
+    (inputs_root / "Giabbanelli & Macewan (edges).csv").write_text(
+        "A,B,1\nC,D,1\nE,F,1\nA,C,1",
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("LCM_INPUTS_ROOT", str(inputs_root))
 
 
 def test_load_hf_run_config_resolves_prompt_fragments_and_runtime_settings(tmp_path: Path) -> None:
@@ -309,6 +325,7 @@ algorithms:
         load_hf_run_config(config_path)
 
 
+@pytest.mark.usefixtures("_synthetic_default_graph_inputs")
 def test_write_resolved_run_preview_writes_source_of_truth_artifacts(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"
@@ -357,9 +374,9 @@ algorithms:
     resolved_yaml = (output_dir / "resolved_run_config.yaml").read_text(encoding="utf-8")
     resolved_plan = (output_dir / "resolved_run_plan.json").read_text(encoding="utf-8")
     resolved_plan_payload = json.loads(resolved_plan)
-    prompt_preview = (
-        output_dir / "prompt_preview" / "algo1" / "base.txt"
-    ).read_text(encoding="utf-8")
+    prompt_preview = (output_dir / "prompt_preview" / "algo1" / "base.txt").read_text(
+        encoding="utf-8"
+    )
 
     assert "temperature: 1.0" in resolved_yaml
     assert '"replications": 5' in resolved_plan
@@ -424,6 +441,7 @@ algorithms:
         write_resolved_run_preview(config=config, output_dir=output_dir)
 
 
+@pytest.mark.usefixtures("_synthetic_default_graph_inputs")
 def test_load_hf_run_config_accepts_resolved_preview_decoding_list(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"
@@ -604,6 +622,7 @@ def test_canonical_batch_runtime_config_focuses_on_qwen_and_mistral() -> None:
     assert config.models.embedding_model == "Qwen/Qwen3-Embedding-0.6B"
 
 
+@pytest.mark.usefixtures("_synthetic_default_graph_inputs")
 def test_write_resolved_run_preview_writes_all_condition_prompt_variants(tmp_path: Path) -> None:
     config_path = tmp_path / "run.yaml"
     output_dir = tmp_path / "preview"
@@ -798,8 +817,9 @@ algorithms:
     }
 
 
+@pytest.mark.usefixtures("_synthetic_default_graph_inputs")
 def test_checked_in_algo3_single_model_configs_are_locally_rent_ready(tmp_path: Path) -> None:
-    repo_root = Path("/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling")
+    repo_root = REPO_ROOT
     cases = [
         (
             repo_root / "configs" / "hf_transformers_algo3_olmo.yaml",
@@ -827,9 +847,7 @@ def test_checked_in_algo3_single_model_configs_are_locally_rent_ready(tmp_path: 
         assert config.run.output_root == expected_output_root
         assert config.models.chat_models == [expected_model]
         assert set(config.algorithms) == {"algo3"}
-        expected_generation_timeout = (
-            60 if expected_model == "allenai/Olmo-3-7B-Instruct" else 600
-        )
+        expected_generation_timeout = 60 if expected_model == "allenai/Olmo-3-7B-Instruct" else 600
         actual_timeout = config.runtime.context_policy["generation_timeout_seconds"]
         assert actual_timeout == expected_generation_timeout
         if expected_model == "allenai/Olmo-3-7B-Instruct":
@@ -863,8 +881,9 @@ def test_checked_in_algo3_single_model_configs_are_locally_rent_ready(tmp_path: 
         assert (preview_dir / "prompt_preview" / "algo3" / "tree_expansion.txt").exists()
 
 
+@pytest.mark.usefixtures("_synthetic_default_graph_inputs")
 def test_checked_in_algo2_single_model_configs_are_locally_rent_ready(tmp_path: Path) -> None:
-    repo_root = Path("/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling")
+    repo_root = REPO_ROOT
     cases = [
         (
             repo_root / "configs" / "hf_transformers_algo2_olmo.yaml",
@@ -892,9 +911,7 @@ def test_checked_in_algo2_single_model_configs_are_locally_rent_ready(tmp_path: 
         assert config.run.output_root == expected_output_root
         assert config.models.chat_models == [expected_model]
         assert set(config.algorithms) == {"algo2"}
-        expected_generation_timeout = (
-            60 if expected_model == "allenai/Olmo-3-7B-Instruct" else 600
-        )
+        expected_generation_timeout = 60 if expected_model == "allenai/Olmo-3-7B-Instruct" else 600
         actual_timeout = config.runtime.context_policy["generation_timeout_seconds"]
         assert actual_timeout == expected_generation_timeout
         assert config.runtime.context_policy["resume_pass_mode"] == "retry-timeouts"

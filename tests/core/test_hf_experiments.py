@@ -6,8 +6,10 @@ import pandas as pd
 import pytest
 
 from llm_conceptual_modeling.algo1.mistral import Method1PromptConfig
+from llm_conceptual_modeling.common.graph_data import load_wordnet_label_lexicon
 from llm_conceptual_modeling.common.hf_transformers import DecodingConfig, RuntimeProfile
 from llm_conceptual_modeling.common.mistral import _format_knowledge_map
+from llm_conceptual_modeling.common.paths import REPO_ROOT
 from llm_conceptual_modeling.hf_batch.monitoring import (
     collect_batch_status,
     current_run_payload,
@@ -30,6 +32,30 @@ from llm_conceptual_modeling.hf_experiments import (
     run_single_spec,
 )
 from llm_conceptual_modeling.hf_run_config import load_hf_run_config
+
+_PAPER_BATCH_CONFIG_PATH = REPO_ROOT / "configs" / "hf_transformers_paper_batch.yaml"
+
+
+@pytest.fixture(autouse=True)
+def _synthetic_research_inputs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[None]:
+    inputs_root = tmp_path / "inputs"
+    inputs_root.mkdir()
+    (inputs_root / "Giabbanelli & Macewan (categories).csv").write_text(
+        "A,Consumption\nB,Environment\nC,Well-being\nD,Social\nE,Weight\nF,Disease",
+        encoding="utf-8",
+    )
+    (inputs_root / "Giabbanelli & Macewan (edges).csv").write_text(
+        "A,B,1\nC,D,1\nE,F,1\nA,C,1",
+        encoding="utf-8",
+    )
+    (inputs_root / "algo2_thesaurus.json").write_text(
+        json.dumps({"synonyms": {}, "antonyms": {}}),
+        encoding="utf-8",
+    )
+    load_wordnet_label_lexicon.cache_clear()
+    monkeypatch.setenv("LCM_INPUTS_ROOT", str(inputs_root))
+    yield
+    load_wordnet_label_lexicon.cache_clear()
 
 
 def _valid_edge_result_row(raw_context: dict[str, object]) -> dict[str, object]:
@@ -721,8 +747,7 @@ def test_run_paper_batch_resume_keeps_retryable_structural_failure_in_pending_co
         call_count["count"] += 1
         assert actual_spec == spec
         raise ValueError(
-            "Model did not return valid structured output: "
-            "```python\\n'A': ['B']\\n```"
+            "Model did not return valid structured output: ```python\\n'A': ['B']\\n```"
         )
 
     run_paper_batch(
@@ -2653,10 +2678,7 @@ algorithms:
 
 
 def test_checked_in_config_algo1_prompt_matches_paper_matrix_variant() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo1 = config.algorithms["algo1"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo1",
@@ -2681,10 +2703,7 @@ def test_checked_in_config_algo1_prompt_matches_paper_matrix_variant() -> None:
 
 
 def test_checked_in_config_algo2_prompt_matches_paper_markup_variant() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo2 = config.algorithms["algo2"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo2",
@@ -2709,10 +2728,7 @@ def test_checked_in_config_algo2_prompt_matches_paper_markup_variant() -> None:
 
 
 def test_checked_in_config_algo2_edge_suggestion_prompt_carries_same_prompt_factors() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo2 = config.algorithms["algo2"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo2",
@@ -2738,10 +2754,7 @@ def test_checked_in_config_algo2_edge_suggestion_prompt_carries_same_prompt_fact
 
 
 def test_checked_in_config_algo3_prompt_matches_paper_and_excludes_depth_text() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo3 = config.algorithms["algo3"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo3",
@@ -2916,10 +2929,7 @@ def _runtime_profile() -> RuntimeProfile:
 
 
 def test_run_algo3_configured_prompt_accepts_literal_dictionary_braces() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo3 = config.algorithms["algo3"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo3",
@@ -2974,10 +2984,7 @@ def test_run_algo3_configured_prompt_accepts_literal_dictionary_braces() -> None
 
 
 def test_run_algo2_configured_prompt_uses_evolving_label_context_across_iterations() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo2 = config.algorithms["algo2"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo2",
@@ -3038,10 +3045,7 @@ def test_run_algo2_configured_prompt_uses_evolving_label_context_across_iteratio
 
 
 def test_checked_in_config_algo2_prompt_bundle_exposes_cove_verification_template() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo2 = config.algorithms["algo2"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo2",
@@ -3061,10 +3065,7 @@ def test_checked_in_config_algo2_prompt_bundle_exposes_cove_verification_templat
 
 
 def test_run_algo2_configured_prompt_applies_cove_verification_to_final_edges() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo2 = config.algorithms["algo2"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo2",
@@ -3131,10 +3132,7 @@ def test_run_algo2_configured_prompt_applies_cove_verification_to_final_edges() 
 
 
 def test_run_algo2_writes_intermediate_stage_artifacts(tmp_path: Path) -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     spec = HFRunSpec(
         algorithm="algo2",
         model="Qwen/Qwen3.5-9B",
@@ -3188,10 +3186,7 @@ def test_run_algo2_writes_intermediate_stage_artifacts(tmp_path: Path) -> None:
 
 
 def test_run_algo1_writes_and_reuses_edge_generation_stage(tmp_path: Path) -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo1 = config.algorithms["algo1"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo1",
@@ -3261,10 +3256,7 @@ def test_run_algo1_writes_and_reuses_edge_generation_stage(tmp_path: Path) -> No
 
 
 def test_run_algo1_writes_active_stage_tracking(tmp_path: Path) -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo1 = config.algorithms["algo1"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo1",
@@ -3327,10 +3319,7 @@ def test_run_algo1_writes_active_stage_tracking(tmp_path: Path) -> None:
 
 
 def test_run_algo1_marks_worker_ready_after_model_load(tmp_path: Path) -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     spec = HFRunSpec(
         algorithm="algo1",
         model="Qwen/Qwen3.5-9B",
@@ -3397,10 +3386,7 @@ def test_worker_loaded_model_requires_boolean_true_or_active_stage(tmp_path: Pat
 
 
 def test_run_algo1_summary_includes_trace_metrics() -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     spec = HFRunSpec(
         algorithm="algo1",
         model="Qwen/Qwen3.5-9B",
@@ -3446,10 +3432,7 @@ def test_run_algo1_summary_includes_trace_metrics() -> None:
 
 
 def test_run_algo1_records_generation_metrics_in_raw_trace(tmp_path: Path) -> None:
-    config = load_hf_run_config(
-        "/Users/noeflandre/variability-conceptual-modeling/llm-conceptual-modeling/"
-        "configs/hf_transformers_paper_batch.yaml"
-    )
+    config = load_hf_run_config(_PAPER_BATCH_CONFIG_PATH)
     algo1 = config.algorithms["algo1"]
     prompt_bundle = _build_prompt_bundle(
         algorithm_name="algo1",

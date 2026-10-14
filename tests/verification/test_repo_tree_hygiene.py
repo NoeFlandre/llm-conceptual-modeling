@@ -121,6 +121,7 @@ def test_docs_directory_keeps_only_maintained_guides() -> None:
         "algo1-method1-guide.md",
         "algo2-method2-guide.md",
         "algo3-method3-guide.md",
+        "ci-artifact-subset.md",
         "huggingface-dataset-README.md",
         "onboarding.md",
         "open-weight-map-extension-decision.md",
