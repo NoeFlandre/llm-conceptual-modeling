@@ -140,7 +140,7 @@ def test_generation_manifests_preserve_legacy_condition_counts(synthetic_inputs_
     assert algo3_manifest(fixture_only=False)["condition_count"] == 16
 
 
-def test_algo2_thesaurus_is_available_and_non_empty() -> None:
+def test_algo2_thesaurus_is_available_and_non_empty(synthetic_inputs_root) -> None:
     thesaurus = load_algo2_thesaurus()
     synonyms = thesaurus["synonyms"]
     antonyms = thesaurus["antonyms"]
