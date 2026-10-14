@@ -31,7 +31,9 @@ def _sha256(path: Path) -> str:
 
 
 def _parse_json_output(output: str) -> Any:
-    """Parse JSON when the CLI prints its upgrade notice before the payload."""
+    """Parse JSON or an empty-list marker after the CLI's upgrade notice."""
+    if any(line.strip() == "(empty)" for line in output.splitlines()):
+        return []
     starts = [position for position in (output.find("{"), output.find("[")) if position >= 0]
     if not starts:
         raise RestoreError("The hf CLI returned no JSON payload.")

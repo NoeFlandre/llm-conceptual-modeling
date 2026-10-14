@@ -78,7 +78,10 @@ else:
 
 if payload is not None:
     print("A new version of huggingface_hub is available")
-    print(json.dumps(payload))
+    if command[:2] == ["buckets", "list"] and not payload:
+        print("(empty)")
+    else:
+        print(json.dumps(payload))
     raise SystemExit(0)
 
 if command[:2] == ["buckets", "cp"]:
