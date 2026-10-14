@@ -42,6 +42,10 @@ This repository does not claim runtime equivalence for historical provider behav
 - `tests/fixtures/legacy/`
   Reference fixtures used for deterministic parity checks.
 
+GitHub Actions restores a small, hash-pinned artifact subset for integration
+tests. It is not a copy of the research corpus. See the [CI artifact subset
+notes](docs/ci-artifact-subset.md).
+
 ## Quick Start
 
 Install the pinned environment:

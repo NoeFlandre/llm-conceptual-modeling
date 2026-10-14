@@ -16,5 +16,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Sync locked environment
         run: uv sync --locked --dev
+      - name: Restore minimal integration-test artifacts
+        run: uv run --locked --no-sync --no-env-file python scripts/restore_ci_artifacts.py
       - name: Run local CI gate
         run: make ci

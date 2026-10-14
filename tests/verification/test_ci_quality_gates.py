@@ -16,7 +16,13 @@ def test_github_actions_runs_the_local_ci_gate() -> None:
     workflow_text = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
 
     assert "uv sync --locked --dev" in workflow_text
+    assert "scripts/restore_ci_artifacts.py" in workflow_text
     assert "make ci" in workflow_text
+    assert (
+        workflow_text.index("uv sync --locked --dev")
+        < workflow_text.index("scripts/restore_ci_artifacts.py")
+        < workflow_text.index("make ci")
+    )
 
 
 def test_make_ci_collects_fast_quality_gates() -> None:
